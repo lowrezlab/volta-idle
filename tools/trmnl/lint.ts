@@ -7,8 +7,6 @@ import { copyFileSync, existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync,
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { screenMarkup } from '@trmnl-games/desk-crawler/templates/screen'
-import { screenMarkup as idleAnglerMarkup } from '@trmnl-games/idle-angler/templates/screen'
-import { screenMarkup as paperLivesMarkup } from '@trmnl-games/paper-lives/templates/screen'
 import { FRAMEWORK_VERSION } from '@trmnl-games/desk-crawler/templates/preview'
 import { bundle, bundleConfig as config, requireBundle, root } from './bundle'
 
@@ -90,8 +88,6 @@ function unknownClasses(markup: Markup, known: Set<string>): Array<{ layout: str
 
 const games: Array<[Markup, string]> = [
   [screenMarkup, 'Desk Crawler'],
-  [idleAnglerMarkup, 'Idle Angler'],
-  [paperLivesMarkup, 'Paper Lives'],
 ]
 let failed = games.map(([markup, label]) => lintGame(markup, label)).some((status) => status !== 0)
 

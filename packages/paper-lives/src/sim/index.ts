@@ -1,7 +1,0 @@
-export * from './types'
-export { simulateLife, SIMULATION_VERSION, BOUNDARY_LINES, eligibleEvents, eligibleDecisions, optionOpen, decisionOf, mortalityPermille, livingCost, yearlyIncome, slotsFor } from './simulate'
-export { starterLife, beginChild, zeroCounters } from './starter'
-export { bequests, longestJob } from './death'
-export { canSetUp, choose, requestAgeUp, rename, setPronouns, pause, resume, type ActionResult } from './actions'
-export { stageFor, seasonAt, moneyBand, holds, genderOf, familyLabel, settleGender, familyRenames, applyRenames, renameIn, PaperLivesInvariantError, type FamilyRename } from './rules'
-export { fill } from './text'

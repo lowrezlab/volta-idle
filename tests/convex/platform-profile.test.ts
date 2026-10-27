@@ -4,7 +4,6 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { api, internal } from '@trmnl-games/backend/api'
 import schema from '../../apps/backend/convex/schema'
 import { seedHero, seedWorld, type T } from './helpers'
-import { seedAngler } from './idleAnglerHelpers'
 
 const modules = import.meta.glob('../../apps/backend/convex/**/*.ts')
 
@@ -15,7 +14,6 @@ describe('shared public profile (D115, S5)', () => {
     vi.setSystemTime(Date.UTC(2026, 10, 2, 6, 5, 3))
     t = convexTest(schema, modules)
     await seedWorld(t)
-    await t.mutation(internal.platform.setGameStatusInternal, { slug: 'idle-angler', status: 'live' })
   })
   afterEach(() => vi.useRealTimers())
 
@@ -25,28 +23,24 @@ describe('shared public profile (D115, S5)', () => {
     expect(await t.query(api.platformProfile.view, { alias: 'Nobody' })).toBeNull()
   })
 
-  it('lists each opted-in game and the Regular badge for two active games', async () => {
-    await seedHero(t, { publicProfile: true }, 'Both')
-    await seedAngler(t, { publicProfile: true }, 'Both')
-    const profile = await t.query(api.platformProfile.view, { alias: 'both' })
-    expect(profile).toMatchObject({ alias: 'Both', games: [{ slug: 'desk-crawler', name: 'Baz' }, { slug: 'idle-angler', title: 'Newcomer', species: 0 }], platform: [{ id: 'regular_1', name: 'Regular', share: null }] })
+  it('lists the opted-in hero', async () => {
+    await seedHero(t, { publicProfile: true }, 'Solo')
+    const profile = await t.query(api.platformProfile.view, { alias: 'solo' })
+    expect(profile).toMatchObject({ alias: 'Solo', games: [{ slug: 'desk-crawler', name: 'Baz' }] })
   })
 
-  it('keeps a game that is not live off the profile for everyone but admins', async () => {
-    await t.mutation(internal.platform.setGameStatusInternal, { slug: 'idle-angler', status: 'hidden' })
-    await seedHero(t, { publicProfile: true }, 'Both')
-    await seedAngler(t, { publicProfile: true }, 'Both')
-    expect((await t.query(api.platformProfile.view, { alias: 'Both' })).games.map((g: { slug: string }) => g.slug)).toEqual(['desk-crawler'])
+  it('shows the hero whatever Desk Crawler\'s listing status, as upstream', async () => {
+    await t.mutation(internal.platform.setGameStatusInternal, { slug: 'desk-crawler', status: 'hidden' })
+    await seedHero(t, { publicProfile: true }, 'Solo')
+    expect(await t.query(api.platformProfile.view, { alias: 'Solo' })).not.toBeNull()
   })
 
   it('tallies platform rarity daily over players with an active game', async () => {
     await seedHero(t, { publicProfile: true }, 'Both')
-    await seedAngler(t, {}, 'Both')
     await seedHero(t, {}, 'Solo')
     await t.mutation(internal.platformProfile.tally, {})
     await t.finishAllScheduledFunctions(vi.runAllTimers)
     const current = await t.run(async (ctx) => await ctx.db.query('platformStats').collect())
-    expect(current).toMatchObject([{ key: 'current', totalPlayers: 2, counts: { regular_1: 1 } }])
-    expect((await t.query(api.platformProfile.view, { alias: 'Both' })).platform[0]).toMatchObject({ id: 'regular_1', share: 50 })
+    expect(current).toMatchObject([{ key: 'current', totalPlayers: 2 }])
   })
 })

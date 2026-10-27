@@ -20,7 +20,6 @@ import { Sheet, SheetTitle } from './-bagSlots'
 import { AlertNudge } from './-alerts'
 import { RosterCard } from './-rosterCard'
 import { WhatsNewCard } from './-whatsNew'
-import { IdleAnglerNote } from './-idleAnglerNote'
 import { messagesFor, useT } from '../../../lib/i18n'
 import { headMessages } from '../../../i18n/heads'
 import { useContent } from '../../../lib/useContent'
@@ -62,7 +61,6 @@ function HeroHome() {
       <PlaylistNudge activatedAt={hero.activatedAt} screenServed={hero.screenServed} />
       <GameScreen hero={{ ...hero, biomeName, targetName, bagReady }} />
       <ReturnNudge />
-      <IdleAnglerNote />
       <WhatsNewCard />
       <HeroSheet hero={hero} />
     </div>

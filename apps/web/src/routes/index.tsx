@@ -10,16 +10,13 @@ import { InstallCta, ScreenBezel } from '../lib/deskCrawlerPitch'
 import { FLOORS } from '../lib/facts.gen'
 import { Glyph, type GlyphName } from '../lib/glyphs'
 import { changeDay, latestChanges } from '../lib/changelogRecent'
-import { IA_PITCH, IDLE_ANGLER_MARKETPLACE_URL, IdleAnglerCta, useMyAngler } from '../lib/idleAnglerPitch'
-import { NotifyMe } from '../lib/launchList'
 import { SITE_FRAME } from '../lib/platformHeader'
 import { SiteShell } from '../lib/prose'
 import { BUTTON_PRIMARY, BUTTON_SECONDARY, LINK_BUTTON } from '../lib/ui'
-import { DESK_CRAWLER_JSON_LD, IDLE_ANGLER_JSON_LD, SITE_JSON_LD, seo } from '../lib/seo'
+import { DESK_CRAWLER_JSON_LD, SITE_JSON_LD, seo } from '../lib/seo'
 import { messagesFor, useLocale, useT } from '../lib/i18n'
 import { headMessages } from '../i18n/heads'
 import { homeMessages } from '../i18n/home'
-import { iaGamePage } from '../i18n/iaGamePage'
 import { pitchMessages } from '../i18n/pitch'
 import { shellMessages } from '../i18n/shell'
 
@@ -28,7 +25,7 @@ export const Route = createFileRoute('/')({
     path: '/',
     locale,
     description: messagesFor(headMessages, locale).home,
-    jsonLd: { '@context': 'https://schema.org', '@graph': [SITE_JSON_LD, DESK_CRAWLER_JSON_LD, IDLE_ANGLER_JSON_LD].map(({ '@context': _, ...node }) => node) },
+    jsonLd: { '@context': 'https://schema.org', '@graph': [SITE_JSON_LD, DESK_CRAWLER_JSON_LD].map(({ '@context': _, ...node }) => node) },
   }),
   // No loader: the page is static, and the signed-in player's games load in the browser after it.
   component: Home,
@@ -43,18 +40,12 @@ function YourGames() {
   const shell = useT(shellMessages)
   const { isAuthenticated } = useConvexAuth()
   const { data: me } = useQuery({ ...convexQuery(api.users.me, {}), enabled: isAuthenticated })
-  const angler = useMyAngler()
   if (!me) return null
-  const rows: Array<{ slug: 'desk-crawler' | 'idle-angler'; line: string; action: ReactNode }> = [
+  const rows: Array<{ slug: 'desk-crawler'; line: string; action: ReactNode }> = [
     {
       slug: 'desk-crawler',
       line: me.hero ? shell.heroLine(me.hero) : t.notStarted,
       action: me.hero ? <Link to="/app/desk-crawler" className={`${LINK_BUTTON} ${BUTTON_PRIMARY}`}>{t.open}</Link> : <Link to="/games/desk-crawler" className="inline-flex min-h-11 items-center underline underline-offset-4">{t.seeGame('Desk Crawler')}</Link>,
-    },
-    {
-      slug: 'idle-angler',
-      line: angler ? shell.anglerLine(angler) : angler === null && !IDLE_ANGLER_MARKETPLACE_URL ? t.inReview : t.notStarted,
-      action: angler ? <Link to="/app/idle-angler" className={`${LINK_BUTTON} ${BUTTON_PRIMARY}`}>{t.open}</Link> : IDLE_ANGLER_MARKETPLACE_URL ? <Link to="/games/idle-angler" className="inline-flex min-h-11 items-center underline underline-offset-4">{t.seeGame('Idle Angler')}</Link> : angler === null ? <NotifyMe gameSlug="idle-angler" /> : null,
     },
   ]
   return (
@@ -83,7 +74,7 @@ function YourGames() {
  * lands on whichever game the visitor points at, a figure from its catalog, its pitch and its one call to action. From
  * 1024px the two cards share rows (subgrid), so their screens, pitches and calls to action line up side by side.
  */
-function GameCard({ slug, alt, caption, facts, factGlyph, pitch, priority = false, children }: { slug: 'desk-crawler' | 'idle-angler'; alt: string; caption: string; facts: string; factGlyph: GlyphName; pitch: string; priority?: boolean; children: ReactNode }) {
+function GameCard({ slug, alt, caption, facts, factGlyph, pitch, priority = false, children }: { slug: 'desk-crawler'; alt: string; caption: string; facts: string; factGlyph: GlyphName; pitch: string; priority?: boolean; children: ReactNode }) {
   const t = useT(homeMessages)
   const name = games[slug].name
   return (
@@ -141,7 +132,6 @@ function RecentChanges() {
 function Home() {
   const t = useT(homeMessages)
   const pitch = useT(pitchMessages)
-  const ia = useT(iaGamePage)
   const monsters = FLOORS.reduce((sum, floor) => sum + floor.monsters.length, 0)
   return (
     <SiteShell>
@@ -157,9 +147,6 @@ function Home() {
             <ul className="grid gap-6 lg:grid-cols-2 lg:gap-x-8">
               <GameCard slug="desk-crawler" alt={pitch.sampleAlt} caption={pitch.homeCaption} facts={t.deskCrawlerFacts(FLOORS.length, monsters)} factGlyph="sword" pitch={t.deskCrawlerPitch} priority>
                 <InstallCta place="home card" compact />
-              </GameCard>
-              <GameCard slug="idle-angler" alt={ia.sampleAlt} caption={ia.caption} facts={t.idleAnglerFacts(IA_PITCH.waters.length, IA_PITCH.species)} factGlyph="pin" pitch={t.idleAnglerPitch}>
-                <IdleAnglerCta place="home card" compact />
               </GameCard>
             </ul>
             <p className="text-sm text-muted">{pitch.needsBefore}<a href="https://trmnl.com" className="underline underline-offset-4 hover:text-ink">{pitch.needsLink}</a>{pitch.needsAfter}</p>

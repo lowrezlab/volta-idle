@@ -9,6 +9,4 @@ export interface LegalPage {
   /** Shown first in a translation: the English text is the one that counts. */
   readonly translationNote?: ComponentType
   readonly Body: ComponentType
-  readonly IdleAngler?: ComponentType
-  readonly PaperLives?: ComponentType
 }

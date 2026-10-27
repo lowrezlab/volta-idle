@@ -7,7 +7,7 @@ import { internalAction, internalMutation, internalQuery, type MutationCtx } fro
  * Owner incident and recovery notices (D27, D36, D38; build-readiness.md
  * "Operational alerts"). One incident per stalled run; one alert and one
  * recovery notice, deduplicated, with bounded retries. Delivery failure never
- * blocks simulation recovery. Disabled until RESEND_API_KEY is configured.
+ * blocks simulation recovery. Disabled until RESEND_API_KEY and ALERT_TO are configured.
  *
  * A quarantine notice (2026-10-27): the first hero a run quarantines sends one alert naming the game, the tick, the count
  * and the reason codes. The run itself is healthy, so the notice is stored already closed and sends no recovery mail;
@@ -17,10 +17,6 @@ const MAX_ATTEMPTS = 3
 /** Game name, failures table and runs table for each run table the incident may point at. */
 const GAMES = [
   ['Desk Crawler', 'simulationFailures', 'simulationRuns'],
-  ['Idle Angler', 'iaSimulationFailures', 'iaSimulationRuns'],
-  ['Paper Lives', 'plSimulationFailures', 'plSimulationRuns'],
-  ['Little Plot', 'lpSimulationFailures', 'lpSimulationRuns'],
-  ['Pixel Wars', 'pwSimulationFailures', 'pwSimulationRuns'],
 ] as const
 type Notice = 'alert' | 'recovery'
 
@@ -33,7 +29,7 @@ export async function openIncident(ctx: MutationCtx, runId: Id<'simulationRuns'>
 }
 
 /** One quarantine notice per run, closed on insert: the run completes as normal, the heroes wait for a release. */
-export async function noteQuarantine(ctx: MutationCtx, runId: Id<'simulationRuns'> | Id<'iaSimulationRuns'> | Id<'plSimulationRuns'> | Id<'lpSimulationRuns'>, now: number): Promise<void> {
+export async function noteQuarantine(ctx: MutationCtx, runId: Id<'simulationRuns'>, now: number): Promise<void> {
   const incidentKey = `${runId}:quarantine`
   const existing = await ctx.db.query('operationalIncidents').withIndex('by_incidentKey', (q) => q.eq('incidentKey', incidentKey)).unique()
   if (existing) return
@@ -65,7 +61,8 @@ export const getIncident = internalQuery({
 })
 
 const alertFrom = () => process.env.ALERT_FROM ?? 'TRMNL Games <alerts@trmnlgames.com>'
-const alertTo = () => process.env.ALERT_TO ?? 'barry@barrymichaeldoyle.com'
+/** Fork: no default recipient; notices stay disabled until ALERT_TO is set. */
+const alertTo = () => process.env.ALERT_TO ?? ''
 
 export const sendNotice = internalAction({
   args: { incidentId: v.id('operationalIncidents'), notice: v.union(v.literal('alert'), v.literal('recovery')) },
@@ -76,7 +73,7 @@ export const sendNotice = internalAction({
     const record = notice === 'alert' ? data.incident.alert : data.incident.recovery
     if (!record || record.state !== 'pending' || record.attempts >= MAX_ATTEMPTS) return null
     const key = process.env.RESEND_API_KEY
-    if (!key) {
+    if (!key || !alertTo()) {
       await ctx.runMutation(internal.incidents.recordDelivery, { incidentId, notice, outcome: 'disabled' })
       return null
     }
@@ -126,7 +123,7 @@ export const sendTestNotice = internalAction({
     const from = alertFrom()
     const to = alertTo()
     const key = process.env.RESEND_API_KEY
-    if (!key) return { status: 'disabled' as const, from, to, id: null }
+    if (!key || !to) return { status: 'disabled' as const, from, to, id: null }
     try {
       const response = await fetch('https://api.resend.com/emails', {
         method: 'POST',

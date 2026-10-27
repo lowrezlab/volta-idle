@@ -38,6 +38,7 @@ describe('incident notices (D27)', () => {
 
   it('opens one incident per stalled run, sends one alert, then one recovery notice', async () => {
     vi.stubEnv('RESEND_API_KEY', 're_test_fake')
+    vi.stubEnv('ALERT_TO', 'ops@example.com')
     const runId = await stallRun(t)
     // Two watchdog passes before the resumed chain finishes.
     await t.mutation(internal.sim.runs.tick.watchdog, {})
@@ -63,6 +64,7 @@ describe('incident notices (D27)', () => {
 
   it('exhausts delivery retries and ignores late workers and results without blocking recovery', async () => {
     vi.stubEnv('RESEND_API_KEY', 're_test_fake')
+    vi.stubEnv('ALERT_TO', 'ops@example.com')
     fetchMock.mockImplementation(async () => new Response('{}', { status: 401 }))
     await stallRun(t)
     await t.mutation(internal.sim.runs.tick.watchdog, {})
@@ -78,6 +80,7 @@ describe('incident notices (D27)', () => {
 
   it('sends one quarantine notice per run with the reason, closed on insert, and no recovery mail', async () => {
     vi.stubEnv('RESEND_API_KEY', 're_test_fake')
+    vi.stubEnv('ALERT_TO', 'ops@example.com')
     // Two heroes over their level-1 maximum of 100 HP: both quarantine on the first tick, one notice names both.
     await seedHero(t, { hp: 160 })
     await seedHero(t, { hp: 999 })

@@ -1,13 +1,5 @@
 import { gameProfile, DESK_CRAWLER } from './lib/gameProfile'
 import { isGame } from './lib/gameHooks'
-import { idleAnglerProfile } from './idleAngler/profile'
-import { purgeAngler } from './idleAngler/purge'
-import { paperLivesProfile } from './paperLives/profile'
-import { purgeLives } from './paperLives/purge'
-import { littlePlotProfile } from './littlePlot/profile'
-import { purgePlot } from './littlePlot/purge'
-import { pixelWarsProfile } from './pixelWars/profile'
-import { purgeDesk } from './pixelWars/purge'
 import { gameSlug as gameSlugValidator, locale as localeValidator } from './schema'
 import type { Locale } from '@trmnl-games/platform'
 import { purgeRaidRows } from './lib/raids'
@@ -76,62 +68,6 @@ export const requestGameDeletion = mutation({
   args: { operationId: v.string(), confirm: v.literal('DELETE'), gameSlug: v.optional(gameSlugValidator) },
   returns: intentReturns({ operationId: v.string(), changed: v.boolean() }),
   handler: async (ctx, args) => {
-    // D115: Idle Angler progress is deleted on its own; the account and Desk Crawler stay.
-    if (args.gameSlug === 'idle-angler') {
-      const result = await runIntent(ctx, args.operationId, 'deletion.requestGameDeletion', { gameSlug: 'idle-angler' }, async (user) => {
-        const profile = await idleAnglerProfile(ctx, user._id)
-        if (profile?.state === 'deleting') return { changed: false }
-        if (profile) await ctx.db.patch(profile._id, { state: 'deleting' })
-        else await ctx.db.insert('idleAnglerProfiles', { userId: user._id, state: 'deleting', createdAt: Date.now() })
-        const now = Date.now()
-        const jobId = await ctx.db.insert('gameDeletionJobs', { userId: user._id, gameSlug: 'idle-angler', state: 'running', phase: 'connections', createdAt: now, lastProgressAt: now })
-        await ctx.scheduler.runAfter(0, internal.deletion.purgeGameStep, { jobId })
-        return { changed: true }
-      })
-      return narrowChanged(result)
-    }
-    // D159: Paper Lives progress likewise, leaving the account and the other games.
-    if (args.gameSlug === 'paper-lives') {
-      const result = await runIntent(ctx, args.operationId, 'deletion.requestGameDeletion', { gameSlug: 'paper-lives' }, async (user) => {
-        const profile = await paperLivesProfile(ctx, user._id)
-        if (profile?.state === 'deleting') return { changed: false }
-        if (profile) await ctx.db.patch(profile._id, { state: 'deleting' })
-        else await ctx.db.insert('paperLivesProfiles', { userId: user._id, state: 'deleting', createdAt: Date.now() })
-        const now = Date.now()
-        const jobId = await ctx.db.insert('gameDeletionJobs', { userId: user._id, gameSlug: 'paper-lives', state: 'running', phase: 'connections', createdAt: now, lastProgressAt: now })
-        await ctx.scheduler.runAfter(0, internal.deletion.purgeGameStep, { jobId })
-        return { changed: true }
-      })
-      return narrowChanged(result)
-    }
-    // D214: Pixel Wars progress likewise.
-    if (args.gameSlug === 'pixel-wars') {
-      const result = await runIntent(ctx, args.operationId, 'deletion.requestGameDeletion', { gameSlug: 'pixel-wars' }, async (user) => {
-        const profile = await pixelWarsProfile(ctx, user._id)
-        if (profile?.state === 'deleting') return { changed: false }
-        if (profile) await ctx.db.patch(profile._id, { state: 'deleting' })
-        else await ctx.db.insert('pixelWarsProfiles', { userId: user._id, state: 'deleting', createdAt: Date.now() })
-        const now = Date.now()
-        const jobId = await ctx.db.insert('gameDeletionJobs', { userId: user._id, gameSlug: 'pixel-wars', state: 'running', phase: 'connections', createdAt: now, lastProgressAt: now })
-        await ctx.scheduler.runAfter(0, internal.deletion.purgeGameStep, { jobId })
-        return { changed: true }
-      })
-      return narrowChanged(result)
-    }
-    // D206: Little Plot progress likewise.
-    if (args.gameSlug === 'little-plot') {
-      const result = await runIntent(ctx, args.operationId, 'deletion.requestGameDeletion', { gameSlug: 'little-plot' }, async (user) => {
-        const profile = await littlePlotProfile(ctx, user._id)
-        if (profile?.state === 'deleting') return { changed: false }
-        if (profile) await ctx.db.patch(profile._id, { state: 'deleting' })
-        else await ctx.db.insert('littlePlotProfiles', { userId: user._id, state: 'deleting', createdAt: Date.now() })
-        const now = Date.now()
-        const jobId = await ctx.db.insert('gameDeletionJobs', { userId: user._id, gameSlug: 'little-plot', state: 'running', phase: 'connections', createdAt: now, lastProgressAt: now })
-        await ctx.scheduler.runAfter(0, internal.deletion.purgeGameStep, { jobId })
-        return { changed: true }
-      })
-      return narrowChanged(result)
-    }
     const result = await runIntent(ctx, args.operationId, 'deletion.requestGameDeletion', {}, async (user) => {
       const reconnect = await ctx.db.query('trmnlReconnectAttempts').withIndex('by_tokenIdentifier', q => q.eq('tokenIdentifier', user.tokenIdentifier)).unique()
       if (reconnect) await ctx.db.delete(reconnect._id)
@@ -177,54 +113,6 @@ export const purgeGameStep = internalMutation({
       const attempts = ours(await ctx.db.query('trmnlInstallAttempts').withIndex('by_userId_and_state', (q) => q.eq('userId', job.userId)).take(CONNECTION_PAGE))
       const removed = grants.length + await deleteBatch(ctx, instances) + await deleteBatch(ctx, attempts)
       return await again(removed ? 'connections' : 'gameplay')
-    }
-    if (job.gameSlug === 'idle-angler') {
-      const profile = await idleAnglerProfile(ctx, job.userId)
-      if (profile?.anglerId) {
-        if ((await purgeAngler(ctx, profile.anglerId, BATCH)) > 0) return await again()
-        await ctx.db.patch(profile._id, { anglerId: undefined })
-      }
-      const receipts = await ctx.db.query('operationReceipts').withIndex('by_userId_and_scope', (q) => q.eq('userId', job.userId).eq('scope', 'idle-angler')).take(BATCH)
-      if ((await deleteBatch(ctx, receipts)) + (await purgeGameAlertRows(ctx, job.userId, 'idle-angler', BATCH)) > 0) return await again()
-      if (profile) await ctx.db.patch(profile._id, { state: 'active' })
-      await ctx.db.patch(jobId, { state: 'completed', phase: 'done', completedAt: now, lastProgressAt: now })
-      return null
-    }
-    if (job.gameSlug === 'paper-lives') {
-      const profile = await paperLivesProfile(ctx, job.userId)
-      if ((await purgeLives(ctx, job.userId, profile?.lifeId, BATCH)) > 0) return await again()
-      if (profile?.lifeId) await ctx.db.patch(profile._id, { lifeId: undefined })
-      const receipts = await ctx.db.query('operationReceipts').withIndex('by_userId_and_scope', (q) => q.eq('userId', job.userId).eq('scope', 'paper-lives')).take(BATCH)
-      if ((await deleteBatch(ctx, receipts)) + (await purgeGameAlertRows(ctx, job.userId, 'paper-lives', BATCH)) > 0) return await again()
-      // The profile stays for a fresh start, without the career or photo totals its lives built up.
-      if (profile) await ctx.db.patch(profile._id, { state: 'active', career: undefined, photosClaimed: undefined, lastPhotoWeek: undefined })
-      await ctx.db.patch(jobId, { state: 'completed', phase: 'done', completedAt: now, lastProgressAt: now })
-      return null
-    }
-    if (job.gameSlug === 'pixel-wars') {
-      const profile = await pixelWarsProfile(ctx, job.userId)
-      if (profile?.deskId) {
-        if ((await purgeDesk(ctx, profile.deskId, BATCH)) > 0) return await again()
-        await ctx.db.patch(profile._id, { deskId: undefined })
-      }
-      const receipts = await ctx.db.query('operationReceipts').withIndex('by_userId_and_scope', (q) => q.eq('userId', job.userId).eq('scope', 'pixel-wars')).take(BATCH)
-      if ((await deleteBatch(ctx, receipts)) + (await purgeGameAlertRows(ctx, job.userId, 'pixel-wars', BATCH)) > 0) return await again()
-      if (profile) await ctx.db.patch(profile._id, { state: 'active' })
-      await ctx.db.patch(jobId, { state: 'completed', phase: 'done', completedAt: now, lastProgressAt: now })
-      return null
-    }
-    if (job.gameSlug === 'little-plot') {
-      const profile = await littlePlotProfile(ctx, job.userId)
-      if (profile?.plotId) {
-        if ((await purgePlot(ctx, profile.plotId, BATCH)) > 0) return await again()
-        await ctx.db.patch(profile._id, { plotId: undefined })
-      }
-      const receipts = await ctx.db.query('operationReceipts').withIndex('by_userId_and_scope', (q) => q.eq('userId', job.userId).eq('scope', 'little-plot')).take(BATCH)
-      if ((await deleteBatch(ctx, receipts)) + (await purgeGameAlertRows(ctx, job.userId, 'little-plot', BATCH)) > 0) return await again()
-      // The profile stays for a fresh start, without the pressed flowers the plot gathered.
-      if (profile) await ctx.db.patch(profile._id, { state: 'active', flowers: undefined })
-      await ctx.db.patch(jobId, { state: 'completed', phase: 'done', completedAt: now, lastProgressAt: now })
-      return null
     }
     const profile = await gameProfile(ctx, job.userId)
     // P37: every hero on the roster, current or parked, one hero's rows per pass.
@@ -356,28 +244,6 @@ export const purgeStep = internalMutation({
         if ((await purgeHeroes(ctx, job.userId!)) > 0) return await again()
         if (user?.activeHeroId) await ctx.db.patch(job.userId, { activeHeroId: undefined })
         if (profile?.activeHeroId) await ctx.db.patch(profile._id, { activeHeroId: undefined, lastSwitch: undefined })
-        // D115: the account's angler and its rows.
-        const ia = await idleAnglerProfile(ctx, job.userId)
-        if (ia?.anglerId) {
-          if ((await purgeAngler(ctx, ia.anglerId, BATCH)) > 0) return await again()
-          await ctx.db.patch(ia._id, { anglerId: undefined })
-        }
-        // D159: the account's lives, records, board rows, achievements and photos.
-        const pl = await paperLivesProfile(ctx, job.userId)
-        if ((await purgeLives(ctx, job.userId, pl?.lifeId, BATCH)) > 0) return await again()
-        if (pl?.lifeId) await ctx.db.patch(pl._id, { lifeId: undefined })
-        // D206: the account's plot and its rows.
-        const lp = await littlePlotProfile(ctx, job.userId)
-        if (lp?.plotId) {
-          if ((await purgePlot(ctx, lp.plotId, BATCH)) > 0) return await again()
-          await ctx.db.patch(lp._id, { plotId: undefined })
-        }
-        // D214: the account's desk and its rows.
-        const pw = await pixelWarsProfile(ctx, job.userId)
-        if (pw?.deskId) {
-          if ((await purgeDesk(ctx, pw.deskId, BATCH)) > 0) return await again()
-          await ctx.db.patch(pw._id, { deskId: undefined })
-        }
         const receipts = await ctx.db.query('operationReceipts').withIndex('by_userId_and_operationId', (q) => q.eq('userId', job.userId!)).take(BATCH)
         return (await deleteBatch(ctx, receipts)) > 0 ? await again() : await advance('provider')
       }
@@ -398,14 +264,6 @@ export const purgeStep = internalMutation({
         }
         const profile = await gameProfile(ctx, job.userId)
         if (profile) await ctx.db.delete(profile._id)
-        const iaProfile = await idleAnglerProfile(ctx, job.userId)
-        if (iaProfile) await ctx.db.delete(iaProfile._id)
-        const plProfile = await paperLivesProfile(ctx, job.userId)
-        if (plProfile) await ctx.db.delete(plProfile._id)
-        const lpProfile = await littlePlotProfile(ctx, job.userId)
-        if (lpProfile) await ctx.db.delete(lpProfile._id)
-        const pwProfile = await pixelWarsProfile(ctx, job.userId)
-        if (pwProfile) await ctx.db.delete(pwProfile._id)
         const gameJobs = await ctx.db.query('gameDeletionJobs').withIndex('by_userId_and_state', (q) => q.eq('userId', job.userId!)).take(BATCH)
         if (gameJobs.length > 0) { await deleteBatch(ctx, gameJobs); return await again() }
         if (user) await ctx.db.delete(user._id)

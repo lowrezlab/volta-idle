@@ -2,10 +2,6 @@ import { currentHero, gameProfile } from './lib/gameProfile'
 import { v } from 'convex/values'
 import { isGame } from './lib/gameHooks'
 import { gameSlug } from './schema'
-import { currentAngler } from './idleAngler/profile'
-import { currentLife } from './paperLives/profile'
-import { currentPlot } from './littlePlot/profile'
-import { currentDesk } from './pixelWars/profile'
 import type { GameSlug } from '@trmnl-games/platform'
 import { gameDeletingFor } from './lib/gameHooks'
 import type { Doc, Id } from './_generated/dataModel'
@@ -19,15 +15,8 @@ async function gameDeleting(ctx: QueryCtx, userId: Id<'users'>, slug: GameSlug):
   return await gameDeletingFor(ctx, slug, userId)
 }
 
-/** The name the management page shows: the hero, the angler's public name, or the life's character. */
+/** The name the management page shows: the hero. */
 async function characterName(ctx: QueryCtx, user: Doc<'users'>, slug: GameSlug): Promise<string | null> {
-  if (slug === 'idle-angler') return (await currentAngler(ctx, user)) ? user.publicAlias : null
-  if (slug === 'little-plot') return (await currentPlot(ctx, user)) ? user.publicAlias : null
-  if (slug === 'pixel-wars') return (await currentDesk(ctx, user)) ? user.publicAlias : null
-  if (slug === 'paper-lives') {
-    const life = await currentLife(ctx, user)
-    return life ? `${life.life.first} ${life.life.last}` : null
-  }
   return (await currentHero(ctx, user))?.name ?? null
 }
 

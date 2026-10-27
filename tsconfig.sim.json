@@ -30,10 +30,6 @@
   },
   "include": [
     "packages/engine/src/**/*.ts",
-    "packages/idle-angler/src/**/*.ts",
-    "packages/paper-lives/src/**/*.ts",
-    "packages/little-plot/src/**/*.ts",
-    "packages/pixel-wars/src/**/*.ts",
     "packages/desk-crawler/src/**/*.ts",
     "tests/**/*.ts",
     "tools/**/*.ts"

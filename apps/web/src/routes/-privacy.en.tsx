@@ -125,20 +125,4 @@ export const privacyEn: LegalPage = {
       <p>When this policy changes we update this page and the date at the top.</p>
     </>
   ),
-  IdleAngler: () => (
-    <>
-      <h2>Idle Angler</h2>
-      <p>Idle Angler stores your angler: coins, the water and bait, your cooler, your logbook of species and best weights, your fishing history, your heaviest fish at each water and in each weekend Open, your fishmonger orders, trophy wall and medals, achievements and fly box. Your heaviest fish appear under your public name on Idle Angler's leaderboards and Open results and on other players' TRMNL screens. Unless you hide Idle Angler from your public profile in Idle Angler settings, anyone with the link sees your title, start date, achievement count, species logged, medal count and the fish on your trophy wall.</p>
-      <p>If you turn on Idle Angler alerts, they use the same devices and quiet hours as your other games' alerts. The weekly fly code on your TRMNL is keyed to your installation and never shown in the companion.</p>
-      <p>In <Link to="/app/idle-angler/settings">Idle Angler settings</Link>, Delete Idle Angler progress removes your angler, cooler, logbook, leaderboard and Open records, trophy wall and medals, fly box, achievements, Idle Angler connections and Idle Angler alert settings. Your account and other games stay. Deleting your TRMNL Games account removes Idle Angler with everything else.</p>
-    </>
-  ),
-  PaperLives: () => (
-    <>
-      <h2>Paper Lives</h2>
-      <p>Paper Lives stores your current life and your finished ones: each character's name, pronouns, traits, stats, money, job and home, the people in their life, their story and the choices you made, plus the album's records and photos and your achievements. Your longest lives and biggest fortunes appear under your public name on Paper Lives' boards and on other players' TRMNL screens. Unless you hide Paper Lives from your public profile in Paper Lives settings, anyone with the link sees your current character's name, age, job and traits, how many lives you have lived, your family tree and your finished lives, each with its epitaph, highlights and photos. Character names are public on those pages, so keep real people's details out of them.</p>
-      <p>If you turn on Paper Lives alerts, they use the same devices and quiet hours as your other games' alerts, and the alert shows your character's first name. The weekly photo code on your TRMNL is keyed to your installation and never shown in the companion.</p>
-      <p>In <Link to="/app/paper-lives/settings">Paper Lives settings</Link>, Delete Paper Lives progress removes your lives, the album and its photos, board records, achievements, Paper Lives connections and Paper Lives alert settings. Your account and other games stay. Deleting your TRMNL Games account removes Paper Lives with everything else.</p>
-    </>
-  ),
 }

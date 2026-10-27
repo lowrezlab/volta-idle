@@ -21,8 +21,8 @@ export const RETENTION = {
   alertOutboxMs: 7 * DAY,
 } as const
 
-type Job = 'tickLogs' | 'receipts' | 'rateLimits' | 'deletionConfirmations' | 'reconnectAttempts' | 'installAttempts' | 'failures' | 'runs' | 'raids' | 'meetings' | 'alerts' | 'iaTickLogs' | 'iaFailures' | 'iaRuns' | 'plTickLogs' | 'plFailures' | 'plRuns' | 'pwOrders' | 'pwMapTicks'
-const ORDER: readonly Job[] = ['tickLogs', 'receipts', 'rateLimits', 'deletionConfirmations', 'reconnectAttempts', 'installAttempts', 'failures', 'runs', 'raids', 'meetings', 'alerts', 'iaTickLogs', 'iaFailures', 'iaRuns', 'plTickLogs', 'plFailures', 'plRuns', 'pwOrders', 'pwMapTicks']
+type Job = 'tickLogs' | 'receipts' | 'rateLimits' | 'deletionConfirmations' | 'reconnectAttempts' | 'installAttempts' | 'failures' | 'runs' | 'raids' | 'meetings' | 'alerts'
+const ORDER: readonly Job[] = ['tickLogs', 'receipts', 'rateLimits', 'deletionConfirmations', 'reconnectAttempts', 'installAttempts', 'failures', 'runs', 'raids', 'meetings', 'alerts']
 
 export const cleanup = internalMutation({
   args: { job: v.optional(v.union(...ORDER.map((j) => v.literal(j)))) },
@@ -92,77 +92,10 @@ export const cleanup = internalMutation({
         deleted = rows.length
         break
       }
-      // D214: resolved Pixel Wars orders and old snapshots that a desk's step or the map's tick did not reach.
-      case 'pwOrders': {
-        const rows = await ctx.db.query('pwOrders').withIndex('by_createdAt', (q) => q.lt('createdAt', now - 2 * 86_400_000)).take(BATCH)
-        for (const row of rows) await ctx.db.delete(row._id)
-        deleted = rows.length
-        break
-      }
-      case 'pwMapTicks': {
-        const rows = await ctx.db.query('pwMapTicks').withIndex('by_at', (q) => q.lt('at', now - 86_400_000)).take(BATCH)
-        for (const row of rows) await ctx.db.delete(row._id)
-        deleted = rows.length
-        break
-      }
       case 'alerts': {
         const rows = await ctx.db.query('alertOutbox').withIndex('by_createdAt', (q) => q.lt('createdAt', now - RETENTION.alertOutboxMs)).take(BATCH)
         for (const row of rows) await ctx.db.delete(row._id)
         deleted = rows.length
-        break
-      }
-      // D115: Idle Angler keeps the same retention as Desk Crawler in its own tables.
-      case 'iaTickLogs': {
-        const rows = await ctx.db.query('iaTickLogs').withIndex('by_at', (q) => q.lt('at', now - RETENTION.tickLogsMs)).take(BATCH)
-        for (const row of rows) await ctx.db.delete(row._id)
-        deleted = rows.length
-        break
-      }
-      case 'iaFailures': {
-        const rows = await ctx.db.query('iaSimulationFailures').withIndex('by_createdAt', (q) => q.lt('createdAt', now - RETENTION.failuresMs)).take(BATCH)
-        for (const row of rows) await ctx.db.delete(row._id)
-        deleted = rows.length
-        break
-      }
-      case 'iaRuns': {
-        const rows = await ctx.db
-          .query('iaSimulationRuns')
-          .withIndex('by_state_and_startedAt', (q) => q.eq('state', 'completed').lt('startedAt', now - RETENTION.runsMs))
-          .take(BATCH)
-        const world = await ctx.db.query('iaWorldState').withIndex('by_key', (q) => q.eq('key', 'world')).unique()
-        for (const row of rows) {
-          const publication = await ctx.db.query('iaLeaderboardPublications').withIndex('by_runId', (q) => q.eq('runId', row._id)).unique()
-          if (publication || row._id === world?.activeRunId) continue
-          await ctx.db.delete(row._id)
-          deleted += 1
-        }
-        break
-      }
-      // D159: Paper Lives keeps the same retention in its own tables. A life's lasting story is its record and highlights.
-      case 'plTickLogs': {
-        const rows = await ctx.db.query('plTickLogs').withIndex('by_at', (q) => q.lt('at', now - RETENTION.tickLogsMs)).take(BATCH)
-        for (const row of rows) await ctx.db.delete(row._id)
-        deleted = rows.length
-        break
-      }
-      case 'plFailures': {
-        const rows = await ctx.db.query('plSimulationFailures').withIndex('by_createdAt', (q) => q.lt('createdAt', now - RETENTION.failuresMs)).take(BATCH)
-        for (const row of rows) await ctx.db.delete(row._id)
-        deleted = rows.length
-        break
-      }
-      case 'plRuns': {
-        const rows = await ctx.db
-          .query('plSimulationRuns')
-          .withIndex('by_state_and_startedAt', (q) => q.eq('state', 'completed').lt('startedAt', now - RETENTION.runsMs))
-          .take(BATCH)
-        const world = await ctx.db.query('plWorldState').withIndex('by_key', (q) => q.eq('key', 'world')).unique()
-        for (const row of rows) {
-          const publication = await ctx.db.query('plLeaderboardPublications').withIndex('by_runId', (q) => q.eq('runId', row._id)).unique()
-          if (publication || row._id === world?.activeRunId) continue
-          await ctx.db.delete(row._id)
-          deleted += 1
-        }
         break
       }
       case 'runs': {

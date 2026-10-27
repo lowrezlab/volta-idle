@@ -29,22 +29,6 @@ export const DESK_CRAWLER_JSON_LD = {
   author: { '@type': 'Person', name: 'Barry Michael Doyle', url: 'https://barrymichaeldoyle.com' },
 }
 
-/** schema.org description of Idle Angler, for its game page's structured data (D210). */
-export const IDLE_ANGLER_JSON_LD = {
-  '@context': 'https://schema.org',
-  '@type': 'VideoGame',
-  name: 'Idle Angler',
-  url: `${SITE_ORIGIN}/games/idle-angler`,
-  description: 'A fishing game that plays itself on your TRMNL e-ink display. Every fifteen minutes your angler casts, and the screen on your desk shows the catch, the weather and the week’s heaviest fish.',
-  image: `${SITE_ORIGIN}/games/idle-angler/sample.png`,
-  genre: ['Simulation', 'Idle'],
-  gamePlatform: 'TRMNL e-ink display',
-  applicationCategory: 'Game',
-  isAccessibleForFree: true,
-  offers: { '@type': 'Offer', price: 0, priceCurrency: 'USD' },
-  author: { '@type': 'Person', name: 'Barry Michael Doyle', url: 'https://barrymichaeldoyle.com' },
-}
-
 /**
  * Per-route head tags. Child meta with the same name/property replaces the
  * root defaults; private and handoff pages pass `index: false`.

@@ -71,14 +71,3 @@ describe('v1.1 intent analytics', () => {
     expect(intentAnalytics('heroes:setStance', { stance: 'bold', operationId: 'op' })?.[1]).toEqual({ stance: 'bold' })
   })
 })
-
-describe('Idle Angler analytics (D115)', () => {
-  it('maps Idle Angler intents to their events with no personal data', () => {
-    expect(intentAnalytics('idleAngler/anglers:sellCatches', { catchIds: ['a', 'b', 'c'] })).toEqual(['fish sold', { count: '3' }])
-    expect(intentAnalytics('idleAngler/anglers:buyNextRod', {})).toEqual(['tackle bought', { item: 'rod' }])
-    expect(intentAnalytics('idleAngler/anglers:buyBaitTubs', { bait: 'worms', tubs: 2 })).toEqual(['tackle bought', { item: 'worms' }])
-    expect(intentAnalytics('idleAngler/anglers:travelTo', { waterId: 'river_bend' })).toEqual(['water changed', { water: 'river_bend' }])
-    expect(intentAnalytics('idleAngler/anglers:chooseBait', { bait: 'bread' })).toEqual(['bait changed', { bait: 'bread' }])
-    expect(intentAnalytics('idleAngler/anglers:pause', {})).toBeNull()
-  })
-})

@@ -126,20 +126,4 @@ export const privacyNl: LegalPage = {
       <p>Als dit beleid verandert, werken we deze pagina en de datum bovenaan bij.</p>
     </>
   ),
-  IdleAngler: () => (
-    <>
-      <h2>Idle Angler</h2>
-      <p>Idle Angler bewaart je visser: munten, het water en het aas, je koelbox, je logboek van soorten en beste gewichten, je visgeschiedenis, je zwaarste vis per water en per weekend-Open, je bestellingen van de visboer, trofeeënwand en medailles, prestaties en vliegendoos. Je zwaarste vissen staan onder je openbare naam in de ranglijsten en Open-uitslagen van Idle Angler en op de TRMNL-schermen van andere spelers. Tenzij je Idle Angler in de instellingen van Idle Angler verbergt op je openbare profiel, ziet iedereen met de link je titel, startdatum, aantal prestaties, gelogde soorten, aantal medailles en de vissen op je trofeeënwand.</p>
-      <p>Zet je meldingen van Idle Angler aan, dan gebruiken die dezelfde apparaten en stille uren als de meldingen van je andere spellen. De wekelijkse vliegcode op je TRMNL hoort bij je installatie en wordt nooit in de app getoond.</p>
-      <p>In de <Link to="/app/idle-angler/settings">instellingen van Idle Angler</Link> verwijdert Voortgang in Idle Angler verwijderen je visser, koelbox, logboek, ranglijst- en Open-records, trofeeënwand en medailles, vliegendoos, prestaties, Idle Angler-koppelingen en meldingsinstellingen van Idle Angler. Je account en andere spellen blijven. Je TRMNL Games-account verwijderen wist Idle Angler samen met al het andere.</p>
-    </>
-  ),
-  PaperLives: () => (
-    <>
-      <h2>Paper Lives</h2>
-      <p>Paper Lives bewaart je huidige leven en je afgeronde levens: van elk personage de naam, voornaamwoorden, eigenschappen, statistieken, geld, baan en woning, de mensen in zijn leven, zijn verhaal en de keuzes die je maakte, plus de records en foto’s in het album en je prestaties. Je langste levens en grootste vermogens staan onder je openbare naam in de lijsten van Paper Lives en op de TRMNL-schermen van andere spelers. Tenzij je Paper Lives in de instellingen van Paper Lives verbergt op je openbare profiel, ziet iedereen met de link de naam, leeftijd, baan en eigenschappen van je huidige personage, hoeveel levens je hebt geleefd, je stamboom en je afgeronde levens, elk met grafschrift, hoogtepunten en foto’s. Personagenamen zijn op die pagina’s openbaar, dus houd gegevens van echte mensen erbuiten.</p>
-      <p>Zet je meldingen van Paper Lives aan, dan gebruiken die dezelfde apparaten en stille uren als de meldingen van je andere spellen, en de melding toont de voornaam van je personage. De wekelijkse fotocode op je TRMNL hoort bij je installatie en wordt nooit in de app getoond.</p>
-      <p>In de <Link to="/app/paper-lives/settings">instellingen van Paper Lives</Link> verwijdert Voortgang in Paper Lives verwijderen je levens, het album en de foto’s, lijstrecords, prestaties, Paper Lives-koppelingen en meldingsinstellingen van Paper Lives. Je account en andere spellen blijven. Je TRMNL Games-account verwijderen wist Paper Lives samen met al het andere.</p>
-    </>
-  ),
 }

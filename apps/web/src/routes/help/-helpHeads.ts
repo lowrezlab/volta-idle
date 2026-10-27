@@ -21,17 +21,3 @@ export const DESK_CRAWLER_HELP_HEAD: Readonly<Record<Locale, HelpHead>> = {
   nl: { seoTitle: 'Desk Crawler: hulp en installatie', description: 'Hoe je Desk Crawler op TRMNL installeert en hoe elk onderdeel van het spel werkt, met oplossingen als het scherm achterloopt.' },
 }
 
-/** Idle Angler help, by language. */
-export const IDLE_ANGLER_HELP_HEAD: Readonly<Record<Locale, HelpHead>> = {
-  en: { seoTitle: 'Idle Angler help', description: 'How Idle Angler fishes on your TRMNL: bait, the cooler, rods, waters, seasons, the logbook, weekend Opens and the fly box.' },
-  fr: { seoTitle: 'Aide Idle Angler', description: 'Comment Idle Angler pêche sur votre TRMNL : appâts, glacière, cannes, plans d’eau, saisons, carnet, Opens du week-end et boîte à mouches.' },
-  de: { seoTitle: 'Hilfe zu Idle Angler', description: 'So angelt Idle Angler auf deinem TRMNL: Köder, Kühlbox, Ruten, Gewässer, Jahreszeiten, Fangbuch, Wochenend-Opens und Fliegendose.' },
-  es: { seoTitle: 'Ayuda de Idle Angler', description: 'Cómo pesca Idle Angler en tu TRMNL: cebos, nevera, cañas, aguas, estaciones, cuaderno, Opens del fin de semana y caja de moscas.' },
-  it: { seoTitle: 'Guida di Idle Angler', description: 'Come pesca Idle Angler sul tuo TRMNL: esche, frigo, canne, acque, stagioni, registro, Open del fine settimana e scatola delle mosche.' },
-  pt: { seoTitle: 'Ajuda do Idle Angler', description: 'Como o Idle Angler pesca no seu TRMNL: iscas, cooler, varas, águas, estações, caderno, Opens de fim de semana e caixa de moscas.' },
-  pl: { seoTitle: 'Pomoc: Idle Angler', description: 'Jak Idle Angler łowi na twoim TRMNL: przynęty, lodówka, wędki, łowiska, pory roku, rejestr, weekendowe zawody Open i pudełko na muchy.' },
-  nl: { seoTitle: 'Hulp bij Idle Angler', description: 'Zo vist Idle Angler op je TRMNL: aas, koelbox, hengels, wateren, seizoenen, logboek, weekend-Opens en vliegendoos.' },
-}
-
-/** The game page's social image, which the help page shares. */
-export const SAMPLE_IMAGE = { path: '/games/idle-angler/sample.png', alt: 'A sample Idle Angler screen' }

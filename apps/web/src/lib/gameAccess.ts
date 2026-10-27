@@ -1,10 +1,7 @@
 import { useAuth } from '@clerk/tanstack-react-start'
 import { convexQuery } from '@convex-dev/react-query'
-import type { QueryClient } from '@tanstack/react-query'
 import { useQuery } from '@tanstack/react-query'
-import { notFound } from '@tanstack/react-router'
 import { api } from '@trmnl-games/backend/api'
-import type { GameSlug } from '@trmnl-games/platform'
 import { useConvexAuth } from 'convex/react'
 import { useEffect, useRef, useState, type ReactNode } from 'react'
 
@@ -23,15 +20,6 @@ export function useGames() {
   const first = useRef(data)
   first.current ??= data
   return isAuthenticated || (isLoaded && !isSignedIn) ? data : first.current
-}
-
-/**
- * Route loader gate for a game that may not be live. A hidden or preview game answers with the
- * ordinary not-found page for everyone but admins, so its routes cannot be probed for.
- */
-export async function requireOpenGame(context: { queryClient: QueryClient }, slug: GameSlug): Promise<void> {
-  const listing = await context.queryClient.ensureQueryData(gamesQuery)
-  if (!listing.games.some((game) => game.slug === slug && game.canOpen)) throw notFound()
 }
 
 /**

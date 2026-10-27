@@ -4,8 +4,8 @@
  * rendered by both engines from the same context and the markup must match
  * exactly. Ruby runs with strict filters, so a filter liquidjs knows but TRMNL
  * lacks fails here instead of silently passing through on TRMNL. Neither engine
- * replaces the live TRMNL render check. Idle Angler's templates are checked the same way over its preview scenarios
- * (D115, template v2).  Usage: pnpm crosscheck:trmnl
+ * replaces the live TRMNL render check.
+ * Usage: pnpm crosscheck:trmnl
  */
 import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
@@ -13,12 +13,6 @@ import { join } from 'node:path'
 import { spawnSync } from 'node:child_process'
 import { Liquid } from 'liquidjs'
 import { screenMarkup } from '@trmnl-games/desk-crawler/templates/screen'
-import { screenMarkup as idleAnglerMarkup } from '@trmnl-games/idle-angler/templates/screen'
-import { previewScenarios } from '@trmnl-games/idle-angler/templates/previewScenarios'
-import { buildPayload } from '@trmnl-games/idle-angler/payload'
-import { screenMarkup as paperLivesMarkup } from '@trmnl-games/paper-lives/templates/screen'
-import { previewScenarios as paperLivesScenarios } from '@trmnl-games/paper-lives/templates/previewScenarios'
-import { buildPayload as buildPaperLivesPayload } from '@trmnl-games/paper-lives/payload'
 import type { PreviewLayout } from '@trmnl-games/desk-crawler/templates/preview'
 import { bundle, requireBundle, root } from './bundle'
 
@@ -38,21 +32,6 @@ try {
     cases.push(...dumped.map(({ name, layout, context }) => ({ id: `${flags.join(' ')} ${name} ${layout}`, layout, context })))
   }
 
-  // Idle Angler: every preview scenario, with and without the weekly fly code (and its D180 claim QR); the fly cases
-  // also carry a UTC offset, so the stories' times (template v15) render in both Liquids.
-  const idleAnglerCases = Object.entries(previewScenarios('https://local-art.invalid')).flatMap(([name, input]) =>
-    [null, '482 917'].flatMap((flyCode) =>
-      (Object.keys(idleAnglerMarkup) as PreviewLayout[]).map((layout) => ({ id: `idle-angler ${name}${flyCode ? ' fly' : ''} ${layout}`, layout, context: JSON.parse(JSON.stringify({ ...buildPayload(input), fly_code: flyCode, fly_qr_base: flyCode ? 'https://local-art.invalid/art/ia/qr/v1/fly/482917' : '', ...(flyCode ? { utc_offset: 3600 } : {}) })) as Record<string, unknown> })),
-    ),
-  )
-
-  // Paper Lives: every preview scenario, with its owner's offset for the close time (D42).
-  const paperLivesCases = Object.entries(paperLivesScenarios('https://local-art.invalid')).flatMap(([name, { utcOffset, ...input }]) =>
-    [null, '482 917'].flatMap((photoCode) =>
-      (Object.keys(paperLivesMarkup) as PreviewLayout[]).map((layout) => ({ id: `paper-lives ${name}${photoCode ? ' photo' : ''} ${layout}`, layout, context: JSON.parse(JSON.stringify({ ...buildPaperLivesPayload(input), photo_code: photoCode, utc_offset: utcOffset })) as Record<string, unknown> })),
-    ),
-  )
-
   // TRMNL renders in UTC; the preview's liquidjs and the Ruby process both use it.
   const renderRubyChunk = (templates: Record<string, string>, set: typeof cases) => {
     const ruby = bundle(['exec', 'ruby', join(root, 'tools/trmnl/crosscheck.rb')], {
@@ -71,13 +50,13 @@ try {
     for (let start = 0; start < set.length; start += RUBY_CHUNK) Object.assign(html, renderRubyChunk(templates, set.slice(start, start + RUBY_CHUNK)))
     return html
   }
-  const rubyHtml = { ...renderRuby(screenMarkup, cases), ...renderRuby(idleAnglerMarkup, idleAnglerCases), ...renderRuby(paperLivesMarkup, paperLivesCases) }
+  const rubyHtml = renderRuby(screenMarkup, cases)
 
   const liquid = new Liquid({ timezoneOffset: 0 })
   const out = join(root, '.previews/crosscheck')
   rmSync(out, { recursive: true, force: true })
   let mismatches = 0
-  const allCases = [...cases.map((c) => ({ ...c, templates: screenMarkup as Record<string, string> })), ...idleAnglerCases.map((c) => ({ ...c, templates: idleAnglerMarkup as Record<string, string> })), ...paperLivesCases.map((c) => ({ ...c, templates: paperLivesMarkup as Record<string, string> }))]
+  const allCases = cases.map((c) => ({ ...c, templates: screenMarkup as Record<string, string> }))
   for (const { id, layout, context, templates } of allCases) {
     const js = await liquid.parseAndRender(templates[layout]!, context)
     const rb = rubyHtml[id] ?? 'RUBY ERROR: no output'

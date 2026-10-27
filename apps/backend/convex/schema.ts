@@ -1,24 +1,11 @@
 import { defineSchema, defineTable } from 'convex/server'
 import { v } from 'convex/values'
 import { logDetail, todoKind } from './lib/logDetail'
-import { DESK_CRAWLER_TABLES, IDLE_ANGLER_TABLES, LITTLE_PLOT_TABLES, PAPER_LIVES_TABLES, PIXEL_WARS_TABLES, engineTables, rankingTables } from './lib/engine/tables'
-import { accessId, anglerCounters, baitClass, logbookEntry, iaLogDetail, iaLogKind, order, season, timeBand, waterId, weather } from './idleAngler/validators'
-import { career as plCareer, glyph as plGlyph, lifeBoard, lifeRecordFields, lifeState, lineChanges as plLineChanges, plLogKind, portraitKey as plPortraitKey } from './paperLives/validators'
-import { lpLogDetail, lpLogKind, plotState as lpPlotState } from './littlePlot/validators'
-import { deskCounters as pwDeskCounters, faction as pwFaction, factionId as pwFactionId, mapEvent as pwMapEvent, orderKind as pwOrderKind, pwLogDetail, pwLogKind, seat as pwSeat, seatEvents as pwSeatEvents, share as pwShare, weekTally as pwWeekTally } from './pixelWars/validators'
+import { DESK_CRAWLER_TABLES, engineTables, rankingTables } from './lib/engine/tables'
 
 /** Desk Crawler's engine tables (world, runs, score windows, leaderboard sets), from the shared factory (S0). */
 const deskCrawlerEngine = { ...engineTables(DESK_CRAWLER_TABLES, ['deaths', 'levelUps', 'heldFinds']), ...rankingTables(DESK_CRAWLER_TABLES) }
 
-/** Idle Angler's engine tables, prefixed `ia` so retention and deletion stay per game (idle-angler.md "Data"); no XP boards (D116). */
-const idleAnglerEngine = engineTables(IDLE_ANGLER_TABLES, ['landed', 'released', 'gotAway'])
-
-/** Paper Lives' engine tables, prefixed `pl` (paper-lives.md "Data"); no XP boards, its boards are life records. */
-const paperLivesEngine = engineTables(PAPER_LIVES_TABLES, ['events', 'years', 'deaths'])
-/** Little Plot's engine tables, prefixed `lp` (little-plot.md "Data"); it ranks by XP like Desk Crawler, so it has the ranking tables too. */
-const littlePlotEngine = { ...engineTables(LITTLE_PLOT_TABLES, ['ripenings', 'pests', 'visits']), ...rankingTables(LITTLE_PLOT_TABLES) }
-/** Pixel Wars' engine tables, prefixed `pw` (pixel-wars.md "Data"); XP boards like Desk Crawler's. */
-const pixelWarsEngine = { ...engineTables(PIXEL_WARS_TABLES, ['orders', 'flips', 'desksTaken']), ...rankingTables(PIXEL_WARS_TABLES) }
 
 /**
  * Current-release schema only (data-model.md). Tables arrive with the work
@@ -148,24 +135,10 @@ export const merchantOffer = v.object({
 export const merchantVisit = v.object({ offers: v.array(merchantOffer), expiresAtTick: v.number(), biomeId: v.string() })
 
 /** P33: the two alert kinds; a new kind needs its own decision row (alerts.md). */
-export const alertKind = v.union(v.literal('asleep'), v.literal('merchant'), v.literal('cooler_full'), v.literal('bait_out'), v.literal('major_decision'), v.literal('life_ended'), v.literal('new_arrival'), v.literal('beds_ripe'), v.literal('new_seed'), v.literal('desk_taken'), v.literal('lead_lost'), v.literal('bell'))
+export const alertKind = v.union(v.literal('asleep'), v.literal('merchant'))
 export const alertPreferences = v.object({
   asleep: v.boolean(),
   merchant: v.boolean(),
-  /** D115: Idle Angler's kinds; absent means off. Devices and quiet hours are shared by both games. */
-  coolerFull: v.optional(v.boolean()),
-  baitOut: v.optional(v.boolean()),
-  /** D159: Paper Lives' kinds; absent means off. */
-  majorDecision: v.optional(v.boolean()),
-  lifeEnded: v.optional(v.boolean()),
-  newArrival: v.optional(v.boolean()),
-  /** D206: Little Plot's kinds; absent means off. */
-  bedsRipe: v.optional(v.boolean()),
-  newSeed: v.optional(v.boolean()),
-  /** D214: Pixel Wars' kinds; absent means off. */
-  deskTaken: v.optional(v.boolean()),
-  leadLost: v.optional(v.boolean()),
-  bell: v.optional(v.boolean()),
   quietStart: v.number(),
   quietEnd: v.number(),
   /** Set when the last device's subscription went stale and both kinds turned off; Settings says why. */
@@ -194,7 +167,7 @@ export const logKind = v.union(
 )
 
 /** Every registered game (packages/platform). Storage accepts any of them; each write path still names its own game. */
-export const gameSlug = v.union(v.literal('desk-crawler'), v.literal('idle-angler'), v.literal('paper-lives'), v.literal('little-plot'), v.literal('pixel-wars'))
+export const gameSlug = v.literal('desk-crawler')
 export const gameStatus = v.union(v.literal('hidden'), v.literal('preview'), v.literal('live'))
 
 /** D149: a hero's look; chosen free at creation, changed later with a makeover. */
@@ -232,7 +205,7 @@ export default defineSchema({
     tasks: v.optional(v.number()),
   }).index('by_key', ['key']),
 
-  /** Server-controlled game lifecycle (idle-angler.md "Architecture"): one row per game once an admin sets its status. */
+  /** Server-controlled game lifecycle : one row per game once an admin sets its status. */
   platformGames: defineTable({
     slug: gameSlug,
     status: gameStatus,
@@ -263,573 +236,6 @@ export default defineSchema({
   leaderboardGenerations: deskCrawlerEngine.generations,
   heroRanks: deskCrawlerEngine.ranks,
   achievementStats: deskCrawlerEngine.achievementStats,
-
-  iaWorldState: idleAnglerEngine.world,
-  iaSimulationRuns: defineTable(idleAnglerEngine.runFields).index('by_tick', ['tick']).index('by_state_and_startedAt', ['state', 'startedAt']),
-  iaSimulationFailures: idleAnglerEngine.failures,
-  iaLeaderboardPublications: defineTable(idleAnglerEngine.publicationFields).index('by_runId', ['runId']).index('by_state', ['state']),
-  iaAchievementStats: idleAnglerEngine.achievementStats,
-
-  /** One per user once they start Idle Angler (D115), like `deskCrawlerProfiles`. */
-  idleAnglerProfiles: defineTable({
-    userId: v.id('users'),
-    state: v.union(v.literal('active'), v.literal('deleting')),
-    anglerId: v.optional(v.id('anglers')),
-    createdAt: v.number(),
-  }).index('by_userId', ['userId']),
-
-  /** The Idle Angler player character. Engine tables call it `heroId` (lib/engine/tables.ts). */
-  anglers: defineTable({
-    userId: v.id('users'),
-    createdAt: v.number(),
-    isActive: v.boolean(),
-    activationState: v.union(v.literal('pending_trmnl'), v.literal('active')),
-    activatedAt: v.optional(v.number()),
-    gold: v.number(),
-    status: v.union(v.literal('fishing'), v.literal('paused')),
-    waterId,
-    travelTo: v.optional(waterId),
-    rodTier: v.number(),
-    coolerTier: v.number(),
-    baitOnHook: v.optional(baitClass),
-    bait: v.record(v.string(), v.number()),
-    access: v.array(accessId),
-    logbook: v.record(v.string(), logbookEntry),
-    counters: anglerCounters,
-    quietTicks: v.number(),
-    publicProfile: v.optional(v.boolean()),
-    eligibleFromTick: v.number(),
-    lastTick: v.number(),
-    lastProgressTick: v.number(),
-    lastAdvancedAt: v.optional(v.number()),
-    logSequence: v.number(),
-    simulationState: v.union(v.literal('healthy'), v.literal('quarantined')),
-    quarantineReasonCode: v.optional(v.string()),
-    achievementsVersion: v.optional(v.number()),
-    // D162 (content v2): the goal, the fishmonger's slate, a charter ticket, the wall's pegs and the last run announced.
-    goal: v.optional(v.object({ rung: v.number(), castsAtStart: v.number(), unclaimed: v.optional(v.array(v.object({ id: v.string(), coins: v.number() }))) })),
-    orders: v.optional(v.array(order)),
-    ordersDay: v.optional(v.number()),
-    swapDay: v.optional(v.number()),
-    charterCasts: v.optional(v.number()),
-    pegs: v.optional(v.number()),
-    runSeen: v.optional(v.string()),
-  })
-    .index('by_userId_and_isActive', ['userId', 'isActive'])
-    .index('by_createdAt', ['createdAt'])
-    .index('by_simulationState', ['simulationState']),
-
-  /** Idle Angler's fly box (D115, the D46 shape): one fly a week from the device's code; cosmetic only. */
-  flyBoxes: defineTable({
-    userId: v.id('users'),
-    totalCollected: v.number(),
-    lastClaimWeek: v.number(),
-    lastClaimedAt: v.number(),
-  }).index('by_userId', ['userId']),
-
-  /** One row per earned Idle Angler achievement, keyed by owner (D65 shape); bounded by the catalog. */
-  iaAchievements: defineTable({
-    userId: v.id('users'),
-    anglerId: v.id('anglers'),
-    achievementId: v.string(),
-    unlockedAt: v.number(),
-    tick: v.number(),
-    catalogVersion: v.number(),
-  })
-    .index('by_userId_and_achievementId', ['userId', 'achievementId'])
-    .index('by_userId_and_unlockedAt', ['userId', 'unlockedAt']),
-
-  /** Fish in an angler's cooler, at most the cooler's capacity (24 at the top tier). Sold explicitly. */
-  catches: defineTable({
-    anglerId: v.id('anglers'),
-    speciesId: v.string(),
-    grams: v.number(),
-    value: v.number(),
-    caughtTick: v.number(),
-    contentVersion: v.string(),
-    createdAt: v.number(),
-    /** D162: when and how it was caught, for fishmonger orders (content v2). */
-    band: v.optional(timeBand),
-    weather: v.optional(weather),
-    season: v.optional(season),
-  }).index('by_anglerId', ['anglerId']),
-
-  /**
-   * Idle Angler boards (2026-10-10): each angler's heaviest fish per water, once for the week (`period` is the Monday,
-   * "w2026-10-05", UTC) and once for all time ("all"). A landed fish, kept or released, replaces the row when heavier.
-   * `earlierFirst` is minus the catch time, so equal weights rank the earlier catch first.
-   */
-  iaCatchRecords: defineTable({
-    waterId,
-    period: v.string(),
-    anglerId: v.id('anglers'),
-    userId: v.id('users'),
-    speciesId: v.string(),
-    grams: v.number(),
-    at: v.number(),
-    earlierFirst: v.number(),
-  })
-    .index('by_waterId_and_period_and_grams', ['waterId', 'period', 'grams', 'earlierFirst'])
-    .index('by_anglerId_and_waterId_and_period', ['anglerId', 'waterId', 'period'])
-    .index('by_period', ['period']),
-
-  plWorldState: paperLivesEngine.world,
-  plSimulationRuns: defineTable(paperLivesEngine.runFields).index('by_tick', ['tick']).index('by_state_and_startedAt', ['state', 'startedAt']),
-  plSimulationFailures: paperLivesEngine.failures,
-  plLeaderboardPublications: defineTable(paperLivesEngine.publicationFields).index('by_runId', ['runId']).index('by_state', ['state']),
-  plAchievementStats: paperLivesEngine.achievementStats,
-
-  lpWorldState: littlePlotEngine.world,
-  lpSimulationRuns: defineTable(littlePlotEngine.runFields).index('by_tick', ['tick']).index('by_state_and_startedAt', ['state', 'startedAt']),
-  lpSimulationFailures: littlePlotEngine.failures,
-  lpScoreWindows: littlePlotEngine.scoreWindows,
-  lpRankInputs: littlePlotEngine.rankInputs,
-  lpLeaderboardPublications: defineTable(littlePlotEngine.publicationFields).index('by_runId', ['runId']).index('by_state', ['state']),
-  lpLeaderboardGenerations: littlePlotEngine.generations,
-  lpRanks: littlePlotEngine.ranks,
-  lpAchievementStats: littlePlotEngine.achievementStats,
-
-  pwWorldState: pixelWarsEngine.world,
-  pwSimulationRuns: defineTable(pixelWarsEngine.runFields).index('by_tick', ['tick']).index('by_state_and_startedAt', ['state', 'startedAt']),
-  pwSimulationFailures: pixelWarsEngine.failures,
-  pwScoreWindows: pixelWarsEngine.scoreWindows,
-  pwRankInputs: pixelWarsEngine.rankInputs,
-  pwLeaderboardPublications: defineTable(pixelWarsEngine.publicationFields).index('by_runId', ['runId']).index('by_state', ['state']),
-  pwLeaderboardGenerations: pixelWarsEngine.generations,
-  pwRanks: pixelWarsEngine.ranks,
-  pwAchievementStats: pixelWarsEngine.achievementStats,
-
-  /** One per user once they start Pixel Wars (D214), like `littlePlotProfiles`. */
-  pixelWarsProfiles: defineTable({
-    userId: v.id('users'),
-    state: v.union(v.literal('active'), v.literal('deleting')),
-    deskId: v.optional(v.id('desks')),
-    createdAt: v.number(),
-  }).index('by_userId', ['userId']),
-
-  /**
-   * The Pixel Wars player character (pixel-wars.md "Desks, maps and placement"): one per account, placed on a map
-   * once a faction is chosen. Engine tables call it `heroId` (lib/engine/tables.ts). The well accrues lazily from
-   * `well.tick`; `faction` 0 means not chosen yet.
-   */
-  desks: defineTable({
-    userId: v.id('users'),
-    createdAt: v.number(),
-    isActive: v.boolean(),
-    activationState: v.union(v.literal('pending_trmnl'), v.literal('active')),
-    activatedAt: v.optional(v.number()),
-    mapId: v.optional(v.id('pwMaps')),
-    seat: v.optional(v.number()),
-    faction: pwFaction,
-    level: v.number(),
-    xp: v.number(),
-    lifetimeXp: v.number(),
-    lastLevelUpTick: v.number(),
-    scoreHourXp: v.number(),
-    scoreHour: v.optional(v.number()),
-    publicProfile: v.optional(v.boolean()),
-    counters: pwDeskCounters,
-    week: pwWeekTally,
-    goal: v.object({ rung: v.number() }),
-    well: v.object({ drops: v.number(), tick: v.number() }),
-    /** The keepsake week the desk last saw a bell for, so the first tick of a new week refills and tallies once. */
-    seasonWeek: v.number(),
-    /** The week a faction switch was last made, one a season. */
-    switchedWeek: v.optional(v.number()),
-    /** The desk whose link placed this one, and this desk's own link code. */
-    invitedBy: v.optional(v.id('desks')),
-    inviteCode: v.string(),
-    /** Cleared to ground after the owner's screens went silent (pixel-wars.md "Desks, maps and placement"). */
-    cleared: v.optional(v.boolean()),
-    eligibleFromTick: v.number(),
-    lastTick: v.number(),
-    lastProgressTick: v.number(),
-    lastAdvancedAt: v.optional(v.number()),
-    logSequence: v.number(),
-    simulationState: v.union(v.literal('healthy'), v.literal('quarantined')),
-    quarantineReasonCode: v.optional(v.string()),
-    achievementsVersion: v.optional(v.number()),
-  })
-    .index('by_userId_and_isActive', ['userId', 'isActive'])
-    .index('by_createdAt', ['createdAt'])
-    .index('by_mapId_and_seat', ['mapId', 'seat'])
-    .index('by_inviteCode', ['inviteCode'])
-    .index('by_simulationState', ['simulationState']),
-
-  /**
-   * A map (pixel-wars.md "Data"): the live cells and painters as bytes, the seats, the cached shares and the season
-   * running score. One row, the global map, in the MVP; `kind` and the per-row shape are what offices (v1.1) reuse.
-   */
-  pwMaps: defineTable({
-    kind: v.union(v.literal('global'), v.literal('office')),
-    x0: v.number(),
-    y0: v.number(),
-    cols: v.number(),
-    rows: v.number(),
-    cells: v.bytes(),
-    painters: v.bytes(),
-    seats: v.array(pwSeat),
-    currentTick: v.number(),
-    seasonWeek: v.number(),
-    /** Index 1 to 4: the week's cumulative score per faction. */
-    seasonScore: v.array(v.number()),
-    shares: v.array(pwShare),
-    lastLeader: v.optional(pwFactionId),
-    leadChanges: v.number(),
-    lastWinner: v.optional(pwFactionId),
-    createdAt: v.number(),
-  }).index('by_kind', ['kind']),
-
-  /** One snapshot per map per tick, the last eight kept: what the device renders and what the per-desk step reads. */
-  pwMapTicks: defineTable({
-    mapId: v.id('pwMaps'),
-    tick: v.number(),
-    at: v.number(),
-    x0: v.number(),
-    y0: v.number(),
-    cols: v.number(),
-    rows: v.number(),
-    cells: v.bytes(),
-    painters: v.bytes(),
-    shares: v.array(pwShare),
-    events: v.array(pwMapEvent),
-    /** Keyed by seat number. */
-    seatEvents: v.record(v.string(), pwSeatEvents),
-    /** Up to three lines for the device, aliases already resolved. */
-    lines: v.array(v.string()),
-    bell: v.optional(v.boolean()),
-    /** The faction that led before this tick and the one leading after, when they differ (for the lead-lost alert). */
-    leaderFrom: v.optional(pwFactionId),
-    leaderTo: v.optional(pwFactionId),
-  })
-    .index('by_mapId_and_tick', ['mapId', 'tick'])
-    .index('by_at', ['at']),
-
-  /** The orders queued for one map and tick, sharded by seat so a busy quarter-hour never fills one document. */
-  pwOrderBoards: defineTable({
-    mapId: v.id('pwMaps'),
-    tick: v.number(),
-    shard: v.number(),
-    orders: v.array(v.object({ s: v.number(), x: v.number(), y: v.number(), k: pwOrderKind, d: v.number() })),
-  }).index('by_mapId_and_tick_and_shard', ['mapId', 'tick', 'shard']),
-
-  /** A player's own queued orders, for the companion's queue and Cancel; the desk's step deletes its resolved rows. */
-  pwOrders: defineTable({
-    deskId: v.id('desks'),
-    mapId: v.id('pwMaps'),
-    tick: v.number(),
-    x: v.number(),
-    y: v.number(),
-    kind: pwOrderKind,
-    drops: v.number(),
-    createdAt: v.number(),
-  })
-    .index('by_deskId_and_tick', ['deskId', 'tick'])
-    .index('by_createdAt', ['createdAt']),
-
-  /** A finished week: the final map for the print and the standings. */
-  pwSeasons: defineTable({
-    mapId: v.id('pwMaps'),
-    week: v.number(),
-    endedAt: v.number(),
-    x0: v.number(),
-    y0: v.number(),
-    cols: v.number(),
-    rows: v.number(),
-    cells: v.bytes(),
-    standings: v.array(v.object({ faction: pwFactionId, score: v.number(), percent: v.number() })),
-    winner: pwFactionId,
-    desks: v.number(),
-  }).index('by_mapId_and_week', ['mapId', 'week']),
-
-  /** One row per earned Pixel Wars achievement, keyed by owner (D65 shape); bounded by the catalog. */
-  pwAchievements: defineTable({
-    userId: v.id('users'),
-    deskId: v.id('desks'),
-    achievementId: v.string(),
-    unlockedAt: v.number(),
-    tick: v.number(),
-    catalogVersion: v.number(),
-  })
-    .index('by_userId_and_achievementId', ['userId', 'achievementId'])
-    .index('by_userId_and_unlockedAt', ['userId', 'unlockedAt']),
-
-  /** A desk's story lines: what fell and came back, what it took, the bell, goals and achievements. */
-  pwTickLogs: defineTable({
-    deskId: v.id('desks'),
-    source: v.union(v.literal('tick'), v.literal('command'), v.literal('lifecycle')),
-    tick: v.optional(v.number()),
-    runId: v.optional(v.id('pwSimulationRuns')),
-    sequence: v.number(),
-    at: v.number(),
-    kind: pwLogKind,
-    summary: v.string(),
-    detail: pwLogDetail,
-  })
-    .index('by_deskId_and_at_and_sequence', ['deskId', 'at', 'sequence'])
-    .index('by_at', ['at']),
-
-  /** One per user once they start Little Plot (D206), like `idleAnglerProfiles`. The pressed flowers (the D46 shape) live here. */
-  littlePlotProfiles: defineTable({
-    userId: v.id('users'),
-    state: v.union(v.literal('active'), v.literal('deleting')),
-    plotId: v.optional(v.id('plots')),
-    flowers: v.optional(v.object({ totalCollected: v.number(), lastClaimWeek: v.number(), lastClaimedAt: v.number() })),
-    createdAt: v.number(),
-  }).index('by_userId', ['userId']),
-
-  /**
-   * The Little Plot player character: the pure core's state stored whole in `plot` (littlePlot/validators.ts), with the
-   * level, XP and gold mirrored on top for ranking and lists. Engine tables call it `heroId` (lib/engine/tables.ts).
-   */
-  plots: defineTable({
-    userId: v.id('users'),
-    createdAt: v.number(),
-    isActive: v.boolean(),
-    activationState: v.union(v.literal('pending_trmnl'), v.literal('active')),
-    activatedAt: v.optional(v.number()),
-    plot: lpPlotState,
-    level: v.number(),
-    xp: v.number(),
-    gold: v.number(),
-    lastLevelUpTick: v.number(),
-    /** D31: XP granted in the current UTC hour, folded into the score window at publication. */
-    scoreHourXp: v.number(),
-    scoreHour: v.optional(v.number()),
-    publicProfile: v.optional(v.boolean()),
-    /** The UTC day the last cutting was sent, one a day. */
-    lastCuttingDay: v.optional(v.number()),
-    eligibleFromTick: v.number(),
-    lastTick: v.number(),
-    lastProgressTick: v.number(),
-    lastAdvancedAt: v.optional(v.number()),
-    logSequence: v.number(),
-    simulationState: v.union(v.literal('healthy'), v.literal('quarantined')),
-    quarantineReasonCode: v.optional(v.string()),
-    achievementsVersion: v.optional(v.number()),
-  })
-    .index('by_userId_and_isActive', ['userId', 'isActive'])
-    .index('by_createdAt', ['createdAt'])
-    .index('by_simulationState', ['simulationState']),
-
-  /** One row per earned Little Plot achievement, keyed by owner (D65 shape); bounded by the catalog. */
-  lpAchievements: defineTable({
-    userId: v.id('users'),
-    plotId: v.id('plots'),
-    achievementId: v.string(),
-    unlockedAt: v.number(),
-    tick: v.number(),
-    catalogVersion: v.number(),
-  })
-    .index('by_userId_and_achievementId', ['userId', 'achievementId'])
-    .index('by_userId_and_unlockedAt', ['userId', 'unlockedAt']),
-
-  /**
-   * The gnome pool (little-plot.md "Gnomes from other gardens"), the raid pool's shape: one row per plot at a random
-   * shard, in its level group, drawable while its page is public and it is growing. A drawn row moves to a new shard
-   * and records when, so nobody is everyone's target.
-   */
-  lpGnomePool: defineTable({
-    plotId: v.id('plots'),
-    userId: v.id('users'),
-    cohortKey: v.string(),
-    eligible: v.boolean(),
-    shard: v.number(),
-    lastActiveTick: v.number(),
-    visitedAtTick: v.optional(v.number()),
-  })
-    .index('by_plotId', ['plotId'])
-    .index('by_cohortKey_and_eligible_and_shard', ['cohortKey', 'eligible', 'shard']),
-
-  /**
-   * The seed ledger between gardens: a gnome's haul or a friend's cutting, written by the sending plot's tick or intent
-   * and applied by the receiving plot at its next evaluation, so each plot only writes its own document. The applied
-   * rows are the week's visit history (at most 30 per plot).
-   */
-  lpVisits: defineTable({
-    plotId: v.id('plots'),
-    fromPlotId: v.id('plots'),
-    fromUserId: v.id('users'),
-    fromName: v.string(),
-    fromNameVersion: v.number(),
-    kindId: v.optional(v.string()),
-    effect: v.union(v.literal('gain'), v.literal('lose'), v.literal('none')),
-    cutting: v.optional(v.literal(true)),
-    caught: v.optional(v.literal(true)),
-    tick: v.number(),
-    state: v.union(v.literal('pending'), v.literal('applied'), v.literal('void')),
-    appliedTick: v.optional(v.number()),
-    createdAt: v.number(),
-  })
-    .index('by_plotId_and_state_and_tick', ['plotId', 'state', 'tick'])
-    .index('by_plotId_and_tick', ['plotId', 'tick']),
-
-  /** A plot's story lines: stages, ripenings, pests, visits, goals and the player's own actions. */
-  lpTickLogs: defineTable({
-    plotId: v.id('plots'),
-    source: v.union(v.literal('tick'), v.literal('command'), v.literal('lifecycle')),
-    tick: v.optional(v.number()),
-    runId: v.optional(v.id('lpSimulationRuns')),
-    sequence: v.number(),
-    at: v.number(),
-    kind: lpLogKind,
-    summary: v.string(),
-    detail: lpLogDetail,
-  })
-    .index('by_plotId_and_at_and_sequence', ['plotId', 'at', 'sequence'])
-    .index('by_at', ['at']),
-
-  /** One per user once they start Paper Lives (D159), like `idleAnglerProfiles`. */
-  paperLivesProfiles: defineTable({
-    userId: v.id('users'),
-    state: v.union(v.literal('active'), v.literal('deleting')),
-    lifeId: v.optional(v.id('lives')),
-    /** The totals of the account's finished lives, for achievements (D159, L5). */
-    career: v.optional(plCareer),
-    /** L6: photos claimed with the weekly device code, and the week of the newest. */
-    photosClaimed: v.optional(v.number()),
-    lastPhotoWeek: v.optional(v.number()),
-    createdAt: v.number(),
-  }).index('by_userId', ['userId']),
-
-  /**
-   * L6: a photo claimed with the weekly device code, one per account a week: the character as they were that week,
-   * kept with the life it was taken in (by ordinal) after that life ends.
-   */
-  plPhotos: defineTable({
-    userId: v.id('users'),
-    lifeId: v.id('lives'),
-    ordinal: v.number(),
-    week: v.number(),
-    takenAt: v.number(),
-    name: v.string(),
-    age: v.number(),
-    petName: v.optional(v.string()),
-    portrait: plPortraitKey,
-  }).index('by_userId_and_ordinal', ['userId', 'ordinal']),
-
-  /** One row per earned Paper Lives achievement, keyed by owner (D65 shape); bounded by the catalog. */
-  plAchievements: defineTable({
-    userId: v.id('users'),
-    achievementId: v.string(),
-    unlockedAt: v.number(),
-    tick: v.number(),
-    catalogVersion: v.number(),
-  })
-    .index('by_userId_and_achievementId', ['userId', 'achievementId'])
-    .index('by_userId_and_unlockedAt', ['userId', 'unlockedAt']),
-
-  /**
-   * The Paper Lives player character: the account's current life, the pure core's state stored whole in `life`
-   * (paperLives/validators.ts). An ended life stays the current row until the next life begins in place, so the
-   * profile pointer never changes. Engine tables call it `heroId` (lib/engine/tables.ts).
-   */
-  lives: defineTable({
-    userId: v.id('users'),
-    createdAt: v.number(),
-    isActive: v.boolean(),
-    activationState: v.union(v.literal('pending_trmnl'), v.literal('active')),
-    activatedAt: v.optional(v.number()),
-    life: lifeState,
-    /** The account's nth life, from 1. */
-    ordinal: v.number(),
-    publicProfile: v.optional(v.boolean()),
-    eligibleFromTick: v.number(),
-    lastTick: v.number(),
-    lastProgressTick: v.number(),
-    lastAdvancedAt: v.optional(v.number()),
-    logSequence: v.number(),
-    simulationState: v.union(v.literal('healthy'), v.literal('quarantined')),
-    quarantineReasonCode: v.optional(v.string()),
-  })
-    .index('by_userId_and_isActive', ['userId', 'isActive'])
-    .index('by_createdAt', ['createdAt'])
-    .index('by_simulationState', ['simulationState']),
-
-  /** Finished lives (paper-lives.md "Data"): one row per life, written once at death; the album and the family tree read them. */
-  lifeRecords: defineTable(lifeRecordFields).index('by_userId_and_endedAt', ['userId', 'endedAt']).index('by_userId_and_ordinal', ['userId', 'ordinal']),
-
-  /**
-   * Record boards (paper-lives.md "Leaderboards"): each player's best finished life per board, once for the week
-   * (`period` is its Monday, "w2026-10-12", UTC) and once for all time ("all"). `value` is the age at death or the peak
-   * money; `earlierFirst` is minus the death time, so ties rank the earlier death first. Written at death only.
-   */
-  plLifeBoards: defineTable({
-    board: lifeBoard,
-    period: v.string(),
-    userId: v.id('users'),
-    recordId: v.id('lifeRecords'),
-    value: v.number(),
-    age: v.number(),
-    endedAt: v.number(),
-    earlierFirst: v.number(),
-  })
-    .index('by_board_and_period_and_value', ['board', 'period', 'value', 'earlierFirst'])
-    .index('by_userId_and_board_and_period', ['userId', 'board', 'period'])
-    .index('by_userId', ['userId']),
-
-  /** A life's story lines: events, decisions, the yearly checks, recaps and the death, marked with the age. */
-  plTickLogs: defineTable({
-    lifeId: v.id('lives'),
-    ordinal: v.number(),
-    source: v.union(v.literal('tick'), v.literal('command'), v.literal('lifecycle')),
-    tick: v.optional(v.number()),
-    runId: v.optional(v.id('plSimulationRuns')),
-    sequence: v.number(),
-    at: v.number(),
-    kind: plLogKind,
-    glyph: plGlyph,
-    age: v.number(),
-    summary: v.string(),
-    remarkable: v.optional(v.boolean()),
-    major: v.optional(v.boolean()),
-    /** The stats and money the line's effect moved (template v7); absent on older lines and lines that moved none. */
-    changes: v.optional(plLineChanges),
-  })
-    .index('by_lifeId_and_at_and_sequence', ['lifeId', 'at', 'sequence'])
-    /** One life's whole story, page by page (D182): the row is reused across lives, so the ordinal picks the life. */
-    .index('by_lifeId_and_ordinal_and_at_and_sequence', ['lifeId', 'ordinal', 'at', 'sequence'])
-    .index('by_at', ['at']),
-
-  /**
-   * D162: the trophy wall (mounted fish, at most 24 pegs) and the shelf (Open medals). Rosettes are the angler's
-   * `opensEntered` count, not rows, so the shelf grows only by medals.
-   */
-  iaTrophies: defineTable({
-    anglerId: v.id('anglers'),
-    userId: v.id('users'),
-    kind: v.union(v.literal('fish'), v.literal('medal')),
-    speciesId: v.optional(v.string()),
-    grams: v.optional(v.number()),
-    water: waterId,
-    at: v.number(),
-    peg: v.optional(v.number()),
-    periodKey: v.optional(v.string()),
-    place: v.optional(v.number()),
-  }).index('by_anglerId_and_kind', ['anglerId', 'kind']),
-
-  /** D162: one row per weekend Open closed, so its medals are awarded once. */
-  iaOpenAwards: defineTable({
-    period: v.string(),
-    waterId,
-    awarded: v.number(),
-    at: v.number(),
-  }).index('by_period_and_waterId', ['period', 'waterId']),
-
-  iaTickLogs: defineTable({
-    anglerId: v.id('anglers'),
-    source: v.union(v.literal('tick'), v.literal('command'), v.literal('lifecycle')),
-    tick: v.optional(v.number()),
-    runId: v.optional(v.id('iaSimulationRuns')),
-    sequence: v.number(),
-    at: v.number(),
-    kind: iaLogKind,
-    summary: v.string(),
-    detail: iaLogDetail,
-    deltas: v.object({ gold: v.number() }),
-  })
-    .index('by_anglerId_and_at_and_sequence', ['anglerId', 'at', 'sequence'])
-    .index('by_at', ['at']),
 
   users: defineTable({
     analyticsConsent: v.optional(v.boolean()),
@@ -1150,7 +556,7 @@ export default defineSchema({
 
 
   operationReceipts: defineTable({
-    scope: v.optional(v.union(v.literal('platform'), v.literal('desk-crawler'), v.literal('idle-angler'), v.literal('paper-lives'), v.literal('little-plot'), v.literal('pixel-wars'))),
+    scope: v.optional(v.union(v.literal('platform'), v.literal('desk-crawler'))),
     userId: v.id('users'),
     operationId: v.string(),
     operation: v.string(),
@@ -1186,16 +592,7 @@ export default defineSchema({
   /** P33: one alert per qualifying event, written by the tick and drained by the sender; kept 7 days. */
   alertOutbox: defineTable({
     userId: v.id('users'),
-    /** Desk Crawler rows carry the hero, Idle Angler rows the angler (D115). */
     heroId: v.optional(v.id('heroes')),
-    anglerId: v.optional(v.id('anglers')),
-    /** Paper Lives rows carry the life, the age it was raised at and the decision or the newborn's id (D159). */
-    lifeId: v.optional(v.id('lives')),
-    lifeAge: v.optional(v.number()),
-    /** Little Plot rows carry the plot (D206). */
-    plotId: v.optional(v.id('plots')),
-    /** Pixel Wars rows carry the desk (D214). */
-    deskId: v.optional(v.id('desks')),
     detail: v.optional(v.string()),
     kind: alertKind,
     /** `${heroId}:${kind}:${eventTick}`: one nap or one merchant visit is one alert. */
@@ -1315,8 +712,7 @@ export default defineSchema({
 
   operationalIncidents: defineTable({
     incidentKey: v.string(),
-    /** Any game's run (D115; the quarantine notice covers all five). */
-    runId: v.union(v.id('simulationRuns'), v.id('iaSimulationRuns'), v.id('plSimulationRuns'), v.id('lpSimulationRuns'), v.id('pwSimulationRuns')),
+    runId: v.id('simulationRuns'),
     state: v.union(v.literal('open'), v.literal('recovered')),
     openedAt: v.number(),
     recoveredAt: v.optional(v.number()),

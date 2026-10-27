@@ -144,11 +144,8 @@ export function captureAnalytics(event: AnalyticsEvent, properties: Record<strin
   }).catch(() => {})
 }
 
-/** The game a page belongs to, for every event's `game` property (D115, D159); platform pages count as Desk Crawler's, as before. */
-const currentGame = () => {
-  const path = typeof window === 'undefined' ? '' : window.location.pathname
-  return /(^|\/)idle-angler(\/|$)/.test(path) ? 'idle-angler' : /(^|\/)paper-lives(\/|$)/.test(path) ? 'paper-lives' : /(^|\/)little-plot(\/|$)/.test(path) ? 'little-plot' : /(^|\/)pixel-wars(\/|$)/.test(path) ? 'pixel-wars' : 'desk-crawler'
-}
+/** The game a page belongs to, for every event's `game` property; this fork has only Desk Crawler. */
+const currentGame = () => 'desk-crawler' as const
 
 /** v1.1 choices worth measuring: intent → event and the one catalog id argument it may carry. */
 const INTENT_EVENTS: Record<string, [AnalyticsEvent, string, string]> = {
@@ -159,14 +156,7 @@ const INTENT_EVENTS: Record<string, [AnalyticsEvent, string, string]> = {
   'inventory:buyPouch': ['pouch bought', 'tierId', 'tier'],
   'inventory:buyBag': ['bag bought', 'tierId', 'tier'],
   // D115: Idle Angler's choices.
-  'idleAngler/anglers:travelTo': ['water changed', 'waterId', 'water'],
-  'idleAngler/anglers:chooseBait': ['bait changed', 'bait', 'bait'],
-  'idleAngler/anglers:buyAccessItem': ['tackle bought', 'access', 'item'],
-  'idleAngler/anglers:buyBaitTubs': ['tackle bought', 'bait', 'item'],
   // D214: Pixel Wars' choices.
-  'pixelWars/desks:queueOrder': ['order queued', 'kind', 'kind'],
-  'pixelWars/desks:chooseFaction': ['side chosen', 'faction', 'faction'],
-  'pixelWars/desks:switchFaction': ['side switched', 'faction', 'faction'],
 }
 
 /** Intents whose event carries a count or a fixed kind rather than one catalog id. */
@@ -177,9 +167,6 @@ const SPECIAL_EVENTS: Record<string, (args: Record<string, unknown>) => [Analyti
   'inventory:chooseAffix': (args) => ['affix chosen', { affix: String(args.affixId ?? '') }],
   // D131: potions combined, by batches.
   'inventory:combinePotions': (args) => ['potion combined', { batches: String(args.batches ?? 1) }],
-  'idleAngler/anglers:sellCatches': (args) => ['fish sold', { count: String(Array.isArray(args.catchIds) ? args.catchIds.length : 0) }],
-  'idleAngler/anglers:buyNextRod': () => ['tackle bought', { item: 'rod' }],
-  'idleAngler/anglers:buyNextCooler': () => ['tackle bought', { item: 'cooler' }],
   // D142: never the names themselves.
   'inventory:buyNameTag': () => ['name tag bought', {}],
   'inventory:buyMakeover': () => ['makeover bought', {}],
@@ -188,7 +175,6 @@ const SPECIAL_EVENTS: Record<string, (args: Record<string, unknown>) => [Analyti
   'follows:follow': () => ['hero followed', {}],
   'follows:unfollow': () => ['hero unfollowed', {}],
   // D159: how the next life starts, as a child or a stranger; never who.
-  'paperLives/lives:begin': (args) => ['next life started', { kind: String(args.kind ?? '') }],
 }
 
 export function intentAnalytics(intent: string, args: Record<string, unknown>): [AnalyticsEvent, Record<string, string>] | null {

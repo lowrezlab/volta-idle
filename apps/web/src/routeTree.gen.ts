@@ -15,36 +15,19 @@ import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AppRouteImport } from './routes/app'
 import { Route as DcRouteImport } from './routes/dc'
 import { Route as FeedbackRouteImport } from './routes/feedback'
-import { Route as IaRouteImport } from './routes/ia'
-import { Route as LpRouteImport } from './routes/lp'
-import { Route as PlRouteImport } from './routes/pl'
 import { Route as PrivacyRouteImport } from './routes/privacy'
-import { Route as PwRouteImport } from './routes/pw'
 import { Route as SupportRouteImport } from './routes/support'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as WhatsNewRouteImport } from './routes/whats-new'
 import { Route as AccountDeleteRouteImport } from './routes/account_.delete'
 import { Route as AppIndexRouteImport } from './routes/app/index'
 import { Route as AppDeskCrawlerRouteImport } from './routes/app/desk-crawler'
-import { Route as AppIdleAnglerRouteImport } from './routes/app/idle-angler'
-import { Route as AppLittlePlotRouteImport } from './routes/app/little-plot'
-import { Route as AppPaperLivesRouteImport } from './routes/app/paper-lives'
-import { Route as AppPixelWarsRouteImport } from './routes/app/pixel-wars'
 import { Route as DeskCrawlerUnsubscribeRouteImport } from './routes/desk-crawler/unsubscribe'
 import { Route as DeskCrawlerWaitingListRouteImport } from './routes/desk-crawler/waiting-list'
 import { Route as DevDeskCrawlerRouteImport } from './routes/dev/desk-crawler'
 import { Route as DevOgRouteImport } from './routes/dev/og'
-import { Route as FCodeRouteImport } from './routes/f.$code'
 import { Route as GamesDeskCrawlerRouteImport } from './routes/games/desk-crawler'
-import { Route as GamesIdleAnglerRouteImport } from './routes/games/idle-angler'
-import { Route as GamesLittlePlotRouteImport } from './routes/games/little-plot'
-import { Route as GamesPaperLivesRouteImport } from './routes/games/paper-lives'
-import { Route as GamesPixelWarsRouteImport } from './routes/games/pixel-wars'
 import { Route as HelpDeskCrawlerRouteImport } from './routes/help/desk-crawler'
-import { Route as HelpIdleAnglerRouteImport } from './routes/help/idle-angler'
-import { Route as HelpLittlePlotRouteImport } from './routes/help/little-plot'
-import { Route as HelpPaperLivesRouteImport } from './routes/help/paper-lives'
-import { Route as HelpPixelWarsRouteImport } from './routes/help/pixel-wars'
 import { Route as KCodeRouteImport } from './routes/k.$code'
 import { Route as LaunchListUnsubscribeRouteImport } from './routes/launch-list/unsubscribe'
 import { Route as ProfileAliasRouteImport } from './routes/profile/$alias'
@@ -59,41 +42,9 @@ import { Route as AppDeskCrawlerLogRouteImport } from './routes/app/desk-crawler
 import { Route as AppDeskCrawlerRosterRouteImport } from './routes/app/desk-crawler/roster'
 import { Route as AppDeskCrawlerSettingsRouteImport } from './routes/app/desk-crawler/settings'
 import { Route as AppDeskCrawlerTrmnlRouteImport } from './routes/app/desk-crawler/trmnl'
-import { Route as AppIdleAnglerIndexRouteImport } from './routes/app/idle-angler/index'
-import { Route as AppIdleAnglerAchievementsRouteImport } from './routes/app/idle-angler/achievements'
-import { Route as AppIdleAnglerCoolerRouteImport } from './routes/app/idle-angler/cooler'
-import { Route as AppIdleAnglerLogbookRouteImport } from './routes/app/idle-angler/logbook'
-import { Route as AppIdleAnglerRankingsRouteImport } from './routes/app/idle-angler/rankings'
-import { Route as AppIdleAnglerSettingsRouteImport } from './routes/app/idle-angler/settings'
-import { Route as AppIdleAnglerShopRouteImport } from './routes/app/idle-angler/shop'
-import { Route as AppIdleAnglerTrophiesRouteImport } from './routes/app/idle-angler/trophies'
-import { Route as AppLittlePlotIndexRouteImport } from './routes/app/little-plot/index'
-import { Route as AppLittlePlotAchievementsRouteImport } from './routes/app/little-plot/achievements'
-import { Route as AppLittlePlotCatalogueRouteImport } from './routes/app/little-plot/catalogue'
-import { Route as AppLittlePlotRankingsRouteImport } from './routes/app/little-plot/rankings'
-import { Route as AppLittlePlotSettingsRouteImport } from './routes/app/little-plot/settings'
-import { Route as AppLittlePlotShedRouteImport } from './routes/app/little-plot/shed'
-import { Route as AppLittlePlotTinRouteImport } from './routes/app/little-plot/tin'
-import { Route as AppPaperLivesIndexRouteImport } from './routes/app/paper-lives/index'
-import { Route as AppPaperLivesAchievementsRouteImport } from './routes/app/paper-lives/achievements'
-import { Route as AppPaperLivesAlbumRouteImport } from './routes/app/paper-lives/album'
-import { Route as AppPaperLivesPeopleRouteImport } from './routes/app/paper-lives/people'
-import { Route as AppPaperLivesRankingsRouteImport } from './routes/app/paper-lives/rankings'
-import { Route as AppPaperLivesSettingsRouteImport } from './routes/app/paper-lives/settings'
-import { Route as AppPaperLivesWorkRouteImport } from './routes/app/paper-lives/work'
-import { Route as AppPixelWarsIndexRouteImport } from './routes/app/pixel-wars/index'
-import { Route as AppPixelWarsAchievementsRouteImport } from './routes/app/pixel-wars/achievements'
-import { Route as AppPixelWarsRankingsRouteImport } from './routes/app/pixel-wars/rankings'
-import { Route as AppPixelWarsSeasonRouteImport } from './routes/app/pixel-wars/season'
-import { Route as AppPixelWarsSettingsRouteImport } from './routes/app/pixel-wars/settings'
 import { Route as DeskCrawlerHeroesAliasRouteImport } from './routes/desk-crawler/heroes.$alias'
 import { Route as ConnectTrmnlDeskCrawlerInstallRouteImport } from './routes/connect/trmnl/desk-crawler/install'
 import { Route as ConnectTrmnlDeskCrawlerManageRouteImport } from './routes/connect/trmnl/desk-crawler/manage'
-import { Route as ConnectTrmnlIdleAnglerInstallRouteImport } from './routes/connect/trmnl/idle-angler/install'
-import { Route as ConnectTrmnlIdleAnglerManageRouteImport } from './routes/connect/trmnl/idle-angler/manage'
-import { Route as ConnectTrmnlPaperLivesInstallRouteImport } from './routes/connect/trmnl/paper-lives/install'
-import { Route as ConnectTrmnlPaperLivesManageRouteImport } from './routes/connect/trmnl/paper-lives/manage'
-import { Route as ProfileAliasLivesNRouteImport } from './routes/profile/$alias_.lives.$n'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -125,29 +76,9 @@ const FeedbackRoute = FeedbackRouteImport.update({
   path: '/feedback',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IaRoute = IaRouteImport.update({
-  id: '/ia',
-  path: '/ia',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const LpRoute = LpRouteImport.update({
-  id: '/lp',
-  path: '/lp',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PlRoute = PlRouteImport.update({
-  id: '/pl',
-  path: '/pl',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const PrivacyRoute = PrivacyRouteImport.update({
   id: '/privacy',
   path: '/privacy',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PwRoute = PwRouteImport.update({
-  id: '/pw',
-  path: '/pw',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SupportRoute = SupportRouteImport.update({
@@ -180,26 +111,6 @@ const AppDeskCrawlerRoute = AppDeskCrawlerRouteImport.update({
   path: '/desk-crawler',
   getParentRoute: () => AppRoute,
 } as any)
-const AppIdleAnglerRoute = AppIdleAnglerRouteImport.update({
-  id: '/idle-angler',
-  path: '/idle-angler',
-  getParentRoute: () => AppRoute,
-} as any)
-const AppLittlePlotRoute = AppLittlePlotRouteImport.update({
-  id: '/little-plot',
-  path: '/little-plot',
-  getParentRoute: () => AppRoute,
-} as any)
-const AppPaperLivesRoute = AppPaperLivesRouteImport.update({
-  id: '/paper-lives',
-  path: '/paper-lives',
-  getParentRoute: () => AppRoute,
-} as any)
-const AppPixelWarsRoute = AppPixelWarsRouteImport.update({
-  id: '/pixel-wars',
-  path: '/pixel-wars',
-  getParentRoute: () => AppRoute,
-} as any)
 const DeskCrawlerUnsubscribeRoute = DeskCrawlerUnsubscribeRouteImport.update({
   id: '/desk-crawler/unsubscribe',
   path: '/desk-crawler/unsubscribe',
@@ -220,59 +131,14 @@ const DevOgRoute = DevOgRouteImport.update({
   path: '/dev/og',
   getParentRoute: () => rootRouteImport,
 } as any)
-const FCodeRoute = FCodeRouteImport.update({
-  id: '/f/$code',
-  path: '/f/$code',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const GamesDeskCrawlerRoute = GamesDeskCrawlerRouteImport.update({
   id: '/games/desk-crawler',
   path: '/games/desk-crawler',
   getParentRoute: () => rootRouteImport,
 } as any)
-const GamesIdleAnglerRoute = GamesIdleAnglerRouteImport.update({
-  id: '/games/idle-angler',
-  path: '/games/idle-angler',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const GamesLittlePlotRoute = GamesLittlePlotRouteImport.update({
-  id: '/games/little-plot',
-  path: '/games/little-plot',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const GamesPaperLivesRoute = GamesPaperLivesRouteImport.update({
-  id: '/games/paper-lives',
-  path: '/games/paper-lives',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const GamesPixelWarsRoute = GamesPixelWarsRouteImport.update({
-  id: '/games/pixel-wars',
-  path: '/games/pixel-wars',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const HelpDeskCrawlerRoute = HelpDeskCrawlerRouteImport.update({
   id: '/help/desk-crawler',
   path: '/help/desk-crawler',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const HelpIdleAnglerRoute = HelpIdleAnglerRouteImport.update({
-  id: '/help/idle-angler',
-  path: '/help/idle-angler',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const HelpLittlePlotRoute = HelpLittlePlotRouteImport.update({
-  id: '/help/little-plot',
-  path: '/help/little-plot',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const HelpPaperLivesRoute = HelpPaperLivesRouteImport.update({
-  id: '/help/paper-lives',
-  path: '/help/paper-lives',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const HelpPixelWarsRoute = HelpPixelWarsRouteImport.update({
-  id: '/help/pixel-wars',
-  path: '/help/pixel-wars',
   getParentRoute: () => rootRouteImport,
 } as any)
 const KCodeRoute = KCodeRouteImport.update({
@@ -348,145 +214,6 @@ const AppDeskCrawlerTrmnlRoute = AppDeskCrawlerTrmnlRouteImport.update({
   path: '/trmnl',
   getParentRoute: () => AppDeskCrawlerRoute,
 } as any)
-const AppIdleAnglerIndexRoute = AppIdleAnglerIndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => AppIdleAnglerRoute,
-} as any)
-const AppIdleAnglerAchievementsRoute =
-  AppIdleAnglerAchievementsRouteImport.update({
-    id: '/achievements',
-    path: '/achievements',
-    getParentRoute: () => AppIdleAnglerRoute,
-  } as any)
-const AppIdleAnglerCoolerRoute = AppIdleAnglerCoolerRouteImport.update({
-  id: '/cooler',
-  path: '/cooler',
-  getParentRoute: () => AppIdleAnglerRoute,
-} as any)
-const AppIdleAnglerLogbookRoute = AppIdleAnglerLogbookRouteImport.update({
-  id: '/logbook',
-  path: '/logbook',
-  getParentRoute: () => AppIdleAnglerRoute,
-} as any)
-const AppIdleAnglerRankingsRoute = AppIdleAnglerRankingsRouteImport.update({
-  id: '/rankings',
-  path: '/rankings',
-  getParentRoute: () => AppIdleAnglerRoute,
-} as any)
-const AppIdleAnglerSettingsRoute = AppIdleAnglerSettingsRouteImport.update({
-  id: '/settings',
-  path: '/settings',
-  getParentRoute: () => AppIdleAnglerRoute,
-} as any)
-const AppIdleAnglerShopRoute = AppIdleAnglerShopRouteImport.update({
-  id: '/shop',
-  path: '/shop',
-  getParentRoute: () => AppIdleAnglerRoute,
-} as any)
-const AppIdleAnglerTrophiesRoute = AppIdleAnglerTrophiesRouteImport.update({
-  id: '/trophies',
-  path: '/trophies',
-  getParentRoute: () => AppIdleAnglerRoute,
-} as any)
-const AppLittlePlotIndexRoute = AppLittlePlotIndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => AppLittlePlotRoute,
-} as any)
-const AppLittlePlotAchievementsRoute =
-  AppLittlePlotAchievementsRouteImport.update({
-    id: '/achievements',
-    path: '/achievements',
-    getParentRoute: () => AppLittlePlotRoute,
-  } as any)
-const AppLittlePlotCatalogueRoute = AppLittlePlotCatalogueRouteImport.update({
-  id: '/catalogue',
-  path: '/catalogue',
-  getParentRoute: () => AppLittlePlotRoute,
-} as any)
-const AppLittlePlotRankingsRoute = AppLittlePlotRankingsRouteImport.update({
-  id: '/rankings',
-  path: '/rankings',
-  getParentRoute: () => AppLittlePlotRoute,
-} as any)
-const AppLittlePlotSettingsRoute = AppLittlePlotSettingsRouteImport.update({
-  id: '/settings',
-  path: '/settings',
-  getParentRoute: () => AppLittlePlotRoute,
-} as any)
-const AppLittlePlotShedRoute = AppLittlePlotShedRouteImport.update({
-  id: '/shed',
-  path: '/shed',
-  getParentRoute: () => AppLittlePlotRoute,
-} as any)
-const AppLittlePlotTinRoute = AppLittlePlotTinRouteImport.update({
-  id: '/tin',
-  path: '/tin',
-  getParentRoute: () => AppLittlePlotRoute,
-} as any)
-const AppPaperLivesIndexRoute = AppPaperLivesIndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => AppPaperLivesRoute,
-} as any)
-const AppPaperLivesAchievementsRoute =
-  AppPaperLivesAchievementsRouteImport.update({
-    id: '/achievements',
-    path: '/achievements',
-    getParentRoute: () => AppPaperLivesRoute,
-  } as any)
-const AppPaperLivesAlbumRoute = AppPaperLivesAlbumRouteImport.update({
-  id: '/album',
-  path: '/album',
-  getParentRoute: () => AppPaperLivesRoute,
-} as any)
-const AppPaperLivesPeopleRoute = AppPaperLivesPeopleRouteImport.update({
-  id: '/people',
-  path: '/people',
-  getParentRoute: () => AppPaperLivesRoute,
-} as any)
-const AppPaperLivesRankingsRoute = AppPaperLivesRankingsRouteImport.update({
-  id: '/rankings',
-  path: '/rankings',
-  getParentRoute: () => AppPaperLivesRoute,
-} as any)
-const AppPaperLivesSettingsRoute = AppPaperLivesSettingsRouteImport.update({
-  id: '/settings',
-  path: '/settings',
-  getParentRoute: () => AppPaperLivesRoute,
-} as any)
-const AppPaperLivesWorkRoute = AppPaperLivesWorkRouteImport.update({
-  id: '/work',
-  path: '/work',
-  getParentRoute: () => AppPaperLivesRoute,
-} as any)
-const AppPixelWarsIndexRoute = AppPixelWarsIndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => AppPixelWarsRoute,
-} as any)
-const AppPixelWarsAchievementsRoute =
-  AppPixelWarsAchievementsRouteImport.update({
-    id: '/achievements',
-    path: '/achievements',
-    getParentRoute: () => AppPixelWarsRoute,
-  } as any)
-const AppPixelWarsRankingsRoute = AppPixelWarsRankingsRouteImport.update({
-  id: '/rankings',
-  path: '/rankings',
-  getParentRoute: () => AppPixelWarsRoute,
-} as any)
-const AppPixelWarsSeasonRoute = AppPixelWarsSeasonRouteImport.update({
-  id: '/season',
-  path: '/season',
-  getParentRoute: () => AppPixelWarsRoute,
-} as any)
-const AppPixelWarsSettingsRoute = AppPixelWarsSettingsRouteImport.update({
-  id: '/settings',
-  path: '/settings',
-  getParentRoute: () => AppPixelWarsRoute,
-} as any)
 const DeskCrawlerHeroesAliasRoute = DeskCrawlerHeroesAliasRouteImport.update({
   id: '/desk-crawler/heroes/$alias',
   path: '/desk-crawler/heroes/$alias',
@@ -504,35 +231,6 @@ const ConnectTrmnlDeskCrawlerManageRoute =
     path: '/connect/trmnl/desk-crawler/manage',
     getParentRoute: () => rootRouteImport,
   } as any)
-const ConnectTrmnlIdleAnglerInstallRoute =
-  ConnectTrmnlIdleAnglerInstallRouteImport.update({
-    id: '/connect/trmnl/idle-angler/install',
-    path: '/connect/trmnl/idle-angler/install',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const ConnectTrmnlIdleAnglerManageRoute =
-  ConnectTrmnlIdleAnglerManageRouteImport.update({
-    id: '/connect/trmnl/idle-angler/manage',
-    path: '/connect/trmnl/idle-angler/manage',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const ConnectTrmnlPaperLivesInstallRoute =
-  ConnectTrmnlPaperLivesInstallRouteImport.update({
-    id: '/connect/trmnl/paper-lives/install',
-    path: '/connect/trmnl/paper-lives/install',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const ConnectTrmnlPaperLivesManageRoute =
-  ConnectTrmnlPaperLivesManageRouteImport.update({
-    id: '/connect/trmnl/paper-lives/manage',
-    path: '/connect/trmnl/paper-lives/manage',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const ProfileAliasLivesNRoute = ProfileAliasLivesNRouteImport.update({
-  id: '/profile/$alias_/lives/$n',
-  path: '/profile/$alias/lives/$n',
-  getParentRoute: () => rootRouteImport,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -541,35 +239,18 @@ export interface FileRoutesByFullPath {
   '/app': typeof AppRouteWithChildren
   '/dc': typeof DcRoute
   '/feedback': typeof FeedbackRoute
-  '/ia': typeof IaRoute
-  '/lp': typeof LpRoute
-  '/pl': typeof PlRoute
   '/privacy': typeof PrivacyRoute
-  '/pw': typeof PwRoute
   '/support': typeof SupportRoute
   '/terms': typeof TermsRoute
   '/whats-new': typeof WhatsNewRoute
   '/account/delete': typeof AccountDeleteRoute
   '/app/desk-crawler': typeof AppDeskCrawlerRouteWithChildren
-  '/app/idle-angler': typeof AppIdleAnglerRouteWithChildren
-  '/app/little-plot': typeof AppLittlePlotRouteWithChildren
-  '/app/paper-lives': typeof AppPaperLivesRouteWithChildren
-  '/app/pixel-wars': typeof AppPixelWarsRouteWithChildren
   '/desk-crawler/unsubscribe': typeof DeskCrawlerUnsubscribeRoute
   '/desk-crawler/waiting-list': typeof DeskCrawlerWaitingListRoute
   '/dev/desk-crawler': typeof DevDeskCrawlerRoute
   '/dev/og': typeof DevOgRoute
-  '/f/$code': typeof FCodeRoute
   '/games/desk-crawler': typeof GamesDeskCrawlerRoute
-  '/games/idle-angler': typeof GamesIdleAnglerRoute
-  '/games/little-plot': typeof GamesLittlePlotRoute
-  '/games/paper-lives': typeof GamesPaperLivesRoute
-  '/games/pixel-wars': typeof GamesPixelWarsRoute
   '/help/desk-crawler': typeof HelpDeskCrawlerRoute
-  '/help/idle-angler': typeof HelpIdleAnglerRoute
-  '/help/little-plot': typeof HelpLittlePlotRoute
-  '/help/paper-lives': typeof HelpPaperLivesRoute
-  '/help/pixel-wars': typeof HelpPixelWarsRoute
   '/k/$code': typeof KCodeRoute
   '/launch-list/unsubscribe': typeof LaunchListUnsubscribeRoute
   '/profile/$alias': typeof ProfileAliasRoute
@@ -584,42 +265,10 @@ export interface FileRoutesByFullPath {
   '/app/desk-crawler/roster': typeof AppDeskCrawlerRosterRoute
   '/app/desk-crawler/settings': typeof AppDeskCrawlerSettingsRoute
   '/app/desk-crawler/trmnl': typeof AppDeskCrawlerTrmnlRoute
-  '/app/idle-angler/achievements': typeof AppIdleAnglerAchievementsRoute
-  '/app/idle-angler/cooler': typeof AppIdleAnglerCoolerRoute
-  '/app/idle-angler/logbook': typeof AppIdleAnglerLogbookRoute
-  '/app/idle-angler/rankings': typeof AppIdleAnglerRankingsRoute
-  '/app/idle-angler/settings': typeof AppIdleAnglerSettingsRoute
-  '/app/idle-angler/shop': typeof AppIdleAnglerShopRoute
-  '/app/idle-angler/trophies': typeof AppIdleAnglerTrophiesRoute
-  '/app/little-plot/achievements': typeof AppLittlePlotAchievementsRoute
-  '/app/little-plot/catalogue': typeof AppLittlePlotCatalogueRoute
-  '/app/little-plot/rankings': typeof AppLittlePlotRankingsRoute
-  '/app/little-plot/settings': typeof AppLittlePlotSettingsRoute
-  '/app/little-plot/shed': typeof AppLittlePlotShedRoute
-  '/app/little-plot/tin': typeof AppLittlePlotTinRoute
-  '/app/paper-lives/achievements': typeof AppPaperLivesAchievementsRoute
-  '/app/paper-lives/album': typeof AppPaperLivesAlbumRoute
-  '/app/paper-lives/people': typeof AppPaperLivesPeopleRoute
-  '/app/paper-lives/rankings': typeof AppPaperLivesRankingsRoute
-  '/app/paper-lives/settings': typeof AppPaperLivesSettingsRoute
-  '/app/paper-lives/work': typeof AppPaperLivesWorkRoute
-  '/app/pixel-wars/achievements': typeof AppPixelWarsAchievementsRoute
-  '/app/pixel-wars/rankings': typeof AppPixelWarsRankingsRoute
-  '/app/pixel-wars/season': typeof AppPixelWarsSeasonRoute
-  '/app/pixel-wars/settings': typeof AppPixelWarsSettingsRoute
   '/desk-crawler/heroes/$alias': typeof DeskCrawlerHeroesAliasRoute
   '/app/desk-crawler/': typeof AppDeskCrawlerIndexRoute
-  '/app/idle-angler/': typeof AppIdleAnglerIndexRoute
-  '/app/little-plot/': typeof AppLittlePlotIndexRoute
-  '/app/paper-lives/': typeof AppPaperLivesIndexRoute
-  '/app/pixel-wars/': typeof AppPixelWarsIndexRoute
   '/connect/trmnl/desk-crawler/install': typeof ConnectTrmnlDeskCrawlerInstallRoute
   '/connect/trmnl/desk-crawler/manage': typeof ConnectTrmnlDeskCrawlerManageRoute
-  '/connect/trmnl/idle-angler/install': typeof ConnectTrmnlIdleAnglerInstallRoute
-  '/connect/trmnl/idle-angler/manage': typeof ConnectTrmnlIdleAnglerManageRoute
-  '/connect/trmnl/paper-lives/install': typeof ConnectTrmnlPaperLivesInstallRoute
-  '/connect/trmnl/paper-lives/manage': typeof ConnectTrmnlPaperLivesManageRoute
-  '/profile/$alias/lives/$n': typeof ProfileAliasLivesNRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -627,11 +276,7 @@ export interface FileRoutesByTo {
   '/admin': typeof AdminRoute
   '/dc': typeof DcRoute
   '/feedback': typeof FeedbackRoute
-  '/ia': typeof IaRoute
-  '/lp': typeof LpRoute
-  '/pl': typeof PlRoute
   '/privacy': typeof PrivacyRoute
-  '/pw': typeof PwRoute
   '/support': typeof SupportRoute
   '/terms': typeof TermsRoute
   '/whats-new': typeof WhatsNewRoute
@@ -640,17 +285,8 @@ export interface FileRoutesByTo {
   '/desk-crawler/waiting-list': typeof DeskCrawlerWaitingListRoute
   '/dev/desk-crawler': typeof DevDeskCrawlerRoute
   '/dev/og': typeof DevOgRoute
-  '/f/$code': typeof FCodeRoute
   '/games/desk-crawler': typeof GamesDeskCrawlerRoute
-  '/games/idle-angler': typeof GamesIdleAnglerRoute
-  '/games/little-plot': typeof GamesLittlePlotRoute
-  '/games/paper-lives': typeof GamesPaperLivesRoute
-  '/games/pixel-wars': typeof GamesPixelWarsRoute
   '/help/desk-crawler': typeof HelpDeskCrawlerRoute
-  '/help/idle-angler': typeof HelpIdleAnglerRoute
-  '/help/little-plot': typeof HelpLittlePlotRoute
-  '/help/paper-lives': typeof HelpPaperLivesRoute
-  '/help/pixel-wars': typeof HelpPixelWarsRoute
   '/k/$code': typeof KCodeRoute
   '/launch-list/unsubscribe': typeof LaunchListUnsubscribeRoute
   '/profile/$alias': typeof ProfileAliasRoute
@@ -665,42 +301,10 @@ export interface FileRoutesByTo {
   '/app/desk-crawler/roster': typeof AppDeskCrawlerRosterRoute
   '/app/desk-crawler/settings': typeof AppDeskCrawlerSettingsRoute
   '/app/desk-crawler/trmnl': typeof AppDeskCrawlerTrmnlRoute
-  '/app/idle-angler/achievements': typeof AppIdleAnglerAchievementsRoute
-  '/app/idle-angler/cooler': typeof AppIdleAnglerCoolerRoute
-  '/app/idle-angler/logbook': typeof AppIdleAnglerLogbookRoute
-  '/app/idle-angler/rankings': typeof AppIdleAnglerRankingsRoute
-  '/app/idle-angler/settings': typeof AppIdleAnglerSettingsRoute
-  '/app/idle-angler/shop': typeof AppIdleAnglerShopRoute
-  '/app/idle-angler/trophies': typeof AppIdleAnglerTrophiesRoute
-  '/app/little-plot/achievements': typeof AppLittlePlotAchievementsRoute
-  '/app/little-plot/catalogue': typeof AppLittlePlotCatalogueRoute
-  '/app/little-plot/rankings': typeof AppLittlePlotRankingsRoute
-  '/app/little-plot/settings': typeof AppLittlePlotSettingsRoute
-  '/app/little-plot/shed': typeof AppLittlePlotShedRoute
-  '/app/little-plot/tin': typeof AppLittlePlotTinRoute
-  '/app/paper-lives/achievements': typeof AppPaperLivesAchievementsRoute
-  '/app/paper-lives/album': typeof AppPaperLivesAlbumRoute
-  '/app/paper-lives/people': typeof AppPaperLivesPeopleRoute
-  '/app/paper-lives/rankings': typeof AppPaperLivesRankingsRoute
-  '/app/paper-lives/settings': typeof AppPaperLivesSettingsRoute
-  '/app/paper-lives/work': typeof AppPaperLivesWorkRoute
-  '/app/pixel-wars/achievements': typeof AppPixelWarsAchievementsRoute
-  '/app/pixel-wars/rankings': typeof AppPixelWarsRankingsRoute
-  '/app/pixel-wars/season': typeof AppPixelWarsSeasonRoute
-  '/app/pixel-wars/settings': typeof AppPixelWarsSettingsRoute
   '/desk-crawler/heroes/$alias': typeof DeskCrawlerHeroesAliasRoute
   '/app/desk-crawler': typeof AppDeskCrawlerIndexRoute
-  '/app/idle-angler': typeof AppIdleAnglerIndexRoute
-  '/app/little-plot': typeof AppLittlePlotIndexRoute
-  '/app/paper-lives': typeof AppPaperLivesIndexRoute
-  '/app/pixel-wars': typeof AppPixelWarsIndexRoute
   '/connect/trmnl/desk-crawler/install': typeof ConnectTrmnlDeskCrawlerInstallRoute
   '/connect/trmnl/desk-crawler/manage': typeof ConnectTrmnlDeskCrawlerManageRoute
-  '/connect/trmnl/idle-angler/install': typeof ConnectTrmnlIdleAnglerInstallRoute
-  '/connect/trmnl/idle-angler/manage': typeof ConnectTrmnlIdleAnglerManageRoute
-  '/connect/trmnl/paper-lives/install': typeof ConnectTrmnlPaperLivesInstallRoute
-  '/connect/trmnl/paper-lives/manage': typeof ConnectTrmnlPaperLivesManageRoute
-  '/profile/$alias/lives/$n': typeof ProfileAliasLivesNRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -710,35 +314,18 @@ export interface FileRoutesById {
   '/app': typeof AppRouteWithChildren
   '/dc': typeof DcRoute
   '/feedback': typeof FeedbackRoute
-  '/ia': typeof IaRoute
-  '/lp': typeof LpRoute
-  '/pl': typeof PlRoute
   '/privacy': typeof PrivacyRoute
-  '/pw': typeof PwRoute
   '/support': typeof SupportRoute
   '/terms': typeof TermsRoute
   '/whats-new': typeof WhatsNewRoute
   '/account_/delete': typeof AccountDeleteRoute
   '/app/desk-crawler': typeof AppDeskCrawlerRouteWithChildren
-  '/app/idle-angler': typeof AppIdleAnglerRouteWithChildren
-  '/app/little-plot': typeof AppLittlePlotRouteWithChildren
-  '/app/paper-lives': typeof AppPaperLivesRouteWithChildren
-  '/app/pixel-wars': typeof AppPixelWarsRouteWithChildren
   '/desk-crawler/unsubscribe': typeof DeskCrawlerUnsubscribeRoute
   '/desk-crawler/waiting-list': typeof DeskCrawlerWaitingListRoute
   '/dev/desk-crawler': typeof DevDeskCrawlerRoute
   '/dev/og': typeof DevOgRoute
-  '/f/$code': typeof FCodeRoute
   '/games/desk-crawler': typeof GamesDeskCrawlerRoute
-  '/games/idle-angler': typeof GamesIdleAnglerRoute
-  '/games/little-plot': typeof GamesLittlePlotRoute
-  '/games/paper-lives': typeof GamesPaperLivesRoute
-  '/games/pixel-wars': typeof GamesPixelWarsRoute
   '/help/desk-crawler': typeof HelpDeskCrawlerRoute
-  '/help/idle-angler': typeof HelpIdleAnglerRoute
-  '/help/little-plot': typeof HelpLittlePlotRoute
-  '/help/paper-lives': typeof HelpPaperLivesRoute
-  '/help/pixel-wars': typeof HelpPixelWarsRoute
   '/k/$code': typeof KCodeRoute
   '/launch-list/unsubscribe': typeof LaunchListUnsubscribeRoute
   '/profile/$alias': typeof ProfileAliasRoute
@@ -753,42 +340,10 @@ export interface FileRoutesById {
   '/app/desk-crawler/roster': typeof AppDeskCrawlerRosterRoute
   '/app/desk-crawler/settings': typeof AppDeskCrawlerSettingsRoute
   '/app/desk-crawler/trmnl': typeof AppDeskCrawlerTrmnlRoute
-  '/app/idle-angler/achievements': typeof AppIdleAnglerAchievementsRoute
-  '/app/idle-angler/cooler': typeof AppIdleAnglerCoolerRoute
-  '/app/idle-angler/logbook': typeof AppIdleAnglerLogbookRoute
-  '/app/idle-angler/rankings': typeof AppIdleAnglerRankingsRoute
-  '/app/idle-angler/settings': typeof AppIdleAnglerSettingsRoute
-  '/app/idle-angler/shop': typeof AppIdleAnglerShopRoute
-  '/app/idle-angler/trophies': typeof AppIdleAnglerTrophiesRoute
-  '/app/little-plot/achievements': typeof AppLittlePlotAchievementsRoute
-  '/app/little-plot/catalogue': typeof AppLittlePlotCatalogueRoute
-  '/app/little-plot/rankings': typeof AppLittlePlotRankingsRoute
-  '/app/little-plot/settings': typeof AppLittlePlotSettingsRoute
-  '/app/little-plot/shed': typeof AppLittlePlotShedRoute
-  '/app/little-plot/tin': typeof AppLittlePlotTinRoute
-  '/app/paper-lives/achievements': typeof AppPaperLivesAchievementsRoute
-  '/app/paper-lives/album': typeof AppPaperLivesAlbumRoute
-  '/app/paper-lives/people': typeof AppPaperLivesPeopleRoute
-  '/app/paper-lives/rankings': typeof AppPaperLivesRankingsRoute
-  '/app/paper-lives/settings': typeof AppPaperLivesSettingsRoute
-  '/app/paper-lives/work': typeof AppPaperLivesWorkRoute
-  '/app/pixel-wars/achievements': typeof AppPixelWarsAchievementsRoute
-  '/app/pixel-wars/rankings': typeof AppPixelWarsRankingsRoute
-  '/app/pixel-wars/season': typeof AppPixelWarsSeasonRoute
-  '/app/pixel-wars/settings': typeof AppPixelWarsSettingsRoute
   '/desk-crawler/heroes/$alias': typeof DeskCrawlerHeroesAliasRoute
   '/app/desk-crawler/': typeof AppDeskCrawlerIndexRoute
-  '/app/idle-angler/': typeof AppIdleAnglerIndexRoute
-  '/app/little-plot/': typeof AppLittlePlotIndexRoute
-  '/app/paper-lives/': typeof AppPaperLivesIndexRoute
-  '/app/pixel-wars/': typeof AppPixelWarsIndexRoute
   '/connect/trmnl/desk-crawler/install': typeof ConnectTrmnlDeskCrawlerInstallRoute
   '/connect/trmnl/desk-crawler/manage': typeof ConnectTrmnlDeskCrawlerManageRoute
-  '/connect/trmnl/idle-angler/install': typeof ConnectTrmnlIdleAnglerInstallRoute
-  '/connect/trmnl/idle-angler/manage': typeof ConnectTrmnlIdleAnglerManageRoute
-  '/connect/trmnl/paper-lives/install': typeof ConnectTrmnlPaperLivesInstallRoute
-  '/connect/trmnl/paper-lives/manage': typeof ConnectTrmnlPaperLivesManageRoute
-  '/profile/$alias_/lives/$n': typeof ProfileAliasLivesNRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -799,35 +354,18 @@ export interface FileRouteTypes {
     | '/app'
     | '/dc'
     | '/feedback'
-    | '/ia'
-    | '/lp'
-    | '/pl'
     | '/privacy'
-    | '/pw'
     | '/support'
     | '/terms'
     | '/whats-new'
     | '/account/delete'
     | '/app/desk-crawler'
-    | '/app/idle-angler'
-    | '/app/little-plot'
-    | '/app/paper-lives'
-    | '/app/pixel-wars'
     | '/desk-crawler/unsubscribe'
     | '/desk-crawler/waiting-list'
     | '/dev/desk-crawler'
     | '/dev/og'
-    | '/f/$code'
     | '/games/desk-crawler'
-    | '/games/idle-angler'
-    | '/games/little-plot'
-    | '/games/paper-lives'
-    | '/games/pixel-wars'
     | '/help/desk-crawler'
-    | '/help/idle-angler'
-    | '/help/little-plot'
-    | '/help/paper-lives'
-    | '/help/pixel-wars'
     | '/k/$code'
     | '/launch-list/unsubscribe'
     | '/profile/$alias'
@@ -842,42 +380,10 @@ export interface FileRouteTypes {
     | '/app/desk-crawler/roster'
     | '/app/desk-crawler/settings'
     | '/app/desk-crawler/trmnl'
-    | '/app/idle-angler/achievements'
-    | '/app/idle-angler/cooler'
-    | '/app/idle-angler/logbook'
-    | '/app/idle-angler/rankings'
-    | '/app/idle-angler/settings'
-    | '/app/idle-angler/shop'
-    | '/app/idle-angler/trophies'
-    | '/app/little-plot/achievements'
-    | '/app/little-plot/catalogue'
-    | '/app/little-plot/rankings'
-    | '/app/little-plot/settings'
-    | '/app/little-plot/shed'
-    | '/app/little-plot/tin'
-    | '/app/paper-lives/achievements'
-    | '/app/paper-lives/album'
-    | '/app/paper-lives/people'
-    | '/app/paper-lives/rankings'
-    | '/app/paper-lives/settings'
-    | '/app/paper-lives/work'
-    | '/app/pixel-wars/achievements'
-    | '/app/pixel-wars/rankings'
-    | '/app/pixel-wars/season'
-    | '/app/pixel-wars/settings'
     | '/desk-crawler/heroes/$alias'
     | '/app/desk-crawler/'
-    | '/app/idle-angler/'
-    | '/app/little-plot/'
-    | '/app/paper-lives/'
-    | '/app/pixel-wars/'
     | '/connect/trmnl/desk-crawler/install'
     | '/connect/trmnl/desk-crawler/manage'
-    | '/connect/trmnl/idle-angler/install'
-    | '/connect/trmnl/idle-angler/manage'
-    | '/connect/trmnl/paper-lives/install'
-    | '/connect/trmnl/paper-lives/manage'
-    | '/profile/$alias/lives/$n'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -885,11 +391,7 @@ export interface FileRouteTypes {
     | '/admin'
     | '/dc'
     | '/feedback'
-    | '/ia'
-    | '/lp'
-    | '/pl'
     | '/privacy'
-    | '/pw'
     | '/support'
     | '/terms'
     | '/whats-new'
@@ -898,17 +400,8 @@ export interface FileRouteTypes {
     | '/desk-crawler/waiting-list'
     | '/dev/desk-crawler'
     | '/dev/og'
-    | '/f/$code'
     | '/games/desk-crawler'
-    | '/games/idle-angler'
-    | '/games/little-plot'
-    | '/games/paper-lives'
-    | '/games/pixel-wars'
     | '/help/desk-crawler'
-    | '/help/idle-angler'
-    | '/help/little-plot'
-    | '/help/paper-lives'
-    | '/help/pixel-wars'
     | '/k/$code'
     | '/launch-list/unsubscribe'
     | '/profile/$alias'
@@ -923,42 +416,10 @@ export interface FileRouteTypes {
     | '/app/desk-crawler/roster'
     | '/app/desk-crawler/settings'
     | '/app/desk-crawler/trmnl'
-    | '/app/idle-angler/achievements'
-    | '/app/idle-angler/cooler'
-    | '/app/idle-angler/logbook'
-    | '/app/idle-angler/rankings'
-    | '/app/idle-angler/settings'
-    | '/app/idle-angler/shop'
-    | '/app/idle-angler/trophies'
-    | '/app/little-plot/achievements'
-    | '/app/little-plot/catalogue'
-    | '/app/little-plot/rankings'
-    | '/app/little-plot/settings'
-    | '/app/little-plot/shed'
-    | '/app/little-plot/tin'
-    | '/app/paper-lives/achievements'
-    | '/app/paper-lives/album'
-    | '/app/paper-lives/people'
-    | '/app/paper-lives/rankings'
-    | '/app/paper-lives/settings'
-    | '/app/paper-lives/work'
-    | '/app/pixel-wars/achievements'
-    | '/app/pixel-wars/rankings'
-    | '/app/pixel-wars/season'
-    | '/app/pixel-wars/settings'
     | '/desk-crawler/heroes/$alias'
     | '/app/desk-crawler'
-    | '/app/idle-angler'
-    | '/app/little-plot'
-    | '/app/paper-lives'
-    | '/app/pixel-wars'
     | '/connect/trmnl/desk-crawler/install'
     | '/connect/trmnl/desk-crawler/manage'
-    | '/connect/trmnl/idle-angler/install'
-    | '/connect/trmnl/idle-angler/manage'
-    | '/connect/trmnl/paper-lives/install'
-    | '/connect/trmnl/paper-lives/manage'
-    | '/profile/$alias/lives/$n'
   id:
     | '__root__'
     | '/'
@@ -967,35 +428,18 @@ export interface FileRouteTypes {
     | '/app'
     | '/dc'
     | '/feedback'
-    | '/ia'
-    | '/lp'
-    | '/pl'
     | '/privacy'
-    | '/pw'
     | '/support'
     | '/terms'
     | '/whats-new'
     | '/account_/delete'
     | '/app/desk-crawler'
-    | '/app/idle-angler'
-    | '/app/little-plot'
-    | '/app/paper-lives'
-    | '/app/pixel-wars'
     | '/desk-crawler/unsubscribe'
     | '/desk-crawler/waiting-list'
     | '/dev/desk-crawler'
     | '/dev/og'
-    | '/f/$code'
     | '/games/desk-crawler'
-    | '/games/idle-angler'
-    | '/games/little-plot'
-    | '/games/paper-lives'
-    | '/games/pixel-wars'
     | '/help/desk-crawler'
-    | '/help/idle-angler'
-    | '/help/little-plot'
-    | '/help/paper-lives'
-    | '/help/pixel-wars'
     | '/k/$code'
     | '/launch-list/unsubscribe'
     | '/profile/$alias'
@@ -1010,42 +454,10 @@ export interface FileRouteTypes {
     | '/app/desk-crawler/roster'
     | '/app/desk-crawler/settings'
     | '/app/desk-crawler/trmnl'
-    | '/app/idle-angler/achievements'
-    | '/app/idle-angler/cooler'
-    | '/app/idle-angler/logbook'
-    | '/app/idle-angler/rankings'
-    | '/app/idle-angler/settings'
-    | '/app/idle-angler/shop'
-    | '/app/idle-angler/trophies'
-    | '/app/little-plot/achievements'
-    | '/app/little-plot/catalogue'
-    | '/app/little-plot/rankings'
-    | '/app/little-plot/settings'
-    | '/app/little-plot/shed'
-    | '/app/little-plot/tin'
-    | '/app/paper-lives/achievements'
-    | '/app/paper-lives/album'
-    | '/app/paper-lives/people'
-    | '/app/paper-lives/rankings'
-    | '/app/paper-lives/settings'
-    | '/app/paper-lives/work'
-    | '/app/pixel-wars/achievements'
-    | '/app/pixel-wars/rankings'
-    | '/app/pixel-wars/season'
-    | '/app/pixel-wars/settings'
     | '/desk-crawler/heroes/$alias'
     | '/app/desk-crawler/'
-    | '/app/idle-angler/'
-    | '/app/little-plot/'
-    | '/app/paper-lives/'
-    | '/app/pixel-wars/'
     | '/connect/trmnl/desk-crawler/install'
     | '/connect/trmnl/desk-crawler/manage'
-    | '/connect/trmnl/idle-angler/install'
-    | '/connect/trmnl/idle-angler/manage'
-    | '/connect/trmnl/paper-lives/install'
-    | '/connect/trmnl/paper-lives/manage'
-    | '/profile/$alias_/lives/$n'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -1055,11 +467,7 @@ export interface RootRouteChildren {
   AppRoute: typeof AppRouteWithChildren
   DcRoute: typeof DcRoute
   FeedbackRoute: typeof FeedbackRoute
-  IaRoute: typeof IaRoute
-  LpRoute: typeof LpRoute
-  PlRoute: typeof PlRoute
   PrivacyRoute: typeof PrivacyRoute
-  PwRoute: typeof PwRoute
   SupportRoute: typeof SupportRoute
   TermsRoute: typeof TermsRoute
   WhatsNewRoute: typeof WhatsNewRoute
@@ -1068,28 +476,14 @@ export interface RootRouteChildren {
   DeskCrawlerWaitingListRoute: typeof DeskCrawlerWaitingListRoute
   DevDeskCrawlerRoute: typeof DevDeskCrawlerRoute
   DevOgRoute: typeof DevOgRoute
-  FCodeRoute: typeof FCodeRoute
   GamesDeskCrawlerRoute: typeof GamesDeskCrawlerRoute
-  GamesIdleAnglerRoute: typeof GamesIdleAnglerRoute
-  GamesLittlePlotRoute: typeof GamesLittlePlotRoute
-  GamesPaperLivesRoute: typeof GamesPaperLivesRoute
-  GamesPixelWarsRoute: typeof GamesPixelWarsRoute
   HelpDeskCrawlerRoute: typeof HelpDeskCrawlerRoute
-  HelpIdleAnglerRoute: typeof HelpIdleAnglerRoute
-  HelpLittlePlotRoute: typeof HelpLittlePlotRoute
-  HelpPaperLivesRoute: typeof HelpPaperLivesRoute
-  HelpPixelWarsRoute: typeof HelpPixelWarsRoute
   KCodeRoute: typeof KCodeRoute
   LaunchListUnsubscribeRoute: typeof LaunchListUnsubscribeRoute
   ProfileAliasRoute: typeof ProfileAliasRoute
   DeskCrawlerHeroesAliasRoute: typeof DeskCrawlerHeroesAliasRoute
   ConnectTrmnlDeskCrawlerInstallRoute: typeof ConnectTrmnlDeskCrawlerInstallRoute
   ConnectTrmnlDeskCrawlerManageRoute: typeof ConnectTrmnlDeskCrawlerManageRoute
-  ConnectTrmnlIdleAnglerInstallRoute: typeof ConnectTrmnlIdleAnglerInstallRoute
-  ConnectTrmnlIdleAnglerManageRoute: typeof ConnectTrmnlIdleAnglerManageRoute
-  ConnectTrmnlPaperLivesInstallRoute: typeof ConnectTrmnlPaperLivesInstallRoute
-  ConnectTrmnlPaperLivesManageRoute: typeof ConnectTrmnlPaperLivesManageRoute
-  ProfileAliasLivesNRoute: typeof ProfileAliasLivesNRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -1136,39 +530,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FeedbackRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/ia': {
-      id: '/ia'
-      path: '/ia'
-      fullPath: '/ia'
-      preLoaderRoute: typeof IaRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/lp': {
-      id: '/lp'
-      path: '/lp'
-      fullPath: '/lp'
-      preLoaderRoute: typeof LpRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/pl': {
-      id: '/pl'
-      path: '/pl'
-      fullPath: '/pl'
-      preLoaderRoute: typeof PlRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/privacy': {
       id: '/privacy'
       path: '/privacy'
       fullPath: '/privacy'
       preLoaderRoute: typeof PrivacyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/pw': {
-      id: '/pw'
-      path: '/pw'
-      fullPath: '/pw'
-      preLoaderRoute: typeof PwRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/support': {
@@ -1213,34 +579,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppDeskCrawlerRouteImport
       parentRoute: typeof AppRoute
     }
-    '/app/idle-angler': {
-      id: '/app/idle-angler'
-      path: '/idle-angler'
-      fullPath: '/app/idle-angler'
-      preLoaderRoute: typeof AppIdleAnglerRouteImport
-      parentRoute: typeof AppRoute
-    }
-    '/app/little-plot': {
-      id: '/app/little-plot'
-      path: '/little-plot'
-      fullPath: '/app/little-plot'
-      preLoaderRoute: typeof AppLittlePlotRouteImport
-      parentRoute: typeof AppRoute
-    }
-    '/app/paper-lives': {
-      id: '/app/paper-lives'
-      path: '/paper-lives'
-      fullPath: '/app/paper-lives'
-      preLoaderRoute: typeof AppPaperLivesRouteImport
-      parentRoute: typeof AppRoute
-    }
-    '/app/pixel-wars': {
-      id: '/app/pixel-wars'
-      path: '/pixel-wars'
-      fullPath: '/app/pixel-wars'
-      preLoaderRoute: typeof AppPixelWarsRouteImport
-      parentRoute: typeof AppRoute
-    }
     '/desk-crawler/unsubscribe': {
       id: '/desk-crawler/unsubscribe'
       path: '/desk-crawler/unsubscribe'
@@ -1269,13 +607,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DevOgRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/f/$code': {
-      id: '/f/$code'
-      path: '/f/$code'
-      fullPath: '/f/$code'
-      preLoaderRoute: typeof FCodeRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/games/desk-crawler': {
       id: '/games/desk-crawler'
       path: '/games/desk-crawler'
@@ -1283,67 +614,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GamesDeskCrawlerRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/games/idle-angler': {
-      id: '/games/idle-angler'
-      path: '/games/idle-angler'
-      fullPath: '/games/idle-angler'
-      preLoaderRoute: typeof GamesIdleAnglerRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/games/little-plot': {
-      id: '/games/little-plot'
-      path: '/games/little-plot'
-      fullPath: '/games/little-plot'
-      preLoaderRoute: typeof GamesLittlePlotRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/games/paper-lives': {
-      id: '/games/paper-lives'
-      path: '/games/paper-lives'
-      fullPath: '/games/paper-lives'
-      preLoaderRoute: typeof GamesPaperLivesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/games/pixel-wars': {
-      id: '/games/pixel-wars'
-      path: '/games/pixel-wars'
-      fullPath: '/games/pixel-wars'
-      preLoaderRoute: typeof GamesPixelWarsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/help/desk-crawler': {
       id: '/help/desk-crawler'
       path: '/help/desk-crawler'
       fullPath: '/help/desk-crawler'
       preLoaderRoute: typeof HelpDeskCrawlerRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/help/idle-angler': {
-      id: '/help/idle-angler'
-      path: '/help/idle-angler'
-      fullPath: '/help/idle-angler'
-      preLoaderRoute: typeof HelpIdleAnglerRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/help/little-plot': {
-      id: '/help/little-plot'
-      path: '/help/little-plot'
-      fullPath: '/help/little-plot'
-      preLoaderRoute: typeof HelpLittlePlotRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/help/paper-lives': {
-      id: '/help/paper-lives'
-      path: '/help/paper-lives'
-      fullPath: '/help/paper-lives'
-      preLoaderRoute: typeof HelpPaperLivesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/help/pixel-wars': {
-      id: '/help/pixel-wars'
-      path: '/help/pixel-wars'
-      fullPath: '/help/pixel-wars'
-      preLoaderRoute: typeof HelpPixelWarsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/k/$code': {
@@ -1444,195 +719,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppDeskCrawlerTrmnlRouteImport
       parentRoute: typeof AppDeskCrawlerRoute
     }
-    '/app/idle-angler/': {
-      id: '/app/idle-angler/'
-      path: '/'
-      fullPath: '/app/idle-angler/'
-      preLoaderRoute: typeof AppIdleAnglerIndexRouteImport
-      parentRoute: typeof AppIdleAnglerRoute
-    }
-    '/app/idle-angler/achievements': {
-      id: '/app/idle-angler/achievements'
-      path: '/achievements'
-      fullPath: '/app/idle-angler/achievements'
-      preLoaderRoute: typeof AppIdleAnglerAchievementsRouteImport
-      parentRoute: typeof AppIdleAnglerRoute
-    }
-    '/app/idle-angler/cooler': {
-      id: '/app/idle-angler/cooler'
-      path: '/cooler'
-      fullPath: '/app/idle-angler/cooler'
-      preLoaderRoute: typeof AppIdleAnglerCoolerRouteImport
-      parentRoute: typeof AppIdleAnglerRoute
-    }
-    '/app/idle-angler/logbook': {
-      id: '/app/idle-angler/logbook'
-      path: '/logbook'
-      fullPath: '/app/idle-angler/logbook'
-      preLoaderRoute: typeof AppIdleAnglerLogbookRouteImport
-      parentRoute: typeof AppIdleAnglerRoute
-    }
-    '/app/idle-angler/rankings': {
-      id: '/app/idle-angler/rankings'
-      path: '/rankings'
-      fullPath: '/app/idle-angler/rankings'
-      preLoaderRoute: typeof AppIdleAnglerRankingsRouteImport
-      parentRoute: typeof AppIdleAnglerRoute
-    }
-    '/app/idle-angler/settings': {
-      id: '/app/idle-angler/settings'
-      path: '/settings'
-      fullPath: '/app/idle-angler/settings'
-      preLoaderRoute: typeof AppIdleAnglerSettingsRouteImport
-      parentRoute: typeof AppIdleAnglerRoute
-    }
-    '/app/idle-angler/shop': {
-      id: '/app/idle-angler/shop'
-      path: '/shop'
-      fullPath: '/app/idle-angler/shop'
-      preLoaderRoute: typeof AppIdleAnglerShopRouteImport
-      parentRoute: typeof AppIdleAnglerRoute
-    }
-    '/app/idle-angler/trophies': {
-      id: '/app/idle-angler/trophies'
-      path: '/trophies'
-      fullPath: '/app/idle-angler/trophies'
-      preLoaderRoute: typeof AppIdleAnglerTrophiesRouteImport
-      parentRoute: typeof AppIdleAnglerRoute
-    }
-    '/app/little-plot/': {
-      id: '/app/little-plot/'
-      path: '/'
-      fullPath: '/app/little-plot/'
-      preLoaderRoute: typeof AppLittlePlotIndexRouteImport
-      parentRoute: typeof AppLittlePlotRoute
-    }
-    '/app/little-plot/achievements': {
-      id: '/app/little-plot/achievements'
-      path: '/achievements'
-      fullPath: '/app/little-plot/achievements'
-      preLoaderRoute: typeof AppLittlePlotAchievementsRouteImport
-      parentRoute: typeof AppLittlePlotRoute
-    }
-    '/app/little-plot/catalogue': {
-      id: '/app/little-plot/catalogue'
-      path: '/catalogue'
-      fullPath: '/app/little-plot/catalogue'
-      preLoaderRoute: typeof AppLittlePlotCatalogueRouteImport
-      parentRoute: typeof AppLittlePlotRoute
-    }
-    '/app/little-plot/rankings': {
-      id: '/app/little-plot/rankings'
-      path: '/rankings'
-      fullPath: '/app/little-plot/rankings'
-      preLoaderRoute: typeof AppLittlePlotRankingsRouteImport
-      parentRoute: typeof AppLittlePlotRoute
-    }
-    '/app/little-plot/settings': {
-      id: '/app/little-plot/settings'
-      path: '/settings'
-      fullPath: '/app/little-plot/settings'
-      preLoaderRoute: typeof AppLittlePlotSettingsRouteImport
-      parentRoute: typeof AppLittlePlotRoute
-    }
-    '/app/little-plot/shed': {
-      id: '/app/little-plot/shed'
-      path: '/shed'
-      fullPath: '/app/little-plot/shed'
-      preLoaderRoute: typeof AppLittlePlotShedRouteImport
-      parentRoute: typeof AppLittlePlotRoute
-    }
-    '/app/little-plot/tin': {
-      id: '/app/little-plot/tin'
-      path: '/tin'
-      fullPath: '/app/little-plot/tin'
-      preLoaderRoute: typeof AppLittlePlotTinRouteImport
-      parentRoute: typeof AppLittlePlotRoute
-    }
-    '/app/paper-lives/': {
-      id: '/app/paper-lives/'
-      path: '/'
-      fullPath: '/app/paper-lives/'
-      preLoaderRoute: typeof AppPaperLivesIndexRouteImport
-      parentRoute: typeof AppPaperLivesRoute
-    }
-    '/app/paper-lives/achievements': {
-      id: '/app/paper-lives/achievements'
-      path: '/achievements'
-      fullPath: '/app/paper-lives/achievements'
-      preLoaderRoute: typeof AppPaperLivesAchievementsRouteImport
-      parentRoute: typeof AppPaperLivesRoute
-    }
-    '/app/paper-lives/album': {
-      id: '/app/paper-lives/album'
-      path: '/album'
-      fullPath: '/app/paper-lives/album'
-      preLoaderRoute: typeof AppPaperLivesAlbumRouteImport
-      parentRoute: typeof AppPaperLivesRoute
-    }
-    '/app/paper-lives/people': {
-      id: '/app/paper-lives/people'
-      path: '/people'
-      fullPath: '/app/paper-lives/people'
-      preLoaderRoute: typeof AppPaperLivesPeopleRouteImport
-      parentRoute: typeof AppPaperLivesRoute
-    }
-    '/app/paper-lives/rankings': {
-      id: '/app/paper-lives/rankings'
-      path: '/rankings'
-      fullPath: '/app/paper-lives/rankings'
-      preLoaderRoute: typeof AppPaperLivesRankingsRouteImport
-      parentRoute: typeof AppPaperLivesRoute
-    }
-    '/app/paper-lives/settings': {
-      id: '/app/paper-lives/settings'
-      path: '/settings'
-      fullPath: '/app/paper-lives/settings'
-      preLoaderRoute: typeof AppPaperLivesSettingsRouteImport
-      parentRoute: typeof AppPaperLivesRoute
-    }
-    '/app/paper-lives/work': {
-      id: '/app/paper-lives/work'
-      path: '/work'
-      fullPath: '/app/paper-lives/work'
-      preLoaderRoute: typeof AppPaperLivesWorkRouteImport
-      parentRoute: typeof AppPaperLivesRoute
-    }
-    '/app/pixel-wars/': {
-      id: '/app/pixel-wars/'
-      path: '/'
-      fullPath: '/app/pixel-wars/'
-      preLoaderRoute: typeof AppPixelWarsIndexRouteImport
-      parentRoute: typeof AppPixelWarsRoute
-    }
-    '/app/pixel-wars/achievements': {
-      id: '/app/pixel-wars/achievements'
-      path: '/achievements'
-      fullPath: '/app/pixel-wars/achievements'
-      preLoaderRoute: typeof AppPixelWarsAchievementsRouteImport
-      parentRoute: typeof AppPixelWarsRoute
-    }
-    '/app/pixel-wars/rankings': {
-      id: '/app/pixel-wars/rankings'
-      path: '/rankings'
-      fullPath: '/app/pixel-wars/rankings'
-      preLoaderRoute: typeof AppPixelWarsRankingsRouteImport
-      parentRoute: typeof AppPixelWarsRoute
-    }
-    '/app/pixel-wars/season': {
-      id: '/app/pixel-wars/season'
-      path: '/season'
-      fullPath: '/app/pixel-wars/season'
-      preLoaderRoute: typeof AppPixelWarsSeasonRouteImport
-      parentRoute: typeof AppPixelWarsRoute
-    }
-    '/app/pixel-wars/settings': {
-      id: '/app/pixel-wars/settings'
-      path: '/settings'
-      fullPath: '/app/pixel-wars/settings'
-      preLoaderRoute: typeof AppPixelWarsSettingsRouteImport
-      parentRoute: typeof AppPixelWarsRoute
-    }
     '/desk-crawler/heroes/$alias': {
       id: '/desk-crawler/heroes/$alias'
       path: '/desk-crawler/heroes/$alias'
@@ -1652,41 +738,6 @@ declare module '@tanstack/react-router' {
       path: '/connect/trmnl/desk-crawler/manage'
       fullPath: '/connect/trmnl/desk-crawler/manage'
       preLoaderRoute: typeof ConnectTrmnlDeskCrawlerManageRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/connect/trmnl/idle-angler/install': {
-      id: '/connect/trmnl/idle-angler/install'
-      path: '/connect/trmnl/idle-angler/install'
-      fullPath: '/connect/trmnl/idle-angler/install'
-      preLoaderRoute: typeof ConnectTrmnlIdleAnglerInstallRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/connect/trmnl/idle-angler/manage': {
-      id: '/connect/trmnl/idle-angler/manage'
-      path: '/connect/trmnl/idle-angler/manage'
-      fullPath: '/connect/trmnl/idle-angler/manage'
-      preLoaderRoute: typeof ConnectTrmnlIdleAnglerManageRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/connect/trmnl/paper-lives/install': {
-      id: '/connect/trmnl/paper-lives/install'
-      path: '/connect/trmnl/paper-lives/install'
-      fullPath: '/connect/trmnl/paper-lives/install'
-      preLoaderRoute: typeof ConnectTrmnlPaperLivesInstallRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/connect/trmnl/paper-lives/manage': {
-      id: '/connect/trmnl/paper-lives/manage'
-      path: '/connect/trmnl/paper-lives/manage'
-      fullPath: '/connect/trmnl/paper-lives/manage'
-      preLoaderRoute: typeof ConnectTrmnlPaperLivesManageRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/profile/$alias_/lives/$n': {
-      id: '/profile/$alias_/lives/$n'
-      path: '/profile/$alias/lives/$n'
-      fullPath: '/profile/$alias/lives/$n'
-      preLoaderRoute: typeof ProfileAliasLivesNRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -1724,115 +775,13 @@ const AppDeskCrawlerRouteWithChildren = AppDeskCrawlerRoute._addFileChildren(
   AppDeskCrawlerRouteChildren,
 )
 
-interface AppIdleAnglerRouteChildren {
-  AppIdleAnglerAchievementsRoute: typeof AppIdleAnglerAchievementsRoute
-  AppIdleAnglerCoolerRoute: typeof AppIdleAnglerCoolerRoute
-  AppIdleAnglerLogbookRoute: typeof AppIdleAnglerLogbookRoute
-  AppIdleAnglerRankingsRoute: typeof AppIdleAnglerRankingsRoute
-  AppIdleAnglerSettingsRoute: typeof AppIdleAnglerSettingsRoute
-  AppIdleAnglerShopRoute: typeof AppIdleAnglerShopRoute
-  AppIdleAnglerTrophiesRoute: typeof AppIdleAnglerTrophiesRoute
-  AppIdleAnglerIndexRoute: typeof AppIdleAnglerIndexRoute
-}
-
-const AppIdleAnglerRouteChildren: AppIdleAnglerRouteChildren = {
-  AppIdleAnglerAchievementsRoute: AppIdleAnglerAchievementsRoute,
-  AppIdleAnglerCoolerRoute: AppIdleAnglerCoolerRoute,
-  AppIdleAnglerLogbookRoute: AppIdleAnglerLogbookRoute,
-  AppIdleAnglerRankingsRoute: AppIdleAnglerRankingsRoute,
-  AppIdleAnglerSettingsRoute: AppIdleAnglerSettingsRoute,
-  AppIdleAnglerShopRoute: AppIdleAnglerShopRoute,
-  AppIdleAnglerTrophiesRoute: AppIdleAnglerTrophiesRoute,
-  AppIdleAnglerIndexRoute: AppIdleAnglerIndexRoute,
-}
-
-const AppIdleAnglerRouteWithChildren = AppIdleAnglerRoute._addFileChildren(
-  AppIdleAnglerRouteChildren,
-)
-
-interface AppLittlePlotRouteChildren {
-  AppLittlePlotAchievementsRoute: typeof AppLittlePlotAchievementsRoute
-  AppLittlePlotCatalogueRoute: typeof AppLittlePlotCatalogueRoute
-  AppLittlePlotRankingsRoute: typeof AppLittlePlotRankingsRoute
-  AppLittlePlotSettingsRoute: typeof AppLittlePlotSettingsRoute
-  AppLittlePlotShedRoute: typeof AppLittlePlotShedRoute
-  AppLittlePlotTinRoute: typeof AppLittlePlotTinRoute
-  AppLittlePlotIndexRoute: typeof AppLittlePlotIndexRoute
-}
-
-const AppLittlePlotRouteChildren: AppLittlePlotRouteChildren = {
-  AppLittlePlotAchievementsRoute: AppLittlePlotAchievementsRoute,
-  AppLittlePlotCatalogueRoute: AppLittlePlotCatalogueRoute,
-  AppLittlePlotRankingsRoute: AppLittlePlotRankingsRoute,
-  AppLittlePlotSettingsRoute: AppLittlePlotSettingsRoute,
-  AppLittlePlotShedRoute: AppLittlePlotShedRoute,
-  AppLittlePlotTinRoute: AppLittlePlotTinRoute,
-  AppLittlePlotIndexRoute: AppLittlePlotIndexRoute,
-}
-
-const AppLittlePlotRouteWithChildren = AppLittlePlotRoute._addFileChildren(
-  AppLittlePlotRouteChildren,
-)
-
-interface AppPaperLivesRouteChildren {
-  AppPaperLivesAchievementsRoute: typeof AppPaperLivesAchievementsRoute
-  AppPaperLivesAlbumRoute: typeof AppPaperLivesAlbumRoute
-  AppPaperLivesPeopleRoute: typeof AppPaperLivesPeopleRoute
-  AppPaperLivesRankingsRoute: typeof AppPaperLivesRankingsRoute
-  AppPaperLivesSettingsRoute: typeof AppPaperLivesSettingsRoute
-  AppPaperLivesWorkRoute: typeof AppPaperLivesWorkRoute
-  AppPaperLivesIndexRoute: typeof AppPaperLivesIndexRoute
-}
-
-const AppPaperLivesRouteChildren: AppPaperLivesRouteChildren = {
-  AppPaperLivesAchievementsRoute: AppPaperLivesAchievementsRoute,
-  AppPaperLivesAlbumRoute: AppPaperLivesAlbumRoute,
-  AppPaperLivesPeopleRoute: AppPaperLivesPeopleRoute,
-  AppPaperLivesRankingsRoute: AppPaperLivesRankingsRoute,
-  AppPaperLivesSettingsRoute: AppPaperLivesSettingsRoute,
-  AppPaperLivesWorkRoute: AppPaperLivesWorkRoute,
-  AppPaperLivesIndexRoute: AppPaperLivesIndexRoute,
-}
-
-const AppPaperLivesRouteWithChildren = AppPaperLivesRoute._addFileChildren(
-  AppPaperLivesRouteChildren,
-)
-
-interface AppPixelWarsRouteChildren {
-  AppPixelWarsAchievementsRoute: typeof AppPixelWarsAchievementsRoute
-  AppPixelWarsRankingsRoute: typeof AppPixelWarsRankingsRoute
-  AppPixelWarsSeasonRoute: typeof AppPixelWarsSeasonRoute
-  AppPixelWarsSettingsRoute: typeof AppPixelWarsSettingsRoute
-  AppPixelWarsIndexRoute: typeof AppPixelWarsIndexRoute
-}
-
-const AppPixelWarsRouteChildren: AppPixelWarsRouteChildren = {
-  AppPixelWarsAchievementsRoute: AppPixelWarsAchievementsRoute,
-  AppPixelWarsRankingsRoute: AppPixelWarsRankingsRoute,
-  AppPixelWarsSeasonRoute: AppPixelWarsSeasonRoute,
-  AppPixelWarsSettingsRoute: AppPixelWarsSettingsRoute,
-  AppPixelWarsIndexRoute: AppPixelWarsIndexRoute,
-}
-
-const AppPixelWarsRouteWithChildren = AppPixelWarsRoute._addFileChildren(
-  AppPixelWarsRouteChildren,
-)
-
 interface AppRouteChildren {
   AppDeskCrawlerRoute: typeof AppDeskCrawlerRouteWithChildren
-  AppIdleAnglerRoute: typeof AppIdleAnglerRouteWithChildren
-  AppLittlePlotRoute: typeof AppLittlePlotRouteWithChildren
-  AppPaperLivesRoute: typeof AppPaperLivesRouteWithChildren
-  AppPixelWarsRoute: typeof AppPixelWarsRouteWithChildren
   AppIndexRoute: typeof AppIndexRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
   AppDeskCrawlerRoute: AppDeskCrawlerRouteWithChildren,
-  AppIdleAnglerRoute: AppIdleAnglerRouteWithChildren,
-  AppLittlePlotRoute: AppLittlePlotRouteWithChildren,
-  AppPaperLivesRoute: AppPaperLivesRouteWithChildren,
-  AppPixelWarsRoute: AppPixelWarsRouteWithChildren,
   AppIndexRoute: AppIndexRoute,
 }
 
@@ -1845,11 +794,7 @@ const rootRouteChildren: RootRouteChildren = {
   AppRoute: AppRouteWithChildren,
   DcRoute: DcRoute,
   FeedbackRoute: FeedbackRoute,
-  IaRoute: IaRoute,
-  LpRoute: LpRoute,
-  PlRoute: PlRoute,
   PrivacyRoute: PrivacyRoute,
-  PwRoute: PwRoute,
   SupportRoute: SupportRoute,
   TermsRoute: TermsRoute,
   WhatsNewRoute: WhatsNewRoute,
@@ -1858,39 +803,15 @@ const rootRouteChildren: RootRouteChildren = {
   DeskCrawlerWaitingListRoute: DeskCrawlerWaitingListRoute,
   DevDeskCrawlerRoute: DevDeskCrawlerRoute,
   DevOgRoute: DevOgRoute,
-  FCodeRoute: FCodeRoute,
   GamesDeskCrawlerRoute: GamesDeskCrawlerRoute,
-  GamesIdleAnglerRoute: GamesIdleAnglerRoute,
-  GamesLittlePlotRoute: GamesLittlePlotRoute,
-  GamesPaperLivesRoute: GamesPaperLivesRoute,
-  GamesPixelWarsRoute: GamesPixelWarsRoute,
   HelpDeskCrawlerRoute: HelpDeskCrawlerRoute,
-  HelpIdleAnglerRoute: HelpIdleAnglerRoute,
-  HelpLittlePlotRoute: HelpLittlePlotRoute,
-  HelpPaperLivesRoute: HelpPaperLivesRoute,
-  HelpPixelWarsRoute: HelpPixelWarsRoute,
   KCodeRoute: KCodeRoute,
   LaunchListUnsubscribeRoute: LaunchListUnsubscribeRoute,
   ProfileAliasRoute: ProfileAliasRoute,
   DeskCrawlerHeroesAliasRoute: DeskCrawlerHeroesAliasRoute,
   ConnectTrmnlDeskCrawlerInstallRoute: ConnectTrmnlDeskCrawlerInstallRoute,
   ConnectTrmnlDeskCrawlerManageRoute: ConnectTrmnlDeskCrawlerManageRoute,
-  ConnectTrmnlIdleAnglerInstallRoute: ConnectTrmnlIdleAnglerInstallRoute,
-  ConnectTrmnlIdleAnglerManageRoute: ConnectTrmnlIdleAnglerManageRoute,
-  ConnectTrmnlPaperLivesInstallRoute: ConnectTrmnlPaperLivesInstallRoute,
-  ConnectTrmnlPaperLivesManageRoute: ConnectTrmnlPaperLivesManageRoute,
-  ProfileAliasLivesNRoute: ProfileAliasLivesNRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

@@ -19,6 +19,7 @@ describe('player feedback (D107)', () => {
     vi.setSystemTime(Date.UTC(2026, 9, 8, 12))
     vi.stubEnv('CLERK_SECRET_KEY', 'sk_test_fake')
     vi.stubEnv('RESEND_API_KEY', 're_test_fake')
+    vi.stubEnv('FEEDBACK_TO', 'owner@example.com')
     resendOk = true
     fetchMock = vi.fn(async (url: string, init?: RequestInit) => {
       if (url.startsWith('https://api.clerk.com') && init?.method !== 'DELETE') return new Response(JSON.stringify(clerkUser('ana@example.com')), { status: 200 })
@@ -39,14 +40,14 @@ describe('player feedback (D107)', () => {
     expect(await rows()).toEqual([])
   })
 
-  it('stores the message and emails it to Barry with the verified address as Reply-To', async () => {
+  it('stores the message and emails it to the owner with the verified address as Reply-To', async () => {
     await seedHero(t, {}, 'Ana')
     const ana = t.withIdentity({ issuer: 'issuer', subject: 'Ana' })
     await ana.mutation(api.feedback.send, { message: '  More biomes please!  ', page: '/app/desk-crawler/settings' })
     await t.finishAllScheduledFunctions(vi.runAllTimers)
     expect(await rows()).toMatchObject([{ message: 'More biomes please!', page: '/app/desk-crawler/settings', publicAlias: 'Ana', state: 'sent', attempts: 1 }])
     const [email] = emails()
-    expect(email).toMatchObject({ to: ['barry@barrymichaeldoyle.com'], reply_to: 'ana@example.com', subject: 'TRMNL Games feedback from Ana' })
+    expect(email).toMatchObject({ to: ['owner@example.com'], reply_to: 'ana@example.com', subject: 'TRMNL Games feedback from Ana' })
     expect(email.text).toContain('More biomes please!')
     expect(email.text).toContain('Page: /app/desk-crawler/settings')
   })

@@ -1,14 +1,6 @@
 import type { GameSlug } from '@trmnl-games/platform'
 import type { Doc, Id } from '../_generated/dataModel'
 import type { MutationCtx, QueryCtx } from '../_generated/server'
-import { activateAngler, prepareAngler } from '../idleAngler/lifecycle'
-import { currentAngler, idleAnglerProfile } from '../idleAngler/profile'
-import { activateLife, prepareLife } from '../paperLives/lifecycle'
-import { currentLife, paperLivesProfile } from '../paperLives/profile'
-import { activatePlot, preparePlot } from '../littlePlot/lifecycle'
-import { currentPlot, littlePlotProfile } from '../littlePlot/profile'
-import { activateDesk, prepareDesk } from '../pixelWars/lifecycle'
-import { currentDesk, pixelWarsProfile } from '../pixelWars/profile'
 import { currentHero, gameProfile } from './gameProfile'
 
 /**
@@ -31,52 +23,14 @@ export function isGame(row: { gameSlug?: string }, slug: GameSlug): boolean {
   return row.gameSlug === slug || (row.gameSlug === undefined && slug === 'desk-crawler')
 }
 
-export const IDLE_ANGLER_HOOKS: GameHooks & { prepare: (ctx: MutationCtx, user: Doc<'users'>, now: number) => Promise<unknown> } = {
-  slug: 'idle-angler',
-  label: 'Idle Angler',
-  deleting: async (ctx, userId) => (await idleAnglerProfile(ctx, userId))?.state === 'deleting',
-  current: currentAngler,
-  needsName: false,
-  activate: activateAngler,
-  prepare: prepareAngler,
+type OtherGameHooks = GameHooks & { prepare: (ctx: MutationCtx, user: Doc<'users'>, now: number) => Promise<unknown> }
+
+/** The hooks of a game other than Desk Crawler. This fork registers only Desk Crawler, so no other game reaches here. */
+export function otherGameHooks(slug: never): OtherGameHooks {
+  throw new Error(`No hooks for game ${String(slug)}`)
 }
 
-export const PAPER_LIVES_HOOKS: GameHooks & { prepare: (ctx: MutationCtx, user: Doc<'users'>, now: number) => Promise<unknown> } = {
-  slug: 'paper-lives',
-  label: 'Paper Lives',
-  deleting: async (ctx, userId) => (await paperLivesProfile(ctx, userId))?.state === 'deleting',
-  current: currentLife,
-  needsName: false,
-  activate: activateLife,
-  prepare: prepareLife,
-}
-
-export const LITTLE_PLOT_HOOKS: GameHooks & { prepare: (ctx: MutationCtx, user: Doc<'users'>, now: number) => Promise<unknown> } = {
-  slug: 'little-plot',
-  label: 'Little Plot',
-  deleting: async (ctx, userId) => (await littlePlotProfile(ctx, userId))?.state === 'deleting',
-  current: currentPlot,
-  needsName: false,
-  activate: activatePlot,
-  prepare: preparePlot,
-}
-
-export const PIXEL_WARS_HOOKS: GameHooks & { prepare: (ctx: MutationCtx, user: Doc<'users'>, now: number) => Promise<unknown> } = {
-  slug: 'pixel-wars',
-  label: 'Pixel Wars',
-  deleting: async (ctx, userId) => (await pixelWarsProfile(ctx, userId))?.state === 'deleting',
-  current: currentDesk,
-  needsName: false,
-  activate: activateDesk,
-  prepare: prepareDesk,
-}
-
-/** The hooks of a game other than Desk Crawler, whose lifecycle predates the hooks (D115, D159, D206, D214). */
-export function otherGameHooks(slug: Exclude<GameSlug, 'desk-crawler'>): typeof IDLE_ANGLER_HOOKS {
-  return slug === 'idle-angler' ? IDLE_ANGLER_HOOKS : slug === 'paper-lives' ? PAPER_LIVES_HOOKS : slug === 'little-plot' ? LITTLE_PLOT_HOOKS : PIXEL_WARS_HOOKS
-}
-
-/** A game's current player character for this user: the hero, the angler or the life. */
+/** A game's current player character for this user: the hero. */
 export async function currentCharacterOf(ctx: QueryCtx, slug: GameSlug, user: Doc<'users'> | null): Promise<{ _id: string; activationState: 'pending_trmnl' | 'active' } | null> {
   return slug === 'desk-crawler' ? await currentHero(ctx, user) : await otherGameHooks(slug).current(ctx, user)
 }

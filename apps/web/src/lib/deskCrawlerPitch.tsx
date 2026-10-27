@@ -37,7 +37,7 @@ export function DeviceSample({ caption, priority = false }: { caption: string; p
  * (Desk Crawler: tools/trmnl/preview.ts --marketing --recap; Idle Angler: its `listing` state, D210). 16-colour PNGs, the
  * X's own 4-bit greys, beat WebP at both sizes: 800px for phones at 2x, 1200px for 3x phones and desktop.
  */
-export function ScreenBezel({ slug, alt, priority = false, sizes = '(min-width: 1024px) 600px, 100vw' }: { slug: 'desk-crawler' | 'idle-angler'; alt: string; priority?: boolean; sizes?: string }) {
+export function ScreenBezel({ slug, alt, priority = false, sizes = '(min-width: 1024px) 600px, 100vw' }: { slug: 'desk-crawler'; alt: string; priority?: boolean; sizes?: string }) {
   return (
     <div className="rounded-[1.4rem] bg-[#3a3566] p-[clamp(0.5rem,2.5vw,1rem)] shadow-[0_0_0_3px_var(--color-night),0_24px_48px_-24px_rgb(0_0_0/0.8)]">
       <img

@@ -68,20 +68,9 @@ function SwitcherMenu({ id, current, listing, close }: { id: string; current: Ga
   const t = useT(shellMessages)
   const ready = isAuthenticated && isSignedIn === true
   const { data: me } = useQuery({ ...convexQuery(api.users.me, {}), enabled: ready })
-  const idleAngler = listing.games.find((game) => game.slug === 'idle-angler')
-  const { data: dock } = useQuery({ ...convexQuery(api.idleAngler.anglers.dock, {}), enabled: ready && idleAngler?.canOpen === true })
-  const angler = (dock as { angler?: { title: string; activationState: string; status: string } | null } | undefined)?.angler
-  const paperLives = listing.games.find((game) => game.slug === 'paper-lives')
-  const { data: lifeView } = useQuery({ ...convexQuery(api.paperLives.lives.view, {}), enabled: ready && paperLives?.canOpen === true })
-  const life = (lifeView as { life?: { first: string; last: string; age: number; activationState: string; status: string } | null } | undefined)?.life
   const rows = listing.games.map((game) => {
     const entry = games[game.slug]
-    const played =
-      game.slug === 'desk-crawler'
-        ? me ? (me.hero ? t.heroLine(me.hero) : me.gameState === 'deleting' ? t.removingProgress : null) : undefined
-        : game.slug === 'paper-lives'
-          ? lifeView ? (life ? t.lifeLine(life) : null) : game.canOpen ? undefined : null
-          : dock ? (angler ? t.anglerLine(angler) : null) : game.canOpen ? undefined : null
+    const played = me ? (me.hero ? t.heroLine(me.hero) : me.gameState === 'deleting' ? t.removingProgress : null) : undefined
     return { slug: game.slug, name: entry.name, status: game.status, canOpen: game.canOpen, played, to: played ? entry.companionPath : entry.publicPath }
   })
   const switched = (to: GameSlug) => { captureAnalytics('game switched', { from: current, to }); close() }

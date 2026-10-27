@@ -146,12 +146,10 @@ export function SiteFooter() {
           <nav aria-label={t.siteNav} className="col-span-2 grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-4 md:col-span-4">
             <FooterGroup title={t.footerGames}>
               <li><Link to="/games/desk-crawler" className={FOOTER_LINK}>Desk Crawler</Link></li>
-              <li><Link to="/games/idle-angler" className={FOOTER_LINK}>Idle Angler</Link></li>
               <Show when="signed-in"><li><Link to="/app" className={FOOTER_LINK}>{t.myGames}</Link></li></Show>
             </FooterGroup>
             <FooterGroup title={t.footerHelp}>
               <li><Link to="/help/desk-crawler" className={FOOTER_LINK}>{t.guideFor('Desk Crawler')}</Link></li>
-              <li><Link to="/help/idle-angler" className={FOOTER_LINK}>{t.guideFor('Idle Angler')}</Link></li>
               <li><Link to="/whats-new" className={FOOTER_LINK}>{t.whatsNew}</Link></li>
               <li><Link to="/support" className={FOOTER_LINK}>{t.support}</Link></li>
               <li><Link to="/feedback" className={FOOTER_LINK}>{t.feedback}</Link></li>

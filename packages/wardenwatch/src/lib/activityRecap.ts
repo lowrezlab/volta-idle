@@ -109,8 +109,8 @@ export function activityRecap(entries: readonly ActivityEntry[], period: RecapPe
     totals.wins ? plural(totals.wins, 'fight won', 'fights won') : null,
     totals.gear ? plural(totals.gear, 'gear find') : null,
     totals.potions ? plural(totals.potions, 'draught found', 'draughts found') : null,
-    totals.breaks ? plural(totals.breaks, 'break') : null,
-    totals.tasks ? plural(totals.tasks, 'task') : null,
+    totals.breaks ? plural(totals.breaks, 'rest') : null,
+    totals.tasks ? plural(totals.tasks, 'order') : null,
   ].filter((value): value is string => value !== null)
   const gains = [totals.xp ? `+${totals.xp} XP` : null, totals.gold ? `${totals.gold} Auro earned` : null].filter((value): value is string => value !== null)
   const highlights = [

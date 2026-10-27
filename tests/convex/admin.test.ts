@@ -133,7 +133,7 @@ describe('owner-run moderation (D23)', () => {
     expect(hero).toMatchObject({ gold: 340, level: 1 })
     expect(hero?.counters.goldEarned).toBe(300)
     const log = await t.run(async (ctx) => await ctx.db.query('tickLogs').withIndex('by_heroId_and_at_and_sequence', (q) => q.eq('heroId', heroId)).order('desc').first())
-    expect(log).toMatchObject({ source: 'command', kind: 'system', summary: 'Thanks for the heads-up about the pause. The office chipped in [[300 gold]].', detail: { operation: 'compensate' }, deltas: { gold: 300, xpEarned: 0, hp: 0 } })
+    expect(log).toMatchObject({ source: 'command', kind: 'system', summary: 'Thanks for the heads-up about the pause. The garrison chipped in [[300 Auro]].', detail: { operation: 'compensate' }, deltas: { gold: 300, xpEarned: 0, hp: 0 } })
     expect((await t.run(async (ctx) => await ctx.db.query('adminAuditEvents').collect())).at(-1)).toMatchObject({ action: 'compensate_hero', outcome: 'gold +300', reasonCode: 'hp_quarantine_2026_10_26' })
     await expect(t.mutation(internal.admin.compensateHero, { heroId, gold: 0, reasonCode: 'x' })).rejects.toThrow()
     await expect(t.mutation(internal.admin.compensateHero, { heroId, gold: 5001, reasonCode: 'x' })).rejects.toThrow()

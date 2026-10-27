@@ -85,7 +85,7 @@ describe('hero roster (P37)', () => {
     const first = { numItems: 10, cursor: null }
     // The parked Warrior's page is still the Warrior's log, with a real cursor.
     const parked = await ana.query(api.heroes.recentLog, { heroId: warrior, paginationOpts: first })
-    expect(parked.page.map((row: { summary: string }) => row.summary)).toEqual(['Clocked out. [[Vex]] takes the desk.', 'Rested at the desk.'])
+    expect(parked.page.map((row: { summary: string }) => row.summary)).toEqual(['Stood down. [[Vex]] takes the watch.', 'Rested at the desk.'])
     // TRMNL-GAMES-CONVEX-8: a live page re-runs from its pinned end cursor. Switching back to the Warrior used to turn
     // the same page from an empty stand-in (cursor "") into the real query, which then refused that cursor.
     vi.setSystemTime(SLOT + 5 * 60_000)

@@ -337,7 +337,7 @@ const castellum: BiomeNarrative = {
   victory: [
     `Defeated a {monster} by the palisade.${win}`,
     `A {monster} fell behind the supply cellar.${win}`,
-    `Entered a {monster} in the survey as dealt with.${win}`,
+    `Entered a {monster} in the survey as settled.${win}`,
     `Beat a {monster} by the well.${win}`,
     `Chased a {monster} out through the gap in the wall.${win}`,
     `Beat a {monster} in the drill yard.${win}`,
@@ -806,7 +806,7 @@ const lore: LoreRule = {
     microwave_wraith:
       'A sahuagin up the river from Mrl Mnø, scaled, webbed and furious about the cold. It haunts the ford with the smell of fish and a hiss that never quite finishes. Beached on the far bank it sulks for a week.',
     leftovers_hydra:
-      'An eel the length of a cart, lit along its back with lanterns that are not lanterns. Follow one light and two more come up by the next dusk. It is beaten by snuffing every lamp at once, which is also the only way the ford has ever gone dark.',
+      'An eel the length of a cart, lit along its back with lanterns that are not lanterns. Follow one light and two more come up by the next dusk. It is beaten by snuffing every lamp at once, which is the only way the ford has ever gone dark.',
     box_file_beetle:
       'A slaver of the Rhithian line, with a ledger, a chain and the law on its side. It carries the bill of sale for a meeting nobody attended and defends it to the last link. Produce papers of your own and it lets go, for now.',
     shelf_lurker:

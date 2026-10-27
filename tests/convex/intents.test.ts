@@ -74,7 +74,7 @@ describe('player intents', () => {
     // D65: the first potion earns "First Aid", logged after the command.
     const stories = preview.log.filter((entry: { k: string }) => entry.k !== 'achievement')
     expect(stories[0]).toMatchObject({ n: 'Drank a potion.', d: `+${potion.hp! - 40} HP` })
-    expect(stories[1].d).toBe(`+${sold.gold} gold`)
+    expect(stories[1].d).toBe(`+${sold.gold} Auro`)
     expect(preview.log.find((entry: { k: string }) => entry.k === 'achievement')).toMatchObject({ n: 'Achievement: [[First Draught]]', d: '' })
   })
 
@@ -226,7 +226,7 @@ describe('player intents', () => {
     expect(hero).toMatchObject({ stance: 'bold', status: 'exploring' })
     expect(hero?.counters.stanceChanges).toBe(1)
     const log = (await t.run(async (ctx) => await ctx.db.query('tickLogs').withIndex('by_heroId_and_at_and_sequence', (q) => q.eq('heroId', heroId)).order('desc').take(2))).find((entry) => entry.kind !== 'achievement')
-    expect(log).toMatchObject({ source: 'command', kind: 'system', summary: 'Stance set to [[Bold]] from balanced.', detail: { operation: 'set_stance', stanceFrom: 'balanced' }, deltas: { xpEarned: 0, gold: 0, hp: 0 } })
+    expect(log).toMatchObject({ source: 'command', kind: 'system', summary: 'Stance set to [[Reckless]] from steady.', detail: { operation: 'set_stance', stanceFrom: 'balanced' }, deltas: { xpEarned: 0, gold: 0, hp: 0 } })
     // Allowed while paused: a stance is not an action.
     await user.mutation(api.heroes.pause, { operationId: opId() })
     expect(await user.mutation(api.heroes.setStance, { operationId: opId(), stance: 'cautious' })).toMatchObject({ changed: true })
@@ -240,7 +240,7 @@ describe('player intents', () => {
     const stanceLogs = async () => (await t.run(async (ctx) => await ctx.db.query('tickLogs').withIndex('by_heroId_and_at_and_sequence', (q) => q.eq('heroId', heroId)).collect())).filter((log) => 'operation' in log.detail && log.detail.operation === 'set_stance')
     const changes = async () => (await t.run(async (ctx) => await ctx.db.get(heroId)))?.counters.stanceChanges
     for (const stance of ['bold', 'cautious', 'bold', 'cautious'] as const) await user.mutation(api.heroes.setStance, { operationId: opId(), stance })
-    expect((await stanceLogs()).map((log) => log.summary)).toEqual(['Stance set to [[Cautious]] from balanced.'])
+    expect((await stanceLogs()).map((log) => log.summary)).toEqual(['Stance set to [[Guarded]] from steady.'])
     expect(await changes()).toBe(1)
     const unlocked = await t.run(async (ctx) => await ctx.db.query('heroAchievements').collect())
     expect(unlocked.map((row) => row.achievementId)).toContain('stances_1')
@@ -252,7 +252,7 @@ describe('player intents', () => {
     await user.mutation(api.heroes.setStance, { operationId: opId(), stance: 'bold' })
     await runTick(t)
     await user.mutation(api.heroes.setStance, { operationId: opId(), stance: 'cautious' })
-    expect((await stanceLogs()).map((log) => log.summary)).toEqual(['Stance set to [[Bold]] from balanced.', 'Stance set to [[Cautious]] from bold.'])
+    expect((await stanceLogs()).map((log) => log.summary)).toEqual(['Stance set to [[Reckless]] from steady.', 'Stance set to [[Guarded]] from reckless.'])
     expect(await changes()).toBe(2)
   })
 })

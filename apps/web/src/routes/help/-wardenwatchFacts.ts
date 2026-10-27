@@ -20,20 +20,20 @@ export type Cost = ReturnType<typeof cost>
 export type Occasion = NonNullable<typeof catalog.occasions>[number]
 
 export const HELP_FACTS = {
-  floors: catalog.biomes.map((biome) => ({ id: biome.id, name: biome.name, level: biome.unlockLevel, monsters: biome.monsterIds.map((id) => catalog.monsters.find((m) => m.id === id)?.name ?? id) })),
+  zones: catalog.biomes.map((biome) => ({ id: biome.id, name: biome.name, level: biome.unlockLevel, monsters: biome.monsterIds.map((id) => catalog.monsters.find((m) => m.id === id)?.name ?? id) })),
   lore: catalog.lore !== undefined,
   todo: todo === undefined ? undefined : {
-    standup: `${String(todo.refillHour).padStart(2, '0')}:00`,
+    muster: `${String(todo.refillHour).padStart(2, '0')}:00`,
     pay: [...new Set(catalog.biomes.map((b) => b.tier))].sort((a, b) => a - b).map((tier) => todo.rewardByTier[tier] ?? 0),
   },
   standoff: standoff === undefined ? undefined : (() => {
-    const floor = catalog.biomes.find((b) => !b.safe && b.tier >= standoff.minBiomeTier)
-    return floor === undefined ? undefined : { minLevel: standoff.minLevel, floor: floor.name, xp: standoff.xpMultiplier, gold: standoff.goldMultiplier, hours: Math.round(standoff.durationTicks / 4) }
+    const zone = catalog.biomes.find((b) => !b.safe && b.tier >= standoff.minBiomeTier)
+    return zone === undefined ? undefined : { minLevel: standoff.minLevel, zone: zone.name, xp: standoff.xpMultiplier, gold: standoff.goldMultiplier, hours: Math.round(standoff.durationTicks / 4) }
   })(),
   shopBags: catalog.bagLadder.tiers.filter((tier) => tier.milestone === undefined && tier.price !== undefined).map((tier) => ({ name: tier.name, size: tier.capacity, price: tier.price! })),
   tote: (() => { const tier = catalog.bagLadder.tiers.find((t) => t.milestone?.ticksExplored !== undefined); return tier === undefined ? undefined : { name: tier.name, size: tier.capacity } })(),
   topBag: catalog.bagLadder.tiers.at(-1)?.capacity ?? 0,
-  firstPouch: { name: catalog.potionPouch?.tiers[0]?.name ?? 'Thermos', size: catalog.potionPouch?.tiers[0]?.cap ?? 20 },
+  firstPouch: { name: catalog.potionPouch?.tiers[0]?.name ?? 'Tin Flask', size: catalog.potionPouch?.tiers[0]?.cap ?? 20 },
   shopPouches: (catalog.potionPouch?.tiers ?? []).filter((tier) => tier.milestone === undefined && tier.price !== undefined).map((tier) => ({ name: tier.name, size: tier.cap, price: tier.price! })),
   merchantOff: catalog.merchant?.ladderDiscountPct ?? 0,
   workbench: workbench === undefined ? undefined : {
@@ -49,9 +49,9 @@ export const HELP_FACTS = {
     drops: catalog.biomes.map((biome) => {
       const weights = potions.dropWeightsByTier[biome.tier] ?? {}
       const ranked = potions.strengths.filter((s) => (weights[s.id] ?? 0) > 0).sort((a, b) => (weights[b.id] ?? 0) - (weights[a.id] ?? 0))
-      return { floor: biome.name, top: ranked[0]?.name, rest: ranked.slice(1).map((s) => s.name) }
-    }).filter((drop) => drop.top !== undefined) as { floor: string; top: string; rest: string[] }[],
-    combine: { count: potions.combine.count, from: potions.strengths.find((s) => s.id === potions.combine.from)?.name ?? 'Minor Potion', to: potions.strengths.find((s) => s.id === potions.combine.to)?.name ?? 'Major Potion', materials: cost({ gold: 0, materials: potions.combine.materials }).materials },
+      return { zone: biome.name, top: ranked[0]?.name, rest: ranked.slice(1).map((s) => s.name) }
+    }).filter((drop) => drop.top !== undefined) as { zone: string; top: string; rest: string[] }[],
+    combine: { count: potions.combine.count, from: potions.strengths.find((s) => s.id === potions.combine.from)?.name ?? 'Small Draught', to: potions.strengths.find((s) => s.id === potions.combine.to)?.name ?? 'Strong Draught', materials: cost({ gold: 0, materials: potions.combine.materials }).materials },
   },
   career: catalog.career === undefined ? undefined : { gold: catalog.career.rungs.reduce((sum, rung) => sum + rung.gold, 0), goals: catalog.career.rungs.filter((rung) => !rung.retired).length },
   unlocks: catalog.unlocks,
@@ -68,6 +68,8 @@ export const HELP_FACTS = {
   },
   lostProperty: catalog.lostProperty !== undefined,
   occasions: catalog.occasions,
+  /** The affix traits by id, named as the catalog names them. */
+  affixes: (catalog.affixes ?? []).map((affix) => ({ id: affix.id, name: affix.name })),
 } as const
 
 
@@ -75,6 +77,12 @@ export type Modifiers = { attackPct?: number; defensePct?: number; xpPct?: numbe
 
 /** "+10" or "−15". */
 export const signed = (value: number) => (value > 0 ? `+${value}` : `−${Math.abs(value)}`)
+
+/** The catalog's name for an occasion rule, or the fallback when the rule is not in the active catalog. */
+export const occasionName = (id: string, fallback: string) => HELP_FACTS.occasions?.find((rule) => rule.id === id)?.name ?? fallback
+
+/** The catalog's name for a trait, or its id capitalised when the catalog has no such trait. */
+export const affixName = (id: string) => HELP_FACTS.affixes.find((affix) => affix.id === id)?.name ?? id.charAt(0).toUpperCase() + id.slice(1)
 
 /** The next date of an occasion that moves each year, or null. */
 export function nextTableDate(dates: readonly string[]): Date | null {

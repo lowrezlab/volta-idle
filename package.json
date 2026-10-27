@@ -24,6 +24,7 @@
     "lint:trmnl": "tsx tools/trmnl/lint.ts",
     "crosscheck:trmnl": "tsx tools/trmnl/crosscheck.ts",
     "sweep:trmnl": "node tools/trmnl/sweep.mjs",
+    "lint:names": "tsx tools/lint/reserved-names.ts",
     "pull:trmnl": "node tools/trmnl/pull-live.mjs",
     "check": "pnpm typecheck && pnpm test",
     "knip": "knip",

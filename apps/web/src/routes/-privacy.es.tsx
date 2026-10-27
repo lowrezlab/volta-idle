@@ -20,10 +20,10 @@ export const privacyEs: LegalPage = {
         importe compartir y nunca incluyas en él datos de contacto.
       </p>
       <p>
-        En Wardenwatch, los héroes asaltan los escritorios de otros y se encuentran por azar. Cuando tu héroe asalta, es asaltado o se encuentra con otro héroe, tu nombre público aparece en el diario de aventuras del otro jugador, en la app y en su TRMNL, igual que ya aparece en las clasificaciones. Cuando tu héroe cae K.O. puede soltar un objeto de repuesto con tu nombre público, que el héroe de otro jugador puede encontrar y quedarse; tu nombre aparece entonces en ese objeto en su app y en su página de héroe. Si cambias de nombre o borras tu cuenta, esas historias y objetos muestran «Jugador oculto» o pierden el nombre.
+        En Wardenwatch, los héroes asaltan los campamentos de otros y se encuentran por azar. Cuando tu héroe asalta, es asaltado o se encuentra con otro héroe, tu nombre público aparece en el diario de aventuras del otro jugador, en la app y en su TRMNL, igual que ya aparece en las clasificaciones. Cuando tu héroe cae K.O. puede soltar un objeto de repuesto con tu nombre público, que el héroe de otro jugador puede encontrar y quedarse; tu nombre aparece entonces en ese objeto en su app y en su página de héroe. Si cambias de nombre o borras tu cuenta, esas historias y objetos muestran «Jugador oculto» o pierden el nombre.
       </p>
       <p>
-        Tu héroe de Wardenwatch tiene una página pública: cualquiera con el enlace puede ver tu nombre público, el nombre de tu héroe, su nivel, puesto, planta actual y fecha de inicio, algunos totales y tus logros. El oro, el diario de aventuras y los datos de tu cuenta siguen siendo privados, y también tu equipo, salvo los repuestos de otros jugadores que guarda tu héroe, que se muestran con sus nombres. La página está activada por defecto. Ocultar mi página de héroe, en Ajustes, la oculta al momento, y puedes volver a mostrarla cuando quieras.
+        Tu héroe de Wardenwatch tiene una página pública: cualquiera con el enlace puede ver tu nombre público, el nombre de tu héroe, su nivel, puesto, zona actual y fecha de inicio, algunos totales y tus logros. El oro, el diario de aventuras y los datos de tu cuenta siguen siendo privados, y también tu equipo, salvo los repuestos de otros jugadores que guarda tu héroe, que se muestran con sus nombres. La página está activada por defecto. Ocultar mi página de héroe, en Ajustes, la oculta al momento, y puedes volver a mostrarla cuando quieras.
       </p>
       <p>
         Los jugadores con sesión iniciada pueden seguir una página pública de héroe. Guardamos quién sigue a quién para que su app pueda listar a los jugadores que siguen. A nadie se le avisa de que lo siguen, y ninguna página muestra quién sigue a un jugador. Si cambias tu nombre público, ocultas tu página o borras tu progreso, otros jugadores dejan de ver a tu héroe en su lista, y el borrado elimina esos registros.
@@ -38,7 +38,7 @@ export const privacyEs: LegalPage = {
           Para cada instalación de TRMNL: el ID de la instancia del plugin, un hash de su token de acceso y el enlace de ajustes que nos da TRMNL. No guardamos tu nombre
           ni tu correo de TRMNL.
         </li>
-        <li>El desfase horario que tu TRMNL envía con cada pantalla (por ejemplo UTC+2), para que el stand-up de la mañana de Wardenwatch siga tu día. Solo guardamos el último.</li>
+        <li>El desfase horario que tu TRMNL envía con cada pantalla (por ejemplo UTC+2), para que la revista de la mañana de Wardenwatch siga tu día. Solo guardamos el último.</li>
         <li>El ajuste de idioma que tu TRMNL envía con cada pantalla (por ejemplo es-ES), para ver a qué idiomas merece la pena traducir los juegos y para que tu pantalla pueda usar tu idioma. Solo guardamos el último.</li>
         <li>Si eliges un idioma para TRMNL Games, esa elección, para que tus pantallas TRMNL y tus alertas también lo usen.</li>
         <li>Registros operativos de corta duración, como contadores de límite de uso y recibos de solicitudes duplicadas.</li>

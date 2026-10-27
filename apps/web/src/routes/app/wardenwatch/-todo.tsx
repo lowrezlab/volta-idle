@@ -25,7 +25,7 @@ const Label = ({ text }: { text: string }) => <>{markedRuns(text).map((run, i) =
 
 /**
  * The office to-do list (D112): three tasks the hero works through on its own. A finished task waits for the
- * morning stand-up with its tick; the one free swap per refill period is the only control, so the card stays a
+ * morning muster with its tick; the one free swap per refill period is the only control, so the card stays a
  * glance, never a chore. Swap asks first in a sheet that says how often it can be used and what is lost, so a stray
  * tap never spends it. Swaps report into the hero page's pinned notice (D98).
  */

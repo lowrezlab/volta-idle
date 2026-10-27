@@ -7,6 +7,7 @@ import { useConvexAuth } from 'convex/react'
 import { Link } from '@tanstack/react-router'
 import { FAQ } from './wardenwatchFaq'
 import { FLOORS, UNLOCKS } from './facts.gen'
+import { SCREEN_SAMPLE, zoneSceneSrc } from './sampleAssets'
 import { Glyph, type GlyphName } from './glyphs'
 import { BIOME_BANDS } from './palette'
 import { WARDENWATCH_INSTALL_URL } from './prose'
@@ -41,8 +42,8 @@ export function ScreenBezel({ slug, alt, priority = false, sizes = '(min-width: 
   return (
     <div className="rounded-[1.4rem] bg-[#3a3566] p-[clamp(0.5rem,2.5vw,1rem)] shadow-[0_0_0_3px_var(--color-night),0_24px_48px_-24px_rgb(0_0_0/0.8)]">
       <img
-        src={`/games/${slug}/screen-sample.png`}
-        srcSet={`/games/${slug}/screen-sample-800.png 800w, /games/${slug}/screen-sample.png 1200w`}
+        src={SCREEN_SAMPLE[slug].src}
+        srcSet={SCREEN_SAMPLE[slug].srcSet}
         sizes={sizes}
         alt={alt}
         width={1200}
@@ -55,7 +56,7 @@ export function ScreenBezel({ slug, alt, priority = false, sizes = '(min-width: 
   )
 }
 
-/** One floor's painted fight scene over its sky, wall and floor bands, as the hero page paints it (D96). */
+/** One zone's painted fight scene over its sky, wall and ground bands, as the hero page paints it (D96). */
 function FloorScene({ id, alt }: { id: string; alt: string }) {
   const bands = BIOME_BANDS[id] ?? BIOME_BANDS.office_cubicles!
   return (
@@ -63,22 +64,22 @@ function FloorScene({ id, alt }: { id: string; alt: string }) {
       <div aria-hidden="true" className="absolute inset-0 grid grid-rows-[18%_14%_40%_28%]">
         {bands.map((colour, i) => <div key={i} style={{ background: colour }} />)}
       </div>
-      <img src={`/games/wardenwatch/floors/${id}.png`} alt={alt} width={152} height={40} loading="lazy" className="relative block h-auto w-full pt-6 [image-rendering:pixelated]" />
+      <img src={zoneSceneSrc(id)} alt={alt} width={152} height={40} loading="lazy" className="relative block h-auto w-full pt-6 [image-rendering:pixelated]" />
     </div>
   )
 }
 
-/** The building's floors in order, each with its picture, opening level and monsters (generated from the active catalog). */
+/** The zones in order, each with its picture, opening level and monsters (generated from the active catalog). */
 export function FloorGrid({ headingId, headingLevel: Heading = 'h2' }: { headingId: string; headingLevel?: 'h2' | 'h3' }) {
   const t = useT(pitchMessages)
   const locale = useLocale()
-  // D169, D193: the generated facts carry each floor's name in every language.
-  const floors = FLOORS.map((floor) => (locale === 'en' ? { ...floor, alt: `A hero fights a ${floor.featured} in the ${floor.name}` } : { ...floor, ...floor[locale] }))
+  // D169, D193: the generated facts carry each zone's name in every language.
+  const floors = FLOORS.map((floor) => (locale === 'en' ? { ...floor, alt: `${floor.name}: a hero fights a ${floor.featured}` } : { ...floor, ...floor[locale] }))
   return (
     <section aria-labelledby={headingId} className="flex flex-col gap-6">
       <div className="flex max-w-prose flex-col gap-2">
-        <Heading id={headingId} className="font-display text-3xl font-bold text-gold-ink">{t.floorsHeading(floors.length, floors.reduce((sum, floor) => sum + floor.monsters.length, 0))}</Heading>
-        <p className="leading-relaxed text-muted">{t.floorsIntro(floors[0]?.name ?? '')}</p>
+        <Heading id={headingId} className="font-display text-3xl font-bold text-gold-ink">{t.zonesHeading(floors.length, floors.reduce((sum, floor) => sum + floor.monsters.length, 0))}</Heading>
+        <p className="leading-relaxed text-muted">{t.zonesIntro(floors[0]?.name ?? '')}</p>
       </div>
       <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
         {floors.map((floor) => (
@@ -110,7 +111,7 @@ const CENSUS_EXTRAS = [
  * Renders nothing until a tick has published the tally, and nothing while that tally is still empty.
  * The landing page mounts this in the browser, after first byte.
  */
-export function OfficeCensus({ className = '', headingId = 'office-census' }: { className?: string; headingId?: string }) {
+export function OfficeCensus({ className = '', headingId = 'garrison-census' }: { className?: string; headingId?: string }) {
   const t = useT(pitchMessages)
   const locale = useLocale()
   const { data, isError } = useQuery(convexQuery(api.census.office, {}))

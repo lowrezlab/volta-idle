@@ -36,7 +36,7 @@ export const games = {
   [WARDENWATCH_GAME]: {
     slug: WARDENWATCH_GAME,
     name: 'Wardenwatch',
-    description: 'An office RPG that plays itself on your TRMNL.',
+    description: 'A frontier RPG that plays itself on your TRMNL.',
     defaultStatus: 'live',
     publicPath: '/games/wardenwatch',
     companionPath: '/app/wardenwatch',

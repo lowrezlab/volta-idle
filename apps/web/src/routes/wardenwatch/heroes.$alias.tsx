@@ -102,7 +102,7 @@ function Found({ profile }: { profile: Profile }) {
   const c = useContent()
   const locale = useLocale()
   const since = formatDate(locale, profile.adventuringSince, { day: 'numeric', month: 'long', year: 'numeric' })
-  const biome = profile.biome ?? 'Office Cubicles'
+  const biome = profile.biome ?? 'Castellum Frigo'
   const r = t.lifetimeRows
   const rows: Array<[string, number]> = [[r.fightsWon, profile.lifetime.combatWins], [r.itemsFound, profile.lifetime.itemsFound], [r.trips, profile.lifetime.trips], [r.rescues, profile.lifetime.rescues], [r.epicFinds, profile.lifetime.epicFinds]]
   // D110: the raid record, once there is one; never who was raided or the gold that moved.

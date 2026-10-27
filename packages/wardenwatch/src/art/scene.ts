@@ -4,6 +4,7 @@ import { monsterArt } from './monsters'
 import { eliteCrown, propArt, type PropId } from './props'
 import { dressingFor, heroHatAnchor, monsterHatCentre, type Dressing, type OccasionArt } from './occasions'
 import type { SceneTime } from './sceneTime'
+import type { LayeredHero } from './layered'
 export { SCENE_VERSION } from './sceneTime'
 
 /**
@@ -359,8 +360,26 @@ export type Placement =
   /** D141: the other hero of a meeting, drawn mirrored; its cloak is a `cloak` placement like ours. */
   | { readonly role: 'coworker'; readonly heroClass: 'warrior' | 'rogue'; readonly gender: HeroGender; readonly sprite: Sprite; readonly left: number; readonly top: number }
 
-export function scenePlacements(pose: HeroPose, subject: Subject, occasion?: OccasionArt): Placement[] {
-  const hero = heroPoses[pose]
+/**
+ * Scene v6: a layered hero (layered.ts) stands where the whole sprite does. Its back slot is in the frame, so it has no
+ * cloak placement, and a hat sits on its body's `head` anchor (GDD §3.4) instead of the `HAT_ANCHOR` table, its bottom
+ * row one below the skull's top as the table's hats sit; a body without that anchor wears none.
+ */
+function heroPlacements(pose: HeroPose, layered: LayeredHero | undefined, dressing: Dressing | undefined, occasion: OccasionArt | undefined): Placement[] {
+  const hero = layered?.sprite ?? heroPoses[pose]
+  const placements: Placement[] = []
+  if (layered === undefined && CLOAKED_POSES.has(pose)) placements.push({ role: 'cloak', sprite: heroCloak, left: HERO_X - 5, top: GROUND - hero.height + 8 })
+  const heroTop = GROUND - hero.height
+  placements.push({ role: 'hero', sprite: hero, left: HERO_X, top: heroTop })
+  if (dressing?.heroHat !== undefined) {
+    const anchor = layered === undefined ? heroHatAnchor(pose) : layered.head === undefined ? undefined : { centre: layered.head.x, bottom: layered.head.y + 1 }
+    const hat = dressing.heroHat
+    if (anchor !== undefined) placements.push({ role: 'decor', id: `${occasion!}:hat`, sprite: hat, left: HERO_X + anchor.centre - Math.floor(hat.width / 2), top: heroTop + anchor.bottom - hat.height + 1 })
+  }
+  return placements
+}
+
+export function scenePlacements(pose: HeroPose, subject: Subject, occasion?: OccasionArt, layered?: LayeredHero): Placement[] {
   const dressing = dressingFor(occasion)
   const placements: Placement[] = []
   // D139: the floor prop stands behind everything, between the hero and its foe, or in the foe's place on an empty stage.
@@ -369,14 +388,7 @@ export function scenePlacements(pose: HeroPose, subject: Subject, occasion?: Occ
     const left = subject.kind === 'none' ? SUBJECT_X : DECOR_X
     placements.push({ role: 'decor', id: `${occasion!}:prop`, sprite: dressing.prop, left, top: GROUND - dressing.prop.height })
   }
-  if (CLOAKED_POSES.has(pose)) placements.push({ role: 'cloak', sprite: heroCloak, left: HERO_X - 5, top: GROUND - hero.height + 8 })
-  const heroTop = GROUND - hero.height
-  placements.push({ role: 'hero', sprite: hero, left: HERO_X, top: heroTop })
-  if (dressing?.heroHat !== undefined) {
-    const anchor = heroHatAnchor(pose)
-    const hat = dressing.heroHat
-    placements.push({ role: 'decor', id: `${occasion!}:hat`, sprite: hat, left: HERO_X + anchor.centre - Math.floor(hat.width / 2), top: heroTop + anchor.bottom - hat.height + 1 })
-  }
+  placements.push(...heroPlacements(pose, layered, dressing, occasion))
   if (subject.kind === 'monster') {
     const art = monsterArt[subject.id]
     placements.push({ role: 'monster', id: subject.id, sprite: art, left: SUBJECT_X, top: GROUND - art.height })
@@ -446,7 +458,7 @@ function ceilingStrip(c: Canvas, strip: NonNullable<Dressing['strip']>, occasion
 export const placementRegion = (placement: Placement): string => (placement.role === 'monster' || placement.role === 'prop' || placement.role === 'decor' ? `${placement.role}:${placement.id}` : placement.role)
 
 /** The stage, drawn onto `c` (a fresh 1-bit canvas unless the companion passes its colour-tracking one). */
-export function composeScene(biome: BiomeArt, pose: HeroPose, subject: Subject, time: SceneTime = 'day', c = new Canvas(STAGE_WIDTH, STAGE_HEIGHT), occasion?: OccasionArt): Canvas {
+export function composeScene(biome: BiomeArt, pose: HeroPose, subject: Subject, time: SceneTime = 'day', c = new Canvas(STAGE_WIDTH, STAGE_HEIGHT), occasion?: OccasionArt, layered?: LayeredHero): Canvas {
   const dressing = dressingFor(occasion)
   BACKDROPS[biome](c, time, dressing?.window)
   if (dressing?.strip !== undefined) ceilingStrip(c, dressing.strip, occasion!)
@@ -454,6 +466,6 @@ export function composeScene(biome: BiomeArt, pose: HeroPose, subject: Subject, 
   c.region = 'ground'
   c.rect(0, GROUND, STAGE_WIDTH, 1, '#')
   c.rect(0, GROUND - 22, STAGE_WIDTH, 0, 'w')
-  for (const placement of scenePlacements(pose, subject, occasion)) drawWithHalo(c, placement.sprite, placement.left, placement.top, placementRegion(placement))
+  for (const placement of scenePlacements(pose, subject, occasion, layered)) drawWithHalo(c, placement.sprite, placement.left, placement.top, placementRegion(placement))
   return c
 }

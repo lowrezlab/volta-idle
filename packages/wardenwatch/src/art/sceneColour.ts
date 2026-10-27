@@ -3,10 +3,11 @@ import { classPose, poseParts, type BasePose, type HeroPose } from './hero'
 import type { monsterArt } from './monsters'
 import { encodePngIndexed } from './png'
 import type { PropId } from './props'
-import { parseScenePath } from './route'
+import { parseScenePath, sceneHero } from './route'
 import { composeScene, scenePlacements, STAGE_HEIGHT, STAGE_WIDTH, type BiomeArt, type Placement, type Subject } from './scene'
 import type { OccasionArt } from './occasions'
 import type { SceneTime } from './sceneTime'
+import type { LayeredHero } from './layered'
 
 /**
  * One flat fill per sprite (D87), which the four-ink panels reduce to red, yellow or paper (D94). Each sprite fills
@@ -432,10 +433,10 @@ class PaintedCanvas extends Canvas {
 }
 
 /** The stage in full colour as rows of colours (null for clear), painted from the same composition as the device image. */
-export function paintedScene(biome: BiomeArt, pose: HeroPose, subject: Subject, time: SceneTime, occasion?: OccasionArt): Array<Array<string | null>> {
+export function paintedScene(biome: BiomeArt, pose: HeroPose, subject: Subject, time: SceneTime, occasion?: OccasionArt, layered?: LayeredHero): Array<Array<string | null>> {
   const c = new PaintedCanvas()
-  composeScene(biome, pose, subject, time, c, occasion)
-  const placements = scenePlacements(pose, subject, occasion)
+  composeScene(biome, pose, subject, time, c, occasion, layered)
+  const placements = scenePlacements(pose, subject, occasion, layered)
   const hero = placements.find((p) => p.role === 'hero')
   const coworker = placements.find((p) => p.role === 'coworker')
   const backdrop = BACKDROP[biome][time]
@@ -463,7 +464,7 @@ export function paintedScene(biome: BiomeArt, pose: HeroPose, subject: Subject, 
 export function paintedSceneUri(path: string): string | null {
   const parsed = parseScenePath(path.replace(/^https?:\/\/[^/]+/, '').replace(/\?.*$/, ''))
   if (!parsed) return null
-  const grid = paintedScene(parsed.biome, parsed.pose, parsed.subject, parsed.time, parsed.occasion)
+  const grid = paintedScene(parsed.biome, parsed.pose, parsed.subject, parsed.time, parsed.occasion, sceneHero(parsed))
   const colours = new Map<string, number>([['', 0]])
   const index = new Uint8Array(STAGE_WIDTH * STAGE_HEIGHT)
   grid.forEach((row, y) =>

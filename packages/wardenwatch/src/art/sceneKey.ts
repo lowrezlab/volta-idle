@@ -1,5 +1,5 @@
 import { classPose, type BasePose, type HeroGender, type HeroPose } from './hero'
-import { SCENE_VERSION, type SceneTime } from './sceneTime'
+import { LAYERED_SCENE_VERSION, SCENE_VERSION, type SceneTime } from './sceneTime'
 import { MEETING_PROPS, type PropId } from './props'
 
 /**
@@ -80,3 +80,11 @@ export function subjectSegment(subject: SceneSubject): string {
 /** D139 (scene v5): the occasion segment follows the time; `plain` on an ordinary day. */
 export const scenePath = (biomeId: string, pose: HeroPose, subject: SceneSubject, scale: number, time: SceneTime = 'day', occasion?: string) =>
   `/art/scene/v${SCENE_VERSION}/${biomeId}/${time}/${occasion ?? 'plain'}/${pose}/${subjectSegment(subject)}/${scale}.png`
+
+/**
+ * Scene v6 (GDD §3.6): the v5 path with the hero's look code between the occasion and the pose, so the composed image
+ * stays immutable per URL. The pose keeps its class and gender names: they pick the whole-sprite fallback when the
+ * registry cannot draw the look.
+ */
+export const layeredScenePath = (biomeId: string, look: string, pose: HeroPose, subject: SceneSubject, scale: number, time: SceneTime = 'day', occasion?: string) =>
+  `/art/scene/v${LAYERED_SCENE_VERSION}/${biomeId}/${time}/${occasion ?? 'plain'}/${look}/${pose}/${subjectSegment(subject)}/${scale}.png`

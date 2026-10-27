@@ -4,7 +4,7 @@ import { monsterArt } from './monsters'
 import { eliteCrown, propArt, type PropId } from './props'
 import { dressingFor, heroHatAnchor, monsterHatCentre, type Dressing, type OccasionArt } from './occasions'
 import type { SceneTime } from './sceneTime'
-import type { LayeredHero } from './layered'
+import { HERO_SIZE, type LayeredHero } from './layered'
 export { SCENE_VERSION } from './sceneTime'
 
 /**
@@ -24,6 +24,8 @@ export const LARGE_SCALE = 6
 export const MEDIUM_SCALE = 3
 const GROUND = 37
 const HERO_X = 24
+/** Where the hero's 24x24 frame sits on the stage (feet on the ground row), for a view that crops to the hero alone. */
+export const HERO_FRAME = { left: HERO_X, top: GROUND - HERO_SIZE, size: HERO_SIZE } as const
 const SUBJECT_X = 92
 /** D139: an occasion's floor prop stands here, in the clear band between the hero and its foe. */
 const DECOR_X = 66

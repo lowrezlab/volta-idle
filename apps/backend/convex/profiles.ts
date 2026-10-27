@@ -3,7 +3,7 @@ import { internalQuery, query, type QueryCtx } from './_generated/server'
 import { ACHIEVEMENT_BY_ID, ACHIEVEMENT_FAMILIES } from '@trmnl-games/wardenwatch/content/achievements'
 import { withCounterDefaults } from '@trmnl-games/wardenwatch/sim/core/starter'
 import { FULL_SCALE } from '@trmnl-games/wardenwatch/art/scene'
-import { sceneFor, scenePath } from '@trmnl-games/wardenwatch/art/sceneKey'
+import { layeredScenePath, sceneFor } from '@trmnl-games/wardenwatch/art/sceneKey'
 import { sceneOccasion } from '@trmnl-games/wardenwatch/payload'
 import { currentHero } from './lib/gameProfile'
 import { MAX_UNLOCK_ROWS } from './lib/achievements'
@@ -11,6 +11,7 @@ import { ALIAS_RULE, normalizeAlias } from './lib/names'
 import { pagePublic } from './lib/publicPage'
 import { heldSpares } from './lib/lostProperty'
 import { sceneEvent } from './lib/heroScene'
+import { heroLook } from './lib/look'
 import { readWorld, worldContent } from './world'
 import { INVENTORY_READ } from '@trmnl-games/wardenwatch/sim/core/limits'
 
@@ -48,7 +49,7 @@ export const card = internalQuery({
     const found = await publicHero(ctx, alias)
     if (found === null) return null
     const { user, hero, scene, rank } = found
-    return { heroName: hero.name, alias: user.publicAlias, level: hero.level, rank, scenePath: scenePath(hero.biomeId, scene.pose, scene.subject, FULL_SCALE, 'day', sceneOccasion(worldContent(found.world), Date.now(), user.trmnlUtcOffset)) }
+    return { heroName: hero.name, alias: user.publicAlias, level: hero.level, rank, scenePath: layeredScenePath(hero.biomeId, heroLook(hero), scene.pose, scene.subject, FULL_SCALE, 'day', sceneOccasion(worldContent(found.world), Date.now(), user.trmnlUtcOffset)) }
   },
 })
 
@@ -87,7 +88,7 @@ export const view = query({
       level: hero.level,
       status: hero.status,
       biome: content.biomes.find((biome) => biome.id === hero.biomeId)?.name ?? null,
-      scenePath: scenePath(hero.biomeId, scene.pose, scene.subject, FULL_SCALE, 'day', sceneOccasion(content, Date.now(), user.trmnlUtcOffset)),
+      scenePath: layeredScenePath(hero.biomeId, heroLook(hero), scene.pose, scene.subject, FULL_SCALE, 'day', sceneOccasion(content, Date.now(), user.trmnlUtcOffset)),
       adventuringSince: hero.activatedAt ?? hero.createdAt,
       rank: found.rank,
       lifetime: { combatWins: counters.combatWins, itemsFound: counters.itemsFound, trips: counters.trips, rescues: counters.rescues, epicFinds: counters.epicFinds },

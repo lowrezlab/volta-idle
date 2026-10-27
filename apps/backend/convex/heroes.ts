@@ -18,7 +18,8 @@ import { starterKit } from '@trmnl-games/wardenwatch/sim/core/starter'
 import { awardAfterIntent } from './lib/achievements'
 import { readWorld } from './world'
 import { FULL_SCALE } from '@trmnl-games/wardenwatch/art/scene'
-import { sceneFor, scenePath } from '@trmnl-games/wardenwatch/art/sceneKey'
+import { layeredScenePath, sceneFor } from '@trmnl-games/wardenwatch/art/sceneKey'
+import { heroLook, normalisedLook } from './lib/look'
 import { sceneOccasion } from '@trmnl-games/wardenwatch/payload'
 import { sceneEvent } from './lib/heroScene'
 import { localDay, occasionAt, occasionCalendar, occasionModifiers } from '@trmnl-games/wardenwatch/sim/core/occasions'
@@ -78,7 +79,9 @@ export const mine = query({
     return {
       id: hero._id,
       // D139: dressed for the occasion on the owner's last TRMNL date; the companion sets the sky from the browser's clock.
-      scenePath: scenePath(hero.biomeId, scene.pose, scene.subject, FULL_SCALE, 'day', sceneOccasion(worldContent(world), now, user.trmnlUtcOffset)),
+      scenePath: layeredScenePath(hero.biomeId, heroLook(hero), scene.pose, scene.subject, FULL_SCALE, 'day', sceneOccasion(worldContent(world), now, user.trmnlUtcOffset)),
+      // GDD §3.6: the look the scene is drawn with, as the creator edits it.
+      look: heroLook(hero),
       name: hero.name,
       alias: user.publicAlias,
       activationState: hero.activationState,
@@ -484,6 +487,25 @@ async function rosterSummary(ctx: QueryCtx, content: ContentCatalog, hero: Doc<'
 }
 
 /** v1.2: show or hide the hero's public profile page. Public until the owner hides it (D144). */
+/**
+ * GDD §3.7: the creator's Save. The look is cosmetic and free, so it is open to a hero still waiting for its TRMNL
+ * save (a new player passes through the creator before the Save) and to a paused or recovering one.
+ */
+export const setLook = mutation({
+  args: { operationId: v.string(), look: v.string() },
+  returns: intentResult,
+  handler: async (ctx, args) =>
+    await runIntent(ctx, args.operationId, 'heroes.setLook', { look: args.look }, async (user) => {
+      const hero = await currentHero(ctx, user)
+      if (hero === null) throw appError('HERO_NOT_FOUND', 'No hero yet.')
+      if (hero.simulationState === 'quarantined') throw appError('SERVICE_PAUSED', 'This hero is paused for a service check.')
+      const look = normalisedLook(args.look)
+      if (heroLook(hero) === look) return { changed: false }
+      await ctx.db.patch(hero._id, { look })
+      return { changed: true }
+    }),
+})
+
 export const setPublicProfile = mutation({
   args: { operationId: v.string(), visible: v.boolean() },
   returns: intentResult,

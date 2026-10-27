@@ -125,8 +125,11 @@ function playerText(line: string, extension: string): string[] {
   const trimmed = line.trim()
   // JSX prose: a line that opens a tag, or a continuation line with none of the punctuation code needs (an object
   // literal's `key: 'value'` pairs are code; their strings were taken above).
-  if (extension === '.tsx' && (trimmed.startsWith('<') || !/[(=;{|[\]]|\?:|\w: ['"`]/.test(trimmed))) {
-    const prose = withoutExpressions(trimmed).replace(/<[^>]*>/g, ' ').trim()
+  // Test the punctuation after removing `{expression}` holes, so a prose line that interpolates a value is still read.
+  const bare = withoutExpressions(trimmed)
+  const moduleLine = /^(import|export)\b|^\}? ?from ['"]/.test(trimmed)
+  if (extension === '.tsx' && !moduleLine && (trimmed.startsWith('<') || !/[(=;{|[\]]|\?:|\w: ['"`]/.test(bare))) {
+    const prose = bare.replace(/<[^>]*>/g, ' ').trim()
     if (prose !== '') segments.push(prose)
   }
   return segments

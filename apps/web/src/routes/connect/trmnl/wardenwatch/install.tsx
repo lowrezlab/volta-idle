@@ -12,11 +12,13 @@ import { BUTTON_PRIMARY, LINK_BUTTON, Button, LoadingState } from '../../../../l
 import { captureAnalytics, readAnalyticsConsent } from '../../../../lib/analytics'
 import { reportError } from '../../../../lib/errorReporting'
 import { NameField } from '../../../../lib/nameField'
-import { GenderPicker, type HeroGender } from '../../../../lib/genderPicker'
+import { LookCreator } from '../../../../lib/lookCreator'
+import { DEFAULT_LOOK, encodeLook } from '@trmnl-games/wardenwatch/art/look'
 import { useAnalyticsView } from '../../../../lib/analyticsProvider'
 import { documentLocale, messagesFor, useT } from '../../../../lib/i18n'
 import { headMessages } from '../../../../i18n/heads'
 import { installMessages } from '../../../../i18n/install'
+import { lookMessages } from '../../../../i18n/look'
 import { serverMessage } from '../../../../i18n/serverMessages'
 
 type Search = { code?: string; installation_callback_url?: string; invalid?: boolean }
@@ -79,9 +81,11 @@ function ConnectForm() {
   const [reconnectCallback, setReconnectCallback] = useState<string | null>(null)
   const [alias, setAlias] = useState('')
   const [heroName, setHeroName] = useState('')
-  const [heroGender, setHeroGender] = useState<HeroGender>('male')
+  // GDD §3.7: a new hero passes through the creator with its naming; the code travels in the form's data.
+  const [heroLook, setHeroLook] = useState(() => encodeLook(DEFAULT_LOOK))
   const inFlight = useRef(false)
   const t = useT(installMessages)
+  const l = useT(lookMessages)
   if (me === undefined) return <LoadingState label={t.loadingAccount} />
   const needsProfile = !me?.user
   const needsHero = !me?.hero
@@ -101,7 +105,7 @@ function ConnectForm() {
         gameSlug: 'wardenwatch',
         analyticsConsent: readAnalyticsConsent() === 'allowed',
         ...(needsProfile ? { publicAlias: String(form.get('publicAlias') ?? '') } : {}),
-        ...(needsHero ? { heroName: String(form.get('heroName') ?? ''), heroGender } : {}),
+        ...(needsHero ? { heroName: String(form.get('heroName') ?? ''), heroLook: String(form.get('heroLook') ?? '') } : {}),
       },
       })
       if (result.ok) {
@@ -140,7 +144,7 @@ function ConnectForm() {
       {needsHero ? (
         <>
           <NameField label={t.heroNameLabel} note={t.heroNameNote} rule={HERO_NAME_RULE} noun="hero name" name="heroName" value={heroName} onChange={setHeroName} placeholder="Steve" disabled={submitting} />
-          <GenderPicker value={heroGender} onChange={setHeroGender} note={t.genderNote} disabled={submitting} />
+          <LookCreator value={heroLook} onChange={setHeroLook} name="heroLook" note={l.firstLook} disabled={submitting} />
           <RankingsPreview alias={(needsProfile ? alias : me?.user?.publicAlias ?? '').trim()} hero={heroName.trim()} />
         </>
       ) : (

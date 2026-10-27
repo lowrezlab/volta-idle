@@ -197,6 +197,7 @@ async function payloadFor(ctx: QueryCtx, user: Doc<'users'>, now: number, instan
           ...(hero.stance === undefined ? {} : { stance: hero.stance }),
           class: hero.class,
           ...(hero.gender === undefined ? {} : { gender: hero.gender }),
+          ...(hero.look === undefined ? {} : { look: hero.look }),
         }
       : null,
     weaponName,

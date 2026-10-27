@@ -34,6 +34,7 @@ import { Route as WardenwatchWaitingListRouteImport } from './routes/wardenwatch
 import { Route as AppWardenwatchIndexRouteImport } from './routes/app/wardenwatch/index'
 import { Route as AppWardenwatchAchievementsRouteImport } from './routes/app/wardenwatch/achievements'
 import { Route as AppWardenwatchCareerRouteImport } from './routes/app/wardenwatch/career'
+import { Route as AppWardenwatchCreatorRouteImport } from './routes/app/wardenwatch/creator'
 import { Route as AppWardenwatchFieldNotesRouteImport } from './routes/app/wardenwatch/field-notes'
 import { Route as AppWardenwatchInventoryRouteImport } from './routes/app/wardenwatch/inventory'
 import { Route as AppWardenwatchKeepsakesRouteImport } from './routes/app/wardenwatch/keepsakes'
@@ -172,6 +173,11 @@ const AppWardenwatchCareerRoute = AppWardenwatchCareerRouteImport.update({
   path: '/career',
   getParentRoute: () => AppWardenwatchRoute,
 } as any)
+const AppWardenwatchCreatorRoute = AppWardenwatchCreatorRouteImport.update({
+  id: '/creator',
+  path: '/creator',
+  getParentRoute: () => AppWardenwatchRoute,
+} as any)
 const AppWardenwatchFieldNotesRoute =
   AppWardenwatchFieldNotesRouteImport.update({
     id: '/field-notes',
@@ -257,6 +263,7 @@ export interface FileRoutesByFullPath {
   '/app/': typeof AppIndexRoute
   '/app/wardenwatch/achievements': typeof AppWardenwatchAchievementsRoute
   '/app/wardenwatch/career': typeof AppWardenwatchCareerRoute
+  '/app/wardenwatch/creator': typeof AppWardenwatchCreatorRoute
   '/app/wardenwatch/field-notes': typeof AppWardenwatchFieldNotesRoute
   '/app/wardenwatch/inventory': typeof AppWardenwatchInventoryRoute
   '/app/wardenwatch/keepsakes': typeof AppWardenwatchKeepsakesRoute
@@ -293,6 +300,7 @@ export interface FileRoutesByTo {
   '/app': typeof AppIndexRoute
   '/app/wardenwatch/achievements': typeof AppWardenwatchAchievementsRoute
   '/app/wardenwatch/career': typeof AppWardenwatchCareerRoute
+  '/app/wardenwatch/creator': typeof AppWardenwatchCreatorRoute
   '/app/wardenwatch/field-notes': typeof AppWardenwatchFieldNotesRoute
   '/app/wardenwatch/inventory': typeof AppWardenwatchInventoryRoute
   '/app/wardenwatch/keepsakes': typeof AppWardenwatchKeepsakesRoute
@@ -332,6 +340,7 @@ export interface FileRoutesById {
   '/app/': typeof AppIndexRoute
   '/app/wardenwatch/achievements': typeof AppWardenwatchAchievementsRoute
   '/app/wardenwatch/career': typeof AppWardenwatchCareerRoute
+  '/app/wardenwatch/creator': typeof AppWardenwatchCreatorRoute
   '/app/wardenwatch/field-notes': typeof AppWardenwatchFieldNotesRoute
   '/app/wardenwatch/inventory': typeof AppWardenwatchInventoryRoute
   '/app/wardenwatch/keepsakes': typeof AppWardenwatchKeepsakesRoute
@@ -372,6 +381,7 @@ export interface FileRouteTypes {
     | '/app/'
     | '/app/wardenwatch/achievements'
     | '/app/wardenwatch/career'
+    | '/app/wardenwatch/creator'
     | '/app/wardenwatch/field-notes'
     | '/app/wardenwatch/inventory'
     | '/app/wardenwatch/keepsakes'
@@ -408,6 +418,7 @@ export interface FileRouteTypes {
     | '/app'
     | '/app/wardenwatch/achievements'
     | '/app/wardenwatch/career'
+    | '/app/wardenwatch/creator'
     | '/app/wardenwatch/field-notes'
     | '/app/wardenwatch/inventory'
     | '/app/wardenwatch/keepsakes'
@@ -446,6 +457,7 @@ export interface FileRouteTypes {
     | '/app/'
     | '/app/wardenwatch/achievements'
     | '/app/wardenwatch/career'
+    | '/app/wardenwatch/creator'
     | '/app/wardenwatch/field-notes'
     | '/app/wardenwatch/inventory'
     | '/app/wardenwatch/keepsakes'
@@ -663,6 +675,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppWardenwatchCareerRouteImport
       parentRoute: typeof AppWardenwatchRoute
     }
+    '/app/wardenwatch/creator': {
+      id: '/app/wardenwatch/creator'
+      path: '/creator'
+      fullPath: '/app/wardenwatch/creator'
+      preLoaderRoute: typeof AppWardenwatchCreatorRouteImport
+      parentRoute: typeof AppWardenwatchRoute
+    }
     '/app/wardenwatch/field-notes': {
       id: '/app/wardenwatch/field-notes'
       path: '/field-notes'
@@ -746,6 +765,7 @@ declare module '@tanstack/react-router' {
 interface AppWardenwatchRouteChildren {
   AppWardenwatchAchievementsRoute: typeof AppWardenwatchAchievementsRoute
   AppWardenwatchCareerRoute: typeof AppWardenwatchCareerRoute
+  AppWardenwatchCreatorRoute: typeof AppWardenwatchCreatorRoute
   AppWardenwatchFieldNotesRoute: typeof AppWardenwatchFieldNotesRoute
   AppWardenwatchInventoryRoute: typeof AppWardenwatchInventoryRoute
   AppWardenwatchKeepsakesRoute: typeof AppWardenwatchKeepsakesRoute
@@ -760,6 +780,7 @@ interface AppWardenwatchRouteChildren {
 const AppWardenwatchRouteChildren: AppWardenwatchRouteChildren = {
   AppWardenwatchAchievementsRoute: AppWardenwatchAchievementsRoute,
   AppWardenwatchCareerRoute: AppWardenwatchCareerRoute,
+  AppWardenwatchCreatorRoute: AppWardenwatchCreatorRoute,
   AppWardenwatchFieldNotesRoute: AppWardenwatchFieldNotesRoute,
   AppWardenwatchInventoryRoute: AppWardenwatchInventoryRoute,
   AppWardenwatchKeepsakesRoute: AppWardenwatchKeepsakesRoute,

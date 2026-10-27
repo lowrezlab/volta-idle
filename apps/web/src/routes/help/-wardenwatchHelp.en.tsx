@@ -42,7 +42,7 @@ export const en: HelpPage = {
   description: WARDENWATCH_HELP_HEAD.en.description,
   title: 'Wardenwatch on TRMNL',
   contents: {
-    'getting-started': 'Getting started', 'if-the-qr-sends-you-back-to-setup': 'If the QR sends you back to setup', 'how-time-works': 'How time works', floors: 'Floors', 'desk-keepsakes': 'Desk keepsakes', career: 'Career', 'heroes-and-classes': 'Heroes and classes', stances: 'Stances', 'desk-raids': 'Desk raids', meetings: 'Meetings', 'lost-property': 'Lost property', 'to-do-list': 'To-do list', potions: 'Potions', 'the-wandering-merchant': 'The wandering merchant', decisions: 'Decisions', effects: 'Effects', 'office-calendar': 'Office calendar', 'rare-and-epic-gear': 'Rare and epic gear', 'when-your-bag-fills-up': 'When your bag fills up', 'bigger-bags': 'Bigger bags', 'salvage-and-the-workbench': 'Salvage and the workbench', 'getting-knocked-out': 'Getting knocked out', recaps: 'Recaps', 'understanding-rankings': 'Understanding rankings', 'sharing-your-hero': 'Sharing your hero', 'following': 'Following', names: 'Names', gender: 'Gender', alerts: 'Alerts', troubleshooting: 'Troubleshooting', 'disconnecting-and-removing': 'Disconnecting and removing', help: 'Help',
+    'getting-started': 'Getting started', 'if-the-qr-sends-you-back-to-setup': 'If the QR sends you back to setup', 'how-time-works': 'How time works', floors: 'Floors', 'desk-keepsakes': 'Desk keepsakes', career: 'Career', 'heroes-and-classes': 'Heroes and classes', stances: 'Stances', 'desk-raids': 'Desk raids', meetings: 'Meetings', 'lost-property': 'Lost property', 'to-do-list': 'To-do list', potions: 'Potions', 'the-wandering-merchant': 'The wandering merchant', decisions: 'Decisions', effects: 'Effects', 'office-calendar': 'Office calendar', 'rare-and-epic-gear': 'Rare and epic gear', 'when-your-bag-fills-up': 'When your bag fills up', 'bigger-bags': 'Bigger bags', 'salvage-and-the-workbench': 'Salvage and the workbench', 'getting-knocked-out': 'Getting knocked out', recaps: 'Recaps', 'understanding-rankings': 'Understanding rankings', 'sharing-your-hero': 'Sharing your hero', 'following': 'Following', names: 'Names', looks: 'Looks', alerts: 'Alerts', troubleshooting: 'Troubleshooting', 'disconnecting-and-removing': 'Disconnecting and removing', help: 'Help',
   },
   Body: () => (
     <>
@@ -86,13 +86,13 @@ export const en: HelpPage = {
       {F.classes !== undefined ? (
         <>
           <h2 id="heroes-and-classes">Heroes and classes</h2>
-          <p>Everyone starts as a Warrior. When your Warrior reaches level {F.rosterLevel}, your TRMNL says “Unlocked: a second hero”, and you can recruit a Rogue from the Heroes page under More. The Rogue starts at level 1 with its own name, gear, gold, potions and goals.</p>
+          <p>Everyone starts as a Knight. When your Knight reaches level {F.rosterLevel}, your TRMNL says “Unlocked: a second hero”, and you can recruit an Assassin from the Heroes page under More. The Assassin starts at level 1 with its own name, gear, gold, potions and goals.</p>
           <ul>
             <li>One hero adventures at a time, and that is the one your TRMNL shows and the one on the leaderboards. The other stays where you left it. It doesn't adventure or catch up later, and a merchant visiting it leaves.</li>
             <li>You can switch once a day. Switching straight back within ten minutes does not count. A hero that is knocked out or on the road has to recover or arrive first.</li>
-            <li>You can have one hero of each class. Achievements belong to you whichever hero earns them; a few belong to the Rogue alone.</li>
-            <li><strong>Warrior</strong>: {F.classes.warriorBlurb}</li>
-            <li><strong>Rogue</strong>: {F.classes.rogueBlurb} {F.classes.rogue.hpPct}% health, attack {signed(F.classes.rogue.attackPct)}%, defense {signed(F.classes.rogue.defensePct)}%, {signed(F.classes.rogue.goldPct)}% gold from every fight and find, and {F.classes.rogue.raidEdgePct} points on its side of every desk raid. It levels at the Warrior's pace but gets knocked out a little more often.</li>
+            <li>You can have one hero of each class. Achievements belong to you whichever hero earns them; a few belong to the Assassin alone.</li>
+            <li><strong>Knight</strong>: {F.classes.warriorBlurb}</li>
+            <li><strong>Assassin</strong>: {F.classes.rogueBlurb} {F.classes.rogue.hpPct}% health, attack {signed(F.classes.rogue.attackPct)}%, defense {signed(F.classes.rogue.defensePct)}%, {signed(F.classes.rogue.goldPct)}% gold from every fight and find, and {F.classes.rogue.raidEdgePct} points on its side of every desk raid. It levels at the Knight's pace but gets knocked out a little more often.</li>
           </ul>
         </>
       ) : null}
@@ -223,8 +223,8 @@ export const en: HelpPage = {
       <p>Signed in, you can follow another player from their public hero page, up to 20 players. Everyone you follow is listed under Rankings, with their hero's level, rank and where they are, and links to their pages. Following changes nothing in play, and nobody is told when you follow them. Desk raids pick their targets by chance from everyone, so following someone never sends your hero after them. If a player hides their page, you see only their name until they show it again. If they change their public name, they drop off your list.</p>
       <h2 id="names">Names</h2>
       <p>You have two names. Your hero's name is on your TRMNL, the rankings and your hero page; to change it, buy a “Hi, my name is” name tag on the More tab for 200 gold. One is in stock a day. Your public name is you, across every TRMNL game: it shows beside your hero in the rankings, in other players' raids and meetings, and in your page's link. You can change it for free once every 7 days from Account. Links to your old page stop working, and nobody else can take your old name for 7 days.</p>
-      <h2 id="gender">Gender</h2>
-      <p>You pick your hero's gender, male or female, when you create it. It only changes how your hero looks on your TRMNL, your hero page and in other players' meetings. Both play the same. To change it later, buy a makeover on the More tab for 200 gold, any time.</p>
+      <h2 id="looks">Looks</h2>
+      <p>You build your hero's look when you create it: ancestry, build, head, hair, back, accessory and tabard. It only changes how your hero looks on your TRMNL, your hero page and in other players' meetings. Every look plays the same. To change it later, visit the camp mirror from your hero page or the More tab. It's free, any time.</p>
       <h2 id="alerts">Alerts</h2>
       <p>Your TRMNL is the main way to keep up with your hero, but Settings can also send a phone notification in two cases, each off until you turn it on:</p>
       <ul>

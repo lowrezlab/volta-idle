@@ -5,7 +5,7 @@ import type { LatestEvent } from '@trmnl-games/wardenwatch/art/sceneKey'
 /**
  * The latest event a scene follows, from its log. D149: a meeting or lost-property scene draws the other hero, so its
  * outcome gains that hero's look as `rivalGender` (one indexed read). The look is the hero's current one, so a
- * makeover shows in other players' scenes too; a deleted hero is drawn in the original look.
+ * look change shows in other players' scenes too; a deleted hero is drawn in the original look.
  */
 export async function sceneEvent(ctx: QueryCtx, log: Doc<'tickLogs'> | undefined): Promise<LatestEvent | null> {
   if (log === undefined) return null

@@ -47,7 +47,7 @@ export const es: HelpPage = {
   description: WARDENWATCH_HELP_HEAD.es.description,
   title: 'Wardenwatch en TRMNL',
   contents: {
-    'getting-started': 'Primeros pasos', 'if-the-qr-sends-you-back-to-setup': 'Si el QR te devuelve a la instalación', 'how-time-works': 'Cómo pasa el tiempo', floors: 'Plantas', 'desk-keepsakes': 'Recuerdos de oficina', career: 'Carrera', 'heroes-and-classes': 'Héroes y clases', stances: 'Posturas', 'desk-raids': 'Incursiones de escritorio', meetings: 'Reuniones', 'lost-property': 'Objetos perdidos', 'to-do-list': 'Lista de tareas', potions: 'Pociones', 'the-wandering-merchant': 'El mercader ambulante', decisions: 'Decisiones', effects: 'Efectos', 'office-calendar': 'Calendario de la oficina', 'rare-and-epic-gear': 'Equipo raro y épico', 'when-your-bag-fills-up': 'Cuando la bolsa se llena', 'bigger-bags': 'Bolsas más grandes', 'salvage-and-the-workbench': 'Desmontar y el banco de trabajo', 'getting-knocked-out': 'Caer K.O.', recaps: 'Resúmenes', 'understanding-rankings': 'Cómo funcionan las clasificaciones', 'sharing-your-hero': 'Compartir tu héroe', 'following': 'Seguir', names: 'Nombres', gender: 'Género', alerts: 'Alertas', troubleshooting: 'Solución de problemas', 'disconnecting-and-removing': 'Desconectar y quitar', help: 'Ayuda',
+    'getting-started': 'Primeros pasos', 'if-the-qr-sends-you-back-to-setup': 'Si el QR te devuelve a la instalación', 'how-time-works': 'Cómo pasa el tiempo', floors: 'Plantas', 'desk-keepsakes': 'Recuerdos de oficina', career: 'Carrera', 'heroes-and-classes': 'Héroes y clases', stances: 'Posturas', 'desk-raids': 'Incursiones de escritorio', meetings: 'Reuniones', 'lost-property': 'Objetos perdidos', 'to-do-list': 'Lista de tareas', potions: 'Pociones', 'the-wandering-merchant': 'El mercader ambulante', decisions: 'Decisiones', effects: 'Efectos', 'office-calendar': 'Calendario de la oficina', 'rare-and-epic-gear': 'Equipo raro y épico', 'when-your-bag-fills-up': 'Cuando la bolsa se llena', 'bigger-bags': 'Bolsas más grandes', 'salvage-and-the-workbench': 'Desmontar y el banco de trabajo', 'getting-knocked-out': 'Caer K.O.', recaps: 'Resúmenes', 'understanding-rankings': 'Cómo funcionan las clasificaciones', 'sharing-your-hero': 'Compartir tu héroe', 'following': 'Seguir', names: 'Nombres', looks: 'Aspecto', alerts: 'Alertas', troubleshooting: 'Solución de problemas', 'disconnecting-and-removing': 'Desconectar y quitar', help: 'Ayuda',
   },
   Body: () => (
     <>
@@ -91,13 +91,13 @@ export const es: HelpPage = {
       {F.classes !== undefined ? (
         <>
           <h2 id="heroes-and-classes">Héroes y clases</h2>
-          <p>Todo el mundo empieza como Guerrero. Cuando tu Guerrero llega al nivel {F.rosterLevel}, tu TRMNL dice «Desbloqueado: un segundo héroe», y puedes reclutar un Pícaro desde la página Héroes, en Más. El Pícaro empieza en el nivel 1 con su propio nombre, equipo, oro, pociones y objetivos.</p>
+          <p>Todo el mundo empieza como Caballero. Cuando tu Caballero llega al nivel {F.rosterLevel}, tu TRMNL dice «Desbloqueado: un segundo héroe», y puedes reclutar un Asesino desde la página Héroes, en Más. El Asesino empieza en el nivel 1 con su propio nombre, equipo, oro, pociones y objetivos.</p>
           <ul>
             <li>Sale de aventura un héroe cada vez, y es el que muestra tu TRMNL y el que aparece en las clasificaciones. El otro se queda donde lo dejaste. No va de aventura ni recupera después, y un mercader que lo visite se marcha.</li>
             <li>Puedes cambiar una vez al día. Volver atrás en diez minutos no cuenta. Un héroe K.O. o de viaje tiene que recuperarse o llegar primero.</li>
-            <li>Puedes tener un héroe de cada clase. Los logros son tuyos, los consiga el héroe que sea; unos pocos son solo del Pícaro.</li>
-            <li><strong>Guerrero</strong>: {t.text(F.classes.warriorBlurb)}</li>
-            <li><strong>Pícaro</strong>: {t.text(F.classes.rogueBlurb)} {F.classes.rogue.hpPct} % de salud, ataque {signed(F.classes.rogue.attackPct)} %, defensa {signed(F.classes.rogue.defensePct)} %, {signed(F.classes.rogue.goldPct)} % de oro en cada combate y hallazgo, y {F.classes.rogue.raidEdgePct} puntos a su favor en cada incursión de escritorio. Sube de nivel al ritmo del Guerrero, pero cae K.O. un poco más a menudo.</li>
+            <li>Puedes tener un héroe de cada clase. Los logros son tuyos, los consiga el héroe que sea; unos pocos son solo del Asesino.</li>
+            <li><strong>Caballero</strong>: {t.text(F.classes.warriorBlurb)}</li>
+            <li><strong>Asesino</strong>: {t.text(F.classes.rogueBlurb)} {F.classes.rogue.hpPct} % de salud, ataque {signed(F.classes.rogue.attackPct)} %, defensa {signed(F.classes.rogue.defensePct)} %, {signed(F.classes.rogue.goldPct)} % de oro en cada combate y hallazgo, y {F.classes.rogue.raidEdgePct} puntos a su favor en cada incursión de escritorio. Sube de nivel al ritmo del Caballero, pero cae K.O. un poco más a menudo.</li>
           </ul>
         </>
       ) : null}
@@ -228,8 +228,8 @@ export const es: HelpPage = {
       <p>Con la sesión iniciada, puedes seguir a otro jugador desde su página pública de héroe, hasta 20 jugadores. Todos los que sigues aparecen en Clasificaciones, con el nivel de su héroe, su puesto y dónde está, y enlaces a sus páginas. Seguir no cambia nada en el juego, y a nadie se le avisa de que lo sigues. Las incursiones eligen sus objetivos al azar entre todos, así que seguir a alguien nunca manda a tu héroe a por él. Si un jugador oculta su página, solo ves su nombre hasta que vuelva a mostrarla. Si cambia su nombre público, sale de tu lista.</p>
       <h2 id="names">Nombres</h2>
       <p>Tienes dos nombres. El nombre de tu héroe aparece en tu TRMNL, las clasificaciones y tu página de héroe; para cambiarlo, compra una etiqueta «Hola, me llamo» en la pestaña Más por 200 de oro. Hay una a la venta cada día. Tu nombre público eres tú, en todos los juegos de TRMNL: aparece junto a tu héroe en las clasificaciones, en las incursiones y reuniones de otros jugadores, y en el enlace de tu página. Puedes cambiarlo gratis una vez cada 7 días desde Cuenta. Los enlaces a tu página antigua dejan de funcionar, y nadie más puede quedarse tu nombre antiguo durante 7 días.</p>
-      <h2 id="gender">Género</h2>
-      <p>Eliges el género de tu héroe, hombre o mujer, al crearlo. Solo cambia su aspecto en tu TRMNL, en tu página de héroe y en las reuniones de otros jugadores. Los dos juegan igual. Para cambiarlo más tarde, compra un cambio de imagen en la pestaña Más por 200 de oro, cuando quieras.</p>
+      <h2 id="looks">Aspecto</h2>
+      <p>Creas el aspecto de tu héroe al crearlo: linaje, complexión, cabeza, pelo, espalda, accesorio y tabardo. Solo cambia su aspecto en tu TRMNL, en tu página de héroe y en las reuniones de otros jugadores. Todos los aspectos juegan igual. Para cambiarlo más tarde, visita el espejo del campamento desde tu página de héroe o la pestaña Más. Es gratis, cuando quieras.</p>
       <h2 id="alerts">Alertas</h2>
       <p>Tu TRMNL es la forma principal de seguir a tu héroe, pero Ajustes también puede enviarte una notificación al móvil en dos casos, cada uno desactivado hasta que lo actives:</p>
       <ul>

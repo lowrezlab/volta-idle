@@ -7,7 +7,8 @@ import { baseAttack, baseDefense, classRule, heroMaxHp, xpToLeave } from '../sim
 import { scaled } from '../sim/core/modifiers'
 import { FULL_SCALE, LARGE_SCALE, MEDIUM_SCALE, SMALL_SCALE } from '../art/scene'
 import { QR_LARGE_SCALE, QR_SCALE, qrBasePath, qrPath, type QrTarget } from '../art/qr'
-import { sceneFor, scenePath, type LatestEvent } from '../art/sceneKey'
+import { layeredScenePath, sceneFor, type LatestEvent } from '../art/sceneKey'
+import { DEFAULT_LOOK, encodeLook } from '../art/look'
 import type { HeroGender } from '../art/hero'
 import { isOccasionArt, type OccasionArt } from '../art/occasions'
 import { occasionAt } from '../sim/core/occasions'
@@ -62,6 +63,8 @@ export interface PayloadHero {
   readonly class?: HeroClass
   /** D149: absent means male. */
   readonly gender?: HeroGender
+  /** GDD §3.6: the creator's look code; absent means the default look. */
+  readonly look?: string
   /** D163: a dug-in elite: its monster, HP and the tick it leaves. */
   readonly standoff?: { readonly monsterId: string; readonly hp: number; readonly maxHp: number; readonly untilTick: number }
 }
@@ -290,13 +293,14 @@ export function buildPayload(input: PayloadInput) {
 
   // D139: the scene dresses for the occasion on the device's local date.
   const occasion = sceneOccasion(content, now, input.utcOffset ?? undefined)
-  const sceneUrls = (biomeId: string, scene: ReturnType<typeof sceneFor>) =>
+  // GDD §3.6: scene v6 carries the hero's look, so the composed image stays immutable per URL.
+  const sceneUrls = (biomeId: string, look: string, scene: ReturnType<typeof sceneFor>) =>
     input.artBaseUrl
       ? {
-          scene_url: `${input.artBaseUrl}${scenePath(biomeId, scene.pose, scene.subject, FULL_SCALE, 'day', occasion)}`,
-          scene_url_small: `${input.artBaseUrl}${scenePath(biomeId, scene.pose, scene.subject, SMALL_SCALE, 'day', occasion)}`,
-          scene_url_large: `${input.artBaseUrl}${scenePath(biomeId, scene.pose, scene.subject, LARGE_SCALE, 'day', occasion)}`,
-          scene_url_medium: `${input.artBaseUrl}${scenePath(biomeId, scene.pose, scene.subject, MEDIUM_SCALE, 'day', occasion)}`,
+          scene_url: `${input.artBaseUrl}${layeredScenePath(biomeId, look, scene.pose, scene.subject, FULL_SCALE, 'day', occasion)}`,
+          scene_url_small: `${input.artBaseUrl}${layeredScenePath(biomeId, look, scene.pose, scene.subject, SMALL_SCALE, 'day', occasion)}`,
+          scene_url_large: `${input.artBaseUrl}${layeredScenePath(biomeId, look, scene.pose, scene.subject, LARGE_SCALE, 'day', occasion)}`,
+          scene_url_medium: `${input.artBaseUrl}${layeredScenePath(biomeId, look, scene.pose, scene.subject, MEDIUM_SCALE, 'day', occasion)}`,
         }
       : { scene_url: '', scene_url_small: '', scene_url_large: '', scene_url_medium: '' }
 
@@ -319,7 +323,7 @@ export function buildPayload(input: PayloadInput) {
       home_qr_base: '',
       corner_qr_base: '',
       first_run: false,
-      ...sceneUrls(content.safeBiomeId, { pose: 'idle', subject: { kind: 'prop', id: 'signpost' } }),
+      ...sceneUrls(content.safeBiomeId, encodeLook(DEFAULT_LOOK), { pose: 'idle', subject: { kind: 'prop', id: 'signpost' } }),
       hero_tick: null,
       hero_updated_at: null,
       data_state: servicePaused ? ('service_paused' as const) : ('unlinked' as const),
@@ -451,7 +455,7 @@ export function buildPayload(input: PayloadInput) {
     home_qr_base: input.artBaseUrl ? `${input.artBaseUrl}${qrBasePath('home')}` : '',
     corner_qr_base: input.artBaseUrl ? `${input.artBaseUrl}${qrBasePath('corner')}` : '',
     first_run: firstRun,
-    ...sceneUrls(hero.biomeId, sceneFor(hero.status, hero.wakeAtTick !== undefined, input.latestEvent, hero.class, hero.gender)),
+    ...sceneUrls(hero.biomeId, hero.look ?? encodeLook(DEFAULT_LOOK), sceneFor(hero.status, hero.wakeAtTick !== undefined, input.latestEvent, hero.class, hero.gender)),
     hero_tick: hero.lastTick,
     hero_updated_at: hero.lastAdvancedAt === undefined ? null : iso(hero.lastAdvancedAt),
     data_state: hero.quarantined || servicePaused ? ('service_paused' as const) : ('ready' as const),

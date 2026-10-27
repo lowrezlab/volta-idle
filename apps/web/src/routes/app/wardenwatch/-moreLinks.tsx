@@ -10,6 +10,7 @@ import { wwMoreMessages } from '../../../i18n/wwMore'
 /** The More tab's pages (D124), each a row with its glyph: what the Hero tab used to hold under the world map. */
 const MORE_LINKS = [
   { to: '/app/wardenwatch/roster', key: 'roster', glyph: 'hero' },
+  { to: '/app/wardenwatch/creator', key: 'creator', glyph: 'eye' },
   { to: '/app/wardenwatch/career', key: 'career', glyph: 'career' },
   { to: '/app/wardenwatch/achievements', key: 'achievements', glyph: 'achievement' },
   { to: '/app/wardenwatch/field-notes', key: 'fieldNotes', glyph: 'quest' },

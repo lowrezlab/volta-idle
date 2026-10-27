@@ -46,7 +46,7 @@ export const de: HelpPage = {
   description: WARDENWATCH_HELP_HEAD.de.description,
   title: 'Wardenwatch auf TRMNL',
   contents: {
-    'getting-started': 'Erste Schritte', 'if-the-qr-sends-you-back-to-setup': 'Wenn der QR-Code zur Einrichtung führt', 'how-time-works': 'Wie die Zeit vergeht', floors: 'Etagen', 'desk-keepsakes': 'Schreibtisch-Andenken', career: 'Karriere', 'heroes-and-classes': 'Helden und Klassen', stances: 'Haltungen', 'desk-raids': 'Schreibtisch-Überfälle', meetings: 'Begegnungen', 'lost-property': 'Fundsachen', 'to-do-list': 'To-do-Liste', potions: 'Tränke', 'the-wandering-merchant': 'Der fahrende Händler', decisions: 'Entscheidungen', effects: 'Effekte', 'office-calendar': 'Bürokalender', 'rare-and-epic-gear': 'Seltene und epische Ausrüstung', 'when-your-bag-fills-up': 'Wenn die Tasche voll ist', 'bigger-bags': 'Größere Taschen', 'salvage-and-the-workbench': 'Zerlegen und Werkbank', 'getting-knocked-out': 'K. o. gehen', recaps: 'Rückblicke', 'understanding-rankings': 'Ranglisten verstehen', 'sharing-your-hero': 'Deinen Helden teilen', 'following': 'Folgen', names: 'Namen', gender: 'Geschlecht', alerts: 'Benachrichtigungen', troubleshooting: 'Fehlerbehebung', 'disconnecting-and-removing': 'Trennen und entfernen', help: 'Hilfe',
+    'getting-started': 'Erste Schritte', 'if-the-qr-sends-you-back-to-setup': 'Wenn der QR-Code zur Einrichtung führt', 'how-time-works': 'Wie die Zeit vergeht', floors: 'Etagen', 'desk-keepsakes': 'Schreibtisch-Andenken', career: 'Karriere', 'heroes-and-classes': 'Helden und Klassen', stances: 'Haltungen', 'desk-raids': 'Schreibtisch-Überfälle', meetings: 'Begegnungen', 'lost-property': 'Fundsachen', 'to-do-list': 'To-do-Liste', potions: 'Tränke', 'the-wandering-merchant': 'Der fahrende Händler', decisions: 'Entscheidungen', effects: 'Effekte', 'office-calendar': 'Bürokalender', 'rare-and-epic-gear': 'Seltene und epische Ausrüstung', 'when-your-bag-fills-up': 'Wenn die Tasche voll ist', 'bigger-bags': 'Größere Taschen', 'salvage-and-the-workbench': 'Zerlegen und Werkbank', 'getting-knocked-out': 'K. o. gehen', recaps: 'Rückblicke', 'understanding-rankings': 'Ranglisten verstehen', 'sharing-your-hero': 'Deinen Helden teilen', 'following': 'Folgen', names: 'Namen', looks: 'Aussehen', alerts: 'Benachrichtigungen', troubleshooting: 'Fehlerbehebung', 'disconnecting-and-removing': 'Trennen und entfernen', help: 'Hilfe',
   },
   Body: () => (
     <>
@@ -90,13 +90,13 @@ export const de: HelpPage = {
       {F.classes !== undefined ? (
         <>
           <h2 id="heroes-and-classes">Helden und Klassen</h2>
-          <p>Alle beginnen als Krieger. Erreicht dein Krieger Stufe {F.rosterLevel}, zeigt dein TRMNL „Freigeschaltet: ein zweiter Held“, und du kannst auf der Seite Helden unter Mehr einen Schurken anwerben. Der Schurke beginnt auf Stufe 1 mit eigenem Namen, eigener Ausrüstung, eigenem Gold, eigenen Tränken und Zielen.</p>
+          <p>Alle beginnen als Ritter. Erreicht dein Ritter Stufe {F.rosterLevel}, zeigt dein TRMNL „Freigeschaltet: ein zweiter Held“, und du kannst auf der Seite Helden unter Mehr einen Assassinen anwerben. Der Assassine beginnt auf Stufe 1 mit eigenem Namen, eigener Ausrüstung, eigenem Gold, eigenen Tränken und Zielen.</p>
           <ul>
             <li>Es geht immer nur ein Held auf Abenteuer, und den zeigt dein TRMNL und die Ranglisten. Der andere bleibt, wo du ihn gelassen hast. Er geht nicht auf Abenteuer und holt nichts nach, und ein Händler, der ihn besucht, zieht weiter.</li>
             <li>Du kannst einmal am Tag wechseln. Direkt innerhalb von zehn Minuten zurückzuwechseln zählt nicht. Ein Held, der k. o. oder unterwegs ist, muss sich erst erholen oder ankommen.</li>
-            <li>Du kannst einen Helden jeder Klasse haben. Erfolge gehören dir, egal welcher Held sie holt; ein paar gehören nur dem Schurken.</li>
-            <li><strong>Krieger</strong>: {t.text(F.classes.warriorBlurb)}</li>
-            <li><strong>Schurke</strong>: {t.text(F.classes.rogueBlurb)} {F.classes.rogue.hpPct} % LP, Angriff {signed(F.classes.rogue.attackPct)} %, Verteidigung {signed(F.classes.rogue.defensePct)} %, {signed(F.classes.rogue.goldPct)} % Gold aus jedem Kampf und Fund und {F.classes.rogue.raidEdgePct} Punkte auf seiner Seite bei jedem Schreibtisch-Überfall. Er steigt im Tempo des Kriegers auf, wird aber etwas öfter k. o. geschlagen.</li>
+            <li>Du kannst einen Helden jeder Klasse haben. Erfolge gehören dir, egal welcher Held sie holt; ein paar gehören nur dem Assassinen.</li>
+            <li><strong>Ritter</strong>: {t.text(F.classes.warriorBlurb)}</li>
+            <li><strong>Assassine</strong>: {t.text(F.classes.rogueBlurb)} {F.classes.rogue.hpPct} % LP, Angriff {signed(F.classes.rogue.attackPct)} %, Verteidigung {signed(F.classes.rogue.defensePct)} %, {signed(F.classes.rogue.goldPct)} % Gold aus jedem Kampf und Fund und {F.classes.rogue.raidEdgePct} Punkte auf seiner Seite bei jedem Schreibtisch-Überfall. Er steigt im Tempo des Ritters auf, wird aber etwas öfter k. o. geschlagen.</li>
           </ul>
         </>
       ) : null}
@@ -227,8 +227,8 @@ export const de: HelpPage = {
       <p>Angemeldet kannst du anderen Spielern über ihre öffentliche Heldenseite folgen, bis zu 20 Spielern. Alle, denen du folgst, stehen unter Ranglisten, mit Stufe, Rang und Aufenthaltsort ihres Helden und Links zu ihren Seiten. Folgen ändert nichts am Spiel, und niemand erfährt, dass du ihm folgst. Schreibtisch-Überfälle wählen ihre Ziele zufällig unter allen Spielern, also schickt Folgen deinen Helden nie zu jemandem. Verbirgt ein Spieler seine Seite, siehst du nur seinen Namen, bis er sie wieder zeigt. Ändert er seinen öffentlichen Namen, fällt er aus deiner Liste.</p>
       <h2 id="names">Namen</h2>
       <p>Du hast zwei Namen. Der Name deines Helden steht auf deinem TRMNL, in den Ranglisten und auf deiner Heldenseite; um ihn zu ändern, kaufst du im Tab Mehr ein Namensschild „Hallo, ich heiße“ für 200 Gold. Pro Tag ist eins vorrätig. Dein öffentlicher Name bist du, in jedem TRMNL-Spiel: Er steht neben deinem Helden in den Ranglisten, in Überfällen und Begegnungen anderer Spieler und im Link deiner Seite. Du kannst ihn alle 7 Tage einmal kostenlos unter Konto ändern. Links zu deiner alten Seite funktionieren dann nicht mehr, und niemand sonst kann deinen alten Namen 7 Tage lang nehmen.</p>
-      <h2 id="gender">Geschlecht</h2>
-      <p>Du wählst das Geschlecht deines Helden, männlich oder weiblich, wenn du ihn erstellst. Es ändert nur sein Aussehen auf deinem TRMNL, deiner Heldenseite und in den Begegnungen anderer Spieler. Beide spielen sich gleich. Um es später zu ändern, buchst du im Tab Mehr jederzeit ein Umstyling für 200 Gold.</p>
+      <h2 id="looks">Aussehen</h2>
+      <p>Du gestaltest das Aussehen deines Helden, wenn du ihn erstellst: Abstammung, Statur, Kopf, Haare, Rücken, Accessoire und Wappenrock. Es ändert nur sein Aussehen auf deinem TRMNL, deiner Heldenseite und in den Begegnungen anderer Spieler. Jedes Aussehen spielt sich gleich. Ändern kannst du es später jederzeit kostenlos am Lagerspiegel, über deine Heldenseite oder den Tab Mehr.</p>
       <h2 id="alerts">Benachrichtigungen</h2>
       <p>Dein TRMNL ist der wichtigste Weg, deinen Helden im Blick zu behalten, aber die Einstellungen können in zwei Fällen auch eine Benachrichtigung aufs Handy schicken, jede aus, bis du sie einschaltest:</p>
       <ul>

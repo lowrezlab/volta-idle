@@ -47,7 +47,7 @@ export const nl: HelpPage = {
   description: WARDENWATCH_HELP_HEAD.nl.description,
   title: 'Wardenwatch op TRMNL',
   contents: {
-    'getting-started': 'Aan de slag', 'if-the-qr-sends-you-back-to-setup': 'Als de QR je terugstuurt naar de installatie', 'how-time-works': 'Hoe de tijd verloopt', floors: 'Verdiepingen', 'desk-keepsakes': 'Bureau-aandenkens', career: 'Carrière', 'heroes-and-classes': 'Helden en klassen', stances: 'Houdingen', 'desk-raids': 'Bureauraids', meetings: 'Vergaderingen', 'lost-property': 'Gevonden voorwerpen', 'to-do-list': 'Takenlijst', potions: 'Drankjes', 'the-wandering-merchant': 'De rondtrekkende koopman', decisions: 'Beslissingen', effects: 'Effecten', 'office-calendar': 'Kantoorkalender', 'rare-and-epic-gear': 'Zeldzame en epische uitrusting', 'when-your-bag-fills-up': 'Als je tas vol raakt', 'bigger-bags': 'Grotere tassen', 'salvage-and-the-workbench': 'Demonteren en de werkbank', 'getting-knocked-out': 'Knock-out gaan', recaps: 'Samenvattingen', 'understanding-rankings': 'Hoe de ranglijsten werken', 'sharing-your-hero': 'Je held delen', 'following': 'Volgen', names: 'Namen', gender: 'Geslacht', alerts: 'Meldingen', troubleshooting: 'Problemen oplossen', 'disconnecting-and-removing': 'Ontkoppelen en verwijderen', help: 'Hulp',
+    'getting-started': 'Aan de slag', 'if-the-qr-sends-you-back-to-setup': 'Als de QR je terugstuurt naar de installatie', 'how-time-works': 'Hoe de tijd verloopt', floors: 'Verdiepingen', 'desk-keepsakes': 'Bureau-aandenkens', career: 'Carrière', 'heroes-and-classes': 'Helden en klassen', stances: 'Houdingen', 'desk-raids': 'Bureauraids', meetings: 'Vergaderingen', 'lost-property': 'Gevonden voorwerpen', 'to-do-list': 'Takenlijst', potions: 'Drankjes', 'the-wandering-merchant': 'De rondtrekkende koopman', decisions: 'Beslissingen', effects: 'Effecten', 'office-calendar': 'Kantoorkalender', 'rare-and-epic-gear': 'Zeldzame en epische uitrusting', 'when-your-bag-fills-up': 'Als je tas vol raakt', 'bigger-bags': 'Grotere tassen', 'salvage-and-the-workbench': 'Demonteren en de werkbank', 'getting-knocked-out': 'Knock-out gaan', recaps: 'Samenvattingen', 'understanding-rankings': 'Hoe de ranglijsten werken', 'sharing-your-hero': 'Je held delen', 'following': 'Volgen', names: 'Namen', looks: 'Uiterlijk', alerts: 'Meldingen', troubleshooting: 'Problemen oplossen', 'disconnecting-and-removing': 'Ontkoppelen en verwijderen', help: 'Hulp',
   },
   Body: () => (
     <>
@@ -91,13 +91,13 @@ export const nl: HelpPage = {
       {F.classes !== undefined ? (
         <>
           <h2 id="heroes-and-classes">Helden en klassen</h2>
-          <p>Iedereen begint als Krijger. Bereikt je Krijger niveau {F.rosterLevel}, dan zegt je TRMNL ‘Ontgrendeld: een tweede held’, en kun je een Schurk aanwerven via de pagina Helden onder Meer. De Schurk begint op niveau 1 met een eigen naam, uitrusting, goud, drankjes en doelen.</p>
+          <p>Iedereen begint als Ridder. Bereikt je Ridder niveau {F.rosterLevel}, dan zegt je TRMNL ‘Ontgrendeld: een tweede held’, en kun je een Sluipmoordenaar aanwerven via de pagina Helden onder Meer. De Sluipmoordenaar begint op niveau 1 met een eigen naam, uitrusting, goud, drankjes en doelen.</p>
           <ul>
             <li>Er gaat één held tegelijk op avontuur, en dat is de held die je TRMNL toont en die in de ranglijsten staat. De ander blijft waar je hem liet. Hij gaat niet op avontuur en haalt later niets in, en een koopman die hem bezoekt, vertrekt.</li>
             <li>Je kunt eens per dag wisselen. Binnen tien minuten terugwisselen telt niet. Een held die knock-out of onderweg is, moet eerst herstellen of aankomen.</li>
-            <li>Je kunt één held per klasse hebben. Prestaties zijn van jou, welke held ze ook haalt; een paar horen alleen bij de Schurk.</li>
-            <li><strong>Krijger</strong>: {t.text(F.classes.warriorBlurb)}</li>
-            <li><strong>Schurk</strong>: {t.text(F.classes.rogueBlurb)} {F.classes.rogue.hpPct}% gezondheid, aanval {signed(F.classes.rogue.attackPct)}%, verdediging {signed(F.classes.rogue.defensePct)}%, {signed(F.classes.rogue.goldPct)}% goud uit elk gevecht en elke vondst, en {F.classes.rogue.raidEdgePct} punten aan zijn kant bij elke bureauraid. Hij stijgt in hetzelfde tempo als de Krijger, maar gaat iets vaker knock-out.</li>
+            <li>Je kunt één held per klasse hebben. Prestaties zijn van jou, welke held ze ook haalt; een paar horen alleen bij de Sluipmoordenaar.</li>
+            <li><strong>Ridder</strong>: {t.text(F.classes.warriorBlurb)}</li>
+            <li><strong>Sluipmoordenaar</strong>: {t.text(F.classes.rogueBlurb)} {F.classes.rogue.hpPct}% gezondheid, aanval {signed(F.classes.rogue.attackPct)}%, verdediging {signed(F.classes.rogue.defensePct)}%, {signed(F.classes.rogue.goldPct)}% goud uit elk gevecht en elke vondst, en {F.classes.rogue.raidEdgePct} punten aan zijn kant bij elke bureauraid. Hij stijgt in hetzelfde tempo als de Ridder, maar gaat iets vaker knock-out.</li>
           </ul>
         </>
       ) : null}
@@ -228,8 +228,8 @@ export const nl: HelpPage = {
       <p>Als je bent ingelogd, kun je een andere speler volgen via zijn openbare heldenpagina, tot 20 spelers. Iedereen die je volgt staat onder Ranglijsten, met het niveau van hun held, hun plek en waar ze zijn, en links naar hun pagina’s. Volgen verandert niets aan het spel, en niemand krijgt te horen dat je hem volgt. Bureau-raids kiezen hun doelen willekeurig uit iedereen, dus iemand volgen stuurt je held nooit op hem af. Verbergt een speler zijn pagina, dan zie je alleen zijn naam tot hij hem weer toont. Wijzigt hij zijn openbare naam, dan valt hij van je lijst.</p>
       <h2 id="names">Namen</h2>
       <p>Je hebt twee namen. De naam van je held staat op je TRMNL, in de ranglijsten en op je heldenpagina; wil je die wijzigen, koop dan voor 200 goud een ‘Hallo, ik heet’-naamplaatje op het tabblad Meer. Er is er één per dag op voorraad. Je openbare naam ben jij, in elk TRMNL-spel: hij staat naast je held in de ranglijsten, in raids en vergaderingen van andere spelers en in de link naar je pagina. Je kunt hem eens per 7 dagen gratis wijzigen via Account. Links naar je oude pagina werken dan niet meer, en niemand anders kan je oude naam 7 dagen lang nemen.</p>
-      <h2 id="gender">Geslacht</h2>
-      <p>Je kiest het geslacht van je held, man of vrouw, als je hem aanmaakt. Het verandert alleen hoe je held eruitziet op je TRMNL, je heldenpagina en in vergaderingen van andere spelers. Beide spelen hetzelfde. Wil je het later wijzigen, koop dan wanneer je wilt een make-over op het tabblad Meer voor 200 goud.</p>
+      <h2 id="looks">Uiterlijk</h2>
+      <p>Je stelt het uiterlijk van je held samen als je hem aanmaakt: afkomst, bouw, hoofd, haar, rug, accessoire en wapenrok. Het verandert alleen hoe je held eruitziet op je TRMNL, je heldenpagina en in vergaderingen van andere spelers. Elk uiterlijk speelt hetzelfde. Wil je het later wijzigen, ga dan naar de kampspiegel via je heldenpagina of het tabblad Meer. Gratis, wanneer je wilt.</p>
       <h2 id="alerts">Meldingen</h2>
       <p>Je TRMNL is de belangrijkste manier om je held te volgen, maar Instellingen kan je in twee gevallen ook een melding op je telefoon sturen, elk uit tot je het aanzet:</p>
       <ul>

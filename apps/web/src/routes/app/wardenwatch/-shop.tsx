@@ -1,13 +1,12 @@
-import { useEffect, useState, type ReactNode } from 'react'
+import { useState, type ReactNode } from 'react'
 import { HERO_NAME_RULE, INTL_TAG } from '@trmnl-games/platform'
 import { NameField, nameProblem } from '../../../lib/nameField'
-import { GenderPicker, type HeroGender } from '../../../lib/genderPicker'
 import { Button, Card } from '../../../lib/ui'
 import { ConfirmSheet, Consequences } from './-confirm'
 import { useLocale, useT } from '../../../lib/i18n'
 import { wwBagMessages } from '../../../i18n/wwBag'
 
-/** Purchases shared by the Bag page and the More tab, where the hero's name tag and makeover live. */
+/** Purchases shared by the Bag page and the More tab, where the hero's name tag lives. */
 export type PurchaseIntent<A> = { pending: boolean; error?: string | null; run: (args: A, message?: string) => Promise<boolean> }
 
 /** D156: a price the hero cannot pay yet, as plain text where the Buy button will be, so no dead button sits on the page. */
@@ -54,24 +53,3 @@ export function NameTag({ tag, heroName, gold, disabled, intent }: { tag: { pric
   </Card>
 }
 
-/** D149: a makeover switches the current hero's gender for gold, any time. Purely cosmetic. */
-export function Makeover({ makeover, heroName, gold, disabled, intent }: { makeover: { price: number; gender: HeroGender }; heroName: string; gold: number; disabled: boolean; intent: PurchaseIntent<{ gender: HeroGender }> }) {
-  const [gender, setGender] = useState<HeroGender>(makeover.gender)
-  const [asking, setAsking] = useState(false)
-  useEffect(() => setGender(makeover.gender), [makeover.gender])
-  const affordable = gold >= makeover.price
-  const changed = gender !== makeover.gender
-  const t = useT(wwBagMessages)
-  return <Card title={t.makeover} icon="hero">
-    <p>{t.makeoverBody(heroName)}</p>
-    {affordable ? <form className="mt-3 flex flex-col gap-2" onSubmit={(event) => { event.preventDefault(); if (changed) setAsking(true) }}>
-      <GenderPicker small value={gender} onChange={setGender} disabled={intent.pending} />
-      {/* The button waits for a different look to be picked, so it never offers to buy the one the hero has. */}
-      {changed ? <Button type="submit" disabled={disabled} pending={intent.pending} icon="coin" busyLabel={t.buying}>{t.buyFor(makeover.price)}</Button> : <p className="text-sm text-muted">{t.pickLook}</p>}
-    </form> : <Price price={makeover.price} gold={gold} className="mt-3" />}
-    <BuySheet open={asking} title={t.makeTitle(heroName, gender)} price={makeover.price} gold={gold} pending={intent.pending} onClose={() => setAsking(false)} onConfirm={async () => await intent.run({ gender }, t.newLook(heroName))}>
-      <li>{t.onlyLook}</li>
-      <li>{t.changeBackFor(makeover.price)}</li>
-    </BuySheet>
-  </Card>
-}

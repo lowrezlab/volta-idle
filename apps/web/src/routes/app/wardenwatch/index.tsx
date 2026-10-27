@@ -24,6 +24,8 @@ import { messagesFor, useT } from '../../../lib/i18n'
 import { headMessages } from '../../../i18n/heads'
 import { useContent } from '../../../lib/useContent'
 import { wwHeroMessages } from '../../../i18n/wwHero'
+import { lookMessages } from '../../../i18n/look'
+import { commonMessages } from '../../../i18n/common'
 
 export const Route = createFileRoute('/app/wardenwatch/')({
   // D180: a keepsake QR's six digits, collected by the callout and then dropped from the address.
@@ -121,8 +123,8 @@ type HeroView = {
   wakeAtTick: number | null
   choice: Choice | null
   effects: Array<{ id: string; name: string; blurb: string; kind: 'boon' | 'bane'; ticksLeft: number }>
-  /** P37: the hero's class name and the roster in brief; null under a catalog without classes. */
-  className?: string
+  /** P37: the hero's class and the roster in brief; null under a catalog without classes. */
+  class?: 'warrior' | 'rogue'
   roster?: { unlockLevel: number; open: boolean; heroes: number; warriorLevel: number | null } | null
   /** D139: today's occasion and the next one on the office calendar; null before the world runs one. */
   calendar?: { today: Occasion | null; next: (Omit<Occasion, 'daysLeft'> & { inDays: number }) | null } | null
@@ -141,6 +143,8 @@ type Stance = { id: StanceId; name: string; blurb: string; potionBelowPct: numbe
 function HeroSheet({ hero }: { hero: HeroView }) {
   const { data: bag } = useQuery(convexQuery(api.inventory.mine, {}))
   const t = useT(wwHeroMessages)
+  const l = useT(lookMessages)
+  const classNames = useT(commonMessages).classNames
   const c = useContent()
   // Every command reports into one pinned notice (D98), so nothing under the buttons moves when an action settles.
   const { notice, notify, dismiss } = useNotice()
@@ -192,7 +196,12 @@ function HeroSheet({ hero }: { hero: HeroView }) {
   return (
     <div className="flex min-w-0 flex-col gap-8">
       {hero.career ? <GoalCard career={hero.career} level={hero.level} gold={hero.gold} holding={holding} notify={notify} /> : null}
-      {hero.roster ? <RosterCard roster={hero.roster} name={hero.name} className={hero.className ?? 'Warrior'} /> : null}
+      {hero.roster ? <RosterCard roster={hero.roster} name={hero.name} className={classNames[hero.class ?? 'warrior']} /> : null}
+      {/* GDD §3.7: the camp mirror, where the look changes free, any time. */}
+      <Link to="/app/wardenwatch/creator" className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1 text-sm">
+        <span>{l.mirrorBlurb(hero.name)}</span>
+        <span className="flex min-h-11 items-center gap-1.5 font-semibold text-gold-ink underline underline-offset-4">{l.title} <Glyph name="play" size={8} /></span>
+      </Link>
       <section ref={commands} aria-labelledby="commands-title" className="flex flex-col gap-2">
         {/* The keys sit under their own small heading, so one lone key never floats between the goal and the effects. */}
         <h2 id="commands-title" className="caps text-sm text-muted">{t.commands}</h2>

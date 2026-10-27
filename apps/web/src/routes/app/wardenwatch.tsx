@@ -60,7 +60,8 @@ function SignedInApp() {
   useAnalyticsView(setupState === 'active' ? 'companion ready' : 'setup screen shown', { setup_state: setupState, has_active_installation: me?.hasActiveInstallation ?? false }, !isPending && me?.user?.state !== 'deleting' && me?.gameState !== 'deleting')
   // P33: an alert's tap lands here with ?alert=<kind>; counted once identity is known.
   useAlertOpened(!isPending)
-  const settings = useLocation({ select: (location) => location.pathname.replace(/\/$/, '').endsWith('/settings') })
+  // The settings and the camp mirror (GDD §3.7) stay open while the hero waits for its Save.
+  const settings = useLocation({ select: (location) => /\/(settings|creator)$/.test(location.pathname.replace(/\/$/, '')) })
   if (isPending) return <main id="main" className="mx-auto w-full max-w-3xl px-4 py-8"><LoadingState label={t.loading} /></main>
   if (me?.gameState === 'deleting') return <main id="main" className="mx-auto w-full max-w-3xl px-4 py-8"><Card title={t.removingTitle}><p>{t.removingBody}</p></Card></main>
   if (!me?.hero) {

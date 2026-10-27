@@ -1,7 +1,6 @@
 import { currentHero, gameProfile, setCurrentHero, WARDENWATCH } from './lib/gameProfile'
 import { currentCharacterOf, gameDeletingFor, isGame, otherGameHooks } from './lib/gameHooks'
-import { gameSlug as gameSlugValidator, heroGender } from './schema'
-import type { HeroGender } from '@trmnl-games/wardenwatch/art/hero'
+import { gameSlug as gameSlugValidator } from './schema'
 import type { GameSlug } from '@trmnl-games/platform'
 import { isAdminIdentity } from './lib/adminAccess'
 import { gameStatusOf } from './platform'
@@ -11,6 +10,7 @@ import type { Doc, Id } from './_generated/dataModel'
 import { action, internalMutation, internalQuery, mutation, query, type MutationCtx } from './_generated/server'
 
 import { createHero } from './lib/heroCreate'
+import { normalisedLook } from './lib/look'
 import { appError } from './lib/errors'
 import { sha256Hex } from './lib/hash'
 import { ALIAS_RULE, HERO_NAME_RULE, normalizeAlias, validateName, validateTimezone } from './lib/names'
@@ -49,8 +49,8 @@ export const completeInstall = action({
     code: v.string(),
     publicAlias: v.optional(v.string()),
     heroName: v.optional(v.string()),
-    /** D149: the new hero's look, chosen on the setup form; absent means male. */
-    heroGender: v.optional(heroGender),
+    /** GDD §3.6: the new hero's look code from the setup form's creator; absent draws the default look. */
+    heroLook: v.optional(v.string()),
     timezone: v.string(),
     analyticsConsent: v.optional(v.boolean()),
   },
@@ -84,7 +84,7 @@ export const completeInstall = action({
       allowReconnection: true,
       ...(args.publicAlias === undefined ? {} : { publicAlias: args.publicAlias }),
       ...(args.heroName === undefined ? {} : { heroName: args.heroName }),
-      ...(args.heroGender === undefined ? {} : { heroGender: args.heroGender }),
+      ...(args.heroLook === undefined ? {} : { heroLook: args.heroLook }),
       timezone: args.timezone,
       ...(args.analyticsConsent === undefined ? {} : { analyticsConsent: args.analyticsConsent }),
     })
@@ -98,8 +98,8 @@ export const linkInstall = internalMutation({
     tokenHash: v.string(),
     publicAlias: v.optional(v.string()),
     heroName: v.optional(v.string()),
-    /** D149: the new hero's look, chosen on the setup form; absent means male. */
-    heroGender: v.optional(heroGender),
+    /** GDD §3.6: the new hero's look code from the setup form's creator; absent draws the default look. */
+    heroLook: v.optional(v.string()),
     timezone: v.string(),
     analyticsConsent: v.optional(v.boolean()),
     allowReconnection: v.optional(v.boolean()),
@@ -174,14 +174,15 @@ export const linkInstall = internalMutation({
 
     const heroName = validateName(args.heroName ?? '', HERO_NAME_RULE)
     if (!heroName.ok) throw appError('INVALID_INPUT', `Hero name: ${heroName.reason}`)
-    await prepareHero(ctx, user, heroName.value, args.heroGender ?? 'male', now)
+    const look = args.heroLook === undefined ? undefined : normalisedLook(args.heroLook)
+    await prepareHero(ctx, user, heroName.value, look, now)
     return { activationState: 'pending_trmnl' as const, heroCreated: true }
   },
 })
 
-/** Pending Warrior + starter kit + welcome log. Initialization, not an earned reward; no rank or simulation until activation. */
-async function prepareHero(ctx: MutationCtx, user: Doc<'users'>, name: string, gender: HeroGender, now: number): Promise<Id<'heroes'>> {
-  return await createHero(ctx, user, { name, heroClass: 'warrior', gender, now, active: false })
+/** Pending Knight + starter kit + welcome log. Initialization, not an earned reward; no rank or simulation until activation. */
+async function prepareHero(ctx: MutationCtx, user: Doc<'users'>, name: string, look: string | undefined, now: number): Promise<Id<'heroes'>> {
+  return await createHero(ctx, user, { name, heroClass: 'warrior', ...(look === undefined ? {} : { look }), now, active: false })
 }
 
 const confirmResult = v.object({

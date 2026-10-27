@@ -47,6 +47,7 @@ import type * as lib_hash from "../lib/hash.js";
 import type * as lib_heroCreate from "../lib/heroCreate.js";
 import type * as lib_heroReminderEmail from "../lib/heroReminderEmail.js";
 import type * as lib_heroScene from "../lib/heroScene.js";
+import type * as lib_look from "../lib/look.js";
 import type * as lib_intent from "../lib/intent.js";
 import type * as lib_keepsakes from "../lib/keepsakes.js";
 import type * as lib_launchEmail from "../lib/launchEmail.js";
@@ -125,6 +126,7 @@ declare const fullApi: ApiFromModules<{
   "lib/keepsakes": typeof lib_keepsakes;
   "lib/launchEmail": typeof lib_launchEmail;
   "lib/logDetail": typeof lib_logDetail;
+  "lib/look": typeof lib_look;
   "lib/lostProperty": typeof lib_lostProperty;
   "lib/meetings": typeof lib_meetings;
   "lib/names": typeof lib_names;

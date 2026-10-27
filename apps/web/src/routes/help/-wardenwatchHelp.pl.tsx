@@ -52,7 +52,7 @@ export const pl: HelpPage = {
   description: WARDENWATCH_HELP_HEAD.pl.description,
   title: 'Wardenwatch na TRMNL',
   contents: {
-    'getting-started': 'Pierwsze kroki', 'if-the-qr-sends-you-back-to-setup': 'Gdy kod QR odsyła do instalacji', 'how-time-works': 'Jak płynie czas', floors: 'Piętra', 'desk-keepsakes': 'Pamiątki z biurka', career: 'Kariera', 'heroes-and-classes': 'Bohaterowie i klasy', stances: 'Postawy', 'desk-raids': 'Rajdy na biurka', meetings: 'Spotkania', 'lost-property': 'Rzeczy znalezione', 'to-do-list': 'Lista zadań', potions: 'Mikstury', 'the-wandering-merchant': 'Wędrowny kupiec', decisions: 'Decyzje', effects: 'Efekty', 'office-calendar': 'Kalendarz biura', 'rare-and-epic-gear': 'Rzadki i epicki sprzęt', 'when-your-bag-fills-up': 'Gdy torba się zapełni', 'bigger-bags': 'Większe torby', 'salvage-and-the-workbench': 'Rozbiórka i warsztat', 'getting-knocked-out': 'Nokaut', recaps: 'Podsumowania', 'understanding-rankings': 'Jak działają rankingi', 'sharing-your-hero': 'Udostępnianie bohatera', 'following': 'Obserwowani', names: 'Nazwy', gender: 'Płeć', alerts: 'Alerty', troubleshooting: 'Rozwiązywanie problemów', 'disconnecting-and-removing': 'Odłączanie i usuwanie', help: 'Pomoc',
+    'getting-started': 'Pierwsze kroki', 'if-the-qr-sends-you-back-to-setup': 'Gdy kod QR odsyła do instalacji', 'how-time-works': 'Jak płynie czas', floors: 'Piętra', 'desk-keepsakes': 'Pamiątki z biurka', career: 'Kariera', 'heroes-and-classes': 'Bohaterowie i klasy', stances: 'Postawy', 'desk-raids': 'Rajdy na biurka', meetings: 'Spotkania', 'lost-property': 'Rzeczy znalezione', 'to-do-list': 'Lista zadań', potions: 'Mikstury', 'the-wandering-merchant': 'Wędrowny kupiec', decisions: 'Decyzje', effects: 'Efekty', 'office-calendar': 'Kalendarz biura', 'rare-and-epic-gear': 'Rzadki i epicki sprzęt', 'when-your-bag-fills-up': 'Gdy torba się zapełni', 'bigger-bags': 'Większe torby', 'salvage-and-the-workbench': 'Rozbiórka i warsztat', 'getting-knocked-out': 'Nokaut', recaps: 'Podsumowania', 'understanding-rankings': 'Jak działają rankingi', 'sharing-your-hero': 'Udostępnianie bohatera', 'following': 'Obserwowani', names: 'Nazwy', looks: 'Wygląd', alerts: 'Alerty', troubleshooting: 'Rozwiązywanie problemów', 'disconnecting-and-removing': 'Odłączanie i usuwanie', help: 'Pomoc',
   },
   Body: () => (
     <>
@@ -96,13 +96,13 @@ export const pl: HelpPage = {
       {F.classes !== undefined ? (
         <>
           <h2 id="heroes-and-classes">Bohaterowie i klasy</h2>
-          <p>Każdy zaczyna jako Wojownik. Gdy Wojownik osiągnie poziom {F.rosterLevel}, TRMNL pokazuje „Odblokowano: drugi bohater” i możesz zwerbować Łotrzyka na stronie Bohaterowie w zakładce Więcej. Łotrzyk zaczyna na poziomie 1 z własnym imieniem, sprzętem, złotem, miksturami i celami.</p>
+          <p>Każdy zaczyna jako Rycerz. Gdy Rycerz osiągnie poziom {F.rosterLevel}, TRMNL pokazuje „Odblokowano: drugi bohater” i możesz zwerbować Zabójcę na stronie Bohaterowie w zakładce Więcej. Zabójca zaczyna na poziomie 1 z własnym imieniem, sprzętem, złotem, miksturami i celami.</p>
           <ul>
             <li>Na przygody wyrusza jeden bohater naraz i to jego pokazuje TRMNL i rankingi. Drugi zostaje tam, gdzie go zostawiłeś. Nie przeżywa przygód i niczego potem nie nadrabia, a kupiec, który go odwiedza, odjeżdża.</li>
             <li>Zmieniać możesz raz dziennie. Powrót w ciągu dziesięciu minut się nie liczy. Bohater po nokaucie albo w drodze musi najpierw dojść do siebie lub dotrzeć na miejsce.</li>
-            <li>Możesz mieć po jednym bohaterze z każdej klasy. Osiągnięcia należą do ciebie, niezależnie od tego, który bohater je zdobył; kilka należy tylko do Łotrzyka.</li>
-            <li><strong>Wojownik</strong>: {t.text(F.classes.warriorBlurb)}</li>
-            <li><strong>Łotrzyk</strong>: {t.text(F.classes.rogueBlurb)} Zdrowie {F.classes.rogue.hpPct}%, atak {signed(F.classes.rogue.attackPct)}%, obrona {signed(F.classes.rogue.defensePct)}%, złoto z każdej walki i znaleziska {signed(F.classes.rogue.goldPct)}%, a w każdym rajdzie na biurko {F.classes.rogue.raidEdgePct} punktów po jego stronie. Awansuje w tempie Wojownika, ale trochę częściej dostaje nokaut.</li>
+            <li>Możesz mieć po jednym bohaterze z każdej klasy. Osiągnięcia należą do ciebie, niezależnie od tego, który bohater je zdobył; kilka należy tylko do Zabójcy.</li>
+            <li><strong>Rycerz</strong>: {t.text(F.classes.warriorBlurb)}</li>
+            <li><strong>Zabójca</strong>: {t.text(F.classes.rogueBlurb)} Zdrowie {F.classes.rogue.hpPct}%, atak {signed(F.classes.rogue.attackPct)}%, obrona {signed(F.classes.rogue.defensePct)}%, złoto z każdej walki i znaleziska {signed(F.classes.rogue.goldPct)}%, a w każdym rajdzie na biurko {F.classes.rogue.raidEdgePct} punktów po jego stronie. Awansuje w tempie Rycerza, ale trochę częściej dostaje nokaut.</li>
           </ul>
         </>
       ) : null}
@@ -233,8 +233,8 @@ export const pl: HelpPage = {
       <p>Po zalogowaniu możesz obserwować innego gracza z jego publicznej strony bohatera, do 20 graczy. Wszyscy obserwowani są w Rankingach, z poziomem bohatera, miejscem i lokalizacją oraz linkami do ich stron. Obserwowanie nic nie zmienia w grze i nikt nie dostaje o tym powiadomienia. Rajdy na biurka wybierają cele losowo spośród wszystkich, więc obserwowanie kogoś nigdy nie wysyła twojego bohatera do niego. Jeśli gracz ukryje stronę, widzisz tylko jego nazwę, dopóki znów jej nie pokaże. Jeśli zmieni nazwę publiczną, znika z twojej listy.</p>
       <h2 id="names">Nazwy</h2>
       <p>Masz dwie nazwy. Imię bohatera widać na TRMNL, w rankingach i na stronie bohatera; aby je zmienić, kup w zakładce Więcej plakietkę „Cześć, mam na imię” za 200 złota. Codziennie jest jedna w sprzedaży. Nazwa publiczna to ty, w każdej grze TRMNL: widać ją obok bohatera w rankingach, w rajdach i spotkaniach innych graczy i w linku do twojej strony. Możesz ją zmienić za darmo raz na 7 dni w zakładce Konto. Linki do starej strony przestają działać, a nikt inny nie może zająć twojej starej nazwy przez 7 dni.</p>
-      <h2 id="gender">Płeć</h2>
-      <p>Płeć bohatera, męską lub żeńską, wybierasz przy jego tworzeniu. Zmienia tylko jego wygląd na TRMNL, na stronie bohatera i w spotkaniach innych graczy. Obie grają tak samo. Aby ją później zmienić, kup w zakładce Więcej metamorfozę za 200 złota, w dowolnej chwili.</p>
+      <h2 id="looks">Wygląd</h2>
+      <p>Wygląd bohatera tworzysz przy jego tworzeniu: pochodzenie, budowa, głowa, włosy, plecy, dodatek i tabard. Zmienia tylko jego wygląd na TRMNL, na stronie bohatera i w spotkaniach innych graczy. Każdy wygląd gra tak samo. Aby go później zmienić, odwiedź lustro w obozie ze strony bohatera lub zakładki Więcej. Za darmo, w dowolnej chwili.</p>
       <h2 id="alerts">Alerty</h2>
       <p>TRMNL to główny sposób na śledzenie bohatera, ale Ustawienia mogą też wysłać powiadomienie na telefon w dwóch przypadkach; każdy jest wyłączony, dopóki go nie włączysz:</p>
       <ul>

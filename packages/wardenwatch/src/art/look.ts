@@ -69,6 +69,9 @@ export const TABARDS = ['tabard.none', 'tabard.castellum', 'tabard.expedition', 
 /** The outfit every Squire starts in (GDD §3.5, §7.4: tier 0 is shared by both classes). */
 export const SQUIRE_OUTFIT = 'outfit.squire'
 
+/** GDD §3.5: what the two classes are called on screen. The sim keeps its ids (`warrior`, `rogue`) and its numbers. */
+export const CLASS_NAMES: Readonly<Record<'warrior' | 'rogue', string>> = { warrior: 'Knight', rogue: 'Assassin' }
+
 export const DEFAULT_LOOK: Look = { ancestry: 0, build: 0, head: 0, hair: 0, back: 0, accessory: 0, tabard: 0 }
 
 /** How many options a field has for a look: builds and heads follow the chosen ancestry. */

@@ -170,7 +170,7 @@ export const logKind = v.union(
 export const gameSlug = v.literal('wardenwatch')
 export const gameStatus = v.union(v.literal('hidden'), v.literal('preview'), v.literal('live'))
 
-/** D149: a hero's look; chosen free at creation, changed later with a makeover. */
+/** D149: the whole-sprite art's look, stored on heroes made before the creator; no longer a player's choice. */
 export const heroGender = v.union(v.literal('male'), v.literal('female'))
 
 export default defineSchema({
@@ -321,8 +321,13 @@ export default defineSchema({
     name: v.string(),
     /** P37: one hero per class per account (`by_userId_and_class`). */
     class: v.union(v.literal('warrior'), v.literal('rogue')),
-    /** D149: the hero's look, purely cosmetic; absent means male, the original art. */
+    /**
+     * D149: the whole-sprite art's look, purely cosmetic; absent means male, the original art. No longer chosen by
+     * players (the creator's `look` replaces it), kept so heroes drawn in the female art stay as they are.
+     */
     gender: v.optional(heroGender),
+    /** GDD §3.6: the creator's look code (`v1.` and seven base-32 characters); absent means the default look. */
+    look: v.optional(v.string()),
     createdAt: v.number(),
     /** The account's current hero; since P37 a parked roster hero is false and carries `parkedAtTick`. */
     isActive: v.boolean(),

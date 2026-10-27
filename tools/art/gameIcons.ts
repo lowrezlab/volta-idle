@@ -78,13 +78,13 @@ const GOLD = '#ffd166'
 const GOLD_HI = '#ffe08f'
 const GOLD_LO = '#b07a00'
 
-/* --------------------------------------------------------------- Desk Crawler */
+/* --------------------------------------------------------------- Wardenwatch */
 
 /**
  * The Warrior from the companion's painted scenes, brought close: brown hair, red cardigan with lanyard badge, and the
  * letter-opener raised. Behind them a torch-gold burst on dungeon purple, with coins catching the light.
  */
-export function deskCrawlerIcon(): Image {
+export function wardenwatchIcon(): Image {
   const W = 64
   const back = new Layer(W, W)
   const cx = 30
@@ -208,7 +208,7 @@ YYYyy
 }
 
 /** The 16px tab icon: the Warrior's face and raised blade in torch light, drawn by hand at tab size. */
-export function deskCrawlerFavicon(): Image {
+export function wardenwatchFavicon(): Image {
   const layer = new Layer(16, 16)
   for (let y = 0; y < 16; y += 1) for (let x = 0; x < 16; x += 1) layer.set(x, y, Math.hypot(x - 6.5, y - 6.5) < 8 ? '#f0a03a' : '#3b2d6b')
   layer.draw(`

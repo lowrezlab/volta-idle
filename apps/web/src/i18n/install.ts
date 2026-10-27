@@ -4,7 +4,7 @@ import { headMessages } from './heads'
 /** D169: the TRMNL connect flow (install), shared by the games' install pages. */
 export const installMessages = defineMessages({
   en: {
-    title: headMessages.en.dcInstall,
+    title: headMessages.en.wwInstall,
     invalidLink: 'That installation link was not valid.',
     startFromPlugin: (game: string) => `Start from the ${game} plugin in your TRMNL account and choose Install. TRMNL will bring you back here.`,
     helpWithSetup: 'Help with setup',
@@ -35,7 +35,7 @@ export const installMessages = defineMessages({
     level1: 'Level 1',
   },
   fr: {
-    title: headMessages.fr.dcInstall,
+    title: headMessages.fr.wwInstall,
     invalidLink: 'Ce lien d’installation n’était pas valide.',
     startFromPlugin: (game: string) => `Commencez depuis le plugin ${game} de votre compte TRMNL et choisissez Installer. TRMNL vous ramènera ici.`,
     helpWithSetup: 'Aide à l’installation',
@@ -66,7 +66,7 @@ export const installMessages = defineMessages({
     level1: 'Niveau 1',
   },
   de: {
-    title: headMessages.de.dcInstall,
+    title: headMessages.de.wwInstall,
     invalidLink: 'Dieser Installationslink war ungültig.',
     startFromPlugin: (game: string) => `Starte beim Plugin ${game} in deinem TRMNL-Konto und wähle Installieren. TRMNL bringt dich hierher zurück.`,
     helpWithSetup: 'Hilfe bei der Einrichtung',
@@ -97,7 +97,7 @@ export const installMessages = defineMessages({
     level1: 'Stufe 1',
   },
   es: {
-    title: headMessages.es.dcInstall,
+    title: headMessages.es.wwInstall,
     invalidLink: 'Ese enlace de instalación no era válido.',
     startFromPlugin: (game: string) => `Empieza desde el plugin ${game} en tu cuenta de TRMNL y elige Instalar. TRMNL te traerá de vuelta aquí.`,
     helpWithSetup: 'Ayuda con la instalación',
@@ -128,7 +128,7 @@ export const installMessages = defineMessages({
     level1: 'Nivel 1',
   },
   it: {
-    title: headMessages.it.dcInstall,
+    title: headMessages.it.wwInstall,
     invalidLink: 'Quel link di installazione non era valido.',
     startFromPlugin: (game: string) => `Parti dal plugin ${game} nel tuo account TRMNL e scegli Installa. TRMNL ti riporterà qui.`,
     helpWithSetup: 'Aiuto con l’installazione',
@@ -159,7 +159,7 @@ export const installMessages = defineMessages({
     level1: 'Livello 1',
   },
   pt: {
-    title: headMessages.pt.dcInstall,
+    title: headMessages.pt.wwInstall,
     invalidLink: 'Esse link de instalação não era válido.',
     startFromPlugin: (game: string) => `Comece pelo plugin ${game} na sua conta TRMNL e escolha Instalar. O TRMNL vai trazer você de volta para cá.`,
     helpWithSetup: 'Ajuda com a instalação',
@@ -190,7 +190,7 @@ export const installMessages = defineMessages({
     level1: 'Nível 1',
   },
   pl: {
-    title: headMessages.pl.dcInstall,
+    title: headMessages.pl.wwInstall,
     invalidLink: 'Ten link instalacyjny był nieprawidłowy.',
     startFromPlugin: (game: string) => `Zacznij od pluginu ${game} na swoim koncie TRMNL i wybierz „Instaluj”. TRMNL przyprowadzi cię z powrotem tutaj.`,
     helpWithSetup: 'Pomoc z instalacją',
@@ -221,7 +221,7 @@ export const installMessages = defineMessages({
     level1: 'Poziom 1',
   },
   nl: {
-    title: headMessages.nl.dcInstall,
+    title: headMessages.nl.wwInstall,
     invalidLink: 'Die installatielink was niet geldig.',
     startFromPlugin: (game: string) => `Begin bij de plugin ${game} in je TRMNL-account en kies Installeren. TRMNL brengt je daarna hier terug.`,
     helpWithSetup: 'Hulp bij de installatie',

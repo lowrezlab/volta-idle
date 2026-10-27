@@ -3,39 +3,39 @@ import { paginationOptsValidator } from 'convex/server'
 import { v } from 'convex/values'
 import { mutation, query, type QueryCtx } from './_generated/server'
 import type { Doc, Id } from './_generated/dataModel'
-import { ACTIVE_CONTENT, catalogs } from '@trmnl-games/desk-crawler/content'
-import { isGear } from '@trmnl-games/desk-crawler/sim/core/workbench'
-import { potionsHeld } from '@trmnl-games/desk-crawler/sim/core/potions'
+import { ACTIVE_CONTENT, catalogs } from '@trmnl-games/wardenwatch/content'
+import { isGear } from '@trmnl-games/wardenwatch/sim/core/workbench'
+import { potionsHeld } from '@trmnl-games/wardenwatch/sim/core/potions'
 import { appError } from './lib/errors'
 import { pagePublic } from './lib/publicPage'
 import { commandLog, currentUser, intentReturns, requirePlayableHero, runIntent } from './lib/intent'
-import { deriveStats } from '@trmnl-games/desk-crawler/sim/core/stats'
-import { withCounterDefaults } from '@trmnl-games/desk-crawler/sim/core/starter'
-import { eventById, optionOf, resolveEffect } from '@trmnl-games/desk-crawler/sim/core/choice'
-import { effectById, effectiveStats, liveEffects, withEffect } from '@trmnl-games/desk-crawler/sim/core/modifiers'
-import type { ContentCatalog } from '@trmnl-games/desk-crawler/sim/core/types'
-import { starterKit } from '@trmnl-games/desk-crawler/sim/core/starter'
+import { deriveStats } from '@trmnl-games/wardenwatch/sim/core/stats'
+import { withCounterDefaults } from '@trmnl-games/wardenwatch/sim/core/starter'
+import { eventById, optionOf, resolveEffect } from '@trmnl-games/wardenwatch/sim/core/choice'
+import { effectById, effectiveStats, liveEffects, withEffect } from '@trmnl-games/wardenwatch/sim/core/modifiers'
+import type { ContentCatalog } from '@trmnl-games/wardenwatch/sim/core/types'
+import { starterKit } from '@trmnl-games/wardenwatch/sim/core/starter'
 import { awardAfterIntent } from './lib/achievements'
 import { readWorld } from './world'
-import { FULL_SCALE } from '@trmnl-games/desk-crawler/art/scene'
-import { sceneFor, scenePath } from '@trmnl-games/desk-crawler/art/sceneKey'
-import { sceneOccasion } from '@trmnl-games/desk-crawler/payload'
+import { FULL_SCALE } from '@trmnl-games/wardenwatch/art/scene'
+import { sceneFor, scenePath } from '@trmnl-games/wardenwatch/art/sceneKey'
+import { sceneOccasion } from '@trmnl-games/wardenwatch/payload'
 import { sceneEvent } from './lib/heroScene'
-import { localDay, occasionAt, occasionCalendar, occasionModifiers } from '@trmnl-games/desk-crawler/sim/core/occasions'
-import { displayLogDeltas } from '@trmnl-games/desk-crawler/log'
-import { raidWinChance } from '@trmnl-games/desk-crawler/sim/core/raid'
+import { localDay, occasionAt, occasionCalendar, occasionModifiers } from '@trmnl-games/wardenwatch/sim/core/occasions'
+import { displayLogDeltas } from '@trmnl-games/wardenwatch/log'
+import { raidWinChance } from '@trmnl-games/wardenwatch/sim/core/raid'
 import { maskRaidSummaries } from './lib/raids'
-import { hereBiomeId, isLocal, nextStandupAfter, swapTask as swapTodoTask, swapUsed, taskLabel } from '@trmnl-games/desk-crawler/sim/core/todo'
-import { deriveStreamSeed } from '@trmnl-games/desk-crawler/sim/seed'
+import { hereBiomeId, isLocal, nextStandupAfter, swapTask as swapTodoTask, swapUsed, taskLabel } from '@trmnl-games/wardenwatch/sim/core/todo'
+import { deriveStreamSeed } from '@trmnl-games/wardenwatch/sim/seed'
 import { worldContent } from './world'
 import { screenFetchedAfterInstall } from './trmnlPayload'
 import { toHeroState } from './sim/runs/adapter'
-import { loreView } from '@trmnl-games/desk-crawler/sim/core/biomes'
-import { claimReward, currentRung, measureRung, unlocked, unlockLevel, unlocksView } from '@trmnl-games/desk-crawler/sim/core/career'
-import type { HeroState } from '@trmnl-games/desk-crawler/sim/core/types'
-import { INVENTORY_READ } from '@trmnl-games/desk-crawler/sim/core/limits'
-import { isBagFull, nextTier } from '@trmnl-games/desk-crawler/sim/core/bag'
-import { nextPouchTier, potionCap } from '@trmnl-games/desk-crawler/sim/core/pouch'
+import { loreView } from '@trmnl-games/wardenwatch/sim/core/biomes'
+import { claimReward, currentRung, measureRung, unlocked, unlockLevel, unlocksView } from '@trmnl-games/wardenwatch/sim/core/career'
+import type { HeroState } from '@trmnl-games/wardenwatch/sim/core/types'
+import { INVENTORY_READ } from '@trmnl-games/wardenwatch/sim/core/limits'
+import { isBagFull, nextTier } from '@trmnl-games/wardenwatch/sim/core/bag'
+import { nextPouchTier, potionCap } from '@trmnl-games/wardenwatch/sim/core/pouch'
 
 const intentResult = intentReturns({
   operationId: v.string(),
@@ -84,8 +84,8 @@ export const mine = query({
       activationState: hero.activationState,
       // When TRMNL confirmed the Save: the companion reminds a new player to add the plugin to a playlist for a day or two.
       activatedAt: hero.activatedAt ?? null,
-      // Whether TRMNL has fetched a Desk Crawler screen for this account since the Save's own render; the reminder above stops once it has.
-      screenServed: (await ctx.db.query('trmnlInstances').withIndex('by_userId_and_state', (q) => q.eq('userId', user._id).eq('state', 'active')).take(10)).some((instance) => (instance.gameSlug ?? 'desk-crawler') === 'desk-crawler' && screenFetchedAfterInstall(instance)),
+      // Whether TRMNL has fetched a Wardenwatch screen for this account since the Save's own render; the reminder above stops once it has.
+      screenServed: (await ctx.db.query('trmnlInstances').withIndex('by_userId_and_state', (q) => q.eq('userId', user._id).eq('state', 'active')).take(10)).some((instance) => (instance.gameSlug ?? 'wardenwatch') === 'wardenwatch' && screenFetchedAfterInstall(instance)),
       simulationState: hero.simulationState,
       level: hero.level,
       xp: hero.xp,
@@ -491,7 +491,7 @@ export const setPublicProfile = mutation({
     await runIntent(ctx, args.operationId, 'heroes.setPublicProfile', { visible: args.visible }, async (user) => {
       const hero = await currentHero(ctx, user)
       if (hero === null) throw appError('HERO_NOT_FOUND', 'No hero yet.')
-      if (hero.activationState !== 'active') throw appError('TRMNL_REQUIRED', 'Save Desk Crawler in TRMNL to start adventures.')
+      if (hero.activationState !== 'active') throw appError('TRMNL_REQUIRED', 'Save Wardenwatch in TRMNL to start adventures.')
       if (pagePublic(hero) === args.visible) return { changed: false }
       await ctx.db.patch(hero._id, { publicProfile: args.visible })
       return { changed: true }

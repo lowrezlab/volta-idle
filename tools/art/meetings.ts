@@ -4,8 +4,8 @@
  * 1-bit as the device draws it on the left and the companion's painted scene on the right.
  */
 import { mkdirSync, writeFileSync } from 'node:fs'
-import { MEETING_PROPS } from '@trmnl-games/desk-crawler/art/props'
-import type { BiomeArt } from '@trmnl-games/desk-crawler/art/scene'
+import { MEETING_PROPS } from '@trmnl-games/wardenwatch/art/props'
+import type { BiomeArt } from '@trmnl-games/wardenwatch/art/scene'
 import { sheet } from './reviewSheet'
 
 const out = process.argv[2] ?? '.previews/meetings'

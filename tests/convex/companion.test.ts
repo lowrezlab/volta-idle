@@ -4,7 +4,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { api, internal } from '@trmnl-games/backend/api'
 import schema from '../../apps/backend/convex/schema'
 import { sha256Hex } from '../../apps/backend/convex/lib/hash'
-import { nextSlotAfter, slotEta, wallSlotFor } from '@trmnl-games/desk-crawler/sim/schedule'
+import { nextSlotAfter, slotEta, wallSlotFor } from '@trmnl-games/wardenwatch/sim/schedule'
 import { seedHero, seedWorld, type T } from './helpers'
 
 const modules = import.meta.glob('../../apps/backend/convex/**/*.ts')

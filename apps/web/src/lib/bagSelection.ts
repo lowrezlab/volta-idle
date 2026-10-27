@@ -1,4 +1,4 @@
-import { BATCH_ITEMS } from '@trmnl-games/desk-crawler/sim/core/limits'
+import { BATCH_ITEMS } from '@trmnl-games/wardenwatch/sim/core/limits'
 
 type SaleGear = { id: string; equipped: boolean; held: boolean; saleValue: number }
 

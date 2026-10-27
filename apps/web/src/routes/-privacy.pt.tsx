@@ -20,10 +20,10 @@ export const privacyPt: LegalPage = {
         não se importe de compartilhar e nunca coloque dados de contato nele.
       </p>
       <p>
-        No Desk Crawler, os heróis invadem as mesas uns dos outros e se encontram por acaso. Quando seu herói invade, é invadido ou encontra outro herói, seu nome público aparece no diário de aventuras do outro jogador, no app e no TRMNL dele, como já aparece nos rankings. Quando seu herói é nocauteado, ele pode deixar cair um item reserva com seu nome público, que o herói de outro jogador pode achar e guardar; seu nome então aparece nesse item no app e na página de herói dele. Se você trocar de nome ou excluir sua conta, essas histórias e itens mostram “Jogador oculto” ou perdem o nome.
+        No Wardenwatch, os heróis invadem as mesas uns dos outros e se encontram por acaso. Quando seu herói invade, é invadido ou encontra outro herói, seu nome público aparece no diário de aventuras do outro jogador, no app e no TRMNL dele, como já aparece nos rankings. Quando seu herói é nocauteado, ele pode deixar cair um item reserva com seu nome público, que o herói de outro jogador pode achar e guardar; seu nome então aparece nesse item no app e na página de herói dele. Se você trocar de nome ou excluir sua conta, essas histórias e itens mostram “Jogador oculto” ou perdem o nome.
       </p>
       <p>
-        Seu herói do Desk Crawler tem uma página pública: qualquer pessoa com o link vê seu nome público, o nome do seu herói, nível, posição, andar atual e data de início, alguns totais e suas conquistas. Ouro, diário de aventuras e dados da conta continuam privados, assim como seu equipamento, exceto os reservas de outros jogadores que seu herói guarda, que aparecem com os nomes deles. A página vem ativada. Ocultar minha página de herói, nas Configurações, a oculta na hora, e você pode mostrá-la de novo quando quiser.
+        Seu herói do Wardenwatch tem uma página pública: qualquer pessoa com o link vê seu nome público, o nome do seu herói, nível, posição, andar atual e data de início, alguns totais e suas conquistas. Ouro, diário de aventuras e dados da conta continuam privados, assim como seu equipamento, exceto os reservas de outros jogadores que seu herói guarda, que aparecem com os nomes deles. A página vem ativada. Ocultar minha página de herói, nas Configurações, a oculta na hora, e você pode mostrá-la de novo quando quiser.
       </p>
       <p>
         Jogadores conectados podem seguir uma página pública de herói. Guardamos quem segue quem para o app deles poder listar os jogadores que seguem. Ninguém é avisado de que foi seguido, e nenhuma página mostra quem segue um jogador. Se você trocar seu nome público, ocultar sua página ou excluir seu progresso, outros jogadores deixam de ver seu herói na lista deles, e a exclusão remove esses registros.
@@ -33,19 +33,19 @@ export const privacyPt: LegalPage = {
       <ul>
         <li>Sua identidade de login do Clerk, nosso provedor de login. Seu e-mail só é copiado para pedidos de confirmação de exclusão de curta duração; não copiamos seu nome real nem sua foto de perfil para o banco de dados do jogo.</li>
         <li>Seu nome público, seu herói, seus itens, seu diário de aventuras e o XP recente usado nos rankings. Contas mais antigas também podem ter um fuso horário salvo de versões anteriores.</li>
-        <li>Se você ligar os alertas do Desk Crawler: quais alertas você quer, seu horário de silêncio e o fuso horário do seu navegador (por exemplo America/Sao_Paulo), e para cada dispositivo que você permitir, o endereço push que o navegador nos dá, as chaves de criptografia e um rótulo como “Chrome on Android”. Também guardamos um registro curto de cada alerta: de que tipo, quando e se foi enviado.</li>
+        <li>Se você ligar os alertas do Wardenwatch: quais alertas você quer, seu horário de silêncio e o fuso horário do seu navegador (por exemplo America/Sao_Paulo), e para cada dispositivo que você permitir, o endereço push que o navegador nos dá, as chaves de criptografia e um rótulo como “Chrome on Android”. Também guardamos um registro curto de cada alerta: de que tipo, quando e se foi enviado.</li>
         <li>
           Para cada instalação do TRMNL: o ID da instância do plugin, um hash do token de acesso e o link de configurações que o TRMNL nos dá. Não guardamos seu nome
           nem seu e-mail do TRMNL.
         </li>
-        <li>A diferença de fuso horário que seu TRMNL envia com cada tela (por exemplo UTC−3), para o stand-up da manhã do Desk Crawler seguir o seu dia. Guardamos só a última.</li>
+        <li>A diferença de fuso horário que seu TRMNL envia com cada tela (por exemplo UTC−3), para o stand-up da manhã do Wardenwatch seguir o seu dia. Guardamos só a última.</li>
         <li>A configuração de idioma que seu TRMNL envia com cada tela (por exemplo pt-BR), para sabermos para quais idiomas vale traduzir os jogos e para sua tela poder usar seu idioma. Guardamos só a última.</li>
         <li>Se você escolher um idioma para o TRMNL Games, essa escolha, para que suas telas TRMNL e seus alertas também o usem.</li>
         <li>Registros operacionais de curta duração, como contadores de limite de uso e recibos de pedidos duplicados.</li>
         <li>Quando você pede a exclusão da conta: seu e-mail principal verificado, um hash do link de confirmação e o status de entrega. O link expira depois de 30 minutos; pedidos expirados são removidos na limpeza diária.</li>
-        <li>A lista de lançamento do Desk Crawler guardava endereços de e-mail para um único e-mail quando o Desk Crawler chegasse à loja do TRMNL. Esse e-mail foi enviado em 13 de outubro de 2026, todos os endereços foram excluídos e a lista está fechada.</li>
+        <li>A lista de lançamento do Wardenwatch guardava endereços de e-mail para um único e-mail quando o Wardenwatch chegasse à loja do TRMNL. Esse e-mail foi enviado em 13 de outubro de 2026, todos os endereços foram excluídos e a lista está fechada.</li>
         <li>A lista de lançamento do Idle Angler guarda, para um único e-mail quando o Idle Angler chegar ao marketplace do TRMNL: de um jogador conectado que toca em Me avise, um vínculo com a conta e o idioma (o endereço é lido da conta na hora do envio); de qualquer outra pessoa, o endereço de e-mail digitado e o idioma. Cada inscrição é apagada quando o e-mail dela é enviado, e você pode sair da lista quando quiser pela página inicial ou pelo e-mail.</li>
-        <li>O lembrete do herói: se o seu herói do Desk Crawler está em jogo há dois dias e você nunca abriu o app do Desk Crawler, enviamos um único e-mail para seu endereço principal verificado dizendo o que espera por você lá, com um link para parar. O endereço é lido do Clerk no envio e não é guardado. Guardamos só quando foi enviado, ou que você pediu para não receber.</li>
+        <li>O lembrete do herói: se o seu herói do Wardenwatch está em jogo há dois dias e você nunca abriu o app do Wardenwatch, enviamos um único e-mail para seu endereço principal verificado dizendo o que espera por você lá, com um link para parar. O endereço é lido do Clerk no envio e não é guardado. Guardamos só quando foi enviado, ou que você pediu para não receber.</li>
         <li>Se você enviar feedback: sua mensagem, a página de onde enviou, seu nome público e um link para sua conta. Ele vai por e-mail para o desenvolvedor, com seu e-mail principal verificado como endereço de resposta.</li>
       </ul>
 
@@ -79,7 +79,7 @@ export const privacyPt: LegalPage = {
         </li>
         <li><strong>PostHog EU</strong> cuida da análise de uso opcional, dos relatórios de erro e das gravações de sessão mascaradas para suporte e melhorias do produto.</li>
         <li><strong>Sentry</strong> (Estados Unidos) recebe relatórios de erro do servidor do nosso site e do backend do jogo, e do seu navegador se você permitir a análise, para encontrarmos e corrigirmos bugs. Um relatório traz o caminho da página ou o nome da função do jogo que falhou, e os detalhes técnicos do erro. Ele nunca inclui sua conta, seu e-mail, seu endereço IP, cookies, conteúdo de formulários, query strings de URL nem códigos e tokens de instalação.</li>
-        <li><strong>O serviço push do seu navegador</strong> (Google para Chrome e Android, Apple para Safari, Mozilla para Firefox) entrega os alertas do Desk Crawler se você ligá-los. Ele recebe o alerta criptografado, então não consegue lê-lo, junto com o endereço push que seu navegador criou.</li>
+        <li><strong>O serviço push do seu navegador</strong> (Google para Chrome e Android, Apple para Safari, Mozilla para Firefox) entrega os alertas do Wardenwatch se você ligá-los. Ele recebe o alerta criptografado, então não consegue lê-lo, junto com o endereço push que seu navegador criou.</li>
         <li><strong>Resend</strong> entrega o e-mail de confirmação de exclusão da conta para seu endereço principal verificado, o e-mail de lançamento (enviado uma vez, em 13 de outubro de 2026) e o feedback que você envia ao desenvolvedor. Ele recebe esses endereços e o conteúdo dos e-mails. Ele também entrega o único lembrete do herói.</li>
       </ul>
 
@@ -92,7 +92,7 @@ export const privacyPt: LegalPage = {
         <li>Lista de lançamento do Idle Angler: cada inscrição é apagada quando o e-mail de lançamento dela é enviado, quando você sai da lista ou junto com sua conta.</li>
         <li>Lembrete do herói: quando foi enviado, ou que você pediu para não receber, até você excluir sua conta.</li>
         <li>Feedback: até você excluir sua conta, ou antes, se pedir. Cópias já enviadas por e-mail ao desenvolvedor são excluídas a pedido.</li>
-        <li>Configurações de alertas e dispositivos: até você desligar os alertas, remover o dispositivo ou excluir o Desk Crawler ou sua conta. Um dispositivo cujo endereço push para de funcionar é removido automaticamente. Registros de alertas individuais: sete dias.</li>
+        <li>Configurações de alertas e dispositivos: até você desligar os alertas, remover o dispositivo ou excluir o Wardenwatch ou sua conta. Um dispositivo cujo endereço push para de funcionar é removido automaticamente. Registros de alertas individuais: sete dias.</li>
         <li>Backups: cerca de uma semana; depois disso, os dados excluídos somem deles também.</li>
         <li>Gravações mascaradas: 30 dias. Eventos de análise e perfis de suporte: até a exclusão da conta ou um pedido de remoção anterior.</li>
         <li>Relatórios de erro no Sentry: até 90 dias. Eles não estão ligados à sua conta, então a exclusão da conta não tem nada a remover lá.</li>
@@ -111,7 +111,7 @@ export const privacyPt: LegalPage = {
       <p>A remoção dos perfis, eventos e gravações do PostHog ligados à conta é pedida como parte da exclusão da conta e processada pelo PostHog de forma assíncrona. Pedidos que falham são repetidos e ficam visíveis para o operador até serem resolvidos.</p>
 
       <h2>Excluir só um jogo</h2>
-      <p>Nas <Link to="/app/desk-crawler/settings">configurações do Desk Crawler</Link>, escolha Excluir o progresso do Desk Crawler para remover esse herói, o histórico, as conexões e as configurações e dispositivos de alertas. Sua conta compartilhada e seu login continuam disponíveis. Você pode começar de novo instalando o plugin quando a exclusão terminar. Os outros jogos não são afetados.</p>
+      <p>Nas <Link to="/app/wardenwatch/settings">configurações do Wardenwatch</Link>, escolha Excluir o progresso do Wardenwatch para remover esse herói, o histórico, as conexões e as configurações e dispositivos de alertas. Sua conta compartilhada e seu login continuam disponíveis. Você pode começar de novo instalando o plugin quando a exclusão terminar. Os outros jogos não são afetados.</p>
 
       <h2>Suas escolhas</h2>
       <p>

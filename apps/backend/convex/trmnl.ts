@@ -1,7 +1,7 @@
-import { currentHero, gameProfile, setCurrentHero, DESK_CRAWLER } from './lib/gameProfile'
+import { currentHero, gameProfile, setCurrentHero, WARDENWATCH } from './lib/gameProfile'
 import { currentCharacterOf, gameDeletingFor, isGame, otherGameHooks } from './lib/gameHooks'
 import { gameSlug as gameSlugValidator, heroGender } from './schema'
-import type { HeroGender } from '@trmnl-games/desk-crawler/art/hero'
+import type { HeroGender } from '@trmnl-games/wardenwatch/art/hero'
 import type { GameSlug } from '@trmnl-games/platform'
 import { isAdminIdentity } from './lib/adminAccess'
 import { gameStatusOf } from './platform'
@@ -23,7 +23,7 @@ import { parseTrmnlLocale } from './lib/trmnlUser'
 
 /** D115: which game's profile is being deleted, its player character, and its name in messages. */
 const gameDeleting = (slug: GameSlug) => (ctx: Parameters<typeof gameDeletingFor>[0], userId: Id<'users'>) => gameDeletingFor(ctx, slug, userId)
-const gameLabel = (slug: GameSlug) => (slug === DESK_CRAWLER ? 'Desk Crawler' : otherGameHooks(slug).label)
+const gameLabel = (slug: GameSlug) => (slug === WARDENWATCH ? 'Wardenwatch' : otherGameHooks(slug).label)
 const currentCharacter = (slug: GameSlug) => (ctx: Parameters<typeof currentCharacterOf>[0], user: Doc<'users'> | null) => currentCharacterOf(ctx, slug, user)
 const deletingError = (slug: GameSlug) => appError('GAME_UNAVAILABLE', `${gameLabel(slug)} progress is being deleted. Try again shortly.`)
 
@@ -78,7 +78,7 @@ export const completeInstall = action({
       throw appError('INSTALL_INVALID', 'TRMNL did not accept that installation. Start again from TRMNL.')
     }
     return await ctx.runMutation(internal.trmnl.linkInstall, {
-      gameSlug: args.gameSlug ?? DESK_CRAWLER,
+      gameSlug: args.gameSlug ?? WARDENWATCH,
       tokenIdentifier: identity.tokenIdentifier,
       tokenHash: sha256Hex(token),
       allowReconnection: true,
@@ -107,14 +107,14 @@ export const linkInstall = internalMutation({
   returns: linkResult,
   handler: async (ctx, args) => {
     const now = Date.now()
-    const slug = args.gameSlug ?? DESK_CRAWLER
+    const slug = args.gameSlug ?? WARDENWATCH
     // D115: a game that is not live yet installs for admins only, enforced here rather than in the web app.
     if ((await gameStatusOf(ctx, slug)) !== 'live' && !isAdminIdentity(args.tokenIdentifier)) throw appError('GAME_UNAVAILABLE', `${gameLabel(slug)} is not open yet.`)
     // Deleted accounts: replayed Clerk tokens and old TRMNL codes/tokens never regain authority (D22/V09).
     assertNotRevoked(await ctx.db.query('revokedAuthIdentities').withIndex('by_identityHash', (q) => q.eq('identityHash', identityHash(args.tokenIdentifier))).first())
     if (await ctx.db.query('revokedTrmnlCredentials').withIndex('by_tokenHash', (q) => q.eq('tokenHash', args.tokenHash)).first()) {
-      // The verified reconnection flow (D69) is Desk Crawler's; a revoked Idle Angler token needs a fresh install.
-      if (!args.allowReconnection || slug !== DESK_CRAWLER) throw appError('CONNECTION_UNAVAILABLE', 'This connection needs fresh verification from TRMNL. Start from Install, then Save and open Configure.')
+      // The verified reconnection flow (D69) is Wardenwatch's; a revoked Idle Angler token needs a fresh install.
+      if (!args.allowReconnection || slug !== WARDENWATCH) throw appError('CONNECTION_UNAVAILABLE', 'This connection needs fresh verification from TRMNL. Start from Install, then Save and open Configure.')
       await reserveReconnection(ctx, args, now)
       return { activationState: 'pending_trmnl' as const, heroCreated: false, reconnectionRequired: true as const }
     }
@@ -167,7 +167,7 @@ export const linkInstall = internalMutation({
 
     const existing = await currentCharacter(slug)(ctx, user)
     if (existing) return { activationState: existing.activationState, heroCreated: false }
-    if (slug !== DESK_CRAWLER) {
+    if (slug !== WARDENWATCH) {
       await otherGameHooks(slug).prepare(ctx, user, now)
       return { activationState: 'pending_trmnl' as const, heroCreated: true }
     }
@@ -206,7 +206,7 @@ export const confirmInstance = internalMutation({
   returns: confirmResult,
   handler: async (ctx, args) => {
     const now = Date.now()
-    const slug = args.gameSlug ?? DESK_CRAWLER
+    const slug = args.gameSlug ?? WARDENWATCH
     const instance = await ctx.db
       .query('trmnlInstances')
       .withIndex('by_uuid', (q) => q.eq('uuid', args.uuid))
@@ -248,7 +248,7 @@ export const confirmInstance = internalMutation({
       createdAt: now,
     })
     await ctx.db.patch(attempt._id, { state: 'completed', completedUuid: args.uuid })
-    if (slug === DESK_CRAWLER) await activateForConfirmedInstallation(ctx, grant.userId, now)
+    if (slug === WARDENWATCH) await activateForConfirmedInstallation(ctx, grant.userId, now)
     else await otherGameHooks(slug).activate(ctx, grant.userId, now)
     return { ok: true, reason: 'confirmed' as const }
   },
@@ -311,7 +311,7 @@ export const uninstallInstance = internalMutation({
       .query('trmnlInstances')
       .withIndex('by_uuid', (q) => q.eq('uuid', args.uuid))
       .unique()
-    const slug = args.gameSlug ?? DESK_CRAWLER
+    const slug = args.gameSlug ?? WARDENWATCH
     if (!instance || !isGame(instance, slug)) return false
     const grant = await ctx.db.get(instance.grantId)
     if (!grant || !isGame(grant, slug) || grant.tokenHash !== args.tokenHash || grant.userId !== instance.userId || (grant.authorizedUuid && grant.authorizedUuid !== args.uuid)) return false
@@ -324,7 +324,7 @@ export const uninstallInstance = internalMutation({
 async function reserveReconnection(ctx: MutationCtx, args: { tokenIdentifier: string; tokenHash: string; publicAlias?: string; heroName?: string; timezone: string; analyticsConsent?: boolean }, now: number) {
   const user = await ctx.db.query('users').withIndex('by_tokenIdentifier', q => q.eq('tokenIdentifier', args.tokenIdentifier)).unique()
   if (user && user.state !== 'active') throw appError('ACCOUNT_UNAVAILABLE', 'This account is not available.')
-  if (user && (await gameProfile(ctx, user._id))?.state === 'deleting') throw appError('GAME_UNAVAILABLE', 'Desk Crawler progress is being deleted. Try again shortly.')
+  if (user && (await gameProfile(ctx, user._id))?.state === 'deleting') throw appError('GAME_UNAVAILABLE', 'Wardenwatch progress is being deleted. Try again shortly.')
   const hero = user ? await currentHero(ctx, user) : null
   const alias = validateName(user?.publicAlias ?? args.publicAlias ?? '', ALIAS_RULE)
   const heroName = validateName(hero?.name ?? args.heroName ?? '', HERO_NAME_RULE)
@@ -415,19 +415,19 @@ export const completeReconnection = mutation({
       user = (await ctx.db.get(id))!
     }
     const result = await runIntent(ctx, args.operationId, 'trmnl.completeReconnection', { attemptId: args.attemptId, confirm: args.confirm }, async owner => {
-      if ((await gameProfile(ctx, owner._id))?.state === 'deleting') throw appError('GAME_UNAVAILABLE', 'Desk Crawler progress is being deleted. Try again shortly.')
+      if ((await gameProfile(ctx, owner._id))?.state === 'deleting') throw appError('GAME_UNAVAILABLE', 'Wardenwatch progress is being deleted. Try again shortly.')
       const attempt = await ctx.db.get(args.attemptId)
       if (!attempt || attempt.tokenIdentifier !== identity.tokenIdentifier || !attempt.verifiedUuid || attempt.expiresAt <= now || !attempt.proofExpiresAt || attempt.proofExpiresAt <= now) throw appError('INSTALL_INVALID', 'This verification expired. Open Configure again from TRMNL.')
       const instance = await ctx.db.query('trmnlInstances').withIndex('by_uuid', q => q.eq('uuid', attempt.verifiedUuid!)).unique()
       if (instance && instance.userId !== owner._id) throw appError('CONNECTION_CONFLICT', 'This installation is connected to another TRMNL Games account.')
-      const grantId = await ctx.db.insert('trmnlGrants', { gameSlug: DESK_CRAWLER, userId: owner._id, tokenHash: attempt.tokenHash, authorizedUuid: attempt.verifiedUuid, state: 'active', createdAt: now, lastVerifiedAt: now })
+      const grantId = await ctx.db.insert('trmnlGrants', { gameSlug: WARDENWATCH, userId: owner._id, tokenHash: attempt.tokenHash, authorizedUuid: attempt.verifiedUuid, state: 'active', createdAt: now, lastVerifiedAt: now })
       if (instance) {
         // Only an explicit signed confirmation can reconnect a selected own tombstone.
         await ctx.db.patch(instance._id, { grantId, state: 'active', confirmedBy: 'management_confirmation' })
         const oldGrant = await ctx.db.get(instance.grantId)
         if (oldGrant?.authorizedUuid) await ctx.db.delete(oldGrant._id)
       } else {
-        await ctx.db.insert('trmnlInstances', { gameSlug: DESK_CRAWLER, grantId, userId: owner._id, uuid: attempt.verifiedUuid, state: 'active', confirmedBy: 'management_confirmation', createdAt: now })
+        await ctx.db.insert('trmnlInstances', { gameSlug: WARDENWATCH, grantId, userId: owner._id, uuid: attempt.verifiedUuid, state: 'active', confirmedBy: 'management_confirmation', createdAt: now })
       }
       if (attempt.analyticsConsent !== undefined) await ctx.db.patch(owner._id, { analyticsConsent: attempt.analyticsConsent })
       if (!await currentHero(ctx, owner)) await prepareHero(ctx, owner, attempt.heroName, 'male', now)
@@ -455,7 +455,7 @@ export const installSummary = internalQuery({
     const rows = (await ctx.db.query('trmnlInstallAttempts').withIndex('by_expiresAt', (q) => q.gte('expiresAt', since + INSTALL_ATTEMPT_MS)).take(2_000)).filter((row) => row.createdAt >= since)
     const games = new Map<string, { connected: number; saved: number; waiting: number; notSaved: number; players: Set<string> }>()
     for (const row of rows) {
-      const game = row.gameSlug ?? DESK_CRAWLER
+      const game = row.gameSlug ?? WARDENWATCH
       const tally = games.get(game) ?? { connected: 0, saved: 0, waiting: 0, notSaved: 0, players: new Set<string>() }
       tally.connected++
       tally.players.add(row.userId)

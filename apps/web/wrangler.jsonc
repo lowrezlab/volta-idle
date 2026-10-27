@@ -1,13 +1,13 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "trmnl-games",
+  "name": "wardenwatch",
   "compatibility_date": "2026-10-01",
   "compatibility_flags": ["nodejs_compat"],
   "main": "src/server.ts",
   "observability": { "enabled": true },
   // Production companion. Secrets (CLERK_SECRET_KEY, INSTALL_FLOW_KEY) are set with `wrangler secret put`.
-  "routes": [{ "pattern": "trmnlgames.com", "custom_domain": true }],
-  "vars": { "TRMNL_CLIENT_ID": "90prjumnczpk4vhkujs9ow" },
+  // No custom domain yet: add a "routes" entry once Wardenwatch has one.
+  "vars": { "TRMNL_CLIENT_ID": "REPLACE_WITH_WARDENWATCH_TRMNL_CLIENT_ID" },
   // Public hero pages (D109): 60 server-rendered loads a minute per visitor IP (src/server/profileLimit.ts).
   "ratelimits": [{ "name": "PROFILE_LIMITER", "namespace_id": "56401", "simple": { "limit": 60, "period": 60 } }]
 }

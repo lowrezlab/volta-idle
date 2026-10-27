@@ -1,10 +1,10 @@
 import { describe, expect, it } from 'vitest'
-import { contentV2 } from '@trmnl-games/desk-crawler/content/v2'
-import { contentV3 } from '@trmnl-games/desk-crawler/content/v3'
-import { validateCatalog } from '@trmnl-games/desk-crawler/content/validate'
-import { simulateHero, SIMULATION_VERSION } from '@trmnl-games/desk-crawler/sim/core/simulate'
-import { maxHp } from '@trmnl-games/desk-crawler/sim/core/stats'
-import type { ContentCatalog, HeroState, StanceId } from '@trmnl-games/desk-crawler/sim/core/types'
+import { contentV2 } from '@trmnl-games/wardenwatch/content/v2'
+import { contentV3 } from '@trmnl-games/wardenwatch/content/v3'
+import { validateCatalog } from '@trmnl-games/wardenwatch/content/validate'
+import { simulateHero, SIMULATION_VERSION } from '@trmnl-games/wardenwatch/sim/core/simulate'
+import { maxHp } from '@trmnl-games/wardenwatch/sim/core/stats'
+import type { ContentCatalog, HeroState, StanceId } from '@trmnl-games/wardenwatch/sim/core/types'
 import { baseState, seeds } from './helpers'
 
 const level = 5

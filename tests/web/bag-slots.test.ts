@@ -1,9 +1,9 @@
 import { createElement } from 'react'
 import { renderToStaticMarkup } from 'react-dom/server'
 import { expect, it } from 'vitest'
-import { catalogs } from '@trmnl-games/desk-crawler/content'
-import { ITEM_ART, itemArt } from '@trmnl-games/desk-crawler/art/items'
-import { EmptySlot, Sheet, Slot, SpriteIcon } from '../../apps/web/src/routes/app/desk-crawler/-bagSlots'
+import { catalogs } from '@trmnl-games/wardenwatch/content'
+import { ITEM_ART, itemArt } from '@trmnl-games/wardenwatch/art/items'
+import { EmptySlot, Sheet, Slot, SpriteIcon } from '../../apps/web/src/routes/app/wardenwatch/-bagSlots'
 
 const piece = { id: 'x', kind: 'weapon' as const, templateId: 'ruler_blade', label: 'Ruler Blade', rarity: 'uncommon', requiredLevel: 1 }
 

@@ -1,5 +1,5 @@
 import { readFileSync, writeFileSync } from 'node:fs'
-const directory = '/private/tmp/desk-crawler-capacity'
+const directory = '/private/tmp/wardenwatch-capacity'
 const reports = JSON.parse(readFileSync(`${directory}/results.json`, 'utf8'))
 const lines = readFileSync(`${directory}/logs.jsonl`, 'utf8').split('\n').flatMap(line => { try { return [JSON.parse(line)] } catch { return [] } })
 const completions = [...new Map(lines.filter(x => x.kind === 'Completion').map(x => [x.executionId, x])).values()]

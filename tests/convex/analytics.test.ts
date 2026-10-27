@@ -34,7 +34,7 @@ describe('identified lifecycle analytics and erasure', () => {
     await t.action(internal.analytics.captureActivation, { userId: user._id })
     expect(fetchMock).toHaveBeenCalledTimes(1)
     const body = JSON.parse(fetchMock.mock.calls[0]![1]!.body)
-    expect(body).toMatchObject({ event: 'hero activated', properties: { distinct_id: 'user_Support123', game: 'desk-crawler' } })
+    expect(body).toMatchObject({ event: 'hero activated', properties: { distinct_id: 'user_Support123', game: 'wardenwatch' } })
     expect(JSON.stringify(body)).not.toContain('issuer|')
     await identity.mutation(api.users.setAnalyticsConsent, { allowed: false })
     await t.action(internal.analytics.captureActivation, { userId: user._id })

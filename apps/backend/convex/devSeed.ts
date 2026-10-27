@@ -1,8 +1,8 @@
 import { currentHero, gameProfile, setCurrentHero } from './lib/gameProfile'
 import { v } from 'convex/values'
 import { internalMutation } from './_generated/server'
-import { ACTIVE_CONTENT, catalogs } from '@trmnl-games/desk-crawler/content'
-import { starterHero, starterKit } from '@trmnl-games/desk-crawler/sim/core/starter'
+import { ACTIVE_CONTENT, catalogs } from '@trmnl-games/wardenwatch/content'
+import { starterHero, starterKit } from '@trmnl-games/wardenwatch/sim/core/starter'
 import { getOrCreateWorld } from './world'
 
 /**

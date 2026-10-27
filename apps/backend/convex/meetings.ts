@@ -3,8 +3,8 @@ import { query } from './_generated/server'
 import { currentHero } from './lib/gameProfile'
 import { currentUser } from './lib/intent'
 import { recentMeetings } from './lib/meetings'
-import { ACTIVE_CONTENT, catalogs } from '@trmnl-games/desk-crawler/content'
-import { meetingKind } from '@trmnl-games/desk-crawler/sim/core/meeting'
+import { ACTIVE_CONTENT, catalogs } from '@trmnl-games/wardenwatch/content'
+import { meetingKind } from '@trmnl-games/wardenwatch/sim/core/meeting'
 
 const RECENT_MEETINGS = 5
 

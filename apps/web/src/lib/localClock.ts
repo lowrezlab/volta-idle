@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { sceneTimeAt, sceneUrlAt } from '@trmnl-games/desk-crawler/art/sceneTime'
+import { sceneTimeAt, sceneUrlAt } from '@trmnl-games/wardenwatch/art/sceneTime'
 
 /** Minute-rounded clock so queries stay cacheable and labels refresh like the device's. Null until hydrated. */
 export function useMinute(): number | null {

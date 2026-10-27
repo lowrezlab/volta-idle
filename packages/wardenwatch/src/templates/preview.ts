@@ -1,0 +1,68 @@
+/**
+ * Browser preview shell for the TRMNL templates: the pinned framework 3.4 CSS/JS,
+ * a device screen class and the mashup wrapper for each layout. Used by the
+ * local layout matrix and the companion's live preview. This approximates
+ * TRMNL's renderer; real-device renders stay the acceptance gate.
+ */
+export const FRAMEWORK_VERSION = '3.4.0'
+
+/** OG (800x480, 1-bit), X (4-bit) and BWRY (800x480, black/white/red/yellow) screen classes from framework 3.4; sizes are the framework's CSS layout boxes (X lays out at 1872x1404). */
+export const PREVIEW_DEVICES = {
+  og: { label: 'TRMNL OG', width: 800, height: 480, classes: 'screen screen--og screen--md screen--1bit screen--landscape' },
+  x: { label: 'TRMNL X', width: 1872, height: 1404, classes: 'screen screen--v2 screen--lg screen--4bit screen--landscape' },
+  /** The OG-sized four-ink panel; `screen--preview-colors` shows the muted inks the panel actually prints. */
+  bwry: { label: 'TRMNL BWRY', width: 800, height: 480, classes: 'screen screen--og screen--md screen--color-4bwry screen--preview-colors screen--landscape' },
+} as const
+export type PreviewDevice = keyof typeof PREVIEW_DEVICES
+
+export const PREVIEW_LAYOUTS = {
+  markup: { label: 'Full', wrapper: (inner: string) => `<div class="view view--full">${inner}</div>` },
+  markup_half_horizontal: {
+    label: 'Half',
+    wrapper: (inner: string) => `<div class="mashup mashup--1Tx1B"><div class="view view--half_horizontal">${inner}</div><div class="view view--half_horizontal"></div></div>`,
+  },
+  markup_half_vertical: {
+    label: 'Side',
+    wrapper: (inner: string) => `<div class="mashup mashup--1Lx1R"><div class="view view--half_vertical">${inner}</div><div class="view view--half_vertical"></div></div>`,
+  },
+  markup_quadrant: {
+    label: 'Quarter',
+    wrapper: (inner: string) =>
+      `<div class="mashup mashup--2x2"><div class="view view--quadrant">${inner}</div><div class="view view--quadrant"></div><div class="view view--quadrant"></div><div class="view view--quadrant"></div></div>`,
+  },
+} as const
+export type PreviewLayout = keyof typeof PREVIEW_LAYOUTS
+
+/** TRMNL's device and per-screen themes: a `screen--theme-<id>` class plus the framework's theme stylesheet. */
+export const PREVIEW_THEMES = ['dark', 'white-and-red', 'black-and-yellow'] as const
+export type PreviewTheme = (typeof PREVIEW_THEMES)[number]
+export const isPreviewTheme = (value: unknown): value is PreviewTheme => PREVIEW_THEMES.includes(value as PreviewTheme)
+
+/** Mashup slots this plugin does not own: a dither field labelled as the owner's other plugins, its cell sized to the device so it survives scaling down. */
+const otherSlotsStyle = (device: PreviewDevice) => {
+  const cell = Math.round((12 * PREVIEW_DEVICES[device].width) / 800)
+  // X-class screens paint a white `.view::before` card under each slot, so the dither goes on both.
+  const dither = `background:conic-gradient(#000 25%,#fff 0 50%,#000 0 75%,#fff 0) 0 0/${cell}px ${cell}px !important`
+  return `.trmnl .screen .mashup .view:empty{${dither};opacity:.35}.trmnl .screen .mashup .view:empty::before{${dither}}`
+}
+
+/**
+ * A standalone HTML document for one rendered layout on one device class.
+ * `<base>` points relative framework URLs (its bitmap fonts) at trmnl.com, which
+ * a file or srcdoc document could not otherwise resolve.
+ */
+/** The device's CSS layout box; portrait swaps width and height. */
+export const previewSize = (device: PreviewDevice, portrait = false) => {
+  const { width, height } = PREVIEW_DEVICES[device]
+  return portrait ? { width: height, height: width } : { width, height }
+}
+
+export function previewDocument(renderedMarkup: string, device: PreviewDevice, layout: PreviewLayout, title = 'Wardenwatch', options: { shadeOtherSlots?: boolean; portrait?: boolean; theme?: PreviewTheme | undefined } = {}): string {
+  const oriented = options.portrait ? PREVIEW_DEVICES[device].classes.replace('screen--landscape', 'screen--portrait') : PREVIEW_DEVICES[device].classes
+  const classes = options.theme ? `${oriented} screen--theme-${options.theme}` : oriented
+  const themeSheet = options.theme ? `<link rel="stylesheet" href="https://trmnl.com/css/${FRAMEWORK_VERSION}/themes/${options.theme}-theme.css">` : ''
+  return `<!doctype html><html><head><meta charset="utf-8"><title>${title}</title><base href="https://trmnl.com/">
+<link rel="stylesheet" href="https://trmnl.com/css/${FRAMEWORK_VERSION}/plugins.css">${themeSheet}<script src="https://trmnl.com/js/${FRAMEWORK_VERSION}/plugins.js"></script>
+<style>html,body{margin:0;overflow:hidden}${options.shadeOtherSlots ? otherSlotsStyle(device) : ''}</style>
+</head><body class="environment trmnl"><div class="${classes}">${PREVIEW_LAYOUTS[layout].wrapper(renderedMarkup)}</div></body></html>`
+}

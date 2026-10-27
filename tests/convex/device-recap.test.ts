@@ -4,7 +4,7 @@ import { afterEach, describe, expect, it, vi } from 'vitest'
 import { api } from '@trmnl-games/backend/api'
 import schema from '../../apps/backend/convex/schema'
 import type { Doc, Id } from '@trmnl-games/backend/data-model'
-import { MAX_LOGS, MAX_RECAP_EVENTS, RECAP_WINDOW_MS } from '@trmnl-games/desk-crawler/payload'
+import { MAX_LOGS, MAX_RECAP_EVENTS, RECAP_WINDOW_MS } from '@trmnl-games/wardenwatch/payload'
 import { seedHero, seedWorld, type T } from './helpers'
 
 const modules = import.meta.glob('../../apps/backend/convex/**/*.ts')

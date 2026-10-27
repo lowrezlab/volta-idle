@@ -1,6 +1,6 @@
 /** Party Menu colouring for the 1-bit brand marks, and an RGB PNG encoder for the results. Node-only (tools). */
 import { deflateSync } from 'node:zlib'
-import type { Canvas } from '@trmnl-games/desk-crawler/art/canvas'
+import type { Canvas } from '@trmnl-games/wardenwatch/art/canvas'
 
 export type Rgb = readonly [number, number, number]
 

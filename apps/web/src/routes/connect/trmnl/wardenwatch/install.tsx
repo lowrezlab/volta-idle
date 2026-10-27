@@ -1,0 +1,183 @@
+import { Show, SignIn } from '@clerk/tanstack-react-start'
+import { convexQuery } from '@convex-dev/react-query'
+import { useQuery } from '@tanstack/react-query'
+import { createFileRoute, Link, redirect } from '@tanstack/react-router'
+import { useRef, useState, type FormEvent } from 'react'
+import { api } from '@trmnl-games/backend/api'
+import { ALIAS_RULE, HERO_NAME_RULE } from '@trmnl-games/platform'
+import { seo } from '../../../../lib/seo'
+import { SwitchAccount } from '../../../../lib/switchAccount'
+import { captureInstall, finishInstall, getPendingInstall } from '../../../../server/installFns'
+import { BUTTON_PRIMARY, LINK_BUTTON, Button, LoadingState } from '../../../../lib/ui'
+import { captureAnalytics, readAnalyticsConsent } from '../../../../lib/analytics'
+import { reportError } from '../../../../lib/errorReporting'
+import { NameField } from '../../../../lib/nameField'
+import { GenderPicker, type HeroGender } from '../../../../lib/genderPicker'
+import { useAnalyticsView } from '../../../../lib/analyticsProvider'
+import { documentLocale, messagesFor, useT } from '../../../../lib/i18n'
+import { headMessages } from '../../../../i18n/heads'
+import { installMessages } from '../../../../i18n/install'
+import { serverMessage } from '../../../../i18n/serverMessages'
+
+type Search = { code?: string; installation_callback_url?: string; invalid?: boolean }
+
+export const Route = createFileRoute('/connect/trmnl/wardenwatch/install')({
+  validateSearch: (search: Record<string, unknown>): Search => ({
+    ...(typeof search.code === 'string' ? { code: search.code } : {}),
+    ...(typeof search.installation_callback_url === 'string' ? { installation_callback_url: search.installation_callback_url } : {}),
+    ...(search.invalid === true || search.invalid === 'true' ? { invalid: true } : {}),
+  }),
+  beforeLoad: async ({ search }) => {
+    if (search.code !== undefined || search.installation_callback_url !== undefined) {
+      // Move the code into the encrypted cookie, then drop it from the URL before any third-party script loads.
+      const result = await captureInstall({ data: { gameSlug: 'wardenwatch', code: search.code ?? '', callback: search.installation_callback_url ?? '' } })
+      throw redirect({ to: '/connect/trmnl/wardenwatch/install', search: result.ok ? {} : { invalid: true }, replace: true })
+    }
+  },
+  loader: async () => await getPendingInstall({ data: { gameSlug: 'wardenwatch' } }),
+  head: ({ match: { context: { locale } } }) => {
+    const head = seo({ title: messagesFor(headMessages, locale).wwInstall, index: false, locale })
+    return { ...head, meta: [...head.meta, { name: 'referrer', content: 'no-referrer' }] }
+  },
+  component: InstallPage,
+})
+
+function InstallPage() {
+  const { pending } = Route.useLoaderData()
+  const { invalid } = Route.useSearch()
+  const t = useT(installMessages)
+  useAnalyticsView(pending ? 'installation started' : 'setup screen shown', { setup_state: pending ? 'pending_install' : invalid ? 'invalid_install_link' : 'missing_install_link' })
+
+  if (!pending) {
+    return (
+      <Page>
+        <h1 className="font-display text-3xl font-bold">{t.title}</h1>
+        {invalid ? <p role="alert">{t.invalidLink}</p> : null}
+        <p>{t.startFromPlugin('Wardenwatch')}</p>
+        <Link to="/help/wardenwatch" className="inline-flex min-h-11 items-center underline underline-offset-4">{t.helpWithSetup}</Link>
+      </Page>
+    )
+  }
+  return (
+    <Page>
+      <h1 className="font-display text-3xl font-bold">{t.connectTo('Wardenwatch')}</h1>
+      <Show when="signed-out">
+        <p>{t.signInFirst}</p>
+        <SignIn routing="hash" forceRedirectUrl="/connect/trmnl/wardenwatch/install" signUpForceRedirectUrl="/connect/trmnl/wardenwatch/install" />
+      </Show>
+      <Show when="signed-in">
+        <ConnectForm />
+      </Show>
+    </Page>
+  )
+}
+
+function ConnectForm() {
+  const { data: me } = useQuery(convexQuery(api.users.me, {}))
+  const [submitting, setSubmitting] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+  const [reconnectCallback, setReconnectCallback] = useState<string | null>(null)
+  const [alias, setAlias] = useState('')
+  const [heroName, setHeroName] = useState('')
+  const [heroGender, setHeroGender] = useState<HeroGender>('male')
+  const inFlight = useRef(false)
+  const t = useT(installMessages)
+  if (me === undefined) return <LoadingState label={t.loadingAccount} />
+  const needsProfile = !me?.user
+  const needsHero = !me?.hero
+
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+    if (inFlight.current) return
+    if (!navigator.onLine) { setError(t.offline); return }
+    inFlight.current = true
+    setSubmitting(true)
+    setError(null)
+    const form = new FormData(event.currentTarget)
+    captureAnalytics('installation submitted', { needs_profile: needsProfile, needs_hero: needsHero })
+    try {
+      const result = await finishInstall({
+      data: {
+        gameSlug: 'wardenwatch',
+        analyticsConsent: readAnalyticsConsent() === 'allowed',
+        ...(needsProfile ? { publicAlias: String(form.get('publicAlias') ?? '') } : {}),
+        ...(needsHero ? { heroName: String(form.get('heroName') ?? ''), heroGender } : {}),
+      },
+      })
+      if (result.ok) {
+        if (result.reconnectionRequired) { setReconnectCallback(result.callbackUrl); return }
+        window.location.assign(result.callbackUrl); return
+      }
+      captureAnalytics('installation failed', { error_code: result.code })
+      setError(serverMessage(result.message, documentLocale()))
+    } catch (caught) {
+      captureAnalytics('installation failed', { error_code: 'NETWORK_OR_SERVER_ERROR' })
+      reportError(caught, 'installation')
+      setError(t.couldntFinish)
+    } finally { inFlight.current = false; setSubmitting(false) }
+  }
+
+  if (reconnectCallback) return <section className="flex flex-col gap-4" data-analytics-private>
+    <h2 className="font-display text-xl font-bold">{t.reconnectTitle}</h2>
+    <p>{t.reconnectSave}</p>
+    <p>{t.reconnectDeleted}</p>
+    <a href={reconnectCallback} className={`${LINK_BUTTON} ${BUTTON_PRIMARY}`}>{t.continueToTrmnl}</a>
+  </section>
+  return (
+    <form onSubmit={onSubmit} data-analytics-private className="flex flex-col gap-4">
+      {needsProfile ? (
+        <p className="border-y border-edge py-3 text-sm">
+          {t.newAccount}
+        </p>
+      ) : null}
+      {needsProfile ? (
+        <NameField label={t.publicNameLabel} note={t.publicNameNote} rule={ALIAS_RULE} noun="public name" name="publicAlias" value={alias} onChange={setAlias} disabled={submitting} />
+      ) : (
+        <p>
+          {t.signedInAsBefore}<strong>{me?.user?.publicAlias}</strong>{t.signedInAsAfter}
+        </p>
+      )}
+      {needsHero ? (
+        <>
+          <NameField label={t.heroNameLabel} note={t.heroNameNote} rule={HERO_NAME_RULE} noun="hero name" name="heroName" value={heroName} onChange={setHeroName} placeholder="Steve" disabled={submitting} />
+          <GenderPicker value={heroGender} onChange={setHeroGender} note={t.genderNote} disabled={submitting} />
+          <RankingsPreview alias={(needsProfile ? alias : me?.user?.publicAlias ?? '').trim()} hero={heroName.trim()} />
+        </>
+      ) : (
+        <p>
+          {t.yourHeroBefore}<strong>{me?.hero?.name}</strong>{t.yourHeroAfter}
+        </p>
+      )}
+      <SwitchAccount returnTo="/connect/trmnl/wardenwatch/install" />
+      {error ? (
+        <p role="alert" className="font-semibold text-hp-ink">
+          {error}
+        </p>
+      ) : null}
+      <Button type="submit" pending={submitting} busyLabel={t.connecting}>{t.connect}</Button>
+      <p className="text-sm text-muted">{t.nextSave}</p>
+    </form>
+  )
+}
+
+/** How the two names sit together on the rankings (leaderboard.tsx): you in bold, your hero underneath. */
+function RankingsPreview({ alias, hero }: { alias: string; hero: string }) {
+  const t = useT(installMessages)
+  return (
+    <div className="flex flex-col gap-1" aria-hidden="true">
+      <p className="text-sm text-muted">{t.rankingsLook}</p>
+      <div className="flex min-w-0 items-start gap-3 border-2 border-rule px-3 py-2">
+        <span className="w-4 font-bold tabular-nums">1</span>
+        <span className="min-w-0 flex-1 [overflow-wrap:anywhere]">
+          <span className="block font-semibold">{alias || t.yourPublicName}</span>
+          <span className="block text-sm text-muted">{hero || 'Steve'}</span>
+        </span>
+        <span className="shrink-0 text-sm font-semibold text-gold-ink">{t.level1}</span>
+      </div>
+    </div>
+  )
+}
+
+function Page({ children }: { children: React.ReactNode }) {
+  return <main id="main" className="mx-auto flex max-w-lg flex-col gap-4 px-4 py-12">{children}</main>
+}

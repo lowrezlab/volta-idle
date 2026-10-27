@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
-import { catalogs } from '@trmnl-games/desk-crawler/content'
-import { validateCatalog } from '@trmnl-games/desk-crawler/content/validate'
-import { starterKit } from '@trmnl-games/desk-crawler/sim/core/starter'
+import { catalogs } from '@trmnl-games/wardenwatch/content'
+import { validateCatalog } from '@trmnl-games/wardenwatch/content/validate'
+import { starterKit } from '@trmnl-games/wardenwatch/sim/core/starter'
 
 describe('gear catalog', () => {
   it('gives every same-tier item in a slot its own stat', () => {

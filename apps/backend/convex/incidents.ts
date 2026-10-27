@@ -16,7 +16,7 @@ import { internalAction, internalMutation, internalQuery, type MutationCtx } fro
 const MAX_ATTEMPTS = 3
 /** Game name, failures table and runs table for each run table the incident may point at. */
 const GAMES = [
-  ['Desk Crawler', 'simulationFailures', 'simulationRuns'],
+  ['Wardenwatch', 'simulationFailures', 'simulationRuns'],
 ] as const
 type Notice = 'alert' | 'recovery'
 
@@ -60,7 +60,7 @@ export const getIncident = internalQuery({
   },
 })
 
-const alertFrom = () => process.env.ALERT_FROM ?? 'TRMNL Games <alerts@trmnlgames.com>'
+const alertFrom = () => process.env.ALERT_FROM ?? 'Wardenwatch <alerts@wardenwatch.example>'
 /** Fork: no default recipient; notices stay disabled until ALERT_TO is set. */
 const alertTo = () => process.env.ALERT_TO ?? ''
 
@@ -78,7 +78,7 @@ export const sendNotice = internalAction({
       return null
     }
     const tick = data.run?.tick ?? 'unknown'
-    const game = data.game ?? 'Desk Crawler'
+    const game = data.game ?? 'Wardenwatch'
     const quarantined = data.kind === 'quarantine'
     const count: number = Math.max(1, data.run?.quarantined ?? data.reasons.length)
     const subject = quarantined

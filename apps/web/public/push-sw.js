@@ -9,21 +9,21 @@ self.addEventListener('push', (event) => {
   } catch {
     data = {}
   }
-  const title = typeof data.title === 'string' ? data.title : 'Desk Crawler'
+  const title = typeof data.title === 'string' ? data.title : 'Wardenwatch'
   event.waitUntil(
     self.registration.showNotification(title, {
       body: typeof data.body === 'string' ? data.body : '',
       icon: '/icon-192.png',
       badge: '/icon-192.png',
       tag: typeof data.tag === 'string' ? data.tag : undefined,
-      data: { url: typeof data.url === 'string' ? data.url : '/app/desk-crawler' },
+      data: { url: typeof data.url === 'string' ? data.url : '/app/wardenwatch' },
     }),
   )
 })
 
 self.addEventListener('notificationclick', (event) => {
   event.notification.close()
-  const target = new URL(event.notification.data?.url ?? '/app/desk-crawler', self.location.origin)
+  const target = new URL(event.notification.data?.url ?? '/app/wardenwatch', self.location.origin)
   // Only ever open this site's own pages.
   if (target.origin !== self.location.origin) return
   event.waitUntil(

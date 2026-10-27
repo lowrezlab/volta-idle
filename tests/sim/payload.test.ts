@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
-import { contentV1 } from '@trmnl-games/desk-crawler/content/v1'
-import { contentV3 } from '@trmnl-games/desk-crawler/content/v3'
-import { aboutDuration, buildPayload, celebrationFor, MAX_LOGS, TOP_ROWS, type PayloadInput } from '@trmnl-games/desk-crawler/payload'
+import { contentV1 } from '@trmnl-games/wardenwatch/content/v1'
+import { contentV3 } from '@trmnl-games/wardenwatch/content/v3'
+import { aboutDuration, buildPayload, celebrationFor, MAX_LOGS, TOP_ROWS, type PayloadInput } from '@trmnl-games/wardenwatch/payload'
 
 const NOW = Date.UTC(2026, 9, 4, 8, 20)
 const input: PayloadInput = {
@@ -19,7 +19,7 @@ const input: PayloadInput = {
   bagCapacity: 30,
   heldItemName: null,
   logs: [],
-  instanceName: 'Desk Crawler',
+  instanceName: 'Wardenwatch',
   content: contentV1,
   spriteBaseUrl: null,
   artBaseUrl: 'https://art.test',

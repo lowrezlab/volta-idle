@@ -1,0 +1,31 @@
+{
+  "name": "@trmnl-games/wardenwatch",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./sim/core": "./src/sim/core/index.ts",
+    "./sim/core/*": "./src/sim/core/*.ts",
+    "./sim/seed": "./src/sim/seed.ts",
+    "./sim/score": "./src/sim/score.ts",
+    "./sim/schedule": "./src/sim/schedule.ts",
+    "./content": "./src/content/index.ts",
+    "./content/*": "./src/content/*.ts",
+    "./art/*": "./src/art/*.ts",
+    "./templates/*": "./src/templates/*.ts",
+    "./payload": "./src/lib/payload.ts",
+    "./log": "./src/lib/logPresentation.ts",
+    "./i18n": "./src/i18n/index.ts",
+    "./i18n/*": "./src/i18n/*.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@trmnl-games/engine": "workspace:*",
+    "fflate": "0.8.3",
+    "@trmnl-games/platform": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "~6.0.3"
+  }
+}

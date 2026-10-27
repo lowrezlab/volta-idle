@@ -3,11 +3,11 @@
  * One sheet per occasion, 1-bit as the device draws it on the left and the companion's painted scene on the right.
  */
 import { mkdirSync, writeFileSync } from 'node:fs'
-import type { BiomeArt, Subject } from '@trmnl-games/desk-crawler/art/scene'
+import type { BiomeArt, Subject } from '@trmnl-games/wardenwatch/art/scene'
 import { sheet } from './reviewSheet'
-import { OCCASION_ARTS, type OccasionArt } from '@trmnl-games/desk-crawler/art/occasions'
-import type { HeroPose } from '@trmnl-games/desk-crawler/art/hero'
-import type { SceneTime } from '@trmnl-games/desk-crawler/art/sceneTime'
+import { OCCASION_ARTS, type OccasionArt } from '@trmnl-games/wardenwatch/art/occasions'
+import type { HeroPose } from '@trmnl-games/wardenwatch/art/hero'
+import type { SceneTime } from '@trmnl-games/wardenwatch/art/sceneTime'
 
 const out = process.argv[2] ?? '.previews/occasions'
 const only = process.argv.slice(3).filter((arg) => arg !== '--contact')

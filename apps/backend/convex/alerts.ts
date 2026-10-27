@@ -6,7 +6,7 @@ import { appError } from './lib/errors'
 import { sha256Hex } from './lib/hash'
 import { currentUser, intentReturns, narrowChanged, runIntent } from './lib/intent'
 import { validateTimezone } from './lib/names'
-import { ALERTS, alertMessage, DESK_CRAWLER_KINDS, ensureSender, inQuietHours, kindOn, localDay, PREF_FOR, quietEndsAt, SWITCHES, type AlertKind, type AlertSwitch } from './lib/alerts'
+import { ALERTS, alertMessage, WARDENWATCH_KINDS, ensureSender, inQuietHours, kindOn, localDay, PREF_FOR, quietEndsAt, SWITCHES, type AlertKind, type AlertSwitch } from './lib/alerts'
 import type { GameSlug } from '@trmnl-games/platform'
 import { readWorld } from './world'
 import { deviceLocale } from './lib/trmnlUser'
@@ -291,7 +291,7 @@ export const devicesForTest = internalQuery({
 
 /**
  * Deleting one game's progress (D115): that game's outbox rows and switches go. Devices and quiet hours stay while the
- * other game still has a character to alert about; otherwise everything goes, as D114 removed it with Desk Crawler.
+ * other game still has a character to alert about; otherwise everything goes, as D114 removed it with Wardenwatch.
  * Returns how many rows went.
  */
 export async function purgeGameAlertRows(ctx: MutationCtx, userId: Id<'users'>, game: GameSlug, batch: number): Promise<number> {
@@ -300,9 +300,9 @@ export async function purgeGameAlertRows(ctx: MutationCtx, userId: Id<'users'>, 
   const otherGame =
     owner === null
       ? false
-      : game !== 'desk-crawler' && (await currentHero(ctx, owner)) !== null
+      : game !== 'wardenwatch' && (await currentHero(ctx, owner)) !== null
   if (!otherGame) return await purgeAlertRows(ctx, userId, batch)
-  const kinds: readonly AlertKind[] = DESK_CRAWLER_KINDS
+  const kinds: readonly AlertKind[] = WARDENWATCH_KINDS
   const rows = (await ctx.db.query('alertOutbox').withIndex('by_userId_and_localDay', (q) => q.eq('userId', userId)).take(batch * 4)).filter((row) => kinds.includes(row.kind)).slice(0, batch)
   for (const row of rows) await ctx.db.delete(row._id)
   if (rows.length === 0) {

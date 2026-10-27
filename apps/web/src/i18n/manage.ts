@@ -4,7 +4,7 @@ import { headMessages } from './heads'
 /** D169: managing a TRMNL installation (Configure), shared by the games' manage pages. */
 export const manageMessages = defineMessages({
   en: {
-    title: headMessages.en.dcManage,
+    title: headMessages.en.wwManage,
     heading: (game: string) => `${game} on TRMNL`,
     expired: 'That link expired or was not valid.',
     openFromSettings: (game: string) => `Open ${game} from your TRMNL plugin settings and choose Configure to manage this installation.`,
@@ -43,7 +43,7 @@ export const manageMessages = defineMessages({
     confirmConnect: 'Confirm and connect',
   },
   fr: {
-    title: headMessages.fr.dcManage,
+    title: headMessages.fr.wwManage,
     heading: (game: string) => `${game} sur TRMNL`,
     expired: 'Ce lien a expiré ou n’était pas valide.',
     openFromSettings: (game: string) => `Ouvrez ${game} depuis les réglages de votre plugin TRMNL et choisissez Configurer pour gérer cette installation.`,
@@ -82,7 +82,7 @@ export const manageMessages = defineMessages({
     confirmConnect: 'Confirmer et relier',
   },
   de: {
-    title: headMessages.de.dcManage,
+    title: headMessages.de.wwManage,
     heading: (game: string) => `${game} auf TRMNL`,
     expired: 'Dieser Link ist abgelaufen oder war ungültig.',
     openFromSettings: (game: string) => `Öffne ${game} in den Einstellungen deines TRMNL-Plugins und wähle Konfigurieren, um diese Installation zu verwalten.`,
@@ -121,7 +121,7 @@ export const manageMessages = defineMessages({
     confirmConnect: 'Bestätigen und verbinden',
   },
   es: {
-    title: headMessages.es.dcManage,
+    title: headMessages.es.wwManage,
     heading: (game: string) => `${game} en TRMNL`,
     expired: 'Ese enlace ha caducado o no era válido.',
     openFromSettings: (game: string) => `Abre ${game} desde los ajustes del plugin en TRMNL y elige Configurar para gestionar esta instalación.`,
@@ -160,7 +160,7 @@ export const manageMessages = defineMessages({
     confirmConnect: 'Confirmar y conectar',
   },
   it: {
-    title: headMessages.it.dcManage,
+    title: headMessages.it.wwManage,
     heading: (game: string) => `${game} su TRMNL`,
     expired: 'Quel link è scaduto o non era valido.',
     openFromSettings: (game: string) => `Apri ${game} dalle impostazioni del plugin in TRMNL e scegli Configura per gestire questa installazione.`,
@@ -199,7 +199,7 @@ export const manageMessages = defineMessages({
     confirmConnect: 'Conferma e collega',
   },
   pt: {
-    title: headMessages.pt.dcManage,
+    title: headMessages.pt.wwManage,
     heading: (game: string) => `${game} no TRMNL`,
     expired: 'Esse link expirou ou não era válido.',
     openFromSettings: (game: string) => `Abra o ${game} nas configurações do plugin no TRMNL e escolha Configurar para gerenciar esta instalação.`,
@@ -238,7 +238,7 @@ export const manageMessages = defineMessages({
     confirmConnect: 'Confirmar e conectar',
   },
   pl: {
-    title: headMessages.pl.dcManage,
+    title: headMessages.pl.wwManage,
     heading: (game: string) => `${game} w TRMNL`,
     expired: 'Ten link wygasł albo był nieprawidłowy.',
     openFromSettings: (game: string) => `Otwórz ${game} w ustawieniach pluginu w TRMNL i wybierz „Konfiguruj”, aby zarządzać tą instalacją.`,
@@ -277,7 +277,7 @@ export const manageMessages = defineMessages({
     confirmConnect: 'Potwierdź i połącz',
   },
   nl: {
-    title: headMessages.nl.dcManage,
+    title: headMessages.nl.wwManage,
     heading: (game: string) => `${game} op TRMNL`,
     expired: 'Die link is verlopen of was niet geldig.',
     openFromSettings: (game: string) => `Open ${game} via de plugininstellingen in TRMNL en kies Configureer om deze installatie te beheren.`,

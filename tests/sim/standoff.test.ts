@@ -1,11 +1,11 @@
 import { describe, expect, it } from 'vitest'
-import { contentV23 } from '@trmnl-games/desk-crawler/content/v23'
-import { contentV24 } from '@trmnl-games/desk-crawler/content/v24'
-import { validateCatalog } from '@trmnl-games/desk-crawler/content/validate'
-import { simulateHero, SIMULATION_VERSION } from '@trmnl-games/desk-crawler/sim/core/simulate'
-import { heroMaxHp } from '@trmnl-games/desk-crawler/sim/core/stats'
-import { starterHero, starterKit } from '@trmnl-games/desk-crawler/sim/core/starter'
-import type { ContentCatalog, HeroState, ItemSnapshot, SimulationResult, Standoff, StreamSeeds } from '@trmnl-games/desk-crawler/sim/core/types'
+import { contentV23 } from '@trmnl-games/wardenwatch/content/v23'
+import { contentV24 } from '@trmnl-games/wardenwatch/content/v24'
+import { validateCatalog } from '@trmnl-games/wardenwatch/content/validate'
+import { simulateHero, SIMULATION_VERSION } from '@trmnl-games/wardenwatch/sim/core/simulate'
+import { heroMaxHp } from '@trmnl-games/wardenwatch/sim/core/stats'
+import { starterHero, starterKit } from '@trmnl-games/wardenwatch/sim/core/starter'
+import type { ContentCatalog, HeroState, ItemSnapshot, SimulationResult, Standoff, StreamSeeds } from '@trmnl-games/wardenwatch/sim/core/types'
 import { seeds, withId } from './helpers'
 
 const streams = (n: number): StreamSeeds => ({

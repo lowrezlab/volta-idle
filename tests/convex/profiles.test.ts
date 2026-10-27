@@ -3,7 +3,7 @@ import { convexTest } from 'convex-test'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { api } from '@trmnl-games/backend/api'
 import schema from '../../apps/backend/convex/schema'
-import { zeroCounters } from '@trmnl-games/desk-crawler/sim/core/starter'
+import { zeroCounters } from '@trmnl-games/wardenwatch/sim/core/starter'
 import { runTick, seedHero, seedWorld, type T } from './helpers'
 
 const modules = import.meta.glob('../../apps/backend/convex/**/*.ts')

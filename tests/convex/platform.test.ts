@@ -19,7 +19,7 @@ async function linkGrant(t: T, alias: string, tokenHash: string) {
 
 const screen = (t: T, tokenHash: string) => t.query(internal.trmnlPayload.forInstance, { tokenHash, uuid: UUID, now: Date.now(), instanceName: null })
 
-describe('Desk Crawler progress deletion', () => {
+describe('Wardenwatch progress deletion', () => {
   let t: T
   let fetchMock: ReturnType<typeof vi.fn>
   beforeEach(async () => {
@@ -57,7 +57,7 @@ describe('Desk Crawler progress deletion', () => {
       instances: (await ctx.db.query('trmnlInstances').collect()).length,
       revokedTokens: (await ctx.db.query('revokedTrmnlCredentials').collect()).map((r) => r.tokenHash),
       revokedIdentities: (await ctx.db.query('revokedAuthIdentities').collect()).length,
-      profile: await ctx.db.query('deskCrawlerProfiles').first(),
+      profile: await ctx.db.query('wardenwatchProfiles').first(),
       job: await ctx.db.query('gameDeletionJobs').first(),
     }))
     expect(state).toMatchObject({ user: { publicAlias: 'Ana', state: 'active' }, hero: null, items: 0, grants: 0, instances: 0, revokedTokens: [tokenHash], revokedIdentities: 0 })
@@ -117,7 +117,7 @@ describe('Desk Crawler progress deletion', () => {
     await t.finishAllScheduledFunctions(vi.runAllTimers)
     expect(await t.run(async (ctx) => ({
       users: (await ctx.db.query('users').collect()).length,
-      profiles: (await ctx.db.query('deskCrawlerProfiles').collect()).length,
+      profiles: (await ctx.db.query('wardenwatchProfiles').collect()).length,
       gameJobs: (await ctx.db.query('gameDeletionJobs').collect()).length,
     }))).toEqual({ users: 0, profiles: 0, gameJobs: 0 })
   })

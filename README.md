@@ -1,4 +1,9 @@
-# Desk Crawler
+# Wardenwatch
+
+> **Wardenwatch** is a Volta-themed idle RPG for the TRMNL e-ink device. It is a fork of
+> [Desk Crawler](https://github.com/barrymichaeldoyle/trmnl-games) by Barry Michael Doyle, whose code is
+> released under the MIT License; the original copyright notice stays in [LICENSE](LICENSE). The rest of this README still
+> describes Desk Crawler as it shipped and is kept for reference until the fork's own docs replace it.
 
 **[Install Desk Crawler on TRMNL](https://trmnl.com/integrations/desk-crawler)** · **[Play at trmnlgames.com](https://trmnlgames.com)**
 
@@ -46,7 +51,7 @@ pnpm lint:trmnl                 # lint all four TRMNL layouts
 pnpm crosscheck:trmnl           # compare preview Liquid (liquidjs) with Ruby Liquid via trmnlp
 pnpm balance                   # balance harness (see docs/evidence/balance.md)
 pnpm tsx tools/trmnl/preview.ts  # local TRMNL layout previews in .previews/
-# Interactive preview gallery (dev server only): http://localhost:3000/dev/desk-crawler
+# Interactive preview gallery (dev server only): http://localhost:3000/dev/wardenwatch
 #   every scenario × OG/X/BWRY × full/half/side/quarter × landscape/portrait
 ```
 

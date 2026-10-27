@@ -1,6 +1,6 @@
 import qrcode from 'qrcode-generator'
 
-/** Two-module quiet zone (Desk Crawler QR v3): compact codes that still scan, since layouts leave white space around them. */
+/** Two-module quiet zone (Wardenwatch QR v3): compact codes that still scan, since layouts leave white space around them. */
 export const QUIET_MODULES = 2
 
 /** Square 1-bit bitmap (1 = black) with a two-module quiet zone, or on the left and bottom only for a `corner` code. */

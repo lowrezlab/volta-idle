@@ -26,7 +26,7 @@ const sentrySourceMaps = (): Plugin[] => process.env.SENTRY_AUTH_TOKEN
   : []
 
 /**
- * D169: Desk Crawler's content dictionaries load one locale at a time in the browser (lib/content, i18n/lazy), where
+ * D169: Wardenwatch's content dictionaries load one locale at a time in the browser (lib/content, i18n/lazy), where
  * the package's own modules (the log presenter, the device payload) import the static index that holds all seven.
  * This swaps that index for the lazy registry wherever the web build resolves it, so no page carries the other six
  * languages.
@@ -37,7 +37,7 @@ const lazyContentDictionaries = (): Plugin => ({
   async resolveId(source, importer, options) {
     if (importer === undefined) return null
     const resolved = await this.resolve(source, importer, { ...options, skipSelf: true })
-    return resolved && /[\\/]packages[\\/]desk-crawler[\\/]src[\\/]i18n[\\/]index\.ts$/.test(resolved.id) ? resolved.id.replace(/index\.ts$/, 'lazy.ts') : null
+    return resolved && /[\\/]packages[\\/]wardenwatch[\\/]src[\\/]i18n[\\/]index\.ts$/.test(resolved.id) ? resolved.id.replace(/index\.ts$/, 'lazy.ts') : null
   },
 })
 

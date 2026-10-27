@@ -1,10 +1,10 @@
 import { defineSchema, defineTable } from 'convex/server'
 import { v } from 'convex/values'
 import { logDetail, todoKind } from './lib/logDetail'
-import { DESK_CRAWLER_TABLES, engineTables, rankingTables } from './lib/engine/tables'
+import { WARDENWATCH_TABLES, engineTables, rankingTables } from './lib/engine/tables'
 
-/** Desk Crawler's engine tables (world, runs, score windows, leaderboard sets), from the shared factory (S0). */
-const deskCrawlerEngine = { ...engineTables(DESK_CRAWLER_TABLES, ['deaths', 'levelUps', 'heldFinds']), ...rankingTables(DESK_CRAWLER_TABLES) }
+/** Wardenwatch's engine tables (world, runs, score windows, leaderboard sets), from the shared factory (S0). */
+const wardenwatchEngine = { ...engineTables(WARDENWATCH_TABLES, ['deaths', 'levelUps', 'heldFinds']), ...rankingTables(WARDENWATCH_TABLES) }
 
 
 /**
@@ -167,7 +167,7 @@ export const logKind = v.union(
 )
 
 /** Every registered game (packages/platform). Storage accepts any of them; each write path still names its own game. */
-export const gameSlug = v.literal('desk-crawler')
+export const gameSlug = v.literal('wardenwatch')
 export const gameStatus = v.union(v.literal('hidden'), v.literal('preview'), v.literal('live'))
 
 /** D149: a hero's look; chosen free at creation, changed later with a makeover. */
@@ -187,7 +187,7 @@ export default defineSchema({
   }).index('by_key', ['key']),
 
   /**
-   * Desk Crawler's public office tally (D174): one row, replaced at the end of each tick's hero walk.
+   * Wardenwatch's public office tally (D174): one row, replaced at the end of each tick's hero walk.
    * Heroes who have started, the monsters they have defeated and the gear they have found.
    */
   officeCensus: defineTable({
@@ -212,13 +212,13 @@ export default defineSchema({
     updatedAt: v.number(),
   }).index('by_slug', ['slug']),
 
-  worldState: deskCrawlerEngine.world,
+  worldState: wardenwatchEngine.world,
   /**
    * Census totals are optional so a run stored before D174 still validates. They are summed across the hero walk
    * and copied to `officeCensus` when the walk finishes; they are not engine counters, which are required on every run.
    */
   simulationRuns: defineTable({
-    ...deskCrawlerEngine.runFields,
+    ...wardenwatchEngine.runFields,
     censusHeroes: v.optional(v.number()),
     censusMonsters: v.optional(v.number()),
     censusFinds: v.optional(v.number()),
@@ -229,13 +229,13 @@ export default defineSchema({
     censusRaids: v.optional(v.number()),
     censusTasks: v.optional(v.number()),
   }).index('by_tick', ['tick']).index('by_state_and_startedAt', ['state', 'startedAt']),
-  simulationFailures: deskCrawlerEngine.failures,
-  heroScoreWindows: deskCrawlerEngine.scoreWindows,
-  rankInputs: deskCrawlerEngine.rankInputs,
-  leaderboardPublications: defineTable(deskCrawlerEngine.publicationFields).index('by_runId', ['runId']).index('by_state', ['state']),
-  leaderboardGenerations: deskCrawlerEngine.generations,
-  heroRanks: deskCrawlerEngine.ranks,
-  achievementStats: deskCrawlerEngine.achievementStats,
+  simulationFailures: wardenwatchEngine.failures,
+  heroScoreWindows: wardenwatchEngine.scoreWindows,
+  rankInputs: wardenwatchEngine.rankInputs,
+  leaderboardPublications: defineTable(wardenwatchEngine.publicationFields).index('by_runId', ['runId']).index('by_state', ['state']),
+  leaderboardGenerations: wardenwatchEngine.generations,
+  heroRanks: wardenwatchEngine.ranks,
+  achievementStats: wardenwatchEngine.achievementStats,
 
   users: defineTable({
     analyticsConsent: v.optional(v.boolean()),
@@ -272,7 +272,7 @@ export default defineSchema({
     .index('by_heldAlias_and_until', ['heldAlias.normalized', 'heldAlias.until'])
     .index('by_state', ['state']),
 
-  deskCrawlerProfiles: defineTable({
+  wardenwatchProfiles: defineTable({
     userId: v.id('users'),
     state: v.union(v.literal('active'), v.literal('deleting')),
     activeHeroId: v.optional(v.id('heroes')),
@@ -556,7 +556,7 @@ export default defineSchema({
 
 
   operationReceipts: defineTable({
-    scope: v.optional(v.union(v.literal('platform'), v.literal('desk-crawler'))),
+    scope: v.optional(v.union(v.literal('platform'), v.literal('wardenwatch'))),
     userId: v.id('users'),
     operationId: v.string(),
     operation: v.string(),

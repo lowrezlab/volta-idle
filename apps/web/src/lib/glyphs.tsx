@@ -1,4 +1,4 @@
-import { GLYPHS } from '@trmnl-games/desk-crawler/art/glyphs'
+import { GLYPHS } from '@trmnl-games/wardenwatch/art/glyphs'
 import type { ReactNode } from 'react'
 
 /**

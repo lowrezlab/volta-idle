@@ -26,11 +26,11 @@ describe('shared public profile (D115, S5)', () => {
   it('lists the opted-in hero', async () => {
     await seedHero(t, { publicProfile: true }, 'Solo')
     const profile = await t.query(api.platformProfile.view, { alias: 'solo' })
-    expect(profile).toMatchObject({ alias: 'Solo', games: [{ slug: 'desk-crawler', name: 'Baz' }] })
+    expect(profile).toMatchObject({ alias: 'Solo', games: [{ slug: 'wardenwatch', name: 'Baz' }] })
   })
 
-  it('shows the hero whatever Desk Crawler\'s listing status, as upstream', async () => {
-    await t.mutation(internal.platform.setGameStatusInternal, { slug: 'desk-crawler', status: 'hidden' })
+  it('shows the hero whatever Wardenwatch\'s listing status, as upstream', async () => {
+    await t.mutation(internal.platform.setGameStatusInternal, { slug: 'wardenwatch', status: 'hidden' })
     await seedHero(t, { publicProfile: true }, 'Solo')
     expect(await t.query(api.platformProfile.view, { alias: 'Solo' })).not.toBeNull()
   })

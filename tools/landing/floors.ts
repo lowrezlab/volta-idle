@@ -1,6 +1,6 @@
 /**
  * Writes the public pages' floor art and facts: one painted fight scene per floor of the active catalog, under
- * apps/web/public/games/desk-crawler/floors/, and apps/web/src/lib/facts.gen.ts with each floor's name, opening level
+ * apps/web/public/games/wardenwatch/floors/, and apps/web/src/lib/facts.gen.ts with each floor's name, opening level
  * and monsters, and the levels the pitch quotes. The pages read these instead of the content catalogs and the scene painter, which would add the whole
  * catalog history and the art code to the home page's bundle. tests/web/facts.test.ts fails when they drift.
  *
@@ -9,21 +9,21 @@
 import { mkdirSync, writeFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { paintedSceneUri } from '../../packages/desk-crawler/src/art/sceneColour'
-import { scenePath } from '../../packages/desk-crawler/src/art/sceneKey'
-import { ACTIVE_CONTENT, catalogs } from '../../packages/desk-crawler/src/content/index'
+import { paintedSceneUri } from '../../packages/wardenwatch/src/art/sceneColour'
+import { scenePath } from '../../packages/wardenwatch/src/art/sceneKey'
+import { ACTIVE_CONTENT, catalogs } from '../../packages/wardenwatch/src/content/index'
 import { LOCALES, type Locale } from '../../packages/platform/src/locale'
-import { contentTranslator, type ContentTranslator } from '../../packages/desk-crawler/src/i18n/index'
-import { renderPhrase } from '../../packages/desk-crawler/src/i18n/grammar'
-import { fr } from '../../packages/desk-crawler/src/i18n/fr'
-import { de } from '../../packages/desk-crawler/src/i18n/de'
+import { contentTranslator, type ContentTranslator } from '../../packages/wardenwatch/src/i18n/index'
+import { renderPhrase } from '../../packages/wardenwatch/src/i18n/grammar'
+import { fr } from '../../packages/wardenwatch/src/i18n/fr'
+import { de } from '../../packages/wardenwatch/src/i18n/de'
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '../..')
 const catalog = catalogs[ACTIVE_CONTENT]
 /** The monster each floor's picture shows; a floor not listed shows its first monster. */
 const FEATURED: Record<string, string> = { office_cubicles: 'stapler_mimic', server_room: 'cable_serpent', cafeteria_depths: 'coffee_slime', archive: 'box_file_beetle', parking_garage: 'ghost_car' }
 
-const outDir = join(root, 'apps/web/public/games/desk-crawler/floors')
+const outDir = join(root, 'apps/web/public/games/wardenwatch/floors')
 mkdirSync(outDir, { recursive: true })
 const floors = catalog.biomes.map((biome) => {
   const featured = biome.monsterIds.includes(FEATURED[biome.id] ?? '') ? FEATURED[biome.id]! : biome.monsterIds[0]!

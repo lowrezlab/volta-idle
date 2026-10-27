@@ -30,7 +30,7 @@
   },
   "include": [
     "packages/engine/src/**/*.ts",
-    "packages/desk-crawler/src/**/*.ts",
+    "packages/wardenwatch/src/**/*.ts",
     "tests/**/*.ts",
     "tools/**/*.ts"
   ],

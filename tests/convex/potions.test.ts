@@ -3,7 +3,7 @@ import { convexTest } from 'convex-test'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { api } from '@trmnl-games/backend/api'
 import type { Id } from '@trmnl-games/backend/data-model'
-import { maxHp } from '@trmnl-games/desk-crawler/sim/core/stats'
+import { maxHp } from '@trmnl-games/wardenwatch/sim/core/stats'
 import schema from '../../apps/backend/convex/schema'
 import { seedHero, seedWorld, type T } from './helpers'
 

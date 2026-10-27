@@ -1,4 +1,4 @@
-import { currentHero, gameProfile, isDeskCrawler } from './lib/gameProfile'
+import { currentHero, gameProfile, isWardenwatch } from './lib/gameProfile'
 import { maskRaidSummaries } from './lib/raids'
 import { sceneEvent } from './lib/heroScene'
 import { v } from 'convex/values'
@@ -6,21 +6,21 @@ import { internalQuery, query, type QueryCtx } from './_generated/server'
 import type { Doc } from './_generated/dataModel'
 import { currentUser } from './lib/intent'
 
-import { bagUsed as countBag } from '@trmnl-games/desk-crawler/sim/core/bag'
-import { potionsHeld } from '@trmnl-games/desk-crawler/sim/core/potions'
-import { buildPayload, MAX_LOGS, MAX_RECAP_EVENTS, recapPeriod, type PayloadInput } from '@trmnl-games/desk-crawler/payload'
+import { bagUsed as countBag } from '@trmnl-games/wardenwatch/sim/core/bag'
+import { potionsHeld } from '@trmnl-games/wardenwatch/sim/core/potions'
+import { buildPayload, MAX_LOGS, MAX_RECAP_EVENTS, recapPeriod, type PayloadInput } from '@trmnl-games/wardenwatch/payload'
 import { readWorld, worldContent } from './world'
 import { readDeviceRanking } from './lib/rankingRead'
 import { keepsakeCode, keepsakeGrant } from './lib/keepsakes'
-import { keepsakesOpen, keepsakeWeek } from '@trmnl-games/desk-crawler/content/keepsakes'
-import { displayLogDeltas } from '@trmnl-games/desk-crawler/log'
-import { affixById } from '@trmnl-games/desk-crawler/sim/core/modifiers'
-import { todoCompactLine } from '@trmnl-games/desk-crawler/sim/core/todo'
-import { careerLine, currentRung, measureRung } from '@trmnl-games/desk-crawler/sim/core/career'
-import { taskLabel } from '@trmnl-games/desk-crawler/sim/core/todo'
+import { keepsakesOpen, keepsakeWeek } from '@trmnl-games/wardenwatch/content/keepsakes'
+import { displayLogDeltas } from '@trmnl-games/wardenwatch/log'
+import { affixById } from '@trmnl-games/wardenwatch/sim/core/modifiers'
+import { todoCompactLine } from '@trmnl-games/wardenwatch/sim/core/todo'
+import { careerLine, currentRung, measureRung } from '@trmnl-games/wardenwatch/sim/core/career'
+import { taskLabel } from '@trmnl-games/wardenwatch/sim/core/todo'
 import { toHeroState } from './sim/runs/adapter'
-import type { ContentCatalog } from '@trmnl-games/desk-crawler/sim/core/types'
-import { INVENTORY_READ } from '@trmnl-games/desk-crawler/sim/core/limits'
+import type { ContentCatalog } from '@trmnl-games/wardenwatch/sim/core/types'
+import { INVENTORY_READ } from '@trmnl-games/wardenwatch/sim/core/limits'
 import { deviceLocale, trmnlUserChanged } from './lib/trmnlUser'
 
 /**
@@ -40,7 +40,7 @@ export const screenFetchedAfterInstall = (instance: { createdAt: number; lastScr
   instance.lastScreenServedAt !== undefined && instance.lastScreenServedAt - instance.createdAt >= INSTALL_RENDER_MS
 
 export const forInstance = internalQuery({
-  args: { gameSlug: v.optional(v.literal('desk-crawler')), tokenHash: v.string(), uuid: v.string(), now: v.number(), instanceName: v.union(v.string(), v.null()), utcOffset: v.optional(v.union(v.number(), v.null())), locale: v.optional(v.union(v.string(), v.null())) },
+  args: { gameSlug: v.optional(v.literal('wardenwatch')), tokenHash: v.string(), uuid: v.string(), now: v.number(), instanceName: v.union(v.string(), v.null()), utcOffset: v.optional(v.union(v.number(), v.null())), locale: v.optional(v.union(v.string(), v.null())) },
   returns: v.union(
     v.null(),
     v.object({ outcome: v.literal('recoverable') }),
@@ -54,11 +54,11 @@ export const forInstance = internalQuery({
     if (!instance) {
       if (await ctx.db.query('revokedTrmnlCredentials').withIndex('by_tokenHash', q => q.eq('tokenHash', args.tokenHash)).first()) return null
       const grant = await ctx.db.query('trmnlGrants').withIndex('by_tokenHash', q => q.eq('tokenHash', args.tokenHash)).unique()
-      return grant && isDeskCrawler(grant) && grant.state === 'active' && !grant.authorizedUuid ? { outcome: 'recoverable' as const } : null
+      return grant && isWardenwatch(grant) && grant.state === 'active' && !grant.authorizedUuid ? { outcome: 'recoverable' as const } : null
     }
     const grant = await ctx.db.get(instance.grantId)
-    if (!grant || !isDeskCrawler(grant) || grant.state !== 'active' || grant.tokenHash !== args.tokenHash || (grant.authorizedUuid && grant.authorizedUuid !== args.uuid)) return null
-    if (!isDeskCrawler(instance) || instance.userId !== grant.userId || instance.state !== 'active') return null
+    if (!grant || !isWardenwatch(grant) || grant.state !== 'active' || grant.tokenHash !== args.tokenHash || (grant.authorizedUuid && grant.authorizedUuid !== args.uuid)) return null
+    if (!isWardenwatch(instance) || instance.userId !== grant.userId || instance.state !== 'active') return null
     const user = await ctx.db.get(instance.userId)
     if (user === null || user.state !== 'active' || (await gameProfile(ctx, user._id))?.state === 'deleting') return null
 

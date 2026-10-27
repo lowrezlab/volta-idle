@@ -1,4 +1,4 @@
-// Refuses to deploy unless CONVEX_DEPLOY_KEY targets Desk Crawler production.
+// Refuses to deploy unless CONVEX_DEPLOY_KEY targets Wardenwatch production.
 // Deploy keys look like "prod:<deployment>|<secret>"; only the prefix is read or printed.
 const EXPECTED = 'prod:exciting-cormorant-948'
 const key = process.env.CONVEX_DEPLOY_KEY ?? ''

@@ -1,14 +1,14 @@
 import { inflateSync } from 'node:zlib'
 import { describe, expect, it } from 'vitest'
-import { parseScenePath, renderScenePng } from '@trmnl-games/desk-crawler/art/route'
-import { composeScene, FULL_SCALE, LARGE_SCALE, MEDIUM_SCALE, SCENE_VERSION, SMALL_SCALE, STAGE_HEIGHT, STAGE_WIDTH } from '@trmnl-games/desk-crawler/art/scene'
-import { sceneFor, scenePath } from '@trmnl-games/desk-crawler/art/sceneKey'
-import { sceneTimeAt, sceneUrlAt, sceneUrlsAt } from '@trmnl-games/desk-crawler/art/sceneTime'
-import { recapPeriod } from '@trmnl-games/desk-crawler/payload'
-import { monsterArt } from '@trmnl-games/desk-crawler/art/monsters'
-import { BWRY_PALETTE, bwryInk, BwryInk } from '@trmnl-games/desk-crawler/art/sceneColour'
-import { contentV1 } from '@trmnl-games/desk-crawler/content/v1'
-import { catalogs } from '@trmnl-games/desk-crawler/content'
+import { parseScenePath, renderScenePng } from '@trmnl-games/wardenwatch/art/route'
+import { composeScene, FULL_SCALE, LARGE_SCALE, MEDIUM_SCALE, SCENE_VERSION, SMALL_SCALE, STAGE_HEIGHT, STAGE_WIDTH } from '@trmnl-games/wardenwatch/art/scene'
+import { sceneFor, scenePath } from '@trmnl-games/wardenwatch/art/sceneKey'
+import { sceneTimeAt, sceneUrlAt, sceneUrlsAt } from '@trmnl-games/wardenwatch/art/sceneTime'
+import { recapPeriod } from '@trmnl-games/wardenwatch/payload'
+import { monsterArt } from '@trmnl-games/wardenwatch/art/monsters'
+import { BWRY_PALETTE, bwryInk, BwryInk } from '@trmnl-games/wardenwatch/art/sceneColour'
+import { contentV1 } from '@trmnl-games/wardenwatch/content/v1'
+import { catalogs } from '@trmnl-games/wardenwatch/content'
 
 describe('scene art', () => {
   it('maps hero state and the latest event to a pose and subject', () => {
@@ -185,22 +185,22 @@ describe('local scene time', () => {
 describe('companion QR codes', () => {
   it('encode only allowlisted targets and scan back to the companion URL', async () => {
     const { default: jsQR } = await import('jsqr')
-    const { parseQrPath, qrInk, qrPath, renderQrPng, QR_SCALE, QR_SCALES } = await import('@trmnl-games/desk-crawler/art/qr')
+    const { parseQrPath, qrInk, qrPath, renderQrPng, QR_SCALE, QR_SCALES } = await import('@trmnl-games/wardenwatch/art/qr')
     expect(parseQrPath(qrPath('bag', QR_SCALE))).toEqual({ target: 'bag', scale: QR_SCALE })
     for (const bad of ['/art/qr/v1/evil/3.png', '/art/qr/v1/app/9.png', '/art/qr/v0/app/3.png', '/art/qr/v1/app/3.png?x=1']) {
       expect(renderQrPng(bad, 'https://example.test')).toBeNull()
     }
     for (const scale of QR_SCALES) {
-      const { size, ink } = qrInk('https://trmnlgames.com/app/desk-crawler/inventory', scale)
+      const { size, ink } = qrInk('https://trmnlgames.com/app/wardenwatch/inventory', scale)
       const rgba = new Uint8ClampedArray(size * size * 4)
       for (let i = 0; i < ink.length; i += 1) rgba.fill(ink[i] ? 0 : 255, i * 4, i * 4 + 3), (rgba[i * 4 + 3] = 255)
-      expect(jsQR(rgba, size, size)?.data).toBe('https://trmnlgames.com/app/desk-crawler/inventory')
+      expect(jsQR(rgba, size, size)?.data).toBe('https://trmnlgames.com/app/wardenwatch/inventory')
     }
   })
 
   it('draws a waiting keepsake\'s claim link at the home code\'s size, and only for six digits (D180)', async () => {
     const { default: jsQR } = await import('jsqr')
-    const { keepsakeQrBasePath, keepsakeQrFields, parseKeepsakeQrPath, qrInk, renderQrPng } = await import('@trmnl-games/desk-crawler/art/qr')
+    const { keepsakeQrBasePath, keepsakeQrFields, parseKeepsakeQrPath, qrInk, renderQrPng } = await import('@trmnl-games/wardenwatch/art/qr')
     expect(keepsakeQrBasePath('482 917')).toBe('/art/qr/v3/keepsake/482917')
     expect(keepsakeQrBasePath('482 917', true)).toBe('/art/qr/v3/keepsake-corner/482917')
     expect(keepsakeQrBasePath('48291')).toBeNull()
@@ -221,8 +221,8 @@ describe('companion QR codes', () => {
 
   it('draws the home and corner codes from the short link, the corner one smaller and quiet only left and below (D108)', async () => {
     const { default: jsQR } = await import('jsqr')
-    const { qrInk, renderQrPng } = await import('@trmnl-games/desk-crawler/art/qr')
-    const { size: full } = qrInk('https://trmnlgames.com/app/desk-crawler', 2)
+    const { qrInk, renderQrPng } = await import('@trmnl-games/wardenwatch/art/qr')
+    const { size: full } = qrInk('https://trmnlgames.com/app/wardenwatch', 2)
     const { size: home } = qrInk('https://trmnlgames.com/dc', 2)
     const { size, ink } = qrInk('https://trmnlgames.com/dc', 2, true)
     expect([full, home, size]).toEqual([66, 58, 54])
@@ -244,7 +244,7 @@ describe('companion QR codes', () => {
 
 describe('hero social card (D109)', () => {
   it('draws every character a public name or hero name may use', async () => {
-    const { glyphFor } = await import('@trmnl-games/desk-crawler/art/font')
+    const { glyphFor } = await import('@trmnl-games/wardenwatch/art/font')
     const fallback = glyphFor('?')
     for (const ch of "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 ._'-#·:/,") expect(glyphFor(ch) === fallback && ch !== '?').toBe(false)
     expect(glyphFor('€')).toBe(fallback)

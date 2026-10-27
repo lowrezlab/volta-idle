@@ -44,11 +44,11 @@ describe('the hero reminder email (D198)', () => {
     expect(messages()).toHaveLength(1)
     const [mail] = messages()
     expect(mail.to).toEqual(['owner@example.com'])
-    expect(mail.subject).toBe('Desk Crawler for TRMNL: Tobias has 10 gold waiting')
-    expect(mail.text).toContain('Tobias has been adventuring on your TRMNL since you installed Desk Crawler on 13 October, and is now level 3.')
+    expect(mail.subject).toBe('Wardenwatch for TRMNL: Tobias has 10 gold waiting')
+    expect(mail.text).toContain('Tobias has been adventuring on your TRMNL since you installed Wardenwatch on 13 October, and is now level 3.')
     expect(mail.text).toContain('- 10 gold from a goal reached, ready to claim')
-    expect(mail.text).toMatch(/https:\/\/trmnlgames\.com\/desk-crawler\/unsubscribe\?u=[^&]+&t=[a-f0-9]{64}/)
-    expect(mail.headers['List-Unsubscribe']).toMatch(/^<https:\/\/trmnlgames\.com\/desk-crawler\/unsubscribe/)
+    expect(mail.text).toMatch(/https:\/\/trmnlgames\.com\/wardenwatch\/unsubscribe\?u=[^&]+&t=[a-f0-9]{64}/)
+    expect(mail.headers['List-Unsubscribe']).toMatch(/^<https:\/\/trmnlgames\.com\/wardenwatch\/unsubscribe/)
     expect((await user('Ana'))!.heroReminderSentAt).toBeDefined()
     // Once is all: the next day's run finds nobody.
     vi.advanceTimersByTime(DAY)
@@ -97,7 +97,7 @@ describe('the hero reminder email (D198)', () => {
     const ana = (await user('Ana'))!
     const sent = await t.action(internal.heroReminder.sendTest, { alias: 'Ana' })
     expect(sent).toBe('sent')
-    const link = new URL(messages()[0].text.match(/https:\/\/trmnlgames\.com\/desk-crawler\/unsubscribe\S+/)![0])
+    const link = new URL(messages()[0].text.match(/https:\/\/trmnlgames\.com\/wardenwatch\/unsubscribe\S+/)![0])
     // A test send marks nothing, so the owner is still due.
     expect((await user('Ana'))!.heroReminderSentAt).toBeUndefined()
     expect(await t.mutation(api.heroReminder.stop, { userId: ana._id, token: 'f'.repeat(64) })).toBe(false)
@@ -109,16 +109,16 @@ describe('the hero reminder email (D198)', () => {
 
 describe('the hero reminder text', () => {
   const facts = { name: 'Tobias', level: 3, since: Date.UTC(2026, 9, 13, 9), timezone: 'Europe/Paris', gold: 25, goals: 2, finds: 7, capacity: 10, best: 'Rare Keyboard Mace', nextGoal: 'Equip a piece of gear you found' }
-  const links = { app: 'https://trmnlgames.com/app/desk-crawler', stop: 'https://trmnlgames.com/stop' }
+  const links = { app: 'https://trmnlgames.com/app/wardenwatch', stop: 'https://trmnlgames.com/stop' }
 
   it('lists only what is there, in every language, with the stop link last', () => {
     const en = heroReminderEmail('en', facts, links)
-    expect(en.subject).toBe('Desk Crawler for TRMNL: Tobias has 25 gold waiting')
+    expect(en.subject).toBe('Wardenwatch for TRMNL: Tobias has 25 gold waiting')
     expect(en.text).toContain('- 25 gold from 2 goals reached, ready to claim\n- 7 finds in the bag (7 of 10 slots). Best find: Rare Keyboard Mace\n- Next goal: Equip a piece of gear you found')
     const quiet = heroReminderEmail('en', { ...facts, gold: 0, goals: 0, finds: 0, best: null }, links)
-    expect(quiet.subject).toBe('Desk Crawler for TRMNL: Tobias is level 3')
+    expect(quiet.subject).toBe('Wardenwatch for TRMNL: Tobias is level 3')
     expect(quiet.text).not.toContain('gold from')
-    expect(quiet.text).toContain('Here’s what’s next in the Desk Crawler app:')
+    expect(quiet.text).toContain('Here’s what’s next in the Wardenwatch app:')
     for (const locale of ['en', 'fr', 'de', 'es', 'it', 'pt', 'pl', 'nl'] as const) {
       const mail = heroReminderEmail(locale, facts, links)
       expect(mail.subject, locale).toContain('Tobias')

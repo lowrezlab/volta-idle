@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
-import { buildPayload } from '@trmnl-games/desk-crawler/payload'
-import { previewScenarios } from '@trmnl-games/desk-crawler/templates/previewScenarios'
-import { DEVICE_WORDS, deviceArea } from '@trmnl-games/desk-crawler/i18n/device'
+import { buildPayload } from '@trmnl-games/wardenwatch/payload'
+import { previewScenarios } from '@trmnl-games/wardenwatch/templates/previewScenarios'
+import { DEVICE_WORDS, deviceArea } from '@trmnl-games/wardenwatch/i18n/device'
 
 const { groups } = previewScenarios(null)
 const states = groups.states

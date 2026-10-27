@@ -7,14 +7,14 @@
  */
 import { writeFileSync } from 'node:fs'
 import { pathToFileURL } from 'node:url'
-import { catalogs, type CatalogId } from '@trmnl-games/desk-crawler/content'
-import { applyItemChanges } from '@trmnl-games/desk-crawler/sim/core/apply'
-import { effectiveStats } from '@trmnl-games/desk-crawler/sim/core/modifiers'
-import { planRaid, raidWinChance } from '@trmnl-games/desk-crawler/sim/core/raid'
-import { createRng } from '@trmnl-games/desk-crawler/sim/core/rng'
-import { simulateHero, SIMULATION_VERSION } from '@trmnl-games/desk-crawler/sim/core/simulate'
-import { starterHero, starterKit } from '@trmnl-games/desk-crawler/sim/core/starter'
-import type { ContentCatalog, HeroState, IncomingRaid, ItemSnapshot, RaidTarget, StanceId, StreamSeeds } from '@trmnl-games/desk-crawler/sim/core/types'
+import { catalogs, type CatalogId } from '@trmnl-games/wardenwatch/content'
+import { applyItemChanges } from '@trmnl-games/wardenwatch/sim/core/apply'
+import { effectiveStats } from '@trmnl-games/wardenwatch/sim/core/modifiers'
+import { planRaid, raidWinChance } from '@trmnl-games/wardenwatch/sim/core/raid'
+import { createRng } from '@trmnl-games/wardenwatch/sim/core/rng'
+import { simulateHero, SIMULATION_VERSION } from '@trmnl-games/wardenwatch/sim/core/simulate'
+import { starterHero, starterKit } from '@trmnl-games/wardenwatch/sim/core/starter'
+import type { ContentCatalog, HeroState, IncomingRaid, ItemSnapshot, RaidTarget, StanceId, StreamSeeds } from '@trmnl-games/wardenwatch/sim/core/types'
 import { POLICIES, visit, type Policy } from './run'
 
 const TICKS_PER_DAY = 96

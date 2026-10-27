@@ -1,11 +1,11 @@
 import { describe, expect, it } from 'vitest'
-import { catalogs } from '@trmnl-games/desk-crawler/content'
-import { validateCatalog } from '@trmnl-games/desk-crawler/content/validate'
-import { applyItemChanges } from '@trmnl-games/desk-crawler/sim/core/apply'
-import { currentRung, reachSatisfiedRung } from '@trmnl-games/desk-crawler/sim/core/career'
-import { simulateHero, SIMULATION_VERSION } from '@trmnl-games/desk-crawler/sim/core/simulate'
-import { starterHero, starterKit } from '@trmnl-games/desk-crawler/sim/core/starter'
-import type { HeroState, ItemSnapshot, SimulationResult } from '@trmnl-games/desk-crawler/sim/core/types'
+import { catalogs } from '@trmnl-games/wardenwatch/content'
+import { validateCatalog } from '@trmnl-games/wardenwatch/content/validate'
+import { applyItemChanges } from '@trmnl-games/wardenwatch/sim/core/apply'
+import { currentRung, reachSatisfiedRung } from '@trmnl-games/wardenwatch/sim/core/career'
+import { simulateHero, SIMULATION_VERSION } from '@trmnl-games/wardenwatch/sim/core/simulate'
+import { starterHero, starterKit } from '@trmnl-games/wardenwatch/sim/core/starter'
+import type { HeroState, ItemSnapshot, SimulationResult } from '@trmnl-games/wardenwatch/sim/core/types'
 import { seeds, withId } from './helpers'
 
 const v26 = catalogs.v26

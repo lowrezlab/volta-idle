@@ -34,7 +34,7 @@ describe('install summary', () => {
       await attempt(NOW - 30 * HOUR, 'completed') // outside the window
     })
     const summary = await t.query(internal.trmnl.installSummary, {})
-    expect(summary).toEqual([{ game: 'desk-crawler', connected: 4, saved: 1, waiting: 1, notSaved: 2, players: 1 }])
-    expect(await t.query(internal.trmnl.installSummary, { hours: 48 })).toContainEqual({ game: 'desk-crawler', connected: 5, saved: 2, waiting: 1, notSaved: 2, players: 1 })
+    expect(summary).toEqual([{ game: 'wardenwatch', connected: 4, saved: 1, waiting: 1, notSaved: 2, players: 1 }])
+    expect(await t.query(internal.trmnl.installSummary, { hours: 48 })).toContainEqual({ game: 'wardenwatch', connected: 5, saved: 2, waiting: 1, notSaved: 2, players: 1 })
   })
 })

@@ -17,7 +17,7 @@ export const termsPt: LegalPage = {
 
       <h2>O jogo</h2>
       <ul>
-        <li>O Desk Crawler é grátis. Não há compras, assinaturas nem anúncios.</li>
+        <li>O Wardenwatch é grátis. Não há compras, assinaturas nem anúncios.</li>
         <li>
           O jogo muda com o tempo: balanceamento, conteúdo e recursos podem ser ajustados. Tentamos manter o progresso do seu herói a cada atualização, mas não
           podemos garantir.
@@ -52,14 +52,14 @@ export const termsPt: LegalPage = {
 
       <h2>TRMNL</h2>
       <p>
-        O TRMNL Games e o Desk Crawler são projetos independentes. Eles não são feitos, endossados nem apoiados pelo TRMNL. Sua conta e seu dispositivo TRMNL seguem os termos do próprio TRMNL.
+        O TRMNL Games e o Wardenwatch são projetos independentes. Eles não são feitos, endossados nem apoiados pelo TRMNL. Sua conta e seu dispositivo TRMNL seguem os termos do próprio TRMNL.
       </p>
 
       <h2>Propriedade</h2>
       <p>
         O código-fonte é aberto sob a Licença MIT no{' '}
         <a href="https://github.com/barrymichaeldoyle/trmnl-games">GitHub</a>. As ilustrações, os nomes de monstros, itens e lugares, os textos escritos do jogo e
-        o nome e o logotipo do Desk Crawler não estão cobertos por essa licença e continuam com todos os direitos reservados.
+        o nome e o logotipo do Wardenwatch não estão cobertos por essa licença e continuam com todos os direitos reservados.
       </p>
 
       <h2>Sem garantia</h2>

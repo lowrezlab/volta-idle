@@ -20,10 +20,10 @@ export const privacyDe: LegalPage = {
         den du gern teilst, und schreib nie Kontaktdaten hinein.
       </p>
       <p>
-        In Desk Crawler überfallen Helden gegenseitig ihre Schreibtische und begegnen sich zufällig. Wenn dein Held überfällt, überfallen wird oder einem anderen Helden begegnet, erscheint dein öffentlicher Name im Abenteuerlog des anderen Spielers, in seiner Begleit-App und auf seinem TRMNL, so wie schon in den Ranglisten. Wird dein Held k. o. geschlagen, kann er ein Ersatzstück mit deinem öffentlichen Namen fallen lassen, das der Held eines anderen Spielers finden und behalten kann; dein Name steht dann auf diesem Gegenstand in dessen Begleit-App und auf dessen Heldenseite. Änderst du deinen Namen oder löschst dein Konto, zeigen diese Geschichten und Gegenstände stattdessen „Verborgener Spieler“ oder verlieren den Namen.
+        In Wardenwatch überfallen Helden gegenseitig ihre Schreibtische und begegnen sich zufällig. Wenn dein Held überfällt, überfallen wird oder einem anderen Helden begegnet, erscheint dein öffentlicher Name im Abenteuerlog des anderen Spielers, in seiner Begleit-App und auf seinem TRMNL, so wie schon in den Ranglisten. Wird dein Held k. o. geschlagen, kann er ein Ersatzstück mit deinem öffentlichen Namen fallen lassen, das der Held eines anderen Spielers finden und behalten kann; dein Name steht dann auf diesem Gegenstand in dessen Begleit-App und auf dessen Heldenseite. Änderst du deinen Namen oder löschst dein Konto, zeigen diese Geschichten und Gegenstände stattdessen „Verborgener Spieler“ oder verlieren den Namen.
       </p>
       <p>
-        Dein Desk-Crawler-Held hat eine öffentliche Seite: Wer den Link hat, sieht deinen öffentlichen Namen, Namen, Stufe, Rang, aktuelle Etage und Startdatum deines Helden, ein paar Gesamtzähler und deine Erfolge. Gold, das Abenteuerlog und deine Kontodaten bleiben privat, ebenso deine Ausrüstung, außer Ersatzstücken anderer Spieler, die dein Held hat; die erscheinen mit den Namen darauf. Die Seite ist standardmäßig an. Meine Heldenseite verbergen in den Einstellungen verbirgt sie sofort, und du kannst sie jederzeit wieder zeigen.
+        Dein Wardenwatch-Held hat eine öffentliche Seite: Wer den Link hat, sieht deinen öffentlichen Namen, Namen, Stufe, Rang, aktuelle Etage und Startdatum deines Helden, ein paar Gesamtzähler und deine Erfolge. Gold, das Abenteuerlog und deine Kontodaten bleiben privat, ebenso deine Ausrüstung, außer Ersatzstücken anderer Spieler, die dein Held hat; die erscheinen mit den Namen darauf. Die Seite ist standardmäßig an. Meine Heldenseite verbergen in den Einstellungen verbirgt sie sofort, und du kannst sie jederzeit wieder zeigen.
       </p>
       <p>
         Angemeldete Spieler können einer öffentlichen Heldenseite folgen. Wir speichern, wer wem folgt, damit ihre Begleit-App die Spieler auflisten kann, denen sie folgen. Niemand erfährt, dass ihm gefolgt wird, und keine Seite zeigt, wer einem Spieler folgt. Änderst du deinen öffentlichen Namen, verbirgst deine Seite oder löschst deinen Fortschritt, sehen andere Spieler deinen Helden nicht mehr in ihrer Liste, und beim Löschen werden diese Einträge entfernt.
@@ -33,19 +33,19 @@ export const privacyDe: LegalPage = {
       <ul>
         <li>Deine Anmeldeidentität von Clerk, unserem Anmeldedienst. Deine E-Mail-Adresse wird nur in kurzlebige Anfragen zur Löschbestätigung kopiert; deinen echten Namen und dein Profilbild kopieren wir nicht in die Spieldatenbank.</li>
         <li>Deinen öffentlichen Namen, deinen Helden, Gegenstände, das Abenteuerlog und die jüngsten XP für die Ranglisten. Ältere Konten haben eventuell noch eine gespeicherte Zeitzone aus früheren Versionen.</li>
-        <li>Wenn du Desk-Crawler-Benachrichtigungen einschaltest: welche Benachrichtigungen du willst, deine Ruhezeiten und die Zeitzone deines Browsers (zum Beispiel Europe/Berlin) und für jedes erlaubte Gerät die Push-Adresse, die dein Browser uns gibt, ihre Schlüssel und eine Bezeichnung wie „Chrome auf Android“. Außerdem führen wir eine kurze Liste jeder Benachrichtigung: welche Art, wann und ob sie gesendet wurde.</li>
+        <li>Wenn du Wardenwatch-Benachrichtigungen einschaltest: welche Benachrichtigungen du willst, deine Ruhezeiten und die Zeitzone deines Browsers (zum Beispiel Europe/Berlin) und für jedes erlaubte Gerät die Push-Adresse, die dein Browser uns gibt, ihre Schlüssel und eine Bezeichnung wie „Chrome auf Android“. Außerdem führen wir eine kurze Liste jeder Benachrichtigung: welche Art, wann und ob sie gesendet wurde.</li>
         <li>
           Für jede TRMNL-Installation: die Instanz-ID des Plugins, einen Hash seines Zugriffstokens und den Einstellungslink, den TRMNL uns gibt. Deinen TRMNL-Namen
           und deine TRMNL-E-Mail speichern wir nicht.
         </li>
-        <li>Die Zeitverschiebung, die dein TRMNL mit jedem Bildschirm schickt (zum Beispiel UTC+2), damit das Morgen-Stand-up von Desk Crawler deinem Tag folgt. Wir behalten nur die letzte.</li>
+        <li>Die Zeitverschiebung, die dein TRMNL mit jedem Bildschirm schickt (zum Beispiel UTC+2), damit das Morgen-Stand-up von Wardenwatch deinem Tag folgt. Wir behalten nur die letzte.</li>
         <li>Die Spracheinstellung, die dein TRMNL mit jedem Bildschirm schickt (zum Beispiel de-DE), damit wir sehen, in welche Sprachen sich eine Übersetzung lohnt, und damit dein Bildschirm deine Sprache verwenden kann. Wir behalten nur die letzte.</li>
         <li>Wenn du eine Sprache für TRMNL Games wählst, diese Wahl, damit deine TRMNL-Bildschirme und Benachrichtigungen sie auch verwenden.</li>
         <li>Kurzlebige Betriebsdaten wie Zähler zur Ratenbegrenzung und Belege für doppelte Anfragen.</li>
         <li>Wenn du die Kontolöschung anforderst: deine bestätigte Haupt-E-Mail-Adresse, einen Hash des Bestätigungslinks und den Zustellstatus. Der Link läuft nach 30 Minuten ab; abgelaufene Anfragen entfernt eine tägliche Bereinigung.</li>
-        <li>Die Desk-Crawler-Startliste enthielt E-Mail-Adressen für eine einzige E-Mail, als Desk Crawler in den TRMNL-Marktplatz kam. Diese E-Mail ging am 13. Oktober 2026 raus, jede Adresse wurde gelöscht, und die Liste ist geschlossen.</li>
+        <li>Die Wardenwatch-Startliste enthielt E-Mail-Adressen für eine einzige E-Mail, als Wardenwatch in den TRMNL-Marktplatz kam. Diese E-Mail ging am 13. Oktober 2026 raus, jede Adresse wurde gelöscht, und die Liste ist geschlossen.</li>
         <li>Die Idle-Angler-Startliste speichert für eine einzige E-Mail, wenn Idle Angler in den TRMNL-Marktplatz kommt: bei angemeldeten Spielern, die auf Bescheid geben tippen, einen Verweis auf ihr Konto und ihre Sprache (die Adresse wird beim Versand aus dem Konto gelesen); bei allen anderen die eingegebene E-Mail-Adresse und ihre Sprache. Jeder Eintrag wird gelöscht, sobald seine E-Mail verschickt ist, und du kannst die Liste jederzeit über die Startseite oder die E-Mail verlassen.</li>
-        <li>Die Helden-Erinnerung: Wenn dein Desk-Crawler-Held seit zwei Tagen unterwegs ist und du die Desk-Crawler-App nie geöffnet hast, schicken wir eine einzige E-Mail an deine bestätigte Hauptadresse, die sagt, was dort auf dich wartet, mit einem Link zum Abbestellen. Die Adresse wird beim Versand bei Clerk abgefragt und nicht gespeichert. Wir behalten nur, wann sie verschickt wurde oder dass du keine willst.</li>
+        <li>Die Helden-Erinnerung: Wenn dein Wardenwatch-Held seit zwei Tagen unterwegs ist und du die Wardenwatch-App nie geöffnet hast, schicken wir eine einzige E-Mail an deine bestätigte Hauptadresse, die sagt, was dort auf dich wartet, mit einem Link zum Abbestellen. Die Adresse wird beim Versand bei Clerk abgefragt und nicht gespeichert. Wir behalten nur, wann sie verschickt wurde oder dass du keine willst.</li>
         <li>Wenn du Feedback sendest: deine Nachricht, die Seite, von der du sie gesendet hast, deinen öffentlichen Namen und einen Link zu deinem Konto. Sie geht per E-Mail an den Entwickler, mit deiner bestätigten Haupt-E-Mail-Adresse als Antwortadresse.</li>
       </ul>
 
@@ -71,7 +71,7 @@ export const privacyDe: LegalPage = {
         <li><strong>TRMNL</strong> holt den Bildschirm deines Helden bei uns ab. Für dein TRMNL-Konto und dein Gerät gilt die Datenschutzerklärung von TRMNL.</li>
         <li><strong>PostHog EU</strong> verarbeitet optionale Nutzungsanalyse, Fehlerberichte und maskierte Sitzungsaufzeichnungen für Support und Produktverbesserungen.</li>
         <li><strong>Sentry</strong> (USA) erhält Fehlerberichte vom Server unserer Website und vom Spiel-Backend, und von deinem Browser, wenn du Analyse erlaubst, damit wir Fehler finden und beheben können. Ein Bericht enthält den Seitenpfad oder den Namen der fehlgeschlagenen Spielfunktion und die technischen Details des Fehlers. Er enthält nie dein Konto, deine E-Mail-Adresse, IP-Adresse, Cookies, Formularinhalte, URL-Parameter oder Installationscodes und -tokens.</li>
-        <li><strong>Der Push-Dienst deines Browsers</strong> (Google für Chrome und Android, Apple für Safari, Mozilla für Firefox) stellt Desk-Crawler-Benachrichtigungen zu, wenn du sie einschaltest. Er erhält die Benachrichtigung verschlüsselt, kann sie also nicht lesen, zusammen mit der Push-Adresse, die dein Browser erstellt hat.</li>
+        <li><strong>Der Push-Dienst deines Browsers</strong> (Google für Chrome und Android, Apple für Safari, Mozilla für Firefox) stellt Wardenwatch-Benachrichtigungen zu, wenn du sie einschaltest. Er erhält die Benachrichtigung verschlüsselt, kann sie also nicht lesen, zusammen mit der Push-Adresse, die dein Browser erstellt hat.</li>
         <li><strong>Resend</strong> stellt die E-Mail zur Kontolöschung an deine bestätigte Hauptadresse zu, die Start-E-Mail (einmal gesendet, am 13. Oktober 2026) und Feedback, das du an den Entwickler schickst. Es erhält diese Adressen und die Inhalte der E-Mails. Er stellt auch die einzige Helden-Erinnerung zu.</li>
       </ul>
 
@@ -84,7 +84,7 @@ export const privacyDe: LegalPage = {
         <li>Idle-Angler-Startliste: Jeder Eintrag wird gelöscht, wenn seine Start-E-Mail verschickt ist, wenn du die Liste verlässt oder mit deinem Konto.</li>
         <li>Helden-Erinnerung: wann sie verschickt wurde oder dass du keine willst, bis du dein Konto löschst.</li>
         <li>Feedback: bis du dein Konto löschst, oder früher auf Anfrage. Bereits an den Entwickler gemailte Kopien werden auf Anfrage gelöscht.</li>
-        <li>Benachrichtigungseinstellungen und Geräte: bis du Benachrichtigungen ausschaltest, das Gerät entfernst oder Desk Crawler oder dein Konto löschst. Ein Gerät, dessen Push-Adresse nicht mehr funktioniert, wird automatisch entfernt. Liste der einzelnen Benachrichtigungen: sieben Tage.</li>
+        <li>Benachrichtigungseinstellungen und Geräte: bis du Benachrichtigungen ausschaltest, das Gerät entfernst oder Wardenwatch oder dein Konto löschst. Ein Gerät, dessen Push-Adresse nicht mehr funktioniert, wird automatisch entfernt. Liste der einzelnen Benachrichtigungen: sieben Tage.</li>
         <li>Sicherungen: etwa eine Woche, danach sind gelöschte Daten auch daraus verschwunden.</li>
         <li>Maskierte Aufzeichnungen: 30 Tage. Analyseereignisse und Supportprofile: bis zur Kontolöschung oder einem früheren Löschantrag.</li>
         <li>Fehlerberichte in Sentry: bis zu 90 Tage. Sie sind nicht mit deinem Konto verknüpft, also gibt es dort bei einer Kontolöschung nichts zu entfernen.</li>
@@ -103,7 +103,7 @@ export const privacyDe: LegalPage = {
       <p>Die Entfernung verknüpfter PostHog-Profile, -Ereignisse und -Aufzeichnungen wird im Rahmen der Kontolöschung beantragt und von PostHog asynchron bearbeitet. Fehlgeschlagene Anträge werden wiederholt und bleiben für den Betreiber sichtbar, bis sie erledigt sind.</p>
 
       <h2>Nur ein Spiel löschen</h2>
-      <p>Wähle in den <Link to="/app/desk-crawler/settings">Desk-Crawler-Einstellungen</Link> Desk-Crawler-Fortschritt löschen, um diesen Helden, den Verlauf, die Verbindungen und die Benachrichtigungseinstellungen und Geräte zu entfernen. Dein gemeinsames Konto und deine Anmeldung bleiben erhalten. Nach Abschluss der Entfernung kannst du neu anfangen, indem du das Plugin installierst. Andere Spiele sind nicht betroffen.</p>
+      <p>Wähle in den <Link to="/app/wardenwatch/settings">Wardenwatch-Einstellungen</Link> Wardenwatch-Fortschritt löschen, um diesen Helden, den Verlauf, die Verbindungen und die Benachrichtigungseinstellungen und Geräte zu entfernen. Dein gemeinsames Konto und deine Anmeldung bleiben erhalten. Nach Abschluss der Entfernung kannst du neu anfangen, indem du das Plugin installierst. Andere Spiele sind nicht betroffen.</p>
 
       <h2>Deine Wahlmöglichkeiten</h2>
       <p>

@@ -1,9 +1,9 @@
 import { v } from 'convex/values'
 import { hmac } from '@noble/hashes/hmac.js'
 import { sha256 } from '@noble/hashes/sha2.js'
-import { contentTranslator } from '@trmnl-games/desk-crawler/i18n'
-import { currentRung } from '@trmnl-games/desk-crawler/sim/core/career'
-import { isGear } from '@trmnl-games/desk-crawler/sim/core/workbench'
+import { contentTranslator } from '@trmnl-games/wardenwatch/i18n'
+import { currentRung } from '@trmnl-games/wardenwatch/sim/core/career'
+import { isGear } from '@trmnl-games/wardenwatch/sim/core/workbench'
 import { internal } from './_generated/api'
 import type { Doc, Id } from './_generated/dataModel'
 import { internalAction, internalMutation, internalQuery, mutation, type QueryCtx } from './_generated/server'
@@ -140,15 +140,15 @@ export const send = internalAction({
         const email = response.ok ? verifiedPrimaryEmail(await response.json()) : null
         if (email) {
           const origin = new URL(process.env.COMPANION_ORIGIN ?? 'https://trmnlgames.com').origin
-          const stopLink = new URL('/desk-crawler/unsubscribe', origin)
+          const stopLink = new URL('/wardenwatch/unsubscribe', origin)
           stopLink.searchParams.set('u', userId)
           stopLink.searchParams.set('t', stopToken(stop, userId))
-          const message = heroReminderEmail(row.locale as Parameters<typeof heroReminderEmail>[0], row.facts as ReminderFacts, { app: `${origin}/app/desk-crawler`, stop: stopLink.toString() })
+          const message = heroReminderEmail(row.locale as Parameters<typeof heroReminderEmail>[0], row.facts as ReminderFacts, { app: `${origin}/app/wardenwatch`, stop: stopLink.toString() })
           const sent = await fetch('https://api.resend.com/emails', {
             method: 'POST',
             signal: AbortSignal.timeout(10_000),
             headers: { Authorization: `Bearer ${key}`, 'Content-Type': 'application/json', 'Idempotency-Key': `hero-reminder/${userId}${test ? `/test/${Date.now()}` : ''}` },
-            body: JSON.stringify({ from: process.env.REMINDER_FROM ?? 'Barry at TRMNL Games <alerts@trmnlgames.com>', to: [email.address], ...message, headers: { 'List-Unsubscribe': `<${stopLink.toString()}>` } }),
+            body: JSON.stringify({ from: process.env.REMINDER_FROM ?? 'Wardenwatch <alerts@wardenwatch.example>', to: [email.address], ...message, headers: { 'List-Unsubscribe': `<${stopLink.toString()}>` } }),
           })
           outcome = sent.ok ? 'sent' : 'failed'
         }

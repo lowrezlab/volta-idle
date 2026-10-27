@@ -6,14 +6,14 @@ import { api } from '@trmnl-games/backend/api'
 import { games } from '@trmnl-games/platform'
 import { useConvexAuth } from 'convex/react'
 import type { ReactNode } from 'react'
-import { InstallCta, ScreenBezel } from '../lib/deskCrawlerPitch'
+import { InstallCta, ScreenBezel } from '../lib/wardenwatchPitch'
 import { FLOORS } from '../lib/facts.gen'
 import { Glyph, type GlyphName } from '../lib/glyphs'
 import { changeDay, latestChanges } from '../lib/changelogRecent'
 import { SITE_FRAME } from '../lib/platformHeader'
 import { SiteShell } from '../lib/prose'
 import { BUTTON_PRIMARY, BUTTON_SECONDARY, LINK_BUTTON } from '../lib/ui'
-import { DESK_CRAWLER_JSON_LD, SITE_JSON_LD, seo } from '../lib/seo'
+import { WARDENWATCH_JSON_LD, SITE_JSON_LD, seo } from '../lib/seo'
 import { messagesFor, useLocale, useT } from '../lib/i18n'
 import { headMessages } from '../i18n/heads'
 import { homeMessages } from '../i18n/home'
@@ -25,7 +25,7 @@ export const Route = createFileRoute('/')({
     path: '/',
     locale,
     description: messagesFor(headMessages, locale).home,
-    jsonLd: { '@context': 'https://schema.org', '@graph': [SITE_JSON_LD, DESK_CRAWLER_JSON_LD].map(({ '@context': _, ...node }) => node) },
+    jsonLd: { '@context': 'https://schema.org', '@graph': [SITE_JSON_LD, WARDENWATCH_JSON_LD].map(({ '@context': _, ...node }) => node) },
   }),
   // No loader: the page is static, and the signed-in player's games load in the browser after it.
   component: Home,
@@ -33,7 +33,7 @@ export const Route = createFileRoute('/')({
 
 /**
  * The signed-in player's games above the pitch (D210): each game's character and status with the way in, or, for a game
- * they have not started, its page (Desk Crawler) or the in-review state with Notify me (Idle Angler before its listing).
+ * they have not started, its page (Wardenwatch) or the in-review state with Notify me (Idle Angler before its listing).
  */
 function YourGames() {
   const t = useT(homeMessages)
@@ -41,11 +41,11 @@ function YourGames() {
   const { isAuthenticated } = useConvexAuth()
   const { data: me } = useQuery({ ...convexQuery(api.users.me, {}), enabled: isAuthenticated })
   if (!me) return null
-  const rows: Array<{ slug: 'desk-crawler'; line: string; action: ReactNode }> = [
+  const rows: Array<{ slug: 'wardenwatch'; line: string; action: ReactNode }> = [
     {
-      slug: 'desk-crawler',
+      slug: 'wardenwatch',
       line: me.hero ? shell.heroLine(me.hero) : t.notStarted,
-      action: me.hero ? <Link to="/app/desk-crawler" className={`${LINK_BUTTON} ${BUTTON_PRIMARY}`}>{t.open}</Link> : <Link to="/games/desk-crawler" className="inline-flex min-h-11 items-center underline underline-offset-4">{t.seeGame('Desk Crawler')}</Link>,
+      action: me.hero ? <Link to="/app/wardenwatch" className={`${LINK_BUTTON} ${BUTTON_PRIMARY}`}>{t.open}</Link> : <Link to="/games/wardenwatch" className="inline-flex min-h-11 items-center underline underline-offset-4">{t.seeGame('Wardenwatch')}</Link>,
     },
   ]
   return (
@@ -74,7 +74,7 @@ function YourGames() {
  * lands on whichever game the visitor points at, a figure from its catalog, its pitch and its one call to action. From
  * 1024px the two cards share rows (subgrid), so their screens, pitches and calls to action line up side by side.
  */
-function GameCard({ slug, alt, caption, facts, factGlyph, pitch, priority = false, children }: { slug: 'desk-crawler'; alt: string; caption: string; facts: string; factGlyph: GlyphName; pitch: string; priority?: boolean; children: ReactNode }) {
+function GameCard({ slug, alt, caption, facts, factGlyph, pitch, priority = false, children }: { slug: 'wardenwatch'; alt: string; caption: string; facts: string; factGlyph: GlyphName; pitch: string; priority?: boolean; children: ReactNode }) {
   const t = useT(homeMessages)
   const name = games[slug].name
   return (
@@ -145,7 +145,7 @@ function Home() {
           <section aria-labelledby="pick-heading" className="flex flex-col gap-4">
             <h2 id="pick-heading" className="sr-only">{t.pickHeading}</h2>
             <ul className="grid gap-6 lg:grid-cols-2 lg:gap-x-8">
-              <GameCard slug="desk-crawler" alt={pitch.sampleAlt} caption={pitch.homeCaption} facts={t.deskCrawlerFacts(FLOORS.length, monsters)} factGlyph="sword" pitch={t.deskCrawlerPitch} priority>
+              <GameCard slug="wardenwatch" alt={pitch.sampleAlt} caption={pitch.homeCaption} facts={t.wardenwatchFacts(FLOORS.length, monsters)} factGlyph="sword" pitch={t.wardenwatchPitch} priority>
                 <InstallCta place="home card" compact />
               </GameCard>
             </ul>

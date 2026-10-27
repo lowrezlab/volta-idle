@@ -1,6 +1,6 @@
 import type { Doc } from '../_generated/dataModel'
 import type { QueryCtx } from '../_generated/server'
-import type { LatestEvent } from '@trmnl-games/desk-crawler/art/sceneKey'
+import type { LatestEvent } from '@trmnl-games/wardenwatch/art/sceneKey'
 
 /**
  * The latest event a scene follows, from its log. D149: a meeting or lost-property scene draws the other hero, so its

@@ -1,4 +1,4 @@
-# Desk Crawler project instructions
+# Wardenwatch project instructions
 
 The user-provided workspace instructions remain applicable. These instructions add project-specific guidance.
 

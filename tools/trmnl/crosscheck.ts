@@ -12,8 +12,8 @@ import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { spawnSync } from 'node:child_process'
 import { Liquid } from 'liquidjs'
-import { screenMarkup } from '@trmnl-games/desk-crawler/templates/screen'
-import type { PreviewLayout } from '@trmnl-games/desk-crawler/templates/preview'
+import { screenMarkup } from '@trmnl-games/wardenwatch/templates/screen'
+import type { PreviewLayout } from '@trmnl-games/wardenwatch/templates/preview'
 import { bundle, requireBundle, root } from './bundle'
 
 /** Preview flag sets that together cover every fixture state, with and without a keepsake code, and in every other language (D169, D193). */
@@ -21,7 +21,7 @@ const FIXTURE_SETS = [['--recap'], ['--recap', '--keepsakes'], ['--potion-finds'
 
 requireBundle()
 
-const dir = mkdtempSync(join(tmpdir(), 'desk-crawler-trmnl-crosscheck-'))
+const dir = mkdtempSync(join(tmpdir(), 'wardenwatch-trmnl-crosscheck-'))
 try {
   const cases: Array<{ id: string; layout: PreviewLayout; context: Record<string, unknown> }> = []
   for (const flags of FIXTURE_SETS) {

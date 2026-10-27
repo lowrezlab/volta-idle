@@ -4,7 +4,7 @@ import { currentHero, gameProfile } from './lib/gameProfile'
 import { currentUser, intentReturns, isIntentRefusal, runIntent } from './lib/intent'
 import { appError } from './lib/errors'
 import { keepsakeCode, keepsakeGrant, letterKeepsakeCode, normalizedKeepsakeCode } from './lib/keepsakes'
-import { KEEPSAKES_OPEN_AT, keepsakesOpen, keepsakeWeek, keepsakeWeekStartsAt, LETTER_CODES_UNTIL, SAMPLE_KEEPSAKE_CODE } from '@trmnl-games/desk-crawler/content/keepsakes'
+import { KEEPSAKES_OPEN_AT, keepsakesOpen, keepsakeWeek, keepsakeWeekStartsAt, LETTER_CODES_UNTIL, SAMPLE_KEEPSAKE_CODE } from '@trmnl-games/wardenwatch/content/keepsakes'
 import { achievementState, awardAchievements } from './lib/achievements'
 import { readWorld, worldContent } from './world'
 
@@ -45,7 +45,7 @@ export const claim = mutation({
     const code = normalizedKeepsakeCode(args.code.slice(0, 64))
     const result = await runIntent(ctx, args.operationId, 'keepsakes.claim', { code }, async (user) => {
       const hero = await currentHero(ctx, user)
-      if (!hero || hero.activationState !== 'active') throw appError('TRMNL_REQUIRED', 'Save Desk Crawler in TRMNL to collect keepsakes.')
+      if (!hero || hero.activationState !== 'active') throw appError('TRMNL_REQUIRED', 'Save Wardenwatch in TRMNL to collect keepsakes.')
       const now = Date.now()
       const week = keepsakeWeek(now)
       const collection = await ctx.db.query('deskKeepsakes').withIndex('by_userId', (q) => q.eq('userId', user._id)).unique()

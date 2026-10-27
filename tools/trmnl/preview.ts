@@ -4,7 +4,7 @@
  * HTML page per state with all four sizes. Screenshot the pages for the layout
  * matrix. This approximates TRMNL's renderer; real-device renders stay the
  * acceptance gate. Scenarios live in the shared previewScenarios module; for an
- * interactive gallery run `pnpm dev` and open /dev/desk-crawler.  Usage: pnpm tsx tools/trmnl/preview.ts [artBaseUrl] [--recap] [--portrait]
+ * interactive gallery run `pnpm dev` and open /dev/wardenwatch.  Usage: pnpm tsx tools/trmnl/preview.ts [artBaseUrl] [--recap] [--portrait]
  * `--dump-contexts <file>` also writes each Liquid render context, for tools/trmnl/crosscheck.ts.
  * `--inline-art` draws scenes and codes locally and inlines them, so art changes preview before any deployment serves them.
  * `--occasion <id>` (D139) dresses every scene for one occasion, e.g. `--occasion halloween`.
@@ -14,14 +14,14 @@
 import { isLocale, type Locale } from '@trmnl-games/platform'
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { Liquid } from 'liquidjs'
-import { buildPayload, MAX_RECAP_EVENTS, type ActivityEntry, type PayloadInput } from '@trmnl-games/desk-crawler/payload'
-import { displayLogDeltas } from '@trmnl-games/desk-crawler/log'
-import { sceneUrlsAt } from '@trmnl-games/desk-crawler/art/sceneTime'
-import { screenMarkup } from '@trmnl-games/desk-crawler/templates/screen'
-import { renderScenePng } from '@trmnl-games/desk-crawler/art/route'
-import { DEFAULT_COMPANION_ORIGIN, keepsakeQrFields, renderQrPng } from '@trmnl-games/desk-crawler/art/qr'
-import { isPreviewTheme, PREVIEW_DEVICES, PREVIEW_LAYOUTS, previewDocument, type PreviewDevice, type PreviewLayout, type PreviewTheme } from '@trmnl-games/desk-crawler/templates/preview'
-import { KEEPSAKE_FREE_SCENARIOS, NO_OFFSET_SCENARIOS, PREVIEW_KEEPSAKE_CODE, PREVIEW_NOW, PREVIEW_UTC_OFFSET, previewScenarios, withOvernightRecap } from '@trmnl-games/desk-crawler/templates/previewScenarios'
+import { buildPayload, MAX_RECAP_EVENTS, type ActivityEntry, type PayloadInput } from '@trmnl-games/wardenwatch/payload'
+import { displayLogDeltas } from '@trmnl-games/wardenwatch/log'
+import { sceneUrlsAt } from '@trmnl-games/wardenwatch/art/sceneTime'
+import { screenMarkup } from '@trmnl-games/wardenwatch/templates/screen'
+import { renderScenePng } from '@trmnl-games/wardenwatch/art/route'
+import { DEFAULT_COMPANION_ORIGIN, keepsakeQrFields, renderQrPng } from '@trmnl-games/wardenwatch/art/qr'
+import { isPreviewTheme, PREVIEW_DEVICES, PREVIEW_LAYOUTS, previewDocument, type PreviewDevice, type PreviewLayout, type PreviewTheme } from '@trmnl-games/wardenwatch/templates/preview'
+import { KEEPSAKE_FREE_SCENARIOS, NO_OFFSET_SCENARIOS, PREVIEW_KEEPSAKE_CODE, PREVIEW_NOW, PREVIEW_UTC_OFFSET, previewScenarios, withOvernightRecap } from '@trmnl-games/wardenwatch/templates/previewScenarios'
 
 const LOCAL_ART_ORIGIN = 'https://local-art.invalid'
 const inlineArt = process.argv.includes('--inline-art')

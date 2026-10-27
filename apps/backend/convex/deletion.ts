@@ -1,4 +1,4 @@
-import { gameProfile, DESK_CRAWLER } from './lib/gameProfile'
+import { gameProfile, WARDENWATCH } from './lib/gameProfile'
 import { isGame } from './lib/gameHooks'
 import { gameSlug as gameSlugValidator, locale as localeValidator } from './schema'
 import type { Locale } from '@trmnl-games/platform'
@@ -74,12 +74,12 @@ export const requestGameDeletion = mutation({
       const profile = await gameProfile(ctx, user._id)
       if (profile?.state === 'deleting') return { changed: false }
       if (profile) await ctx.db.patch(profile._id, { state: 'deleting' })
-      else await ctx.db.insert('deskCrawlerProfiles', {
+      else await ctx.db.insert('wardenwatchProfiles', {
         userId: user._id, state: 'deleting', createdAt: Date.now(),
         ...(user.activeHeroId ? { activeHeroId: user.activeHeroId } : {}),
       })
       const now = Date.now()
-      const jobId = await ctx.db.insert('gameDeletionJobs', { userId: user._id, gameSlug: DESK_CRAWLER, state: 'running', phase: 'connections', createdAt: now, lastProgressAt: now })
+      const jobId = await ctx.db.insert('gameDeletionJobs', { userId: user._id, gameSlug: WARDENWATCH, state: 'running', phase: 'connections', createdAt: now, lastProgressAt: now })
       await ctx.scheduler.runAfter(0, internal.deletion.purgeGameStep, { jobId })
       return { changed: true }
     })
@@ -122,10 +122,10 @@ export const purgeGameStep = internalMutation({
     if (user?.activeHeroId) await ctx.db.patch(user._id, { activeHeroId: undefined })
     const keepsakes = await ctx.db.query('deskKeepsakes').withIndex('by_userId', (q) => q.eq('userId', job.userId)).take(BATCH)
     const unlocks = await ctx.db.query('heroAchievements').withIndex('by_userId_and_achievementId', (q) => q.eq('userId', job.userId)).take(BATCH)
-    // P33: Desk Crawler's alert switches and outbox rows; devices and quiet hours are shared with Idle Angler (D115).
-    // D143: follows both ways go with Desk Crawler progress.
-    if (await deleteBatch(ctx, keepsakes) + await deleteBatch(ctx, unlocks) + await purgeGameAlertRows(ctx, job.userId, 'desk-crawler', BATCH) + await purgeFollowRows(ctx, job.userId, BATCH) > 0) return await again()
-    const receipts = await ctx.db.query('operationReceipts').withIndex('by_userId_and_scope', (q) => q.eq('userId', job.userId).eq('scope', DESK_CRAWLER)).take(BATCH)
+    // P33: Wardenwatch's alert switches and outbox rows; devices and quiet hours are shared with Idle Angler (D115).
+    // D143: follows both ways go with Wardenwatch progress.
+    if (await deleteBatch(ctx, keepsakes) + await deleteBatch(ctx, unlocks) + await purgeGameAlertRows(ctx, job.userId, 'wardenwatch', BATCH) + await purgeFollowRows(ctx, job.userId, BATCH) > 0) return await again()
+    const receipts = await ctx.db.query('operationReceipts').withIndex('by_userId_and_scope', (q) => q.eq('userId', job.userId).eq('scope', WARDENWATCH)).take(BATCH)
     const legacy = await ctx.db.query('operationReceipts').withIndex('by_userId_and_scope', (q) => q.eq('userId', job.userId).eq('scope', undefined)).take(BATCH)
     if (await deleteBatch(ctx, receipts) + await deleteBatch(ctx, legacy) > 0) return await again()
     // A new enrollment can now create a new hero, but every old token stays tombstoned.
@@ -380,7 +380,7 @@ export const requestDeletionEmail = action({
     } catch { /* Fail closed: no guessed or unverified recipient. */ }
     if (!email) throw appError('EMAIL_UNAVAILABLE', 'Add a verified primary email to your account before requesting deletion.')
     const origin = new URL(process.env.COMPANION_ORIGIN ?? 'https://trmnlgames.com').origin
-    return await ctx.runMutation(internal.deletion.reserveDeletionEmail, { tokenIdentifier: identity.tokenIdentifier, email: email.address, emailId: email.id, origin, from: process.env.DELETION_EMAIL_FROM ?? 'TRMNL Games <alerts@trmnlgames.com>', ...(locale === undefined ? {} : { locale }) })
+    return await ctx.runMutation(internal.deletion.reserveDeletionEmail, { tokenIdentifier: identity.tokenIdentifier, email: email.address, emailId: email.id, origin, from: process.env.DELETION_EMAIL_FROM ?? 'Wardenwatch <alerts@wardenwatch.example>', ...(locale === undefined ? {} : { locale }) })
   },
 })
 

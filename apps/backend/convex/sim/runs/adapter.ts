@@ -1,7 +1,7 @@
 import type { Doc, Id } from '../../_generated/dataModel'
 import type { MutationCtx } from '../../_generated/server'
-import type { HeroState, ItemChange, ItemSnapshot, LogDetail, SimulationResult } from '@trmnl-games/desk-crawler/sim/core/types'
-import { withCounterDefaults } from '@trmnl-games/desk-crawler/sim/core/starter'
+import type { HeroState, ItemChange, ItemSnapshot, LogDetail, SimulationResult } from '@trmnl-games/wardenwatch/sim/core/types'
+import { withCounterDefaults } from '@trmnl-games/wardenwatch/sim/core/starter'
 
 /** Convex hero document -> pure domain state (domain-contracts.md). */
 export function toHeroState(hero: Doc<'heroes'>): HeroState {

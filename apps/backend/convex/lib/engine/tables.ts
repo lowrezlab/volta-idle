@@ -5,7 +5,7 @@ import { v } from 'convex/values'
  * Engine tables (idle-angler.md "Architecture", S0). Every game's world, runs,
  * publications and, for XP boards, score windows and leaderboard sets come from these factories, so their
  * shapes and indexes are identical by construction and the engine code in this
- * folder can serve them all. Desk Crawler's instantiation produces exactly the
+ * folder can serve them all. Wardenwatch's instantiation produces exactly the
  * tables it had before S0.
  *
  * `heroId` is the engine's name for the game's player character: a hero in Desk
@@ -18,7 +18,7 @@ export interface EngineTableNames {
   readonly failures: string
   readonly publications: string
   readonly achievementStats: string
-  /** XP boards (Desk Crawler): a game without them publishes only achievement rarity each hour (D116). */
+  /** XP boards (Wardenwatch): a game without them publishes only achievement rarity each hour (D116). */
   readonly scoreWindows?: string
   readonly rankInputs?: string
   readonly generations?: string
@@ -219,8 +219,8 @@ export function rankingTables<const N extends RankedTableNames>(names: N) {
   }
 }
 
-/** Desk Crawler's engine tables keep their original names. */
-export const DESK_CRAWLER_TABLES = {
+/** Wardenwatch's engine tables keep their original names. */
+export const WARDENWATCH_TABLES = {
   subject: 'heroes',
   world: 'worldState',
   runs: 'simulationRuns',

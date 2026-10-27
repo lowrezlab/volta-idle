@@ -2,7 +2,7 @@
 import { convexTest } from 'convex-test'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { api, internal } from '@trmnl-games/backend/api'
-import { ACTIVE_CONTENT } from '@trmnl-games/desk-crawler/content'
+import { ACTIVE_CONTENT } from '@trmnl-games/wardenwatch/content'
 import schema from '../../apps/backend/convex/schema'
 import { runTick, seedHero, seedWorld, type T } from './helpers'
 

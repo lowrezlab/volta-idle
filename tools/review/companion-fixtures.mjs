@@ -5,7 +5,7 @@
  *
  *   node tools/review/companion-fixtures.mjs && pnpm exec vite --config .previews/submission-companion/vite.config.mjs
  *
- * Then open http://127.0.0.1:4197/app/desk-crawler (or /inventory, /log, /leaderboard, /settings, /achievements, /keepsakes, /trmnl). Query parameters:
+ * Then open http://127.0.0.1:4197/app/wardenwatch (or /inventory, /log, /leaderboard, /settings, /achievements, /keepsakes, /trmnl). Query parameters:
  *   workbench=1 (D129, default: a few materials and the workbench card)   workbench=rich (every job affordable)   workbench=done (a +3 weapon)   workbench=0 (no workbench)   workbench=locked (D155: below level 4, the locked card)
  *   potions=1 (D131, default: three strengths, a combine affordable)   potions=short (two minors, no Scrap)   potions=one (healing only)   potions=0 (no strengths)
  *   level=9 (the hero at that level, its unlocks opened)   stance=none|cautious|balanced|bold (D192: none chosen, or one)   floor=server_room (D132: the hero on another floor)   status=paused|sleeping|dead|travelling|resting   held=1 (held find, bag full)   hp=40 (HP percent)   slots=30 (gear count)   merchant=1
@@ -19,7 +19,7 @@
  *   whatsnew=1 (D154: the What's new card, with every entry after 12 October)
  *   rank=9 (D152: the hero ninth on every board, so the rankings open with the rows around it)
  *   lang=fr|de (D169: the companion in French or German)
- *   /desk-crawler/heroes/<name> serves the public hero page (private=1 reads as not found)
+ *   /wardenwatch/heroes/<name> serves the public hero page (private=1 reads as not found)
  * Idle Angler (D115): /app/idle-angler, /cooler, /shop, /logbook, /settings, with ia=full (cooler full), ia=empty (empty cooler, no bait here),
  *   ia=paused, ia=pending, ia=none (not started), ia=rich (Master Angler at the pier with every pass)
  *   goal=ready (D166, with v2=1: two reached goals waiting on the Dock's Claim button and a dot on the Dock tab)
@@ -41,7 +41,7 @@ const root = resolve(import.meta.dirname, '../..')
 const directory = resolve(root, '.previews/submission-companion')
 mkdirSync(directory, { recursive: true })
 const write = (name, body) => writeFileSync(resolve(directory, name), body)
-write('index.html', '<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Desk Crawler synthetic QA</title></head><body><div id="root"></div><script type="module" src="/main.jsx"></script></body></html>')
+write('index.html', '<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Wardenwatch synthetic QA</title></head><body><div id="root"></div><script type="module" src="/main.jsx"></script></body></html>')
 write('styles.css', readFileSync(resolve(root, 'apps/web/src/styles.css'), 'utf8').replace('@import "tailwindcss";', '@import "tailwindcss";\n@source "../../apps/web/src";'))
 write('fixture.json', readFileSync(resolve(import.meta.dirname, 'fixtures/companion.json'), 'utf8'))
 write('paper-lives.json', readFileSync(resolve(import.meta.dirname, 'fixtures/paper-lives.json'), 'utf8'))
@@ -73,9 +73,9 @@ export const Outlet = () => { const Page = useContext(OutletContext); return Pag
 // Queries from the fixture; mutations settle locally.
 write('data.js', `import fixture from './fixture.json';
 import paperLives from './paper-lives.json';
-import { ACHIEVEMENTS } from '../../packages/desk-crawler/src/content/achievements';
-import { contentV16 } from '../../packages/desk-crawler/src/content/v16';
-import { loreView } from '../../packages/desk-crawler/src/sim/core/biomes';
+import { ACHIEVEMENTS } from '../../packages/wardenwatch/src/content/achievements';
+import { contentV16 } from '../../packages/wardenwatch/src/content/v16';
+import { loreView } from '../../packages/wardenwatch/src/sim/core/biomes';
 import { useCallback, useState } from 'react';
 const params = new URLSearchParams(location.search);
 const flag = (name) => params.get(name) === '1';
@@ -367,7 +367,7 @@ const queries = {
   'users:me': () => data.me,
   // D210: onlist=1 puts the signed-in player on Idle Angler's launch list.
   'launchList:mine': () => params.get('onlist') === '1',
-  'platform:list': () => ({ admin: true, games: [{ slug: 'desk-crawler', status: 'live', canOpen: true }, { slug: 'idle-angler', status: params.get('status') === 'live' ? 'live' : 'hidden', canOpen: true }, { slug: 'paper-lives', status: 'hidden', canOpen: true }] }),
+  'platform:list': () => ({ admin: true, games: [{ slug: 'wardenwatch', status: 'live', canOpen: true }, { slug: 'idle-angler', status: params.get('status') === 'live' ? 'live' : 'hidden', canOpen: true }, { slug: 'paper-lives', status: 'hidden', canOpen: true }] }),
   'paperLives/lives:view': () => {
     if (params.get('pl') === 'none') return { gameState: null, life: null }
     const view = paperLives[params.get('pl') ?? 'adult'] ?? paperLives.adult
@@ -466,19 +466,19 @@ write('switchAccount.jsx', `import React from 'react'; export const SwitchAccoun
 
 write('main.jsx', `import React from 'react';
 import { createRoot } from 'react-dom/client';
-import { Route as Shell } from '../../apps/web/src/routes/app/desk-crawler';
-import { Route as Hero } from '../../apps/web/src/routes/app/desk-crawler/index';
-import { Route as Bag } from '../../apps/web/src/routes/app/desk-crawler/inventory';
-import { Route as Ranks } from '../../apps/web/src/routes/app/desk-crawler/leaderboard';
-import { Route as Settings } from '../../apps/web/src/routes/app/desk-crawler/settings';
-import { Route as Log } from '../../apps/web/src/routes/app/desk-crawler/log';
-import { Route as DcAchievements } from '../../apps/web/src/routes/app/desk-crawler/achievements';
-import { Route as Career } from '../../apps/web/src/routes/app/desk-crawler/career';
-import { Route as FieldNotes } from '../../apps/web/src/routes/app/desk-crawler/field-notes';
-import { Route as Roster } from '../../apps/web/src/routes/app/desk-crawler/roster';
-import { Route as Keepsakes } from '../../apps/web/src/routes/app/desk-crawler/keepsakes';
-import { Route as Device } from '../../apps/web/src/routes/app/desk-crawler/trmnl';
-import { Route as Profile } from '../../apps/web/src/routes/desk-crawler/heroes.$alias';
+import { Route as Shell } from '../../apps/web/src/routes/app/wardenwatch';
+import { Route as Hero } from '../../apps/web/src/routes/app/wardenwatch/index';
+import { Route as Bag } from '../../apps/web/src/routes/app/wardenwatch/inventory';
+import { Route as Ranks } from '../../apps/web/src/routes/app/wardenwatch/leaderboard';
+import { Route as Settings } from '../../apps/web/src/routes/app/wardenwatch/settings';
+import { Route as Log } from '../../apps/web/src/routes/app/wardenwatch/log';
+import { Route as DcAchievements } from '../../apps/web/src/routes/app/wardenwatch/achievements';
+import { Route as Career } from '../../apps/web/src/routes/app/wardenwatch/career';
+import { Route as FieldNotes } from '../../apps/web/src/routes/app/wardenwatch/field-notes';
+import { Route as Roster } from '../../apps/web/src/routes/app/wardenwatch/roster';
+import { Route as Keepsakes } from '../../apps/web/src/routes/app/wardenwatch/keepsakes';
+import { Route as Device } from '../../apps/web/src/routes/app/wardenwatch/trmnl';
+import { Route as Profile } from '../../apps/web/src/routes/wardenwatch/heroes.$alias';
 import { Route as IaShell } from '../../apps/web/src/routes/app/idle-angler';
 import { Route as IaDock } from '../../apps/web/src/routes/app/idle-angler/index';
 import { Route as IaCooler } from '../../apps/web/src/routes/app/idle-angler/cooler';
@@ -499,26 +499,26 @@ import { Route as PlAchievements } from '../../apps/web/src/routes/app/paper-liv
 import { Route as PlPublic } from '../../apps/web/src/routes/profile/$alias_.lives.$n';
 import { Route as Home } from '../../apps/web/src/routes/index';
 import { Route as Library } from '../../apps/web/src/routes/app/index';
-import { Route as DcGame } from '../../apps/web/src/routes/games/desk-crawler';
+import { Route as DcGame } from '../../apps/web/src/routes/games/wardenwatch';
 import { Route as IaGame } from '../../apps/web/src/routes/games/idle-angler';
 import { AuthShell } from '../../apps/web/src/lib/platformShell';
 import { NetworkProvider } from '../../apps/web/src/lib/network';
 import { LocaleProvider } from '../../apps/web/src/lib/i18n';
 import { OutletContext, useLocation } from './router.jsx';
 import './styles.css';
-const pages = { '/app/desk-crawler': Hero.options.component, '/app/desk-crawler/inventory': Bag.options.component, '/app/desk-crawler/leaderboard': Ranks.options.component, '/app/desk-crawler/settings': Settings.options.component, '/app/desk-crawler/log': Log.options.component, '/app/desk-crawler/achievements': DcAchievements.options.component, '/app/desk-crawler/career': Career.options.component, '/app/desk-crawler/field-notes': FieldNotes.options.component, '/app/desk-crawler/roster': Roster.options.component, '/app/desk-crawler/keepsakes': Keepsakes.options.component, '/app/desk-crawler/trmnl': Device.options.component,
+const pages = { '/app/wardenwatch': Hero.options.component, '/app/wardenwatch/inventory': Bag.options.component, '/app/wardenwatch/leaderboard': Ranks.options.component, '/app/wardenwatch/settings': Settings.options.component, '/app/wardenwatch/log': Log.options.component, '/app/wardenwatch/achievements': DcAchievements.options.component, '/app/wardenwatch/career': Career.options.component, '/app/wardenwatch/field-notes': FieldNotes.options.component, '/app/wardenwatch/roster': Roster.options.component, '/app/wardenwatch/keepsakes': Keepsakes.options.component, '/app/wardenwatch/trmnl': Device.options.component,
   '/app/idle-angler': IaDock.options.component, '/app/idle-angler/cooler': IaCooler.options.component, '/app/idle-angler/shop': IaShop.options.component, '/app/idle-angler/logbook': IaLogbook.options.component, '/app/idle-angler/settings': IaSettings.options.component, '/app/idle-angler/rankings': IaRankings.options.component, '/app/idle-angler/achievements': IaAchievements.options.component, '/app/idle-angler/trophies': IaTrophies.options.component,
   '/app/paper-lives': PlLife.options.component, '/app/paper-lives/people': PlPeople.options.component, '/app/paper-lives/work': PlWork.options.component, '/app/paper-lives/settings': PlSettings.options.component, '/app/paper-lives/album': PlAlbum.options.component, '/app/paper-lives/rankings': PlRankings.options.component, '/app/paper-lives/achievements': PlAchievements.options.component };
 const lifePage = /^\\/profile\\/[^/]+\\/lives\\/\\d+/.test(location.pathname);
 // D210: the signed-in front page, game pages and library, outside the companion shell.
-const sitePages = { '/': Home, '/app': Library, '/games/desk-crawler': DcGame, '/games/idle-angler': IaGame };
+const sitePages = { '/': Home, '/app': Library, '/games/wardenwatch': DcGame, '/games/idle-angler': IaGame };
 const sitePage = sitePages[location.pathname.replace(/(.)\\/$/, '$1')];
-const publicPage = location.pathname.startsWith('/desk-crawler/heroes/') || lifePage || Boolean(sitePage);
-if (!publicPage && !pages[location.pathname.replace(/\\/$/, '')]) history.replaceState(null, '', '/app/desk-crawler' + location.search);
+const publicPage = location.pathname.startsWith('/wardenwatch/heroes/') || lifePage || Boolean(sitePage);
+if (!publicPage && !pages[location.pathname.replace(/\\/$/, '')]) history.replaceState(null, '', '/app/wardenwatch' + location.search);
 function App() {
   const pathname = useLocation({ select: (l) => l.pathname.replace(/\\/$/, '') });
   const AppShell = (pathname.startsWith('/app/idle-angler') ? IaShell : pathname.startsWith('/app/paper-lives') ? PlShell : Shell).options.component;
-  return <OutletContext.Provider value={pages[pathname] ?? pages['/app/desk-crawler']}><AuthShell><AppShell /></AuthShell></OutletContext.Provider>;
+  return <OutletContext.Provider value={pages[pathname] ?? pages['/app/wardenwatch']}><AuthShell><AppShell /></AuthShell></OutletContext.Provider>;
 }
 document.body.className = 'bg-ground text-ink';
 const ProfilePage = (sitePage ?? (lifePage ? PlPublic : Profile)).options.component;

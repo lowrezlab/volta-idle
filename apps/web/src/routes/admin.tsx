@@ -17,7 +17,7 @@ export const Route = createFileRoute('/admin')({
   head: () => seo({ title: 'Admin', index: false }),
   component: () => (
     <main id="main" className="mx-auto flex max-w-3xl flex-col gap-4 px-4 py-8">
-      <h1 className="font-display text-3xl font-bold">Desk Crawler admin</h1>
+      <h1 className="font-display text-3xl font-bold">Wardenwatch admin</h1>
       <Show when="signed-in">
         <AdminGate />
       </Show>

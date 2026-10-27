@@ -3,8 +3,8 @@ import { convexTest } from 'convex-test'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { api, internal } from '@trmnl-games/backend/api'
 import schema from '../../apps/backend/convex/schema'
-import { contentV1 } from '@trmnl-games/desk-crawler/content/v1'
-import { starterKit } from '@trmnl-games/desk-crawler/sim/core/starter'
+import { contentV1 } from '@trmnl-games/wardenwatch/content/v1'
+import { starterKit } from '@trmnl-games/wardenwatch/sim/core/starter'
 import { sha256Hex } from '../../apps/backend/convex/lib/hash'
 import { verifySvix } from '../../apps/backend/convex/lib/svix'
 import { seedDeletionConfirmation, seedHero, seedWorld, type T } from './helpers'
@@ -99,7 +99,7 @@ describe('account deletion (D22)', () => {
 
   it('reconciles a verified Clerk user.deleted once, and refuses unsigned or stale deliveries (V09)', async () => {
     vi.stubEnv('CLERK_JWT_ISSUER_DOMAIN', 'issuer')
-    const secret = 'whsec_' + btoa('desk-crawler-test-signing-key-32b')
+    const secret = 'whsec_' + btoa('wardenwatch-test-signing-key-32b')
     vi.stubEnv('CLERK_WEBHOOK_SECRET', secret)
     await seedHero(t, {}, 'user_Dana12345')
     // Clerk already deleted the user, so the provider step sees 404 and completes.

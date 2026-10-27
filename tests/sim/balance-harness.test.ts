@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { contentV1 } from '@trmnl-games/desk-crawler/content/v1'
+import { contentV1 } from '@trmnl-games/wardenwatch/content/v1'
 import { simulateCohort, summarize } from '../../tools/balance/run'
 
 describe('balance evidence', () => {

@@ -1,10 +1,10 @@
 import { describe, expect, it } from 'vitest'
-import { classPose, heroPoses, poseParts, type BasePose } from '@trmnl-games/desk-crawler/art/hero'
-import { heroHatAnchor } from '@trmnl-games/desk-crawler/art/occasions'
-import { parseScenePath, renderScenePng } from '@trmnl-games/desk-crawler/art/route'
-import { scenePlacements } from '@trmnl-games/desk-crawler/art/scene'
-import { paintedScene } from '@trmnl-games/desk-crawler/art/sceneColour'
-import { sceneFor, scenePath } from '@trmnl-games/desk-crawler/art/sceneKey'
+import { classPose, heroPoses, poseParts, type BasePose } from '@trmnl-games/wardenwatch/art/hero'
+import { heroHatAnchor } from '@trmnl-games/wardenwatch/art/occasions'
+import { parseScenePath, renderScenePng } from '@trmnl-games/wardenwatch/art/route'
+import { scenePlacements } from '@trmnl-games/wardenwatch/art/scene'
+import { paintedScene } from '@trmnl-games/wardenwatch/art/sceneColour'
+import { sceneFor, scenePath } from '@trmnl-games/wardenwatch/art/sceneKey'
 
 const BASES: BasePose[] = ['idle', 'fight', 'walk', 'rest', 'sleep', 'knocked_out']
 const HAIR = '#5a3a24'

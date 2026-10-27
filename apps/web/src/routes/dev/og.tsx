@@ -1,18 +1,18 @@
 import { createFileRoute, notFound } from '@tanstack/react-router'
 
 const CARDS = {
-  platform: { mark: '/favicon.svg', title: 'TRMNL Games', tagline: 'Games for your TRMNL e-ink display.', note: 'Desk Crawler is free on the TRMNL marketplace' },
-  'desk-crawler': { mark: '/games/desk-crawler/icon-192.png', title: 'Desk Crawler', tagline: 'An office RPG that plays itself on your desk.', note: 'Free on the TRMNL marketplace' },
+  platform: { mark: '/favicon.svg', title: 'TRMNL Games', tagline: 'Games for your TRMNL e-ink display.', note: 'Wardenwatch is free on the TRMNL marketplace' },
+  'wardenwatch': { mark: '/games/wardenwatch/icon-192.png', title: 'Wardenwatch', tagline: 'An office RPG that plays itself on your desk.', note: 'Free on the TRMNL marketplace' },
 } as const
 type Card = keyof typeof CARDS
 
 /**
  * Dev-only social cards (1200x630). `node tools/art/og.mjs` screenshots `#og-card` into
- * public/og.png and public/games/desk-crawler/og.png (then bump OG_VERSION in lib/seo.ts), so the cards use the site's own fonts
+ * public/og.png and public/games/wardenwatch/og.png (then bump OG_VERSION in lib/seo.ts), so the cards use the site's own fonts
  * and the same real TRMNL X screen, in the same device frame, as the home page's `DeviceSample`.
  */
 export const Route = createFileRoute('/dev/og')({
-  validateSearch: (search: Record<string, unknown>): { card: Card } => ({ card: search.card === 'desk-crawler' ? 'desk-crawler' : 'platform' }),
+  validateSearch: (search: Record<string, unknown>): { card: Card } => ({ card: search.card === 'wardenwatch' ? 'wardenwatch' : 'platform' }),
   beforeLoad: () => {
     if (!import.meta.env.DEV) throw notFound()
   },
@@ -31,7 +31,7 @@ function OgCard() {
       </div>
       {/* The home page's frame around the X marketing render (tools/trmnl/preview.ts --marketing --recap). */}
       <div className="w-[640px] shrink-0 rounded-[1.4rem] bg-[#3a3566] p-4 shadow-[0_0_0_3px_var(--color-night)]">
-        <img src="/games/desk-crawler/screen-sample.png" alt="" width={1200} height={900} className="block h-auto w-full rounded-md bg-white" />
+        <img src="/games/wardenwatch/screen-sample.png" alt="" width={1200} height={900} className="block h-auto w-full rounded-md bg-white" />
       </div>
     </div>
   )

@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest'
 import { Liquid } from 'liquidjs'
-import { buildPayload } from '@trmnl-games/desk-crawler/payload'
-import { screenMarkup } from '@trmnl-games/desk-crawler/templates/screen'
-import { PREVIEW_DEVICES, PREVIEW_LAYOUTS, previewDocument, type PreviewDevice, type PreviewLayout } from '@trmnl-games/desk-crawler/templates/preview'
-import { previewScenarios, withOvernightRecap } from '@trmnl-games/desk-crawler/templates/previewScenarios'
+import { buildPayload } from '@trmnl-games/wardenwatch/payload'
+import { screenMarkup } from '@trmnl-games/wardenwatch/templates/screen'
+import { PREVIEW_DEVICES, PREVIEW_LAYOUTS, previewDocument, type PreviewDevice, type PreviewLayout } from '@trmnl-games/wardenwatch/templates/preview'
+import { previewScenarios, withOvernightRecap } from '@trmnl-games/wardenwatch/templates/previewScenarios'
 
 const { groups, overnightEntries } = previewScenarios('https://art.example')
 const scenarios = Object.values(groups).flatMap((group) => Object.entries(group))

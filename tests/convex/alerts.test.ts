@@ -4,9 +4,9 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { api, internal } from '@trmnl-games/backend/api'
 import type { Id } from '@trmnl-games/backend/data-model'
 import schema from '../../apps/backend/convex/schema'
-import { contentV1 } from '@trmnl-games/desk-crawler/content/v1'
-import { starterKit } from '@trmnl-games/desk-crawler/sim/core/starter'
-import type { SimulationResult } from '@trmnl-games/desk-crawler/sim/core/types'
+import { contentV1 } from '@trmnl-games/wardenwatch/content/v1'
+import { starterKit } from '@trmnl-games/wardenwatch/sim/core/starter'
+import type { SimulationResult } from '@trmnl-games/wardenwatch/sim/core/types'
 import { SLOT_MS } from '../../apps/backend/convex/sim/runs/tick'
 import { ALERTS, alertMessage, inQuietHours, localDay, merchantDeal, queueAlerts, quietEndsAt } from '../../apps/backend/convex/lib/alerts'
 import { purgeAlertRows } from '../../apps/backend/convex/alerts'
@@ -182,7 +182,7 @@ describe('alerts backend (P33)', () => {
     expect(rows).toHaveLength(1)
     expect(rows[0]).toMatchObject({ kind: 'asleep', eventTick: hero.lastTick, state: 'sent', attempts: 1 })
     expect(sent).toHaveLength(1)
-    expect(JSON.parse(sent[0]!.payload)).toMatchObject({ body: 'Baz is holding a new find for you. Make room in the bag so the next ones are not left behind.', url: '/app/desk-crawler/inventory?alert=asleep' })
+    expect(JSON.parse(sent[0]!.payload)).toMatchObject({ body: 'Baz is holding a new find for you. Make room in the bag so the next ones are not left behind.', url: '/app/wardenwatch/inventory?alert=asleep' })
   })
 
   /** Insert an outbox row due now for the hero. */
@@ -266,7 +266,7 @@ describe('alerts backend (P33)', () => {
     expect(await row(nap)).toMatchObject({ state: 'failed', attempts: 3, reason: 'push_failed' })
   })
 
-  it('Desk Crawler removal deletes preferences, devices and outbox rows', async () => {
+  it('Wardenwatch removal deletes preferences, devices and outbox rows', async () => {
     const heroId = await seedHero(t, { status: 'sleeping' }, 'Kit')
     await subscribe(t, 'Kit', 1)
     await enable(t, 'Kit')
@@ -292,7 +292,7 @@ describe('alerts backend (P33)', () => {
 })
 
 describe('alert copy (D169)', () => {
-  it('sends Desk Crawler alerts in the owner’s language', () => {
+  it('sends Wardenwatch alerts in the owner’s language', () => {
     expect(alertMessage({ kind: 'asleep', offerName: undefined }, 'Baz', 'fr').title).toBe('Le sac de Baz est plein')
     expect(alertMessage({ kind: 'merchant', offerName: 'Messenger Bag' }, 'Baz', 'de').body).toContain('eine Kuriertasche')
     expect(alertMessage({ kind: 'asleep', offerName: undefined }, 'Baz').title).toBe("Baz's bag is full")

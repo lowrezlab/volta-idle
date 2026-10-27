@@ -2,7 +2,7 @@ import { hmac } from '@noble/hashes/hmac.js'
 import { sha256 } from '@noble/hashes/sha2.js'
 import type { Id } from '../_generated/dataModel'
 import type { QueryCtx } from '../_generated/server'
-import { isDeskCrawler } from './gameProfile'
+import { isWardenwatch } from './gameProfile'
 
 const ALPHABET = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'
 
@@ -41,9 +41,9 @@ export async function keepsakeGrant(ctx: QueryCtx, userId: Id<'users'>) {
   const instance = await ctx.db.query('trmnlInstances')
     .withIndex('by_userId_and_state', (q) => q.eq('userId', userId).eq('state', 'active'))
     .order('desc').first()
-  if (!instance || !isDeskCrawler(instance)) return null
+  if (!instance || !isWardenwatch(instance)) return null
   const grant = await ctx.db.get(instance.grantId)
-  return grant && isDeskCrawler(grant) && grant.userId === userId && grant.state === 'active' ? grant : null
+  return grant && isWardenwatch(grant) && grant.userId === userId && grant.state === 'active' ? grant : null
 }
 
 export const normalizedKeepsakeCode = (code: string) => code.trim().toUpperCase().replace(/[\s-]/g, '')

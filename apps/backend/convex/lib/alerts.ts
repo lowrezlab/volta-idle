@@ -1,9 +1,9 @@
 import { internal } from '../_generated/api'
 import type { Doc, Id } from '../_generated/dataModel'
 import type { MutationCtx } from '../_generated/server'
-import type { SimulationResult } from '@trmnl-games/desk-crawler/sim/core/types'
+import type { SimulationResult } from '@trmnl-games/wardenwatch/sim/core/types'
 import type { Locale } from '@trmnl-games/platform'
-import { contentTranslator } from '@trmnl-games/desk-crawler/i18n'
+import { contentTranslator } from '@trmnl-games/wardenwatch/i18n'
 
 /**
  * P33 hero alerts (alerts.md): an alert goes out only when the hero has stopped or is about to lose something the
@@ -37,8 +37,8 @@ export const PREF_FOR: Readonly<Record<AlertKind, AlertSwitch>> = {
   merchant: 'merchant',
 }
 export const kindOn = (prefs: AlertPreferences | undefined, kind: AlertKind) => prefs?.[PREF_FOR[kind]] === true
-/** Desk Crawler's kinds. */
-export const DESK_CRAWLER_KINDS: readonly AlertKind[] = ['asleep', 'merchant']
+/** Wardenwatch's kinds. */
+export const WARDENWATCH_KINDS: readonly AlertKind[] = ['asleep', 'merchant']
 
 const STEP_MS = 15 * 60_000
 
@@ -132,8 +132,8 @@ export async function ensureSender(ctx: MutationCtx, at: number): Promise<void> 
 
 /** One sentence in the game's voice, with nothing private on a lock screen, and the page it opens. */
 export function alertMessage(row: Pick<Doc<'alertOutbox'>, 'kind' | 'offerName'>, heroName: string, locale: Locale = 'en'): { title: string; body: string; url: string } {
-  if (row.kind === 'asleep') return { ...DESK_ALERTS[locale].asleep(heroName), url: '/app/desk-crawler/inventory?alert=asleep' }
-  return { ...DESK_ALERTS[locale].merchant(heroName, row.offerName ?? null), url: '/app/desk-crawler/inventory?alert=merchant' }
+  if (row.kind === 'asleep') return { ...DESK_ALERTS[locale].asleep(heroName), url: '/app/wardenwatch/inventory?alert=asleep' }
+  return { ...DESK_ALERTS[locale].merchant(heroName, row.offerName ?? null), url: '/app/wardenwatch/inventory?alert=merchant' }
 }
 
 const fr = contentTranslator('fr')
@@ -144,7 +144,7 @@ const pt = contentTranslator('pt')
 const pl = contentTranslator('pl')
 const nl = contentTranslator('nl')
 
-/** D169, D193: Desk Crawler's two alerts in the owner's language (lib/trmnlUser.ts `deviceLocale`). */
+/** D169, D193: Wardenwatch's two alerts in the owner's language (lib/trmnlUser.ts `deviceLocale`). */
 const DESK_ALERTS: Readonly<Record<Locale, { asleep: (hero: string) => { title: string; body: string }; merchant: (hero: string, offer: string | null) => { title: string; body: string } }>> = {
   en: {
     asleep: (hero) => ({ title: `${hero}'s bag is full`, body: `${hero} is holding a new find for you. Make room in the bag so the next ones are not left behind.` }),

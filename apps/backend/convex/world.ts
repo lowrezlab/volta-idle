@@ -1,15 +1,15 @@
-import { ACTIVE_CONTENT, catalogs, type CatalogId } from '@trmnl-games/desk-crawler/content'
-import { remapRung, rungSatisfied } from '@trmnl-games/desk-crawler/sim/core/career'
-import type { ContentCatalog } from '@trmnl-games/desk-crawler/sim/core/types'
+import { ACTIVE_CONTENT, catalogs, type CatalogId } from '@trmnl-games/wardenwatch/content'
+import { remapRung, rungSatisfied } from '@trmnl-games/wardenwatch/sim/core/career'
+import type { ContentCatalog } from '@trmnl-games/wardenwatch/sim/core/types'
 import { v } from 'convex/values'
 import type { Doc } from './_generated/dataModel'
 import { internalMutation, type MutationCtx, type QueryCtx } from './_generated/server'
-import { DESK_CRAWLER_RUNTIME } from './lib/engine/deskCrawler'
+import { WARDENWATCH_RUNTIME } from './lib/engine/wardenwatch'
 import { toHeroState } from './sim/runs/adapter'
 import { getOrCreateEngineWorld, readEngineWorld, setEngineContentVersion } from './lib/engine/world'
 
 export async function readWorld(ctx: QueryCtx): Promise<Doc<'worldState'> | null> {
-  return await readEngineWorld(ctx, DESK_CRAWLER_RUNTIME)
+  return await readEngineWorld(ctx, WARDENWATCH_RUNTIME)
 }
 
 /**
@@ -22,7 +22,7 @@ export function worldContent(world: Pick<Doc<'worldState'>, 'activeContentVersio
 
 /** Idempotently create the world singleton. The seed is server-only and never returned by public functions. */
 export async function getOrCreateWorld(ctx: MutationCtx): Promise<Doc<'worldState'>> {
-  return await getOrCreateEngineWorld(ctx, DESK_CRAWLER_RUNTIME)
+  return await getOrCreateEngineWorld(ctx, WARDENWATCH_RUNTIME)
 }
 
 /**
@@ -34,7 +34,7 @@ export const setActiveContentVersion = internalMutation({
   args: { contentVersion: v.string() },
   returns: v.object({ from: v.string(), to: v.string(), heroesMoved: v.number() }),
   handler: async (ctx, { contentVersion }) => {
-    const switched = await setEngineContentVersion(ctx, DESK_CRAWLER_RUNTIME, contentVersion)
+    const switched = await setEngineContentVersion(ctx, WARDENWATCH_RUNTIME, contentVersion)
     const from = catalogs[switched.from as CatalogId]?.career
     const content = catalogs[switched.to as CatalogId]
     const to = content?.career

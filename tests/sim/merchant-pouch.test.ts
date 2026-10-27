@@ -1,11 +1,11 @@
 import { describe, expect, it } from 'vitest'
-import { contentV3 } from '@trmnl-games/desk-crawler/content/v3'
-import { contentV4 } from '@trmnl-games/desk-crawler/content/v4'
-import { validateCatalog } from '@trmnl-games/desk-crawler/content/validate'
-import { simulateHero, SIMULATION_VERSION } from '@trmnl-games/desk-crawler/sim/core/simulate'
-import { nextEarlyPouchTier, potionCap, pouchMilestoneUpgrade } from '@trmnl-games/desk-crawler/sim/core/pouch'
-import { maxHp } from '@trmnl-games/desk-crawler/sim/core/stats'
-import type { ContentCatalog, HeroState, SimulationResult } from '@trmnl-games/desk-crawler/sim/core/types'
+import { contentV3 } from '@trmnl-games/wardenwatch/content/v3'
+import { contentV4 } from '@trmnl-games/wardenwatch/content/v4'
+import { validateCatalog } from '@trmnl-games/wardenwatch/content/validate'
+import { simulateHero, SIMULATION_VERSION } from '@trmnl-games/wardenwatch/sim/core/simulate'
+import { nextEarlyPouchTier, potionCap, pouchMilestoneUpgrade } from '@trmnl-games/wardenwatch/sim/core/pouch'
+import { maxHp } from '@trmnl-games/wardenwatch/sim/core/stats'
+import type { ContentCatalog, HeroState, SimulationResult } from '@trmnl-games/wardenwatch/sim/core/types'
 import { baseState, seeds } from './helpers'
 
 const tick = (hero: HeroState, inventory: ReturnType<typeof baseState>['inventory'], content: ContentCatalog, seed = 1, at = 10) =>

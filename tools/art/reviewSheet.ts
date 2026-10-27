@@ -2,12 +2,12 @@
  * A review sheet of scenes (D139, D141): one row per scene, 1-bit as the device draws it on the left and the
  * companion's painted scene on the right, each at three times the stage.
  */
-import { encodePngIndexed } from '@trmnl-games/desk-crawler/art/png'
-import { composeScene, STAGE_HEIGHT, STAGE_WIDTH, type BiomeArt, type Subject } from '@trmnl-games/desk-crawler/art/scene'
-import { paintedScene } from '@trmnl-games/desk-crawler/art/sceneColour'
-import type { OccasionArt } from '@trmnl-games/desk-crawler/art/occasions'
-import type { HeroPose } from '@trmnl-games/desk-crawler/art/hero'
-import type { SceneTime } from '@trmnl-games/desk-crawler/art/sceneTime'
+import { encodePngIndexed } from '@trmnl-games/wardenwatch/art/png'
+import { composeScene, STAGE_HEIGHT, STAGE_WIDTH, type BiomeArt, type Subject } from '@trmnl-games/wardenwatch/art/scene'
+import { paintedScene } from '@trmnl-games/wardenwatch/art/sceneColour'
+import type { OccasionArt } from '@trmnl-games/wardenwatch/art/occasions'
+import type { HeroPose } from '@trmnl-games/wardenwatch/art/hero'
+import type { SceneTime } from '@trmnl-games/wardenwatch/art/sceneTime'
 
 const SCALE = 3
 const GAP = 4

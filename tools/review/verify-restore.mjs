@@ -4,7 +4,7 @@ import { spawnSync } from 'node:child_process'
 import { readFileSync, writeFileSync } from 'node:fs'
 import { createHash } from 'node:crypto'
 const target = 'usable-snail-909'
-const snapshot = '/private/tmp/desk-crawler-synthetic-backup.zip'
+const snapshot = '/private/tmp/wardenwatch-synthetic-backup.zip'
 const cli = 'node_modules/convex/bin/main.js'
 function command(args) {
   const p = spawnSync(process.execPath, [cli, ...args], { encoding: 'utf8' })

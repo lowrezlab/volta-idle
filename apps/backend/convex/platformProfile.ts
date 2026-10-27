@@ -8,7 +8,7 @@ import { internalMutation, query, type QueryCtx } from './_generated/server'
 import { MAX_UNLOCK_ROWS } from './lib/achievements'
 import { currentHero } from './lib/gameProfile'
 import { readEngineWorld } from './lib/engine/world'
-import { DESK_CRAWLER_RUNTIME } from './lib/engine/deskCrawler'
+import { WARDENWATCH_RUNTIME } from './lib/engine/wardenwatch'
 import { ALIAS_RULE, normalizeAlias } from './lib/names'
 import { pagePublic } from './lib/publicPage'
 import { adminRef } from './lib/adminAccess'
@@ -25,9 +25,9 @@ import type { EngineRuntime } from './lib/engine/runtime'
 /** The player's achievements earned in each game and the games with an active character. */
 async function crossGame(ctx: QueryCtx, user: Doc<'users'>) {
   const hero = await currentHero(ctx, user)
-  const dcUnlocks = (await ctx.db.query('heroAchievements').withIndex('by_userId_and_achievementId', (q) => q.eq('userId', user._id)).take(MAX_UNLOCK_ROWS)).length
+  const wwUnlocks = (await ctx.db.query('heroAchievements').withIndex('by_userId_and_achievementId', (q) => q.eq('userId', user._id)).take(MAX_UNLOCK_ROWS)).length
   const games = hero?.activationState === 'active' ? 1 : 0
-  return { hero, dcUnlocks, games, collected: dcUnlocks }
+  return { hero, wwUnlocks, games, collected: wwUnlocks }
 }
 
 /** All-time rank in a game's published set, or null. */
@@ -49,14 +49,14 @@ export const view = query({
     if (normalized.length < ALIAS_RULE.min || normalized.length > ALIAS_RULE.max) return null
     const user = await ctx.db.query('users').withIndex('by_normalizedAlias', (q) => q.eq('normalizedAlias', normalized)).first()
     if (user === null || user.state !== 'active' || user.nameRepairRequired) return null
-    const { hero, dcUnlocks, games, collected } = await crossGame(ctx, user)
+    const { hero, wwUnlocks, games, collected } = await crossGame(ctx, user)
     const showDesk = hero !== null && hero.activationState === 'active' && pagePublic(hero)
     if (!showDesk) return null
     const current = await ctx.db.query('platformStats').withIndex('by_key', (q) => q.eq('key', 'current')).unique()
     return {
       alias: user.publicAlias,
       games: [
-        ...(showDesk ? [{ slug: 'desk-crawler' as const, name: hero.name, level: hero.level, since: hero.activatedAt ?? hero.createdAt, rank: await overallRank(ctx, DESK_CRAWLER_RUNTIME, hero._id), achievements: dcUnlocks, page: `/desk-crawler/heroes/${encodeURIComponent(user.publicAlias)}` }] : []),
+        ...(showDesk ? [{ slug: 'wardenwatch' as const, name: hero.name, level: hero.level, since: hero.activatedAt ?? hero.createdAt, rank: await overallRank(ctx, WARDENWATCH_RUNTIME, hero._id), achievements: wwUnlocks, page: `/wardenwatch/heroes/${encodeURIComponent(user.publicAlias)}` }] : []),
       ],
       platform: platformAchievements({ games, collected }).map((a) => ({ id: a.id, name: a.name, blurb: a.blurb, family: a.family, tier: a.tier, share: current && current.totalPlayers > 0 ? Math.max(1, Math.round(((current.counts[a.id] ?? 0) * 100) / current.totalPlayers)) : null })),
     }

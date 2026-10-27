@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest'
-import { ACHIEVEMENTS, ACHIEVEMENT_BY_ID, ACHIEVEMENT_FAMILIES, MONSTER_LADDER, rarityBand } from '@trmnl-games/desk-crawler/content/achievements'
-import { allSatisfied, familyProgress, measure, newlyUnlocked, satisfied, type AchievementState } from '@trmnl-games/desk-crawler/sim/core/achievements'
-import { zeroCounters } from '@trmnl-games/desk-crawler/sim/core/starter'
-import type { HeroCounters } from '@trmnl-games/desk-crawler/sim/core/types'
-import { catalogs } from '@trmnl-games/desk-crawler/content'
+import { ACHIEVEMENTS, ACHIEVEMENT_BY_ID, ACHIEVEMENT_FAMILIES, MONSTER_LADDER, rarityBand } from '@trmnl-games/wardenwatch/content/achievements'
+import { allSatisfied, familyProgress, measure, newlyUnlocked, satisfied, type AchievementState } from '@trmnl-games/wardenwatch/sim/core/achievements'
+import { zeroCounters } from '@trmnl-games/wardenwatch/sim/core/starter'
+import type { HeroCounters } from '@trmnl-games/wardenwatch/sim/core/types'
+import { catalogs } from '@trmnl-games/wardenwatch/content'
 import { baseState, content, findSeed, run } from './helpers'
 
 /** D133: monster and floor families appended for the Archive and the Parking Garage resolve under the catalog that has them. */

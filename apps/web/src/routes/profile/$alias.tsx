@@ -11,7 +11,7 @@ import { headMessages } from '../../i18n/heads'
 import { publicPagesMessages } from '../../i18n/publicPages'
 import { preloadContent } from '../../lib/content'
 
-type Game = { slug: 'desk-crawler'; name: string; level: number; since: number; rank: { rank: number; totalPlayers: number } | null; achievements: number; page: string | null }
+type Game = { slug: 'wardenwatch'; name: string; level: number; since: number; rank: { rank: number; totalPlayers: number } | null; achievements: number; page: string | null }
 type Profile = { alias: string; games: Game[]; platform: Array<{ id: string; name: string; blurb: string; share: number | null }> } | null
 
 const profileQuery = (alias: string) => convexQuery(api.platformProfile.view, { alias })

@@ -14,11 +14,11 @@ describe('Sentry error report privacy boundary (D113)', () => {
 
   it('keeps only the method and path of the request: no query, headers, cookies, body or identity', () => {
     const scrubbed = scrubSentryEvent(event({
-      request: { method: 'POST', url: 'https://trmnlgames.com/connect/trmnl/desk-crawler/install?code=secret-code&installation_callback_url=https%3A%2F%2Ftrmnl.com', query_string: 'code=secret-code', headers: { cookie: 'session=secret', authorization: 'Bearer secret' }, cookies: { session: 'secret' }, data: { code: 'secret-code' } },
+      request: { method: 'POST', url: 'https://trmnlgames.com/connect/trmnl/wardenwatch/install?code=secret-code&installation_callback_url=https%3A%2F%2Ftrmnl.com', query_string: 'code=secret-code', headers: { cookie: 'session=secret', authorization: 'Bearer secret' }, cookies: { session: 'secret' }, data: { code: 'secret-code' } },
       user: { id: 'user_test', email: 'player@example.test', ip_address: '203.0.113.1' },
       server_name: 'worker',
     }))
-    expect(scrubbed?.request).toEqual({ method: 'POST', url: 'https://trmnlgames.com/connect/trmnl/desk-crawler/install' })
+    expect(scrubbed?.request).toEqual({ method: 'POST', url: 'https://trmnlgames.com/connect/trmnl/wardenwatch/install' })
     expect(scrubbed?.user).toBeUndefined()
     expect(scrubbed?.server_name).toBeUndefined()
   })
@@ -29,7 +29,7 @@ describe('Sentry error report privacy boundary (D113)', () => {
       request: { url: 'https://trmnlgames.com/app' },
       message: `Failed https://trmnlgames.com/manage?jwt=${jwt}`,
       exception: { values: [{ type: 'Error', value: `bad token=secret-token and ${jwt}` }] },
-      breadcrumbs: [{ category: 'navigation', data: { from: '/connect/trmnl/desk-crawler/install?code=secret-code', to: '/app' } }],
+      breadcrumbs: [{ category: 'navigation', data: { from: '/connect/trmnl/wardenwatch/install?code=secret-code', to: '/app' } }],
       extra: { callbackUrl: 'https://trmnl.com/callback', note: 'access_token: secret' },
       tags: { source: 'route' },
     }))

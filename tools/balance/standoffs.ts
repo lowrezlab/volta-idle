@@ -9,8 +9,8 @@
  */
 import { writeFileSync } from 'node:fs'
 import { pathToFileURL } from 'node:url'
-import { catalogs, type CatalogId } from '@trmnl-games/desk-crawler/content'
-import type { ContentCatalog, StanceId } from '@trmnl-games/desk-crawler/sim/core/types'
+import { catalogs, type CatalogId } from '@trmnl-games/wardenwatch/content'
+import type { ContentCatalog, StanceId } from '@trmnl-games/wardenwatch/sim/core/types'
 import { POLICIES, simulateCohort, type HeroLog, type Policy, type TickObserver } from './run'
 
 const TICKS_PER_DAY = 96

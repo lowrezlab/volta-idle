@@ -70,7 +70,7 @@ export async function requireActiveUser(ctx: QueryCtx): Promise<Doc<'users'>> {
 export async function requirePlayableHero(ctx: QueryCtx, user: Doc<'users'>): Promise<Doc<'heroes'>> {
   const hero = await currentHero(ctx, user)
   if (hero === null) throw appError('HERO_NOT_FOUND', 'No hero yet.')
-  if (hero.activationState !== 'active') throw appError('TRMNL_REQUIRED', 'Save Desk Crawler in TRMNL to start adventures.')
+  if (hero.activationState !== 'active') throw appError('TRMNL_REQUIRED', 'Save Wardenwatch in TRMNL to start adventures.')
   if (hero.simulationState === 'quarantined') throw appError('SERVICE_PAUSED', 'This hero is paused for a service check.')
   return hero
 }
@@ -115,7 +115,7 @@ export async function runIntent(
 
     const result = await handler(user)
     if (prior) await ctx.db.delete(prior._id)
-    await ctx.db.insert('operationReceipts', { scope: operation === 'deletion.requestDeletion' || operation.startsWith('users.') ? 'platform' : 'desk-crawler', userId: user._id, operationId, operation, argumentHash, result, createdAt: now, expiresAt: now + RECEIPT_TTL_MS })
+    await ctx.db.insert('operationReceipts', { scope: operation === 'deletion.requestDeletion' || operation.startsWith('users.') ? 'platform' : 'wardenwatch', userId: user._id, operationId, operation, argumentHash, result, createdAt: now, expiresAt: now + RECEIPT_TTL_MS })
     return { ...result, operationId }
   } catch (error) {
     const refusal = refusalOf(error)

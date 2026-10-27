@@ -1,5 +1,5 @@
 /** The TRMNL Games mark: a desk display showing a d-pad and two buttons, drawn on native pixel grids. */
-import { Canvas, sprite } from '@trmnl-games/desk-crawler/art/canvas'
+import { Canvas, sprite } from '@trmnl-games/wardenwatch/art/canvas'
 
 const display = sprite(`
  ##########################

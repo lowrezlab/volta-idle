@@ -1,14 +1,14 @@
 import { describe, expect, it } from 'vitest'
-import { contentV19 } from '@trmnl-games/desk-crawler/content/v19'
-import { heroPoses, type HeroPose } from '@trmnl-games/desk-crawler/art/hero'
-import { monsterArt } from '@trmnl-games/desk-crawler/art/monsters'
-import { DRESSING, isOccasionArt, OCCASION_ARTS } from '@trmnl-games/desk-crawler/art/occasions'
-import { parseScenePath, renderScenePng } from '@trmnl-games/desk-crawler/art/route'
-import { composeScene, scenePlacements, STAGE_HEIGHT, STAGE_WIDTH, type BiomeArt } from '@trmnl-games/desk-crawler/art/scene'
-import { paintedSceneUri } from '@trmnl-games/desk-crawler/art/sceneColour'
-import { scenePath } from '@trmnl-games/desk-crawler/art/sceneKey'
-import { Canvas } from '@trmnl-games/desk-crawler/art/canvas'
-import { buildPayload, sceneOccasion, type PayloadInput } from '@trmnl-games/desk-crawler/payload'
+import { contentV19 } from '@trmnl-games/wardenwatch/content/v19'
+import { heroPoses, type HeroPose } from '@trmnl-games/wardenwatch/art/hero'
+import { monsterArt } from '@trmnl-games/wardenwatch/art/monsters'
+import { DRESSING, isOccasionArt, OCCASION_ARTS } from '@trmnl-games/wardenwatch/art/occasions'
+import { parseScenePath, renderScenePng } from '@trmnl-games/wardenwatch/art/route'
+import { composeScene, scenePlacements, STAGE_HEIGHT, STAGE_WIDTH, type BiomeArt } from '@trmnl-games/wardenwatch/art/scene'
+import { paintedSceneUri } from '@trmnl-games/wardenwatch/art/sceneColour'
+import { scenePath } from '@trmnl-games/wardenwatch/art/sceneKey'
+import { Canvas } from '@trmnl-games/wardenwatch/art/canvas'
+import { buildPayload, sceneOccasion, type PayloadInput } from '@trmnl-games/wardenwatch/payload'
 
 const BIOMES: BiomeArt[] = ['office_cubicles', 'server_room', 'cafeteria_depths', 'archive', 'parking_garage']
 const POSES = Object.keys(heroPoses) as HeroPose[]
@@ -86,7 +86,7 @@ describe('occasion dressing (D139)', () => {
       bagCapacity: 10,
       heldItemName: null,
       logs: [],
-      instanceName: 'Desk Crawler',
+      instanceName: 'Wardenwatch',
       content: contentV19,
       spriteBaseUrl: null,
       artBaseUrl: 'https://art.test',

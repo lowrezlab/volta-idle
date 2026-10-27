@@ -5,8 +5,8 @@ const redirect = (location: string, status = 307) => new Response(null, { status
 
 describe('trailing-slash redirects', () => {
   it.each([
-    ['/help/desk-crawler/', '/help/desk-crawler'],
-    ['/games/desk-crawler/', 'https://trmnlgames.com/games/desk-crawler'],
+    ['/help/wardenwatch/', '/help/wardenwatch'],
+    ['/games/wardenwatch/', 'https://trmnlgames.com/games/wardenwatch'],
     ['/privacy/?ref=x', '/privacy?ref=x'],
   ])('makes the slash-stripping redirect from %s permanent', (path, location) => {
     const response = permanentSlashRedirect(new Request('https://trmnlgames.com' + path), redirect(location))
@@ -15,13 +15,13 @@ describe('trailing-slash redirects', () => {
   })
   it('leaves every other redirect and response alone', () => {
     const cases: Array<[string, Response]> = [
-      ['/help/desk-crawler/', redirect('/support')],
-      ['/connect/trmnl/desk-crawler/install/?code=secret', redirect('/connect/trmnl/desk-crawler/install')],
+      ['/help/wardenwatch/', redirect('/support')],
+      ['/connect/trmnl/wardenwatch/install/?code=secret', redirect('/connect/trmnl/wardenwatch/install')],
       ['/app/', redirect('/app', 302)],
-      ['/help/desk-crawler', redirect('/help/desk-crawler')],
+      ['/help/wardenwatch', redirect('/help/wardenwatch')],
       ['/', redirect('/')],
-      ['/help/desk-crawler/', redirect('https://evil.example/help/desk-crawler')],
-      ['/help/desk-crawler/', new Response('page')],
+      ['/help/wardenwatch/', redirect('https://evil.example/help/wardenwatch')],
+      ['/help/wardenwatch/', new Response('page')],
     ]
     for (const [path, original] of cases) expect(permanentSlashRedirect(new Request('https://trmnlgames.com' + path), original)).toBe(original)
   })

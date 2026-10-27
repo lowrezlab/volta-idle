@@ -37,8 +37,8 @@ export async function currentCharacterOf(ctx: QueryCtx, slug: GameSlug, user: Do
 
 /** Whether this game's progress is being deleted for the user. */
 export async function gameDeletingFor(ctx: QueryCtx, slug: GameSlug, userId: Id<'users'>): Promise<boolean> {
-  return slug === 'wardenwatch' ? await deskCrawlerDeleting(ctx, userId) : await otherGameHooks(slug).deleting(ctx, userId)
+  return slug === 'wardenwatch' ? await wardenwatchDeleting(ctx, userId) : await otherGameHooks(slug).deleting(ctx, userId)
 }
 
-export const deskCrawlerDeleting = async (ctx: QueryCtx, userId: Id<'users'>) => (await gameProfile(ctx, userId))?.state === 'deleting'
+export const wardenwatchDeleting = async (ctx: QueryCtx, userId: Id<'users'>) => (await gameProfile(ctx, userId))?.state === 'deleting'
 export { currentHero }

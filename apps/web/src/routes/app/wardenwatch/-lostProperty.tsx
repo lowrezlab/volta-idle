@@ -6,7 +6,7 @@ import { RARITY_TONE } from '../../../lib/palette'
 import { WithName } from './-withName'
 import { formatNumber, useLocale, useT } from '../../../lib/i18n'
 import { useContent } from '../../../lib/useContent'
-import { dcLogMessages } from '../../../i18n/dcLog'
+import { wwLogMessages } from '../../../i18n/wwLog'
 
 /**
  * Lost property (D145): where your hero's spare is lying or who found it, and the other players' spares it holds.
@@ -15,7 +15,7 @@ import { dcLogMessages } from '../../../i18n/dcLog'
  */
 export function LostProperty() {
   const { data } = useQuery(convexQuery(api.lostProperty.mine, {}))
-  const t = useT(dcLogMessages)
+  const t = useT(wwLogMessages)
   const locale = useLocale()
   const c = useContent()
   if (!data) return null

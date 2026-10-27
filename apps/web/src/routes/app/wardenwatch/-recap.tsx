@@ -10,7 +10,7 @@ import { isRefusal } from '../../../lib/intent'
 import { afterVisibleVisit } from '../../../lib/visibleVisit'
 import { LocalTime } from '../../../lib/localTime'
 import { countForm, formatNumber, useLocale, useT } from '../../../lib/i18n'
-import { dcRecapMessages } from '../../../i18n/dcRecap'
+import { wwRecapMessages } from '../../../i18n/wwRecap'
 
 type Summary = {
   baseline: { at: number } | null
@@ -79,7 +79,7 @@ export function ReturnRecap() {
 }
 
 function Ledger({ summary }: { summary: Summary }) {
-  const t = useT(dcRecapMessages)
+  const t = useT(wwRecapMessages)
   const locale = useLocale()
   const bag = summary.held ? (
     <p className="mt-3 font-semibold">
@@ -159,7 +159,7 @@ function Ledger({ summary }: { summary: Summary }) {
 export function ReturnNudge() {
   const { data } = useQuery(convexQuery(api.heroes.returnSummary, {}))
   const summary = data as Summary | undefined
-  const t = useT(dcRecapMessages)
+  const t = useT(wwRecapMessages)
   const locale = useLocale()
   if (!summary || summary.baseline === null) return null
   const parts = ([
@@ -189,7 +189,7 @@ export function ReturnNudge() {
 export function LiveGain() {
   const { data: hero } = useQuery(convexQuery(api.heroes.mine, {}))
   const start = useRef(hero)
-  const t = useT(dcRecapMessages)
+  const t = useT(wwRecapMessages)
   const locale = useLocale()
   start.current ??= hero
   if (!hero || !start.current) return null

@@ -6,7 +6,7 @@ import { SectionTitle } from '../../../lib/glyphs'
 import { useIntent } from '../../../lib/intent'
 import { Button, NoticeBar, useNotice } from '../../../lib/ui'
 import { formatNumber, useLocale, useT } from '../../../lib/i18n'
-import { dcLogMessages } from '../../../i18n/dcLog'
+import { wwLogMessages } from '../../../i18n/wwLog'
 import { useShownName } from './-withName'
 
 /**
@@ -16,7 +16,7 @@ import { useShownName } from './-withName'
 export function FollowingCard() {
   const { data } = useQuery(convexQuery(api.follows.list, {}))
   const { notice, notify, dismiss } = useNotice()
-  const t = useT(dcLogMessages)
+  const t = useT(wwLogMessages)
   const locale = useLocale()
   const shown = useShownName()
   const unfollow = useIntent(api.follows.unfollow, { onFeedback: notify })

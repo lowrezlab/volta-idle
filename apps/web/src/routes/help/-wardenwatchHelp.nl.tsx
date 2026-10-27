@@ -1,8 +1,8 @@
 import { contentTranslator } from '@trmnl-games/wardenwatch/i18n/lazy'
-import { DESK_CRAWLER_INSTALL_URL, SUPPORT_EMAIL } from '../../lib/prose'
-import { HELP_FACTS as F, nextTableDate, signed, type Cost, type Modifiers, type Occasion } from './-deskCrawlerFacts'
-import type { HelpPage } from './-deskCrawlerHelp'
-import { DESK_CRAWLER_HELP_HEAD } from './-helpHeads'
+import { WARDENWATCH_INSTALL_URL, SUPPORT_EMAIL } from '../../lib/prose'
+import { HELP_FACTS as F, nextTableDate, signed, type Cost, type Modifiers, type Occasion } from './-wardenwatchFacts'
+import type { HelpPage } from './-wardenwatchHelp'
+import { WARDENWATCH_HELP_HEAD } from './-helpHeads'
 
 const t = contentTranslator('nl')
 const n = (value: number) => t.number(value)
@@ -43,8 +43,8 @@ function occasionDate(rule: Occasion): string {
 }
 
 export const nl: HelpPage = {
-  seoTitle: DESK_CRAWLER_HELP_HEAD.nl.seoTitle,
-  description: DESK_CRAWLER_HELP_HEAD.nl.description,
+  seoTitle: WARDENWATCH_HELP_HEAD.nl.seoTitle,
+  description: WARDENWATCH_HELP_HEAD.nl.description,
   title: 'Wardenwatch op TRMNL',
   contents: {
     'getting-started': 'Aan de slag', 'if-the-qr-sends-you-back-to-setup': 'Als de QR je terugstuurt naar de installatie', 'how-time-works': 'Hoe de tijd verloopt', floors: 'Verdiepingen', 'desk-keepsakes': 'Bureau-aandenkens', career: 'Carrière', 'heroes-and-classes': 'Helden en klassen', stances: 'Houdingen', 'desk-raids': 'Bureauraids', meetings: 'Vergaderingen', 'lost-property': 'Gevonden voorwerpen', 'to-do-list': 'Takenlijst', potions: 'Drankjes', 'the-wandering-merchant': 'De rondtrekkende koopman', decisions: 'Beslissingen', effects: 'Effecten', 'office-calendar': 'Kantoorkalender', 'rare-and-epic-gear': 'Zeldzame en epische uitrusting', 'when-your-bag-fills-up': 'Als je tas vol raakt', 'bigger-bags': 'Grotere tassen', 'salvage-and-the-workbench': 'Demonteren en de werkbank', 'getting-knocked-out': 'Knock-out gaan', recaps: 'Samenvattingen', 'understanding-rankings': 'Hoe de ranglijsten werken', 'sharing-your-hero': 'Je held delen', 'following': 'Volgen', names: 'Namen', gender: 'Geslacht', alerts: 'Meldingen', troubleshooting: 'Problemen oplossen', 'disconnecting-and-removing': 'Ontkoppelen en verwijderen', help: 'Hulp',
@@ -53,14 +53,14 @@ export const nl: HelpPage = {
     <>
       <h2 id="getting-started">Aan de slag</h2>
       <ul>
-        <li>Open <a href={DESK_CRAWLER_INSTALL_URL}>Wardenwatch in de TRMNL-marketplace</a> en kies Installeren.</li>
+        <li>Open <a href={WARDENWATCH_INSTALL_URL}>Wardenwatch in de TRMNL-marketplace</a> en kies Installeren.</li>
         <li>Log in bij Wardenwatch, kies een openbare naam en een heldennaam, en koppel de installatie.</li>
         <li>Klik terug in TRMNL op Opslaan. Het eerste avontuur van je held begint binnen 15 minuten.</li>
         <li>Zet de plugin in een afspeellijst, of in een mashup als je je held naast andere plugins wilt. Alle vier de indelingsformaten worden ondersteund.</li>
       </ul>
       <h2 id="if-the-qr-sends-you-back-to-setup">Als de QR je terugstuurt naar de installatie</h2>
       <p>De QR opent de app van het account waarmee je bent ingelogd. Hij start geen nieuwe installatie. Controleer het e-mailadres van de login op de installatiepagina en gebruik Ander account als je oorspronkelijk met een ander account hebt gekoppeld.</p>
-      <p>Staat er bij de installatie ‘Wardenwatch opnieuw koppelen’, dan bestaat je TRMNL-koppeling wel, maar ontbreekt de held. Dat kan gebeuren na de reset van het spel vóór de lancering. Installeer een nieuwe kopie van <a href={DESK_CRAWLER_INSTALL_URL}>Wardenwatch vanuit TRMNL</a>, log in met hetzelfde account, kies een nieuwe heldennaam, koppel en klik dan in TRMNL op Opslaan. Werkt de nieuwe kopie, haal dan de oude uit je afspeellijst.</p>
+      <p>Staat er bij de installatie ‘Wardenwatch opnieuw koppelen’, dan bestaat je TRMNL-koppeling wel, maar ontbreekt de held. Dat kan gebeuren na de reset van het spel vóór de lancering. Installeer een nieuwe kopie van <a href={WARDENWATCH_INSTALL_URL}>Wardenwatch vanuit TRMNL</a>, log in met hetzelfde account, kies een nieuwe heldennaam, koppel en klik dan in TRMNL op Opslaan. Werkt de nieuwe kopie, haal dan de oude uit je afspeellijst.</p>
       <p>Staat er ‘Sla op in TRMNL om te beginnen’, dan staat je held al klaar. Ga terug naar die installatie in TRMNL en klik op Opslaan.</p>
       <h2 id="how-time-works">Hoe de tijd verloopt</h2>
       <p>

@@ -23,12 +23,12 @@ import { WhatsNewCard } from './-whatsNew'
 import { messagesFor, useT } from '../../../lib/i18n'
 import { headMessages } from '../../../i18n/heads'
 import { useContent } from '../../../lib/useContent'
-import { dcHeroMessages } from '../../../i18n/dcHero'
+import { wwHeroMessages } from '../../../i18n/wwHero'
 
 export const Route = createFileRoute('/app/wardenwatch/')({
   // D180: a keepsake QR's six digits, collected by the callout and then dropped from the address.
   validateSearch: (search: Record<string, unknown>): { keepsake?: string } => (typeof search.keepsake === 'string' && /^\d{6}$/.test(search.keepsake) ? { keepsake: search.keepsake } : typeof search.keepsake === 'number' && Number.isInteger(search.keepsake) && search.keepsake >= 0 && search.keepsake < 1e6 ? { keepsake: String(search.keepsake).padStart(6, '0') } : {}),
-  head: ({ match: { context: { locale } } }) => seo({ title: messagesFor(headMessages, locale).dcHero, index: false, locale }),
+  head: ({ match: { context: { locale } } }) => seo({ title: messagesFor(headMessages, locale).wwHero, index: false, locale }),
   loader: ({ context }) =>
     preload(context, convexQuery(api.heroes.mine, {}), convexQuery(api.inventory.mine, {}), convexQuery(api.heroes.returnSummary, {}), convexQuery(api.keepsakes.mine, {}), latestLogQuery()),
   component: HeroHome,
@@ -47,7 +47,7 @@ function HeroHome() {
   const { keepsake: scanned } = Route.useSearch()
   const { data: hero } = useQuery(convexQuery(api.heroes.mine, {}))
   const { data: bag } = useQuery(convexQuery(api.inventory.mine, {}))
-  const t = useT(dcHeroMessages)
+  const t = useT(wwHeroMessages)
   if (!hero) return <LoadingState label={t.loading} />
   const biomeName = hero.biomes.find((b: Biome) => b.id === hero.biomeId)?.name ?? ''
   const targetName = hero.biomes.find((b: Biome) => b.id === hero.targetBiomeId)?.name ?? ''
@@ -76,7 +76,7 @@ const PLAYLIST_NUDGE_MS = 48 * 3_600_000
  * the Hero page points at what to check.
  */
 function PlaylistNudge({ activatedAt, screenServed }: { activatedAt?: number | null; screenServed?: boolean }) {
-  const t = useT(dcHeroMessages)
+  const t = useT(wwHeroMessages)
   if (screenServed || !activatedAt || Date.now() - activatedAt > PLAYLIST_NUDGE_MS) return null
   return (
     <div className="border-[3px] border-sky px-3 py-2 text-sm">
@@ -140,7 +140,7 @@ type Stance = { id: StanceId; name: string; blurb: string; potionBelowPct: numbe
 
 function HeroSheet({ hero }: { hero: HeroView }) {
   const { data: bag } = useQuery(convexQuery(api.inventory.mine, {}))
-  const t = useT(dcHeroMessages)
+  const t = useT(wwHeroMessages)
   const c = useContent()
   // Every command reports into one pinned notice (D98), so nothing under the buttons moves when an action settles.
   const { notice, notify, dismiss } = useNotice()
@@ -340,7 +340,7 @@ type PotionRow = { templateId: string; name: string; healPct: number; heals: num
  */
 function AskSheets({ ask, hero, close, intents, strengths }: { ask: Ask | null; hero: HeroView; close: () => void; intents: { travel: Run<{ biomeId: string; leaveStandoff?: boolean }>; choose: Run<{ optionId: string }>; potion: Run<{ templateId?: string }>; walkAway: Run<Record<string, never>> }; strengths: readonly PotionRow[] }) {
   const healthy = hero.simulationState !== 'quarantined'
-  const t = useT(dcHeroMessages)
+  const t = useT(wwHeroMessages)
   const c = useContent()
   const here = hero.biomes.findIndex((b) => b.id === hero.biomeId)
   const common = { onClose: close, disabled: !healthy }
@@ -419,7 +419,7 @@ function AskSheets({ ask, hero, close, intents, strengths }: { ask: Ask | null; 
  */
 function StandoffCard({ standoff, status, healthy, pending, onWalkAway }: { standoff: Standoff; status: string; healthy: boolean; pending: boolean; onWalkAway: () => void }) {
   const fighting = status === 'exploring'
-  const t = useT(dcHeroMessages)
+  const t = useT(wwHeroMessages)
   return (
     <section aria-labelledby="standoff-title" className="flex flex-col gap-3 border-[3px] border-night bg-panel p-4">
       <SectionTitle id="standoff-title" glyph="combat" tone="text-hp-ink" size="text-2xl">{t.dugIn(standoff.name)}</SectionTitle>

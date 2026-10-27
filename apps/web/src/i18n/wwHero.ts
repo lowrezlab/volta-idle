@@ -13,9 +13,9 @@ const nl = contentTranslator('nl')
 const plural = (n: number, one: string, many: string) => (n === 1 ? one : many)
 
 /** D169: the Wardenwatch Hero page: commands, effects, the decision, stance, world map, standoff and confirmations. Names arrive in English. */
-export const dcHeroMessages = defineMessages({
+export const wwHeroMessages = defineMessages({
   en: {
-    title: headMessages.en.dcHero,
+    title: headMessages.en.wwHero,
     loading: 'Loading your hero…',
     yourHero: (name: string) => `${name}, your hero`,
     playlistTitle: 'Not seeing your hero on your TRMNL yet?',
@@ -116,7 +116,7 @@ export const dcHeroMessages = defineMessages({
     floor: (name: string) => name,
   },
   fr: {
-    title: headMessages.fr.dcHero,
+    title: headMessages.fr.wwHero,
     loading: 'Chargement de votre héros…',
     yourHero: (name: string) => `${name}, votre héros`,
     playlistTitle: 'Votre héros n’apparaît pas encore sur votre TRMNL ?',
@@ -217,7 +217,7 @@ export const dcHeroMessages = defineMessages({
     floor: (name: string) => fr.name(name),
   },
   de: {
-    title: headMessages.de.dcHero,
+    title: headMessages.de.wwHero,
     loading: 'Dein Held wird geladen …',
     yourHero: (name: string) => `${name}, dein Held`,
     playlistTitle: 'Dein Held ist noch nicht auf deinem TRMNL?',
@@ -318,7 +318,7 @@ export const dcHeroMessages = defineMessages({
     floor: (name: string) => de.name(name),
   },
   es: {
-    title: headMessages.es.dcHero,
+    title: headMessages.es.wwHero,
     loading: 'Cargando tu héroe…',
     yourHero: (name: string) => `${name}, tu héroe`,
     playlistTitle: '¿Aún no ves a tu héroe en tu TRMNL?',
@@ -419,7 +419,7 @@ export const dcHeroMessages = defineMessages({
     floor: (name: string) => es.name(name),
   },
   it: {
-    title: headMessages.it.dcHero,
+    title: headMessages.it.wwHero,
     loading: 'Caricamento del tuo eroe…',
     yourHero: (name: string) => `${name}, il tuo eroe`,
     playlistTitle: 'Non vedi ancora il tuo eroe sul TRMNL?',
@@ -520,7 +520,7 @@ export const dcHeroMessages = defineMessages({
     floor: (name: string) => it.name(name),
   },
   pt: {
-    title: headMessages.pt.dcHero,
+    title: headMessages.pt.wwHero,
     loading: 'Carregando seu herói…',
     yourHero: (name: string) => `${name}, seu herói`,
     playlistTitle: 'Ainda não vê seu herói no TRMNL?',
@@ -621,7 +621,7 @@ export const dcHeroMessages = defineMessages({
     floor: (name: string) => pt.name(name),
   },
   pl: {
-    title: headMessages.pl.dcHero,
+    title: headMessages.pl.wwHero,
     loading: 'Wczytywanie bohatera…',
     yourHero: (name: string) => `${name}, twój bohater`,
     playlistTitle: 'Nie widzisz jeszcze bohatera na TRMNL?',
@@ -722,7 +722,7 @@ export const dcHeroMessages = defineMessages({
     floor: (name: string) => pl.name(name),
   },
   nl: {
-    title: headMessages.nl.dcHero,
+    title: headMessages.nl.wwHero,
     loading: 'Je held wordt geladen…',
     yourHero: (name: string) => `${name}, je held`,
     playlistTitle: 'Zie je je held nog niet op je TRMNL?',

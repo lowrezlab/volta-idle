@@ -33,7 +33,7 @@ import type * as lib_adminAccess from "../lib/adminAccess.js";
 import type * as lib_alerts from "../lib/alerts.js";
 import type * as lib_aliases from "../lib/aliases.js";
 import type * as lib_deletionConfirmation from "../lib/deletionConfirmation.js";
-import type * as lib_engine_deskCrawler from "../lib/engine/deskCrawler.js";
+import type * as lib_engine_wardenwatch from "../lib/engine/wardenwatch.js";
 import type * as lib_engine_publication from "../lib/engine/publication.js";
 import type * as lib_engine_runner from "../lib/engine/runner.js";
 import type * as lib_engine_runtime from "../lib/engine/runtime.js";
@@ -107,7 +107,7 @@ declare const fullApi: ApiFromModules<{
   "lib/alerts": typeof lib_alerts;
   "lib/aliases": typeof lib_aliases;
   "lib/deletionConfirmation": typeof lib_deletionConfirmation;
-  "lib/engine/deskCrawler": typeof lib_engine_deskCrawler;
+  "lib/engine/wardenwatch": typeof lib_engine_wardenwatch;
   "lib/engine/publication": typeof lib_engine_publication;
   "lib/engine/runner": typeof lib_engine_runner;
   "lib/engine/runtime": typeof lib_engine_runtime;

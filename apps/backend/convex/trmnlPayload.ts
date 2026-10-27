@@ -1,4 +1,4 @@
-import { currentHero, gameProfile, isDeskCrawler } from './lib/gameProfile'
+import { currentHero, gameProfile, isWardenwatch } from './lib/gameProfile'
 import { maskRaidSummaries } from './lib/raids'
 import { sceneEvent } from './lib/heroScene'
 import { v } from 'convex/values'
@@ -54,11 +54,11 @@ export const forInstance = internalQuery({
     if (!instance) {
       if (await ctx.db.query('revokedTrmnlCredentials').withIndex('by_tokenHash', q => q.eq('tokenHash', args.tokenHash)).first()) return null
       const grant = await ctx.db.query('trmnlGrants').withIndex('by_tokenHash', q => q.eq('tokenHash', args.tokenHash)).unique()
-      return grant && isDeskCrawler(grant) && grant.state === 'active' && !grant.authorizedUuid ? { outcome: 'recoverable' as const } : null
+      return grant && isWardenwatch(grant) && grant.state === 'active' && !grant.authorizedUuid ? { outcome: 'recoverable' as const } : null
     }
     const grant = await ctx.db.get(instance.grantId)
-    if (!grant || !isDeskCrawler(grant) || grant.state !== 'active' || grant.tokenHash !== args.tokenHash || (grant.authorizedUuid && grant.authorizedUuid !== args.uuid)) return null
-    if (!isDeskCrawler(instance) || instance.userId !== grant.userId || instance.state !== 'active') return null
+    if (!grant || !isWardenwatch(grant) || grant.state !== 'active' || grant.tokenHash !== args.tokenHash || (grant.authorizedUuid && grant.authorizedUuid !== args.uuid)) return null
+    if (!isWardenwatch(instance) || instance.userId !== grant.userId || instance.state !== 'active') return null
     const user = await ctx.db.get(instance.userId)
     if (user === null || user.state !== 'active' || (await gameProfile(ctx, user._id))?.state === 'deleting') return null
 

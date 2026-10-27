@@ -4,7 +4,7 @@ import { Link, createFileRoute } from '@tanstack/react-router'
 import { api } from '@trmnl-games/backend/api'
 import { SiteShell } from '../../lib/prose'
 import { artUrl } from '../../lib/artUrl'
-import { DESK_CRAWLER_OG, seo } from '../../lib/seo'
+import { WARDENWATCH_OG, seo } from '../../lib/seo'
 import { Button, Card, NoticeBar, useNotice } from '../../lib/ui'
 import { useIntent } from '../../lib/intent'
 import { TrophyCase } from '../app/wardenwatch/-achievements'
@@ -46,7 +46,7 @@ const profileQuery = (alias: string) => convexQuery(api.profiles.view, { alias }
 const heroCard = (profile: Pick<Profile, 'alias' | 'heroName' | 'level' | 'rank'>, locale: Locale) =>
   import.meta.env.VITE_CONVEX_SITE_URL
     ? { url: artUrl(`/art/card/hero/${encodeURIComponent(profile.alias)}.png?v=${profile.level}-${profile.rank?.rank ?? 0}`), alt: messagesFor(headMessages, locale).heroCardAlt(profile.heroName, profile.level), width: 1200, height: 630 }
-    : DESK_CRAWLER_OG
+    : WARDENWATCH_OG
 
 export const Route = createFileRoute('/wardenwatch/heroes/$alias')({
   loader: async ({ context, params }) => (await Promise.all([context.queryClient.ensureQueryData(profileQuery(params.alias)), preloadContent(context.locale)]))[0] as Profile | null,

@@ -215,7 +215,7 @@ export { SUPPORT_EMAIL } from './support'
 /** Optional support for the games (D134): a plain link out, with nothing in play attached to it. */
 export const SPONSOR_URL = 'https://github.com/sponsors/barrymichaeldoyle'
 /** Wardenwatch's public marketplace listing (plugin 564): its Install button starts the TRMNL connect flow. */
-export const DESK_CRAWLER_INSTALL_URL = games['wardenwatch'].marketplaceUrl
+export const WARDENWATCH_INSTALL_URL = games['wardenwatch'].marketplaceUrl
 /** Shown on the privacy and terms pages; bump whenever either changes. */
 export const POLICY_UPDATED = '2026-10-08'
 /** The privacy policy alone changed on 9 October 2026 (D110: public names in other players' raid stories). */

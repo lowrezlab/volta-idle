@@ -20,7 +20,7 @@ import { achievementState, awardAchievements, keepsakeTotal, tallyUnlocks } from
 import { needsFullPass } from '@trmnl-games/wardenwatch/sim/core/achievements'
 import { SLOT_MS, SLOT_OFFSET_MS, wallSlotFor } from '@trmnl-games/wardenwatch/sim/schedule'
 import { queueAlerts } from '../../lib/alerts'
-import { DESK_CRAWLER_RUNTIME } from '../../lib/engine/deskCrawler'
+import { WARDENWATCH_RUNTIME } from '../../lib/engine/wardenwatch'
 import { runBatch, startRun, watchdogStep, type SubjectStep } from '../../lib/engine/runner'
 import { noteQuarantine } from '../../incidents'
 import { accumulatorOf, addBucket, creditTick, foldScore } from '../../lib/engine/scores'
@@ -45,13 +45,13 @@ export function shouldPublish(scoreAt: number, lastPublishedAt: number | undefin
 export const startTick = internalMutation({
   args: {},
   returns: v.union(v.null(), v.id('simulationRuns')),
-  handler: async (ctx) => await startRun(ctx, DESK_CRAWLER_RUNTIME),
+  handler: async (ctx) => await startRun(ctx, WARDENWATCH_RUNTIME),
 })
 
 export const simulateBatch = internalMutation({
   args: { runId: v.id('simulationRuns'), expectedSequence: v.number() },
   returns: v.null(),
-  handler: async (ctx, { runId, expectedSequence }) => await runBatch(ctx, DESK_CRAWLER_RUNTIME, runId, expectedSequence, simulateHeroStep),
+  handler: async (ctx, { runId, expectedSequence }) => await runBatch(ctx, WARDENWATCH_RUNTIME, runId, expectedSequence, simulateHeroStep),
 })
 
 /**
@@ -97,7 +97,7 @@ export async function simulateHeroStep(ctx: MutationCtx, hero: Doc<'heroes'>, { 
     counts.quarantined += 1
     await ctx.db.patch(hero._id, { lastTick: run.tick })
     if (run.publishes) {
-      const scores = await foldScore(ctx, DESK_CRAWLER_RUNTIME, hero._id, run, accumulatorOf(hero))
+      const scores = await foldScore(ctx, WARDENWATCH_RUNTIME, hero._id, run, accumulatorOf(hero))
       await writeRankInput(ctx, run, (await ctx.db.get(hero._id))!, owner, scores)
       await tallyUnlocks(ctx, owner._id, tally.unlocks)
       tally.population += 1
@@ -171,7 +171,7 @@ export async function simulateHeroStep(ctx: MutationCtx, hero: Doc<'heroes'>, { 
     counts.quarantined += 1
     await ctx.db.patch(hero._id, { simulationState: 'quarantined', quarantineReasonCode: error.code, lastTick: run.tick })
     if (run.publishes) {
-      const scores = await foldScore(ctx, DESK_CRAWLER_RUNTIME, hero._id, run, accumulatorOf(hero))
+      const scores = await foldScore(ctx, WARDENWATCH_RUNTIME, hero._id, run, accumulatorOf(hero))
       await writeRankInput(ctx, run, (await ctx.db.get(hero._id))!, owner, scores)
       await tallyUnlocks(ctx, owner._id, tally.unlocks)
       tally.population += 1
@@ -228,7 +228,7 @@ export async function simulateHeroStep(ctx: MutationCtx, hero: Doc<'heroes'>, { 
   if (sequence !== hero.logSequence) markers.logSequence = sequence
   // Credit this tick's granted XP to the current-hour accumulator (D31).
   const credited = creditTick(accumulatorOf(hero), run.scoreAt, result.event?.deltas.xpEarned ?? 0)
-  if (credited.fold) await addBucket(ctx, DESK_CRAWLER_RUNTIME, hero._id, credited.fold)
+  if (credited.fold) await addBucket(ctx, WARDENWATCH_RUNTIME, hero._id, credited.fold)
   markers.scoreHourXp = credited.accumulator.scoreHourXp
   markers.scoreHour = credited.accumulator.scoreHour
   await ctx.db.patch(hero._id, markers)
@@ -239,7 +239,7 @@ export async function simulateHeroStep(ctx: MutationCtx, hero: Doc<'heroes'>, { 
     await awardAchievements(ctx, updated, achievementState(hero, keepsakes), achievementState(updated, keepsakes), content, now, run.tick)
   }
   if (run.publishes) {
-    const scores = await foldScore(ctx, DESK_CRAWLER_RUNTIME, hero._id, run, credited.accumulator)
+    const scores = await foldScore(ctx, WARDENWATCH_RUNTIME, hero._id, run, credited.accumulator)
     await writeRankInput(ctx, run, (await ctx.db.get(hero._id))!, owner, scores)
     await tallyUnlocks(ctx, owner._id, tally.unlocks)
     tally.population += 1
@@ -258,5 +258,5 @@ export async function simulateHeroStep(ctx: MutationCtx, hero: Doc<'heroes'>, { 
 export const watchdog = internalMutation({
   args: {},
   returns: v.null(),
-  handler: async (ctx) => await watchdogStep(ctx, DESK_CRAWLER_RUNTIME),
+  handler: async (ctx) => await watchdogStep(ctx, WARDENWATCH_RUNTIME),
 })

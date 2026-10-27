@@ -1,8 +1,8 @@
 import { contentTranslator } from '@trmnl-games/wardenwatch/i18n/lazy'
-import { DESK_CRAWLER_INSTALL_URL, SUPPORT_EMAIL } from '../../lib/prose'
-import { HELP_FACTS as F, nextTableDate, signed, type Cost, type Modifiers, type Occasion } from './-deskCrawlerFacts'
-import type { HelpPage } from './-deskCrawlerHelp'
-import { DESK_CRAWLER_HELP_HEAD } from './-helpHeads'
+import { WARDENWATCH_INSTALL_URL, SUPPORT_EMAIL } from '../../lib/prose'
+import { HELP_FACTS as F, nextTableDate, signed, type Cost, type Modifiers, type Occasion } from './-wardenwatchFacts'
+import type { HelpPage } from './-wardenwatchHelp'
+import { WARDENWATCH_HELP_HEAD } from './-helpHeads'
 
 const t = contentTranslator('it')
 const n = (value: number) => t.number(value)
@@ -46,8 +46,8 @@ function occasionDate(rule: Occasion): string {
 }
 
 export const it: HelpPage = {
-  seoTitle: DESK_CRAWLER_HELP_HEAD.it.seoTitle,
-  description: DESK_CRAWLER_HELP_HEAD.it.description,
+  seoTitle: WARDENWATCH_HELP_HEAD.it.seoTitle,
+  description: WARDENWATCH_HELP_HEAD.it.description,
   title: 'Wardenwatch su TRMNL',
   contents: {
     'getting-started': 'Per iniziare', 'if-the-qr-sends-you-back-to-setup': 'Se il QR ti riporta all’installazione', 'how-time-works': 'Come passa il tempo', floors: 'Piani', 'desk-keepsakes': 'Ricordini da scrivania', career: 'Carriera', 'heroes-and-classes': 'Eroi e classi', stances: 'Tattiche', 'desk-raids': 'Incursioni sulle scrivanie', meetings: 'Riunioni', 'lost-property': 'Oggetti smarriti', 'to-do-list': 'Cose da fare', potions: 'Pozioni', 'the-wandering-merchant': 'Il mercante ambulante', decisions: 'Decisioni', effects: 'Effetti', 'office-calendar': 'Calendario dell’ufficio', 'rare-and-epic-gear': 'Equipaggiamento raro ed epico', 'when-your-bag-fills-up': 'Quando la borsa si riempie', 'bigger-bags': 'Borse più grandi', 'salvage-and-the-workbench': 'Smontaggio e banco da lavoro', 'getting-knocked-out': 'Finire KO', recaps: 'Riepiloghi', 'understanding-rankings': 'Come funzionano le classifiche', 'sharing-your-hero': 'Condividere il tuo eroe', 'following': 'Seguiti', names: 'Nomi', gender: 'Genere', alerts: 'Avvisi', troubleshooting: 'Risoluzione dei problemi', 'disconnecting-and-removing': 'Scollegare e rimuovere', help: 'Aiuto',
@@ -56,14 +56,14 @@ export const it: HelpPage = {
     <>
       <h2 id="getting-started">Per iniziare</h2>
       <ul>
-        <li>Apri <a href={DESK_CRAWLER_INSTALL_URL}>Wardenwatch nel marketplace TRMNL</a> e scegli Installa.</li>
+        <li>Apri <a href={WARDENWATCH_INSTALL_URL}>Wardenwatch nel marketplace TRMNL</a> e scegli Installa.</li>
         <li>Accedi a Wardenwatch, scegli un nome pubblico e un nome per l’eroe, e collega l’installazione.</li>
         <li>Torna in TRMNL e premi Salva. La prima avventura del tuo eroe parte entro 15 minuti.</li>
         <li>Aggiungi il plugin a una playlist, o a un mashup se vuoi il tuo eroe accanto ad altri plugin. Sono supportate tutte e quattro le dimensioni di layout.</li>
       </ul>
       <h2 id="if-the-qr-sends-you-back-to-setup">Se il QR ti riporta all’installazione</h2>
       <p>Il QR apre l’app dell’account con cui hai effettuato l’accesso. Non avvia una nuova installazione. Controlla l’e-mail dell’accesso mostrata nella pagina di installazione e usa Cambia account se all’inizio ti eri collegato con un altro account.</p>
-      <p>Se l’installazione dice «Ricollega Wardenwatch», il collegamento a TRMNL esiste ma manca l’eroe. Può succedere dopo l’azzeramento del gioco prima del lancio. Installa una nuova copia di <a href={DESK_CRAWLER_INSTALL_URL}>Wardenwatch da TRMNL</a>, accedi con lo stesso account, scegli un nuovo nome per l’eroe, collega e poi premi Salva in TRMNL. Quando la nuova copia funziona, togli quella vecchia dalla playlist.</p>
+      <p>Se l’installazione dice «Ricollega Wardenwatch», il collegamento a TRMNL esiste ma manca l’eroe. Può succedere dopo l’azzeramento del gioco prima del lancio. Installa una nuova copia di <a href={WARDENWATCH_INSTALL_URL}>Wardenwatch da TRMNL</a>, accedi con lo stesso account, scegli un nuovo nome per l’eroe, collega e poi premi Salva in TRMNL. Quando la nuova copia funziona, togli quella vecchia dalla playlist.</p>
       <p>Se l’installazione dice «Salva in TRMNL per iniziare», il tuo eroe è già pronto. Torna a quell’installazione in TRMNL e premi Salva.</p>
       <h2 id="how-time-works">Come passa il tempo</h2>
       <p>

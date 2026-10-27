@@ -12,11 +12,11 @@ import { artUrl } from '../../../lib/artUrl'
 import { localSceneUrl, useMinute } from '../../../lib/localClock'
 import { BIOME_BANDS } from '../../../lib/palette'
 import { Hearts } from './-gameScreen'
-import { dcScreenMessages } from '../../../i18n/dcScreen'
+import { wwScreenMessages } from '../../../i18n/wwScreen'
 import { ConfirmSheet, Consequences } from './-confirm'
 import { formatNumber, formatTime, useLocale, useT } from '../../../lib/i18n'
 import { useContent } from '../../../lib/useContent'
-import { dcPagesMessages } from '../../../i18n/dcPages'
+import { wwPagesMessages } from '../../../i18n/wwPages'
 import { INTL_TAG, type Locale } from '@trmnl-games/platform'
 
 /** What `roster.mine` returns (P37). */
@@ -42,13 +42,13 @@ const clock = (locale: Locale, at: number) => new Date(at).toLocaleString(INTL_T
 
 /** How the roster works, in three lines: folded under the heroes. */
 function RosterRules() {
-  const t = useT(dcPagesMessages)
+  const t = useT(wwPagesMessages)
   return <Consequences>{t.rules.map((rule) => <li key={rule}>{rule}</li>)}</Consequences>
 }
 
 /** A class's name, blurb, passive and numbers, as the recruit card and the classes list show it. */
 function ClassBody({ rule }: { rule: RosterView['classes'][number] }) {
-  const t = useT(dcPagesMessages)
+  const t = useT(wwPagesMessages)
   const c = useContent()
   return <>
     <p className="font-semibold">{c.text(rule.name)}</p>
@@ -70,7 +70,7 @@ export function Roster({ roster, notify }: { roster: RosterView; notify: Notify 
   const parked = roster.heroes.filter((hero) => !hero.current)
   const open = roster.classes.filter((rule) => !rule.recruited)
   const ruleOf = (hero: Hero) => roster.classes.find((rule) => rule.id === hero.class)
-  const t = useT(dcPagesMessages)
+  const t = useT(wwPagesMessages)
   return (
     <div className="flex flex-col gap-5">
       <SectionTitle id="heroes-title" glyph="hero" as="h1">{t.yourHeroes}</SectionTitle>
@@ -113,8 +113,8 @@ function CoinMark() {
 
 /** One hero's card: scene with its Adventuring or Waiting tab, name and level in the HUD voice, hearts, coins and the class's passive. */
 function HeroCard({ hero, rule, children }: { hero: Hero; rule: ClassRule | undefined; children?: React.ReactNode }) {
-  const t = useT(dcPagesMessages)
-  const s = useT(dcScreenMessages)
+  const t = useT(wwPagesMessages)
+  const s = useT(wwScreenMessages)
   const c = useContent()
   const locale = useLocale()
   return (
@@ -144,7 +144,7 @@ function HeroCard({ hero, rule, children }: { hero: Hero; rule: ClassRule | unde
 function ParkedHero({ hero, rule, current, roster, notify }: { hero: Hero; rule: ClassRule | undefined; current: Hero | undefined; roster: RosterView; notify: Notify }) {
   const [asking, setAsking] = useState(false)
   const switchHero = useIntent(api.roster.switchHero, { onFeedback: notify })
-  const t = useT(dcPagesMessages)
+  const t = useT(wwPagesMessages)
   const locale = useLocale()
   const undo = roster.undoHeroId === hero.id
   const blocked = !undo && roster.nextAt !== null
@@ -170,7 +170,7 @@ function RecruitSlot({ rule, current, roster, notify }: { rule: ClassRule; curre
   const [opened, setOpened] = useState(false)
   const slot = useRef<HTMLLIElement>(null)
   const closed = useRef(false)
-  const t = useT(dcPagesMessages)
+  const t = useT(wwPagesMessages)
   const c = useContent()
   // Not yet hands focus back to the Recruit key it came from, not the top of the page.
   useEffect(() => { if (!opened && closed.current) slot.current?.querySelector('button')?.focus() }, [opened])
@@ -196,7 +196,7 @@ function RecruitCard({ rule, current, roster, notify, onCancel }: { rule: ClassR
   const card = useRef<HTMLLIElement>(null)
   // The key that opened the form is gone; the name is the next thing to do.
   useEffect(() => { card.current?.querySelector('input')?.focus() }, [])
-  const t = useT(dcPagesMessages)
+  const t = useT(wwPagesMessages)
   const locale = useLocale()
   return (
     <li ref={card} className="flex min-w-0 flex-col border-[3px] border-gold bg-panel px-3 pt-3 pb-4 min-[375px]:px-4 sm:px-5">

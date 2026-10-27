@@ -57,7 +57,7 @@ export const shellMessages = defineMessages({
     signInBody: 'Your heroes, your games and your account settings are here once you sign in.',
     newHere: 'New here?',
     newHereBody: 'TRMNL Games makes games for the TRMNL e-ink display. The first, Wardenwatch, is an office RPG that plays itself on your desk.',
-    aboutDeskCrawler: 'About Wardenwatch',
+    aboutWardenwatch: 'About Wardenwatch',
   },
   fr: {
     guideFor: (name: string) => `Guide de ${name}`,
@@ -109,7 +109,7 @@ export const shellMessages = defineMessages({
     signInBody: 'Vos héros, vos jeux et les réglages de votre compte vous attendent une fois connecté.',
     newHere: 'Nouveau ici ?',
     newHereBody: 'TRMNL Games crée des jeux pour l’écran e-ink TRMNL. Le premier, Wardenwatch, est un RPG de bureau qui se joue tout seul sur votre bureau.',
-    aboutDeskCrawler: 'À propos de Wardenwatch',
+    aboutWardenwatch: 'À propos de Wardenwatch',
   },
   de: {
     guideFor: (name: string) => `Leitfaden zu ${name}`,
@@ -161,7 +161,7 @@ export const shellMessages = defineMessages({
     signInBody: 'Sobald du angemeldet bist, findest du hier deine Helden, deine Spiele und deine Kontoeinstellungen.',
     newHere: 'Neu hier?',
     newHereBody: 'TRMNL Games macht Spiele für das TRMNL-E-Ink-Display. Das erste, Wardenwatch, ist ein Büro-RPG, das sich auf deinem Schreibtisch von selbst spielt.',
-    aboutDeskCrawler: 'Über Wardenwatch',
+    aboutWardenwatch: 'Über Wardenwatch',
   },
   es: {
     guideFor: (name: string) => `Guía de ${name}`,
@@ -213,7 +213,7 @@ export const shellMessages = defineMessages({
     signInBody: 'Cuando inicies sesión, aquí tendrás tus héroes, tus juegos y los ajustes de tu cuenta.',
     newHere: '¿Eres nuevo?',
     newHereBody: 'TRMNL Games hace juegos para la pantalla de tinta electrónica TRMNL. El primero, Wardenwatch, es un RPG de oficina que se juega solo en tu escritorio.',
-    aboutDeskCrawler: 'Acerca de Wardenwatch',
+    aboutWardenwatch: 'Acerca de Wardenwatch',
   },
   it: {
     guideFor: (name: string) => `Guida di ${name}`,
@@ -265,7 +265,7 @@ export const shellMessages = defineMessages({
     signInBody: 'Dopo l’accesso trovi qui i tuoi eroi, i tuoi giochi e le impostazioni dell’account.',
     newHere: 'Sei nuovo?',
     newHereBody: 'TRMNL Games crea giochi per il display e-ink TRMNL. Il primo, Wardenwatch, è un GDR d’ufficio che si gioca da solo sulla tua scrivania.',
-    aboutDeskCrawler: 'Informazioni su Wardenwatch',
+    aboutWardenwatch: 'Informazioni su Wardenwatch',
   },
   pt: {
     guideFor: (name: string) => `Guia do ${name}`,
@@ -317,7 +317,7 @@ export const shellMessages = defineMessages({
     signInBody: 'Depois de entrar, seus heróis, seus jogos e as configurações da conta ficam aqui.',
     newHere: 'Primeira vez aqui?',
     newHereBody: 'O TRMNL Games faz jogos para a tela e-ink TRMNL. O primeiro, Wardenwatch, é um RPG de escritório que se joga sozinho na sua mesa.',
-    aboutDeskCrawler: 'Sobre o Wardenwatch',
+    aboutWardenwatch: 'Sobre o Wardenwatch',
   },
   pl: {
     guideFor: (name: string) => `Przewodnik po ${name}`,
@@ -369,7 +369,7 @@ export const shellMessages = defineMessages({
     signInBody: 'Po zalogowaniu znajdziesz tu swoich bohaterów, gry i ustawienia konta.',
     newHere: 'Jesteś tu pierwszy raz?',
     newHereBody: 'TRMNL Games tworzy gry na ekran e-ink TRMNL. Pierwsza z nich, Wardenwatch, to biurowe RPG, które samo gra się na twoim biurku.',
-    aboutDeskCrawler: 'O Wardenwatch',
+    aboutWardenwatch: 'O Wardenwatch',
   },
   nl: {
     guideFor: (name: string) => `Gids voor ${name}`,
@@ -421,6 +421,6 @@ export const shellMessages = defineMessages({
     signInBody: 'Zodra je bent ingelogd, vind je hier je helden, je spellen en je accountinstellingen.',
     newHere: 'Nieuw hier?',
     newHereBody: 'TRMNL Games maakt spellen voor het TRMNL-e-ink-scherm. De eerste, Wardenwatch, is een kantoor-RPG die zichzelf speelt op je bureau.',
-    aboutDeskCrawler: 'Over Wardenwatch',
+    aboutWardenwatch: 'Over Wardenwatch',
   },
 })

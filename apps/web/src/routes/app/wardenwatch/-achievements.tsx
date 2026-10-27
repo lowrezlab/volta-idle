@@ -10,7 +10,7 @@ import { LocalTime } from '../../../lib/localTime'
 import { AchievementHint } from './-achievementHint'
 import { formatDate, formatNumber, useLocale, useT } from '../../../lib/i18n'
 import { useContent } from '../../../lib/useContent'
-import { dcAchievementsMessages, shelfTitle } from '../../../i18n/dcAchievements'
+import { wwAchievementsMessages, shelfTitle } from '../../../i18n/wwAchievements'
 import { INTL_TAG, type Locale } from '@trmnl-games/platform'
 
 type Earned = { id: string; name: string; blurb: string; tier: number; unlockedAt: number | null }
@@ -18,7 +18,7 @@ type Family = { family: string; name: string; category: string; tier: number; ti
 type View = { unlocked: Array<{ id: string; unlockedAt: number }>; families: Family[]; rarity: { counts: Record<string, number>; totalPlayers: number; scoreAt: number } | null }
 
 const BAND_TONE: Record<RarityBand, string> = { common: 'text-muted', uncommon: 'text-xp-ink', rare: 'text-rare-ink', legendary: 'text-gold-ink' }
-type T = (typeof dcAchievementsMessages)['en']
+type T = (typeof wwAchievementsMessages)['en']
 
 /** "7% of heroes" from the publication tally; below a small population, "3 of 11 heroes" (achievements.md "Rarity"). */
 function rarityOf(id: string, rarity: View['rarity'], t: T): { band: RarityBand; text: string } | null {
@@ -37,7 +37,7 @@ const compact = (locale: Locale) => new Intl.NumberFormat(INTL_TAG[locale], { no
 const earnedOn = (locale: Locale) => (date: Date) => formatDate(locale, date, { day: 'numeric', month: 'short' })
 
 function Rarity({ id, rarity }: { id: string; rarity: View['rarity'] }) {
-  const t = useT(dcAchievementsMessages)
+  const t = useT(wwAchievementsMessages)
   const r = rarityOf(id, rarity, t)
   if (!r) return <span className="text-xs text-muted">{t.rarityLater}</span>
   return (
@@ -98,7 +98,7 @@ function TierPips({ tier, tiers }: { tier: number; tiers: number }) {
 
 /** An earned family as a badge: its glyph on gold with the tier tab, the name, tier pips and how far the next tier is, and its rarity. Tapping opens its sheet. */
 function EarnedTile({ family, rarity, onOpen }: { family: EarnedFamily; rarity: View['rarity']; onOpen: () => void }) {
-  const t = useT(dcAchievementsMessages)
+  const t = useT(wwAchievementsMessages)
   const c = useContent()
   const locale = useLocale()
   const name = c.text(family.earned.name)
@@ -129,7 +129,7 @@ function EarnedTile({ family, rarity, onOpen }: { family: EarnedFamily; rarity: 
 
 /** An unearned family: a dashed "?" slot with the first tier's rarity, never a name. Legendary first tiers stay a surprise. */
 function LockedTile({ family, rarity }: { family: Family; rarity: View['rarity'] }) {
-  const t = useT(dcAchievementsMessages)
+  const t = useT(wwAchievementsMessages)
   const first = ACHIEVEMENTS.find((def) => def.family === family.family && def.tier === 1)
   const r = first ? rarityOf(first.id, rarity, t) : null
   const preview = r && r.band !== 'legendary' ? r : null
@@ -146,7 +146,7 @@ function LockedTile({ family, rarity }: { family: Family; rarity: View['rarity']
 
 /** One earned achievement's details: what it is, its rarity, when it came and how far the next tier is. */
 function EarnedSheet({ family, rarity, onClose, showcase = false }: { family: EarnedFamily | null; rarity: View['rarity']; onClose: () => void; showcase?: boolean }) {
-  const t = useT(dcAchievementsMessages)
+  const t = useT(wwAchievementsMessages)
   const c = useContent()
   const locale = useLocale()
   return (
@@ -179,7 +179,7 @@ function EarnedSheet({ family, rarity, onClose, showcase = false }: { family: Ea
 
 /** The case at the top: how much of the collection is found, the rarest one held and the latest. Rarest and latest open their sheets. */
 function Summary({ view, earned, onOpen }: { view: View; earned: EarnedFamily[]; onOpen: (family: string) => void }) {
-  const t = useT(dcAchievementsMessages)
+  const t = useT(wwAchievementsMessages)
   const c = useContent()
   const locale = useLocale()
   const n = (value: number) => formatNumber(locale, value)
@@ -224,7 +224,7 @@ function Summary({ view, earned, onOpen }: { view: View; earned: EarnedFamily[];
 export function Achievements() {
   const { data } = useQuery(convexQuery(api.achievements.mine, {}))
   const [openId, setOpenId] = useState<string | null>(null)
-  const t = useT(dcAchievementsMessages)
+  const t = useT(wwAchievementsMessages)
   const c = useContent()
   if (!data) return null
   const view = data as View
@@ -268,7 +268,7 @@ const tiersOf = (family: string) => ACHIEVEMENTS.filter((def) => def.family === 
  */
 export function TrophyCase({ achievements, rarity }: { achievements: Shown[]; rarity: View['rarity'] }) {
   const [openId, setOpenId] = useState<string | null>(null)
-  const t = useT(dcAchievementsMessages)
+  const t = useT(wwAchievementsMessages)
   const c = useContent()
   const families = achievements.flatMap((shown): EarnedFamily[] => {
     const family = ACHIEVEMENT_FAMILIES.find((f) => f.id === ACHIEVEMENT_BY_ID.get(shown.id)?.family)

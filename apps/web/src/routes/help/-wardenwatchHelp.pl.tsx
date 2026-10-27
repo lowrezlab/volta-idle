@@ -1,8 +1,8 @@
 import { contentTranslator } from '@trmnl-games/wardenwatch/i18n/lazy'
-import { DESK_CRAWLER_INSTALL_URL, SUPPORT_EMAIL } from '../../lib/prose'
-import { HELP_FACTS as F, nextTableDate, signed, type Cost, type Modifiers, type Occasion } from './-deskCrawlerFacts'
-import type { HelpPage } from './-deskCrawlerHelp'
-import { DESK_CRAWLER_HELP_HEAD } from './-helpHeads'
+import { WARDENWATCH_INSTALL_URL, SUPPORT_EMAIL } from '../../lib/prose'
+import { HELP_FACTS as F, nextTableDate, signed, type Cost, type Modifiers, type Occasion } from './-wardenwatchFacts'
+import type { HelpPage } from './-wardenwatchHelp'
+import { WARDENWATCH_HELP_HEAD } from './-helpHeads'
 
 const t = contentTranslator('pl')
 const n = (value: number) => t.number(value)
@@ -48,8 +48,8 @@ function occasionDate(rule: Occasion): string {
 }
 
 export const pl: HelpPage = {
-  seoTitle: DESK_CRAWLER_HELP_HEAD.pl.seoTitle,
-  description: DESK_CRAWLER_HELP_HEAD.pl.description,
+  seoTitle: WARDENWATCH_HELP_HEAD.pl.seoTitle,
+  description: WARDENWATCH_HELP_HEAD.pl.description,
   title: 'Wardenwatch na TRMNL',
   contents: {
     'getting-started': 'Pierwsze kroki', 'if-the-qr-sends-you-back-to-setup': 'Gdy kod QR odsyła do instalacji', 'how-time-works': 'Jak płynie czas', floors: 'Piętra', 'desk-keepsakes': 'Pamiątki z biurka', career: 'Kariera', 'heroes-and-classes': 'Bohaterowie i klasy', stances: 'Postawy', 'desk-raids': 'Rajdy na biurka', meetings: 'Spotkania', 'lost-property': 'Rzeczy znalezione', 'to-do-list': 'Lista zadań', potions: 'Mikstury', 'the-wandering-merchant': 'Wędrowny kupiec', decisions: 'Decyzje', effects: 'Efekty', 'office-calendar': 'Kalendarz biura', 'rare-and-epic-gear': 'Rzadki i epicki sprzęt', 'when-your-bag-fills-up': 'Gdy torba się zapełni', 'bigger-bags': 'Większe torby', 'salvage-and-the-workbench': 'Rozbiórka i warsztat', 'getting-knocked-out': 'Nokaut', recaps: 'Podsumowania', 'understanding-rankings': 'Jak działają rankingi', 'sharing-your-hero': 'Udostępnianie bohatera', 'following': 'Obserwowani', names: 'Nazwy', gender: 'Płeć', alerts: 'Alerty', troubleshooting: 'Rozwiązywanie problemów', 'disconnecting-and-removing': 'Odłączanie i usuwanie', help: 'Pomoc',
@@ -58,14 +58,14 @@ export const pl: HelpPage = {
     <>
       <h2 id="getting-started">Pierwsze kroki</h2>
       <ul>
-        <li>Otwórz <a href={DESK_CRAWLER_INSTALL_URL}>Wardenwatch w sklepie TRMNL</a> i wybierz „Instaluj”.</li>
+        <li>Otwórz <a href={WARDENWATCH_INSTALL_URL}>Wardenwatch w sklepie TRMNL</a> i wybierz „Instaluj”.</li>
         <li>Zaloguj się do Wardenwatch, wybierz nazwę publiczną i imię bohatera, a potem połącz instalację.</li>
         <li>Wróć do TRMNL i kliknij „Zapisz”. Pierwsza przygoda bohatera zacznie się w ciągu 15 minut.</li>
         <li>Dodaj plugin do playlisty albo do mashupu, jeśli chcesz mieć bohatera obok innych pluginów. Obsługiwane są wszystkie cztery rozmiary układu.</li>
       </ul>
       <h2 id="if-the-qr-sends-you-back-to-setup">Gdy kod QR odsyła do instalacji</h2>
       <p>Kod QR otwiera aplikację dla konta, na które jesteś zalogowany. Nie zaczyna nowej instalacji. Sprawdź adres e-mail zalogowanego konta na stronie instalacji i użyj opcji „Przełącz konto”, jeśli pierwotnie łączyłeś się z innego konta.</p>
-      <p>Jeśli instalacja mówi „Połącz ponownie Wardenwatch”, połączenie z TRMNL istnieje, ale brakuje bohatera. Może się tak zdarzyć po resecie gry przed premierą. Zainstaluj nową kopię <a href={DESK_CRAWLER_INSTALL_URL}>Wardenwatch z TRMNL</a>, zaloguj się na to samo konto, wybierz nowe imię bohatera, połącz i kliknij „Zapisz” w TRMNL. Gdy nowa kopia zadziała, usuń starą z playlisty.</p>
+      <p>Jeśli instalacja mówi „Połącz ponownie Wardenwatch”, połączenie z TRMNL istnieje, ale brakuje bohatera. Może się tak zdarzyć po resecie gry przed premierą. Zainstaluj nową kopię <a href={WARDENWATCH_INSTALL_URL}>Wardenwatch z TRMNL</a>, zaloguj się na to samo konto, wybierz nowe imię bohatera, połącz i kliknij „Zapisz” w TRMNL. Gdy nowa kopia zadziała, usuń starą z playlisty.</p>
       <p>Jeśli instalacja mówi „Zapisz w TRMNL, aby zacząć”, bohater jest już gotowy. Wróć do tej instalacji w TRMNL i kliknij „Zapisz”.</p>
       <h2 id="how-time-works">Jak płynie czas</h2>
       <p>

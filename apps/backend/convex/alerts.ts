@@ -6,7 +6,7 @@ import { appError } from './lib/errors'
 import { sha256Hex } from './lib/hash'
 import { currentUser, intentReturns, narrowChanged, runIntent } from './lib/intent'
 import { validateTimezone } from './lib/names'
-import { ALERTS, alertMessage, DESK_CRAWLER_KINDS, ensureSender, inQuietHours, kindOn, localDay, PREF_FOR, quietEndsAt, SWITCHES, type AlertKind, type AlertSwitch } from './lib/alerts'
+import { ALERTS, alertMessage, WARDENWATCH_KINDS, ensureSender, inQuietHours, kindOn, localDay, PREF_FOR, quietEndsAt, SWITCHES, type AlertKind, type AlertSwitch } from './lib/alerts'
 import type { GameSlug } from '@trmnl-games/platform'
 import { readWorld } from './world'
 import { deviceLocale } from './lib/trmnlUser'
@@ -302,7 +302,7 @@ export async function purgeGameAlertRows(ctx: MutationCtx, userId: Id<'users'>, 
       ? false
       : game !== 'wardenwatch' && (await currentHero(ctx, owner)) !== null
   if (!otherGame) return await purgeAlertRows(ctx, userId, batch)
-  const kinds: readonly AlertKind[] = DESK_CRAWLER_KINDS
+  const kinds: readonly AlertKind[] = WARDENWATCH_KINDS
   const rows = (await ctx.db.query('alertOutbox').withIndex('by_userId_and_localDay', (q) => q.eq('userId', userId)).take(batch * 4)).filter((row) => kinds.includes(row.kind)).slice(0, batch)
   for (const row of rows) await ctx.db.delete(row._id)
   if (rows.length === 0) {

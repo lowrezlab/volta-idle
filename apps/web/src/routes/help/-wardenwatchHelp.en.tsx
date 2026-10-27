@@ -1,7 +1,7 @@
-import { DESK_CRAWLER_INSTALL_URL, SUPPORT_EMAIL } from '../../lib/prose'
-import { HELP_FACTS as F, nextTableDate, signed, type Cost, type Modifiers, type Occasion } from './-deskCrawlerFacts'
-import type { HelpPage } from './-deskCrawlerHelp'
-import { DESK_CRAWLER_HELP_HEAD } from './-helpHeads'
+import { WARDENWATCH_INSTALL_URL, SUPPORT_EMAIL } from '../../lib/prose'
+import { HELP_FACTS as F, nextTableDate, signed, type Cost, type Modifiers, type Occasion } from './-wardenwatchFacts'
+import type { HelpPage } from './-wardenwatchHelp'
+import { WARDENWATCH_HELP_HEAD } from './-helpHeads'
 
 const gold = (n: number) => `${n.toLocaleString('en-US')} gold`
 const and = (parts: readonly string[], last = 'and') => (parts.length <= 1 ? parts.join('') : `${parts.slice(0, -1).join(', ')} ${last} ${parts.at(-1)}`)
@@ -38,8 +38,8 @@ function occasionDate(rule: Occasion): string {
 }
 
 export const en: HelpPage = {
-  seoTitle: DESK_CRAWLER_HELP_HEAD.en.seoTitle,
-  description: DESK_CRAWLER_HELP_HEAD.en.description,
+  seoTitle: WARDENWATCH_HELP_HEAD.en.seoTitle,
+  description: WARDENWATCH_HELP_HEAD.en.description,
   title: 'Wardenwatch on TRMNL',
   contents: {
     'getting-started': 'Getting started', 'if-the-qr-sends-you-back-to-setup': 'If the QR sends you back to setup', 'how-time-works': 'How time works', floors: 'Floors', 'desk-keepsakes': 'Desk keepsakes', career: 'Career', 'heroes-and-classes': 'Heroes and classes', stances: 'Stances', 'desk-raids': 'Desk raids', meetings: 'Meetings', 'lost-property': 'Lost property', 'to-do-list': 'To-do list', potions: 'Potions', 'the-wandering-merchant': 'The wandering merchant', decisions: 'Decisions', effects: 'Effects', 'office-calendar': 'Office calendar', 'rare-and-epic-gear': 'Rare and epic gear', 'when-your-bag-fills-up': 'When your bag fills up', 'bigger-bags': 'Bigger bags', 'salvage-and-the-workbench': 'Salvage and the workbench', 'getting-knocked-out': 'Getting knocked out', recaps: 'Recaps', 'understanding-rankings': 'Understanding rankings', 'sharing-your-hero': 'Sharing your hero', 'following': 'Following', names: 'Names', gender: 'Gender', alerts: 'Alerts', troubleshooting: 'Troubleshooting', 'disconnecting-and-removing': 'Disconnecting and removing', help: 'Help',
@@ -48,14 +48,14 @@ export const en: HelpPage = {
     <>
       <h2 id="getting-started">Getting started</h2>
       <ul>
-        <li>Open <a href={DESK_CRAWLER_INSTALL_URL}>Wardenwatch in the TRMNL marketplace</a> and choose Install.</li>
+        <li>Open <a href={WARDENWATCH_INSTALL_URL}>Wardenwatch in the TRMNL marketplace</a> and choose Install.</li>
         <li>Sign in to Wardenwatch, pick a public name and a hero name, and connect the installation.</li>
         <li>Back in TRMNL, click Save. Your hero's first adventure starts within 15 minutes.</li>
         <li>Add the plugin to a playlist, or to a mashup if you want your hero beside other plugins. All four layout sizes are supported.</li>
       </ul>
       <h2 id="if-the-qr-sends-you-back-to-setup">If the QR sends you back to setup</h2>
       <p>The QR opens the companion for the account you are signed in with. It does not start a new installation. Check the signed-in email shown on the setup page and use Switch account if you originally connected with a different account.</p>
-      <p>If setup says “Reconnect Wardenwatch”, your TRMNL connection exists but the hero is missing. This can happen after the pre-launch game reset. Install a fresh copy of <a href={DESK_CRAWLER_INSTALL_URL}>Wardenwatch from TRMNL</a>, sign in with the same account, choose a new hero name, connect, then click Save back in TRMNL. Once the new copy works, remove the old copy from your playlist.</p>
+      <p>If setup says “Reconnect Wardenwatch”, your TRMNL connection exists but the hero is missing. This can happen after the pre-launch game reset. Install a fresh copy of <a href={WARDENWATCH_INSTALL_URL}>Wardenwatch from TRMNL</a>, sign in with the same account, choose a new hero name, connect, then click Save back in TRMNL. Once the new copy works, remove the old copy from your playlist.</p>
       <p>If setup says “Save in TRMNL to start”, your hero is already prepared. Return to that installation in TRMNL and click Save.</p>
       <h2 id="how-time-works">How time works</h2>
       <p>

@@ -1,7 +1,7 @@
 import { Link } from '@tanstack/react-router'
 import { Glyph } from '../../../lib/glyphs'
 import { useT } from '../../../lib/i18n'
-import { dcScreenMessages } from '../../../i18n/dcScreen'
+import { wwScreenMessages } from '../../../i18n/wwScreen'
 
 type Summary = { unlockLevel: number; open: boolean; heroes: number; warriorLevel: number | null }
 
@@ -10,7 +10,7 @@ type Summary = { unlockLevel: number; open: boolean; heroes: number; warriorLeve
  * and a quiet link to switch once the account holds two heroes.
  */
 export function RosterCard({ roster, name, className }: { roster: Summary; name: string; className: string }) {
-  const t = useT(dcScreenMessages)
+  const t = useT(wwScreenMessages)
   if (roster.heroes > 1) {
     return (
       <p className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1 text-sm">

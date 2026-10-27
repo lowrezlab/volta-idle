@@ -1,14 +1,14 @@
 import { describe, expect, it } from 'vitest'
 import { makeSchedule, SLOT_MS } from '@trmnl-games/engine/schedule'
 import { deriveSharedSeed, deriveStreamSeed } from '@trmnl-games/engine/seed'
-import { deriveStreamSeed as deskCrawlerSeed } from '@trmnl-games/wardenwatch/sim/seed'
-import * as deskCrawler from '@trmnl-games/wardenwatch/sim/schedule'
+import { deriveStreamSeed as wardenwatchSeed } from '@trmnl-games/wardenwatch/sim/seed'
+import * as wardenwatch from '@trmnl-games/wardenwatch/sim/schedule'
 
 describe('engine schedule', () => {
   it('keeps Wardenwatch on the quarter-hour', () => {
     const at = Date.UTC(2026, 9, 9, 10, 15, 4)
-    expect(deskCrawler.wallSlotFor(at)).toBe(Date.UTC(2026, 9, 9, 10, 15))
-    expect(deskCrawler.CRON_MINUTES).toBe('0,15,30,45')
+    expect(wardenwatch.wallSlotFor(at)).toBe(Date.UTC(2026, 9, 9, 10, 15))
+    expect(wardenwatch.CRON_MINUTES).toBe('0,15,30,45')
   })
 
   it('offsets a second world by five minutes so the two never share a slot', () => {
@@ -28,7 +28,7 @@ describe('engine schedule', () => {
 
 describe('engine seeds', () => {
   it('derive the same per-stream seed Wardenwatch has always used', () => {
-    expect(deskCrawlerSeed('seed', 'hero', 7, 1, 'encounter')).toBe(deriveStreamSeed('seed', 'hero', 7, 1, 'encounter'))
+    expect(wardenwatchSeed('seed', 'hero', 7, 1, 'encounter')).toBe(deriveStreamSeed('seed', 'hero', 7, 1, 'encounter'))
     // Fixed vector: changing the hash input would change every replay.
     expect(deriveStreamSeed('seed', 'hero', 7, 1, 'encounter')).toMatchInlineSnapshot(`3137966346`)
   })

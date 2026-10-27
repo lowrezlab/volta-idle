@@ -6,12 +6,12 @@ import { makeSchedule } from '@trmnl-games/engine/schedule'
 import { internal } from '../../_generated/api'
 import { publishOfficeCensus } from '../../census'
 import type { EngineRuntime } from './runtime'
-import { DESK_CRAWLER_TABLES } from './tables'
+import { WARDENWATCH_TABLES } from './tables'
 
 /** Wardenwatch's binding to the shared engine: its tables, quarter-hour schedule (D42), versions and catalogs. */
-export const DESK_CRAWLER_RUNTIME: EngineRuntime<ContentCatalog> = {
+export const WARDENWATCH_RUNTIME: EngineRuntime<ContentCatalog> = {
   slug: 'wardenwatch',
-  tables: DESK_CRAWLER_TABLES,
+  tables: WARDENWATCH_TABLES,
   schedule: makeSchedule(0),
   simulationVersion: SIMULATION_VERSION,
   seedVersion: SEED_VERSION,

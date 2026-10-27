@@ -2,7 +2,7 @@ import type { ReactNode } from 'react'
 import { Button } from '../../../lib/ui'
 import { Sheet, SheetTitle } from './-bagSlots'
 import { useT } from '../../../lib/i18n'
-import { dcScreenMessages } from '../../../i18n/dcScreen'
+import { wwScreenMessages } from '../../../i18n/wwScreen'
 
 type Choice = { confirmLabel: string; busyLabel: string; cancelLabel: string; pending: boolean; disabled?: boolean; onConfirm: () => void; onCancel: () => void }
 
@@ -22,7 +22,7 @@ export function ConfirmButtons({ confirmLabel, busyLabel, cancelLabel, pending, 
  */
 export function ConfirmSheet({ open, title, children, ...choice }: Omit<Choice, 'onCancel'> & { open: boolean; title: ReactNode; children: ReactNode; onClose: () => void }) {
   const { onClose, ...rest } = choice
-  const t = useT(dcScreenMessages)
+  const t = useT(wwScreenMessages)
   return (
     <Sheet open={open} onClose={() => { if (!choice.pending) onClose() }} label={typeof title === 'string' ? title : t.confirm}>
       {open ? (
@@ -41,7 +41,7 @@ export const Consequences = ({ children }: { children: ReactNode }) => <ul class
 
 /** What pausing costs, the same on the Hero page and in Settings. */
 export function PauseConsequences() {
-  const t = useT(dcScreenMessages)
+  const t = useT(wwScreenMessages)
   return (
     <Consequences>
       <li>{t.pauseStops}<strong>{t.pauseStopsStrong}</strong>{t.pauseStopsAfter}</li>

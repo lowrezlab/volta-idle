@@ -6,7 +6,7 @@ import { currentUser } from './lib/intent'
 import { maskedEntries } from './lib/rankingRead'
 import { readWorld } from './world'
 import { levelGroup } from '@trmnl-games/wardenwatch/sim/core/stats'
-import { DESK_CRAWLER_RUNTIME } from './lib/engine/deskCrawler'
+import { WARDENWATCH_RUNTIME } from './lib/engine/wardenwatch'
 import { beginEngineBuild, buildStep, cleanupStep, TOP_ENTRIES } from './lib/engine/publication'
 import { writeEngineRankInput } from './lib/engine/scores'
 
@@ -27,25 +27,25 @@ export async function writeRankInput(
   scores: { xp24h: number; xp7d: number },
 ): Promise<void> {
   const dormant = hero.status === 'paused' || (hero.status === 'sleeping' && hero.wakeAtTick === undefined)
-  await writeEngineRankInput(ctx, DESK_CRAWLER_RUNTIME, run, hero, owner, scores, dormant)
+  await writeEngineRankInput(ctx, WARDENWATCH_RUNTIME, run, hero, owner, scores, dormant)
 }
 
 /** Called when a publication run's cohort is exhausted: start the guarded builder. */
 export async function beginBuild(ctx: MutationCtx, run: Doc<'simulationRuns'>, world: Doc<'worldState'>, now: number): Promise<void> {
-  await beginEngineBuild(ctx, DESK_CRAWLER_RUNTIME, run, world, now)
+  await beginEngineBuild(ctx, WARDENWATCH_RUNTIME, run, world, now)
 }
 
 export const buildBatch = internalMutation({
   args: { publicationId: v.id('leaderboardPublications'), expectedSequence: v.number() },
   returns: v.null(),
-  handler: async (ctx, { publicationId, expectedSequence }) => await buildStep(ctx, DESK_CRAWLER_RUNTIME, publicationId, expectedSequence),
+  handler: async (ctx, { publicationId, expectedSequence }) => await buildStep(ctx, WARDENWATCH_RUNTIME, publicationId, expectedSequence),
 })
 
 /** Delete an obsolete publication's rows in bounded batches, then its rank inputs and the record itself. */
 export const cleanupPublication = internalMutation({
   args: { publicationId: v.id('leaderboardPublications') },
   returns: v.null(),
-  handler: async (ctx, { publicationId }) => await cleanupStep(ctx, DESK_CRAWLER_RUNTIME, publicationId),
+  handler: async (ctx, { publicationId }) => await cleanupStep(ctx, WARDENWATCH_RUNTIME, publicationId),
 })
 
 const boardValidator = v.union(v.literal('overall'), v.literal('recent_24h'), v.literal('recent_7d'))

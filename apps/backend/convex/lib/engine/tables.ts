@@ -220,7 +220,7 @@ export function rankingTables<const N extends RankedTableNames>(names: N) {
 }
 
 /** Wardenwatch's engine tables keep their original names. */
-export const DESK_CRAWLER_TABLES = {
+export const WARDENWATCH_TABLES = {
   subject: 'heroes',
   world: 'worldState',
   runs: 'simulationRuns',

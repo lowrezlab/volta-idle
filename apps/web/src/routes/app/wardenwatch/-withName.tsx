@@ -1,10 +1,10 @@
 import { Link } from '@tanstack/react-router'
 import { useT } from '../../../lib/i18n'
-import { dcLogMessages } from '../../../i18n/dcLog'
+import { wwLogMessages } from '../../../i18n/wwLog'
 
 /** The backend's stand-in for a player whose name is gone or hidden (D110), shown in the reader's language. */
 export const useShownName = () => {
-  const t = useT(dcLogMessages)
+  const t = useT(wwLogMessages)
   return (name: string) => (name === 'Hidden player' ? t.hiddenPlayer : name)
 }
 

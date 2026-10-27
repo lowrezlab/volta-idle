@@ -4,7 +4,7 @@ import { api } from '@trmnl-games/backend/api'
 import { seo } from '../../../lib/seo'
 import { messagesFor, useT } from '../../../lib/i18n'
 import { headMessages } from '../../../i18n/heads'
-import { dcLogMessages } from '../../../i18n/dcLog'
+import { wwLogMessages } from '../../../i18n/wwLog'
 import { preload } from '../../../lib/preload'
 import { LiveGain, ReturnRecap } from './-recap'
 import { AdventureLog } from './-log'
@@ -19,7 +19,7 @@ import { useQuery } from '@tanstack/react-query'
  * then the quest log with its filters, then the desk raids, meetings (D141) and lost property (D145) either way.
  */
 export const Route = createFileRoute('/app/wardenwatch/log')({
-  head: ({ match: { context: { locale } } }) => seo({ title: messagesFor(headMessages, locale).dcLog, index: false, locale }),
+  head: ({ match: { context: { locale } } }) => seo({ title: messagesFor(headMessages, locale).wwLog, index: false, locale }),
   // The log's first page follows the hero view, which names the hero it belongs to, so the tab opens on its rows
   // rather than a skeleton (the live pagination cannot be preloaded, so AdventureLog reads this page until it is).
   loader: async ({ context }) => {
@@ -32,7 +32,7 @@ export const Route = createFileRoute('/app/wardenwatch/log')({
 
 function LogPage() {
   const { data: hero } = useQuery(convexQuery(api.heroes.mine, {}))
-  const t = useT(dcLogMessages)
+  const t = useT(wwLogMessages)
   return (
     <>
       <h1 className="sr-only">{t.logTitle}</h1>

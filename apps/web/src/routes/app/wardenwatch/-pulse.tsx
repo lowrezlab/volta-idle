@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { nextSlotAfter, slotEta, wallSlotFor, SLOT_MS } from '@trmnl-games/wardenwatch/sim/schedule'
 import { formatTime, useLocale, useT } from '../../../lib/i18n'
-import { dcScreenMessages } from '../../../i18n/dcScreen'
+import { wwScreenMessages } from '../../../i18n/wwScreen'
 
 const STATUS_GLYPH: Record<string, string> = { exploring: 'combat', resting: 'rest', travelling: 'travel', dead: 'death', paused: 'system', sleeping: 'loot' }
 
@@ -36,7 +36,7 @@ function countdown(ms: number): string {
   return `${minutes}:${String(total % 60).padStart(2, '0')}`
 }
 
-function sentence(hero: PulseHero, t: (typeof dcScreenMessages)['en']): string {
+function sentence(hero: PulseHero, t: (typeof wwScreenMessages)['en']): string {
   switch (hero.status) {
     case 'exploring':
       return t.exploring(hero.biomeName)
@@ -72,7 +72,7 @@ const runningAt = (world: NonNullable<PulseHero['world']>, now: number) => {
  */
 export function usePulse(hero: PulseHero): { glyph: string; sentence: string; detail: string | null } {
   const now = useNow(30_000)
-  const t = useT(dcScreenMessages)
+  const t = useT(wwScreenMessages)
   const locale = useLocale()
   const clock = (at: number) => formatTime(locale, at)
   const world = hero.world
@@ -95,7 +95,7 @@ export function usePulse(hero: PulseHero): { glyph: string; sentence: string; de
 /** The next-adventure clock: null when none is scheduled, a blank clock until mounted, "Now" during a run. */
 export function useCountdown(hero: PulseHero): string | null {
   const now = useNow()
-  const t = useT(dcScreenMessages)
+  const t = useT(wwScreenMessages)
   if (!scheduledFor(hero)) return null
   if (now === null || !hero.world) return '--:--'
   return runningAt(hero.world, now) ? t.now : countdown(nextSlotAfter(now) - now)

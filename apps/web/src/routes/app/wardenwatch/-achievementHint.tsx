@@ -8,7 +8,7 @@ import { Glyph } from '../../../lib/glyphs'
 import { useHydrated } from '../../../lib/localTime'
 import { formatNumber, useLocale, useT } from '../../../lib/i18n'
 import { useContent } from '../../../lib/useContent'
-import { dcAchievementsMessages, shelfTitle } from '../../../i18n/dcAchievements'
+import { wwAchievementsMessages, shelfTitle } from '../../../i18n/wwAchievements'
 import type { Locale } from '@trmnl-games/platform'
 
 type HintFamily = { family: string; name: string; category: string; earned: { unlockedAt: number | null } | null; next: { tier: number } | null; value: number; target: number }
@@ -16,7 +16,7 @@ type HeroView = { status: string; biomeId: string; gold: number; choice?: unknow
 type BagView = { gear: Array<{ equipped: boolean; held: boolean }>; merchant: unknown; ladder: { next: { name: string; price: number; buyable: boolean } | null } }
 type KeepsakeView = { connected: boolean; lastClaimWeek: number | null }
 type Hint = { family: HintFamily; text: string; hash?: string; to: '/app/wardenwatch' | '/app/wardenwatch/inventory' | '/app/wardenwatch/keepsakes'; link: 'bag' | 'hero' | 'keepsakes' | 'map' }
-type T = (typeof dcAchievementsMessages)['en']
+type T = (typeof wwAchievementsMessages)['en']
 
 const DAY_MS = 86_400_000
 
@@ -60,7 +60,7 @@ export function AchievementHint({ families, latestAt }: { families: HintFamily[]
   const { data: hero } = useQuery(convexQuery(api.heroes.mine, {}))
   const { data: bag } = useQuery(convexQuery(api.inventory.mine, {}))
   const { data: keepsakes } = useQuery(convexQuery(api.keepsakes.mine, {}))
-  const t = useT(dcAchievementsMessages)
+  const t = useT(wwAchievementsMessages)
   const c = useContent()
   const locale = useLocale()
   // The day is counted in the browser, so the hint waits for hydration rather than guessing on the server.

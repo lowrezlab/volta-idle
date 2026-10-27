@@ -15,7 +15,7 @@ import { Glyph } from '../../../lib/glyphs'
 import { LocalTime } from '../../../lib/localTime'
 import { formatNumber, useLocale, useT } from '../../../lib/i18n'
 import { useContent } from '../../../lib/useContent'
-import { dcCareerMessages } from '../../../i18n/dcCareer'
+import { wwCareerMessages } from '../../../i18n/wwCareer'
 
 const arrivesAt = (tag: string) => (date: Date) => date.toLocaleString(tag, { weekday: 'long', hour: 'numeric', minute: '2-digit' })
 const opensOn = (tag: string) => (date: Date) => date.toLocaleString(tag, { weekday: 'long', day: 'numeric', month: 'long', hour: 'numeric', minute: '2-digit' })
@@ -41,7 +41,7 @@ function useKeepsakeClaim() {
   const [message, setMessage] = useState<string | null>(null)
   const [earned, setEarned] = useState<(typeof DESK_KEEPSAKES)[number] | typeof EASTER_EGG_KEEPSAKE | null>(null)
   const [now, setNow] = useState(() => Date.now())
-  const t = useT(dcCareerMessages)
+  const t = useT(wwCareerMessages)
   useEffect(() => {
     const timer = window.setInterval(() => setNow(Date.now()), 60_000)
     return () => window.clearInterval(timer)
@@ -96,7 +96,7 @@ function useKeepsakeClaim() {
 type KeepsakeClaim = ReturnType<typeof useKeepsakeClaim>
 
 function KeepsakeCodeForm({ form, inputId }: { form: KeepsakeClaim; inputId: string }) {
-  const t = useT(dcCareerMessages)
+  const t = useT(wwCareerMessages)
   const connected = form.collection?.connected ?? false
   return <form onSubmit={form.claim} className="flex flex-wrap items-end gap-3">
     <div className="flex min-w-0 flex-col gap-1">
@@ -124,7 +124,7 @@ export function KeepsakeCallout({ scanned }: { scanned?: string }) {
   const [fromScan, setFromScan] = useState(false)
   const sent = useRef(false)
   const navigate = useNavigate()
-  const t = useT(dcCareerMessages)
+  const t = useT(wwCareerMessages)
   const c = useContent()
   const ready = collection !== undefined && collection !== null
   useEffect(() => {
@@ -169,7 +169,7 @@ export function KeepsakeCallout({ scanned }: { scanned?: string }) {
 export function DeskKeepsakes() {
   const form = useKeepsakeClaim()
   const { collection, collectedThisWeek, open, next, error, message } = form
-  const t = useT(dcCareerMessages)
+  const t = useT(wwCareerMessages)
   const c = useContent()
   const locale = useLocale()
 

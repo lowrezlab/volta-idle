@@ -9,7 +9,7 @@ import { Achievements } from './-achievements'
 
 /** Achievements on their own page under More (D124), with the earned badges, the ones still to find and a hint once a day has passed (D127). */
 export const Route = createFileRoute('/app/wardenwatch/achievements')({
-  head: ({ match: { context: { locale } } }) => seo({ title: messagesFor(headMessages, locale).dcAchievements, index: false, locale }),
+  head: ({ match: { context: { locale } } }) => seo({ title: messagesFor(headMessages, locale).wwAchievements, index: false, locale }),
   loader: ({ context }) => preload(context, convexQuery(api.achievements.mine, {}), convexQuery(api.heroes.mine, {}), convexQuery(api.inventory.mine, {}), convexQuery(api.keepsakes.mine, {})),
   component: Achievements,
 })

@@ -29,9 +29,9 @@ const classLine = (n: Numbers, words: { health: string; attack: string; defense:
 }
 
 /** D169: the Heroes (roster), Field notes and On your TRMNL pages under More. */
-export const dcPagesMessages = defineMessages({
+export const wwPagesMessages = defineMessages({
   en: {
-    rosterTitle: headMessages.en.dcRoster,
+    rosterTitle: headMessages.en.wwRoster,
     loadingHeroes: 'Loading your heroes…',
     moreHeroesSoon: 'More heroes are on their way. Your Warrior keeps adventuring meanwhile.',
     colon: ':',
@@ -80,7 +80,7 @@ export const dcPagesMessages = defineMessages({
     daysSwitchBack: 'This is the day\'s switch; you can switch back within ten minutes.',
 
     ladderLater: 'The career ladder arrives with your hero\'s next adventure.',
-    notesTitle: headMessages.en.dcNotes,
+    notesTitle: headMessages.en.wwNotes,
     loadingHero: 'Loading your hero…',
     notesLater: 'Field notes arrive with the next content update.',
     notesCount: (n: number, of: number) => `${n} of ${of} notes`,
@@ -92,7 +92,7 @@ export const dcPagesMessages = defineMessages({
     wins: (n: string, count: number) => `${n} ${plural(count, 'win', 'wins')}`,
     beatOne: 'Beat one and the note opens.',
 
-    trmnlTitle: headMessages.en.dcTrmnl,
+    trmnlTitle: headMessages.en.wwTrmnl,
     trmnlIntro: 'The Wardenwatch plugin draws a new screen after every adventure. This is the same picture, in each layout and on each device.',
     enterCode: 'Enter a keepsake code',
     installations: 'TRMNL installations',
@@ -111,7 +111,7 @@ export const dcPagesMessages = defineMessages({
     liveRenderShared: 'A live render of your TRMNL screen. Shaded areas are your other plugins.',
   },
   fr: {
-    rosterTitle: headMessages.fr.dcRoster,
+    rosterTitle: headMessages.fr.wwRoster,
     loadingHeroes: 'Chargement de vos héros…',
     moreHeroesSoon: 'D’autres héros arrivent bientôt. Votre Guerrier continue l’aventure en attendant.',
     colon: ' :',
@@ -160,7 +160,7 @@ export const dcPagesMessages = defineMessages({
     daysSwitchBack: 'C’est le changement du jour ; vous pouvez revenir en arrière dans les dix minutes.',
 
     ladderLater: 'L’échelle de carrière arrive avec la prochaine aventure de votre héros.',
-    notesTitle: headMessages.fr.dcNotes,
+    notesTitle: headMessages.fr.wwNotes,
     loadingHero: 'Chargement de votre héros…',
     notesLater: 'Les notes de terrain arrivent avec la prochaine mise à jour du contenu.',
     notesCount: (n: number, of: number) => `${n} notes sur ${of}`,
@@ -172,7 +172,7 @@ export const dcPagesMessages = defineMessages({
     wins: (n: string, count: number) => `${n} ${plural(count, 'victoire', 'victoires')}`,
     beatOne: 'Battez-en un et la note s’ouvre.',
 
-    trmnlTitle: headMessages.fr.dcTrmnl,
+    trmnlTitle: headMessages.fr.wwTrmnl,
     trmnlIntro: 'Le plugin Wardenwatch dessine un nouvel écran après chaque aventure. Voici la même image, dans chaque mise en page et sur chaque appareil.',
     enterCode: 'Saisir un code souvenir',
     installations: 'Installations TRMNL',
@@ -191,7 +191,7 @@ export const dcPagesMessages = defineMessages({
     liveRenderShared: 'Un rendu en direct de votre écran TRMNL. Les zones grisées sont vos autres plugins.',
   },
   de: {
-    rosterTitle: headMessages.de.dcRoster,
+    rosterTitle: headMessages.de.wwRoster,
     loadingHeroes: 'Deine Helden werden geladen …',
     moreHeroesSoon: 'Weitere Helden sind unterwegs. Dein Krieger erkundet derweil weiter.',
     colon: ':',
@@ -240,7 +240,7 @@ export const dcPagesMessages = defineMessages({
     daysSwitchBack: 'Das ist der Wechsel des Tages; du kannst innerhalb von zehn Minuten zurückwechseln.',
 
     ladderLater: 'Die Karriereleiter kommt mit dem nächsten Abenteuer deines Helden.',
-    notesTitle: headMessages.de.dcNotes,
+    notesTitle: headMessages.de.wwNotes,
     loadingHero: 'Dein Held wird geladen …',
     notesLater: 'Feldnotizen kommen mit dem nächsten Inhalts-Update.',
     notesCount: (n: number, of: number) => `${n} von ${of} Notizen`,
@@ -252,7 +252,7 @@ export const dcPagesMessages = defineMessages({
     wins: (n: string, count: number) => `${n} ${plural(count, 'Sieg', 'Siege')}`,
     beatOne: 'Besiege eins, und die Notiz öffnet sich.',
 
-    trmnlTitle: headMessages.de.dcTrmnl,
+    trmnlTitle: headMessages.de.wwTrmnl,
     trmnlIntro: 'Das Wardenwatch-Plugin zeichnet nach jedem Abenteuer einen neuen Bildschirm. Das ist dasselbe Bild, in jedem Layout und auf jedem Gerät.',
     enterCode: 'Andenken-Code eingeben',
     installations: 'TRMNL-Installationen',
@@ -271,7 +271,7 @@ export const dcPagesMessages = defineMessages({
     liveRenderShared: 'Eine Live-Darstellung deines TRMNL-Bildschirms. Schraffierte Bereiche sind deine anderen Plugins.',
   },
   es: {
-    rosterTitle: headMessages.es.dcRoster,
+    rosterTitle: headMessages.es.wwRoster,
     loadingHeroes: 'Cargando tus héroes…',
     moreHeroesSoon: 'Vienen más héroes de camino. Mientras tanto, tu Guerrero sigue de aventura.',
     colon: ':',
@@ -320,7 +320,7 @@ export const dcPagesMessages = defineMessages({
     daysSwitchBack: 'Este es el cambio del día; puedes volver atrás en diez minutos.',
 
     ladderLater: 'La escalera de carrera llega con la próxima aventura de tu héroe.',
-    notesTitle: headMessages.es.dcNotes,
+    notesTitle: headMessages.es.wwNotes,
     loadingHero: 'Cargando tu héroe…',
     notesLater: 'Las notas de campo llegan con la próxima actualización de contenido.',
     notesCount: (n: number, of: number) => `${n} de ${of} notas`,
@@ -332,7 +332,7 @@ export const dcPagesMessages = defineMessages({
     wins: (n: string, count: number) => `${n} ${plural(count, 'victoria', 'victorias')}`,
     beatOne: 'Vence a uno y se abre la nota.',
 
-    trmnlTitle: headMessages.es.dcTrmnl,
+    trmnlTitle: headMessages.es.wwTrmnl,
     trmnlIntro: 'El plugin Wardenwatch dibuja una pantalla nueva después de cada aventura. Esta es la misma imagen, en cada diseño y en cada dispositivo.',
     enterCode: 'Introducir un código de recuerdo',
     installations: 'Instalaciones de TRMNL',
@@ -351,7 +351,7 @@ export const dcPagesMessages = defineMessages({
     liveRenderShared: 'Una imagen en directo de la pantalla de tu TRMNL. Las zonas sombreadas son tus otros plugins.',
   },
   it: {
-    rosterTitle: headMessages.it.dcRoster,
+    rosterTitle: headMessages.it.wwRoster,
     loadingHeroes: 'Caricamento dei tuoi eroi…',
     moreHeroesSoon: 'Altri eroi sono in arrivo. Nel frattempo il tuo Guerriero continua l’avventura.',
     colon: ':',
@@ -400,7 +400,7 @@ export const dcPagesMessages = defineMessages({
     daysSwitchBack: 'È il cambio del giorno; puoi tornare indietro entro dieci minuti.',
 
     ladderLater: 'La scala della carriera arriva con la prossima avventura del tuo eroe.',
-    notesTitle: headMessages.it.dcNotes,
+    notesTitle: headMessages.it.wwNotes,
     loadingHero: 'Caricamento del tuo eroe…',
     notesLater: 'Gli appunti di campo arrivano con il prossimo aggiornamento dei contenuti.',
     notesCount: (n: number, of: number) => `${n} appunti su ${of}`,
@@ -412,7 +412,7 @@ export const dcPagesMessages = defineMessages({
     wins: (n: string, count: number) => `${n} ${plural(count, 'vittoria', 'vittorie')}`,
     beatOne: 'Battine uno e l’appunto si apre.',
 
-    trmnlTitle: headMessages.it.dcTrmnl,
+    trmnlTitle: headMessages.it.wwTrmnl,
     trmnlIntro: 'Il plugin Wardenwatch disegna una nuova schermata dopo ogni avventura. Questa è la stessa immagine, in ogni layout e su ogni dispositivo.',
     enterCode: 'Inserisci un codice ricordino',
     installations: 'Installazioni TRMNL',
@@ -431,7 +431,7 @@ export const dcPagesMessages = defineMessages({
     liveRenderShared: 'Un’immagine dal vivo dello schermo del tuo TRMNL. Le zone ombreggiate sono gli altri plugin.',
   },
   pt: {
-    rosterTitle: headMessages.pt.dcRoster,
+    rosterTitle: headMessages.pt.wwRoster,
     loadingHeroes: 'Carregando seus heróis…',
     moreHeroesSoon: 'Mais heróis estão a caminho. Enquanto isso, seu Guerreiro continua em aventura.',
     colon: ':',
@@ -480,7 +480,7 @@ export const dcPagesMessages = defineMessages({
     daysSwitchBack: 'Esta é a troca do dia; dá para voltar atrás em até dez minutos.',
 
     ladderLater: 'A escada de carreira chega com a próxima aventura do seu herói.',
-    notesTitle: headMessages.pt.dcNotes,
+    notesTitle: headMessages.pt.wwNotes,
     loadingHero: 'Carregando seu herói…',
     notesLater: 'As notas de campo chegam com a próxima atualização de conteúdo.',
     notesCount: (n: number, of: number) => `${n} de ${of} notas`,
@@ -492,7 +492,7 @@ export const dcPagesMessages = defineMessages({
     wins: (n: string, count: number) => `${n} ${plural(count, 'vitória', 'vitórias')}`,
     beatOne: 'Vença um e a nota abre.',
 
-    trmnlTitle: headMessages.pt.dcTrmnl,
+    trmnlTitle: headMessages.pt.wwTrmnl,
     trmnlIntro: 'O plugin Wardenwatch desenha uma tela nova depois de cada aventura. Esta é a mesma imagem, em cada layout e em cada dispositivo.',
     enterCode: 'Digitar um código de lembrancinha',
     installations: 'Instalações do TRMNL',
@@ -511,7 +511,7 @@ export const dcPagesMessages = defineMessages({
     liveRenderShared: 'Uma imagem ao vivo da tela do seu TRMNL. As áreas sombreadas são seus outros plugins.',
   },
   pl: {
-    rosterTitle: headMessages.pl.dcRoster,
+    rosterTitle: headMessages.pl.wwRoster,
     loadingHeroes: 'Wczytywanie bohaterów…',
     moreHeroesSoon: 'Kolejni bohaterowie są w drodze. Do tego czasu twój Wojownik dalej przeżywa przygody.',
     colon: ':',
@@ -560,7 +560,7 @@ export const dcPagesMessages = defineMessages({
     daysSwitchBack: 'To dzisiejsza zmiana; możesz wrócić w ciągu dziesięciu minut.',
 
     ladderLater: 'Drabina kariery przyjdzie z następną przygodą bohatera.',
-    notesTitle: headMessages.pl.dcNotes,
+    notesTitle: headMessages.pl.wwNotes,
     loadingHero: 'Wczytywanie bohatera…',
     notesLater: 'Notatki terenowe przyjdą z następną aktualizacją treści.',
     notesCount: (n: number, of: number) => `Notatki: ${n} z ${of}`,
@@ -572,7 +572,7 @@ export const dcPagesMessages = defineMessages({
     wins: (n: string, count: number) => `${n} ${plForm(count, 'wygrana', 'wygrane', 'wygranych')}`,
     beatOne: 'Pokonaj jednego, a notatka się otworzy.',
 
-    trmnlTitle: headMessages.pl.dcTrmnl,
+    trmnlTitle: headMessages.pl.wwTrmnl,
     trmnlIntro: 'Plugin Wardenwatch rysuje nowy ekran po każdej przygodzie. To ten sam obraz w każdym układzie i na każdym urządzeniu.',
     enterCode: 'Wpisz kod pamiątki',
     installations: 'Instalacje TRMNL',
@@ -591,7 +591,7 @@ export const dcPagesMessages = defineMessages({
     liveRenderShared: 'Bieżący obraz ekranu twojego TRMNL. Zacienione pola to twoje inne pluginy.',
   },
   nl: {
-    rosterTitle: headMessages.nl.dcRoster,
+    rosterTitle: headMessages.nl.wwRoster,
     loadingHeroes: 'Je helden worden geladen…',
     moreHeroesSoon: 'Er komen meer helden aan. Je Krijger gaat ondertussen gewoon op avontuur.',
     colon: ':',
@@ -640,7 +640,7 @@ export const dcPagesMessages = defineMessages({
     daysSwitchBack: 'Dit is de wissel van vandaag; je kunt binnen tien minuten terugwisselen.',
 
     ladderLater: 'De carrièreladder komt met het volgende avontuur van je held.',
-    notesTitle: headMessages.nl.dcNotes,
+    notesTitle: headMessages.nl.wwNotes,
     loadingHero: 'Je held wordt geladen…',
     notesLater: 'Veldnotities komen met de volgende inhoudsupdate.',
     notesCount: (n: number, of: number) => `${n} van ${of} notities`,
@@ -652,7 +652,7 @@ export const dcPagesMessages = defineMessages({
     wins: (n: string, count: number) => `${n} ${plural(count, 'overwinning', 'overwinningen')}`,
     beatOne: 'Versla er één en de notitie gaat open.',
 
-    trmnlTitle: headMessages.nl.dcTrmnl,
+    trmnlTitle: headMessages.nl.wwTrmnl,
     trmnlIntro: 'De plugin Wardenwatch tekent na elk avontuur een nieuw scherm. Dit is hetzelfde beeld, in elke indeling en op elk apparaat.',
     enterCode: 'Een aandenken-code invullen',
     installations: 'TRMNL-installaties',

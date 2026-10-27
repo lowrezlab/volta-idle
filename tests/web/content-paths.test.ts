@@ -67,8 +67,8 @@ describe('content pages', () => {
 
   it('keeps the help guides, which write game names at module scope, behind the loader', () => {
     const route = readFileSync(join(SRC, 'routes/help/wardenwatch.tsx'), 'utf8')
-    expect(route).toMatch(/loader: .*import\('\.\/-deskCrawlerHelp'\).*loadDeskCrawlerHelp/)
-    expect(route).not.toMatch(/from '\.\/-deskCrawlerHelp\.\w\w'/)
+    expect(route).toMatch(/loader: .*import\('\.\/-wardenwatchHelp'\).*loadWardenwatchHelp/)
+    expect(route).not.toMatch(/from '\.\/-wardenwatchHelp\.\w\w'/)
     expect(readFileSync(join(SRC, 'client.tsx'), 'utf8')).toContain('/help/wardenwatch')
   })
 })

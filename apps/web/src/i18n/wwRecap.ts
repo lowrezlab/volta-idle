@@ -3,7 +3,7 @@ import { defineMessages, plForm } from '../lib/i18n'
 const plural = (n: number, one: string, many: string) => (n === 1 ? one : many)
 
 /** D169: the return recap, the "while you were away" lines, and the to-do card. */
-export const dcRecapMessages = defineMessages({
+export const wwRecapMessages = defineMessages({
   en: {
     newFind: 'A new find is waiting.',
     manageBag: 'Manage your bag',

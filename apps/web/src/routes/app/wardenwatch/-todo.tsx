@@ -8,7 +8,7 @@ import { PixelIcon } from './-pixelIcon'
 import { useGains } from '../../../lib/ui'
 import { SectionTitle } from '../../../lib/glyphs'
 import { formatNumber, useLocale, useT } from '../../../lib/i18n'
-import { dcRecapMessages } from '../../../i18n/dcRecap'
+import { wwRecapMessages } from '../../../i18n/wwRecap'
 import { useContent } from '../../../lib/useContent'
 
 export type TodoView = {
@@ -36,7 +36,7 @@ export function TodoCard({ todo, biomes, healthy, notify }: { todo: TodoView; bi
   const askingTask = todo.tasks.find((task) => task.slot === asking) ?? null
   const done = todo.tasks.filter((task) => task.done).length
   const biomeName = (id: string | null) => biomes.find((biome) => biome.id === id)?.name ?? ''
-  const t = useT(dcRecapMessages)
+  const t = useT(wwRecapMessages)
   const c = useContent()
   const locale = useLocale()
   const n = (value: number) => formatNumber(locale, value)

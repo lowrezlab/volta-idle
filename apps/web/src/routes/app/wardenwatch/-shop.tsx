@@ -5,21 +5,21 @@ import { GenderPicker, type HeroGender } from '../../../lib/genderPicker'
 import { Button, Card } from '../../../lib/ui'
 import { ConfirmSheet, Consequences } from './-confirm'
 import { useLocale, useT } from '../../../lib/i18n'
-import { dcBagMessages } from '../../../i18n/dcBag'
+import { wwBagMessages } from '../../../i18n/wwBag'
 
 /** Purchases shared by the Bag page and the More tab, where the hero's name tag and makeover live. */
 export type PurchaseIntent<A> = { pending: boolean; error?: string | null; run: (args: A, message?: string) => Promise<boolean> }
 
 /** D156: a price the hero cannot pay yet, as plain text where the Buy button will be, so no dead button sits on the page. */
 export function Price({ price, gold, className = '' }: { price: number; gold: number; className?: string }) {
-  const t = useT(dcBagMessages)
+  const t = useT(wwBagMessages)
   const [amount, rest] = t.priceToGo(price, gold)
   return <p className={`text-sm tabular-nums ${className}`}><span className="font-semibold text-gold-ink">{amount}</span>{rest}</p>
 }
 
 /** Every purchase asks first: a stray tap only opens this sheet, which says what changes and the gold left. */
 export function BuySheet({ open, title, price, gold, pending, onConfirm, onClose, children }: { open: boolean; title: string; price: number; gold: number; pending: boolean; onConfirm: () => Promise<boolean>; onClose: () => void; children: ReactNode }) {
-  const t = useT(dcBagMessages)
+  const t = useT(wwBagMessages)
   return (
     <ConfirmSheet open={open} title={title} confirmLabel={t.buyFor(price)} busyLabel={t.buying} cancelLabel={t.cancel} pending={pending} onClose={onClose} onConfirm={async () => { if (pending) return; await onConfirm(); onClose() }}>
       <Consequences>
@@ -38,7 +38,7 @@ export function NameTag({ tag, heroName, gold, disabled, intent }: { tag: { pric
   const inStock = tag.inStockAt === null || tag.inStockAt <= Date.now()
   const affordable = gold >= tag.price
   const valid = nameProblem(name, HERO_NAME_RULE, 'hero name') === null && name.trim() !== heroName
-  const t = useT(dcBagMessages)
+  const t = useT(wwBagMessages)
   const locale = useLocale()
   return <Card title={t.nameTag} icon="tag">
     <p>{t.nameTagBody}</p>
@@ -61,7 +61,7 @@ export function Makeover({ makeover, heroName, gold, disabled, intent }: { makeo
   useEffect(() => setGender(makeover.gender), [makeover.gender])
   const affordable = gold >= makeover.price
   const changed = gender !== makeover.gender
-  const t = useT(dcBagMessages)
+  const t = useT(wwBagMessages)
   return <Card title={t.makeover} icon="hero">
     <p>{t.makeoverBody(heroName)}</p>
     {affordable ? <form className="mt-3 flex flex-col gap-2" onSubmit={(event) => { event.preventDefault(); if (changed) setAsking(true) }}>

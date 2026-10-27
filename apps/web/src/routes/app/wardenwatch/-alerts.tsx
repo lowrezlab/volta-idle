@@ -8,7 +8,7 @@ import { useIntent } from '../../../lib/intent'
 import { currentSubscription, deviceLabel, endpointFingerprint, pushSupport, subscribePush, type PushSupport } from '../../../lib/push'
 import { Button, Card, LoadingState } from '../../../lib/ui'
 import { useT } from '../../../lib/i18n'
-import { dcMoreMessages } from '../../../i18n/dcMore'
+import { wwMoreMessages } from '../../../i18n/wwMore'
 
 /** The switches a game's card owns (D115: each game shows its own kinds; devices and quiet hours are shared). */
 const SWITCHES = ['asleep', 'merchant'] as const
@@ -27,7 +27,7 @@ const clock = (hour: number) => `${String(hour).padStart(2, '0')}:00`
  * (alerts.md) are the default, each saying what it is and how often it can arrive.
  */
 export function AlertsCard({ notify, kinds: given, intro: givenIntro, quietNote: givenNote }: { notify: Notify; kinds?: readonly AlertKindCopy[]; intro?: string; quietNote?: string }) {
-  const t = useT(dcMoreMessages)
+  const t = useT(wwMoreMessages)
   const kinds: readonly AlertKindCopy[] = given ?? [{ id: 'asleep', ...t.kinds.asleep }, { id: 'merchant', ...t.kinds.merchant }]
   const intro = givenIntro ?? t.intro
   const quietNote = givenNote ?? t.quietNote
@@ -179,7 +179,7 @@ export function AlertsCard({ notify, kinds: given, intro: givenIntro, quietNote:
 /** The single quiet way in besides Settings (alerts.md): under the bag-full state, only while the nap alert is off. */
 export function AlertNudge() {
   const { data: alerts } = useQuery(convexQuery(api.alerts.mine, {}))
-  const t = useT(dcMoreMessages)
+  const t = useT(wwMoreMessages)
   if (!alerts || alerts.asleep || !alerts.vapidPublicKey) return null
   return <p className="text-sm">{t.nudge}<Link to="/app/wardenwatch/settings" hash="alerts" className="underline underline-offset-4">{t.turnOnAlerts}</Link></p>
 }

@@ -6,7 +6,7 @@ import { Glyph, SectionTitle } from '../../../lib/glyphs'
 import { BIOME_SWATCH } from '../../../lib/palette'
 import { formatNumber, useLocale, useT } from '../../../lib/i18n'
 import { useContent } from '../../../lib/useContent'
-import { dcPagesMessages } from '../../../i18n/dcPages'
+import { wwPagesMessages } from '../../../i18n/wwPages'
 
 /** heroes.mine's `lore` (D133): every floor with its note and its monsters' notes, each open or still a "?" slot. */
 export type LoreView = {
@@ -65,7 +65,7 @@ function MonsterSprite({ id, open }: { id: string; open: boolean }) {
  * unearned achievements are; nothing here nudges, notifies or explains how to open one beyond the one line.
  */
 export function FieldNotes({ lore, level }: { lore: LoreView; level: number }) {
-  const t = useT(dcPagesMessages)
+  const t = useT(wwPagesMessages)
   const c = useContent()
   const locale = useLocale()
   return (

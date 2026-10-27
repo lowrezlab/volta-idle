@@ -36,7 +36,7 @@ export const Route = createFileRoute('/connect/trmnl/wardenwatch/install')({
   },
   loader: async () => await getPendingInstall({ data: { gameSlug: 'wardenwatch' } }),
   head: ({ match: { context: { locale } } }) => {
-    const head = seo({ title: messagesFor(headMessages, locale).dcInstall, index: false, locale })
+    const head = seo({ title: messagesFor(headMessages, locale).wwInstall, index: false, locale })
     return { ...head, meta: [...head.meta, { name: 'referrer', content: 'no-referrer' }] }
   },
   component: InstallPage,

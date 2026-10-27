@@ -74,7 +74,7 @@ export const requestGameDeletion = mutation({
       const profile = await gameProfile(ctx, user._id)
       if (profile?.state === 'deleting') return { changed: false }
       if (profile) await ctx.db.patch(profile._id, { state: 'deleting' })
-      else await ctx.db.insert('deskCrawlerProfiles', {
+      else await ctx.db.insert('wardenwatchProfiles', {
         userId: user._id, state: 'deleting', createdAt: Date.now(),
         ...(user.activeHeroId ? { activeHeroId: user.activeHeroId } : {}),
       })

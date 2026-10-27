@@ -15,7 +15,7 @@ import { documentLocale } from './lib/i18n'
  * test imports that module, and the guides' import graph would drag the backend's types into the test typecheck.
  */
 function prepareHydration(pathname: string, locale: ReturnType<typeof documentLocale>): Promise<void> {
-  if (pathname.replace(/\/$/, '') === '/help/wardenwatch') return import('./routes/help/-deskCrawlerHelp').then((m) => m.loadDeskCrawlerHelp(locale)).catch(() => {})
+  if (pathname.replace(/\/$/, '') === '/help/wardenwatch') return import('./routes/help/-wardenwatchHelp').then((m) => m.loadWardenwatchHelp(locale)).catch(() => {})
   return contentNeededAt(pathname) ? preloadContent(locale) : Promise.resolve()
 }
 

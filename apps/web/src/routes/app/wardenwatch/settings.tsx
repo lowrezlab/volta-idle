@@ -9,7 +9,7 @@ import { captureAnalytics } from '../../../lib/analytics'
 import { seo } from '../../../lib/seo'
 import { messagesFor, useT } from '../../../lib/i18n'
 import { headMessages } from '../../../i18n/heads'
-import { dcMoreMessages } from '../../../i18n/dcMore'
+import { wwMoreMessages } from '../../../i18n/wwMore'
 import { Button, Card, LoadingState, NoticeBar, useFocusWithin, useNotice } from '../../../lib/ui'
 import { preload } from '../../../lib/preload'
 import { AlertsCard } from './-alerts'
@@ -17,7 +17,7 @@ import { MoreLinks } from './-moreLinks'
 import { Makeover, NameTag } from './-shop'
 
 /** The More tab (D124): the pages that are not play (achievements, keepsakes, the device) above the settings. */
-export const Route = createFileRoute('/app/wardenwatch/settings')({ head: ({ match: { context: { locale } } }) => seo({ title: messagesFor(headMessages, locale).dcMore, index: false, locale }), loader: ({ context }) => preload(context, convexQuery(api.users.me, {}), convexQuery(api.heroes.mine, {}), convexQuery(api.inventory.mine, {}), convexQuery(api.connections.mine, {}), convexQuery(api.alerts.mine, {})), component: Settings })
+export const Route = createFileRoute('/app/wardenwatch/settings')({ head: ({ match: { context: { locale } } }) => seo({ title: messagesFor(headMessages, locale).wwMore, index: false, locale }), loader: ({ context }) => preload(context, convexQuery(api.users.me, {}), convexQuery(api.heroes.mine, {}), convexQuery(api.inventory.mine, {}), convexQuery(api.connections.mine, {}), convexQuery(api.alerts.mine, {})), component: Settings })
 
 function Settings() {
   const { data: me } = useQuery(convexQuery(api.users.me, {}))
@@ -48,7 +48,7 @@ function Settings() {
   // Pause and Resume swap places when they succeed; focus follows to whichever control takes over.
   const adventures = useFocusWithin<HTMLDivElement>(hero?.status)
   const sharing = useFocusWithin<HTMLDivElement>(hero?.publicProfile)
-  const t = useT(dcMoreMessages)
+  const t = useT(wwMoreMessages)
   if (!me?.user || !hero) return <LoadingState label={t.loadingSettings} />
   const healthy = hero.simulationState !== 'quarantined'
   return (
@@ -187,7 +187,7 @@ function Settings() {
 function ShareHeroLink({ alias, heroName, notify }: { alias: string; heroName: string; notify: (feedback: { error: string | null; message: string | null }) => void }) {
   // Known only in the browser; the server render shows Copy link alone, and Share joins it after hydration.
   const [canShare, setCanShare] = useState(false)
-  const t = useT(dcMoreMessages)
+  const t = useT(wwMoreMessages)
   useEffect(() => setCanShare(typeof navigator.share === 'function'), [])
   const url = () => `${window.location.origin}/wardenwatch/heroes/${encodeURIComponent(alias)}`
   const share = async () => {

@@ -32,7 +32,7 @@ export const Route = createFileRoute('/connect/trmnl/wardenwatch/manage')({
   },
   loader: async () => await getManagedInstance({ data: { gameSlug: 'wardenwatch' } }),
   head: ({ match: { context: { locale } } }) => {
-    const head = seo({ title: messagesFor(headMessages, locale).dcManage, index: false, locale })
+    const head = seo({ title: messagesFor(headMessages, locale).wwManage, index: false, locale })
     return { ...head, meta: [...head.meta, { name: 'referrer', content: 'no-referrer' }] }
   },
   component: ManagePage,

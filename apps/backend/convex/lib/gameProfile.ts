@@ -6,12 +6,12 @@ export { WARDENWATCH_GAME as WARDENWATCH } from '@trmnl-games/platform'
 import { WARDENWATCH_GAME as WARDENWATCH } from '@trmnl-games/platform'
 
 /** Only omitted pre-migration credentials inherit the original game's scope. */
-export function isDeskCrawler(row: { gameSlug?: string }): boolean {
+export function isWardenwatch(row: { gameSlug?: string }): boolean {
   return row.gameSlug === undefined || row.gameSlug === WARDENWATCH
 }
 
 export async function gameProfile(ctx: QueryCtx, userId: Id<'users'>) {
-  return await ctx.db.query('deskCrawlerProfiles').withIndex('by_userId', (q) => q.eq('userId', userId)).unique()
+  return await ctx.db.query('wardenwatchProfiles').withIndex('by_userId', (q) => q.eq('userId', userId)).unique()
 }
 
 /** Read legacy owner pointers only until the bounded migration creates a profile. */
@@ -28,6 +28,6 @@ export async function setCurrentHero(ctx: MutationCtx, user: Doc<'users'>, heroI
   const profile = await gameProfile(ctx, user._id)
   if (profile?.state === 'deleting') throw appError('GAME_UNAVAILABLE', 'Wardenwatch progress is being deleted. Try again shortly.')
   if (profile) await ctx.db.patch(profile._id, { activeHeroId: heroId })
-  else await ctx.db.insert('deskCrawlerProfiles', { userId: user._id, state: 'active', activeHeroId: heroId, createdAt: Date.now() })
+  else await ctx.db.insert('wardenwatchProfiles', { userId: user._id, state: 'active', activeHeroId: heroId, createdAt: Date.now() })
   if (user.activeHeroId) await ctx.db.patch(user._id, { activeHeroId: undefined })
 }

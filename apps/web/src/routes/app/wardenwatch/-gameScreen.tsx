@@ -14,7 +14,7 @@ import { PixelIcon } from './-pixelIcon'
 import { useCountdown, usePulse, type PulseHero } from './-pulse'
 import { latestLogQuery } from './-queries'
 import { formatNumber, useLocale, useT } from '../../../lib/i18n'
-import { dcScreenMessages } from '../../../i18n/dcScreen'
+import { wwScreenMessages } from '../../../i18n/wwScreen'
 import { useStoryOptions } from '../../../lib/useStory'
 
 /** Gain chips: the stat's colour as a fill, night text on top. */
@@ -38,7 +38,7 @@ function Heart({ left, right }: { left: boolean; right: boolean }) {
 }
 
 export function Hearts({ hp, maxHp }: { hp: number; maxHp: number }) {
-  const t = useT(dcScreenMessages)
+  const t = useT(wwScreenMessages)
   // Half-heart resolution, never showing empty while the hero has any health left.
   const halves = hp <= 0 ? 0 : Math.max(1, Math.round((hp / Math.max(1, maxHp)) * HEARTS * 2))
   return (
@@ -65,7 +65,7 @@ export function GameScreen({ hero }: { hero: ScreenHero }) {
   const bands = BIOME_BANDS[hero.biomeId] ?? FALLBACK_BANDS
   const sceneUrl = localSceneUrl(hero.scenePath, now)
   const painted = useMemo(() => paintedSceneUri(sceneUrl), [sceneUrl])
-  const t = useT(dcScreenMessages)
+  const t = useT(wwScreenMessages)
   const locale = useLocale()
   const xpPct = hero.xpToNext > 0 ? Math.min(100, Math.round((hero.xp * 100) / hero.xpToNext)) : 0
   return (
@@ -132,7 +132,7 @@ export function GameScreen({ hero }: { hero: ScreenHero }) {
 /** The HUD's next-adventure box, on its own second clock so the rest of the screen holds still between ticks. */
 function NextAdventure({ hero }: { hero: PulseHero }) {
   const countdown = useCountdown(hero)
-  const t = useT(dcScreenMessages)
+  const t = useT(wwScreenMessages)
   if (countdown === null) return null
   return (
     <p className="label-px sm:border-[3px] sm:border-night sm:bg-night/85 sm:px-3 sm:py-2" aria-live="off">

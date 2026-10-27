@@ -10,7 +10,7 @@ const pl = contentTranslator('pl')
 const nl = contentTranslator('nl')
 
 /** D169: the game screen and its status line, the log story row, confirmations, the roster card and What's new. */
-export const dcScreenMessages = defineMessages({
+export const wwScreenMessages = defineMessages({
   en: {
     health: (hp: number, max: number) => `Health ${hp} of ${max}`,
     gameScreen: (name: string) => `${name}'s game screen`,

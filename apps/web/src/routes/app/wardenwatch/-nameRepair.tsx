@@ -5,14 +5,14 @@ import { useIntent } from '../../../lib/intent'
 import { NameField } from '../../../lib/nameField'
 import { Button, Card, ErrorNote } from '../../../lib/ui'
 import { useT } from '../../../lib/i18n'
-import { dcMoreMessages } from '../../../i18n/dcMore'
+import { wwMoreMessages } from '../../../i18n/wwMore'
 
 /** Shown only when an admin has masked this player's names (D23). Progress is untouched. */
 export function NameRepair() {
   const replace = useIntent(api.users.replacePublicNames)
   const [alias, setAlias] = useState('')
   const [hero, setHero] = useState('')
-  const t = useT(dcMoreMessages)
+  const t = useT(wwMoreMessages)
   async function onSubmit(event: FormEvent) {
     event.preventDefault()
     await replace.run({ publicAlias: alias, heroName: hero })

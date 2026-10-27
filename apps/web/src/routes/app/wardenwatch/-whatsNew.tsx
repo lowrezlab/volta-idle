@@ -7,7 +7,7 @@ import { api } from '@trmnl-games/backend/api'
 import { changeKeys } from '../../../lib/changelog'
 import { Glyph } from '../../../lib/glyphs'
 import { useLocale, useT } from '../../../lib/i18n'
-import { dcScreenMessages } from '../../../i18n/dcScreen'
+import { wwScreenMessages } from '../../../i18n/wwScreen'
 
 /** At most this many change titles in the card; the rest are counted, and the page has them all. */
 const SHOWN = 3
@@ -21,7 +21,7 @@ export function WhatsNewCard() {
   const { data: me } = useQuery(convexQuery(api.users.me, {}))
   const dismiss = useMutation(api.users.dismissWhatsNew)
   const [hidden, setHidden] = useState<string | null>(null)
-  const t = useT(dcScreenMessages)
+  const t = useT(wwScreenMessages)
   const locale = useLocale()
   const since = me?.user?.whatsNewSince
   if (!since) return null

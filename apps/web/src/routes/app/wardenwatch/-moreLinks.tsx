@@ -5,7 +5,7 @@ import { captureAnalytics } from '../../../lib/analytics'
 import { SPONSOR_URL } from '../../../lib/prose'
 import { CHANGELOG, changeDay } from '../../../lib/changelog'
 import { useLocale, useT } from '../../../lib/i18n'
-import { dcMoreMessages } from '../../../i18n/dcMore'
+import { wwMoreMessages } from '../../../i18n/wwMore'
 
 /** The More tab's pages (D124), each a row with its glyph: what the Hero tab used to hold under the world map. */
 const MORE_LINKS = [
@@ -21,7 +21,7 @@ const MORE_LINKS = [
 ] as const satisfies ReadonlyArray<{ to: string; key: string; glyph: GlyphName }>
 
 export function MoreLinks() {
-  const t = useT(dcMoreMessages)
+  const t = useT(wwMoreMessages)
   const locale = useLocale()
   const day = changeDay(CHANGELOG[0]!.date, false, locale)
   return (

@@ -6,7 +6,7 @@ import { api } from '@trmnl-games/backend/api'
 import { seo } from '../../../lib/seo'
 import { messagesFor, useT } from '../../../lib/i18n'
 import { headMessages } from '../../../i18n/heads'
-import { dcPagesMessages } from '../../../i18n/dcPages'
+import { wwPagesMessages } from '../../../i18n/wwPages'
 import { artUrl } from '../../../lib/artUrl'
 import { preload } from '../../../lib/preload'
 import { LoadingState } from '../../../lib/ui'
@@ -16,14 +16,14 @@ const DevicePreview = lazy(() => import('./-devicePreview').then((module) => ({ 
 
 /** What the owner's TRMNL is showing (companion.md "Display help"), on its own page under More (D124). */
 export const Route = createFileRoute('/app/wardenwatch/trmnl')({
-  head: ({ match: { context: { locale } } }) => seo({ title: messagesFor(headMessages, locale).dcTrmnl, index: false, locale }),
+  head: ({ match: { context: { locale } } }) => seo({ title: messagesFor(headMessages, locale).wwTrmnl, index: false, locale }),
   loader: ({ context }) => preload(context, convexQuery(api.heroes.mine, {}), latestLogQuery()),
   component: DevicePage,
 })
 
 function DevicePage() {
   const { data: hero } = useQuery(convexQuery(api.heroes.mine, {}))
-  const t = useT(dcPagesMessages)
+  const t = useT(wwPagesMessages)
   if (!hero) return <LoadingState label={t.loadingHero} />
   return (
     <>
@@ -47,7 +47,7 @@ function DevicePage() {
  * with the control rows' height reserved, so nothing moves when it takes over.
  */
 function DeviceStandIn({ sceneUrl, heroName }: { sceneUrl: string; heroName: string }) {
-  const t = useT(dcPagesMessages)
+  const t = useT(wwPagesMessages)
   return (
     <figure className="flex flex-col gap-3" aria-busy="true">
       <div className="rounded-[1.4rem] bg-[#3a3566] p-[clamp(0.5rem,2.5vw,1rem)]">

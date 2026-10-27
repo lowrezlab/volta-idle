@@ -9,7 +9,7 @@ import { DeskKeepsakes } from './-keepsakes'
 
 /** Desk keepsakes (D46) on their own page under More (D124): the code form and the shelf. */
 export const Route = createFileRoute('/app/wardenwatch/keepsakes')({
-  head: ({ match: { context: { locale } } }) => seo({ title: messagesFor(headMessages, locale).dcKeepsakes, index: false, locale }),
+  head: ({ match: { context: { locale } } }) => seo({ title: messagesFor(headMessages, locale).wwKeepsakes, index: false, locale }),
   loader: ({ context }) => preload(context, convexQuery(api.keepsakes.mine, {})),
   component: DeskKeepsakes,
 })

@@ -10,17 +10,17 @@ import { preloadContent } from '../../lib/content'
 import { captureAnalytics } from '../../lib/analytics'
 import { useAnalyticsView } from '../../lib/analyticsProvider'
 import { SwitchAccount } from '../../lib/switchAccount'
-import { InstallLink } from '../../lib/deskCrawlerPitch'
+import { InstallLink } from '../../lib/wardenwatchPitch'
 import { Glyph, type GlyphName } from '../../lib/glyphs'
 import { useAlertOpened } from './wardenwatch/-alerts'
 import { gamesQuery } from '../../lib/gameAccess'
 import { messagesFor, useT } from '../../lib/i18n'
 import { headMessages } from '../../i18n/heads'
-import { dcShellMessages } from '../../i18n/dcShell'
+import { wwShellMessages } from '../../i18n/wwShell'
 
 /** Companion shell: auth gate, setup states and mobile-first navigation (companion.md). */
 export const Route = createFileRoute('/app/wardenwatch')({
-  head: ({ match: { context: { locale } } }) => seo({ title: messagesFor(headMessages, locale).dcShell, index: false, locale }),
+  head: ({ match: { context: { locale } } }) => seo({ title: messagesFor(headMessages, locale).wwShell, index: false, locale }),
   // The listing feeds the header's game switcher, so it is in the server render too. The reader's content dictionary
   // (lib/content) loads with it, so every page under the shell translates game names from its first render.
   loader: ({ context }) => Promise.all([preloadContent(context.locale), preload(context, convexQuery(api.users.me, {}), gamesQuery, convexQuery(api.inventory.badges, {}))]).then(() => undefined),
@@ -37,7 +37,7 @@ const NAV = [
   { to: '/app/wardenwatch/log', label: 'log', glyph: 'quest' },
   { to: '/app/wardenwatch/leaderboard', label: 'ranks', glyph: 'trophy' },
   { to: '/app/wardenwatch/settings', label: 'more', glyph: 'cog' },
-] as const satisfies ReadonlyArray<{ to: string; label: keyof (typeof import('../../i18n/dcShell'))['dcShellMessages']['en']['nav']; glyph: GlyphName }>
+] as const satisfies ReadonlyArray<{ to: string; label: keyof (typeof import('../../i18n/wwShell'))['wwShellMessages']['en']['nav']; glyph: GlyphName }>
 
 function AppShell() {
   return <SignedInApp />
@@ -47,7 +47,7 @@ function AppShell() {
 const NEARLY_FULL = 0.8
 
 function SignedInApp() {
-  const t = useT(dcShellMessages)
+  const t = useT(wwShellMessages)
   const { data: me, isPending } = useQuery(convexQuery(api.users.me, {}))
   // One small query feeds both tab marks from any tab, in place of the whole hero and bag views the shell once watched.
   const { data: badges } = useQuery(convexQuery(api.inventory.badges, {}))

@@ -40,7 +40,7 @@ function rosterOpen(content: ContentCatalog, heroes: readonly Doc<'heroes'>[]): 
 }
 
 /** When the next switch is allowed, and whether a switch back to the hero just left is still an undo. */
-function switchState(profile: Doc<'deskCrawlerProfiles'> | null, now: number) {
+function switchState(profile: Doc<'wardenwatchProfiles'> | null, now: number) {
   const last = profile?.lastSwitch
   const nextAt = last === undefined ? null : last.at + SWITCH_GAP_MS
   const undoHeroId = last?.fromHeroId !== undefined && now < last.at + UNDO_MS ? last.fromHeroId : null

@@ -14,7 +14,7 @@ const list = (parts: readonly string[], and: string) => (parts.length <= 1 ? par
 const capital = (text: string) => text.charAt(0).toUpperCase() + text.slice(1)
 
 /** D169: the goal card, "Coming up", the Career page and the keepsakes. Rung titles and blurbs arrive in English. */
-export const dcCareerMessages = defineMessages({
+export const wwCareerMessages = defineMessages({
   en: {
     goalReached: 'Goal reached!',
     goal: 'Goal',

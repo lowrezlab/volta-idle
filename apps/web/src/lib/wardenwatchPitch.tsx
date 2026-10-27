@@ -5,11 +5,11 @@ import { api } from '@trmnl-games/backend/api'
 import { useQuery } from '@tanstack/react-query'
 import { useConvexAuth } from 'convex/react'
 import { Link } from '@tanstack/react-router'
-import { FAQ } from './deskCrawlerFaq'
+import { FAQ } from './wardenwatchFaq'
 import { FLOORS, UNLOCKS } from './facts.gen'
 import { Glyph, type GlyphName } from './glyphs'
 import { BIOME_BANDS } from './palette'
-import { DESK_CRAWLER_INSTALL_URL } from './prose'
+import { WARDENWATCH_INSTALL_URL } from './prose'
 import { BUTTON_PRIMARY, Button, LINK_BUTTON } from './ui'
 import { useAnalyticsView } from './analyticsProvider'
 import { captureAnalytics } from './analytics'
@@ -233,7 +233,7 @@ export function Faq({ headingId }: { headingId: string }) {
 /** The marketplace listing's Install button, counted by where it sits. */
 export function InstallLink({ place, className = '' }: { place: string; className?: string }) {
   const t = useT(pitchMessages)
-  return <a href={DESK_CRAWLER_INSTALL_URL} onClick={() => captureAnalytics('install link opened', { place })} className={`self-start ${LINK_BUTTON} ${BUTTON_PRIMARY} ${className}`}>{t.installOnTrmnl}</a>
+  return <a href={WARDENWATCH_INSTALL_URL} onClick={() => captureAnalytics('install link opened', { place })} className={`self-start ${LINK_BUTTON} ${BUTTON_PRIMARY} ${className}`}>{t.installOnTrmnl}</a>
 }
 
 /**
@@ -252,7 +252,7 @@ export function InstallCta({ place, compact = false }: { place: string; compact?
         <p className="text-sm text-muted">{t.thenSignIn}</p>
       </Show>
       <Show when="signed-in">
-        <Link to="/app/wardenwatch" className={`self-start ${LINK_BUTTON} ${BUTTON_PRIMARY}`}>{t.openDeskCrawler}</Link>
+        <Link to="/app/wardenwatch" className={`self-start ${LINK_BUTTON} ${BUTTON_PRIMARY}`}>{t.openWardenwatch}</Link>
         <NoHeroYet place={place} />
       </Show>
       {compact ? null : <p className="text-sm text-muted">{t.needsBefore}<a href="https://trmnl.com" className="underline underline-offset-4 hover:text-ink">{t.needsLink}</a>{t.needsAfter}</p>}
@@ -266,14 +266,14 @@ function NoHeroYet({ place }: { place: string }) {
   const { isAuthenticated } = useConvexAuth()
   const { data: me } = useQuery({ ...convexQuery(api.users.me, {}), enabled: isAuthenticated })
   if (me?.hero) return null
-  return <p className="text-sm text-muted">{t.signedInBefore}<a href={DESK_CRAWLER_INSTALL_URL} onClick={() => captureAnalytics('install link opened', { place })} className="underline underline-offset-4 hover:text-ink">{t.signedInLink}</a>{t.signedInAfter}</p>
+  return <p className="text-sm text-muted">{t.signedInBefore}<a href={WARDENWATCH_INSTALL_URL} onClick={() => captureAnalytics('install link opened', { place })} className="underline underline-offset-4 hover:text-ink">{t.signedInLink}</a>{t.signedInAfter}</p>
 }
 
 /**
  * Signed-out view of the companion routes (D102). The screen's QR codes lead here, so a visitor who scanned someone
  * else's TRMNL learns what Wardenwatch is and that it needs a TRMNL before being asked to sign in.
  */
-export function DeskCrawlerSignedOut() {
+export function WardenwatchSignedOut() {
   useAnalyticsView('setup screen shown', { setup_state: 'signed_out' })
   const t = useT(pitchMessages)
   return (
@@ -289,7 +289,7 @@ export function DeskCrawlerSignedOut() {
         <p>{t.wantBefore}<a href="https://trmnl.com" className="underline underline-offset-4">TRMNL</a>{t.wantAfter}</p>
         <InstallLink place="qr pitch" />
         <div className="flex flex-wrap items-center gap-4">
-          <Link to="/games/wardenwatch" className="inline-flex min-h-11 items-center underline underline-offset-4">{t.aboutDeskCrawler}</Link>
+          <Link to="/games/wardenwatch" className="inline-flex min-h-11 items-center underline underline-offset-4">{t.aboutWardenwatch}</Link>
           <Link to="/help/wardenwatch" className="inline-flex min-h-11 items-center underline underline-offset-4">{t.setupHelp}</Link>
         </div>
       </section>

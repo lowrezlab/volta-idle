@@ -23,9 +23,9 @@ type RaidLine = 'mishapRaider' | 'mishapTarget' | 'raided' | 'caughtRaiding' | '
  * D169: the Log tab (quest log, raids, coworkers, lost property) and the Rankings tab (board, records, following).
  * Lines with `{name}` link the other player's name where it stands (WithName).
  */
-export const dcLogMessages = defineMessages({
+export const wwLogMessages = defineMessages({
   en: {
-    logTitle: headMessages.en.dcLog,
+    logTitle: headMessages.en.wwLog,
     hiddenPlayer: 'Hidden player',
     filters: { all: 'All', fights: 'Fights', finds: 'Finds', milestones: 'Milestones', rest: 'Rest & traps', raids: 'Other people', todo: 'To-do' } as Record<FilterKey, string>,
     today: 'Today',
@@ -42,7 +42,7 @@ export const dcLogMessages = defineMessages({
     loadingOlder: 'Loading older adventures…',
     keptThreeDays: 'Detailed history is kept for three days.',
 
-    rankingsTitle: headMessages.en.dcRankings,
+    rankingsTitle: headMessages.en.wwRankings,
     tabs: { recent_24h: 'Today', recent_7d: 'This week', overall: 'Lifetime' },
     group: (key: string) => (key === 'all' ? 'All heroes' : `Levels ${key.replace('-', '–').replace('+', ' and up')}`),
     levelGroup: 'Level group',
@@ -124,7 +124,7 @@ export const dcLogMessages = defineMessages({
     whose: '{name}\'s',
   },
   fr: {
-    logTitle: headMessages.fr.dcLog,
+    logTitle: headMessages.fr.wwLog,
     hiddenPlayer: 'Joueur masqué',
     filters: { all: 'Tout', fights: 'Combats', finds: 'Trouvailles', milestones: 'Étapes', rest: 'Repos et pièges', raids: 'Les autres', todo: 'Tâches' },
     today: 'Aujourd’hui',
@@ -141,7 +141,7 @@ export const dcLogMessages = defineMessages({
     loadingOlder: 'Chargement des aventures plus anciennes…',
     keptThreeDays: 'L’historique détaillé est conservé trois jours.',
 
-    rankingsTitle: headMessages.fr.dcRankings,
+    rankingsTitle: headMessages.fr.wwRankings,
     tabs: { recent_24h: 'Aujourd’hui', recent_7d: 'Semaine', overall: 'Global' },
     group: (key: string) => (key === 'all' ? 'Tous les héros' : `Niveaux ${key.replace('-', '–').replace('+', ' et plus')}`),
     levelGroup: 'Groupe de niveau',
@@ -223,7 +223,7 @@ export const dcLogMessages = defineMessages({
     whose: 'à {name}',
   },
   de: {
-    logTitle: headMessages.de.dcLog,
+    logTitle: headMessages.de.wwLog,
     hiddenPlayer: 'Verborgener Spieler',
     filters: { all: 'Alles', fights: 'Kämpfe', finds: 'Funde', milestones: 'Meilensteine', rest: 'Rast & Fallen', raids: 'Andere Leute', todo: 'To-do' },
     today: 'Heute',
@@ -240,7 +240,7 @@ export const dcLogMessages = defineMessages({
     loadingOlder: 'Ältere Abenteuer werden geladen …',
     keptThreeDays: 'Der genaue Verlauf wird drei Tage aufbewahrt.',
 
-    rankingsTitle: headMessages.de.dcRankings,
+    rankingsTitle: headMessages.de.wwRankings,
     tabs: { recent_24h: 'Heute', recent_7d: 'Woche', overall: 'Gesamt' },
     group: (key: string) => (key === 'all' ? 'Alle Helden' : `Stufen ${key.replace('-', '–').replace('+', ' und höher')}`),
     levelGroup: 'Stufengruppe',
@@ -322,7 +322,7 @@ export const dcLogMessages = defineMessages({
     whose: 'von {name}',
   },
   es: {
-    logTitle: headMessages.es.dcLog,
+    logTitle: headMessages.es.wwLog,
     hiddenPlayer: 'Jugador oculto',
     filters: { all: 'Todo', fights: 'Combates', finds: 'Hallazgos', milestones: 'Hitos', rest: 'Descanso y trampas', raids: 'Otra gente', todo: 'Tareas' },
     today: 'Hoy',
@@ -339,7 +339,7 @@ export const dcLogMessages = defineMessages({
     loadingOlder: 'Cargando aventuras anteriores…',
     keptThreeDays: 'El historial detallado se guarda tres días.',
 
-    rankingsTitle: headMessages.es.dcRankings,
+    rankingsTitle: headMessages.es.wwRankings,
     tabs: { recent_24h: 'Hoy', recent_7d: 'Semana', overall: 'Siempre' },
     group: (key: string) => (key === 'all' ? 'Todos los héroes' : `Niveles ${key.replace('-', '–').replace('+', ' en adelante')}`),
     levelGroup: 'Grupo de nivel',
@@ -421,7 +421,7 @@ export const dcLogMessages = defineMessages({
     whose: 'De {name}',
   },
   it: {
-    logTitle: headMessages.it.dcLog,
+    logTitle: headMessages.it.wwLog,
     hiddenPlayer: 'Giocatore nascosto',
     filters: { all: 'Tutto', fights: 'Combattimenti', finds: 'Ritrovamenti', milestones: 'Traguardi', rest: 'Riposo e trappole', raids: 'Altre persone', todo: 'Cose da fare' },
     today: 'Oggi',
@@ -438,7 +438,7 @@ export const dcLogMessages = defineMessages({
     loadingOlder: 'Caricamento delle avventure precedenti…',
     keptThreeDays: 'La cronologia dettagliata resta per tre giorni.',
 
-    rankingsTitle: headMessages.it.dcRankings,
+    rankingsTitle: headMessages.it.wwRankings,
     tabs: { recent_24h: 'Oggi', recent_7d: 'Settimana', overall: 'Sempre' },
     group: (key: string) => (key === 'all' ? 'Tutti gli eroi' : `Livelli ${key.replace('-', '–').replace('+', ' e oltre')}`),
     levelGroup: 'Fascia di livello',
@@ -520,7 +520,7 @@ export const dcLogMessages = defineMessages({
     whose: 'Di {name}',
   },
   pt: {
-    logTitle: headMessages.pt.dcLog,
+    logTitle: headMessages.pt.wwLog,
     hiddenPlayer: 'Jogador oculto',
     filters: { all: 'Tudo', fights: 'Combates', finds: 'Achados', milestones: 'Marcos', rest: 'Descanso e armadilhas', raids: 'Outras pessoas', todo: 'Tarefas' },
     today: 'Hoje',
@@ -537,7 +537,7 @@ export const dcLogMessages = defineMessages({
     loadingOlder: 'Carregando aventuras anteriores…',
     keptThreeDays: 'O histórico detalhado fica guardado por três dias.',
 
-    rankingsTitle: headMessages.pt.dcRankings,
+    rankingsTitle: headMessages.pt.wwRankings,
     tabs: { recent_24h: 'Hoje', recent_7d: 'Semana', overall: 'Sempre' },
     group: (key: string) => (key === 'all' ? 'Todos os heróis' : `Níveis ${key.replace('-', '–').replace('+', ' em diante')}`),
     levelGroup: 'Grupo de nível',
@@ -619,7 +619,7 @@ export const dcLogMessages = defineMessages({
     whose: 'De {name}',
   },
   pl: {
-    logTitle: headMessages.pl.dcLog,
+    logTitle: headMessages.pl.wwLog,
     hiddenPlayer: 'Ukryty gracz',
     filters: { all: 'Wszystko', fights: 'Walki', finds: 'Znaleziska', milestones: 'Kamienie milowe', rest: 'Odpoczynek i pułapki', raids: 'Inni ludzie', todo: 'Zadania' },
     today: 'Dziś',
@@ -636,7 +636,7 @@ export const dcLogMessages = defineMessages({
     loadingOlder: 'Wczytywanie starszych przygód…',
     keptThreeDays: 'Szczegółowa historia jest przechowywana przez trzy dni.',
 
-    rankingsTitle: headMessages.pl.dcRankings,
+    rankingsTitle: headMessages.pl.wwRankings,
     tabs: { recent_24h: 'Dziś', recent_7d: 'Tydzień', overall: 'Od początku' },
     group: (key: string) => (key === 'all' ? 'Wszyscy bohaterowie' : `Poziomy ${key.replace('-', '–').replace('+', ' i wyżej')}`),
     levelGroup: 'Grupa poziomów',
@@ -718,7 +718,7 @@ export const dcLogMessages = defineMessages({
     whose: 'Gracza {name}',
   },
   nl: {
-    logTitle: headMessages.nl.dcLog,
+    logTitle: headMessages.nl.wwLog,
     hiddenPlayer: 'Verborgen speler',
     filters: { all: 'Alles', fights: 'Gevechten', finds: 'Vondsten', milestones: 'Mijlpalen', rest: 'Rust en vallen', raids: 'Andere mensen', todo: 'Taken' },
     today: 'Vandaag',
@@ -735,7 +735,7 @@ export const dcLogMessages = defineMessages({
     loadingOlder: 'Oudere avonturen worden geladen…',
     keptThreeDays: 'De gedetailleerde geschiedenis blijft drie dagen bewaard.',
 
-    rankingsTitle: headMessages.nl.dcRankings,
+    rankingsTitle: headMessages.nl.wwRankings,
     tabs: { recent_24h: 'Vandaag', recent_7d: 'Week', overall: 'Altijd' },
     group: (key: string) => (key === 'all' ? 'Alle helden' : `Niveaus ${key.replace('-', '–').replace('+', ' en hoger')}`),
     levelGroup: 'Niveaugroep',

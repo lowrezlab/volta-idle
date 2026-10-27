@@ -2,7 +2,7 @@
 import { mkdirSync, writeFileSync } from 'node:fs'
 import type { Canvas } from '@trmnl-games/wardenwatch/art/canvas'
 import { BRAND, Image, colourMark, markSvg } from './colour'
-import { deskCrawlerFavicon, deskCrawlerIcon } from './gameIcons'
+import { wardenwatchFavicon, wardenwatchIcon } from './gameIcons'
 import { platformFaviconCanvas, platformIconCanvas } from './platformArt'
 
 function writeIconSet(out: string, iconArt: Canvas, faviconArt: Canvas): void {
@@ -61,4 +61,4 @@ function writeImages(out: string, favicon: Image, sizes: Array<[string, Image, n
 
 // The platform mark at the site root; each game's colour icon under its game path.
 writeIconSet('apps/web/public', platformIconCanvas(), platformFaviconCanvas())
-writeGameIconSet('apps/web/public/games/wardenwatch', deskCrawlerIcon(), deskCrawlerFavicon(), 'docs/assets/plugin-icon.png')
+writeGameIconSet('apps/web/public/games/wardenwatch', wardenwatchIcon(), wardenwatchFavicon(), 'docs/assets/plugin-icon.png')

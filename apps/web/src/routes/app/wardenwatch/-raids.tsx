@@ -8,7 +8,7 @@ import { LocalTime } from '../../../lib/localTime'
 import { WithName } from './-withName'
 import { formatDate, formatNumber, formatTime, useLocale, useT } from '../../../lib/i18n'
 import type { Locale } from '@trmnl-games/platform'
-import { dcLogMessages } from '../../../i18n/dcLog'
+import { wwLogMessages } from '../../../i18n/wwLog'
 
 type Raid = { tick: number; at: number; role: 'raider' | 'target'; rivalName: string; profile: boolean; won: boolean; gold: number; hpLost: number | null; pending: boolean; mishap?: true; rival?: true }
 
@@ -29,7 +29,7 @@ const when = (locale: Locale) => (day: Date) => {
  */
 export function Raids({ enabled }: { enabled: boolean }) {
   const { data } = useQuery(convexQuery(api.raids.recent, {}))
-  const t = useT(dcLogMessages)
+  const t = useT(wwLogMessages)
   const locale = useLocale()
   if (!data) return null
   const { record, raids } = data

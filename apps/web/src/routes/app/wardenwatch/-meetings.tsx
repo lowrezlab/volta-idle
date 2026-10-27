@@ -8,7 +8,7 @@ import { LocalTime } from '../../../lib/localTime'
 import { WithName } from './-withName'
 import { formatDate, formatNumber, formatTime, useLocale, useT } from '../../../lib/i18n'
 import type { Locale } from '@trmnl-games/platform'
-import { dcLogMessages } from '../../../i18n/dcLog'
+import { wwLogMessages } from '../../../i18n/wwLog'
 import { useContent } from '../../../lib/useContent'
 
 type Meeting = { tick: number; at: number; role: 'starter' | 'partner'; rivalName: string; profile: boolean; kindName: string; boon: string; floor: string; pending: boolean }
@@ -26,7 +26,7 @@ const when = (locale: Locale) => (day: Date) => {
  */
 export function Meetings({ enabled }: { enabled: boolean }) {
   const { data } = useQuery(convexQuery(api.meetings.recent, {}))
-  const t = useT(dcLogMessages)
+  const t = useT(wwLogMessages)
   const locale = useLocale()
   const c = useContent()
   if (!data) return null

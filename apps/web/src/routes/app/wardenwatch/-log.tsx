@@ -12,12 +12,12 @@ import { logPresentation, type LogDeltas, type PresentationOptions } from '@trmn
 import { formatDate, useLocale, useT } from '../../../lib/i18n'
 import type { Locale } from '@trmnl-games/platform'
 import { useStoryOptions } from '../../../lib/useStory'
-import { dcLogMessages } from '../../../i18n/dcLog'
+import { wwLogMessages } from '../../../i18n/wwLog'
 import { firstLogPage, LOG_PAGE } from './-queries'
 
 type Entry = { id: string; at: number; tick: number | null; kind: string; summary: string; source: string; deltas: LogDeltas }
 
-type T = (typeof dcLogMessages)['en']
+type T = (typeof wwLogMessages)['en']
 
 /** Each filter is a badge wearing the glyph of the log lines it keeps, so all of them fit one phone-width row. */
 const FILTERS = [
@@ -101,7 +101,7 @@ export function AdventureLog() {
   const loadMore = paged.loadMore
   const [filter, setFilter] = useState<FilterKey>('all')
   const [limit, setLimit] = useState(FIRST_VIEW)
-  const t = useT(dcLogMessages)
+  const t = useT(wwLogMessages)
   const locale = useLocale()
   const story = useStoryOptions()
   const chosen = FILTERS.find((item) => item.key === filter)!

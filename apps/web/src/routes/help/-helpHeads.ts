@@ -10,7 +10,7 @@ export interface HelpHead {
 }
 
 /** Wardenwatch help, by language. */
-export const DESK_CRAWLER_HELP_HEAD: Readonly<Record<Locale, HelpHead>> = {
+export const WARDENWATCH_HELP_HEAD: Readonly<Record<Locale, HelpHead>> = {
   en: { seoTitle: 'Wardenwatch help and setup', description: 'How to set up Wardenwatch on TRMNL and how each part of the game works, with fixes for a screen that looks out of date.' },
   fr: { seoTitle: 'Aide et installation de Wardenwatch', description: 'Comment installer Wardenwatch sur TRMNL et comment fonctionne chaque partie du jeu, avec des solutions quand l’écran semble en retard.' },
   de: { seoTitle: 'Wardenwatch: Hilfe und Einrichtung', description: 'Wie du Wardenwatch auf TRMNL einrichtest und wie jeder Teil des Spiels funktioniert, mit Lösungen, wenn der Bildschirm veraltet aussieht.' },

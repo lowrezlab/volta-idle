@@ -10,7 +10,7 @@ import { Confetti, useBurst } from '../../../lib/confetti'
 import { PixelIcon } from './-pixelIcon'
 import { formatNumber, useLocale, useT } from '../../../lib/i18n'
 import { useContent } from '../../../lib/useContent'
-import { dcCareerMessages } from '../../../i18n/dcCareer'
+import { wwCareerMessages } from '../../../i18n/wwCareer'
 
 /** heroes.mine's `career` (P35): the current rung with its progress, and every rung's state for the Career page. */
 export type CareerView = {
@@ -56,7 +56,7 @@ export function GoalCard({ career, level, gold = 0, holding, notify }: { career:
   const affordable = forSale && price != null && gold >= price
   const pct = goal === null ? 0 : Math.max(0, Math.min(100, Math.round((Math.min(value, goal.target) * 100) / Math.max(1, goal.target))))
   const reward = waiting[0]
-  const t = useT(dcCareerMessages)
+  const t = useT(wwCareerMessages)
   const c = useContent()
   const locale = useLocale()
   const n = (value: number) => formatNumber(locale, value)
@@ -117,7 +117,7 @@ export function GoalCard({ career, level, gold = 0, holding, notify }: { career:
  * the Career page's full list. Nothing locked is drawn as a card, so nothing locked looks like something to press.
  */
 export function ComingUp({ unlocks, roster }: { unlocks?: UnlockView | null; roster?: { unlockLevel: number; open: boolean } | null }) {
-  const t = useT(dcCareerMessages)
+  const t = useT(wwCareerMessages)
   const locked = [
     ...(unlocks ?? []).filter((entry) => !entry.unlocked).map((entry) => ({ feature: entry.feature as keyof typeof t.features, label: entry.label, level: entry.level })),
     ...(roster && !roster.open ? [{ feature: 'roster' as const, label: 'a second hero', level: roster.unlockLevel }] : []),
@@ -142,7 +142,7 @@ export function ComingUp({ unlocks, roster }: { unlocks?: UnlockView | null; ros
  * features this hero's level has opened and the level each of the others arrives at.
  */
 export function CareerLadder({ career, unlocks, floors = [] }: { career: CareerView; unlocks: UnlockView | null; floors?: ReadonlyArray<{ name: string; unlockLevel: number }> }) {
-  const t = useT(dcCareerMessages)
+  const t = useT(wwCareerMessages)
   const c = useContent()
   const locale = useLocale()
   const done = career.rungs.map((rung, index) => ({ rung, index })).filter(({ rung }) => rung.state === 'done')

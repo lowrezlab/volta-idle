@@ -6,14 +6,14 @@ import { api } from '@trmnl-games/backend/api'
 import { games } from '@trmnl-games/platform'
 import { useConvexAuth } from 'convex/react'
 import type { ReactNode } from 'react'
-import { InstallCta, ScreenBezel } from '../lib/deskCrawlerPitch'
+import { InstallCta, ScreenBezel } from '../lib/wardenwatchPitch'
 import { FLOORS } from '../lib/facts.gen'
 import { Glyph, type GlyphName } from '../lib/glyphs'
 import { changeDay, latestChanges } from '../lib/changelogRecent'
 import { SITE_FRAME } from '../lib/platformHeader'
 import { SiteShell } from '../lib/prose'
 import { BUTTON_PRIMARY, BUTTON_SECONDARY, LINK_BUTTON } from '../lib/ui'
-import { DESK_CRAWLER_JSON_LD, SITE_JSON_LD, seo } from '../lib/seo'
+import { WARDENWATCH_JSON_LD, SITE_JSON_LD, seo } from '../lib/seo'
 import { messagesFor, useLocale, useT } from '../lib/i18n'
 import { headMessages } from '../i18n/heads'
 import { homeMessages } from '../i18n/home'
@@ -25,7 +25,7 @@ export const Route = createFileRoute('/')({
     path: '/',
     locale,
     description: messagesFor(headMessages, locale).home,
-    jsonLd: { '@context': 'https://schema.org', '@graph': [SITE_JSON_LD, DESK_CRAWLER_JSON_LD].map(({ '@context': _, ...node }) => node) },
+    jsonLd: { '@context': 'https://schema.org', '@graph': [SITE_JSON_LD, WARDENWATCH_JSON_LD].map(({ '@context': _, ...node }) => node) },
   }),
   // No loader: the page is static, and the signed-in player's games load in the browser after it.
   component: Home,
@@ -145,7 +145,7 @@ function Home() {
           <section aria-labelledby="pick-heading" className="flex flex-col gap-4">
             <h2 id="pick-heading" className="sr-only">{t.pickHeading}</h2>
             <ul className="grid gap-6 lg:grid-cols-2 lg:gap-x-8">
-              <GameCard slug="wardenwatch" alt={pitch.sampleAlt} caption={pitch.homeCaption} facts={t.deskCrawlerFacts(FLOORS.length, monsters)} factGlyph="sword" pitch={t.deskCrawlerPitch} priority>
+              <GameCard slug="wardenwatch" alt={pitch.sampleAlt} caption={pitch.homeCaption} facts={t.wardenwatchFacts(FLOORS.length, monsters)} factGlyph="sword" pitch={t.wardenwatchPitch} priority>
                 <InstallCta place="home card" compact />
               </GameCard>
             </ul>

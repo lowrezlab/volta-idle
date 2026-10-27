@@ -6,7 +6,7 @@ import { screenMarkup } from '@trmnl-games/wardenwatch/templates/screen'
 import { sceneUrlsAt } from '@trmnl-games/wardenwatch/art/sceneTime'
 import { browserUtcOffset, localSceneUrl as sceneForNow, useMinute } from '../../../lib/localClock'
 import { useT } from '../../../lib/i18n'
-import { dcPagesMessages } from '../../../i18n/dcPages'
+import { wwPagesMessages } from '../../../i18n/wwPages'
 import { PREVIEW_DEVICES, PREVIEW_LAYOUTS, previewDocument, previewSize, type PreviewDevice, type PreviewLayout } from '@trmnl-games/wardenwatch/templates/preview'
 
 const STORAGE_KEY = 'wardenwatch.preview'
@@ -48,7 +48,7 @@ export function DevicePreview({ sceneUrl, heroName }: { sceneUrl: string; heroNa
   const [loaded, setLoaded] = useState<string | null>(null)
   const [failed, setFailed] = useState(false)
   const frame = useRef<HTMLDivElement>(null)
-  const t = useT(dcPagesMessages)
+  const t = useT(wwPagesMessages)
   const device = PREVIEW_DEVICES[choice.device]
   const size = previewSize(choice.device, choice.portrait)
   const localSceneUrl = sceneForNow(sceneUrl, now)

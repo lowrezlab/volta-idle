@@ -2,9 +2,9 @@ import { defineMessages } from '../lib/i18n'
 import { headMessages } from './heads'
 
 /** D169: the Wardenwatch companion's frame: tabs and the setup states before a hero exists. */
-export const dcShellMessages = defineMessages({
+export const wwShellMessages = defineMessages({
   en: {
-    title: headMessages.en.dcShell,
+    title: headMessages.en.wwShell,
     nav: { hero: 'Hero', bag: 'Bag', log: 'Log', ranks: 'Ranks', more: 'More' },
     navLabel: 'Wardenwatch',
     slotsUsed: (n: number) => `, ${n} slots used`,
@@ -27,7 +27,7 @@ export const dcShellMessages = defineMessages({
     settings: 'Wardenwatch settings',
   },
   fr: {
-    title: headMessages.fr.dcShell,
+    title: headMessages.fr.wwShell,
     nav: { hero: 'Héros', bag: 'Sac', log: 'Journal', ranks: 'Rangs', more: 'Plus' },
     navLabel: 'Wardenwatch',
     slotsUsed: (n: number) => `, ${n} places utilisées`,
@@ -50,7 +50,7 @@ export const dcShellMessages = defineMessages({
     settings: 'Réglages de Wardenwatch',
   },
   de: {
-    title: headMessages.de.dcShell,
+    title: headMessages.de.wwShell,
     nav: { hero: 'Held', bag: 'Tasche', log: 'Log', ranks: 'Ränge', more: 'Mehr' },
     navLabel: 'Wardenwatch',
     slotsUsed: (n: number) => `, ${n} Plätze belegt`,
@@ -73,7 +73,7 @@ export const dcShellMessages = defineMessages({
     settings: 'Wardenwatch-Einstellungen',
   },
   es: {
-    title: headMessages.es.dcShell,
+    title: headMessages.es.wwShell,
     nav: { hero: 'Héroe', bag: 'Bolsa', log: 'Diario', ranks: 'Tabla', more: 'Más' },
     navLabel: 'Wardenwatch',
     slotsUsed: (n: number) => `, ${n} huecos ocupados`,
@@ -96,7 +96,7 @@ export const dcShellMessages = defineMessages({
     settings: 'Ajustes de Wardenwatch',
   },
   it: {
-    title: headMessages.it.dcShell,
+    title: headMessages.it.wwShell,
     nav: { hero: 'Eroe', bag: 'Borsa', log: 'Diario', ranks: 'Podio', more: 'Altro' },
     navLabel: 'Wardenwatch',
     slotsUsed: (n: number) => `, ${n} posti occupati`,
@@ -119,7 +119,7 @@ export const dcShellMessages = defineMessages({
     settings: 'Impostazioni di Wardenwatch',
   },
   pt: {
-    title: headMessages.pt.dcShell,
+    title: headMessages.pt.wwShell,
     nav: { hero: 'Herói', bag: 'Bolsa', log: 'Diário', ranks: 'Placar', more: 'Mais' },
     navLabel: 'Wardenwatch',
     slotsUsed: (n: number) => `, ${n} espaços ocupados`,
@@ -142,7 +142,7 @@ export const dcShellMessages = defineMessages({
     settings: 'Configurações do Wardenwatch',
   },
   pl: {
-    title: headMessages.pl.dcShell,
+    title: headMessages.pl.wwShell,
     nav: { hero: 'Bohater', bag: 'Torba', log: 'Wpisy', ranks: 'Tabela', more: 'Więcej' },
     navLabel: 'Wardenwatch',
     slotsUsed: (n: number) => `, zajęte miejsca: ${n}`,
@@ -165,7 +165,7 @@ export const dcShellMessages = defineMessages({
     settings: 'Ustawienia Wardenwatch',
   },
   nl: {
-    title: headMessages.nl.dcShell,
+    title: headMessages.nl.wwShell,
     nav: { hero: 'Held', bag: 'Tas', log: 'Logboek', ranks: 'Stand', more: 'Meer' },
     navLabel: 'Wardenwatch',
     slotsUsed: (n: number) => `, ${n} plekken bezet`,

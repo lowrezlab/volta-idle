@@ -6,13 +6,13 @@ import { api } from '@trmnl-games/backend/api'
 import { seo } from '../../../lib/seo'
 import { messagesFor, useT } from '../../../lib/i18n'
 import { headMessages } from '../../../i18n/heads'
-import { dcPagesMessages } from '../../../i18n/dcPages'
+import { wwPagesMessages } from '../../../i18n/wwPages'
 import { LoadingState, NoticeBar, useNotice } from '../../../lib/ui'
 import { Roster, type RosterView } from './-roster'
 
 /** The hero roster under More (P37): the heroes on the account, switching between them, and recruiting a new class. */
 export const Route = createFileRoute('/app/wardenwatch/roster')({
-  head: ({ match: { context: { locale } } }) => seo({ title: messagesFor(headMessages, locale).dcRoster, index: false, locale }),
+  head: ({ match: { context: { locale } } }) => seo({ title: messagesFor(headMessages, locale).wwRoster, index: false, locale }),
   component: RosterPage,
 })
 
@@ -30,7 +30,7 @@ function RosterPage() {
   const now = useMinute()
   const { data } = useQuery(convexQuery(api.roster.mine, { now }))
   const { notice, notify, dismiss } = useNotice()
-  const t = useT(dcPagesMessages)
+  const t = useT(wwPagesMessages)
   if (data === undefined) return <LoadingState label={t.loadingHeroes} />
   const roster = data as RosterView | null
   if (roster === null || !roster.available) return <p className="text-muted">{t.moreHeroesSoon}</p>

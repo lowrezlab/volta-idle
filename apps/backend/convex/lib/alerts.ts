@@ -38,7 +38,7 @@ export const PREF_FOR: Readonly<Record<AlertKind, AlertSwitch>> = {
 }
 export const kindOn = (prefs: AlertPreferences | undefined, kind: AlertKind) => prefs?.[PREF_FOR[kind]] === true
 /** Wardenwatch's kinds. */
-export const DESK_CRAWLER_KINDS: readonly AlertKind[] = ['asleep', 'merchant']
+export const WARDENWATCH_KINDS: readonly AlertKind[] = ['asleep', 'merchant']
 
 const STEP_MS = 15 * 60_000
 

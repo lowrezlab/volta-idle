@@ -7,20 +7,20 @@ export const SITE_NAME = PLATFORM_NAME
 /** Bump when the social cards are re-rendered: Discord and other unfurlers cache images by URL. */
 export const OG_VERSION = 3
 /** Wardenwatch's own social card, for its public pages. */
-export const DESK_CRAWLER_OG = { path: `/games/wardenwatch/og.png?v=${OG_VERSION}`, alt: 'Wardenwatch on a TRMNL X: Pip, level 7, fighting a Cable Serpent in the Server Room, with the latest adventures, to-do list and weekly rankings' }
+export const WARDENWATCH_OG = { path: `/games/wardenwatch/og.png?v=${OG_VERSION}`, alt: 'Wardenwatch on a TRMNL X: Pip, level 7, fighting a Cable Serpent in the Server Room, with the latest adventures, to-do list and weekly rankings' }
 const SITE_DESCRIPTION = 'Games that play themselves on your TRMNL e-ink display: Wardenwatch, an office RPG, and Idle Angler, a fishing game.'
 
 /** schema.org description of the site, for the home page's structured data. */
 export const SITE_JSON_LD = { '@context': 'https://schema.org', '@type': 'WebSite', name: SITE_NAME, url: `${SITE_ORIGIN}/`, description: SITE_DESCRIPTION }
 
 /** schema.org description of Wardenwatch, for its game page's structured data. */
-export const DESK_CRAWLER_JSON_LD = {
+export const WARDENWATCH_JSON_LD = {
   '@context': 'https://schema.org',
   '@type': 'VideoGame',
   name: 'Wardenwatch',
   url: `${SITE_ORIGIN}/games/wardenwatch`,
   description: 'An office RPG that plays itself on your TRMNL e-ink display. Every fifteen minutes your hero fights, finds loot or gets knocked out, and the screen on your desk shows what happened.',
-  image: `${SITE_ORIGIN}${DESK_CRAWLER_OG.path}`,
+  image: `${SITE_ORIGIN}${WARDENWATCH_OG.path}`,
   genre: ['Role-playing', 'Idle'],
   gamePlatform: 'TRMNL e-ink display',
   applicationCategory: 'Game',

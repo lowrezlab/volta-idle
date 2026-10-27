@@ -1,13 +1,13 @@
 import { Link, createFileRoute } from '@tanstack/react-router'
-import { DeviceSample, Faq, FeatureGrid, FloorGrid, HowItPlays, InstallCta, OfficeCensus } from '../../lib/deskCrawlerPitch'
-import { faqJsonLd } from '../../lib/deskCrawlerFaq'
+import { DeviceSample, Faq, FeatureGrid, FloorGrid, HowItPlays, InstallCta, OfficeCensus } from '../../lib/wardenwatchPitch'
+import { faqJsonLd } from '../../lib/wardenwatchFaq'
 import { AfterListing } from '../../lib/gameAccess'
 import { Glyph } from '../../lib/glyphs'
 import { messagesFor, useT } from '../../lib/i18n'
 import { headMessages } from '../../i18n/heads'
 import { SITE_FRAME } from '../../lib/platformHeader'
 import { SiteShell } from '../../lib/prose'
-import { DESK_CRAWLER_JSON_LD, DESK_CRAWLER_OG, seo } from '../../lib/seo'
+import { WARDENWATCH_JSON_LD, WARDENWATCH_OG, seo } from '../../lib/seo'
 import { BUTTON_SECONDARY, LINK_BUTTON } from '../../lib/ui'
 import { pitchMessages } from '../../i18n/pitch'
 import { commonMessages } from '../../i18n/common'
@@ -22,9 +22,9 @@ export const Route = createFileRoute('/games/wardenwatch')({
       title: 'Wardenwatch',
       path: '/games/wardenwatch',
       locale,
-      description: messagesFor(headMessages, locale).dcGame,
-      image: DESK_CRAWLER_OG,
-      jsonLd: { '@context': 'https://schema.org', '@graph': [DESK_CRAWLER_JSON_LD, faqJsonLd(locale)].map(({ '@context': _, ...node }) => node) },
+      description: messagesFor(headMessages, locale).wwGame,
+      image: WARDENWATCH_OG,
+      jsonLd: { '@context': 'https://schema.org', '@graph': [WARDENWATCH_JSON_LD, faqJsonLd(locale)].map(({ '@context': _, ...node }) => node) },
     }),
   component: GamePage,
 })
@@ -65,7 +65,7 @@ function GamePage() {
           <div className="grid gap-12 lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] lg:gap-16">
             <Faq headingId="faq-heading" />
             <section aria-labelledby="launch-heading" className="window flex flex-col gap-4 self-start p-5 sm:p-6">
-              <h2 id="launch-heading" className="font-display text-2xl font-bold text-gold-ink">{t.getDeskCrawler}</h2>
+              <h2 id="launch-heading" className="font-display text-2xl font-bold text-gold-ink">{t.getWardenwatch}</h2>
               <InstallCta place="game page end" />
             </section>
           </div>

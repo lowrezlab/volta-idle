@@ -5,21 +5,21 @@ import { api } from '@trmnl-games/backend/api'
 import { seo } from '../../../lib/seo'
 import { messagesFor, useT } from '../../../lib/i18n'
 import { headMessages } from '../../../i18n/heads'
-import { dcPagesMessages } from '../../../i18n/dcPages'
+import { wwPagesMessages } from '../../../i18n/wwPages'
 import { preload } from '../../../lib/preload'
 import { LoadingState } from '../../../lib/ui'
 import { CareerLadder, type CareerView, type UnlockView } from './-career'
 
 /** The career ladder on its own page under More (P35): every rung in order, and which features the hero's level has opened. */
 export const Route = createFileRoute('/app/wardenwatch/career')({
-  head: ({ match: { context: { locale } } }) => seo({ title: messagesFor(headMessages, locale).dcCareer, index: false, locale }),
+  head: ({ match: { context: { locale } } }) => seo({ title: messagesFor(headMessages, locale).wwCareer, index: false, locale }),
   loader: ({ context }) => preload(context, convexQuery(api.heroes.mine, {})),
   component: CareerPage,
 })
 
 function CareerPage() {
   const { data: hero } = useQuery(convexQuery(api.heroes.mine, {}))
-  const t = useT(dcPagesMessages)
+  const t = useT(wwPagesMessages)
   if (!hero) return <LoadingState label={t.loadingHero} />
   const career = hero.career as CareerView | null
   if (!career) return <p className="text-muted">{t.ladderLater}</p>

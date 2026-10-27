@@ -21,13 +21,13 @@ import { WithName } from './-withName'
 import { formatNumber, formatTime, messagesFor, useLocale, useT } from '../../../lib/i18n'
 import { headMessages } from '../../../i18n/heads'
 import { useContent } from '../../../lib/useContent'
-import { dcBagMessages, materialsList } from '../../../i18n/dcBag'
+import { wwBagMessages, materialsList } from '../../../i18n/wwBag'
 
-// `typeof import()` rather than `typeof dcBagMessages`: a value reference here would keep the catalog in the route's
+// `typeof import()` rather than `typeof wwBagMessages`: a value reference here would keep the catalog in the route's
 // shared part, which the main bundle carries, so every page would load the Bag's copy.
-type T = (typeof import('../../../i18n/dcBag'))['dcBagMessages']['en']
+type T = (typeof import('../../../i18n/wwBag'))['wwBagMessages']['en']
 
-export const Route = createFileRoute('/app/wardenwatch/inventory')({ head: ({ match: { context: { locale } } }) => seo({ title: messagesFor(headMessages, locale).dcBag, index: false, locale }), loader: ({ context }) => preload(context, convexQuery(api.inventory.mine, {}), convexQuery(api.heroes.mine, {})), component: Inventory })
+export const Route = createFileRoute('/app/wardenwatch/inventory')({ head: ({ match: { context: { locale } } }) => seo({ title: messagesFor(headMessages, locale).wwBag, index: false, locale }), loader: ({ context }) => preload(context, convexQuery(api.inventory.mine, {}), convexQuery(api.heroes.mine, {})), component: Inventory })
 
 type Gear = {
   id: Id<'items'>
@@ -113,7 +113,7 @@ function Inventory() {
   const buyBag = useIntent(api.inventory.buyBag, { onFeedback: notify })
   const buyPouch = useIntent(api.inventory.buyPouch, { onFeedback: notify })
   const buyOffer = useIntent(api.inventory.buyOffer, { onFeedback: notify })
-  const t = useT(dcBagMessages)
+  const t = useT(wwBagMessages)
   const c = useContent()
   const statLabel = (item: Gear) => t.stat[item.kind]
   const mats = (counts: MaterialCount) => materialsText(counts, materials, t)
@@ -397,7 +397,7 @@ function ItemSheet({ item, hero, current, manageable, reason, busy, claimBlocked
   // Unequipping, or equipping something weaker, makes the hero fight worse, so it asks first (in place, inside this sheet).
   const [confirming, setConfirming] = useState<'equip' | 'unequip' | null>(null)
   const weaker = !item.equipped && current !== null && delta < 0
-  const t = useT(dcBagMessages)
+  const t = useT(wwBagMessages)
   const c = useContent()
   const stat = t.stat[item.kind]
   return <>
@@ -466,7 +466,7 @@ type Pouch = { name: string; cap: number; findable: boolean; next: { id: string;
  * line, since its Buy button or price sits right below, and the merchant's discount is never advertised (D164).
  */
 function MilestoneLine({ milestone, findable }: { milestone: string | null; findable: boolean }) {
-  const t = useT(dcBagMessages)
+  const t = useT(wwBagMessages)
   if (milestone === null) return null
   const early = [findable ? t.heroFinds : null, t.merchantHas].filter((route): route is string => route !== null)
   return <p className="mt-1 text-sm text-muted">{t.yoursAt(milestone, early)}</p>
@@ -479,7 +479,7 @@ function PotionPouch({ pouch, potions, gold, disabled, intent }: { pouch: Pouch;
   const next = pouch.next
   const affordable = next?.price != null && gold >= next.price
   const [asking, setAsking] = useState(false)
-  const t = useT(dcBagMessages)
+  const t = useT(wwBagMessages)
   const c = useContent()
   const holds = t.holdsPotions(pouch.cap, potions)
   const nextLine = next ? t.nextPouch(next.name, next.cap) : []
@@ -501,7 +501,7 @@ function PotionPouch({ pouch, potions, gold, disabled, intent }: { pouch: Pouch;
 /** D78: the visiting merchant's offers, each sold once, open for a few adventures. */
 function Merchant({ visit, gold, potions, cap, discountPct, disabled, intent }: { visit: Visit; gold: number; potions: number; cap: number; discountPct: number; disabled: boolean; intent: PurchaseIntent<{ offerId: Offer['id'] }> }) {
   const [asking, setAsking] = useState<Offer | null>(null)
-  const t = useT(dcBagMessages)
+  const t = useT(wwBagMessages)
   const c = useContent()
   const have = t.haveGold(gold)
   return <Card title={t.merchant} icon="merchant">
@@ -530,7 +530,7 @@ function BagLadder({ ladder, capacity, gold, disabled, intent }: { ladder: Ladde
   const next = ladder.next
   const affordable = next?.price != null && gold >= next.price
   const [asking, setAsking] = useState(false)
-  const t = useT(dcBagMessages)
+  const t = useT(wwBagMessages)
   const holds = t.yourBagHolds(ladder.name, capacity)
   const nextLine = next ? t.nextBag(next.name, next.capacity) : []
   return <Card title={t.biggerBags} icon="bag">
@@ -561,7 +561,7 @@ function Workbench({ rules, materials, equipped, hero, disabled, intents }: { ru
   const affixShort = Object.fromEntries(Object.entries(affixPrice.materials).filter(([id, n]) => (materials.find((m) => m.id === id)?.count ?? 0) < n).map(([id, n]) => [id, n - (materials.find((m) => m.id === id)?.count ?? 0)]))
   const affixAffordable = Object.keys(affixShort).length === 0 && hero.gold >= affixPrice.gold
   const step = asking?.nextStep ?? null
-  const t = useT(dcBagMessages)
+  const t = useT(wwBagMessages)
   const c = useContent()
   const mats = (counts: MaterialCount) => materialsText(counts, materials, t)
   const statTitle = (item: Gear) => t.statTitle[item.kind]
@@ -641,19 +641,19 @@ function shortText(step: Step, hero: { level: number; gold: number }, materials:
 
 /** A piece's own figure stays neutral; only a comparison takes a colour (green better, red worse). */
 function StatOf({ item }: { item: Gear }) {
-  const t = useT(dcBagMessages)
+  const t = useT(wwBagMessages)
   return <span>{t.statOf(statOf(item), t.stat[item.kind])}</span>
 }
 
 /** The difference against the equipped piece, signed and coloured by direction. */
 function Delta({ delta }: { delta: number }) {
-  const t = useT(dcBagMessages)
+  const t = useT(wwBagMessages)
   return <span className={`font-semibold ${delta > 0 ? 'text-xp-ink' : delta < 0 ? 'text-hp-ink' : 'text-muted'}`}>{delta > 0 ? t.deltaBetter(delta) : delta < 0 ? t.deltaWorse(delta) : t.deltaSame}</span>
 }
 
 function ResumeAt() {
   const now = useNow(60_000)
-  const t = useT(dcBagMessages)
+  const t = useT(wwBagMessages)
   const locale = useLocale()
   const at = now === null ? null : formatTime(locale, nextSlotAfter(now))
   return <p>{t.resumingAt(at)}</p>

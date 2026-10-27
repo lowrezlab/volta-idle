@@ -12,12 +12,12 @@ import { LocalTime } from '../../../lib/localTime'
 import { formatNumber, messagesFor, useLocale, useT } from '../../../lib/i18n'
 import { headMessages } from '../../../i18n/heads'
 import { INTL_TAG } from '@trmnl-games/platform'
-import { dcLogMessages } from '../../../i18n/dcLog'
+import { wwLogMessages } from '../../../i18n/wwLog'
 import { Records } from './-records'
 import { FollowingCard } from './-following'
 import { useShownName } from './-withName'
 
-export const Route = createFileRoute('/app/wardenwatch/leaderboard')({ head: ({ match: { context: { locale } } }) => seo({ title: messagesFor(headMessages, locale).dcRankings, index: false, locale }), loader: ({ context }) => preload(context, convexQuery(api.leaderboard.view, { board: 'recent_7d' }), convexQuery(api.heroes.mine, {}), convexQuery(api.follows.list, {})), component: Leaderboard })
+export const Route = createFileRoute('/app/wardenwatch/leaderboard')({ head: ({ match: { context: { locale } } }) => seo({ title: messagesFor(headMessages, locale).wwRankings, index: false, locale }), loader: ({ context }) => preload(context, convexQuery(api.leaderboard.view, { board: 'recent_7d' }), convexQuery(api.heroes.mine, {}), convexQuery(api.follows.list, {})), component: Leaderboard })
 
 type Board = 'recent_7d' | 'recent_24h' | 'overall'
 // Labels short enough to sit on one line in a third of a phone screen. Shortest period first, as a reader expects.
@@ -34,7 +34,7 @@ type Row = { rank: number; name: string; hero_name: string; level: number; score
 const AROUND_FROM = 5
 
 function RankRow({ row, own, board }: { row: Row; own: boolean; board: Board }) {
-  const t = useT(dcLogMessages)
+  const t = useT(wwLogMessages)
   const locale = useLocale()
   const shown = useShownName()
   return (
@@ -59,7 +59,7 @@ function RankRow({ row, own, board }: { row: Row; own: boolean; board: Board }) 
 function Leaderboard() {
   const [board, setBoard] = useState<Board>('recent_7d')
   const [cohortKey, setCohortKey] = useState<string | undefined>(undefined)
-  const t = useT(dcLogMessages)
+  const t = useT(wwLogMessages)
   const locale = useLocale()
   const n = (value: number) => formatNumber(locale, value)
   const updatedAt = (date: Date) => date.toLocaleString(INTL_TAG[locale], { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' })

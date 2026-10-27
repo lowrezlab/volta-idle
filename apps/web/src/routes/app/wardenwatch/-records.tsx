@@ -4,11 +4,11 @@ import { Link } from '@tanstack/react-router'
 import { api } from '@trmnl-games/backend/api'
 import { Glyph, SectionTitle, type GlyphName } from '../../../lib/glyphs'
 import { formatNumber, useLocale, useT } from '../../../lib/i18n'
-import { dcLogMessages } from '../../../i18n/dcLog'
+import { wwLogMessages } from '../../../i18n/wwLog'
 
 type Counters = { combatWins: number; retreats: number; deaths: number; rescues: number; goldEarned: number; itemsFound: number; ticksExplored: number; eliteWins: number; potionsUsed: number; potionsCombined: number; trapsAvoided: number; itemsSold: number }
 
-const hours = (ticks: number, t: (typeof dcLogMessages)['en']) => {
+const hours = (ticks: number, t: (typeof wwLogMessages)['en']) => {
   const total = Math.round((ticks * 15) / 60)
   return total < 48 ? t.hours(total) : t.days(Math.round(total / 24))
 }
@@ -16,7 +16,7 @@ const hours = (ticks: number, t: (typeof dcLogMessages)['en']) => {
 /** This week's rank in the hero's level group (D202), from the same published board as Rankings. */
 function Rank({ stopped }: { stopped: boolean }) {
   const { data } = useQuery(convexQuery(api.leaderboard.view, {}))
-  const t = useT(dcLogMessages)
+  const t = useT(wwLogMessages)
   if (!data) return <p className="text-muted">{t.readingRankings}</p>
   const board = data as { published: boolean; cohortKey?: string; totalPlayers?: number; own?: { rank: number; rankDelta: number | null } | null }
   const group = board.cohortKey ? t.group(board.cohortKey) : null
@@ -38,7 +38,7 @@ function Rank({ stopped }: { stopped: boolean }) {
 /** `withRank` draws this week's rank and the link to the Rankings page; the Rankings page itself leaves both out. */
 export function Records({ counters, lifetimeXp, stopped = false, withRank = true }: { counters: Counters; lifetimeXp: number; stopped?: boolean; withRank?: boolean }) {
   // Each record wears its stat's glyph in that stat's ink (the One Meaning Rule); the label still names it.
-  const t = useT(dcLogMessages)
+  const t = useT(wwLogMessages)
   const locale = useLocale()
   const n = (value: number) => formatNumber(locale, value)
   const rows: Array<[string, string, GlyphName, string]> = [

@@ -2,6 +2,8 @@ import { DAY_START_HOUR, NIGHT_START_HOUR } from '../lib/activityRecap'
 
 /** Bump whenever scene art changes: each image URL is immutable. */
 export const SCENE_VERSION = 5
+/** The layered hero's scenes (GDD §3.6): v5 paths with a look code, served alongside v5 until the reskin retires it. */
+export const LAYERED_SCENE_VERSION = 6
 export type SceneTime = 'day' | 'night'
 
 /**
@@ -17,7 +19,7 @@ export function sceneTimeAt(now: number, utcOffset: number | null): SceneTime {
 
 /** Select the sky without changing the encounter, scale or asset origin. Older URLs stay intact. */
 export function sceneUrlAt(url: string, time: SceneTime): string {
-  return url.replace(new RegExp(`(/art/scene/v${SCENE_VERSION}/[a-z_]+/)(day|night)(/)`), `$1${time}$3`)
+  return url.replace(new RegExp(`(/art/scene/v(?:${SCENE_VERSION}|${LAYERED_SCENE_VERSION})/[a-z_]+/)(day|night)(/)`), `$1${time}$3`)
 }
 
 interface SceneUrls {

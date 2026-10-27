@@ -1,8 +1,10 @@
 import type { NlDictionary } from './core'
+import { voltaNl } from './volta/nl'
 
 /** D193: Wardenwatch's content in Dutch, keyed by the English text (see ./index). */
 export const nl: NlDictionary = {
   nouns: {
+    ...voltaNl.nouns,
     "Paper Imp": ["Papierduiveltje", "n"],
     "Rogue Roomba": ["Losgeslagen Roomba", "m"],
     "Stapler Mimic": ["Nietmachinemimic", "m"],
@@ -84,6 +86,7 @@ export const nl: NlDictionary = {
     "Components": ["Componenten", "pl"],
   },
   adjectives: {
+    ...voltaNl.adjectives,
     "Common": ["gewoon", "gewone"],
     "Uncommon": ["ongewoon", "ongewone"],
     "Rare": ["zeldzaam", "zeldzame"],
@@ -95,6 +98,7 @@ export const nl: NlDictionary = {
     "Thrifty": ["zuinig", "zuinige"],
   },
   text: {
+    ...voltaNl.text,
     "the to-do list": "de takenlijst",
     "stances": "de houdingen",
     "office decisions": "de kantoorbeslissingen",

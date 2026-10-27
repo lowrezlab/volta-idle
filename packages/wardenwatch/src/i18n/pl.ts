@@ -1,8 +1,10 @@
 import type { PlDictionary } from './core'
+import { voltaPl } from './volta/pl'
 
 /** D193: Wardenwatch's content in Polish, keyed by the English text (see ./index). Names stay in the nominative; templates are written around them. */
 export const pl: PlDictionary = {
   nouns: {
+    ...voltaPl.nouns,
     "Paper Imp": ["Papierowy chochlik", "m"],
     "Rogue Roomba": ["Zbuntowana Roomba", "f"],
     "Stapler Mimic": ["Zszywaczowy mimik", "m"],
@@ -84,6 +86,7 @@ export const pl: PlDictionary = {
     "Components": ["Komponenty", "pl"],
   },
   adjectives: {
+    ...voltaPl.adjectives,
     "Common": ["zwykły", "zwykła", "zwykłe", "zwykłe"],
     "Uncommon": ["niezwykły", "niezwykła", "niezwykłe", "niezwykłe"],
     "Rare": ["rzadki", "rzadka", "rzadkie", "rzadkie"],
@@ -95,6 +98,7 @@ export const pl: PlDictionary = {
     "Thrifty": ["oszczędny", "oszczędna", "oszczędne", "oszczędne"],
   },
   text: {
+    ...voltaPl.text,
     "the to-do list": "lista zadań",
     "stances": "postawy",
     "office decisions": "decyzje biurowe",

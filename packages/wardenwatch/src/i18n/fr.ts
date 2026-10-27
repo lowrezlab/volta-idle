@@ -1,8 +1,10 @@
 import type { FrDictionary } from './core'
+import { voltaFr } from './volta/fr'
 
 /** D169: Wardenwatch's content in French, keyed by the English text (see ./index). */
 export const fr: FrDictionary = {
   nouns: {
+    ...voltaFr.nouns,
     "Paper Imp": ["Diablotin de papier", "m"],
     "Rogue Roomba": ["Roomba rebelle", "m"],
     "Stapler Mimic": ["Mimique agrafeuse", "f"],
@@ -84,6 +86,7 @@ export const fr: FrDictionary = {
     "Components": ["Composants", "pl"],
   },
   adjectives: {
+    ...voltaFr.adjectives,
     "Common": ["commun", "commune"],
     "Uncommon": ["peu commun", "peu commune"],
     "Rare": ["rare", "rare"],
@@ -95,6 +98,7 @@ export const fr: FrDictionary = {
     "Thrifty": ["économe", "économe"],
   },
   text: {
+    ...voltaFr.text,
     // D169: the unlock labels (career.ts FEATURE_LABEL), shown in "Unlocked:" lines and the Career page.
     "the to-do list": "la liste de tâches",
     "stances": "les postures",

@@ -417,7 +417,7 @@ export const voltaPl: PlDictionary = {
     "Found a {item} with {rival} scratched into it.": "Znaleziono: {item}, z wydrapanym „{rival}”.",
     "Found a {item} in the snow. The mark says {rival}.": "Znaleziono w śniegu: {item}. Znak mówi: {rival}.",
     "Pulled a {item} out of a stray bundle. Marked {rival}.": "Wyciągnięto z zabłąkanego tobołka: {item}. Oznaczone: {rival}.",
-    "{rival} picked up your stray {item} in the {destination}.": "{rival} podniosł{a:rival} twoją zgubę ({item}): {destination}.",
+    "{rival} picked up your stray {item} in the {destination}.": "{rival} podniósł twoją zgubę ({item}): {destination}.",
     // ---- standoff
     "An elite {monster} has dug in under the fen ice.": "Elitarn{y:monster} {monster} okopał{a:monster} się pod lodem bagien.",
     "An elite {monster} has dug in on the Grokdeep road.": "Elitarn{y:monster} {monster} okopał{a:monster} się na drodze do Grokdeep.",

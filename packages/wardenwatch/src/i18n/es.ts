@@ -1,8 +1,10 @@
 import type { EsDictionary } from './core'
+import { voltaEs } from './volta/es'
 
 /** D193: Wardenwatch's content in Spanish, keyed by the English text (see ./index). */
 export const es: EsDictionary = {
   nouns: {
+    ...voltaEs.nouns,
     "Paper Imp": ["Diablillo de papel", "m"],
     "Rogue Roomba": ["Roomba rebelde", "m"],
     "Stapler Mimic": ["Mímico grapador", "m"],
@@ -84,6 +86,7 @@ export const es: EsDictionary = {
     "Components": ["Componentes", "pl"],
   },
   adjectives: {
+    ...voltaEs.adjectives,
     "Common": ["común", "común"],
     "Uncommon": ["poco común", "poco común"],
     "Rare": ["raro", "rara"],
@@ -95,6 +98,7 @@ export const es: EsDictionary = {
     "Thrifty": ["ahorrador", "ahorradora"],
   },
   text: {
+    ...voltaEs.text,
     "the to-do list": "la lista de tareas",
     "stances": "las posturas",
     "office decisions": "las decisiones de la oficina",

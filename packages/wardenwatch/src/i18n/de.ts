@@ -1,8 +1,10 @@
 import type { DeDictionary } from './core'
+import { voltaDe } from './volta/de'
 
 /** D169: Wardenwatch's content in German, keyed by the English text (see ./index). */
 export const de: DeDictionary = {
   nouns: {
+    ...voltaDe.nouns,
     "Paper Imp": ["Papierkobold", "m"],
     "Rogue Roomba": ["Schurken-Roomba", "m"],
     "Stapler Mimic": ["Tacker-Mimik", "f"],
@@ -84,6 +86,7 @@ export const de: DeDictionary = {
     "Components": ["Bauteile", "pl"],
   },
   adjectives: {
+    ...voltaDe.adjectives,
     "Common": "gewöhnlich",
     "Uncommon": "ungewöhnlich",
     "Rare": "selten",
@@ -95,6 +98,7 @@ export const de: DeDictionary = {
     "Thrifty": "sparsam",
   },
   text: {
+    ...voltaDe.text,
     // D169: the unlock labels (career.ts FEATURE_LABEL), shown in "Unlocked:" lines and the Career page.
     "the to-do list": "die To-do-Liste",
     "stances": "Haltungen",

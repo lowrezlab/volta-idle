@@ -1,8 +1,10 @@
 import type { ItDictionary } from './core'
+import { voltaIt } from './volta/it'
 
 /** D193: Wardenwatch's content in Italian, keyed by the English text (see ./index). */
 export const it: ItDictionary = {
   nouns: {
+    ...voltaIt.nouns,
     "Paper Imp": ["Diavoletto di carta", "m"],
     "Rogue Roomba": ["Roomba ribelle", "m"],
     "Stapler Mimic": ["Spillatrice mimetica", "f"],
@@ -84,6 +86,7 @@ export const it: ItDictionary = {
     "Components": ["Componenti", "pl"],
   },
   adjectives: {
+    ...voltaIt.adjectives,
     "Common": ["comune", "comune"],
     "Uncommon": ["non comune", "non comune"],
     "Rare": ["raro", "rara"],
@@ -95,6 +98,7 @@ export const it: ItDictionary = {
     "Thrifty": ["parsimonioso", "parsimoniosa"],
   },
   text: {
+    ...voltaIt.text,
     "the to-do list": "la lista delle cose da fare",
     "stances": "le tattiche",
     "office decisions": "le decisioni d’ufficio",

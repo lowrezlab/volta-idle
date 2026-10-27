@@ -1,8 +1,10 @@
 import type { PtDictionary } from './core'
+import { voltaPt } from './volta/pt'
 
 /** D193: Wardenwatch's content in Brazilian Portuguese, keyed by the English text (see ./index). */
 export const pt: PtDictionary = {
   nouns: {
+    ...voltaPt.nouns,
     "Paper Imp": ["Diabrete de papel", "m"],
     "Rogue Roomba": ["Roomba rebelde", "m"],
     "Stapler Mimic": ["Grampeador mímico", "m"],
@@ -84,6 +86,7 @@ export const pt: PtDictionary = {
     "Components": ["Componentes", "pl"],
   },
   adjectives: {
+    ...voltaPt.adjectives,
     "Common": ["comum", "comum"],
     "Uncommon": ["incomum", "incomum"],
     "Rare": ["raro", "rara"],
@@ -95,6 +98,7 @@ export const pt: PtDictionary = {
     "Thrifty": ["econômico", "econômica"],
   },
   text: {
+    ...voltaPt.text,
     "the to-do list": "a lista de tarefas",
     "stances": "as posturas",
     "office decisions": "as decisões do escritório",

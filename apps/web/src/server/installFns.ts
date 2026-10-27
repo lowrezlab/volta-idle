@@ -4,6 +4,7 @@ import { createServerFn } from '@tanstack/react-start'
 import { deleteCookie, getCookie, setCookie } from '@tanstack/react-start/server'
 import { ConvexError } from 'convex/values'
 import { ConvexHttpClient } from 'convex/browser'
+import { isLookCode } from '@trmnl-games/wardenwatch/art/look'
 import { api } from '@trmnl-games/backend/api'
 import {
   installCookie,
@@ -55,7 +56,7 @@ export type FinishInstallResult = { ok: true; callbackUrl: string; reconnectionR
 
 /** Exchange and link through the Clerk-authenticated Convex action, then hand back the validated TRMNL callback. */
 export const finishInstall = createServerFn({ method: 'POST' })
-  .inputValidator((input: { gameSlug: GameSlug; publicAlias?: string; heroName?: string; heroGender?: 'male' | 'female'; analyticsConsent?: boolean }) => input)
+  .inputValidator((input: { gameSlug: GameSlug; publicAlias?: string; heroName?: string; heroLook?: string; analyticsConsent?: boolean }) => input)
   .handler(async ({ data }): Promise<FinishInstallResult> => {
     const pending = isGameSlug(data.gameSlug) ? await openPendingInstall(getCookie(installCookie(data.gameSlug)), flowSecret(), Date.now(), data.gameSlug) : null
     if (!pending) return { ok: false, code: 'INSTALL_EXPIRED', message: 'This installation expired. Start again from TRMNL.' }
@@ -76,7 +77,8 @@ export const finishInstall = createServerFn({ method: 'POST' })
         timezone: 'UTC',
         ...(data.publicAlias ? { publicAlias: data.publicAlias } : {}),
         ...(data.heroName ? { heroName: data.heroName } : {}),
-        ...(data.heroGender === 'female' ? { heroGender: 'female' as const } : {}),
+        // GDD §3.6: the creator's code; anything else is left out and the hero draws the default look.
+        ...(data.heroLook !== undefined && isLookCode(data.heroLook) ? { heroLook: data.heroLook } : {}),
       })
       reconnectionRequired = result.reconnectionRequired
     } catch (error) {

@@ -1,7 +1,7 @@
 import { defineMessages } from '../lib/i18n'
 import { headMessages } from './heads'
 
-type LinkKey = 'roster' | 'career' | 'achievements' | 'fieldNotes' | 'keepsakes' | 'trmnl' | 'help' | 'whatsNew'
+type LinkKey = 'roster' | 'creator' | 'career' | 'achievements' | 'fieldNotes' | 'keepsakes' | 'trmnl' | 'help' | 'whatsNew'
 type Link = { readonly label: string; readonly blurb: string }
 
 /** D169: the More tab: its links, settings, alerts (shared with the other games' settings) and name repair. */
@@ -10,6 +10,7 @@ export const wwMoreMessages = defineMessages({
     title: headMessages.en.wwMore,
     links: {
       roster: { label: 'Heroes', blurb: 'Your heroes, switching between them, and recruiting a new class.' },
+      creator: { label: headMessages.en.wwCreator, blurb: 'Change how your hero looks, free, any time.' },
       career: { label: headMessages.en.wwCareer, blurb: 'The ladder of goals, and what opens at each level.' },
       achievements: { label: 'Achievements', blurb: 'Every one you have earned, and how rare it is.' },
       fieldNotes: { label: 'Field notes', blurb: 'What your hero knows about every floor and monster.' },
@@ -137,6 +138,7 @@ export const wwMoreMessages = defineMessages({
     title: headMessages.fr.wwMore,
     links: {
       roster: { label: 'Héros', blurb: 'Vos héros, passer de l’un à l’autre, et recruter une nouvelle classe.' },
+      creator: { label: headMessages.fr.wwCreator, blurb: 'Changez l’apparence de votre héros, gratuitement, à tout moment.' },
       career: { label: headMessages.fr.wwCareer, blurb: 'L’échelle des objectifs, et ce qui se débloque à chaque niveau.' },
       achievements: { label: 'Succès', blurb: 'Tous ceux que vous avez obtenus, et leur rareté.' },
       fieldNotes: { label: 'Notes de terrain', blurb: 'Ce que votre héros sait de chaque étage et de chaque monstre.' },
@@ -263,6 +265,7 @@ export const wwMoreMessages = defineMessages({
     title: headMessages.de.wwMore,
     links: {
       roster: { label: 'Helden', blurb: 'Deine Helden, zwischen ihnen wechseln und eine neue Klasse anwerben.' },
+      creator: { label: headMessages.de.wwCreator, blurb: 'Ändere das Aussehen deines Helden, kostenlos, jederzeit.' },
       career: { label: headMessages.de.wwCareer, blurb: 'Die Leiter der Ziele und was auf jeder Stufe freigeschaltet wird.' },
       achievements: { label: 'Erfolge', blurb: 'Alle, die du verdient hast, und wie selten sie sind.' },
       fieldNotes: { label: 'Feldnotizen', blurb: 'Was dein Held über jedes Stockwerk und jedes Monster weiß.' },
@@ -389,6 +392,7 @@ export const wwMoreMessages = defineMessages({
     title: headMessages.es.wwMore,
     links: {
       roster: { label: 'Héroes', blurb: 'Tus héroes, cambiar entre ellos y reclutar una clase nueva.' },
+      creator: { label: headMessages.es.wwCreator, blurb: 'Cambia el aspecto de tu héroe, gratis, cuando quieras.' },
       career: { label: headMessages.es.wwCareer, blurb: 'La escalera de objetivos y lo que se abre en cada nivel.' },
       achievements: { label: 'Logros', blurb: 'Todos los que has conseguido y lo raro que es cada uno.' },
       fieldNotes: { label: 'Notas de campo', blurb: 'Lo que tu héroe sabe de cada planta y cada monstruo.' },
@@ -515,6 +519,7 @@ export const wwMoreMessages = defineMessages({
     title: headMessages.it.wwMore,
     links: {
       roster: { label: 'Eroi', blurb: 'I tuoi eroi, il cambio tra loro e il reclutamento di una nuova classe.' },
+      creator: { label: headMessages.it.wwCreator, blurb: 'Cambia l’aspetto del tuo eroe, gratis, quando vuoi.' },
       career: { label: headMessages.it.wwCareer, blurb: 'La scala degli obiettivi e cosa si apre a ogni livello.' },
       achievements: { label: 'Obiettivi', blurb: 'Tutti quelli che hai ottenuto e quanto sono rari.' },
       fieldNotes: { label: 'Appunti di campo', blurb: 'Cosa sa il tuo eroe di ogni piano e di ogni mostro.' },
@@ -641,6 +646,7 @@ export const wwMoreMessages = defineMessages({
     title: headMessages.pt.wwMore,
     links: {
       roster: { label: 'Heróis', blurb: 'Seus heróis, a troca entre eles e o recrutamento de uma nova classe.' },
+      creator: { label: headMessages.pt.wwCreator, blurb: 'Mude o visual do seu herói, de graça, a qualquer hora.' },
       career: { label: headMessages.pt.wwCareer, blurb: 'A escada de objetivos e o que abre em cada nível.' },
       achievements: { label: 'Conquistas', blurb: 'Todas as que você ganhou e quão raras elas são.' },
       fieldNotes: { label: 'Notas de campo', blurb: 'O que seu herói sabe sobre cada andar e cada monstro.' },
@@ -767,6 +773,7 @@ export const wwMoreMessages = defineMessages({
     title: headMessages.pl.wwMore,
     links: {
       roster: { label: 'Bohaterowie', blurb: 'Twoi bohaterowie, zmiana między nimi i werbunek nowej klasy.' },
+      creator: { label: headMessages.pl.wwCreator, blurb: 'Zmień wygląd bohatera, za darmo, w każdej chwili.' },
       career: { label: headMessages.pl.wwCareer, blurb: 'Drabina celów i to, co otwiera się na każdym poziomie.' },
       achievements: { label: 'Osiągnięcia', blurb: 'Wszystkie zdobyte i to, jak są rzadkie.' },
       fieldNotes: { label: 'Notatki terenowe', blurb: 'Co twój bohater wie o każdym piętrze i potworze.' },
@@ -893,6 +900,7 @@ export const wwMoreMessages = defineMessages({
     title: headMessages.nl.wwMore,
     links: {
       roster: { label: 'Helden', blurb: 'Je helden, tussen ze wisselen en een nieuwe klasse aanwerven.' },
+      creator: { label: headMessages.nl.wwCreator, blurb: 'Verander het uiterlijk van je held, gratis, wanneer je wilt.' },
       career: { label: headMessages.nl.wwCareer, blurb: 'De ladder van doelen, en wat er op elk niveau opengaat.' },
       achievements: { label: 'Prestaties', blurb: 'Alles wat je hebt behaald, en hoe zeldzaam het is.' },
       fieldNotes: { label: 'Veldnotities', blurb: 'Wat je held weet over elke verdieping en elk monster.' },

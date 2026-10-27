@@ -5,7 +5,8 @@ import { HERO_NAME_RULE } from '@trmnl-games/platform'
 import { useIntent } from '../../../lib/intent'
 import { useHoldReload } from '../../../lib/deployWatch'
 import { NameField, nameProblem } from '../../../lib/nameField'
-import { GenderPicker, type HeroGender } from '../../../lib/genderPicker'
+import { LookCreator } from '../../../lib/lookCreator'
+import { DEFAULT_LOOK, encodeLook } from '@trmnl-games/wardenwatch/art/look'
 import { Button } from '../../../lib/ui'
 import { Glyph, SectionTitle } from '../../../lib/glyphs'
 import { artUrl } from '../../../lib/artUrl'
@@ -16,7 +17,15 @@ import { wwScreenMessages } from '../../../i18n/wwScreen'
 import { ConfirmSheet, Consequences } from './-confirm'
 import { formatNumber, formatTime, useLocale, useT } from '../../../lib/i18n'
 import { useContent } from '../../../lib/useContent'
+
+/** GDD §3.5: the classes' names on screen (Knight, Assassin), apart from the catalog's ids. */
+const useClassName = () => {
+  const names = useT(commonMessages).classNames
+  return (id: string) => names[id as keyof typeof names] ?? id
+}
 import { wwPagesMessages } from '../../../i18n/wwPages'
+import { lookMessages } from '../../../i18n/look'
+import { commonMessages } from '../../../i18n/common'
 import { INTL_TAG, type Locale } from '@trmnl-games/platform'
 
 /** What `roster.mine` returns (P37). */
@@ -50,8 +59,9 @@ function RosterRules() {
 function ClassBody({ rule }: { rule: RosterView['classes'][number] }) {
   const t = useT(wwPagesMessages)
   const c = useContent()
+  const className = useClassName()
   return <>
-    <p className="font-semibold">{c.text(rule.name)}</p>
+    <p className="font-semibold">{className(rule.id)}</p>
     <p className="text-sm">{c.text(rule.blurb)}</p>
     <p className="mt-1 text-sm"><strong>{c.text(rule.passive.name)}{t.colon}</strong> {c.text(rule.passive.blurb)}</p>
     <p className="mt-1 text-sm text-muted">{t.classNumbers(numbersOf(rule))}</p>
@@ -116,6 +126,7 @@ function HeroCard({ hero, rule, children }: { hero: Hero; rule: ClassRule | unde
   const t = useT(wwPagesMessages)
   const s = useT(wwScreenMessages)
   const c = useContent()
+  const className = useClassName()
   const locale = useLocale()
   return (
     <li className={`flex min-w-0 flex-col border-[3px] ${hero.current ? 'border-gold' : 'border-night'} bg-panel`}>
@@ -127,7 +138,7 @@ function HeroCard({ hero, rule, children }: { hero: Hero; rule: ClassRule | unde
       </div>
       <div className="flex flex-1 flex-col gap-2 px-3 pt-3 pb-4 min-[375px]:px-4">
         <h2 className="hud text-sm leading-snug [overflow-wrap:anywhere]">{hero.name} <span className="text-gold-ink">{s.levelShort}{hero.level}</span></h2>
-        <p className="text-sm text-muted">{c.text(hero.className)} · {hero.current ? t.inBiome(hero.biome) : t.waiting(hero.parkedFor ?? 0, hero.biome)}</p>
+        <p className="text-sm text-muted">{className(hero.class)} · {hero.current ? t.inBiome(hero.biome) : t.waiting(hero.parkedFor ?? 0, hero.biome)}</p>
         <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
           <Hearts hp={hero.hp} maxHp={hero.maxHp} />
           <span className="flex items-center gap-1.5 label-px text-gold-ink">
@@ -172,22 +183,24 @@ function RecruitSlot({ rule, current, roster, notify }: { rule: ClassRule; curre
   const closed = useRef(false)
   const t = useT(wwPagesMessages)
   const c = useContent()
+  const className = useClassName()
   // Not yet hands focus back to the Recruit key it came from, not the top of the page.
   useEffect(() => { if (!opened && closed.current) slot.current?.querySelector('button')?.focus() }, [opened])
   if (roster.open && opened) return <RecruitCard rule={rule} current={current} roster={roster} notify={notify} onCancel={() => { closed.current = true; setOpened(false) }} />
   return (
     <li ref={slot} className={`flex min-h-56 min-w-0 flex-col items-center justify-center gap-3 border-[3px] border-dashed border-faint px-4 py-6 text-center ${roster.open ? '' : 'text-muted'}`}>
       <span aria-hidden="true" className="hud grid size-14 place-items-center border-2 border-dashed border-faint text-xl text-muted">?</span>
-      <h2 className="font-display text-xl font-bold">{c.text(rule.name)}</h2>
+      <h2 className="font-display text-xl font-bold">{className(rule.id)}</h2>
       <p className="max-w-[36ch] text-sm text-muted">{c.text(rule.blurb)}</p>
-      {roster.open ? <Button onClick={() => setOpened(true)}>{t.recruitA(c.text(rule.name))}</Button> : <p className="flex items-center gap-2 text-sm font-semibold"><Glyph name="hero" size={14} />{t.secondOpens(roster.unlockLevel)}</p>}
+      {roster.open ? <Button onClick={() => setOpened(true)}>{t.recruitA(className(rule.id))}</Button> : <p className="flex items-center gap-2 text-sm font-semibold"><Glyph name="hero" size={14} />{t.secondOpens(roster.unlockLevel)}</p>}
     </li>
   )
 }
 
 function RecruitCard({ rule, current, roster, notify, onCancel }: { rule: ClassRule; current: Hero | undefined; roster: RosterView; notify: Notify; onCancel: () => void }) {
   const [name, setName] = useState('')
-  const [gender, setGender] = useState<HeroGender>('male')
+  // GDD §3.7: a recruit passes through the creator with its naming.
+  const [look, setLook] = useState(() => encodeLook(DEFAULT_LOOK))
   const [asking, setAsking] = useState(false)
   const recruit = useIntent(api.roster.recruit, { onFeedback: notify })
   useHoldReload(name.trim() !== '' || asking || recruit.pending)
@@ -197,19 +210,22 @@ function RecruitCard({ rule, current, roster, notify, onCancel }: { rule: ClassR
   // The key that opened the form is gone; the name is the next thing to do.
   useEffect(() => { card.current?.querySelector('input')?.focus() }, [])
   const t = useT(wwPagesMessages)
+  const l = useT(lookMessages)
+  const className = useClassName()
   const locale = useLocale()
+  const shown = className(rule.id)
   return (
     <li ref={card} className="flex min-w-0 flex-col border-[3px] border-gold bg-panel px-3 pt-3 pb-4 min-[375px]:px-4 sm:px-5">
       <ClassBody rule={rule} />
-      <form className="mt-3 flex flex-col gap-2" onSubmit={(event) => { event.preventDefault(); if (valid && !blocked) setAsking(true) }}>
-        <NameField label={t.nameYour(rule.name)} small rule={HERO_NAME_RULE} noun="hero name" value={name} onChange={setName} disabled={recruit.pending} />
-        <GenderPicker small value={gender} onChange={setGender} disabled={recruit.pending} />
-        <Button type="submit" disabled={!valid || blocked}>{t.recruitA(rule.name)}</Button>
+      <form className="mt-3 flex flex-col gap-3" onSubmit={(event) => { event.preventDefault(); if (valid && !blocked) setAsking(true) }}>
+        <NameField label={t.nameYour(shown)} small rule={HERO_NAME_RULE} noun="hero name" value={name} onChange={setName} disabled={recruit.pending} />
+        <LookCreator small value={look} onChange={setLook} heroClass={rule.id} note={l.firstLook} disabled={recruit.pending} />
+        <Button type="submit" disabled={!valid || blocked}>{t.recruitA(shown)}</Button>
         {roster.nextAt !== null ? <p className="text-sm text-muted">{t.recruitCounts(clock(locale, roster.nextAt))}</p> : null}
         {roster.nextAt === null && !roster.canPark && current ? <p className="text-sm text-muted">{t.canHandOver(current.name)}</p> : null}
         <Button variant="quiet" className="-ml-3 self-start min-[375px]:-ml-4" disabled={recruit.pending} onClick={onCancel}>{t.notYet}</Button>
       </form>
-      <ConfirmSheet open={asking} title={t.recruitTitle(name.trim(), rule.name)} confirmLabel={t.recruitName(name.trim())} busyLabel={t.recruiting} cancelLabel={t.notYet} pending={recruit.pending} onClose={() => setAsking(false)} onConfirm={() => { setAsking(false); void recruit.run({ heroClass: rule.id, name: name.trim(), gender }, t.recruited(name.trim(), rule.name)).then((done) => { if (done) setName('') }) }}>
+      <ConfirmSheet open={asking} title={t.recruitTitle(name.trim(), shown)} confirmLabel={t.recruitName(name.trim())} busyLabel={t.recruiting} cancelLabel={t.notYet} pending={recruit.pending} onClose={() => setAsking(false)} onConfirm={() => { setAsking(false); void recruit.run({ heroClass: rule.id, name: name.trim(), look }, t.recruited(name.trim(), shown)).then((done) => { if (done) setName('') }) }}>
         <Consequences>
           <li>{t.startsAt(name.trim())}</li>
           <li>{t.waitsExactly(current?.name ?? null)}</li>

@@ -20,10 +20,10 @@ export const privacyPl: LegalPage = {
         chcesz się dzielić, i nigdy nie umieszczaj w niej danych kontaktowych.
       </p>
       <p>
-        W Wardenwatch bohaterowie robią sobie nawzajem rajdy na biurka i spotykają się przypadkiem. Gdy twój bohater robi rajd, jest jego celem albo spotyka innego bohatera, twoja nazwa publiczna pojawia się w dzienniku przygód drugiego gracza, w aplikacji i na jego TRMNL, tak jak już pojawia się w rankingach. Gdy twój bohater dostanie nokaut, może zgubić zapasowy przedmiot z twoją nazwą publiczną, który bohater innego gracza może znaleźć i zatrzymać; twoja nazwa jest wtedy widoczna na tym przedmiocie w jego aplikacji i na jego stronie bohatera. Jeśli zmienisz nazwę lub usuniesz konto, te historie i przedmioty pokazują „Ukryty gracz” albo tracą nazwę.
+        W Wardenwatch bohaterowie robią sobie nawzajem rajdy na obozy i spotykają się przypadkiem. Gdy twój bohater robi rajd, jest jego celem albo spotyka innego bohatera, twoja nazwa publiczna pojawia się w dzienniku przygód drugiego gracza, w aplikacji i na jego TRMNL, tak jak już pojawia się w rankingach. Gdy twój bohater dostanie nokaut, może zgubić zapasowy przedmiot z twoją nazwą publiczną, który bohater innego gracza może znaleźć i zatrzymać; twoja nazwa jest wtedy widoczna na tym przedmiocie w jego aplikacji i na jego stronie bohatera. Jeśli zmienisz nazwę lub usuniesz konto, te historie i przedmioty pokazują „Ukryty gracz” albo tracą nazwę.
       </p>
       <p>
-        Twój bohater w Wardenwatch ma stronę publiczną: każdy, kto ma link, widzi twoją nazwę publiczną, imię bohatera, jego poziom, miejsce w rankingu, obecne piętro i datę rozpoczęcia, kilka liczników oraz twoje osiągnięcia. Złoto, dziennik przygód i dane konta pozostają prywatne, podobnie jak twój sprzęt, z wyjątkiem zapasów innych graczy, które trzyma twój bohater i które są widoczne z ich podpisami. Strona jest domyślnie włączona. Opcja „Ukryj moją stronę bohatera” w Ustawieniach od razu ją ukrywa, a pokazać ją ponownie możesz w każdej chwili.
+        Twój bohater w Wardenwatch ma stronę publiczną: każdy, kto ma link, widzi twoją nazwę publiczną, imię bohatera, jego poziom, miejsce w rankingu, obecną strefę i datę rozpoczęcia, kilka liczników oraz twoje osiągnięcia. Złoto, dziennik przygód i dane konta pozostają prywatne, podobnie jak twój sprzęt, z wyjątkiem zapasów innych graczy, które trzyma twój bohater i które są widoczne z ich podpisami. Strona jest domyślnie włączona. Opcja „Ukryj moją stronę bohatera” w Ustawieniach od razu ją ukrywa, a pokazać ją ponownie możesz w każdej chwili.
       </p>
       <p>
         Zalogowani gracze mogą obserwować publiczną stronę bohatera. Przechowujemy, kto kogo obserwuje, aby ich aplikacja mogła wymienić obserwowanych graczy. Nikt nie dostaje powiadomienia, że jest obserwowany, a żadna strona nie pokazuje, kto obserwuje gracza. Jeśli zmienisz nazwę publiczną, ukryjesz stronę lub usuniesz postępy, inni gracze przestają widzieć twojego bohatera na swojej liście, a usunięcie kasuje te zapisy.
@@ -38,7 +38,7 @@ export const privacyPl: LegalPage = {
           Dla każdej instalacji TRMNL: identyfikator instancji pluginu, skrót (hash) jego tokenu dostępu i link do ustawień, który daje nam TRMNL. Nie przechowujemy twojej nazwy
           ani e-maila z TRMNL.
         </li>
-        <li>Przesunięcie strefy czasowej, które TRMNL wysyła z każdym ekranem (na przykład UTC+2), aby poranny stand-up w Wardenwatch podążał za twoim dniem. Przechowujemy tylko ostatnie.</li>
+        <li>Przesunięcie strefy czasowej, które TRMNL wysyła z każdym ekranem (na przykład UTC+2), aby poranna zbiórka w Wardenwatch podążała za twoim dniem. Przechowujemy tylko ostatnie.</li>
         <li>Ustawienie języka, które TRMNL wysyła z każdym ekranem (na przykład pl-PL), aby wiedzieć, na które języki warto tłumaczyć gry, i aby ekran mógł używać twojego języka. Przechowujemy tylko ostatnie.</li>
         <li>Jeśli wybierzesz język dla TRMNL Games, ten wybór, aby używały go też twoje ekrany TRMNL i alerty.</li>
         <li>Krótkotrwałe zapisy techniczne, takie jak liczniki limitów i potwierdzenia zduplikowanych żądań.</li>

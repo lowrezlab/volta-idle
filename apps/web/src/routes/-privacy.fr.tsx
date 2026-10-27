@@ -20,10 +20,10 @@ export const privacyFr: LegalPage = {
         un nom public que vous acceptez de partager, sans jamais y mettre vos coordonnées.
       </p>
       <p>
-        Dans Wardenwatch, les héros pillent le bureau des autres et se rencontrent au hasard. Quand votre héros pille, est pillé ou croise un autre héros, votre nom public apparaît dans le journal d’aventure de l’autre joueur, dans son compagnon et sur son TRMNL, comme il apparaît déjà dans les classements. Quand votre héros est mis K.-O., il peut laisser tomber un objet en double portant votre nom public, que le héros d’un autre joueur peut trouver et garder ; votre nom s’affiche alors sur cet objet dans son compagnon et sur sa page de héros. Si vous changez de nom ou supprimez votre compte, ces récits et objets affichent « Joueur masqué » à la place, ou perdent le nom.
+        Dans Wardenwatch, les héros pillent le camp des autres et se rencontrent au hasard. Quand votre héros pille, est pillé ou croise un autre héros, votre nom public apparaît dans le journal d’aventure de l’autre joueur, dans son compagnon et sur son TRMNL, comme il apparaît déjà dans les classements. Quand votre héros est mis K.-O., il peut laisser tomber un objet en double portant votre nom public, que le héros d’un autre joueur peut trouver et garder ; votre nom s’affiche alors sur cet objet dans son compagnon et sur sa page de héros. Si vous changez de nom ou supprimez votre compte, ces récits et objets affichent « Joueur masqué » à la place, ou perdent le nom.
       </p>
       <p>
-        Votre héros Wardenwatch a une page publique : toute personne disposant du lien voit votre nom public, le nom de votre héros, son niveau, son rang, son étage actuel et sa date de départ, quelques compteurs à vie et vos succès. L’or, le journal d’aventure et les informations de votre compte restent privés, de même que votre équipement, sauf les doubles d’autres joueurs que garde votre héros, affichés avec les noms qu’ils portent. La page est activée par défaut. Masquer ma page de héros, dans les Réglages, la masque immédiatement, et vous pouvez la réafficher à tout moment.
+        Votre héros Wardenwatch a une page publique : toute personne disposant du lien voit votre nom public, le nom de votre héros, son niveau, son rang, sa zone actuelle et sa date de départ, quelques compteurs à vie et vos succès. L’or, le journal d’aventure et les informations de votre compte restent privés, de même que votre équipement, sauf les doubles d’autres joueurs que garde votre héros, affichés avec les noms qu’ils portent. La page est activée par défaut. Masquer ma page de héros, dans les Réglages, la masque immédiatement, et vous pouvez la réafficher à tout moment.
       </p>
       <p>
         Les joueurs connectés peuvent suivre une page publique de héros. Nous conservons qui suit qui pour que leur compagnon puisse lister les joueurs qu’ils suivent. Personne n’est prévenu d’être suivi, et aucune page ne montre qui suit un joueur. Si vous changez de nom public, masquez votre page ou supprimez votre progression, les autres joueurs ne voient plus votre héros dans leur liste, et la suppression efface ces données.
@@ -38,7 +38,7 @@ export const privacyFr: LegalPage = {
           Pour chaque installation TRMNL : l’identifiant de l’instance du plugin, une empreinte de son jeton d’accès et le lien de réglages que TRMNL nous donne.
           Nous ne conservons ni votre nom ni votre e-mail TRMNL.
         </li>
-        <li>Le décalage horaire que votre TRMNL envoie avec chaque écran (par exemple UTC+2), pour que le stand-up du matin de Wardenwatch suive votre journée. Nous ne gardons que le dernier.</li>
+        <li>Le décalage horaire que votre TRMNL envoie avec chaque écran (par exemple UTC+2), pour que le rassemblement du matin de Wardenwatch suive votre journée. Nous ne gardons que le dernier.</li>
         <li>La langue que votre TRMNL envoie avec chaque écran (par exemple fr-FR), pour savoir dans quelles langues traduire les jeux et pour que votre écran puisse utiliser votre langue. Nous ne gardons que la dernière.</li>
         <li>Si vous choisissez une langue pour TRMNL Games, ce choix, pour que vos écrans TRMNL et vos alertes l’utilisent aussi.</li>
         <li>Des données techniques de courte durée, comme des compteurs de limitation de débit et des reçus de requêtes en double.</li>

@@ -1,20 +1,23 @@
 import { contentTranslator } from '@trmnl-games/wardenwatch/i18n/lazy'
 import { WARDENWATCH_INSTALL_URL, SUPPORT_EMAIL } from '../../lib/prose'
-import { HELP_FACTS as F, nextTableDate, signed, type Cost, type Modifiers, type Occasion } from './-wardenwatchFacts'
+import { affixName, HELP_FACTS as F, nextTableDate, occasionName, signed, type Cost, type Modifiers, type Occasion } from './-wardenwatchFacts'
 import type { HelpPage } from './-wardenwatchHelp'
 import { WARDENWATCH_HELP_HEAD } from './-helpHeads'
 
 const t = contentTranslator('nl')
 const n = (value: number) => t.number(value)
-const goud = (value: number) => `${n(value)} goud`
+const auro = (value: number) => `${n(value)} Auro`
 const en = (parts: readonly string[], last = 'en') => (parts.length <= 1 ? parts.join('') : `${parts.slice(0, -1).join(', ')} ${last} ${parts.at(-1)}`)
 const name = (english: string) => t.name(english)
-const floor = (english: string) => t.nameWith(english, 'de')
-const rungs = (list: readonly { name: string; size: number; price: number }[]) => en(list.map((rung) => `${t.nameWith(rung.name, 'een')} (${rung.size}) voor ${goud(rung.price)}`))
-const price = (c: Cost) => `${en(c.materials.map((m) => `${m.n} ${name(m.name).toLowerCase()}`))} plus ${goud(c.gold)}`
-const boonLine = (m: Modifiers) => [m.attackPct ? `${signed(m.attackPct)}% aanval` : '', m.defensePct ? `${signed(m.defensePct)}% verdediging` : '', m.xpPct ? `${signed(m.xpPct)}% XP uit overwinningen` : '', m.goldPct ? `${signed(m.goldPct)}% goud` : '', m.trapDamagePct ? `vallen doen ${m.trapDamagePct}% minder pijn` : ''].filter(Boolean).join(', ')
-const FLOORS_LINE = en(F.floors.filter((b) => b.level > 1).map((b) => `${floor(b.name)} op niveau ${b.level}`))
+const zone = (english: string) => t.nameWith(english, 'de')
+const rungs = (list: readonly { name: string; size: number; price: number }[]) => en(list.map((rung) => `${t.nameWith(rung.name, 'een')} (${rung.size}) voor ${auro(rung.price)}`))
+const price = (c: Cost) => `${en(c.materials.map((m) => `${m.n} ${name(m.name).toLowerCase()}`))} plus ${auro(c.gold)}`
+const boonLine = (m: Modifiers) => [m.attackPct ? `${signed(m.attackPct)}% aanval` : '', m.defensePct ? `${signed(m.defensePct)}% verdediging` : '', m.xpPct ? `${signed(m.xpPct)}% XP uit overwinningen` : '', m.goldPct ? `${signed(m.goldPct)}% Auro` : '', m.trapDamagePct ? `vallen doen ${m.trapDamagePct}% minder pijn` : ''].filter(Boolean).join(', ')
+const ZONES_LINE = en(F.zones.filter((b) => b.level > 1).map((b) => `${zone(b.name)} op niveau ${b.level}`))
 const arrives = (feature: 'todo' | 'stances' | 'choices' | 'merchant' | 'raids') => (F.unlocks === undefined ? '' : ` Dit komt op niveau ${F.unlocks[feature]}.`)
+const SAFE = name(F.zones[0]?.name ?? 'Castellum Frigo')
+const ILL_OMEN = t.text(occasionName('friday_13th', 'Dag van het slechte voorteken'))
+const GIFT_DAY = t.text(occasionName('christmas', 'Midwinterfeest'))
 const rarityNl: Record<string, string> = { common: 'gewone', uncommon: 'ongewone', rare: 'zeldzame', epic: 'epische' }
 
 const MONTHS = ['januari', 'februari', 'maart', 'april', 'mei', 'juni', 'juli', 'augustus', 'september', 'oktober', 'november', 'december']
@@ -47,197 +50,201 @@ export const nl: HelpPage = {
   description: WARDENWATCH_HELP_HEAD.nl.description,
   title: 'Wardenwatch op TRMNL',
   contents: {
-    'getting-started': 'Aan de slag', 'if-the-qr-sends-you-back-to-setup': 'Als de QR je terugstuurt naar de installatie', 'how-time-works': 'Hoe de tijd verloopt', floors: 'Verdiepingen', 'desk-keepsakes': 'Bureau-aandenkens', career: 'Carrière', 'heroes-and-classes': 'Helden en klassen', stances: 'Houdingen', 'desk-raids': 'Bureauraids', meetings: 'Vergaderingen', 'lost-property': 'Gevonden voorwerpen', 'to-do-list': 'Takenlijst', potions: 'Drankjes', 'the-wandering-merchant': 'De rondtrekkende koopman', decisions: 'Beslissingen', effects: 'Effecten', 'office-calendar': 'Kantoorkalender', 'rare-and-epic-gear': 'Zeldzame en epische uitrusting', 'when-your-bag-fills-up': 'Als je tas vol raakt', 'bigger-bags': 'Grotere tassen', 'salvage-and-the-workbench': 'Demonteren en de werkbank', 'getting-knocked-out': 'Knock-out gaan', recaps: 'Samenvattingen', 'understanding-rankings': 'Hoe de ranglijsten werken', 'sharing-your-hero': 'Je held delen', 'following': 'Volgen', names: 'Namen', looks: 'Uiterlijk', alerts: 'Meldingen', troubleshooting: 'Problemen oplossen', 'disconnecting-and-removing': 'Ontkoppelen en verwijderen', help: 'Hulp',
+    'getting-started': 'Aan de slag', 'if-the-qr-sends-you-back-to-setup': 'Als de QR je terugstuurt naar de installatie', 'how-time-works': 'Hoe de tijd verloopt', zones: 'Gebieden', seals: 'Zegels', commissions: 'Opdrachten', 'heroes-and-classes': 'Helden en klassen', stances: 'Houdingen', 'camp-raids': 'Kampraids', musters: 'Appels', strays: 'Verloren goed', 'garrison-orders': 'Garnizoensorders', draughts: 'Drankjes', 'the-serpentos-moneychanger': 'De Serpentos-wisselaar', decisions: 'Beslissingen', effects: 'Effecten', 'sky-calendar': 'De hemel en de kalender', 'rare-and-epic-gear': 'Zeldzame en epische uitrusting', 'when-your-pack-fills-up': 'Als je ransel vol raakt', 'bigger-packs': 'Grotere ransels', 'salvage-and-the-forge': 'Demonteren en de Smidse', 'getting-knocked-out': 'Knock-out gaan', recaps: 'Samenvattingen', 'understanding-rankings': 'Hoe de ranglijsten werken', 'sharing-your-hero': 'Je held delen', 'following': 'Volgen', names: 'Namen', looks: 'Uiterlijk', alerts: 'Meldingen', troubleshooting: 'Problemen oplossen', 'disconnecting-and-removing': 'Ontkoppelen en verwijderen', help: 'Hulp',
   },
   Body: () => (
     <>
       <h2 id="getting-started">Aan de slag</h2>
       <ul>
         <li>Open <a href={WARDENWATCH_INSTALL_URL}>Wardenwatch in de TRMNL-marketplace</a> en kies Installeren.</li>
-        <li>Log in bij Wardenwatch, kies een openbare naam en een heldennaam, en koppel de installatie.</li>
+        <li>Log in bij Wardenwatch, kies een openbare naam, geef je Schildknaap een naam en een uiterlijk, en koppel de installatie.</li>
         <li>Klik terug in TRMNL op Opslaan. Het eerste avontuur van je held begint binnen 15 minuten.</li>
         <li>Zet de plugin in een afspeellijst, of in een mashup als je je held naast andere plugins wilt. Alle vier de indelingsformaten worden ondersteund.</li>
       </ul>
       <h2 id="if-the-qr-sends-you-back-to-setup">Als de QR je terugstuurt naar de installatie</h2>
       <p>De QR opent de app van het account waarmee je bent ingelogd. Hij start geen nieuwe installatie. Controleer het e-mailadres van de login op de installatiepagina en gebruik Ander account als je oorspronkelijk met een ander account hebt gekoppeld.</p>
-      <p>Staat er bij de installatie ‘Wardenwatch opnieuw koppelen’, dan bestaat je TRMNL-koppeling wel, maar ontbreekt de held. Dat kan gebeuren na de reset van het spel vóór de lancering. Installeer een nieuwe kopie van <a href={WARDENWATCH_INSTALL_URL}>Wardenwatch vanuit TRMNL</a>, log in met hetzelfde account, kies een nieuwe heldennaam, koppel en klik dan in TRMNL op Opslaan. Werkt de nieuwe kopie, haal dan de oude uit je afspeellijst.</p>
+      <p>Staat er bij de installatie ‘Wardenwatch opnieuw koppelen’, dan bestaat je TRMNL-koppeling wel, maar ontbreekt de held. Dat kan gebeuren na een reset van het spel. Installeer een nieuwe kopie van <a href={WARDENWATCH_INSTALL_URL}>Wardenwatch vanuit TRMNL</a>, log in met hetzelfde account, kies een nieuwe heldennaam, koppel en klik dan in TRMNL op Opslaan. Werkt de nieuwe kopie, haal dan de oude uit je afspeellijst.</p>
       <p>Staat er ‘Sla op in TRMNL om te beginnen’, dan staat je held al klaar. Ga terug naar die installatie in TRMNL en klik op Opslaan.</p>
       <h2 id="how-time-works">Hoe de tijd verloopt</h2>
       <p>
         De spelwereld gaat elk kwartier verder, of je scherm nu aanstaat of niet. Je TRMNL toont een momentopname en ververst in zijn eigen tempo.
         Slaapstand, trager verversen en andere afspeellijstitems kosten je held nooit voortgang. Avonturentijden in de app gebruiken de tijdzone van je browser.
       </p>
-      <h2 id="floors">Verdiepingen</h2>
-      <p>Het gebouw heeft {F.floors.length} verdiepingen, en je held begint in {floor(F.floors[0]?.name ?? '')}. Elke verdieping gaat open op een niveau, of je er nu komt of niet: {FLOORS_LINE}. Je TRMNL zegt ‘Nieuw gebied ontgrendeld’ als het zover is; of je erheen reist, bepaal je zelf, via de wereldkaart op de pagina Held. Diepere verdiepingen hebben taaiere monsters, meer goud, betere drankjes en beter betaalde taken. In {floor(F.floors[0]?.name ?? '')} kan een held niet knock-out gaan; op elke andere verdieping wel.</p>
+      <p>
+        De titelbalk van je TRMNL draagt de Volta-datum, zoals ‘Rime Ascendant 4 · Gyre van de Wyrm 1203’. Een Volta-dag is één doorgang van Myrkos de Wachter langs de hemel en duurt één echte dag. Negen dagen vormen een as (Ascendant, Skybottom, Descendant, Midheaven), vier assen een Kardinale Cyclus (Rime, Echo, Gloam, Grave, Melt, Verd, Tan, Shade, Molt, Tanhaus) en tien cycli een jaar van 360 dagen, elk jaar om de beurt onder een van de twaalf Wardens. De telling begon op 1 Rime Ascendant 1203, het jaar waarin Castellum Frigo werd gesticht. De datum is alleen een telling: de simulatie houdt de echte tijd aan.
+      </p>
+      <h2 id="zones">Gebieden</h2>
+      <p>De kaart van Ur-Turul heeft {F.zones.length} gebieden, en je held begint in {SAFE}, het half gebouwde fort van de Expeditie aan de oostoever van de Oerwildernis. Elk gebied gaat open op een niveau, of je er nu komt of niet: {ZONES_LINE}. Je TRMNL zet dan nieuw terrein op de kaart; of je erheen reist, bepaal je zelf, via de kaart op de pagina Held. Gebieden verder van het fort hebben taaiere wezens, meer Auro, sterkere drankjes en beter betaalde garnizoensorders. In {SAFE} kan een held niet knock-out gaan; in elk ander gebied wel.</p>
       <ul>
-        {F.floors.map((f) => <li key={f.id}><strong>{name(f.name)}</strong>{f.level > 1 ? ` (niveau ${f.level})` : ' (vanaf het begin)'}: {f.monsters.map(name).join(', ')}.</li>)}
+        {F.zones.map((z) => <li key={z.id}><strong>{name(z.name)}</strong>{z.level > 1 ? ` (niveau ${z.level})` : ' (vanaf het begin)'}: {z.monsters.map(name).join(', ')}.</li>)}
       </ul>
-      {F.lore ? <p>De pagina Veldnotities onder Meer bewaart wat je held over elke verdieping en elk monster heeft opgeschreven. De notitie van een verdieping gaat open zodra je held er voor het eerst staat, die van een monster bij de eerste overwinning erop. Notities hebben geen invloed op het spel.</p> : null}
-      <h2 id="desk-keepsakes">Bureau-aandenkens</h2>
-      <p>Houd Wardenwatch in je afspeellijst en zoek in de titelbalk van het scherm naar ‘Aandenken-code’ met een zescijferige code, zoals 482 917 (smalle staande mashups korten dat in tot ‘Aandenken’). Vul die code in bij Instellingen in de app om een blijvend kantoorsouvenir te verzamelen. Zowel volledig scherm als mashups tonen hem; het voorbeeld in de app verbergt hem. Terwijl er een aandenken wacht, verzamelt de QR-code op het scherm het ook: scan hem met je telefoon en de app zet het op je plank, ook met de titelbalk uit. Waar ruimte is, staat de code ernaast.</p>
-      <p>Je kunt één aandenken per week verzamelen, met elke maandag om 00:00 UTC een nieuwe code. De code van vorige week werkt ook als je scherm traag ververst. Mis je een week, dan krijg je de week erna hetzelfde ontwerp. Heb je de hele set, dan kun je van elk meer verzamelen. Aandenkens veranderen niets aan XP, uitrusting of ranglijsten, en extra apparaten of sneller verversen leveren niets extra’s op.</p>
+      {F.lore ? <p>De pagina Veldnotities onder Meer bewaart wat de opmeting van Ur-Turul over elk gebied en elk wezen heeft opgeschreven. De notitie van een gebied gaat open zodra je held er voor het eerst staat, die van een wezen bij de eerste overwinning erop. Notities hebben geen invloed op het spel.</p> : null}
+      <h2 id="seals">Zegels</h2>
+      <p>Houd Wardenwatch in je afspeellijst en zoek in de titelbalk van het scherm naar de zegelcode, zes cijfers zoals 482 917 (smalle staande mashups korten het label in). Vul die code in bij Instellingen in de app om een blijvend waszegel in je verzameling te drukken. Zowel volledig scherm als mashups tonen hem; het voorbeeld in de app verbergt hem. Terwijl er een zegel wacht, verzamelt de QR-code op het scherm het ook: scan hem met je telefoon en de app zet het op je plank, ook met de titelbalk uit. Waar ruimte is, staat de code ernaast.</p>
+      <p>Je kunt één zegel per week verzamelen, met elke maandag om 00:00 UTC een nieuwe code. De code van vorige week werkt ook als je scherm traag ververst. Mis je een week, dan krijg je de week erna hetzelfde zegel. Heb je de hele set, dan kun je van elk meer verzamelen. Zegels veranderen niets aan XP, uitrusting of ranglijsten, en extra apparaten of sneller verversen leveren niets extra’s op.</p>
       {F.career !== undefined ? (
         <>
-          <h2 id="career">Carrière</h2>
-          <p>Je held heeft altijd één doel, bovenaan de pagina Held: ‘Win je eerste gevecht’, ‘Rust een gevonden uitrustingsstuk uit’, ‘Bereik de Serverruimte’, ‘Koop de Laptoprugzak’. Sommige haal je al avonturend; de rest doe je hier, op de pagina Tas of Held. Een doel halen toont ‘Doel bereikt’ op je TRMNL en zet wat goud opzij ({n(F.career.gold)} over de hele ladder); druk op Ophalen op de pagina Held om het binnen te halen. Doelen geven geen XP en verlopen nooit, en het volgende doel begint of je nu hebt opgehaald of niet.</p>
+          <h2 id="commissions">Opdrachten</h2>
+          <p>Je held heeft altijd één doel van de commandant van het fort, bovenaan de pagina Held: ‘Win je eerste gevecht’, ‘Rust een gevonden uitrustingsstuk uit’, ‘Reis naar de Moonbight-fjorden’, ‘Koop de Pelgrimsransel’. Sommige haal je al avonturend; de rest doe je hier, op de pagina Ransel of Held. Een doel halen wordt op je TRMNL aangekondigd en zet wat Auro opzij ({n(F.career.gold)} over de hele ladder); druk op Ophalen op de pagina Held om het binnen te halen. Doelen geven geen XP en verlopen nooit, en het volgende doel begint of je nu hebt opgehaald of niet.</p>
           <ul>
-            <li>De Carrièrepagina onder Meer toont de {F.career.goals} doelen op volgorde, met de datum waarop je elk doel haalde. Een doel dat je al had gedaan toen de ladder kwam, telt als bereikt.</li>
-            {F.unlocks !== undefined ? <li>Functies komen per niveau, of je nu langskomt of niet: de takenlijst op niveau {F.unlocks.todo}, houdingen op niveau {F.unlocks.stances}, kantoorbeslissingen op niveau {F.unlocks.choices}, {F.meetings?.level !== undefined ? `vergaderingen met collega’s op niveau ${F.meetings.level}, ` : ''}{F.workbench?.level !== undefined ? `demonteren en de werkbank op niveau ${F.workbench.level}, ` : ''}de rondtrekkende koopman op niveau {F.unlocks.merchant} en bureauraids op niveau {F.unlocks.raids}. Je TRMNL zegt ‘Ontgrendeld’ als het zover is. Ook de verdiepingen gaan per niveau open: {FLOORS_LINE}.</li> : null}
-            <li>Als de houdingen opengaan, heeft je held er nog geen gekozen en speelt hij Evenwichtig. Eén doel vraagt je er een te kiezen; elk van de drie telt, en je kunt hem later wijzigen.</li>
-            <li>Een paar vroege doelen komen gegarandeerd op tijd: het eerste gevecht binnen een handvol avonturen, een stuk uitrusting binnen het eerste dozijn, en een eerste beslissing, koopman en elite binnen ongeveer een dag na hun niveau. De rest hangt van het toeval af.</li>
+            <li>De pagina Opdrachten onder Meer toont de {F.career.goals} doelen op volgorde, met de datum waarop je elk doel haalde. Een doel dat je al had gedaan toen de ladder kwam, telt als bereikt. De rangen onderweg zijn Schildknaap, Gezworene, Baanderheer en Warden-gezworene.</li>
+            {F.unlocks !== undefined ? <li>Functies komen per niveau, of je nu langskomt of niet: garnizoensorders op niveau {F.unlocks.todo}, houdingen op niveau {F.unlocks.stances}, beslissingen onderweg op niveau {F.unlocks.choices}, {F.meetings?.level !== undefined ? `appels met kameraden op niveau ${F.meetings.level}, ` : ''}{F.workbench?.level !== undefined ? `demonteren en de Smidse op niveau ${F.workbench.level}, ` : ''}de Serpentos-wisselaar op niveau {F.unlocks.merchant} en kampraids op niveau {F.unlocks.raids}. Je TRMNL kondigt ze elk aan. Ook de gebieden gaan per niveau open: {ZONES_LINE}.</li> : null}
+            <li>Als de houdingen opengaan, heeft je held er nog geen gekozen en speelt hij Standvastig. Eén doel vraagt je er een te kiezen; elk van de drie telt, en je kunt hem later wijzigen.</li>
+            <li>Een paar vroege doelen komen gegarandeerd op tijd: het eerste gevecht binnen een handvol avonturen, een stuk uitrusting binnen het eerste dozijn, en een eerste beslissing, wisselaar en elite binnen ongeveer een dag na hun niveau. De rest hangt van het toeval af.</li>
           </ul>
         </>
       ) : null}
       {F.classes !== undefined ? (
         <>
           <h2 id="heroes-and-classes">Helden en klassen</h2>
-          <p>Iedereen begint als Ridder. Bereikt je Ridder niveau {F.rosterLevel}, dan zegt je TRMNL ‘Ontgrendeld: een tweede held’, en kun je een Sluipmoordenaar aanwerven via de pagina Helden onder Meer. De Sluipmoordenaar begint op niveau 1 met een eigen naam, uitrusting, goud, drankjes en doelen.</p>
+          <p>Iedereen begint als Ridder. Bereikt je Ridder niveau {F.rosterLevel}, dan kondigt je TRMNL een tweede held aan, en kun je een Sluipmoordenaar aanwerven via de pagina Helden onder Meer. De Sluipmoordenaar begint op niveau 1 met een eigen naam, uiterlijk, uitrusting, Auro, drankjes en doelen.</p>
           <ul>
-            <li>Er gaat één held tegelijk op avontuur, en dat is de held die je TRMNL toont en die in de ranglijsten staat. De ander blijft waar je hem liet. Hij gaat niet op avontuur en haalt later niets in, en een koopman die hem bezoekt, vertrekt.</li>
+            <li>Er gaat één held tegelijk op avontuur, en dat is de held die je TRMNL toont en die in de ranglijsten staat. De ander blijft waar je hem liet. Hij gaat niet op avontuur en haalt later niets in, en een wisselaar die hem bezoekt, vertrekt.</li>
             <li>Je kunt eens per dag wisselen. Binnen tien minuten terugwisselen telt niet. Een held die knock-out of onderweg is, moet eerst herstellen of aankomen.</li>
-            <li>Je kunt één held per klasse hebben. Prestaties zijn van jou, welke held ze ook haalt; een paar horen alleen bij de Sluipmoordenaar.</li>
+            <li>Je kunt één held per klasse hebben. Opmetingsvermeldingen zijn van jou, welke held ze ook haalt; een paar horen alleen bij de Sluipmoordenaar.</li>
             <li><strong>Ridder</strong>: {t.text(F.classes.warriorBlurb)}</li>
-            <li><strong>Sluipmoordenaar</strong>: {t.text(F.classes.rogueBlurb)} {F.classes.rogue.hpPct}% gezondheid, aanval {signed(F.classes.rogue.attackPct)}%, verdediging {signed(F.classes.rogue.defensePct)}%, {signed(F.classes.rogue.goldPct)}% goud uit elk gevecht en elke vondst, en {F.classes.rogue.raidEdgePct} punten aan zijn kant bij elke bureauraid. Hij stijgt in hetzelfde tempo als de Ridder, maar gaat iets vaker knock-out.</li>
+            <li><strong>Sluipmoordenaar</strong>: {t.text(F.classes.rogueBlurb)} {F.classes.rogue.hpPct}% gezondheid, aanval {signed(F.classes.rogue.attackPct)}%, verdediging {signed(F.classes.rogue.defensePct)}%, {signed(F.classes.rogue.goldPct)}% Auro uit elk gevecht en elke vondst, en {F.classes.rogue.raidEdgePct} punten aan zijn kant bij elke kampraid. Hij stijgt in hetzelfde tempo als de Ridder, maar gaat iets vaker knock-out.</li>
           </ul>
         </>
       ) : null}
       <h2 id="stances">Houdingen</h2>
-      <p>Kies op de pagina Held hoe voorzichtig je held is.{arrives('stances')} De houding geldt vanaf het volgende avontuur, en je kunt hem altijd wijzigen. Je TRMNL toont hem naast de tasteller, onder een meter met de naald laag voor Veilig, in het midden voor Evenwichtig en hoog voor Roekeloos.</p>
+      <p>Kies op de pagina Held hoe ver je held doorgaat voordat hij rust.{arrives('stances')} De houding geldt vanaf het volgende avontuur, en je kunt hem altijd wijzigen. Je TRMNL toont hem naast de ranselteller, onder een meter met de naald laag voor Op je hoede, in het midden voor Standvastig en hoog voor Roekeloos.</p>
       <ul>
-        <li><strong>Veilig</strong> drinkt een drankje onder 65% HP, rust onder 50% en gaat weer op pad bij 90%. Krijgt 90% van de gewone XP uit overwinningen.</li>
-        <li><strong>Evenwichtig</strong>, de standaard, drinkt onder 50%, rust onder 35% en gaat weer op pad bij 75%, met de gewone XP.</li>
+        <li><strong>Op je hoede</strong> drinkt een drankje onder 65% HP, rust onder 50% en gaat weer op pad bij 90%. Krijgt 90% van de gewone XP uit overwinningen.</li>
+        <li><strong>Standvastig</strong>, de garnizoensregel en de standaard, drinkt onder 50%, rust onder 35% en gaat weer op pad bij 75%, met de gewone XP.</li>
         <li><strong>Roekeloos</strong> drinkt onder 35%, rust onder 20% en gaat weer op pad bij 60%. Krijgt 115% XP uit overwinningen, maar gaat vaker knock-out.</li>
       </ul>
-      <p>In {floor(F.floors[0]?.name ?? '')} kan een held niet knock-out gaan, dus daar loopt Roekeloos geen risico. Op elke andere verdieping kost een knock-out goud en gaat je held terug naar {floor(F.floors[0]?.name ?? '')}, en Roekeloos gaat het vaakst knock-out.</p>
-      <h2 id="desk-raids">Bureauraids</h2>
-      <p>Tijdens het verkennen overvallen helden soms elkaars bureaus. Elke actieve held{F.unlocks === undefined ? '' : ` vanaf niveau ${F.unlocks.raids}`} doet automatisch raids en wordt automatisch overvallen. Je kunt geen raid starten en geen doelwit kiezen.{F.unlocks === undefined ? '' : ` Onder niveau ${F.unlocks.raids} doet een held geen raids en wordt hij niet overvallen.`} De raid staat in het avonturenlogboek van beide helden met de openbare naam van de andere speler, en de pagina Held houdt de raids van je held bij.</p>
+      <p>In {SAFE} kan een held niet knock-out gaan, dus binnen de muren loopt Roekeloos geen risico. In elk ander gebied kost een knock-out Auro en gaat je held terug naar {SAFE}, en Roekeloos gaat het vaakst knock-out.</p>
+      <h2 id="camp-raids">Kampraids</h2>
+      <p>Op patrouille gaan Schildknapen soms door elkaars spullen. Elke actieve held{F.unlocks === undefined ? '' : ` vanaf niveau ${F.unlocks.raids}`} doet automatisch raids en wordt automatisch overvallen. Je kunt geen raid starten en geen doelwit kiezen.{F.unlocks === undefined ? '' : ` Onder niveau ${F.unlocks.raids} doet een held geen raids en wordt hij niet overvallen.`} De raid staat in het avonturenlogboek van beide helden met de openbare naam van de andere speler, en de pagina Held houdt de raids van je held bij.</p>
       <ul>
-        <li>Wie wint is een muntworp, die alleen de houding verschuift. Niveau, uitrusting en effecten tellen nooit. Veilig telt 10 punten bij aan zijn kant, Evenwichtig niets en Roekeloos haalt er 5 af, bij aanvallen en verdedigen.</li>
-        <li>Hoe vaak je held een raid doet, hangt ook van de houding af: Veilig ongeveer om de dag verkennen, Evenwichtig ongeveer één keer per dag, Roekeloos ongeveer twee keer per dag.</li>
-        <li>De verliezer geeft 5% van zijn goud aan de winnaar, dus goud wisselt alleen van eigenaar. Beide verliezen gezondheid: de verliezer 30% van zijn maximale HP, de winnaar 10%. Uitrusting met {t.text('Thrifty')} haalt zijn punten van het goudverlies af.</li>
-        <li>Een raid kan een held knock-out slaan, net als een gevecht; in {floor(F.floors[0]?.name ?? '')} wordt je held dan gered. Raids vinden alleen helden die verkennen of rusten, en een overvallen held wordt zo’n zes uur met rust gelaten.</li>
-        <li>Wil je minder raids verliezen, kies dan Veilig, dat de minste raids doet en het vaakst wint.</li>
+        <li>Wie wint is een muntworp, die alleen de houding verschuift. Niveau, uitrusting en effecten tellen nooit. Op je hoede telt 10 punten bij aan zijn kant, Standvastig niets en Roekeloos haalt er 5 af, bij aanvallen en verdedigen.</li>
+        <li>Hoe vaak je held een raid doet, hangt ook van de houding af: Op je hoede ongeveer om de patrouilledag, Standvastig ongeveer één keer per dag, Roekeloos ongeveer twee keer per dag.</li>
+        <li>De verliezer geeft 5% van zijn Auro aan de winnaar, dus Auro wisselt alleen van eigenaar. Beide verliezen gezondheid: de verliezer 30% van zijn maximale HP, de winnaar 10%. Uitrusting met {name(affixName('thrifty'))} haalt zijn punten van het Auro-verlies af.</li>
+        <li>Een raid kan een held knock-out slaan, net als een gevecht; in {SAFE} wordt je held dan gered. Raids vinden alleen helden die verkennen of rusten, en een overvallen held wordt zo’n zes uur met rust gelaten.</li>
+        <li>Wil je minder raids verliezen, kies dan Op je hoede, dat de minste raids doet en het vaakst wint.</li>
       </ul>
       {F.meetings !== undefined ? (
         <>
-          <h2 id="meetings">Vergaderingen</h2>
-          <p>Af en toe loopt je held in plaats van een gevecht de held van een andere speler tegen het lijf op dezelfde verdieping{F.meetings.level === undefined ? '' : `, vanaf niveau ${F.meetings.level}`}. Ze drinken koffie, delen oorlogsverhalen of een broodje, en beide helden krijgen hetzelfde kleine voordeel voor {F.meetings.boonAdventures} avonturen. Beide logboeken vertellen het verhaal met de openbare naam van de andere speler, en het tabblad Logboek toont de laatste vijf vergaderingen van je held.</p>
+          <h2 id="musters">Appels</h2>
+          <p>Af en toe loopt je held in plaats van een gevecht de held van een andere speler tegen het lijf in hetzelfde gebied{F.meetings.level === undefined ? '' : `, vanaf niveau ${F.meetings.level}`}. Ze staan in de rij voor de soep, wisselen sterke verhalen uit of delen hun rantsoen, en beide helden krijgen hetzelfde kleine voordeel voor {F.meetings.boonAdventures} avonturen. Beide logboeken vertellen het verhaal met de openbare naam van de andere speler, en het tabblad Logboek toont de laatste vijf appels van je held.</p>
           <ul>
             {F.meetings.kinds.map((kind) => <li key={kind.id}><strong>{t.text(kind.name)}</strong>: {t.text(kind.effect)}, {boonLine(kind.modifiers)}.</li>)}
-            <li>Niets wisselt van eigenaar. Een vergadering neemt de plaats van één avontuur in, en het voordeel maakt dat ongeveer goed.</li>
-            <li>Het gebeurt even vaak, welke houding of klasse je ook hebt, ongeveer om de dag voor een held die aan het verkennen is. Helden ontmoeten elkaar alleen tijdens verkennen of rusten, en een held die net een vergadering had, wordt zo’n twaalf uur met rust gelaten.</li>
+            <li>Niets wisselt van eigenaar. Een appel neemt de plaats van één avontuur in, en het voordeel maakt dat ongeveer goed.</li>
+            <li>Het gebeurt even vaak, welke houding of klasse je ook hebt, ongeveer om de dag voor een held op patrouille. Helden ontmoeten elkaar alleen tijdens verkennen of rusten, en een held die net een appel had, wordt zo’n twaalf uur met rust gelaten.</li>
           </ul>
         </>
       ) : null}
       {F.lostProperty ? (
         <>
-          <h2 id="lost-property">Gevonden voorwerpen</h2>
-          <p>Gaat je held buiten het Kantoor knock-out, dan laat hij op die verdieping een reserve van zijn wapen of harnas vallen, met je openbare naam erop in stift. Je held houdt alles wat hij droeg. Later kan de held van een andere speler die die verdieping verkent, de reserve vinden in plaats van een gewone vondst, en je TRMNL vertelt je wie hem vond.</p>
+          <h2 id="strays">Verloren goed</h2>
+          <p>Gaat je held buiten de muren knock-out, dan laat hij op de weg in dat gebied een reserve van zijn wapen of harnas vallen, met je openbare naam erin gekrast. Je held houdt alles wat hij droeg. Later kan de held van een andere speler die daar patrouilleert, het verloren stuk vinden in plaats van een gewone vondst, en je TRMNL vertelt je wie het vond.</p>
           <ul>
-            <li>Je held kan op dezelfde manier reserves van andere spelers vinden. Een reserve is gewone uitrusting: draag hem, verkoop hem, demonteer hem of breng hem naar de werkbank. Hij komt met de basiswaarden van zijn soort en zeldzaamheid, zonder de verbeteringen van de eerste eigenaar.</li>
-            <li>De naam blijft erop staan. De pagina Tas en de kaart Gevonden voorwerpen in het Logboek tonen van wie hij was, net als je heldenpagina zolang je hem hebt.</li>
-            <li>Een reserve vervangt alleen een vondst die je held toch al zou doen, dus niemand krijgt extra uitrusting. Carrièredoelen en kerstcadeaus zijn altijd nieuwe uitrusting.</li>
-            <li>Er ligt steeds maar één reserve van jou rond. Gaat je held opnieuw knock-out voordat iemand hem vindt, dan vervangt de nieuwe reserve de oude.</li>
+            <li>Je held kan op dezelfde manier verloren goed van andere spelers vinden. Het is gewone uitrusting: draag het, verkoop het, demonteer het of breng het naar de Smidse. Het komt met de basiswaarden van zijn soort en zeldzaamheid, zonder de verbeteringen van de eerste eigenaar.</li>
+            <li>De naam blijft erop staan. De pagina Ransel en de kaart Verloren goed in het Logboek tonen van wie het was, net als je heldenpagina zolang je het hebt.</li>
+            <li>Verloren goed vervangt alleen een vondst die je held toch al zou doen, dus niemand krijgt extra uitrusting. Opdrachtbeloningen en geschenken van het {GIFT_DAY} zijn altijd nieuwe uitrusting.</li>
+            <li>Er ligt steeds maar één stuk van jou rond. Gaat je held opnieuw knock-out voordat iemand het vindt, dan vervangt het nieuwe stuk het oude.</li>
           </ul>
         </>
       ) : null}
       {F.todo !== undefined ? (
         <>
-          <h2 id="to-do-list">Takenlijst</h2>
-          <p>Je held houdt een kantoortakenlijst bij met drie kleine taken, zoals ‘Versla 4 Papierduiveltjes’, ‘Vind 2 stuks uitrusting’ of ‘Verken de Serverruimte 16 avonturen lang’.{arrives('todo')} Hij werkt ze af tijdens het verkennen, en de pagina Held toont de voortgang van elke taak. Is een taak klaar, dan zegt je scherm ‘Afgevinkt’ en krijgt je held wat goud: {en(F.todo.pay.map(String), 'of')}, afhankelijk van de verdieping. Taken geven geen XP, dus ze hebben geen invloed op de ranglijsten.</p>
+          <h2 id="garrison-orders">Garnizoensorders</h2>
+          <p>Het bord van het fort hangt drie kleine orders voor je held op, zoals ‘Versla 4 Kelderrijpratten’, ‘Vind 2 stuks uitrusting’ of ‘Patrouilleer 16 avonturen lang in de Moonbight-fjorden’.{arrives('todo')} Hij werkt ze af op patrouille, en de pagina Held toont de voortgang van elke order. Is een order klaar, dan zegt je scherm dat en krijgt je held wat Auro: {en(F.todo.pay.map(String), 'of')}, afhankelijk van het gebied. Orders geven geen XP, dus ze hebben geen invloed op de ranglijsten.</p>
           <ul>
-            <li>Elke ochtend om {F.todo.standup}, lokale tijd van je TRMNL, geeft de stand-up nieuwe taken voor de afgeronde. Je scherm somt ze op.</li>
-            <li>Taken verlopen nooit. Een vastgelopen taak wordt na twee stand-ups vanzelf geruild.</li>
-            <li>Minstens twee van de drie taken kunnen worden gedaan waar je held is. Hooguit één vraagt een reis naar een ander gebied, als je je held daarheen wilt sturen.</li>
-            <li>Eén keer tussen twee stand-ups kun je op de pagina Held een onafgemaakte taak ruilen voor een andere.</li>
+            <li>Elke ochtend om {F.todo.muster}, lokale tijd van je TRMNL, hangt het ochtendappel nieuwe orders op voor de afgeronde. Je scherm somt ze op.</li>
+            <li>Orders verlopen nooit. Een vastgelopen order wordt na twee appels vanzelf geruild.</li>
+            <li>Minstens twee van de drie orders kunnen worden gedaan waar je held is. Hooguit één vraagt een reis naar een ander gebied, als je je held daarheen wilt sturen.</li>
+            <li>Eén keer tussen twee appels kun je op de pagina Held een onafgemaakte order ruilen voor een andere.</li>
           </ul>
         </>
       ) : null}
-      <h2 id="potions">Drankjes</h2>
+      <h2 id="draughts">Drankjes</h2>
       {F.potions === undefined
-        ? <p>Een genezingsdrankje geeft 40% van de maximale HP van je held terug, naar boven afgerond. Je held drinkt er automatisch een als zijn HP tijdens het verkennen onder de drankjesgrens van zijn houding zakt, en het logboek noteert het. Zonder drankjes rust je held onder de rustgrens en gaat hij weer op pad als hij hersteld is. Je kunt er ook zelf een drinken via de pagina Held als je held verkent of rust en niet volledig gezond is. Drankjes vind je tijdens het verkennen en ze nemen nooit ruimte in de tas in.</p>
+        ? <p>Een koperdrankje geeft 40% van de maximale HP van je held terug, naar boven afgerond. Je held drinkt er automatisch een als zijn HP op patrouille onder de drankjesgrens van zijn houding zakt, en het logboek noteert het. Zonder drankjes rust je held onder de rustgrens en gaat hij weer op pad als hij hersteld is. Je kunt er ook zelf een drinken via de pagina Held als je held verkent of rust en niet volledig gezond is. Drankjes vind je op patrouille en ze nemen nooit ruimte in de ransel in.</p>
         : <>
-          <p>Drankjes zijn er in {F.potions.strengths.length} sterktes: {en(F.potions.strengths.map((s) => `${name(s.name).toLowerCase()} (${s.healPct}%)`))}, en elk geeft dat deel van de maximale HP van je held terug, naar boven afgerond. Wat je vindt hangt af van waar je held is: {F.potions.drops.map((d) => `${floor(d.floor)} geeft ${d.rest.length === 0 ? 'alleen' : 'vooral'} ${name(`${d.top.toLowerCase()}s`)}${d.rest.length === 0 ? '' : `, met wat ${d.rest.map((r) => name(`${r.toLowerCase()}s`)).join(' en ')}`}`).join('; ')}. Een nieuwe held begint met genezingsdrankjes, en de koopman en kantoorbeslissingen delen ook genezingsdrankjes uit. Alle sterktes delen één buidel en nemen nooit ruimte in de tas in.</p>
-          <p>Je held drinkt automatisch als zijn HP tijdens het verkennen onder de drankjesgrens van zijn houding zakt: het zwakste drankje dat hem weer boven die grens brengt, of het sterkste dat hij heeft als geen zwakker drankje volstaat. Het logboek noemt wat hij dronk. Zonder drankjes rust je held onder de rustgrens en gaat hij weer op pad als hij hersteld is. Je kunt er ook zelf een drinken via de pagina Held als je held verkent, rust of reist en niet volledig gezond is; met meer dan één sterkte in de buidel vraagt de pagina Held welke.</p>
-          <p><strong>Combineren.</strong> Op de pagina Tas worden {F.potions.combine.count} {name(`${F.potions.combine.from.toLowerCase()}s`)} en {F.potions.combine.materials.map((m) => `${m.n} ${name(m.name).toLowerCase()}`).join(', ')} één {name(F.potions.combine.to.toLowerCase())}. Combineren laat je nooit met meer drankjes achter dan ervoor, dus de buidel kan niet overlopen. Het gebeurt alleen als jij ervoor kiest.</p>
+          <p>Koperdrankjes zijn er in {F.potions.strengths.length} sterktes: {en(F.potions.strengths.map((s) => `${name(s.name).toLowerCase()} (${s.healPct}%)`))}, en elk geeft dat deel van de maximale HP van je held terug, naar boven afgerond. Wat je vindt hangt af van waar je held is: {F.potions.drops.map((d) => `${zone(d.zone)} geeft ${d.rest.length === 0 ? 'alleen' : 'vooral'} ${name(`${d.top.toLowerCase()}s`)}${d.rest.length === 0 ? '' : `, met wat ${d.rest.map((r) => name(`${r.toLowerCase()}s`)).join(' en ')}`}`).join('; ')}. Een nieuwe held begint met drankjes, en de wisselaar en beslissingen onderweg delen ook drankjes uit. Alle sterktes delen één kist en nemen nooit ruimte in de ransel in.</p>
+          <p>Je held drinkt automatisch als zijn HP op patrouille onder de drankjesgrens van zijn houding zakt: het zwakste drankje dat hem weer boven die grens brengt, of het sterkste dat hij heeft als geen zwakker drankje volstaat. Het logboek noemt wat hij dronk. Zonder drankjes rust je held onder de rustgrens en gaat hij weer op pad als hij hersteld is. Je kunt er ook zelf een drinken via de pagina Held als je held verkent, rust of reist en niet volledig gezond is; met meer dan één sterkte in de kist vraagt de pagina Held welke.</p>
+          <p><strong>Combineren.</strong> Op de pagina Ransel worden {F.potions.combine.count} {name(`${F.potions.combine.from.toLowerCase()}s`)} en {F.potions.combine.materials.map((m) => `${m.n} ${name(m.name).toLowerCase()}`).join(', ')} één {name(F.potions.combine.to.toLowerCase())}. Combineren laat je nooit met meer drankjes achter dan ervoor, dus de kist kan niet overlopen. Het gebeurt alleen als jij ervoor kiest.</p>
         </>}
-      <p>Drankjes zitten in een buidel. Een nieuwe held heeft {t.nameWith(F.firstPouch.name, 'een')} waar er {F.firstPouch.size} in passen. Grotere buidels koop je met goud op de pagina Tas, één tegelijk: {rungs(F.shopPouches)}. Is de buidel vol, dan wordt een gevonden drankje goud.</p>
-      <h2 id="the-wandering-merchant">De rondtrekkende koopman</h2>
-      <p>Af en toe komt je held tijdens het verkennen een rondtrekkende koopman tegen. Je scherm zegt ‘Er is een koopman op bezoek. Winkel snel in de app.’ en de pagina Tas toont tot drie aanbiedingen: een paar drankjes en de volgende buidel of tas{F.merchantOff > 0 ? ` met ${F.merchantOff}% korting op de prijs van de pagina Tas` : ''}. Elke aanbieding verkoopt één keer. De koopman trekt verder na vier avonturen of na je laatste aankoop.</p>
+      <p>Drankjes zitten in een kist. Een nieuwe held heeft {t.nameWith(F.firstPouch.name, 'een')} waar er {F.firstPouch.size} in passen. Grotere kisten koop je met Auro op de pagina Ransel, één tegelijk: {rungs(F.shopPouches)}. Is de kist vol, dan wordt een gevonden drankje Auro.</p>
+      <h2 id="the-serpentos-moneychanger">De Serpentos-wisselaar</h2>
+      <p>Af en toe houdt een Serpentos-factor, een van de Dragu-wisselaars die met de bevoorradingsschepen meereizen, halt bij je held op patrouille. Je scherm zegt het, en de pagina Ransel toont tot drie aanbiedingen: een paar drankjes en de volgende kist of ransel{F.merchantOff > 0 ? ` met ${F.merchantOff}% korting op de prijs van de pagina Ransel` : ''}. Elke aanbieding verkoopt één keer. De factor trekt verder na vier avonturen of na je laatste aankoop.</p>
       <h2 id="decisions">Beslissingen</h2>
-      <p>Soms vraagt het kantoor je held iets kleins, zoals meebetalen aan een taart of overwerken. Je scherm zegt ‘Er wacht een beslissing in de app.’ en de pagina Held toont beide opties met precies wat elke optie verandert. Antwoord je niet binnen ongeveer een dag, dan wordt de optie die als standaard gemarkeerd is voor je gekozen.</p>
+      <p>Soms vraagt de weg je held iets kleins, zoals bijdragen aan de stoofpot van de kok of een nachtwacht lopen op de palissade. Je scherm zegt dat er een beslissing wacht, en de pagina Held toont beide opties met precies wat elke optie verandert. Antwoord je niet binnen ongeveer een dag, dan wordt de optie die als standaard gemarkeerd is voor je gekozen.</p>
       <h2 id="effects">Effecten</h2>
-      <p>Sommige momenten geven je held een kort effect, dat op de pagina Held staat met de avonturen die nog resten. Een elite verslaan maakt je held {t.text('Fired up')} (+10% aanval voor acht avonturen). Meebetalen aan de taart geeft {t.text('Well fed')} (+10% XP voor acht avonturen). Een val laat je held {t.text('Bruised')} achter (−15% verdediging voor vier avonturen). Je held heeft hooguit drie effecten. Elke rust haalt slechte effecten weg, en een knock-out wist ze allemaal.</p>
+      <p>Sommige momenten geven je held een kort effect, dat op de pagina Held staat met de avonturen die nog resten. Een elite verslaan maakt je held {t.text('Fired up')} (+10% aanval voor acht avonturen). Bijdragen aan de stoofpot geeft {t.text('Well fed')} (+10% XP voor acht avonturen). Een val laat je held {t.text('Bruised')} achter (−15% verdediging voor vier avonturen). Je held heeft hooguit drie effecten. Elke rust haalt slechte effecten weg, en een knock-out wist ze allemaal.</p>
       {F.standoff !== undefined ? (
         <>
           <h2 id="dug-in-elites">Ingegraven elites</h2>
-          <p>Vanaf niveau {F.standoff.minLevel}, in {floor(F.standoff.floor)} en diepere verdiepingen, graaft een elite zich soms in in plaats van in één gevecht te vallen. Je TRMNL toont hem met zijn gezondheidsbalk, en je held gaat elk avontuur terug tot hij valt.</p>
+          <p>Vanaf niveau {F.standoff.minLevel}, in {zone(F.standoff.zone)} en de gebieden daarachter, graaft een elite zich soms in in plaats van in één gevecht te vallen. Je TRMNL toont hem met zijn gezondheidsbalk, en je held gaat elk avontuur terug tot hij valt.</p>
           <ul>
-            <li>Elk avontuur vecht je held tot zes rondes tegen hem, en zijn gezondheid blijft staan. Hij slaat veel harder dan een gewone elite, en je held vecht door voorbij de rustgrens van zijn houding voordat hij terugtrekt, dus een confrontatie kan in een knock-out eindigen. Afbreken kost geen goud.</li>
-            <li>Valt hij, dan levert hij {F.standoff.xp} keer de XP van het monster en {F.standoff.gold} keer zijn goud op, plus een zeldzame of epische vondst van die verdieping.</li>
+            <li>Elk avontuur vecht je held tot zes rondes tegen hem, en zijn gezondheid blijft staan. Hij slaat veel harder dan een gewone elite, en je held vecht door voorbij de rustgrens van zijn houding voordat hij terugtrekt, dus een confrontatie kan in een knock-out eindigen. Afbreken kost geen Auro.</li>
+            <li>Valt hij, dan levert hij {F.standoff.xp} keer de XP van het wezen en {F.standoff.gold} keer zijn Auro op, plus een zeldzame of epische vondst uit dat gebied.</li>
             <li>Hij vertrekt na {F.standoff.hours} uur, of eerder als je held knock-out gaat of reist. Een pauze houdt de klok niet tegen.</li>
             <li>De pagina Held toont zijn gezondheid en wanneer hij vertrekt. Daar kun je weglopen, en reizen vraagt het eerst voordat je hem achterlaat.</li>
           </ul>
         </>
       ) : null}
+      <h2 id="sky-calendar">De hemel en de kalender</h2>
+      <p>Twaalf geketende manen hangen boven Volta, één voor elke Astrale Warden, en de strook bovenaan de scène van je held toont ze in Gyre-volgorde: Geketende Maagd, Leviathan, Wyrm, Magnus, Bloeiende Gruwel, Sluierhond, Verrader, Verbondenen, Eldritch Beest, Titaan, Eclips en Wachter. De verlichte kant van elke maan volgt zijn eigen periode, van de ene dag van de Wachter tot het jaar van de Maagd, en de volste maan van de dag draagt een halo. De maan van de Maagd is een dode schil en wordt altijd gebarsten getekend. De hemel wordt, net als de datum in de titelbalk, alleen uit de klok berekend en verandert niets aan het spel.</p>
       {F.occasions !== undefined ? (
         <>
-          <h2 id="office-calendar">Kantoorkalender</h2>
-          <p>Feestdagen en kantoorgelegenheden versieren die dag de scène van je held: slingers aan het plafond, iets op de vloer, soms een hoed, en in {floor(F.floors[0]?.name ?? '')} een ander uitzicht door het raam. Ze volgen de lokale datum van je TRMNL. De eerste keer dat je held er een ziet, noemt het logboek hem, en de meeste geven zolang ze duren een kleine bonus. De pagina Held toont de gelegenheid van vandaag en de volgende.</p>
+          <p>Bepaalde dagen van het jaar zijn hemelgebeurtenissen die de scène van je held versieren: versiering bovenaan, iets op de grond, soms een hoed, en in {SAFE} een ander uitzicht voorbij de palissade. Ze volgen de lokale datum van je TRMNL. De eerste keer dat je held er een ziet, noemt het logboek hem, en de meeste geven zolang ze duren een kleine bonus. De pagina Held toont de gebeurtenis van vandaag en de volgende.</p>
           <ul>
-            {F.occasions.map((rule) => <li key={rule.id}><strong>{t.text(rule.name)}</strong>, {occasionDate(rule)}: {rule.id === 'friday_13th' ? 'elke bureauraid loopt mis (zie hieronder).' : rule.effectLabel ? `${t.text(rule.effectLabel)}.` : 'alleen versiering.'}</li>)}
+            {F.occasions.map((rule) => <li key={rule.id}><strong>{t.text(rule.name)}</strong>, {occasionDate(rule)}: {rule.id === 'friday_13th' ? 'elke kampraid loopt mis (zie hieronder).' : rule.effectLabel ? `${t.text(rule.effectLabel)}.` : 'alleen versiering.'}</li>)}
           </ul>
-          <p><strong>Vrijdag de 13e.</strong> Bureauraids beginnen twee keer zo vaak, en ze lopen allemaal mis: niemand wint, en beide helden verliezen 20% van hun maximale HP en 5% van hun goud, dat niemand krijgt. Het raidoverzicht van je held telt het als ongelukje.</p>
-          <p><strong>Kerst.</strong> Je held vindt elke kerst één ingepakt cadeau: een stuk uitrusting van de verdieping waar hij is, bij zijn eerste avontuur van de drie dagen.</p>
+          <p><strong>{ILL_OMEN}.</strong> Kampraids beginnen twee keer zo vaak, en ze lopen allemaal mis: niemand wint, en beide helden verliezen 20% van hun maximale HP en 5% van hun Auro, dat niemand krijgt. Het raidoverzicht van je held telt het als ongelukje.</p>
+          <p><strong>{GIFT_DAY}.</strong> Je held vindt één ingepakt geschenk: een stuk uitrusting uit het gebied waar hij is, bij zijn eerste avontuur van de drie dagen.</p>
         </>
       ) : null}
       <h2 id="rare-and-epic-gear">Zeldzame en epische uitrusting</h2>
-      <p>Uitrusting is gewoon, ongewoon, zeldzaam of episch. Episch is het zeldzaamst, ongeveer één vondst op honderd, en het sterkst. Zeldzame en epische uitrusting heeft ook een speciale eigenschap, die in de naam staat en op de pagina Tas wordt uitgelegd:</p>
+      <p>Uitrusting is gewoon, ongewoon, zeldzaam of episch. Episch is het zeldzaamst, ongeveer één vondst op honderd, en het sterkst. Zeldzame en epische uitrusting draagt ook een eigenschap van het Sterrensmeden, die in de naam staat en op de pagina Ransel wordt uitgelegd. Elke eigenschap volgt de metaalkunde van de Obsidianiden: een metaal dat in het stuk is verwerkt, leent het één eigenschap.</p>
       <ul>
-        <li><strong>{t.text('Vampiric')}</strong> geneest na elke overwinning 5% van de maximale HP.</li>
-        <li><strong>{t.text('Lucky')}</strong> geeft 20% meer goud uit overwinningen en vondsten.</li>
-        <li><strong>{t.text('Sturdy')}</strong> krijgt 40% minder schade van vallen.</li>
-        <li><strong>{t.text('Thrifty')}</strong> verliest 5 punten minder goud als het misgaat: een terugtocht kost geen goud in plaats van 5%, en een knock-out kost 5% in plaats van 10%.</li>
+        <li><strong>{name(affixName('vampiric'))}</strong> geneest na elke overwinning 5% van de maximale HP, want koper geneest.</li>
+        <li><strong>{name(affixName('lucky'))}</strong> geeft 20% meer Auro uit overwinningen en vondsten.</li>
+        <li><strong>{name(affixName('sturdy'))}</strong> krijgt 40% minder schade van vallen.</li>
+        <li><strong>{name(affixName('thrifty'))}</strong> verliest 5 punten minder Auro als het misgaat: een terugtocht kost geen Auro in plaats van 5%, en een knock-out kost 5% in plaats van 10%.</li>
       </ul>
-      <h2 id="when-your-bag-fills-up">Als je tas vol raakt</h2>
-      <p>Een nieuwe held begint met een kleine papieren zak waar 6 stuks uitrusting in passen. Gedragen uitrusting en drankjes nemen geen ruimte in. Is de tas vol, dan houdt je held het volgende stuk dat hij vindt voor je vast en gaat hij door met avonturen. Zolang dat stuk wacht, blijven verdere vondsten liggen tot je ruimte maakt.</p>
-      <h2 id="bigger-bags">Grotere tassen</h2>
-      <p>Je tas groeit met goud. {F.tote ? `Je held vindt binnen de eerste paar uur ${t.nameWith(F.tote.name, 'een')} (${F.tote.size}). ` : ''}Daarna koop je grotere tassen op de pagina Tas, één tegelijk: {rungs(F.shopBags)}, tot {F.topBag} plekken. Er zijn geen niveau-eisen, en tassen vallen nooit als buit.</p>
+      <h2 id="when-your-pack-fills-up">Als je ransel vol raakt</h2>
+      <p>Een nieuwe held begint met een schoudertas waar 6 stuks uitrusting in passen. Gedragen uitrusting en drankjes nemen geen ruimte in. Is de ransel vol, dan houdt je held het volgende stuk dat hij vindt voor je vast en gaat hij door met avonturen. Zolang dat stuk wacht, blijven verdere vondsten liggen tot je ruimte maakt.</p>
+      <h2 id="bigger-packs">Grotere ransels</h2>
+      <p>Je ransel groeit met Auro. {F.tote ? `Je held krijgt binnen de eerste paar uur ${t.nameWith(F.tote.name, 'een')} (${F.tote.size}) uitgereikt. ` : ''}Daarna koop je grotere ransels op de pagina Ransel, één tegelijk: {rungs(F.shopBags)}, tot {F.topBag} plekken. Er zijn geen niveau-eisen, en ransels vallen nooit als buit.</p>
       <ol className="[&_li]:list-decimal">
-        <li>Open Tas in de app. Draag eventuele verbeteringen en verkoop overbodige uitrusting om ruimte te maken.</li>
+        <li>Open Ransel in de app. Draag eventuele verbeteringen en verkoop overbodige uitrusting om ruimte te maken.</li>
         <li>Wordt er een vondst bewaard, kies dan Vondst ophalen. Laat daarna minstens één plek vrij, zodat de avonturen verder kunnen.</li>
-        <li>Is er een plek vrij en wacht er niets, dan gaan de avonturen binnen 15 minuten vanzelf verder. Tot die tijd kun je op de pagina Tas nog een ander ontgrendeld gebied kiezen.</li>
+        <li>Is er een plek vrij en wacht er niets, dan gaan de avonturen binnen 15 minuten vanzelf verder. Tot die tijd kun je op de pagina Ransel nog een ander open gebied kiezen.</li>
       </ol>
-      <p>Uitrusting dragen maakt geen plek vrij. Uitrusting verkopen of demonteren, of een grotere tas kopen, wel, en de bewaarde vondst gaat meteen de tas in. De pagina Tas kan ook met één tik je zwakste reserve verkopen en de vondst houden. Ook de slaapstand van je TRMNL houdt het spel nooit tegen.</p>
+      <p>Uitrusting dragen maakt geen plek vrij. Uitrusting verkopen of demonteren, of een grotere ransel kopen, wel, en de bewaarde vondst gaat meteen de ransel in. De pagina Ransel kan ook met één tik je zwakste reserve verkopen en de vondst houden. Ook de slaapstand van je TRMNL houdt het spel nooit tegen.</p>
       {F.workbench !== undefined ? <>
-        <h2 id="salvage-and-the-workbench">Demonteren en de werkbank</h2>
-        <p>{F.workbench.level !== undefined ? `Vanaf niveau ${F.workbench.level} heeft o` : 'O'}verbodige uitrusting {F.workbench.level !== undefined ? '' : 'heeft '}twee uitwegen uit de tas: verkopen voor goud, of demonteren tot materialen op de pagina Tas. Demonteren levert op naar de trede waarop het stuk is gevonden, in eenheden van het materiaal van zijn zeldzaamheid: {F.workbench.materials.map((m) => `${name(m.name).toLowerCase()} uit ${m.rarities.map((r) => rarityNl[r] ?? r).join(' en ')} uitrusting`).join(', ')}. Epische uitrusting levert {F.workbench.epicMultiplier} keer zoveel op. Materialen nemen geen ruimte in de tas in en worden nooit verkocht. Uitrusting wordt alleen gedemonteerd als jij dat kiest.{F.workbench.level !== undefined ? ` Verkoop vóór niveau ${F.workbench.level} je reserves: de eerste opwaardering vraagt toch niveau ${F.workbench.level}.` : ''}</p>
-        <p>De werkbank besteedt materialen en goud aan de uitrusting die je held draagt, terwijl hij die aanhoudt: het stuk houdt zijn naam en eigenschap, alleen de getallen veranderen. Elk stuk heeft één volgende stap. {F.workbench.tiers.map((s, k) => `${k === 0 ? 'Een stuk van trede 1 naar Mk II brengen' : 'Van Mk II naar Mk III'} kost ${price(s)}`).join('; ')}; een stuk kan alleen naar een trede die je held op zijn niveau zou kunnen dragen. Is een stuk Mk III (of zo gevonden), dan voegt versterken per stap één punt toe: {F.workbench.reinforce.map((s) => `+${s.to} voor ${price(s)}`).join(', ')}. {F.workbench.reinforce.length > 0 ? `Na +${F.workbench.reinforce.at(-1)!.to} is het stuk af.` : ''} Zeldzame en epische uitrusting kan ook een eigenschap naar keuze krijgen voor {price(F.workbench.affix)}, in plaats van de huidige.</p>
+        <h2 id="salvage-and-the-forge">Demonteren en de Smidse</h2>
+        <p>{F.workbench.level !== undefined ? `Vanaf niveau ${F.workbench.level} heeft o` : 'O'}verbodige uitrusting {F.workbench.level !== undefined ? '' : 'heeft '}twee uitwegen uit de ransel: verkopen voor Auro, of demonteren tot stellazia-scherven op de pagina Ransel. Demonteren levert op naar de trede waarop het stuk is gevonden, in eenheden van de scherf van zijn zeldzaamheid: {F.workbench.materials.map((m) => `${name(m.name).toLowerCase()} uit ${m.rarities.map((r) => rarityNl[r] ?? r).join(' en ')} uitrusting`).join(', ')}. Epische uitrusting levert {F.workbench.epicMultiplier} keer zoveel op. Scherven nemen geen ruimte in de ransel in en worden nooit verkocht. Uitrusting wordt alleen gedemonteerd als jij dat kiest.{F.workbench.level !== undefined ? ` Verkoop vóór niveau ${F.workbench.level} je reserves: de eerste opwaardering vraagt toch niveau ${F.workbench.level}.` : ''}</p>
+        <p>De Smidse is Sterrensmeden op de schaal van het fort: ze besteedt scherven en Auro aan de uitrusting die je held draagt, terwijl hij die aanhoudt. Het stuk houdt zijn naam en eigenschap, alleen de getallen veranderen. Elk stuk heeft één volgende stap. {F.workbench.tiers.map((s, k) => `${k === 0 ? 'Een stuk van trede 1 naar Mk II brengen' : 'Van Mk II naar Mk III'} kost ${price(s)}`).join('; ')}; een stuk kan alleen naar een trede die je held op zijn niveau zou kunnen dragen. Is een stuk Mk III (of zo gevonden), dan voegt versterken per stap één punt toe: {F.workbench.reinforce.map((s) => `+${s.to} voor ${price(s)}`).join(', ')}. {F.workbench.reinforce.length > 0 ? `Na +${F.workbench.reinforce.at(-1)!.to} is het stuk af.` : ''} Zeldzame en epische uitrusting kan ook een eigenschap naar keuze krijgen voor {price(F.workbench.affix)}, in plaats van de huidige.</p>
         <p>Opwaarderen lukt altijd. Een opgewaardeerd stuk demonteren geeft niet terug wat je eraan uitgaf, dus waardeer alleen uitrusting op die je wilt blijven dragen.</p>
       </> : null}
       <h2 id="getting-knocked-out">Knock-out gaan</h2>
-      <p>Je held komt na ongeveer twee uur vanzelf weer bij en keert terug naar {floor(F.floors[0]?.name ?? '')}. Je houdt je XP en uitrusting, maar verliest 10% van je huidige goud.</p>
+      <p>Je held komt na ongeveer twee uur vanzelf weer bij en keert terug naar {SAFE}. Je houdt je XP en uitrusting, maar verliest 10% van je huidige Auro.</p>
       <h2 id="recaps">Samenvattingen</h2>
-      <p>Je scherm toont een korte samenvatting van de laatste afgeronde nacht of dag, in de lokale tijd van je TRMNL. Om 07:00 beslaat de nachtsamenvatting 19:00 tot 07:00 en blijft die de hele dag staan. Om 19:00 beslaat de dagsamenvatting 07:00 tot 19:00 en blijft die de hele avond en nacht staan. Het kantoorraam toont dag en nacht op dezelfde tijden. De verhalen erboven zijn altijd de nieuwste.</p>
+      <p>Je scherm toont een korte samenvatting van de laatste afgeronde nacht of dag, in de lokale tijd van je TRMNL. Om 07:00 beslaat de nachtsamenvatting 19:00 tot 07:00 en blijft die de hele dag staan. Om 19:00 beslaat de dagsamenvatting 07:00 tot 19:00 en blijft die de hele avond en nacht staan. De scène toont dag en nacht op dezelfde tijden. De verhalen erboven zijn altijd de nieuwste.</p>
       <h2 id="understanding-rankings">Hoe de ranglijsten werken</h2>
-      <p>Het scherm toont de Top 5 XP van deze week voor je niveaugroep, met je eigen regel gemarkeerd, of onder de lijst toegevoegd als je lager staat. De app biedt ook de lijst van vandaag en een lijst aller tijden. De dag begint om 00:00 UTC en de week op maandag om 00:00 UTC, net als bij de aandenkens. De ranglijsten verschijnen elk uur, dus een recent avontuur of een nieuw niveau kan al te zien zijn voordat je plek wordt bijgewerkt.</p>
+      <p>Het scherm toont de Top 5 XP van deze week voor je niveaugroep, met je eigen regel gemarkeerd, of onder de lijst toegevoegd als je lager staat. De app biedt ook de lijst van vandaag en een lijst aller tijden. De dag begint om 00:00 UTC en de week op maandag om 00:00 UTC, net als bij de zegels. De ranglijsten verschijnen elk uur, dus een recent avontuur of een nieuw niveau kan al te zien zijn voordat je plek wordt bijgewerkt.</p>
       <p>Gepauzeerde en gestopte helden houden hun voortgang. Een held zonder XP deze week verdwijnt van de weeklijst tot hij weer XP verdient. De voortgang van aller tijden blijft bewaard.</p>
       <h2 id="sharing-your-hero">Je held delen</h2>
-      <p>Je held heeft een openbare pagina met zijn niveau, plek, huidige verdieping, totalen en prestaties. Goud en het avonturenlogboek worden nooit getoond, en uitrusting alleen als het een reserve van een andere speler is die je held vasthoudt. Je naam linkt naar de pagina vanuit de ranglijsten en vanuit raids en vergaderingen van andere spelers, en daar volgen andere spelers je. In Instellingen staan de knoppen Delen en Link kopiëren, en een gedeelde link toont een kaart met een afbeelding van je held, zijn naam, niveau en plek. Wil je hem verbergen, kies dan Mijn heldenpagina verbergen in Instellingen. Hij is meteen weg, en zolang hij verborgen is, kan niemand je volgen.</p>
+      <p>Je held heeft een openbare pagina met zijn niveau, plek, huidige gebied, totalen en opmetingsvermeldingen. Auro en het avonturenlogboek worden nooit getoond, en uitrusting alleen als het verloren goed van een andere speler is dat je held vasthoudt. Je naam linkt naar de pagina vanuit de ranglijsten en vanuit raids en appels van andere spelers, en daar volgen andere spelers je. In Instellingen staan de knoppen Delen en Link kopiëren, en een gedeelde link toont een kaart met een afbeelding van je held, zijn naam, niveau en plek. Wil je hem verbergen, kies dan Mijn heldenpagina verbergen in Instellingen. Hij is meteen weg, en zolang hij verborgen is, kan niemand je volgen.</p>
       <h2 id="following">Volgen</h2>
-      <p>Als je bent ingelogd, kun je een andere speler volgen via zijn openbare heldenpagina, tot 20 spelers. Iedereen die je volgt staat onder Ranglijsten, met het niveau van hun held, hun plek en waar ze zijn, en links naar hun pagina’s. Volgen verandert niets aan het spel, en niemand krijgt te horen dat je hem volgt. Bureau-raids kiezen hun doelen willekeurig uit iedereen, dus iemand volgen stuurt je held nooit op hem af. Verbergt een speler zijn pagina, dan zie je alleen zijn naam tot hij hem weer toont. Wijzigt hij zijn openbare naam, dan valt hij van je lijst.</p>
+      <p>Als je bent ingelogd, kun je een andere speler volgen via zijn openbare heldenpagina, tot 20 spelers. Iedereen die je volgt staat onder Ranglijsten, met het niveau van hun held, hun plek en waar ze zijn, en links naar hun pagina’s. Volgen verandert niets aan het spel, en niemand krijgt te horen dat je hem volgt. Kampraids kiezen hun doelen willekeurig uit iedereen, dus iemand volgen stuurt je held nooit op hem af. Verbergt een speler zijn pagina, dan zie je alleen zijn naam tot hij hem weer toont. Wijzigt hij zijn openbare naam, dan valt hij van je lijst.</p>
       <h2 id="names">Namen</h2>
-      <p>Je hebt twee namen. De naam van je held staat op je TRMNL, in de ranglijsten en op je heldenpagina; wil je die wijzigen, koop dan voor 200 goud een ‘Hallo, ik heet’-naamplaatje op het tabblad Meer. Er is er één per dag op voorraad. Je openbare naam ben jij, in elk TRMNL-spel: hij staat naast je held in de ranglijsten, in raids en vergaderingen van andere spelers en in de link naar je pagina. Je kunt hem eens per 7 dagen gratis wijzigen via Account. Links naar je oude pagina werken dan niet meer, en niemand anders kan je oude naam 7 dagen lang nemen.</p>
+      <p>Je hebt twee namen. De naam van je held staat op je TRMNL, in de ranglijsten en op je heldenpagina; wil je die wijzigen, laat dan via het tabblad Meer de klerk van het fort de monsterrol aanpassen, voor 200 Auro. De klerk neemt één aanpassing per dag aan. Je openbare naam ben jij, in elk TRMNL-spel: hij staat naast je held in de ranglijsten, in raids en appels van andere spelers en in de link naar je pagina. Je kunt hem eens per 7 dagen gratis wijzigen via Account. Links naar je oude pagina werken dan niet meer, en niemand anders kan je oude naam 7 dagen lang nemen.</p>
       <h2 id="looks">Uiterlijk</h2>
-      <p>Je stelt het uiterlijk van je held samen als je hem aanmaakt: afkomst, bouw, hoofd, haar, rug, accessoire en wapenrok. Het verandert alleen hoe je held eruitziet op je TRMNL, je heldenpagina en in vergaderingen van andere spelers. Elk uiterlijk speelt hetzelfde. Wil je het later wijzigen, ga dan naar de kampspiegel via je heldenpagina of het tabblad Meer. Gratis, wanneer je wilt.</p>
+      <p>Je stelt het uiterlijk van je held samen als je hem aanmaakt: afkomst, bouw, hoofd, haar, rug, accessoire en wapenrok. Elf volkeren van Volta kunnen de eed van de Schildknaap afleggen, van de kleine Aquaniden, Lunaris en Dragu tot de torenhoge Crystalkin. Het verandert alleen hoe je held eruitziet op je TRMNL, je heldenpagina en in appels van andere spelers. Elk uiterlijk speelt hetzelfde. Ook de naam is aan jou: de maker kan een naam voorstellen in de taal van de afkomst die je kiest. Wil je het uiterlijk later wijzigen, ga dan naar de kampspiegel via je heldenpagina of het tabblad Meer. Gratis, wanneer je wilt.</p>
       <h2 id="alerts">Meldingen</h2>
       <p>Je TRMNL is de belangrijkste manier om je held te volgen, maar Instellingen kan je in twee gevallen ook een melding op je telefoon sturen, elk uit tot je het aanzet:</p>
       <ul>
-        <li><strong>Tas vol:</strong> de tas is vol en je held houdt een vondst voor je vast. Komt een halfuur nadat de tas volraakte, dus er komt niets als je hem al aan het opruimen bent, en één keer per keer dat hij volraakt.</li>
-        <li><strong>Koopje van de koopman:</strong> een koopman verkoopt de volgende tas of buidel{F.merchantOff > 0 ? ` met ${F.merchantOff}% korting` : ''} en je held heeft het goud. Hooguit één keer per dag. Een koopman met alleen drankjes stuurt er nooit een.</li>
+        <li><strong>Ransel vol:</strong> de ransel is vol en je held houdt een vondst voor je vast. Komt een halfuur nadat de ransel volraakte, dus er komt niets als je hem al aan het opruimen bent, en één keer per keer dat hij volraakt.</li>
+        <li><strong>Koopje van de wisselaar:</strong> een Serpentos-factor verkoopt de volgende ransel of kist{F.merchantOff > 0 ? ` met ${F.merchantOff}% korting` : ''} en je held heeft het Auro. Hooguit één keer per dag. Een factor met alleen drankjes stuurt er nooit een.</li>
       </ul>
-      <p>Je krijgt hooguit twee meldingen per dag. Stille uren lopen van 21:00 tot 08:00, tenzij je ze wijzigt: een melding over een volle tas wacht tot ze voorbij zijn, en een koopje van de koopman dat dan opduikt, wordt overgeslagen. Voor het versturen controleert het spel of de melding nog klopt, dus je hoort nooit over een tas die je al hebt opgeruimd of een aanbieding die al weg is. Beslissingen, raids, knock-outs, nieuwe niveaus en aandenkens sturen nooit meldingen.</p>
-      <p>Kies Toestaan op dit apparaat in Instellingen en accepteer daarna de vraag van je browser. Zet op iPhone en iPad eerst TRMNL Games op je beginscherm (Deel, dan Zet op beginscherm) en open het vanaf daar. Elk apparaat dat je toestaat, staat in Instellingen met een knop Verwijderen; het laatste verwijderen zet de meldingen uit.</p>
+      <p>Je krijgt hooguit twee meldingen per dag. Stille uren lopen van 21:00 tot 08:00, tenzij je ze wijzigt: een melding over een volle ransel wacht tot ze voorbij zijn, en een koopje dat dan opduikt, wordt overgeslagen. Voor het versturen controleert het spel of de melding nog klopt, dus je hoort nooit over een ransel die je al hebt opgeruimd of een aanbieding die al weg is. Beslissingen, raids, knock-outs, nieuwe niveaus en zegels sturen nooit meldingen.</p>
+      <p>Kies Toestaan op dit apparaat in Instellingen en accepteer daarna de vraag van je browser. Zet op iPhone en iPad eerst de app op je beginscherm (Deel, dan Zet op beginscherm) en open hem vanaf daar. Elk apparaat dat je toestaat, staat in Instellingen met een knop Verwijderen; het laatste verwijderen zet de meldingen uit.</p>
       <h2 id="troubleshooting">Problemen oplossen</h2>
       <h3 id="not-on-your-screen">Je held staat niet op je scherm</h3>
       <ul>

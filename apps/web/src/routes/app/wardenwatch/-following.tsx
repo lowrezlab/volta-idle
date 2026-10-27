@@ -40,7 +40,7 @@ export function FollowingCard() {
                 {row.hero ? (
                   <>
                     <p className="text-sm text-muted">{row.hero.name}, {t.heroClass(row.hero.heroClass === 'rogue' ? 'rogue' : 'warrior')}</p>
-                    <p className="text-sm">{t.doing(row.hero.status, row.hero.biome ?? 'Office Cubicles')}.</p>
+                    <p className="text-sm">{t.doing(row.hero.status, row.hero.biome ?? 'Castellum Frigo')}.</p>
                   </>
                 ) : (
                   <p className="text-sm text-muted">{row.state === 'private' ? t.pagePrivate : t.gone}</p>

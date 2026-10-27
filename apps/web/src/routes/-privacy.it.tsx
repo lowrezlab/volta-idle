@@ -20,10 +20,10 @@ export const privacyIt: LegalPage = {
         contento di condividere e non metterci mai i tuoi contatti.
       </p>
       <p>
-        In Wardenwatch, gli eroi fanno incursioni sulle scrivanie altrui e si incontrano per caso. Quando il tuo eroe fa un’incursione, la subisce o incontra un altro eroe, il tuo nome pubblico compare nel diario delle avventure dell’altro giocatore, nell’app e sul suo TRMNL, come già succede nelle classifiche. Quando il tuo eroe va KO può lasciare cadere un oggetto di riserva con il tuo nome pubblico, che l’eroe di un altro giocatore può trovare e tenere; il tuo nome compare allora su quell’oggetto nella sua app e sulla sua pagina eroe. Se cambi nome o elimini l’account, quelle storie e quegli oggetti mostrano «Giocatore nascosto» o perdono il nome.
+        In Wardenwatch, gli eroi fanno incursioni sui campi altrui e si incontrano per caso. Quando il tuo eroe fa un’incursione, la subisce o incontra un altro eroe, il tuo nome pubblico compare nel diario delle avventure dell’altro giocatore, nell’app e sul suo TRMNL, come già succede nelle classifiche. Quando il tuo eroe va KO può lasciare cadere un oggetto di riserva con il tuo nome pubblico, che l’eroe di un altro giocatore può trovare e tenere; il tuo nome compare allora su quell’oggetto nella sua app e sulla sua pagina eroe. Se cambi nome o elimini l’account, quelle storie e quegli oggetti mostrano «Giocatore nascosto» o perdono il nome.
       </p>
       <p>
-        Il tuo eroe di Wardenwatch ha una pagina pubblica: chiunque abbia il link può vedere il tuo nome pubblico, il nome del tuo eroe, livello, posizione, piano attuale e data di inizio, alcuni totali e i tuoi obiettivi. Oro, diario delle avventure e dati dell’account restano privati, e così il tuo equipaggiamento, tranne i doppioni di altri giocatori che il tuo eroe tiene, che compaiono con i loro nomi. La pagina è attiva di default. Nascondi la mia pagina eroe, nelle Impostazioni, la nasconde subito, e puoi mostrarla di nuovo quando vuoi.
+        Il tuo eroe di Wardenwatch ha una pagina pubblica: chiunque abbia il link può vedere il tuo nome pubblico, il nome del tuo eroe, livello, posizione, zona attuale e data di inizio, alcuni totali e i tuoi obiettivi. Oro, diario delle avventure e dati dell’account restano privati, e così il tuo equipaggiamento, tranne i doppioni di altri giocatori che il tuo eroe tiene, che compaiono con i loro nomi. La pagina è attiva di default. Nascondi la mia pagina eroe, nelle Impostazioni, la nasconde subito, e puoi mostrarla di nuovo quando vuoi.
       </p>
       <p>
         I giocatori che hanno effettuato l’accesso possono seguire una pagina eroe pubblica. Conserviamo chi segue chi, così la loro app può elencare i giocatori che seguono. Nessuno viene avvisato di essere seguito, e nessuna pagina mostra chi segue un giocatore. Se cambi il nome pubblico, nascondi la pagina o elimini i tuoi progressi, gli altri giocatori non vedono più il tuo eroe nella loro lista, e l’eliminazione cancella quei dati.
@@ -38,7 +38,7 @@ export const privacyIt: LegalPage = {
           Per ogni installazione TRMNL: l’ID dell’istanza del plugin, un hash del suo token di accesso e il link alle impostazioni che ci fornisce TRMNL. Non conserviamo il tuo nome
           né la tua e-mail TRMNL.
         </li>
-        <li>Lo scostamento di fuso orario che il tuo TRMNL invia con ogni schermata (per esempio UTC+2), così lo stand-up del mattino di Wardenwatch segue la tua giornata. Conserviamo solo l’ultimo.</li>
+        <li>Lo scostamento di fuso orario che il tuo TRMNL invia con ogni schermata (per esempio UTC+2), così l’adunata del mattino di Wardenwatch segue la tua giornata. Conserviamo solo l’ultimo.</li>
         <li>L’impostazione della lingua che il tuo TRMNL invia con ogni schermata (per esempio it-IT), per capire in quali lingue vale la pena tradurre i giochi e perché lo schermo possa usare la tua lingua. Conserviamo solo l’ultima.</li>
         <li>Se scegli una lingua per TRMNL Games, quella scelta, così anche gli schermi TRMNL e gli avvisi la usano.</li>
         <li>Dati operativi di breve durata, come contatori dei limiti di frequenza e ricevute delle richieste duplicate.</li>

@@ -14,17 +14,17 @@ export interface HelpPage {
 
 type SectionId = (typeof SECTIONS)[number]
 
-const SECTIONS = ['getting-started', 'if-the-qr-sends-you-back-to-setup', 'how-time-works', 'floors', 'desk-keepsakes', 'career', 'heroes-and-classes', 'stances', 'desk-raids', 'meetings', 'lost-property', 'to-do-list', 'potions', 'the-wandering-merchant', 'decisions', 'effects', 'office-calendar', 'rare-and-epic-gear', 'when-your-bag-fills-up', 'bigger-bags', 'salvage-and-the-workbench', 'getting-knocked-out', 'recaps', 'understanding-rankings', 'sharing-your-hero', 'following', 'names', 'looks', 'alerts', 'troubleshooting', 'disconnecting-and-removing', 'help'] as const
+/** P5.2: the Volta section ids. The Hero page links `sky-calendar`; the rest are reached from the jump list. */
+const SECTIONS = ['getting-started', 'if-the-qr-sends-you-back-to-setup', 'how-time-works', 'zones', 'seals', 'commissions', 'heroes-and-classes', 'stances', 'camp-raids', 'musters', 'strays', 'garrison-orders', 'draughts', 'the-serpentos-moneychanger', 'decisions', 'effects', 'sky-calendar', 'rare-and-epic-gear', 'when-your-pack-fills-up', 'bigger-packs', 'salvage-and-the-forge', 'getting-knocked-out', 'recaps', 'understanding-rankings', 'sharing-your-hero', 'following', 'names', 'looks', 'alerts', 'troubleshooting', 'disconnecting-and-removing', 'help'] as const
 
 /** Sections the active catalog has no rule for are left out of the page and its jump list. */
 const PRESENT: Partial<Record<SectionId, boolean>> = {
-  career: F.career !== undefined,
+  commissions: F.career !== undefined,
   'heroes-and-classes': F.classes !== undefined,
-  meetings: F.meetings !== undefined,
-  'lost-property': F.lostProperty,
-  'to-do-list': F.todo !== undefined,
-  'office-calendar': F.occasions !== undefined,
-  'salvage-and-the-workbench': F.workbench !== undefined,
+  musters: F.meetings !== undefined,
+  strays: F.lostProperty,
+  'garrison-orders': F.todo !== undefined,
+  'salvage-and-the-forge': F.workbench !== undefined,
 }
 
 /** The jump list at the top: on a phone the page runs to about twenty screens. */

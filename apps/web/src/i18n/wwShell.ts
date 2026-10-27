@@ -5,7 +5,7 @@ import { headMessages } from './heads'
 export const wwShellMessages = defineMessages({
   en: {
     title: headMessages.en.wwShell,
-    nav: { hero: 'Hero', bag: 'Bag', log: 'Log', ranks: 'Ranks', more: 'More' },
+    nav: { hero: 'Hero', bag: 'Pack', log: 'Log', ranks: 'Ranks', more: 'More' },
     navLabel: 'Wardenwatch',
     slotsUsed: (n: number) => `, ${n} slots used`,
     findWaiting: ', a find is waiting for a slot',
@@ -28,7 +28,7 @@ export const wwShellMessages = defineMessages({
   },
   fr: {
     title: headMessages.fr.wwShell,
-    nav: { hero: 'Héros', bag: 'Sac', log: 'Journal', ranks: 'Rangs', more: 'Plus' },
+    nav: { hero: 'Héros', bag: 'Paquetage', log: 'Journal', ranks: 'Rangs', more: 'Plus' },
     navLabel: 'Wardenwatch',
     slotsUsed: (n: number) => `, ${n} places utilisées`,
     findWaiting: ', une trouvaille attend une place',
@@ -74,7 +74,7 @@ export const wwShellMessages = defineMessages({
   },
   es: {
     title: headMessages.es.wwShell,
-    nav: { hero: 'Héroe', bag: 'Bolsa', log: 'Diario', ranks: 'Tabla', more: 'Más' },
+    nav: { hero: 'Héroe', bag: 'Mochila', log: 'Diario', ranks: 'Tabla', more: 'Más' },
     navLabel: 'Wardenwatch',
     slotsUsed: (n: number) => `, ${n} huecos ocupados`,
     findWaiting: ', un hallazgo espera un hueco',
@@ -97,7 +97,7 @@ export const wwShellMessages = defineMessages({
   },
   it: {
     title: headMessages.it.wwShell,
-    nav: { hero: 'Eroe', bag: 'Borsa', log: 'Diario', ranks: 'Podio', more: 'Altro' },
+    nav: { hero: 'Eroe', bag: 'Zaino', log: 'Diario', ranks: 'Podio', more: 'Altro' },
     navLabel: 'Wardenwatch',
     slotsUsed: (n: number) => `, ${n} posti occupati`,
     findWaiting: ', un ritrovamento aspetta un posto',
@@ -120,7 +120,7 @@ export const wwShellMessages = defineMessages({
   },
   pt: {
     title: headMessages.pt.wwShell,
-    nav: { hero: 'Herói', bag: 'Bolsa', log: 'Diário', ranks: 'Placar', more: 'Mais' },
+    nav: { hero: 'Herói', bag: 'Mochila', log: 'Diário', ranks: 'Placar', more: 'Mais' },
     navLabel: 'Wardenwatch',
     slotsUsed: (n: number) => `, ${n} espaços ocupados`,
     findWaiting: ', um achado espera por um espaço',
@@ -166,7 +166,7 @@ export const wwShellMessages = defineMessages({
   },
   nl: {
     title: headMessages.nl.wwShell,
-    nav: { hero: 'Held', bag: 'Tas', log: 'Logboek', ranks: 'Stand', more: 'Meer' },
+    nav: { hero: 'Held', bag: 'Ransel', log: 'Logboek', ranks: 'Stand', more: 'Meer' },
     navLabel: 'Wardenwatch',
     slotsUsed: (n: number) => `, ${n} plekken bezet`,
     findWaiting: ', een vondst wacht op een plek',

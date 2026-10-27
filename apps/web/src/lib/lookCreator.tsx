@@ -10,6 +10,7 @@ import { artUrl } from './artUrl'
 import { Button } from './ui'
 import { useT } from './i18n'
 import { lookMessages } from '../i18n/look'
+import { suggestName } from './heroNames'
 
 /**
  * GDD §3.7: the creator. A live 6x preview of the chosen look in `idle`, drawn by the same scene painter as the hero
@@ -62,7 +63,7 @@ export function shuffledLook(random: () => number = Math.random): Look {
   return { ancestry, build: pick('build'), head: pick('head'), hair: pick('hair'), back: pick('back'), accessory: pick('accessory'), tabard: pick('tabard') }
 }
 
-export function LookCreator({ value, onChange, heroClass = 'warrior', gender = 'male', biomeId = 'office_cubicles', disabled = false, name, note, small = false }: {
+export function LookCreator({ value, onChange, heroClass = 'warrior', gender = 'male', biomeId = 'office_cubicles', disabled = false, name, note, small = false, onSuggestName }: {
   /** The look code (art/look.ts); anything else reads as the default look. */
   value: string
   onChange: (code: string) => void
@@ -75,10 +76,14 @@ export function LookCreator({ value, onChange, heroClass = 'warrior', gender = '
   name?: string
   note?: string
   small?: boolean
+  /** With a naming form beside the creator, a Suggest a name key offers a name in the chosen ancestry's tongue (P3.2). */
+  onSuggestName?: (name: string) => void
 }) {
   const t = useT(lookMessages)
   const id = useId()
   const [pose, setPose] = useState<Pose>('idle')
+  // Each press moves to the next suggestion for the ancestry; the sequence is deterministic per ancestry.
+  const [suggestion, setSuggestion] = useState(0)
   const look = useMemo(() => decodeLook(value), [value])
   const path = layeredScenePath(biomeId, encodeLook(look), classPose(pose as BasePose, heroClass, gender), { kind: 'none' }, 1)
   const painted = useMemo(() => paintedSceneUri(path), [path])
@@ -107,7 +112,10 @@ export function LookCreator({ value, onChange, heroClass = 'warrior', gender = '
       <div className="flex flex-col gap-2">
         {LOOK_FIELDS.map((field) => <SlotRow key={field} id={`${id}-${field}`} field={field} look={look} label={optionLabel(t, field, look)} count={optionCount(field, look)} undrawn={undrawn.has(field)} disabled={disabled} small={small} onStep={(delta) => set(stepLook(look, field, delta))} />)}
       </div>
-      <Button variant="secondary" icon="choice" className="self-start" disabled={disabled} onClick={() => set(shuffledLook())}>{t.shuffle}</Button>
+      <div className="flex flex-wrap gap-2">
+        <Button variant="secondary" icon="choice" disabled={disabled} onClick={() => set(shuffledLook())}>{t.shuffle}</Button>
+        {onSuggestName ? <Button variant="secondary" icon="hero" disabled={disabled} onClick={() => { onSuggestName(suggestName(look.ancestry, suggestion)); setSuggestion(suggestion + 1) }}>{t.suggestName}</Button> : null}
+      </div>
       {name ? <input type="hidden" name={name} value={encodeLook(look)} /> : null}
     </div>
   )

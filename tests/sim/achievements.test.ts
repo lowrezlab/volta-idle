@@ -150,7 +150,7 @@ describe('simulator lifetime counters (O14)', () => {
 describe('Tasks done (D112, catalog version 4)', () => {
   it('is a Lifetime family on the tasks counter at 1, 10, 50 and 250', () => {
     const family = ACHIEVEMENT_FAMILIES.find((f) => f.id === 'tasks_done')
-    expect(family).toMatchObject({ name: 'Tasks done', category: 'Lifetime' })
+    expect(family).toMatchObject({ name: 'Orders done', category: 'Lifetime' })
     const earned = (count: number) => allSatisfied(state({ tasksCompleted: count }), content).filter((a) => a.family === 'tasks_done').map((a) => a.id)
     expect(earned(0)).toEqual([])
     expect(earned(9)).toEqual(['tasks_done_1'])
@@ -176,7 +176,7 @@ describe('Networking (D141, catalog version 10)', () => {
     expect(earned({})).toEqual([])
     expect(earned({ meetings: 1 })).toEqual(['networking_1'])
     expect(earned({ meetings: 50 })).toEqual(['networking_1', 'networking_2', 'networking_3'])
-    expect(ACHIEVEMENT_FAMILIES.find((f) => f.id === 'networking')).toMatchObject({ category: 'Coworkers' })
+    expect(ACHIEVEMENT_FAMILIES.find((f) => f.id === 'networking')).toMatchObject({ category: 'Comrades' })
   })
 })
 
@@ -186,7 +186,7 @@ describe('Lost and found (D145, catalog version 11)', () => {
     expect(earned({})).toEqual([])
     expect(earned({ lostPropertyFound: 1 })).toEqual(['lost_and_found_1'])
     expect(earned({ lostPropertyFound: 25 })).toEqual(['lost_and_found_1', 'lost_and_found_2', 'lost_and_found_3'])
-    expect(ACHIEVEMENT_FAMILIES.find((f) => f.id === 'lost_and_found')).toMatchObject({ category: 'Coworkers' })
+    expect(ACHIEVEMENT_FAMILIES.find((f) => f.id === 'lost_and_found')).toMatchObject({ category: 'Comrades' })
   })
 })
 

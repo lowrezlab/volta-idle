@@ -171,7 +171,7 @@ describe('the Archive and the Parking Garage (D133)', () => {
     expect(families.slice(families.indexOf('slay_box_file_beetle'), families.indexOf('slay_box_file_beetle') + 10)).toEqual(['slay_box_file_beetle', 'slay_shelf_lurker', 'slay_microfilm_phantom', 'slay_auditor', 'slay_trolley_swarm', 'slay_oil_slick', 'slay_barrier_golem', 'slay_ghost_car', 'floor_cleared_4', 'floor_cleared_5'])
     expect(ACHIEVEMENTS.find((a) => a.id === 'floor_cleared_5')?.predicate).toEqual({ kind: 'biomeMonsters', biomeId: 'parking_garage', atLeast: 25 })
     expect(new Set(ACHIEVEMENTS.map((a) => a.id)).size).toBe(ACHIEVEMENTS.length)
-    // Every floor's monster families share the shelf category the companion lists.
-    for (const biome of v16.biomes) for (const id of biome.monsterIds) expect(ACHIEVEMENT_FAMILIES.find((f) => f.id === `slay_${id}`)?.category).toBe(`${biome.name} monster`)
+    // Every floor's monster families share the shelf category the companion lists, named for the zone as v28 calls it.
+    for (const biome of catalogs.v28.biomes) for (const id of biome.monsterIds) expect(ACHIEVEMENT_FAMILIES.find((f) => f.id === `slay_${id}`)?.category).toBe(`${biome.name} monster`)
   })
 })

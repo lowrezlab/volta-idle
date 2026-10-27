@@ -24,31 +24,24 @@ describe('game lifecycle status (D115)', () => {
     expect(await player().query(api.platform.list, {})).toEqual(expected)
   })
 
-  it('shows admins the hidden games and lets them open them', async () => {
-    expect(await admin().query(api.platform.list, {})).toEqual({
-      admin: true,
-      games: [
-        { slug: 'desk-crawler', status: 'live', canOpen: true },
-        { slug: 'idle-angler', status: 'hidden', canOpen: true },
-        { slug: 'paper-lives', status: 'hidden', canOpen: true },
-        { slug: 'little-plot', status: 'hidden', canOpen: true },
-        { slug: 'pixel-wars', status: 'hidden', canOpen: true },
-      ],
-    })
+  it('lists a preview game for everyone but opens it only for admins', async () => {
+    await admin().mutation(api.platform.setGameStatus, { slug: 'desk-crawler', status: 'preview', reasonCode: 'art_ready' })
+    expect((await player().query(api.platform.list, {})).games).toContainEqual({ slug: 'desk-crawler', status: 'preview', canOpen: false })
+    expect((await admin().query(api.platform.list, {})).games).toContainEqual({ slug: 'desk-crawler', status: 'preview', canOpen: true })
+    await t.mutation(internal.platform.setGameStatusInternal, { slug: 'desk-crawler', status: 'live' })
+    expect((await player().query(api.platform.list, {})).games).toContainEqual({ slug: 'desk-crawler', status: 'live', canOpen: true })
   })
 
-  it('lists a preview game for everyone but opens it only for admins', async () => {
-    await admin().mutation(api.platform.setGameStatus, { slug: 'idle-angler', status: 'preview', reasonCode: 'art_ready' })
-    expect((await player().query(api.platform.list, {})).games).toContainEqual({ slug: 'idle-angler', status: 'preview', canOpen: false })
-    expect((await admin().query(api.platform.list, {})).games).toContainEqual({ slug: 'idle-angler', status: 'preview', canOpen: true })
-    await t.mutation(internal.platform.setGameStatusInternal, { slug: 'idle-angler', status: 'live' })
-    expect((await player().query(api.platform.list, {})).games).toContainEqual({ slug: 'idle-angler', status: 'live', canOpen: true })
+  it('keeps a hidden game out of non-admin listings but open to admins', async () => {
+    await t.mutation(internal.platform.setGameStatusInternal, { slug: 'desk-crawler', status: 'hidden' })
+    expect(await player().query(api.platform.list, {})).toEqual({ admin: false, games: [] })
+    expect(await admin().query(api.platform.list, {})).toEqual({ admin: true, games: [{ slug: 'desk-crawler', status: 'hidden', canOpen: true }] })
   })
 
   it('refuses the switch to non-admins and audits it for admins', async () => {
-    await expect(player().mutation(api.platform.setGameStatus, { slug: 'idle-angler', status: 'live', reasonCode: 'nope' })).rejects.toThrow()
-    expect(await admin().mutation(api.platform.setGameStatus, { slug: 'idle-angler', status: 'preview', reasonCode: 'art_ready' })).toEqual({ from: 'hidden', to: 'preview' })
+    await expect(player().mutation(api.platform.setGameStatus, { slug: 'desk-crawler', status: 'hidden', reasonCode: 'nope' })).rejects.toThrow()
+    expect(await admin().mutation(api.platform.setGameStatus, { slug: 'desk-crawler', status: 'preview', reasonCode: 'art_ready' })).toEqual({ from: 'live', to: 'preview' })
     const events = await t.run(async (ctx) => await ctx.db.query('adminAuditEvents').collect())
-    expect(events).toMatchObject([{ action: 'platform.setGameStatus', targetRef: 'idle-angler', reasonCode: 'art_ready', outcome: 'hidden -> preview' }])
+    expect(events).toMatchObject([{ action: 'platform.setGameStatus', targetRef: 'desk-crawler', reasonCode: 'art_ready', outcome: 'live -> preview' }])
   })
 })

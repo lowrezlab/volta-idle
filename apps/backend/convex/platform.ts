@@ -59,7 +59,7 @@ export const setGameStatus = mutation({
   },
 })
 
-/** Operator switch: `npx convex run --prod platform:setGameStatusInternal '{"slug":"idle-angler","status":"live"}'`. */
+/** Operator switch: `npx convex run --prod platform:setGameStatusInternal '{"slug":"desk-crawler","status":"live"}'`. */
 export const setGameStatusInternal = internalMutation({
   args: { slug: gameSlug, status: gameStatus },
   returns: v.object({ from: gameStatus, to: gameStatus }),

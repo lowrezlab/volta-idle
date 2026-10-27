@@ -8,15 +8,6 @@ import { renderHeroCardPng } from '@trmnl-games/desk-crawler/art/heroCard'
 import { sceneUrlsAt } from '@trmnl-games/desk-crawler/art/sceneTime'
 import { DEFAULT_COMPANION_ORIGIN, keepsakeQrFields, renderQrPng } from '@trmnl-games/desk-crawler/art/qr'
 import { parseUtcOffset, screenMarkup } from '@trmnl-games/desk-crawler/templates/screen'
-import { screenMarkup as idleAnglerMarkup } from '@trmnl-games/idle-angler/templates/screen'
-import { screenMarkup as paperLivesMarkup } from '@trmnl-games/paper-lives/templates/screen'
-import { flyQrBase, renderIdleAnglerArt } from '@trmnl-games/idle-angler/art/route'
-import { renderPaperLivesArt } from '@trmnl-games/paper-lives/art/route'
-import { screenMarkup as littlePlotMarkup } from '@trmnl-games/little-plot/templates/screen'
-import { flowerQrBase, renderLittlePlotArt } from '@trmnl-games/little-plot/art/route'
-import { screenMarkup as pixelWarsMarkup } from '@trmnl-games/pixel-wars/templates/screen'
-import { parseArtPath as parsePixelWarsArt, renderMapPng as renderPixelWarsMap, renderQrPng as renderPixelWarsQr } from '@trmnl-games/pixel-wars/art/route'
-import { contentV1 as pixelWarsContent } from '@trmnl-games/pixel-wars/content'
 import type { GameSlug } from '@trmnl-games/platform'
 import { parseTrmnlLocale } from './lib/trmnlUser'
 
@@ -95,17 +86,8 @@ const uninstall = (gameSlug: GameSlug) =>
     return found ? json(200, { ok: true }) : notFound()
   })
 
-// Desk Crawler keeps its original paths; Idle Angler's plugin points at its own (D115).
 http.route({ path: '/trmnl/install/success', method: 'POST', handler: installSuccess('desk-crawler') })
 http.route({ path: '/trmnl/uninstall', method: 'POST', handler: uninstall('desk-crawler') })
-http.route({ path: '/trmnl/idle-angler/install/success', method: 'POST', handler: installSuccess('idle-angler') })
-http.route({ path: '/trmnl/idle-angler/uninstall', method: 'POST', handler: uninstall('idle-angler') })
-http.route({ path: '/trmnl/paper-lives/install/success', method: 'POST', handler: installSuccess('paper-lives') })
-http.route({ path: '/trmnl/paper-lives/uninstall', method: 'POST', handler: uninstall('paper-lives') })
-http.route({ path: '/trmnl/little-plot/install/success', method: 'POST', handler: installSuccess('little-plot') })
-http.route({ path: '/trmnl/little-plot/uninstall', method: 'POST', handler: uninstall('little-plot') })
-http.route({ path: '/trmnl/pixel-wars/install/success', method: 'POST', handler: installSuccess('pixel-wars') })
-http.route({ path: '/trmnl/pixel-wars/uninstall', method: 'POST', handler: uninstall('pixel-wars') })
 
 /** Shared screen request parsing: bearer, form type and size, one `user_uuid`. */
 async function parseScreenRequest(request: Request): Promise<{ tokenHash: string; form: URLSearchParams; uuid: string } | Response> {
@@ -120,89 +102,6 @@ async function parseScreenRequest(request: Request): Promise<{ tokenHash: string
   if (!UUID.test(uuid)) return json(400, { error: 'invalid_body' })
   return { tokenHash, form, uuid }
 }
-
-const idleAnglerScreen = httpAction(async (ctx, request) => {
-  const parsed = await parseScreenRequest(request)
-  if (parsed instanceof Response) return parsed
-  const { tokenHash, form, uuid } = parsed
-  const now = Date.now()
-  const utcOffset = parseUtcOffset(form.get('trmnl[user][utc_offset]'))
-  const locale = parseTrmnlLocale(form.get('trmnl[user][locale]'))
-  const args = { tokenHash, uuid, now, utcOffset, locale }
-  let result = await ctx.runQuery(internal.idleAngler.payload.forInstance, args)
-  if (result?.outcome === 'recoverable') {
-    await ctx.runMutation(internal.trmnl.confirmInstance, { gameSlug: 'idle-angler', tokenHash, uuid, confirmedBy: 'screen_request' })
-    result = await ctx.runQuery(internal.idleAngler.payload.forInstance, args)
-  }
-  if (result === null || result.outcome !== 'payload') return notFound()
-  if (result.recordUserFor !== undefined) await ctx.runMutation(internal.trmnl.recordTrmnlUser, { userId: result.recordUserFor, ...(utcOffset === null ? {} : { utcOffset }), ...(locale === null ? {} : { locale }) })
-  // D180: this week's fly code also rides in the standing QR, as Desk Crawler's keepsake does.
-  const flyQr = result.flyCode && process.env.CONVEX_SITE_URL ? flyQrBase(result.flyCode) : null
-  return json(200, { ...idleAnglerMarkup, merge_variables: { ...result.payload, fly_code: result.flyCode, fly_qr_base: flyQr ? `${process.env.CONVEX_SITE_URL}${flyQr}` : '', utc_offset: utcOffset } })
-})
-http.route({ path: '/trmnl/idle-angler/v1/screen', method: 'POST', handler: idleAnglerScreen })
-
-/** Paper Lives' screen (D159): the same authorization and lost-callback recovery as Idle Angler's. */
-const paperLivesScreen = httpAction(async (ctx, request) => {
-  const parsed = await parseScreenRequest(request)
-  if (parsed instanceof Response) return parsed
-  const { tokenHash, form, uuid } = parsed
-  const now = Date.now()
-  const utcOffset = parseUtcOffset(form.get('trmnl[user][utc_offset]'))
-  const locale = parseTrmnlLocale(form.get('trmnl[user][locale]'))
-  const args = { tokenHash, uuid, now, utcOffset, locale }
-  let result = await ctx.runQuery(internal.paperLives.payload.forInstance, args)
-  if (result?.outcome === 'recoverable') {
-    await ctx.runMutation(internal.trmnl.confirmInstance, { gameSlug: 'paper-lives', tokenHash, uuid, confirmedBy: 'screen_request' })
-    result = await ctx.runQuery(internal.paperLives.payload.forInstance, args)
-  }
-  if (result === null || result.outcome !== 'payload') return notFound()
-  if (result.recordUserFor !== undefined) await ctx.runMutation(internal.trmnl.recordTrmnlUser, { userId: result.recordUserFor, ...(utcOffset === null ? {} : { utcOffset }), ...(locale === null ? {} : { locale }) })
-  return json(200, { ...paperLivesMarkup, merge_variables: { ...result.payload, photo_code: result.photoCode, utc_offset: utcOffset } })
-})
-http.route({ path: '/trmnl/paper-lives/v1/screen', method: 'POST', handler: paperLivesScreen })
-
-/** Little Plot's screen (D206): the same authorization and lost-callback recovery as the other games'. */
-const littlePlotScreen = httpAction(async (ctx, request) => {
-  const parsed = await parseScreenRequest(request)
-  if (parsed instanceof Response) return parsed
-  const { tokenHash, form, uuid } = parsed
-  const now = Date.now()
-  const utcOffset = parseUtcOffset(form.get('trmnl[user][utc_offset]'))
-  const locale = parseTrmnlLocale(form.get('trmnl[user][locale]'))
-  const args = { tokenHash, uuid, now, utcOffset, locale }
-  let result = await ctx.runQuery(internal.littlePlot.payload.forInstance, args)
-  if (result?.outcome === 'recoverable') {
-    await ctx.runMutation(internal.trmnl.confirmInstance, { gameSlug: 'little-plot', tokenHash, uuid, confirmedBy: 'screen_request' })
-    result = await ctx.runQuery(internal.littlePlot.payload.forInstance, args)
-  }
-  if (result === null || result.outcome !== 'payload') return notFound()
-  if (result.recordUserFor !== undefined) await ctx.runMutation(internal.trmnl.recordTrmnlUser, { userId: result.recordUserFor, ...(utcOffset === null ? {} : { utcOffset }), ...(locale === null ? {} : { locale }) })
-  const flowerQr = result.flowerCode && process.env.CONVEX_SITE_URL ? flowerQrBase(result.flowerCode) : null
-  return json(200, { ...littlePlotMarkup, merge_variables: { ...result.payload, flower_code: result.flowerCode, flower_qr_base: flowerQr ? `` : '', utc_offset: utcOffset } })
-})
-http.route({ path: '/trmnl/little-plot/v1/screen', method: 'POST', handler: littlePlotScreen })
-
-/** Pixel Wars' screen (D214): the same authorization and lost-callback recovery; every valid screen records when it was served, for the cleared-desk rule. */
-const pixelWarsScreen = httpAction(async (ctx, request) => {
-  const parsed = await parseScreenRequest(request)
-  if (parsed instanceof Response) return parsed
-  const { tokenHash, form, uuid } = parsed
-  const now = Date.now()
-  const utcOffset = parseUtcOffset(form.get('trmnl[user][utc_offset]'))
-  const locale = parseTrmnlLocale(form.get('trmnl[user][locale]'))
-  const args = { tokenHash, uuid, now, utcOffset, locale }
-  let result = await ctx.runQuery(internal.pixelWars.payload.forInstance, args)
-  if (result?.outcome === 'recoverable') {
-    await ctx.runMutation(internal.trmnl.confirmInstance, { gameSlug: 'pixel-wars', tokenHash, uuid, confirmedBy: 'screen_request' })
-    result = await ctx.runQuery(internal.pixelWars.payload.forInstance, args)
-  }
-  if (result === null || result.outcome !== 'payload') return notFound()
-  if (result.recordUserFor !== undefined) await ctx.runMutation(internal.trmnl.recordTrmnlUser, { userId: result.recordUserFor, ...(utcOffset === null ? {} : { utcOffset }), ...(locale === null ? {} : { locale }) })
-  if (result.screenServedFor !== undefined) { try { await ctx.runMutation(internal.trmnl.recordScreenServed, { instanceId: result.screenServedFor, at: now }) } catch { /* next request retries */ } }
-  return json(200, { ...pixelWarsMarkup, merge_variables: { ...result.payload, utc_offset: utcOffset } })
-})
-http.route({ path: '/trmnl/pixel-wars/v1/screen', method: 'POST', handler: pixelWarsScreen })
 
 http.route({
   path: '/trmnl/v1/screen',
@@ -244,39 +143,6 @@ http.route({
   method: 'GET',
   handler: httpAction(async (ctx, request) => {
     const path = new URL(request.url).pathname
-    // D115: Idle Angler's scenes and codes live under their own prefix.
-    if (path.startsWith('/art/ia/')) {
-      const art = renderIdleAnglerArt(path, process.env.COMPANION_ORIGIN ?? DEFAULT_COMPANION_ORIGIN)
-      if (art === null) return new Response('Not found', { status: 404 })
-      return new Response(new Blob([art.png.slice().buffer as ArrayBuffer], { type: 'image/png' }), { status: 200, headers: { 'Content-Type': 'image/png', 'Cache-Control': art.immutable ? 'public, max-age=31536000, immutable' : 'public, max-age=86400' } })
-    }
-    // D159: Paper Lives' portraits and code.
-    if (path.startsWith('/art/pl/')) {
-      const art = renderPaperLivesArt(path, process.env.COMPANION_ORIGIN ?? DEFAULT_COMPANION_ORIGIN)
-      if (art === null) return new Response('Not found', { status: 404 })
-      return new Response(new Blob([art.png.slice().buffer as ArrayBuffer], { type: 'image/png' }), { status: 200, headers: { 'Content-Type': 'image/png', 'Cache-Control': art.immutable ? 'public, max-age=31536000, immutable' : 'public, max-age=86400' } })
-    }
-    // D214: Pixel Wars' map windows and prints are drawn from stored snapshots; its code is pure.
-    if (path.startsWith('/art/pw/')) {
-      const art = parsePixelWarsArt(path)
-      if (art === null) return new Response('Not found', { status: 404 })
-      const png = (bytes: Uint8Array, cache: string) => new Response(new Blob([bytes.slice().buffer as ArrayBuffer], { type: 'image/png' }), { status: 200, headers: { 'Content-Type': 'image/png', 'Cache-Control': cache } })
-      if (art.kind === 'qr') return png(renderPixelWarsQr(art.target, art.scale, process.env.COMPANION_ORIGIN ?? DEFAULT_COMPANION_ORIGIN), 'public, max-age=86400')
-      if (art.kind === 'map') {
-        const row = await ctx.runQuery(internal.pixelWars.art.snapshot, { mapId: art.mapId, tick: art.tick, seat: art.seat })
-        if (row === null) return new Response('Not found', { status: 404, headers: { 'Cache-Control': 'public, max-age=60' } })
-        return png(renderPixelWarsMap({ ...row, cells: new Uint8Array(row.cells) }, art.window, pixelWarsContent, row.own ?? undefined), 'public, max-age=31536000, immutable')
-      }
-      const row = await ctx.runQuery(internal.pixelWars.art.print, { seasonId: art.seasonId })
-      if (row === null) return new Response('Not found', { status: 404, headers: { 'Cache-Control': 'public, max-age=60' } })
-      return png(renderPixelWarsMap({ ...row, cells: new Uint8Array(row.cells) }, { x0: row.x0, y0: row.y0, cols: row.cols, rows: row.rows, px: art.px }, pixelWarsContent), 'public, max-age=31536000, immutable')
-    }
-    // D206: Little Plot's scenes and codes.
-    if (path.startsWith('/art/lp/')) {
-      const art = renderLittlePlotArt(path, process.env.COMPANION_ORIGIN ?? DEFAULT_COMPANION_ORIGIN)
-      if (art === null) return new Response('Not found', { status: 404 })
-      return new Response(new Blob([art.png.slice().buffer as ArrayBuffer], { type: 'image/png' }), { status: 200, headers: { 'Content-Type': 'image/png', 'Cache-Control': art.immutable ? 'public, max-age=31536000, immutable' : 'public, max-age=86400' } })
-    }
     // D109: a public hero page's social card, drawn only while the page is public; an hour's cache follows level and rank.
     const card = /^\/art\/card\/hero\/([^/]{1,80})\.png$/.exec(path)
     if (card) {

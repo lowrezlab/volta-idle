@@ -15,7 +15,8 @@ const WINDOW_MS = 60 * 60_000
 const PLAYER_LIMIT = 5
 const GLOBAL_LIMIT = 200
 const SEND_ATTEMPTS = 3
-const TO = 'barry@barrymichaeldoyle.com'
+/** Fork: no default recipient; feedback stays in the table until FEEDBACK_TO is set. */
+const feedbackTo = () => process.env.FEEDBACK_TO ?? ''
 
 export const send = mutation({
   args: { message: v.string(), page: v.optional(v.string()) },
@@ -71,7 +72,7 @@ export const deliver = internalAction({
   handler: async (ctx, { id }) => {
     const row = await ctx.runQuery(internal.feedback.getForDelivery, { id })
     const resendKey = process.env.RESEND_API_KEY
-    if (!row || !resendKey) return null
+    if (!row || !resendKey || !feedbackTo()) return null
     let replyTo: string | null = null
     const clerkSecret = process.env.CLERK_SECRET_KEY
     if (clerkSecret) {
@@ -97,7 +98,7 @@ export const deliver = internalAction({
         method: 'POST',
         signal: AbortSignal.timeout(10_000),
         headers: { Authorization: `Bearer ${resendKey}`, 'Content-Type': 'application/json', 'Idempotency-Key': `feedback/${id}` },
-        body: JSON.stringify({ from, to: [TO], subject: `TRMNL Games feedback from ${who}`, text, ...(replyTo ? { reply_to: replyTo } : {}) }),
+        body: JSON.stringify({ from, to: [feedbackTo()], subject: `TRMNL Games feedback from ${who}`, text, ...(replyTo ? { reply_to: replyTo } : {}) }),
       })
       ok = response.ok
     } catch { ok = false }

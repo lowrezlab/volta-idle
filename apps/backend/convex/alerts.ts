@@ -6,19 +6,8 @@ import { appError } from './lib/errors'
 import { sha256Hex } from './lib/hash'
 import { currentUser, intentReturns, narrowChanged, runIntent } from './lib/intent'
 import { validateTimezone } from './lib/names'
-import { ALERTS, alertMessage, DESK_CRAWLER_KINDS, ensureSender, inQuietHours, kindOn, lifeAlertMessage, LITTLE_PLOT_KINDS, localDay, PAPER_LIVES_KINDS, PIXEL_WARS_KINDS, PREF_FOR, quietEndsAt, IDLE_ANGLER_KINDS, SWITCHES, type AlertKind, type AlertSwitch } from './lib/alerts'
-import { currentAngler } from './idleAngler/profile'
-import { currentLife } from './paperLives/profile'
-import { currentPlot } from './littlePlot/profile'
-import { currentDesk } from './pixelWars/profile'
-import { toMapState } from './pixelWars/maps'
-import { cellAt } from '@trmnl-games/pixel-wars/sim'
-import { kindOf as plotKindOf, stageOf as plotStageOf } from '@trmnl-games/little-plot/sim'
-import { contentV1 as plotContent } from '@trmnl-games/little-plot/content'
+import { ALERTS, alertMessage, DESK_CRAWLER_KINDS, ensureSender, inQuietHours, kindOn, localDay, PREF_FOR, quietEndsAt, SWITCHES, type AlertKind, type AlertSwitch } from './lib/alerts'
 import type { GameSlug } from '@trmnl-games/platform'
-import { coolerOf } from '@trmnl-games/idle-angler/sim'
-import { contentV1 } from '@trmnl-games/idle-angler/content'
-import { ACTIVE_CONTENT, catalogs } from '@trmnl-games/paper-lives/content'
 import { readWorld } from './world'
 import { deviceLocale } from './lib/trmnlUser'
 
@@ -37,9 +26,9 @@ const defaults = (prefs: Doc<'users'>['alerts']) => ({
   offReason: prefs?.offReason ?? null,
 })
 
-/** Alerts need a player character in some game: a hero, an angler (D115), a life (D159) or a plot (D206). */
+/** Alerts need a player character: a hero. */
 async function playsAGame(ctx: QueryCtx, user: Doc<'users'>): Promise<boolean> {
-  return (await currentHero(ctx, user)) !== null || (await currentAngler(ctx, user)) !== null || (await currentLife(ctx, user)) !== null || (await currentPlot(ctx, user)) !== null || (await currentDesk(ctx, user)) !== null
+  return (await currentHero(ctx, user)) !== null
 }
 
 /** A short, stable fingerprint of an endpoint, so the companion can tell which listed device it is without the endpoint itself. */
@@ -59,16 +48,6 @@ export const mine = query({
       timezone: v.string(),
       asleep: v.boolean(),
       merchant: v.boolean(),
-      coolerFull: v.boolean(),
-      baitOut: v.boolean(),
-      majorDecision: v.boolean(),
-      lifeEnded: v.boolean(),
-      newArrival: v.boolean(),
-      bedsRipe: v.boolean(),
-      newSeed: v.boolean(),
-      deskTaken: v.boolean(),
-      leadLost: v.boolean(),
-      bell: v.boolean(),
       quietStart: v.number(),
       quietEnd: v.number(),
       offReason: v.union(v.literal('no_devices'), v.null()),
@@ -100,16 +79,6 @@ export const setPreferences = mutation({
     operationId: v.string(),
     asleep: v.optional(v.boolean()),
     merchant: v.optional(v.boolean()),
-    coolerFull: v.optional(v.boolean()),
-    baitOut: v.optional(v.boolean()),
-    majorDecision: v.optional(v.boolean()),
-    lifeEnded: v.optional(v.boolean()),
-    newArrival: v.optional(v.boolean()),
-    bedsRipe: v.optional(v.boolean()),
-    newSeed: v.optional(v.boolean()),
-    deskTaken: v.optional(v.boolean()),
-    leadLost: v.optional(v.boolean()),
-    bell: v.optional(v.boolean()),
     quietStart: v.number(), quietEnd: v.number(), timezone: v.string() },
   returns: intentResult,
   handler: async (ctx, args) => {
@@ -233,60 +202,7 @@ export const claimDue = internalMutation({
       // An alert never tells the player something that is already over.
       let ttlSeconds = 12 * 60 * 60
       let name = owner.publicAlias
-      let lifeMessage: ReturnType<typeof lifeAlertMessage> | undefined
-      if (PAPER_LIVES_KINDS.includes(row.kind)) {
-        // D159: the life must still be the owner's current one; a decision must still be open in the same year.
-        const life = await currentLife(ctx, owner)
-        if (life === null || life._id !== row.lifeId || life.activationState !== 'active') { await skip(row, 'life_gone'); continue }
-        const state = life.life
-        if (row.kind === 'major_decision') {
-          const pending = state.year.pending
-          if (state.status !== 'living' || state.age !== row.lifeAge || pending?.decisionId !== row.detail || pending?.chosen !== undefined) { await skip(row, 'year_closed'); continue }
-          ttlSeconds = Math.max(60, (catalogs[ACTIVE_CONTENT].tuning.closeYearTicks - state.year.elapsed) * SLOT_MINUTES * 60)
-          lifeMessage = lifeAlertMessage(row, state.first)
-        } else if (row.kind === 'new_arrival') {
-          const baby = state.people.find((person) => person.id === row.detail)
-          if (baby === undefined || !baby.alive || state.status === 'ended') { await skip(row, 'arrival_gone'); continue }
-          ttlSeconds = 6 * 60 * 60
-          lifeMessage = lifeAlertMessage(row, state.first, { name: baby.name, role: baby.role === 'grandchild' ? 'grandchild' : 'child' })
-        } else {
-          if (state.status !== 'ended') { await skip(row, 'life_gone'); continue }
-          lifeMessage = lifeAlertMessage(row, state.first)
-        }
-      } else if (LITTLE_PLOT_KINDS.includes(row.kind)) {
-        // D206: the plot must still be the owner's; half the beds must still be ripe, or the new seed still unsown and ungrown.
-        const plot = await currentPlot(ctx, owner)
-        if (plot === null || plot._id !== row.plotId || plot.plot.status === 'paused') { await skip(row, 'plot_gone'); continue }
-        if (row.kind === 'beds_ripe') {
-          const ripe = plot.plot.beds.filter((b) => b.kindId !== undefined && plotStageOf(b, plotKindOf(plotContent, b.kindId)) === 'ripe').length
-          if (ripe < Math.ceil(plot.plot.beds.length / 2)) { await skip(row, 'picked'); continue }
-        } else {
-          const kindId = row.key.split(':').at(-1) ?? ''
-          if ((plot.plot.tin[kindId] ?? 0) === 0 || plot.plot.catalogue[kindId] !== undefined) { await skip(row, 'sown'); continue }
-        }
-      } else if (PIXEL_WARS_KINDS.includes(row.kind)) {
-        // D214: the desk must still be the owner's; a taken desk must still be held by another side; the lead must still be lost.
-        const desk = await currentDesk(ctx, owner)
-        if (desk === null || desk._id !== row.deskId || desk.mapId === undefined || desk.seat === undefined) { await skip(row, 'desk_gone'); continue }
-        if (row.kind !== 'bell') {
-          const map = await ctx.db.get(desk.mapId)
-          if (map === null) { await skip(row, 'desk_gone'); continue }
-          if (row.kind === 'desk_taken') {
-            const s = map.seats[desk.seat - 1]
-            const held = s ? cellAt(toMapState(map), s.x, s.y)?.faction : undefined
-            if (held === desk.faction) { await skip(row, 'liberated'); continue }
-          } else if (map.lastLeader === desk.faction) { await skip(row, 'lead_back'); continue }
-          ttlSeconds = 4 * 60 * 60
-        }
-      } else if (row.kind === 'cooler_full' || row.kind === 'bait_out') {
-        // D115: Idle Angler rechecks its angler; the cooler must still be full, or the hook still bare.
-        const angler = await currentAngler(ctx, owner)
-        if (angler === null || angler._id !== row.anglerId || angler.status === 'paused') { await skip(row, 'angler_gone'); continue }
-        if (row.kind === 'cooler_full') {
-          const held = (await ctx.db.query('catches').withIndex('by_anglerId', (q) => q.eq('anglerId', angler._id)).take(32)).length
-          if (held < coolerOf(contentV1, angler.coolerTier).capacity) { await skip(row, 'sold'); continue }
-        } else if (angler.baitOnHook !== undefined && (angler.bait[angler.baitOnHook] ?? 0) > 0) { await skip(row, 'restocked'); continue }
-      } else {
+      {
       const hero = await currentHero(ctx, owner)
       if (hero === null || hero._id !== row.heroId) { await skip(row, 'hero_gone'); continue }
       name = hero.name
@@ -305,9 +221,8 @@ export const claimDue = internalMutation({
       const devices = await devicesOf(ctx, owner._id)
       if (devices.length === 0) { await skip(row, 'no_devices'); continue }
       if (inQuietHours(now, owner.timezone, prefs)) {
-        // The nap, a full cooler, a waiting decision and a death are still news in the morning; the merchant, a bait
-        // alert and a birth are not worth waking for (a decision whose year closes overnight drops at the recheck).
-        if (row.kind === 'merchant' || row.kind === 'bait_out' || row.kind === 'new_arrival' || row.kind === 'new_seed') await skip(row, 'quiet_hours')
+        // The nap is still news in the morning; the merchant is not worth waking for.
+        if (row.kind === 'merchant') await skip(row, 'quiet_hours')
         else await ctx.db.patch(row._id, { notBefore: quietEndsAt(now, owner.timezone, prefs), updatedAt: now })
         continue
       }
@@ -317,7 +232,7 @@ export const claimDue = internalMutation({
       if (today.length >= ALERTS.dailyCap) { await skip(row, 'daily_cap'); continue }
       if (row.kind === 'merchant' && today.filter((other) => other.kind === 'merchant').length >= ALERTS.merchantDailyCap) { await skip(row, 'merchant_cap'); continue }
       await ctx.db.patch(row._id, { state: 'sending', localDay: day, attempts: row.attempts + 1, updatedAt: now })
-      const message = lifeMessage ?? alertMessage(row, name, deviceLocale(owner))
+      const message = alertMessage(row, name, deviceLocale(owner))
       sends.push({
         outboxId: row._id,
         ttlSeconds,
@@ -385,9 +300,9 @@ export async function purgeGameAlertRows(ctx: MutationCtx, userId: Id<'users'>, 
   const otherGame =
     owner === null
       ? false
-      : (game !== 'desk-crawler' && (await currentHero(ctx, owner)) !== null) || (game !== 'idle-angler' && (await currentAngler(ctx, owner)) !== null) || (game !== 'paper-lives' && (await currentLife(ctx, owner)) !== null) || (game !== 'little-plot' && (await currentPlot(ctx, owner)) !== null) || (game !== 'pixel-wars' && (await currentDesk(ctx, owner)) !== null)
+      : game !== 'desk-crawler' && (await currentHero(ctx, owner)) !== null
   if (!otherGame) return await purgeAlertRows(ctx, userId, batch)
-  const kinds: readonly AlertKind[] = game === 'idle-angler' ? IDLE_ANGLER_KINDS : game === 'paper-lives' ? PAPER_LIVES_KINDS : game === 'little-plot' ? LITTLE_PLOT_KINDS : game === 'pixel-wars' ? PIXEL_WARS_KINDS : DESK_CRAWLER_KINDS
+  const kinds: readonly AlertKind[] = DESK_CRAWLER_KINDS
   const rows = (await ctx.db.query('alertOutbox').withIndex('by_userId_and_localDay', (q) => q.eq('userId', userId)).take(batch * 4)).filter((row) => kinds.includes(row.kind)).slice(0, batch)
   for (const row of rows) await ctx.db.delete(row._id)
   if (rows.length === 0) {

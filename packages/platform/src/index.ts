@@ -2,12 +2,8 @@
 export const PLATFORM_NAME = 'TRMNL Games'
 export const PLATFORM_ORIGIN = 'https://trmnlgames.com'
 export const DESK_CRAWLER_GAME = 'desk-crawler' as const
-export const IDLE_ANGLER_GAME = 'idle-angler' as const
-export const PAPER_LIVES_GAME = 'paper-lives' as const
-export const LITTLE_PLOT_GAME = 'little-plot' as const
-export const PIXEL_WARS_GAME = 'pixel-wars' as const
-export type GameSlug = typeof DESK_CRAWLER_GAME | typeof IDLE_ANGLER_GAME | typeof PAPER_LIVES_GAME | typeof LITTLE_PLOT_GAME | typeof PIXEL_WARS_GAME
-export const GAME_SLUGS: readonly GameSlug[] = [DESK_CRAWLER_GAME, IDLE_ANGLER_GAME, PAPER_LIVES_GAME, LITTLE_PLOT_GAME, PIXEL_WARS_GAME]
+export type GameSlug = typeof DESK_CRAWLER_GAME
+export const GAME_SLUGS: readonly GameSlug[] = [DESK_CRAWLER_GAME]
 
 /**
  * Lifecycle status (idle-angler.md "Architecture"). `hidden`: nothing lists the game and its routes
@@ -50,66 +46,10 @@ export const games = {
     clientIdEnv: 'TRMNL_CLIENT_ID',
     marketplaceUrl: 'https://trmnl.com/integrations/desk-crawler',
   },
-  [IDLE_ANGLER_GAME]: {
-    slug: IDLE_ANGLER_GAME,
-    name: 'Idle Angler',
-    description: 'A fishing game that plays itself on your TRMNL.',
-    defaultStatus: 'hidden',
-    publicPath: '/games/idle-angler',
-    companionPath: '/app/idle-angler',
-    helpPath: '/help/idle-angler',
-    installPath: '/connect/trmnl/idle-angler/install',
-    managePath: '/connect/trmnl/idle-angler/manage',
-    clientIdEnv: 'TRMNL_CLIENT_ID_IDLE_ANGLER',
-    // TRMNL is reviewing plugin 568 (D209). On approval the launch-day branch sets its listing's URL here.
-    marketplaceUrl: null,
-  },
-  [PAPER_LIVES_GAME]: {
-    slug: PAPER_LIVES_GAME,
-    name: 'Paper Lives',
-    description: 'A life story that writes itself on your TRMNL.',
-    // D159: hidden (admin-only) while it is built, until its own listing.
-    defaultStatus: 'hidden',
-    publicPath: '/games/paper-lives',
-    companionPath: '/app/paper-lives',
-    helpPath: '/help/paper-lives',
-    installPath: '/connect/trmnl/paper-lives/install',
-    managePath: '/connect/trmnl/paper-lives/manage',
-    clientIdEnv: 'TRMNL_CLIENT_ID_PAPER_LIVES',
-    marketplaceUrl: null,
-  },
-  [LITTLE_PLOT_GAME]: {
-    slug: LITTLE_PLOT_GAME,
-    name: 'Little Plot',
-    description: 'A cosy garden that grows on your TRMNL.',
-    // P46 / D206: hidden (admin-only) while it is built, and until Idle Angler has had its launch.
-    defaultStatus: 'hidden',
-    publicPath: '/games/little-plot',
-    companionPath: '/app/little-plot',
-    helpPath: '/help/little-plot',
-    installPath: '/connect/trmnl/little-plot/install',
-    managePath: '/connect/trmnl/little-plot/manage',
-    clientIdEnv: 'TRMNL_CLIENT_ID_LITTLE_PLOT',
-    marketplaceUrl: null,
-  },
-  [PIXEL_WARS_GAME]: {
-    slug: PIXEL_WARS_GAME,
-    name: 'Pixel Wars',
-    description: 'Every TRMNL is a tile. Hold yours, take your neighbours\'.',
-    // P47 / D214: hidden (admin-only) while it is built, until its own listing.
-    defaultStatus: 'hidden',
-    publicPath: '/games/pixel-wars',
-    companionPath: '/app/pixel-wars',
-    helpPath: '/help/pixel-wars',
-    installPath: '/connect/trmnl/pixel-wars/install',
-    managePath: '/connect/trmnl/pixel-wars/manage',
-    clientIdEnv: 'TRMNL_CLIENT_ID_PIXEL_WARS',
-    marketplaceUrl: null,
-  },
 } as const satisfies Record<GameSlug, GameEntry>
 
 export function isGameSlug(value: unknown): value is GameSlug {
-  return value === DESK_CRAWLER_GAME || value === IDLE_ANGLER_GAME || value === PAPER_LIVES_GAME || value === LITTLE_PLOT_GAME || value === PIXEL_WARS_GAME
+  return value === DESK_CRAWLER_GAME
 }
 
 export function isGameStatus(value: unknown): value is GameStatus {

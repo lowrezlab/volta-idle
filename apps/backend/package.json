@@ -14,7 +14,6 @@
     "@trmnl-games/desk-crawler": "workspace:*",
     "@trmnl-games/engine": "workspace:*",
     "@trmnl-games/platform": "workspace:*",
-    "@trmnl-games/idle-angler": "workspace:*",
     "convex": "^1.46.0",
     "convex-helpers": "0.1.128",
     "web-push": "3.6.7"

@@ -2,7 +2,6 @@ import { internal } from '../_generated/api'
 import type { Doc, Id } from '../_generated/dataModel'
 import type { MutationCtx } from '../_generated/server'
 import type { SimulationResult } from '@trmnl-games/desk-crawler/sim/core/types'
-import type { LifeState, PaperLivesCatalog } from '@trmnl-games/paper-lives/sim'
 import type { Locale } from '@trmnl-games/platform'
 import { contentTranslator } from '@trmnl-games/desk-crawler/i18n'
 
@@ -30,32 +29,16 @@ export type AlertKind = Doc<'alertOutbox'>['kind']
 export type AlertPreferences = NonNullable<Doc<'users'>['alerts']>
 
 /** Every kind's on/off switch on the owner's preferences, across the games. */
-export const SWITCHES = ['asleep', 'merchant', 'coolerFull', 'baitOut', 'majorDecision', 'lifeEnded', 'newArrival', 'bedsRipe', 'newSeed', 'deskTaken', 'leadLost', 'bell'] as const
+export const SWITCHES = ['asleep', 'merchant'] as const
 export type AlertSwitch = (typeof SWITCHES)[number]
 /** The preference switch for each kind. */
 export const PREF_FOR: Readonly<Record<AlertKind, AlertSwitch>> = {
   asleep: 'asleep',
   merchant: 'merchant',
-  cooler_full: 'coolerFull',
-  bait_out: 'baitOut',
-  major_decision: 'majorDecision',
-  life_ended: 'lifeEnded',
-  new_arrival: 'newArrival',
-  beds_ripe: 'bedsRipe',
-  new_seed: 'newSeed',
-  desk_taken: 'deskTaken',
-  lead_lost: 'leadLost',
-  bell: 'bell',
 }
 export const kindOn = (prefs: AlertPreferences | undefined, kind: AlertKind) => prefs?.[PREF_FOR[kind]] === true
-/** Desk Crawler's kinds, Idle Angler's (D115) and Paper Lives' (D159). */
+/** Desk Crawler's kinds. */
 export const DESK_CRAWLER_KINDS: readonly AlertKind[] = ['asleep', 'merchant']
-export const IDLE_ANGLER_KINDS: readonly AlertKind[] = ['cooler_full', 'bait_out']
-export const PAPER_LIVES_KINDS: readonly AlertKind[] = ['major_decision', 'life_ended', 'new_arrival']
-/** Little Plot's kinds (D206): half the beds ripe, and a seed of a kind never grown in the tin. */
-export const LITTLE_PLOT_KINDS: readonly AlertKind[] = ['beds_ripe', 'new_seed']
-/** Pixel Wars' kinds (D214): the desk taken, the lead lost, the bell. */
-export const PIXEL_WARS_KINDS: readonly AlertKind[] = ['desk_taken', 'lead_lost', 'bell']
 
 const STEP_MS = 15 * 60_000
 
@@ -147,92 +130,10 @@ export async function ensureSender(ctx: MutationCtx, at: number): Promise<void> 
   else await ctx.db.insert('alertSender', { key: 'sender', scheduledId, runAt })
 }
 
-/**
- * Idle Angler tick hook (D115): a cooler that filled on this cast (held 30 minutes, like a nap) and a bait that ran out.
- * Reads nothing unless the owner turned the kind on.
- */
-export async function queueIdleAnglerAlerts(ctx: MutationCtx, args: { owner: Doc<'users'>; anglerId: Doc<'anglers'>['_id']; filledCooler: boolean; ranOut: boolean; tick: number; now: number }): Promise<void> {
-  const { owner, anglerId, tick, now } = args
-  const prefs = owner.alerts
-  if (prefs === undefined) return
-  const rows: Array<{ kind: AlertKind; notBefore: number }> = []
-  if (args.filledCooler && prefs.coolerFull) rows.push({ kind: 'cooler_full', notBefore: now + ALERTS.asleepDelayMs })
-  if (args.ranOut && prefs.baitOut) rows.push({ kind: 'bait_out', notBefore: now })
-  for (const row of rows) {
-    const key = `${anglerId}:${row.kind}:${tick}`
-    if (await ctx.db.query('alertOutbox').withIndex('by_key', (q) => q.eq('key', key)).first()) continue
-    await ctx.db.insert('alertOutbox', { userId: owner._id, anglerId, key, eventTick: tick, state: 'pending', attempts: 0, createdAt: now, updatedAt: now, ...row })
-    await ensureSender(ctx, row.notBefore)
-  }
-}
-
-/**
- * Paper Lives tick hook (D159): a major decision still open once the year's minimum has passed (once per decision), a
- * life that ended, and a child or grandchild born on this tick. Reads nothing unless the owner turned a kind on.
- */
-export async function queuePaperLivesAlerts(ctx: MutationCtx, args: { owner: Doc<'users'>; lifeId: Id<'lives'>; before: LifeState; after: LifeState; content: PaperLivesCatalog; tick: number; now: number }): Promise<void> {
-  const { owner, lifeId, before, after, content, tick, now } = args
-  const prefs = owner.alerts
-  if (prefs === undefined) return
-  const rows: Array<{ kind: AlertKind; key: string; lifeAge: number; detail?: string }> = []
-  if (prefs.majorDecision) {
-    const open = (life: LifeState) => {
-      const pending = life.status === 'living' ? life.year.pending : undefined
-      if (pending === undefined || pending.chosen !== undefined || life.year.elapsed < content.tuning.minYearTicks) return undefined
-      return content.decisions.find((d) => d.id === pending.decisionId)?.major ? pending.decisionId : undefined
-    }
-    const id = open(after)
-    // Raised once: on the tick the decision first stands open past the minimum.
-    if (id !== undefined && !(open(before) === id && before.age === after.age)) rows.push({ kind: 'major_decision', key: `${lifeId}:major_decision:${after.age}:${id}`, lifeAge: after.age, detail: id })
-  }
-  if (prefs.lifeEnded && before.status !== 'ended' && after.status === 'ended') rows.push({ kind: 'life_ended', key: `${lifeId}:life_ended`, lifeAge: after.age })
-  if (prefs.newArrival) {
-    const known = new Set(before.people.map((p) => p.id))
-    for (const person of after.people) {
-      if (known.has(person.id) || (person.role !== 'child' && person.role !== 'grandchild') || person.bornAt < before.age) continue
-      rows.push({ kind: 'new_arrival', key: `${lifeId}:new_arrival:${person.id}`, lifeAge: after.age, detail: person.id })
-    }
-  }
-  for (const row of rows) {
-    if (await ctx.db.query('alertOutbox').withIndex('by_key', (q) => q.eq('key', row.key)).first()) continue
-    await ctx.db.insert('alertOutbox', { userId: owner._id, lifeId, eventTick: tick, state: 'pending', attempts: 0, notBefore: now, createdAt: now, updatedAt: now, ...row })
-    await ensureSender(ctx, now)
-  }
-}
-
-/** Paper Lives' lock-screen lines (D159): the character's first name and nothing from the story itself. */
-export function lifeAlertMessage(row: Pick<Doc<'alertOutbox'>, 'kind'>, first: string, arrival?: { name: string; role: 'child' | 'grandchild' }): { title: string; body: string; url: string } {
-  if (row.kind === 'major_decision') return { title: `A big decision for ${first}`, body: `${first} has a choice to make this year. If you don’t choose, the quietest option is picked when the year closes.`, url: '/app/paper-lives?alert=major_decision' }
-  if (row.kind === 'life_ended') return { title: `${first}'s life has ended`, body: `${first}'s page is in the album now, and the next life is ready to begin.`, url: '/app/paper-lives?alert=life_ended' }
-  const baby = arrival?.name ?? 'A baby'
-  return arrival?.role === 'grandchild'
-    ? { title: `${first} has a grandchild`, body: `${baby} was born today, a grandchild for ${first}.`, url: '/app/paper-lives/people?alert=new_arrival' }
-    : { title: `A baby for ${first}`, body: `${baby} has joined the family.`, url: '/app/paper-lives/people?alert=new_arrival' }
-}
-
 /** One sentence in the game's voice, with nothing private on a lock screen, and the page it opens. */
 export function alertMessage(row: Pick<Doc<'alertOutbox'>, 'kind' | 'offerName'>, heroName: string, locale: Locale = 'en'): { title: string; body: string; url: string } {
-  if (row.kind === 'beds_ripe') return { ...PLOT_ALERTS[locale].bedsRipe, url: '/app/little-plot?alert=beds_ripe' }
-  if (row.kind === 'new_seed') return { ...PLOT_ALERTS[locale].newSeed(row.offerName ?? null), url: '/app/little-plot/tin?alert=new_seed' }
-  if (row.kind === 'desk_taken') return { ...WAR_ALERTS[locale].deskTaken(row.offerName ?? null), url: '/app/pixel-wars?alert=desk_taken' }
-  if (row.kind === 'lead_lost') return { ...WAR_ALERTS[locale].leadLost(row.offerName ?? null), url: '/app/pixel-wars?alert=lead_lost' }
-  if (row.kind === 'bell') return { ...WAR_ALERTS[locale].bell(row.offerName ?? null), url: '/app/pixel-wars/season?alert=bell' }
-  if (row.kind === 'cooler_full') return { ...ANGLER_ALERTS[locale].coolerFull, url: '/app/idle-angler/cooler?alert=cooler_full' }
-  if (row.kind === 'bait_out') return { ...ANGLER_ALERTS[locale].baitOut, url: '/app/idle-angler/shop?alert=bait_out' }
   if (row.kind === 'asleep') return { ...DESK_ALERTS[locale].asleep(heroName), url: '/app/desk-crawler/inventory?alert=asleep' }
   return { ...DESK_ALERTS[locale].merchant(heroName, row.offerName ?? null), url: '/app/desk-crawler/inventory?alert=merchant' }
-}
-
-/** D200: Idle Angler's two alerts in the owner's language. */
-const ANGLER_ALERTS: Readonly<Record<Locale, { coolerFull: { title: string; body: string }; baitOut: { title: string; body: string } }>> = {
-  en: { coolerFull: { title: 'Your cooler is full', body: 'New catches are being released. Sell some fish to make room.' }, baitOut: { title: 'Out of bait', body: 'Your angler is fishing a bare hook. Restock in the tackle shop.' } },
-  fr: { coolerFull: { title: 'Votre glacière est pleine', body: 'Les nouvelles prises retournent à l’eau. Vendez des poissons pour faire de la place.' }, baitOut: { title: 'Plus d’appât', body: 'Votre pêcheur pêche à l’hameçon nu. Réapprovisionnez-vous au magasin.' } },
-  de: { coolerFull: { title: 'Deine Kühlbox ist voll', body: 'Neue Fänge werden freigelassen. Verkaufe ein paar Fische, um Platz zu schaffen.' }, baitOut: { title: 'Kein Köder mehr', body: 'Dein Angler fischt mit blankem Haken. Kauf im Angelladen nach.' } },
-  es: { coolerFull: { title: 'Tu nevera está llena', body: 'Las nuevas capturas vuelven al agua. Vende algunos peces para hacer sitio.' }, baitOut: { title: 'Sin cebo', body: 'Tu pescador pesca con el anzuelo vacío. Repón en la tienda.' } },
-  it: { coolerFull: { title: 'Il tuo frigo è pieno', body: 'Le nuove catture tornano in acqua. Vendi qualche pesce per fare spazio.' }, baitOut: { title: 'Esca finita', body: 'Il tuo pescatore pesca con l’amo nudo. Fai scorta nel negozio.' } },
-  pt: { coolerFull: { title: 'Seu cooler está cheio', body: 'As novas capturas estão voltando para a água. Venda alguns peixes para abrir espaço.' }, baitOut: { title: 'Sem isca', body: 'Seu pescador está pescando com o anzol vazio. Reabasteça na loja.' } },
-  pl: { coolerFull: { title: 'Lodówka jest pełna', body: 'Nowe ryby wracają do wody. Sprzedaj kilka, żeby zrobić miejsce.' }, baitOut: { title: 'Koniec przynęty', body: 'Twój wędkarz łowi na goły haczyk. Uzupełnij zapasy w sklepie.' } },
-  nl: { coolerFull: { title: 'Je koelbox is vol', body: 'Nieuwe vangsten worden teruggezet. Verkoop wat vis om ruimte te maken.' }, baitOut: { title: 'Geen aas meer', body: 'Je visser vist met een kale haak. Vul je voorraad aan in de winkel.' } },
 }
 
 const fr = contentTranslator('fr')
@@ -277,65 +178,4 @@ const DESK_ALERTS: Readonly<Record<Locale, { asleep: (hero: string) => { title: 
     asleep: (hero) => ({ title: `De tas van ${hero} is vol`, body: `${hero} bewaart een nieuwe vondst voor je. Maak ruimte in de tas, zodat de volgende niet blijven liggen.` }),
     merchant: (hero, offer) => ({ title: 'Er is een koopman op bezoek', body: `Een koopman biedt ${hero} ${offer === null ? 'een grotere tas' : nl.nameWith(offer, 'een')} met korting aan, en het goud is er. Het aanbod geldt ongeveer een uur.` }),
   },
-}
-
-/** D206: Little Plot's two alerts in the owner's language. The seed's kind rides in `offerName`, as the merchant's offer does. */
-const PLOT_ALERTS: Readonly<Record<Locale, { bedsRipe: { title: string; body: string }; newSeed: (kind: string | null) => { title: string; body: string } }>> = {
-  en: { bedsRipe: { title: 'Half your beds are ripe', body: 'Pick them in the companion. Left a day, they go to seed on their own.' }, newSeed: (kind) => ({ title: 'A seed you have never grown', body: kind ? `A ${kind} seed is in the tin. Sow it and see.` : 'A new kind of seed is in the tin. Sow it and see.' }) },
-  fr: { bedsRipe: { title: 'La moitié de vos carrés sont mûrs', body: 'Récoltez-les dans le compagnon. Laissés un jour, ils montent en graine tout seuls.' }, newSeed: (kind) => ({ title: 'Une graine jamais cultivée', body: kind ? `Une graine de ${kind} est dans la boîte. Semez-la pour voir.` : 'Une graine d’une nouvelle sorte est dans la boîte. Semez-la pour voir.' }) },
-  de: { bedsRipe: { title: 'Die Hälfte deiner Beete ist reif', body: 'Ernte sie in der Begleit-App. Nach einem Tag gehen sie von selbst in Samen.' }, newSeed: (kind) => ({ title: 'Ein Samen, den du nie gezogen hast', body: kind ? `Ein ${kind}-Samen liegt in der Dose. Säe ihn und schau.` : 'Eine neue Samensorte liegt in der Dose. Säe sie und schau.' }) },
-  es: { bedsRipe: { title: 'La mitad de tus bancales están maduros', body: 'Recógelos en la app. Si pasan un día, granan solos.' }, newSeed: (kind) => ({ title: 'Una semilla que nunca has cultivado', body: kind ? `Hay una semilla de ${kind} en la lata. Siémbrala y verás.` : 'Hay una semilla de una clase nueva en la lata. Siémbrala y verás.' }) },
-  it: { bedsRipe: { title: 'Metà delle tue aiuole è matura', body: 'Raccoglile nell’app. Lasciate un giorno, vanno a seme da sole.' }, newSeed: (kind) => ({ title: 'Un seme che non hai mai coltivato', body: kind ? `Un seme di ${kind} è nella scatola. Seminalo e vedi.` : 'Un seme di un tipo nuovo è nella scatola. Seminalo e vedi.' }) },
-  pt: { bedsRipe: { title: 'Metade dos seus canteiros está madura', body: 'Colha no app. Se ficarem um dia, vão a semente sozinhos.' }, newSeed: (kind) => ({ title: 'Uma semente que você nunca cultivou', body: kind ? `Uma semente de ${kind} está na lata. Plante e veja.` : 'Uma semente de um tipo novo está na lata. Plante e veja.' }) },
-  pl: { bedsRipe: { title: 'Połowa grządek dojrzała', body: 'Zbierz je w aplikacji. Zostawione na dzień same pójdą w nasiona.' }, newSeed: (kind) => ({ title: 'Nasiono, którego nigdy nie uprawiałeś', body: kind ? `W puszce jest nasiono: ${kind}. Posiej i zobacz.` : 'W puszce jest nasiono nowego rodzaju. Posiej i zobacz.' }) },
-  nl: { bedsRipe: { title: 'De helft van je bedden is rijp', body: 'Pluk ze in de app. Na een dag gaan ze vanzelf in het zaad.' }, newSeed: (kind) => ({ title: 'Een zaadje dat je nooit hebt gekweekt', body: kind ? `Er ligt een ${kind}-zaadje in het blik. Zaai het en kijk.` : 'Er ligt een nieuw soort zaadje in het blik. Zaai het en kijk.' }) },
-}
-
-/**
- * Little Plot tick hook (D206): half the beds ripe on this tick (held 30 minutes, like a nap) and a kind never grown
- * landing in the tin. Reads nothing unless the owner turned the kind on.
- */
-export async function queueLittlePlotAlerts(ctx: MutationCtx, args: { owner: Doc<'users'>; plotId: Id<'plots'>; halfRipe: boolean; newSeeds: readonly string[]; content: { kinds: ReadonlyArray<{ id: string; name: string }> }; tick: number; now: number }): Promise<void> {
-  const { owner, plotId, tick, now } = args
-  const prefs = owner.alerts
-  if (prefs === undefined) return
-  const rows: Array<{ kind: AlertKind; key: string; notBefore: number; offerName?: string }> = []
-  if (args.halfRipe && prefs.bedsRipe) rows.push({ kind: 'beds_ripe', key: `${plotId}:beds_ripe:${tick}`, notBefore: now + ALERTS.asleepDelayMs })
-  if (prefs.newSeed) for (const kindId of args.newSeeds) rows.push({ kind: 'new_seed', key: `${plotId}:new_seed:${kindId}`, notBefore: now, offerName: args.content.kinds.find((k) => k.id === kindId)?.name ?? kindId })
-  for (const row of rows) {
-    if (await ctx.db.query('alertOutbox').withIndex('by_key', (q) => q.eq('key', row.key)).first()) continue
-    await ctx.db.insert('alertOutbox', { userId: owner._id, plotId, eventTick: tick, state: 'pending', attempts: 0, createdAt: now, updatedAt: now, ...row })
-    await ensureSender(ctx, row.notBefore)
-  }
-}
-
-const WAR_ALERTS: Readonly<Record<Locale, { deskTaken: (faction: string | null) => { title: string; body: string }; leadLost: (faction: string | null) => { title: string; body: string }; bell: (winner: string | null) => { title: string; body: string } }>> = {
-  en: { deskTaken: (f) => ({ title: 'Your desk fell', body: f ? `${f} holds your desk. One drop of yours counts three on your own desk.` : 'Another side holds your desk. One drop of yours counts three on your own desk.' }), leadLost: (f) => ({ title: 'Your side lost the lead', body: f ? `${f} holds the most ground now.` : 'Another side holds the most ground now.' }), bell: (w) => ({ title: 'The bell', body: w ? `${w} won the week. The map is clean and your well is full.` : 'The week is over. The map is clean and your well is full.' }) },
-  fr: { deskTaken: (f) => ({ title: 'Votre bureau est tombé', body: f ? `${f} tient votre bureau. Chacune de vos gouttes compte triple sur votre propre bureau.` : 'Un autre camp tient votre bureau. Chacune de vos gouttes compte triple sur votre propre bureau.' }), leadLost: (f) => ({ title: 'Votre camp a perdu la tête', body: f ? `${f} tient le plus de terrain maintenant.` : 'Un autre camp tient le plus de terrain maintenant.' }), bell: (w) => ({ title: 'La cloche', body: w ? `${w} a gagné la semaine. La carte est nettoyée et votre puits est plein.` : 'La semaine est finie. La carte est nettoyée et votre puits est plein.' }) },
-  de: { deskTaken: (f) => ({ title: 'Dein Schreibtisch ist gefallen', body: f ? `${f} hält deinen Schreibtisch. Jeder deiner Tropfen zählt dreifach auf deinem eigenen Schreibtisch.` : 'Eine andere Seite hält deinen Schreibtisch. Jeder deiner Tropfen zählt dreifach auf deinem eigenen Schreibtisch.' }), leadLost: (f) => ({ title: 'Deine Seite hat die Führung verloren', body: f ? `${f} hält jetzt das meiste Gelände.` : 'Eine andere Seite hält jetzt das meiste Gelände.' }), bell: (w) => ({ title: 'Die Glocke', body: w ? `${w} hat die Woche gewonnen. Die Karte ist sauber und dein Brunnen voll.` : 'Die Woche ist vorbei. Die Karte ist sauber und dein Brunnen voll.' }) },
-  es: { deskTaken: (f) => ({ title: 'Tu escritorio cayó', body: f ? `${f} tiene tu escritorio. Cada gota tuya cuenta triple en tu propio escritorio.` : 'Otro bando tiene tu escritorio. Cada gota tuya cuenta triple en tu propio escritorio.' }), leadLost: (f) => ({ title: 'Tu bando perdió el liderato', body: f ? `${f} tiene ahora más terreno.` : 'Otro bando tiene ahora más terreno.' }), bell: (w) => ({ title: 'La campana', body: w ? `${w} ganó la semana. El mapa está limpio y tu pozo lleno.` : 'La semana terminó. El mapa está limpio y tu pozo lleno.' }) },
-  it: { deskTaken: (f) => ({ title: 'La tua scrivania è caduta', body: f ? `${f} tiene la tua scrivania. Ogni tua goccia conta il triplo sulla tua scrivania.` : 'Un altro schieramento tiene la tua scrivania. Ogni tua goccia conta il triplo sulla tua scrivania.' }), leadLost: (f) => ({ title: 'Il tuo schieramento ha perso la testa', body: f ? `${f} tiene ora più terreno.` : 'Un altro schieramento tiene ora più terreno.' }), bell: (w) => ({ title: 'La campana', body: w ? `${w} ha vinto la settimana. La mappa è pulita e il tuo pozzo è pieno.` : 'La settimana è finita. La mappa è pulita e il tuo pozzo è pieno.' }) },
-  pt: { deskTaken: (f) => ({ title: 'Sua mesa caiu', body: f ? `${f} tem a sua mesa. Cada gota sua conta o triplo na sua própria mesa.` : 'Outro lado tem a sua mesa. Cada gota sua conta o triplo na sua própria mesa.' }), leadLost: (f) => ({ title: 'Seu lado perdeu a liderança', body: f ? `${f} tem mais terreno agora.` : 'Outro lado tem mais terreno agora.' }), bell: (w) => ({ title: 'O sino', body: w ? `${w} venceu a semana. O mapa está limpo e seu poço cheio.` : 'A semana acabou. O mapa está limpo e seu poço cheio.' }) },
-  pl: { deskTaken: (f) => ({ title: 'Twoje biurko padło', body: f ? `${f} trzyma twoje biurko. Każda twoja kropla liczy się potrójnie na własnym biurku.` : 'Inna strona trzyma twoje biurko. Każda twoja kropla liczy się potrójnie na własnym biurku.' }), leadLost: (f) => ({ title: 'Twoja strona straciła prowadzenie', body: f ? `${f} ma teraz najwięcej terenu.` : 'Inna strona ma teraz najwięcej terenu.' }), bell: (w) => ({ title: 'Dzwon', body: w ? `${w} wygrało tydzień. Mapa jest czysta, a twoja studnia pełna.` : 'Tydzień minął. Mapa jest czysta, a twoja studnia pełna.' }) },
-  nl: { deskTaken: (f) => ({ title: 'Je bureau is gevallen', body: f ? `${f} houdt je bureau. Elke druppel van jou telt driedubbel op je eigen bureau.` : 'Een andere kant houdt je bureau. Elke druppel van jou telt driedubbel op je eigen bureau.' }), leadLost: (f) => ({ title: 'Je kant is de leiding kwijt', body: f ? `${f} houdt nu het meeste terrein.` : 'Een andere kant houdt nu het meeste terrein.' }), bell: (w) => ({ title: 'De bel', body: w ? `${w} won de week. De kaart is schoon en je put is vol.` : 'De week is voorbij. De kaart is schoon en je put is vol.' }) },
-}
-
-/**
- * Pixel Wars tick hook (D214): the desk taken this tick (held half an hour, so a liberation in the next tick cancels
- * it), the side's lead lost this tick (once a day), and the bell (once a week). Reads nothing unless the owner turned
- * the kind on.
- */
-export async function queuePixelWarsAlerts(ctx: MutationCtx, args: { owner: Doc<'users'>; deskId: Id<'desks'>; fellTo: string | null; leadLostTo: string | null; bell: { winner: string | null; week: number } | null; tick: number; now: number }): Promise<void> {
-  const { owner, deskId, tick, now } = args
-  const prefs = owner.alerts
-  if (prefs === undefined) return
-  const rows: Array<{ kind: AlertKind; key: string; notBefore: number; offerName?: string }> = []
-  if (args.fellTo !== null && prefs.deskTaken) rows.push({ kind: 'desk_taken', key: `${deskId}:desk_taken:${Math.floor(tick / 16)}`, notBefore: now + ALERTS.asleepDelayMs, offerName: args.fellTo })
-  if (args.leadLostTo !== null && prefs.leadLost) rows.push({ kind: 'lead_lost', key: `${deskId}:lead_lost:${Math.floor(tick / 96)}`, notBefore: now, offerName: args.leadLostTo })
-  if (args.bell !== null && prefs.bell) rows.push({ kind: 'bell', key: `${deskId}:bell:${args.bell.week}`, notBefore: now, ...(args.bell.winner === null ? {} : { offerName: args.bell.winner }) })
-  for (const row of rows) {
-    if (await ctx.db.query('alertOutbox').withIndex('by_key', (q) => q.eq('key', row.key)).first()) continue
-    await ctx.db.insert('alertOutbox', { userId: owner._id, deskId, eventTick: tick, state: 'pending', attempts: 0, createdAt: now, updatedAt: now, ...row })
-    await ensureSender(ctx, row.notBefore)
-  }
 }

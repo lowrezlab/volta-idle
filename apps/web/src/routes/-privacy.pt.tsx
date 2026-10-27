@@ -126,20 +126,4 @@ export const privacyPt: LegalPage = {
       <p>Quando esta política muda, atualizamos esta página e a data no topo.</p>
     </>
   ),
-  IdleAngler: () => (
-    <>
-      <h2>Idle Angler</h2>
-      <p>O Idle Angler guarda seu pescador: as moedas, as águas e a isca, seu cooler, seu caderno de espécies e melhores pesos, seu histórico de pesca, seu peixe mais pesado em cada água e em cada Open de fim de semana, seus pedidos do peixeiro, sua parede de troféus e suas medalhas, conquistas e caixa de moscas. Seus peixes mais pesados aparecem com seu nome público nos rankings e nos resultados dos Opens do Idle Angler e nas telas TRMNL de outros jogadores. A menos que você oculte o Idle Angler do seu perfil público nas configurações do Idle Angler, qualquer pessoa com o link vê seu título, sua data de início, seu número de conquistas, as espécies registradas, seu número de medalhas e os peixes da sua parede de troféus.</p>
-      <p>Se você ligar os alertas do Idle Angler, eles usam os mesmos dispositivos e horário de silêncio dos alertas dos seus outros jogos. O código semanal de mosca no seu TRMNL é ligado à sua instalação e nunca aparece no app.</p>
-      <p>Nas <Link to="/app/idle-angler/settings">configurações do Idle Angler</Link>, Excluir o progresso do Idle Angler remove seu pescador, o cooler, o caderno, os registros de ranking e dos Opens, a parede de troféus e as medalhas, a caixa de moscas, as conquistas, as conexões do Idle Angler e as configurações de alertas do Idle Angler. Sua conta e os outros jogos continuam. Excluir sua conta TRMNL Games remove o Idle Angler junto com todo o resto.</p>
-    </>
-  ),
-  PaperLives: () => (
-    <>
-      <h2>Paper Lives</h2>
-      <p>O Paper Lives guarda sua vida atual e as que terminaram: o nome de cada personagem, pronomes, traços, atributos, dinheiro, trabalho e casa, as pessoas da vida dele, sua história e as escolhas que você fez, além dos registros e fotos do álbum e suas conquistas. Suas vidas mais longas e maiores fortunas aparecem com seu nome público nos placares do Paper Lives e nas telas TRMNL de outros jogadores. A menos que você oculte o Paper Lives do seu perfil público nas configurações do Paper Lives, qualquer pessoa com o link vê o nome, a idade, o trabalho e os traços do seu personagem atual, quantas vidas você viveu, sua árvore genealógica e suas vidas terminadas, cada uma com epitáfio, destaques e fotos. Os nomes dos personagens são públicos nessas páginas, então não coloque dados de pessoas reais neles.</p>
-      <p>Se você ligar os alertas do Paper Lives, eles usam os mesmos dispositivos e horário de silêncio dos alertas dos seus outros jogos, e o alerta mostra o primeiro nome do seu personagem. O código semanal de foto no seu TRMNL é ligado à sua instalação e nunca aparece no app.</p>
-      <p>Nas <Link to="/app/paper-lives/settings">configurações do Paper Lives</Link>, Excluir o progresso do Paper Lives remove suas vidas, o álbum e as fotos dele, os registros dos placares, as conquistas, as conexões do Paper Lives e as configurações de alertas do Paper Lives. Sua conta e os outros jogos continuam. Excluir sua conta TRMNL Games remove o Paper Lives junto com todo o resto.</p>
-    </>
-  ),
 }

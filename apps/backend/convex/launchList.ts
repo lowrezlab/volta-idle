@@ -15,13 +15,14 @@ import { gameSlug as gameSlugValidator, locale as localeValidator } from './sche
  * D201: a game's launch list while it waits for marketplace review. A signed-in player taps Notify me and only their
  * identity is kept; the address comes from Clerk when the one email is sent, as the hero reminder's does (D198). A
  * visitor leaves an email. Each row is deleted once Resend accepts its email; Barry starts the send after approval:
- * `npx convex run --prod launchList:sendLaunch '{"gameSlug":"idle-angler","installUrl":"https://trmnl.com/integrations/idle-angler"}'`.
+ * `npx convex run --prod launchList:sendLaunch '{"gameSlug":"<slug>","installUrl":"<marketplace url>"}'`.
  */
 const JOIN_WINDOW_MS = 10 * 60_000
 const JOIN_LIMIT = 300
 const SEND_BATCH = 25
 const SEND_ATTEMPTS = 3
-const LISTED = new Set(['idle-angler'])
+/** Games with an open launch list; none while this fork has a single, listed game. */
+const LISTED = new Set<string>()
 
 export function normalizeEmail(raw: string): string | null {
   const email = raw.trim().toLowerCase()
@@ -117,7 +118,7 @@ export const leave = mutation({
   },
 })
 
-/** Operator view: `npx convex run --prod launchList:summary '{"gameSlug":"idle-angler"}'`. Counts stop at 5,000 per state. */
+/** Operator view: `npx convex run --prod launchList:summary '{"gameSlug":"<slug>"}'`. Counts stop at 5,000 per state. */
 export const summary = internalQuery({
   args: { gameSlug: gameSlugValidator },
   returns: v.object({ waiting: v.number(), signedIn: v.number(), sending: v.number(), failed: v.number() }),

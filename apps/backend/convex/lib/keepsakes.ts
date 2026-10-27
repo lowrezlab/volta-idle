@@ -46,10 +46,5 @@ export async function keepsakeGrant(ctx: QueryCtx, userId: Id<'users'>) {
   return grant && isDeskCrawler(grant) && grant.userId === userId && grant.state === 'active' ? grant : null
 }
 
-/** Idle Angler's weekly fly code (D115): the keepsake code under its own tag, keyed with the Idle Angler installation. */
-export const flyCode = (tokenHash: string, userId: string, week: number) => keepsakeCode(tokenHash, userId, week, 'idle-angler-fly-v1')
-
 export const normalizedKeepsakeCode = (code: string) => code.trim().toUpperCase().replace(/[\s-]/g, '')
 
-/** Paper Lives' weekly photo code (D159, L6): the keepsake code under its own tag, keyed with the Paper Lives installation. */
-export const photoCode = (tokenHash: string, userId: string, week: number) => keepsakeCode(tokenHash, userId, week, 'paper-lives-photo-v1')

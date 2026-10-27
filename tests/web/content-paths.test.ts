@@ -63,7 +63,6 @@ describe('content pages', () => {
 
   it('leaves pages without game content to hydrate at once', () => {
     expect(contentNeededAt('/')).toBe(false)
-    expect(contentNeededAt('/app/idle-angler')).toBe(false)
   })
 
   it('keeps the help guides, which write game names at module scope, behind the loader', () => {

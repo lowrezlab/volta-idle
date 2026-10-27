@@ -118,20 +118,4 @@ export const privacyDe: LegalPage = {
       <p>Wenn sich diese Erklärung ändert, aktualisieren wir diese Seite und das Datum oben.</p>
     </>
   ),
-  IdleAngler: () => (
-    <>
-      <h2>Idle Angler</h2>
-      <p>Idle Angler speichert deinen Angler: Münzen, Gewässer und Köder, deine Kühlbox, dein Fangbuch mit Arten und Bestgewichten, deinen Angelverlauf, deine schwersten Fische an jedem Gewässer und in jedem Wochenend-Open, deine Aufträge vom Fischhändler, Trophäenwand und Medaillen, Erfolge und Fliegendose. Deine schwersten Fische erscheinen unter deinem öffentlichen Namen in den Ranglisten und Open-Ergebnissen von Idle Angler und auf den TRMNL-Bildschirmen anderer Spieler. Wenn du Idle Angler nicht in den Idle-Angler-Einstellungen aus deinem öffentlichen Profil ausblendest, sieht jeder mit dem Link deinen Titel, dein Startdatum, die Zahl deiner Erfolge, die eingetragenen Arten, die Zahl deiner Medaillen und die Fische an deiner Trophäenwand.</p>
-      <p>Wenn du Idle-Angler-Benachrichtigungen einschaltest, nutzen sie dieselben Geräte und Ruhezeiten wie die Benachrichtigungen deiner anderen Spiele. Der wöchentliche Fliegen-Code auf deinem TRMNL ist an deine Installation gebunden und wird nie in der Begleit-App gezeigt.</p>
-      <p>In den <Link to="/app/idle-angler/settings">Idle-Angler-Einstellungen</Link> entfernt Idle-Angler-Fortschritt löschen deinen Angler, Kühlbox, Fangbuch, Ranglisten- und Open-Einträge, Trophäenwand und Medaillen, Fliegendose, Erfolge, Idle-Angler-Verbindungen und Idle-Angler-Benachrichtigungseinstellungen. Dein Konto und andere Spiele bleiben. Das Löschen deines TRMNL-Games-Kontos entfernt Idle Angler mit allem anderen.</p>
-    </>
-  ),
-  PaperLives: () => (
-    <>
-      <h2>Paper Lives</h2>
-      <p>Paper Lives speichert dein aktuelles Leben und deine beendeten: Name, Pronomen, Eigenschaften, Werte, Geld, Beruf und Zuhause jeder Figur, die Menschen in ihrem Leben, ihre Geschichte und die Entscheidungen, die du getroffen hast, dazu die Einträge und Fotos des Albums und deine Erfolge. Deine längsten Leben und größten Vermögen erscheinen unter deinem öffentlichen Namen in den Ranglisten von Paper Lives und auf den TRMNL-Bildschirmen anderer Spieler. Wenn du Paper Lives nicht in den Paper-Lives-Einstellungen aus deinem öffentlichen Profil ausblendest, sieht jeder mit dem Link Namen, Alter, Beruf und Eigenschaften deiner aktuellen Figur, wie viele Leben du gelebt hast, deinen Stammbaum und deine beendeten Leben, jeweils mit Grabinschrift, Höhepunkten und Fotos. Die Namen der Figuren sind auf diesen Seiten öffentlich, also lass Angaben über echte Menschen weg.</p>
-      <p>Wenn du Paper-Lives-Benachrichtigungen einschaltest, nutzen sie dieselben Geräte und Ruhezeiten wie die Benachrichtigungen deiner anderen Spiele, und die Benachrichtigung zeigt den Vornamen deiner Figur. Der wöchentliche Foto-Code auf deinem TRMNL ist an deine Installation gebunden und wird nie in der Begleit-App gezeigt.</p>
-      <p>In den <Link to="/app/paper-lives/settings">Paper-Lives-Einstellungen</Link> entfernt Paper-Lives-Fortschritt löschen deine Leben, das Album und seine Fotos, Ranglisteneinträge, Erfolge, Paper-Lives-Verbindungen und Paper-Lives-Benachrichtigungseinstellungen. Dein Konto und andere Spiele bleiben. Das Löschen deines TRMNL-Games-Kontos entfernt Paper Lives mit allem anderen.</p>
-    </>
-  ),
 }

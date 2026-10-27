@@ -283,8 +283,8 @@ describe('scene v6', () => {
   })
 
   it('falls back to the whole-sprite hero while the registry cannot draw the look, so v6 always renders', () => {
-    // The generated registry is empty until the first import: every v6 image is its v5 twin.
-    expect(PARTS).toEqual([])
+    // The generated registry has no body for this look (the placeholders draw eldrith.slight): every v6 image is its v5 twin.
+    expect(PARTS.some((p) => p.slot === 'body' && p.id === lookParts(decodeLook(look)).body)).toBe(false)
     expect(sceneHero(parseScenePath(v6)!)).toBeUndefined()
     expect(sceneHero({ pose: 'idle' })).toBeUndefined()
     expect(renderScenePng(v6)).toEqual(renderScenePng(v5))
@@ -331,5 +331,25 @@ describe('scene v6', () => {
     const bare = sceneHero(parsed, hatless)!
     expect(bare.head).toBeUndefined()
     expect(scenePlacements('idle', { kind: 'none' }, occasion, bare).some((p) => p.role === 'decor' && p.id === `${occasion}:hat`)).toBe(false)
+  })
+})
+
+describe('imported parts', () => {
+  it('compose through the layered renderer in every pose', () => {
+    const registry = registryOf(PARTS)
+    const bodies = PARTS.filter((p) => p.slot === 'body')
+    expect(bodies.length).toBeGreaterThan(0)
+    for (const body of bodies) {
+      const ancestry = body.id.split('.')[0]!
+      const head = PARTS.find((p) => p.id === `head.${ancestry}`)
+      const hair = PARTS.find((p) => p.slot === 'hair')
+      const parts: HeroParts = { body: body.id, outfit: SQUIRE_OUTFIT, ...(head ? { head: head.id } : {}), ...(hair ? { hair: hair.id } : {}) }
+      for (const pose of BASE_POSES) {
+        const hero = composeLayeredHero(parts, pose, registry)
+        expect(hero.sprite.width).toBe(HERO_SIZE)
+        expect(hero.sprite.height).toBe(HERO_SIZE)
+        expect(hero.head).toBeDefined()
+      }
+    }
   })
 })

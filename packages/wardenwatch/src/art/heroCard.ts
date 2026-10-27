@@ -77,7 +77,7 @@ export function renderHeroCardPng(card: HeroCard): Uint8Array | null {
   const linesTop = nameTop + FONT_HEIGHT * 2 + 5
   text(`LEVEL ${card.level}${ordinalRank(card.rank)}`, linesTop, 1, GOLD)
   text(`${card.alias.toUpperCase()}'S HERO`, linesTop + FONT_HEIGHT + 4, 1, MUTED)
-  text('DESK CRAWLER ON TRMNL', linesTop + (FONT_HEIGHT + 4) * 2, 1, CREAM)
+  text('WARDENWATCH ON TRMNL', linesTop + (FONT_HEIGHT + 4) * 2, 1, CREAM)
 
   // Scale each cell to 6x6 pixels in an 8-bit indexed PNG; scaled pixel art compresses to a few kilobytes.
   const rowBytes = CARD_WIDTH + 1

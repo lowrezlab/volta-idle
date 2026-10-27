@@ -51,7 +51,7 @@ pnpm lint:trmnl                 # lint all four TRMNL layouts
 pnpm crosscheck:trmnl           # compare preview Liquid (liquidjs) with Ruby Liquid via trmnlp
 pnpm balance                   # balance harness (see docs/evidence/balance.md)
 pnpm tsx tools/trmnl/preview.ts  # local TRMNL layout previews in .previews/
-# Interactive preview gallery (dev server only): http://localhost:3000/dev/desk-crawler
+# Interactive preview gallery (dev server only): http://localhost:3000/dev/wardenwatch
 #   every scenario × OG/X/BWRY × full/half/side/quarter × landscape/portrait
 ```
 

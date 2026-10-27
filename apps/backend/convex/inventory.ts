@@ -17,6 +17,7 @@ import { readWorld, worldContent } from './world'
 import { awardAfterIntent } from './lib/achievements'
 import { spareOwners } from './lib/lostProperty'
 import { withCounterDefaults } from '@trmnl-games/wardenwatch/sim/core/starter'
+import { shardMultiplier, skyForTick } from '@trmnl-games/wardenwatch/sim/core/sky'
 import { addMaterials, applyStep, heldMaterials, isGear, materialShortfall, nextStep, salvageYield, workbenchSuffix } from '@trmnl-games/wardenwatch/sim/core/workbench'
 import { bestFitPotion, combineBatches, healPctOf, potionItem, potionStrengths, potionWord, potionsHeld, strengthById, strengthOf } from '@trmnl-games/wardenwatch/sim/core/potions'
 import type { ItemSnapshot, MaterialCount } from '@trmnl-games/wardenwatch/sim/core/types'
@@ -755,7 +756,9 @@ export const salvageMany = mutation({
       const content = await contentOf(ctx)
       requireWorkbench(content, hero)
       const chosen = await bagGear(ctx, hero, args.itemIds)
-      const yielded = addMaterials(...chosen.map((item) => salvageYield(content, snapshotOf(item))))
+      // 2B.2: a conjunction day pays double shards; the mutation's clock is the same instant the tick would read.
+      const shards = shardMultiplier(skyForTick(content, Date.now()))
+      const yielded = addMaterials(...chosen.map((item) => salvageYield(content, snapshotOf(item), shards)))
       for (const item of chosen) await ctx.db.delete(item._id)
       await adjustMaterials(ctx, hero, await heroItems(ctx, hero._id), content, yielded)
       const counters = withCounterDefaults(hero.counters)

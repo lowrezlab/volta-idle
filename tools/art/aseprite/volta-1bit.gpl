@@ -1,0 +1,21 @@
+GIMP Palette
+Name: Volta 1-bit
+Columns: 6
+Channels: RGBA
+# Wardenwatch hero parts (GDD section 7.2). Each swatch maps to one engine glyph; the import tool
+# (tools/art/aseprite-import.ts) fails on any other colour. Index 0 is the sprite's transparent colour.
+#
+# Draw only with the six drawing swatches. The anchor swatches go on the hidden _anchors layer only,
+# one pixel each.
+  0   0   0   0	Transparent
+  0   0   0 255	Black #
+255 255 255 255	White w
+128 128 128 255	Mid grey : (50% checker)
+192 192 192 255	Light grey . (25% shade)
+ 64  96 192 255	Hatch blue = (horizontal hatch)
+255   0   0 255	anchor.head
+255 128   0 255	anchor.neck
+  0 255   0 255	anchor.hand
+  0   0 255 255	anchor.back
+255   0 255 255	anchor.crown
+  0 255 255 255	anchor.origin

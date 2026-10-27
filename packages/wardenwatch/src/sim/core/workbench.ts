@@ -40,14 +40,15 @@ export const templateTier = (content: ContentCatalog, item: Pick<ItemSnapshot, '
 
 /**
  * Materials a bag item yields: the tier it was found at, in units of its rarity's material, epic at the catalog
- * multiplier. Upgrades never raise the yield, so no step turns one material (or gold) into another.
+ * multiplier, times `multiplier` (2B.2: the sky's `shardMultiplier`, 2 on a conjunction day). Upgrades never raise
+ * the yield, so no step turns one material (or gold) into another.
  */
-export function salvageYield(content: ContentCatalog, item: Pick<ItemSnapshot, 'templateId' | 'requiredLevel' | 'rarity' | 'kind'>): MaterialCount {
+export function salvageYield(content: ContentCatalog, item: Pick<ItemSnapshot, 'templateId' | 'requiredLevel' | 'rarity' | 'kind'>, multiplier = 1): MaterialCount {
   const rules = content.workbench
   if (rules === undefined || !isGear(item.kind)) return {}
   const material = materialFor(rules, item.rarity)
   if (material === undefined) return {}
-  return { [material.id]: templateTier(content, item) * (item.rarity === 'epic' ? rules.epicYieldMultiplier : 1) }
+  return { [material.id]: templateTier(content, item) * (item.rarity === 'epic' ? rules.epicYieldMultiplier : 1) * multiplier }
 }
 
 /** Sum of several yields or costs. */

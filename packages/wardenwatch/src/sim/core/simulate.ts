@@ -1,7 +1,7 @@
 import { applyItemChanges } from './apply'
 import { isBagFull, milestoneUpgrade, nextEarlyTier } from './bag'
 import { eventById, optionOf, resolveEffect } from './choice'
-import { affixById, effectById, effectiveStats, liveEffects, scaled, withEffect } from './modifiers'
+import { affixById, effectById, effectiveStats, liveEffects, mergeModifiers, scaled, withEffect } from './modifiers'
 import { gearTierOf } from './biomes'
 import { nextEarlyPouchTier, potionCap, pouchMilestoneUpgrade } from './pouch'
 import { autoPotion, potionItem, potionRows, potionStrengths, potionWord, potionsHeld, rollPotionStrength, strengthOf } from './potions'
@@ -15,6 +15,7 @@ import { applyTodo } from './todo'
 import { applyCareer, currentRung, effectiveStance, guaranteeDue, unlocked } from './career'
 import { applyOccasion } from './occasionLine'
 import { mishapRule, occasionForTick, occasionModifiers, raidLaunchPct, type LiveOccasion } from './occasions'
+import { skyForTick, skyModifiers, skyPrice, skyStance, type LiveSky } from './sky'
 import { applyXp, classRule, deriveStats, heroMaxHp, pctOf } from './stats'
 import type {
   BagTier,
@@ -131,6 +132,8 @@ class TickRun {
   private foundApplied = false
   /** D139: the occasion live on the hero's local date, if any. */
   private readonly occasion: LiveOccasion | undefined
+  /** 2B.2: the Volta sky at the tick's wall slot, under a catalog with a sky table. */
+  private readonly sky: LiveSky | undefined
   /** D163: a dug-in elite whose clock ran out while the hero explored; told as this tick's event. */
   private slipped: Standoff | undefined
 
@@ -144,11 +147,12 @@ class TickRun {
       narrative: createRng(input.streams.narrative),
     }
     this.occasion = occasionForTick(input.content, input.tick, input.tickAt, input.utcOffsetSeconds)
+    this.sky = skyForTick(input.content, input.tickAt)
   }
 
-  /** What the hero fights with now: class, affixes, effects and the live occasion's modifiers. */
+  /** What the hero fights with now: class, affixes, effects, the live occasion's modifiers and the sky's (2B.2: the aria passive, and the Gyre's XP favour in its zone). */
   private stats() {
-    return effectiveStats(this.content, this.h, this.input.inventory, this.input.tick, occasionModifiers(this.occasion))
+    return effectiveStats(this.content, this.h, this.input.inventory, this.input.tick, mergeModifiers(occasionModifiers(this.occasion), skyModifiers(this.sky, this.h.biomeId)))
   }
 
   /**
@@ -157,8 +161,10 @@ class TickRun {
    */
   private sustain(): { autoPotionBelowPct: number; restBelowPct: number; resumeExploringAtPct: number; victoryXpPct: number } {
     // P35: below the stance unlock a chosen stance waits; the hero plays balanced until then.
-    const rule = this.content.stances?.[this.stance() ?? 'balanced']
-    return rule ?? { ...this.content.constants, victoryXpPct: 100 }
+    const stance = this.stance() ?? 'balanced'
+    const rule = this.content.stances?.[stance]
+    // 2B.2: the standing Axis nudges the thresholds of the stance it favours.
+    return rule === undefined ? { ...this.content.constants, victoryXpPct: 100 } : skyStance(this.sky, stance, rule)
   }
 
   /** The stance the hero plays and raids by (P35: balanced until stances unlock). */
@@ -1120,14 +1126,15 @@ class TickRun {
     const rule = content.merchant!
     const quantity = this.rng.reward.int(1, rule.maxPotionsOffered)
     // D139 Black Friday: every price on a visit that opens that day is scaled for the whole visit.
-    const sale = (price: number) => Math.max(1, Math.floor((price * (this.occasion?.rule.effect?.merchantPricePct ?? 100)) / 100))
-    const offers: MerchantOffer[] = [{ id: 'potions', name: quantity === 1 ? 'Healing potion' : `${quantity} healing potions`, quantity, price: sale(rule.potionPrice * biomeTier * quantity) }]
+    // 2B.2: the Cardinal Cycle's featured offer is discounted on top, for the whole visit.
+    const sale = (offer: MerchantOffer['id'], price: number) => skyPrice(this.sky, offer, Math.max(1, Math.floor((price * (this.occasion?.rule.effect?.merchantPricePct ?? 100)) / 100)))
+    const offers: MerchantOffer[] = [{ id: 'potions', name: quantity === 1 ? 'Healing potion' : `${quantity} healing potions`, quantity, price: sale('potions', rule.potionPrice * biomeTier * quantity) }]
     // D122: the merchant undercuts the companion's ladder price, so a visit is a deal rather than a convenience.
-    const discounted = (price: number) => sale(Math.max(1, Math.floor((price * (100 - (rule.ladderDiscountPct ?? 0))) / 100)))
+    const discounted = (offer: MerchantOffer['id'], price: number) => sale(offer, Math.max(1, Math.floor((price * (100 - (rule.ladderDiscountPct ?? 0))) / 100)))
     const pouch = nextEarlyPouchTier(content, h)
-    if (pouch?.price !== undefined) offers.push({ id: 'pouch', name: pouch.name, quantity: 1, price: discounted(pouch.price), tierId: pouch.id })
+    if (pouch?.price !== undefined) offers.push({ id: 'pouch', name: pouch.name, quantity: 1, price: discounted('pouch', pouch.price), tierId: pouch.id })
     const bag = nextEarlyTier(content, h)
-    if (bag?.price !== undefined) offers.push({ id: 'bag', name: bag.name, quantity: 1, price: discounted(bag.price), tierId: bag.id })
+    if (bag?.price !== undefined) offers.push({ id: 'bag', name: bag.name, quantity: 1, price: discounted('bag', bag.price), tierId: bag.id })
     return { offers, expiresAtTick: this.input.tick + rule.staysForTicks, biomeId: h.biomeId }
   }
 

@@ -2,6 +2,7 @@
  * Pure domain types for the simulator (domain-contracts.md).
  * No Convex, auth, connection or wall-clock types belong here.
  */
+import type { AxisName, WardenId } from './calendar'
 
 export type StreamName = 'encounter' | 'combat' | 'reward' | 'narrative' | 'raid' | 'quest' | 'meeting' | 'graveyard'
 /**
@@ -779,6 +780,38 @@ export interface Standoff {
   readonly untilTick: number
 }
 
+/** A daily aria passive (2B.2): the named modifier the day's fullest moon grants. */
+export interface AriaPassive {
+  readonly name: string
+  readonly blurb: string
+  readonly modifiers: Modifiers
+}
+
+/** An Axis's nudge (2B.2): the stance it favours and the whole points its thresholds move while the Axis stands. */
+export interface AxisNudge {
+  readonly stance: StanceId
+  readonly autoPotionBelowPct?: number
+  readonly restBelowPct?: number
+  readonly resumeExploringAtPct?: number
+}
+
+/**
+ * 2B.2 (GDD §6.2): the Volta sky's hooks in the sim, read from the tick's wall slot alone (`calendar.ts`). One table
+ * holds every number. Absent (every catalog before v28, and a tick without a wall slot): the sky changes nothing.
+ */
+export interface SkyRule {
+  /** The year's Gyre Warden favours one zone: victory XP there is up by `xpPct`. */
+  readonly gyre: Readonly<{ xpPct: number; favoured: Readonly<Record<WardenId, string>> }>
+  /** The moneychanger's featured offer rotates with the Cardinal Cycle (`rotation[cycleIndex % length]`), `discountPct` off. */
+  readonly cycle: Readonly<{ discountPct: number; rotation: readonly MerchantOffer['id'][] }>
+  /** Each Axis's nudge; an Axis without one favours no stance. */
+  readonly axis: Readonly<Partial<Record<AxisName, AxisNudge>>>
+  /** The passive each sky Warden's moon grants on a day it is the aria; a Warden without one grants nothing. */
+  readonly aria: Readonly<Partial<Record<WardenId, AriaPassive>>>
+  /** Salvage yields are multiplied by this on a conjunction day. */
+  readonly conjunction: Readonly<{ shardMultiplier: number }>
+}
+
 export interface ContentCatalog {
   readonly contentVersion: string
   readonly constants: SimulationConstants
@@ -835,6 +868,8 @@ export interface ContentCatalog {
   readonly lore?: LoreRule
   /** Absent before v19 (D139): no occasions. Ordered: when two overlap, the earlier one is live. */
   readonly occasions?: readonly OccasionRule[]
+  /** Absent before v28 (2B.2): the Volta sky changes nothing in play. */
+  readonly sky?: SkyRule
   readonly narrative: Readonly<{ biomes: Readonly<Record<string, BiomeNarrative>>; shared: SharedNarrative; monsters: Readonly<Record<string, MonsterNarrative>> }>
 }
 

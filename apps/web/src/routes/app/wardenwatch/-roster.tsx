@@ -219,7 +219,7 @@ function RecruitCard({ rule, current, roster, notify, onCancel }: { rule: ClassR
       <ClassBody rule={rule} />
       <form className="mt-3 flex flex-col gap-3" onSubmit={(event) => { event.preventDefault(); if (valid && !blocked) setAsking(true) }}>
         <NameField label={t.nameYour(shown)} small rule={HERO_NAME_RULE} noun="hero name" value={name} onChange={setName} disabled={recruit.pending} />
-        <LookCreator small value={look} onChange={setLook} heroClass={rule.id} note={l.firstLook} disabled={recruit.pending} />
+        <LookCreator small value={look} onChange={setLook} heroClass={rule.id} note={l.firstLook} disabled={recruit.pending} onSuggestName={setName} />
         <Button type="submit" disabled={!valid || blocked}>{t.recruitA(shown)}</Button>
         {roster.nextAt !== null ? <p className="text-sm text-muted">{t.recruitCounts(clock(locale, roster.nextAt))}</p> : null}
         {roster.nextAt === null && !roster.canPark && current ? <p className="text-sm text-muted">{t.canHandOver(current.name)}</p> : null}

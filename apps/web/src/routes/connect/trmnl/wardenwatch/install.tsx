@@ -144,7 +144,7 @@ function ConnectForm() {
       {needsHero ? (
         <>
           <NameField label={t.heroNameLabel} note={t.heroNameNote} rule={HERO_NAME_RULE} noun="hero name" name="heroName" value={heroName} onChange={setHeroName} placeholder="Steve" disabled={submitting} />
-          <LookCreator value={heroLook} onChange={setHeroLook} name="heroLook" note={l.firstLook} disabled={submitting} />
+          <LookCreator value={heroLook} onChange={setHeroLook} name="heroLook" note={l.firstLook} disabled={submitting} onSuggestName={setHeroName} />
           <RankingsPreview alias={(needsProfile ? alias : me?.user?.publicAlias ?? '').trim()} hero={heroName.trim()} />
         </>
       ) : (

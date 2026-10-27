@@ -1,7 +1,7 @@
 /*
  * Refresh tools/review/fixtures/companion.json from a real hero (the companion review harness's data).
  *
- * 1. Open https://trmnlgames.com/app/desk-crawler signed in, then the browser's DevTools console.
+ * 1. Open https://trmnlgames.com/app/wardenwatch signed in, then the browser's DevTools console.
  * 2. Paste this whole file and press Enter. It runs read-only queries and copies the fixture to the clipboard.
  * 3. In the repository: pbpaste > tools/review/fixtures/companion.json
  *

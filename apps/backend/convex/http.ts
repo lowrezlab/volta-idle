@@ -86,8 +86,8 @@ const uninstall = (gameSlug: GameSlug) =>
     return found ? json(200, { ok: true }) : notFound()
   })
 
-http.route({ path: '/trmnl/install/success', method: 'POST', handler: installSuccess('desk-crawler') })
-http.route({ path: '/trmnl/uninstall', method: 'POST', handler: uninstall('desk-crawler') })
+http.route({ path: '/trmnl/install/success', method: 'POST', handler: installSuccess('wardenwatch') })
+http.route({ path: '/trmnl/uninstall', method: 'POST', handler: uninstall('wardenwatch') })
 
 /** Shared screen request parsing: bearer, form type and size, one `user_uuid`. */
 async function parseScreenRequest(request: Request): Promise<{ tokenHash: string; form: URLSearchParams; uuid: string } | Response> {

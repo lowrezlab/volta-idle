@@ -52,8 +52,8 @@ describe('content pages', () => {
   const routes = files.filter((file) => file.startsWith(join(SRC, 'routes')) && reaches.has(file)).map(routeOf).filter((route): route is string => route !== null)
 
   it('finds the companion and the public hero pages', () => {
-    expect(routes).toContain('/app/desk-crawler')
-    expect(routes).toContain('/desk-crawler/heroes/x')
+    expect(routes).toContain('/app/wardenwatch')
+    expect(routes).toContain('/wardenwatch/heroes/x')
   })
 
   it('lists every route that renders game content on the client entry', () => {
@@ -66,9 +66,9 @@ describe('content pages', () => {
   })
 
   it('keeps the help guides, which write game names at module scope, behind the loader', () => {
-    const route = readFileSync(join(SRC, 'routes/help/desk-crawler.tsx'), 'utf8')
+    const route = readFileSync(join(SRC, 'routes/help/wardenwatch.tsx'), 'utf8')
     expect(route).toMatch(/loader: .*import\('\.\/-deskCrawlerHelp'\).*loadDeskCrawlerHelp/)
     expect(route).not.toMatch(/from '\.\/-deskCrawlerHelp\.\w\w'/)
-    expect(readFileSync(join(SRC, 'client.tsx'), 'utf8')).toContain('/help/desk-crawler')
+    expect(readFileSync(join(SRC, 'client.tsx'), 'utf8')).toContain('/help/wardenwatch')
   })
 })

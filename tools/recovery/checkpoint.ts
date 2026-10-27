@@ -44,7 +44,7 @@ export function captureCheckpoint(tables: RecoveryTables, sourceDeployment: stri
   for (const user of users.values()) if (user.state === 'deleting') identities.add(authHash(string(user, 'tokenIdentifier')))
   const gameDeletions = new Map<string, number>()
   for (const job of rows(tables, 'gameDeletionJobs')) {
-    if (job.gameSlug !== 'desk-crawler') throw new Error('Unsupported game deletion scope')
+    if (job.gameSlug !== 'wardenwatch') throw new Error('Unsupported game deletion scope')
     const owner = users.get(string(job, 'userId'))
     if (!owner) continue // Fully deleted accounts are covered by identity tombstones.
     const identity = authHash(string(owner, 'tokenIdentifier'))
@@ -91,7 +91,7 @@ export function sealCheckpoint(checkpoint: Checkpoint, key: Buffer): Buffer {
   if (key.length !== 32) throw new Error('Recovery key must contain 32 bytes')
   const iv = randomBytes(12)
   const cipher = createCipheriv('aes-256-gcm', key, iv)
-  cipher.setAAD(Buffer.from('desk-crawler-recovery-v1'))
+  cipher.setAAD(Buffer.from('wardenwatch-recovery-v1'))
   const body = Buffer.concat([cipher.update(JSON.stringify(checkpoint)), cipher.final()])
   return Buffer.concat([Buffer.from('DCR1'), iv, cipher.getAuthTag(), body])
 }
@@ -99,7 +99,7 @@ export function sealCheckpoint(checkpoint: Checkpoint, key: Buffer): Buffer {
 export function openCheckpoint(bytes: Buffer, key: Buffer): Checkpoint {
   if (key.length !== 32 || bytes.length < 33 || bytes.subarray(0, 4).toString() !== 'DCR1') throw new Error('Invalid protected checkpoint')
   const decipher = createDecipheriv('aes-256-gcm', key, bytes.subarray(4, 16))
-  decipher.setAAD(Buffer.from('desk-crawler-recovery-v1'))
+  decipher.setAAD(Buffer.from('wardenwatch-recovery-v1'))
   decipher.setAuthTag(bytes.subarray(16, 32))
   const value: unknown = JSON.parse(Buffer.concat([decipher.update(bytes.subarray(32)), decipher.final()]).toString())
   validateCheckpoint(value)

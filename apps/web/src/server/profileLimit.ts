@@ -2,7 +2,7 @@
 export type RateLimiter = { limit(options: { key: string }): Promise<{ success: boolean }> }
 
 /** Desk Crawler hero pages (D109) and the shared profile (D115). */
-const PROFILE_PATH = /^\/(desk-crawler\/heroes|profile)\/[^/]+\/?$/
+const PROFILE_PATH = /^\/(wardenwatch\/heroes|profile)\/[^/]+\/?$/
 
 /**
  * Public hero pages (D109) are the one public page keyed by a guessable name, so

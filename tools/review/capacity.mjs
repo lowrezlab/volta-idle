@@ -2,7 +2,7 @@ import { spawn, spawnSync } from 'node:child_process'
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 const deployment = 'precious-pheasant-866'
 const cli = 'node_modules/convex/bin/main.js'
-const output = '/private/tmp/desk-crawler-capacity'
+const output = '/private/tmp/wardenwatch-capacity'
 mkdirSync(output, { recursive: true })
 const run = (name, args = {}, extra = []) => {
   const p = spawnSync(process.execPath, [cli, 'run', name, JSON.stringify(args), '--deployment', deployment, ...extra], { encoding: 'utf8' })

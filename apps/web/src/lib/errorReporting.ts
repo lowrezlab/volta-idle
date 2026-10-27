@@ -32,5 +32,5 @@ export function startErrorReporting(): Promise<SentryBrowser | null> {
 export function reportError(error: unknown, source: string, componentStack?: string) {
   const detail = routeErrorContext(error, componentStack)
   captureAnalyticsException(error, source, detail)
-  void startErrorReporting().then((Sentry) => { Sentry?.captureException(error, { tags: { source, game: 'desk-crawler' }, ...(detail ? { extra: detail } : {}) }) })
+  void startErrorReporting().then((Sentry) => { Sentry?.captureException(error, { tags: { source, game: 'wardenwatch' }, ...(detail ? { extra: detail } : {}) }) })
 }

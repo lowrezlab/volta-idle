@@ -20,7 +20,7 @@ export interface GameHooks {
 
 /** Only omitted pre-migration credentials inherit the original game's scope. */
 export function isGame(row: { gameSlug?: string }, slug: GameSlug): boolean {
-  return row.gameSlug === slug || (row.gameSlug === undefined && slug === 'desk-crawler')
+  return row.gameSlug === slug || (row.gameSlug === undefined && slug === 'wardenwatch')
 }
 
 type OtherGameHooks = GameHooks & { prepare: (ctx: MutationCtx, user: Doc<'users'>, now: number) => Promise<unknown> }
@@ -32,12 +32,12 @@ export function otherGameHooks(slug: never): OtherGameHooks {
 
 /** A game's current player character for this user: the hero. */
 export async function currentCharacterOf(ctx: QueryCtx, slug: GameSlug, user: Doc<'users'> | null): Promise<{ _id: string; activationState: 'pending_trmnl' | 'active' } | null> {
-  return slug === 'desk-crawler' ? await currentHero(ctx, user) : await otherGameHooks(slug).current(ctx, user)
+  return slug === 'wardenwatch' ? await currentHero(ctx, user) : await otherGameHooks(slug).current(ctx, user)
 }
 
 /** Whether this game's progress is being deleted for the user. */
 export async function gameDeletingFor(ctx: QueryCtx, slug: GameSlug, userId: Id<'users'>): Promise<boolean> {
-  return slug === 'desk-crawler' ? await deskCrawlerDeleting(ctx, userId) : await otherGameHooks(slug).deleting(ctx, userId)
+  return slug === 'wardenwatch' ? await deskCrawlerDeleting(ctx, userId) : await otherGameHooks(slug).deleting(ctx, userId)
 }
 
 export const deskCrawlerDeleting = async (ctx: QueryCtx, userId: Id<'users'>) => (await gameProfile(ctx, userId))?.state === 'deleting'

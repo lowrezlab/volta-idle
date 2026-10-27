@@ -140,10 +140,10 @@ export const send = internalAction({
         const email = response.ok ? verifiedPrimaryEmail(await response.json()) : null
         if (email) {
           const origin = new URL(process.env.COMPANION_ORIGIN ?? 'https://trmnlgames.com').origin
-          const stopLink = new URL('/desk-crawler/unsubscribe', origin)
+          const stopLink = new URL('/wardenwatch/unsubscribe', origin)
           stopLink.searchParams.set('u', userId)
           stopLink.searchParams.set('t', stopToken(stop, userId))
-          const message = heroReminderEmail(row.locale as Parameters<typeof heroReminderEmail>[0], row.facts as ReminderFacts, { app: `${origin}/app/desk-crawler`, stop: stopLink.toString() })
+          const message = heroReminderEmail(row.locale as Parameters<typeof heroReminderEmail>[0], row.facts as ReminderFacts, { app: `${origin}/app/wardenwatch`, stop: stopLink.toString() })
           const sent = await fetch('https://api.resend.com/emails', {
             method: 'POST',
             signal: AbortSignal.timeout(10_000),

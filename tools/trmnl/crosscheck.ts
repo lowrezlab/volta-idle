@@ -21,7 +21,7 @@ const FIXTURE_SETS = [['--recap'], ['--recap', '--keepsakes'], ['--potion-finds'
 
 requireBundle()
 
-const dir = mkdtempSync(join(tmpdir(), 'desk-crawler-trmnl-crosscheck-'))
+const dir = mkdtempSync(join(tmpdir(), 'wardenwatch-trmnl-crosscheck-'))
 try {
   const cases: Array<{ id: string; layout: PreviewLayout; context: Record<string, unknown> }> = []
   for (const flags of FIXTURE_SETS) {

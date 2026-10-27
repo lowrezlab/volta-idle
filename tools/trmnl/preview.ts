@@ -4,7 +4,7 @@
  * HTML page per state with all four sizes. Screenshot the pages for the layout
  * matrix. This approximates TRMNL's renderer; real-device renders stay the
  * acceptance gate. Scenarios live in the shared previewScenarios module; for an
- * interactive gallery run `pnpm dev` and open /dev/desk-crawler.  Usage: pnpm tsx tools/trmnl/preview.ts [artBaseUrl] [--recap] [--portrait]
+ * interactive gallery run `pnpm dev` and open /dev/wardenwatch.  Usage: pnpm tsx tools/trmnl/preview.ts [artBaseUrl] [--recap] [--portrait]
  * `--dump-contexts <file>` also writes each Liquid render context, for tools/trmnl/crosscheck.ts.
  * `--inline-art` draws scenes and codes locally and inlines them, so art changes preview before any deployment serves them.
  * `--occasion <id>` (D139) dresses every scene for one occasion, e.g. `--occasion halloween`.

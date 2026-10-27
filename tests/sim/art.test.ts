@@ -191,10 +191,10 @@ describe('companion QR codes', () => {
       expect(renderQrPng(bad, 'https://example.test')).toBeNull()
     }
     for (const scale of QR_SCALES) {
-      const { size, ink } = qrInk('https://trmnlgames.com/app/desk-crawler/inventory', scale)
+      const { size, ink } = qrInk('https://trmnlgames.com/app/wardenwatch/inventory', scale)
       const rgba = new Uint8ClampedArray(size * size * 4)
       for (let i = 0; i < ink.length; i += 1) rgba.fill(ink[i] ? 0 : 255, i * 4, i * 4 + 3), (rgba[i * 4 + 3] = 255)
-      expect(jsQR(rgba, size, size)?.data).toBe('https://trmnlgames.com/app/desk-crawler/inventory')
+      expect(jsQR(rgba, size, size)?.data).toBe('https://trmnlgames.com/app/wardenwatch/inventory')
     }
   })
 
@@ -222,7 +222,7 @@ describe('companion QR codes', () => {
   it('draws the home and corner codes from the short link, the corner one smaller and quiet only left and below (D108)', async () => {
     const { default: jsQR } = await import('jsqr')
     const { qrInk, renderQrPng } = await import('@trmnl-games/wardenwatch/art/qr')
-    const { size: full } = qrInk('https://trmnlgames.com/app/desk-crawler', 2)
+    const { size: full } = qrInk('https://trmnlgames.com/app/wardenwatch', 2)
     const { size: home } = qrInk('https://trmnlgames.com/dc', 2)
     const { size, ink } = qrInk('https://trmnlgames.com/dc', 2, true)
     expect([full, home, size]).toEqual([66, 58, 54])

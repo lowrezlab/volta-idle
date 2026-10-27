@@ -33,7 +33,7 @@ export const mine = query({
   args: { gameSlug: v.optional(gameSlug) },
   returns: v.array(instanceView),
   handler: async (ctx, args) => {
-    const slug = args.gameSlug ?? 'desk-crawler'
+    const slug = args.gameSlug ?? 'wardenwatch'
     const user = await currentUser(ctx)
     if (user === null || user.state !== 'active' || (await gameDeleting(ctx, user._id, slug))) return []
     const rows = await ctx.db
@@ -53,7 +53,7 @@ export const forManagement = query({
   args: { gameSlug: v.optional(gameSlug), uuid: v.string() },
   returns: v.union(v.null(), v.object({ owned: v.literal(false) }), v.object({ owned: v.literal(true), instance: instanceView, heroName: v.union(v.string(), v.null()) })),
   handler: async (ctx, { uuid, gameSlug: requested }) => {
-    const slug = requested ?? 'desk-crawler'
+    const slug = requested ?? 'wardenwatch'
     const user = await currentUser(ctx)
     if (user === null || user.state !== 'active' || (await gameDeleting(ctx, user._id, slug))) return null
     const row = await ctx.db
@@ -76,7 +76,7 @@ export const disconnect = mutation({
   handler: async (ctx, args) => {
     const result = await runIntent(ctx, args.operationId, 'connections.disconnect', { instanceId: args.instanceId }, async (user) => {
       const row = await ctx.db.get(args.instanceId)
-      if (row === null || !isGame(row, args.gameSlug ?? 'desk-crawler') || row.userId !== user._id) throw appError('CONNECTION_UNAVAILABLE', 'That connection is not available.')
+      if (row === null || !isGame(row, args.gameSlug ?? 'wardenwatch') || row.userId !== user._id) throw appError('CONNECTION_UNAVAILABLE', 'That connection is not available.')
       if (row.state !== 'active') return { changed: false }
       await ctx.db.patch(row._id, { state: 'disconnected' })
       return { changed: true }

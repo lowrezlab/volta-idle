@@ -111,7 +111,7 @@ export const privacyPl: LegalPage = {
       <p>Usunięcie powiązanych profili, zdarzeń i nagrań w PostHog jest zlecane w ramach usuwania konta i realizowane przez PostHog asynchronicznie. Nieudane żądania są ponawiane i pozostają widoczne dla operatora, dopóki nie zostaną rozwiązane.</p>
 
       <h2>Usuwanie tylko jednej gry</h2>
-      <p>W <Link to="/app/desk-crawler/settings">ustawieniach Desk Crawler</Link> wybierz „Usuń postępy w Desk Crawler”, aby usunąć tego bohatera, historię, połączenia oraz ustawienia i urządzenia alertów. Wspólne konto i logowanie pozostają dostępne. Po zakończeniu usuwania możesz zacząć od nowa, instalując plugin. Inne gry pozostają bez zmian.</p>
+      <p>W <Link to="/app/wardenwatch/settings">ustawieniach Desk Crawler</Link> wybierz „Usuń postępy w Desk Crawler”, aby usunąć tego bohatera, historię, połączenia oraz ustawienia i urządzenia alertów. Wspólne konto i logowanie pozostają dostępne. Po zakończeniu usuwania możesz zacząć od nowa, instalując plugin. Inne gry pozostają bez zmian.</p>
 
       <h2>Twoje wybory</h2>
       <p>

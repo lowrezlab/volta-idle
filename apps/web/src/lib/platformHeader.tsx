@@ -26,7 +26,7 @@ export function PlatformHeader() {
         <Link to="/" className="flex min-h-11 min-w-0 items-center gap-2 font-display text-lg font-semibold"><img src="/favicon.svg" alt="" width={24} height={24} className="shrink-0 [image-rendering:pixelated]" /><span className={`truncate ${inGame ? 'max-sm:sr-only' : 'max-[359px]:sr-only'}`}>TRMNL Games</span></Link>
         <nav aria-label={t.platformNav} className="flex shrink-0 items-center gap-4 text-sm">
           <Show when="signed-out">
-            <Link to="/help/desk-crawler" className={NAV_LINK} activeProps={{ 'aria-current': 'page', className: 'underline' }}>{t.help}</Link>
+            <Link to="/help/wardenwatch" className={NAV_LINK} activeProps={{ 'aria-current': 'page', className: 'underline' }}>{t.help}</Link>
             <SignInButton mode="modal"><button type="button" {...PRELOAD_CLERK_UI} className="hud uppercase text-hud-sm min-h-10 border-[3px] border-edge px-3 hover:bg-ink hover:text-night active:bg-ink active:text-night">{t.signIn}</button></SignInButton>
           </Show>
           <Show when="signed-in">

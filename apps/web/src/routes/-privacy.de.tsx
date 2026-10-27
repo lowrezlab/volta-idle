@@ -103,7 +103,7 @@ export const privacyDe: LegalPage = {
       <p>Die Entfernung verknüpfter PostHog-Profile, -Ereignisse und -Aufzeichnungen wird im Rahmen der Kontolöschung beantragt und von PostHog asynchron bearbeitet. Fehlgeschlagene Anträge werden wiederholt und bleiben für den Betreiber sichtbar, bis sie erledigt sind.</p>
 
       <h2>Nur ein Spiel löschen</h2>
-      <p>Wähle in den <Link to="/app/desk-crawler/settings">Desk-Crawler-Einstellungen</Link> Desk-Crawler-Fortschritt löschen, um diesen Helden, den Verlauf, die Verbindungen und die Benachrichtigungseinstellungen und Geräte zu entfernen. Dein gemeinsames Konto und deine Anmeldung bleiben erhalten. Nach Abschluss der Entfernung kannst du neu anfangen, indem du das Plugin installierst. Andere Spiele sind nicht betroffen.</p>
+      <p>Wähle in den <Link to="/app/wardenwatch/settings">Desk-Crawler-Einstellungen</Link> Desk-Crawler-Fortschritt löschen, um diesen Helden, den Verlauf, die Verbindungen und die Benachrichtigungseinstellungen und Geräte zu entfernen. Dein gemeinsames Konto und deine Anmeldung bleiben erhalten. Nach Abschluss der Entfernung kannst du neu anfangen, indem du das Plugin installierst. Andere Spiele sind nicht betroffen.</p>
 
       <h2>Deine Wahlmöglichkeiten</h2>
       <p>

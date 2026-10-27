@@ -111,7 +111,7 @@ export const privacyIt: LegalPage = {
       <p>La rimozione dei profili, degli eventi e delle registrazioni PostHog collegati viene richiesta durante l’eliminazione dell’account ed elaborata da PostHog in modo asincrono. Le richieste non riuscite vengono ritentate e restano visibili al gestore finché non sono risolte.</p>
 
       <h2>Eliminare solo un gioco</h2>
-      <p>Nelle <Link to="/app/desk-crawler/settings">impostazioni di Desk Crawler</Link>, scegli Elimina i progressi di Desk Crawler per rimuovere quell’eroe, la cronologia, i collegamenti e le impostazioni e i dispositivi degli avvisi. Il tuo account condiviso e l’accesso restano disponibili. Puoi ricominciare installando il plugin quando l’eliminazione è finita. Gli altri giochi non cambiano.</p>
+      <p>Nelle <Link to="/app/wardenwatch/settings">impostazioni di Desk Crawler</Link>, scegli Elimina i progressi di Desk Crawler per rimuovere quell’eroe, la cronologia, i collegamenti e le impostazioni e i dispositivi degli avvisi. Il tuo account condiviso e l’accesso restano disponibili. Puoi ricominciare installando il plugin quando l’eliminazione è finita. Gli altri giochi non cambiano.</p>
 
       <h2>Le tue scelte</h2>
       <p>

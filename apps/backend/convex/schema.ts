@@ -167,7 +167,7 @@ export const logKind = v.union(
 )
 
 /** Every registered game (packages/platform). Storage accepts any of them; each write path still names its own game. */
-export const gameSlug = v.literal('desk-crawler')
+export const gameSlug = v.literal('wardenwatch')
 export const gameStatus = v.union(v.literal('hidden'), v.literal('preview'), v.literal('live'))
 
 /** D149: a hero's look; chosen free at creation, changed later with a makeover. */
@@ -556,7 +556,7 @@ export default defineSchema({
 
 
   operationReceipts: defineTable({
-    scope: v.optional(v.union(v.literal('platform'), v.literal('desk-crawler'))),
+    scope: v.optional(v.union(v.literal('platform'), v.literal('wardenwatch'))),
     userId: v.id('users'),
     operationId: v.string(),
     operation: v.string(),

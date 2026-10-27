@@ -10,7 +10,7 @@ import { DESK_CRAWLER_TABLES } from './tables'
 
 /** Desk Crawler's binding to the shared engine: its tables, quarter-hour schedule (D42), versions and catalogs. */
 export const DESK_CRAWLER_RUNTIME: EngineRuntime<ContentCatalog> = {
-  slug: 'desk-crawler',
+  slug: 'wardenwatch',
   tables: DESK_CRAWLER_TABLES,
   schedule: makeSchedule(0),
   simulationVersion: SIMULATION_VERSION,

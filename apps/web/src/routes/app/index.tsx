@@ -24,17 +24,17 @@ function Library() {
       {isPending ? <p role="status">{t.loading}</p> : (
         <section className="window flex flex-col gap-4 p-5" aria-labelledby="library-dc">
           <div className="flex items-center gap-4">
-            <img src="/games/desk-crawler/icon-192.png" alt="" width={64} height={64} className="h-16 w-16 [image-rendering:pixelated]" />
+            <img src="/games/wardenwatch/icon-192.png" alt="" width={64} height={64} className="h-16 w-16 [image-rendering:pixelated]" />
             <div>
               <h2 id="library-dc" className="font-display text-2xl font-bold text-gold-ink">Desk Crawler</h2>
               {me?.hero ? (
                 <p className="mt-1 text-muted"><strong className="text-ink">{me.hero.name}</strong> <span className="label-px ml-1">{me.hero.activationState === 'active' ? (me.hero.waking ? shell.heroStatus.resuming : shell.heroStatus[me.hero.status] ?? shell.adventuring) : shell.waitingForSave}</span></p>
               ) : (
-                <p className="mt-1 text-muted">{me?.gameState === 'deleting' ? t.removing : shell.games['desk-crawler']}</p>
+                <p className="mt-1 text-muted">{me?.gameState === 'deleting' ? t.removing : shell.games['wardenwatch']}</p>
               )}
             </div>
           </div>
-          <Link to={me?.hero || me?.gameState === 'deleting' ? '/app/desk-crawler' : '/games/desk-crawler'} className={`self-start ${LINK_BUTTON} ${BUTTON_PRIMARY}`}>{me?.hero ? t.open('Desk Crawler') : t.about('Desk Crawler')}</Link>
+          <Link to={me?.hero || me?.gameState === 'deleting' ? '/app/wardenwatch' : '/games/wardenwatch'} className={`self-start ${LINK_BUTTON} ${BUTTON_PRIMARY}`}>{me?.hero ? t.open('Desk Crawler') : t.about('Desk Crawler')}</Link>
         </section>
       )}
     </main>

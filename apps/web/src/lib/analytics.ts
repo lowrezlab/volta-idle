@@ -145,7 +145,7 @@ export function captureAnalytics(event: AnalyticsEvent, properties: Record<strin
 }
 
 /** The game a page belongs to, for every event's `game` property; this fork has only Desk Crawler. */
-const currentGame = () => 'desk-crawler' as const
+const currentGame = () => 'wardenwatch' as const
 
 /** v1.1 choices worth measuring: intent → event and the one catalog id argument it may carry. */
 const INTENT_EVENTS: Record<string, [AnalyticsEvent, string, string]> = {

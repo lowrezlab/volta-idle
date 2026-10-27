@@ -61,4 +61,4 @@ function writeImages(out: string, favicon: Image, sizes: Array<[string, Image, n
 
 // The platform mark at the site root; each game's colour icon under its game path.
 writeIconSet('apps/web/public', platformIconCanvas(), platformFaviconCanvas())
-writeGameIconSet('apps/web/public/games/desk-crawler', deskCrawlerIcon(), deskCrawlerFavicon(), 'docs/assets/plugin-icon.png')
+writeGameIconSet('apps/web/public/games/wardenwatch', deskCrawlerIcon(), deskCrawlerFavicon(), 'docs/assets/plugin-icon.png')

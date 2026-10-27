@@ -10,5 +10,5 @@ it('keeps the public pages\' floor facts, quoted levels and pictures in step wit
     catalog.biomes.map((biome) => ({ id: biome.id, name: biome.name, level: biome.unlockLevel, monsters: biome.monsterIds.map(name) })),
   )
   expect(UNLOCKS).toEqual({ raids: catalog.unlocks?.raids, roster: catalog.unlocks?.roster })
-  for (const floor of FLOORS) expect(existsSync(`apps/web/public/games/desk-crawler/floors/${floor.id}.png`)).toBe(true)
+  for (const floor of FLOORS) expect(existsSync(`apps/web/public/games/wardenwatch/floors/${floor.id}.png`)).toBe(true)
 })

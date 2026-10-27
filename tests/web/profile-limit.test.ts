@@ -11,21 +11,21 @@ const limiter = (success: boolean) => ({ limit: vi.fn<RateLimiter['limit']>(asyn
 describe('public hero page rate limit (D109)', () => {
   it('keys hero pages by visitor IP and answers 429 once the budget is spent', async () => {
     const allowed = limiter(true)
-    expect(await profileRateLimit(request('/desk-crawler/heroes/Wren'), allowed)).toBeNull()
+    expect(await profileRateLimit(request('/wardenwatch/heroes/Wren'), allowed)).toBeNull()
     expect(allowed.limit).toHaveBeenCalledWith({ key: 'profile:203.0.113.7' })
     // D115: the shared profile shares the budget.
     expect((await profileRateLimit(request('/profile/Wren'), limiter(false)))?.status).toBe(429)
-    const blocked = await profileRateLimit(request('/desk-crawler/heroes/Wren'), limiter(false))
+    const blocked = await profileRateLimit(request('/wardenwatch/heroes/Wren'), limiter(false))
     expect(blocked?.status).toBe(429)
     expect(blocked?.headers.get('Retry-After')).toBe('60')
   })
 
   it('leaves every other page, non-GET requests, missing IPs and local dev alone', async () => {
     const spent = limiter(false)
-    for (const path of ['/', '/desk-crawler/heroes', '/desk-crawler/heroes/Wren/extra', '/app/desk-crawler']) expect(await profileRateLimit(request(path), spent)).toBeNull()
-    expect(await profileRateLimit(request('/desk-crawler/heroes/Wren', { method: 'POST' }), spent)).toBeNull()
-    expect(await profileRateLimit(request('/desk-crawler/heroes/Wren', { ip: null }), spent)).toBeNull()
-    expect(await profileRateLimit(request('/desk-crawler/heroes/Wren'), undefined)).toBeNull()
+    for (const path of ['/', '/wardenwatch/heroes', '/wardenwatch/heroes/Wren/extra', '/app/wardenwatch']) expect(await profileRateLimit(request(path), spent)).toBeNull()
+    expect(await profileRateLimit(request('/wardenwatch/heroes/Wren', { method: 'POST' }), spent)).toBeNull()
+    expect(await profileRateLimit(request('/wardenwatch/heroes/Wren', { ip: null }), spent)).toBeNull()
+    expect(await profileRateLimit(request('/wardenwatch/heroes/Wren'), undefined)).toBeNull()
     expect(spent.limit).not.toHaveBeenCalled()
   })
 })

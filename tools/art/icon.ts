@@ -1,4 +1,4 @@
-/** Render a game's 512x512 TRMNL plugin icon (tools/art/gameIcons.ts). pnpm tsx tools/art/icon.ts [desk-crawler] <out.png> */
+/** Render a game's 512x512 TRMNL plugin icon (tools/art/gameIcons.ts). pnpm tsx tools/art/icon.ts [wardenwatch] <out.png> */
 import { writeFileSync } from 'node:fs'
 import { deskCrawlerIcon } from './gameIcons'
 

@@ -9,7 +9,7 @@ type Life = { first: string; last: string; age: number; activationState: string;
 export const shellMessages = defineMessages({
   en: {
     guideFor: (name: string) => `${name} guide`,
-    games: { 'desk-crawler': 'An office RPG that plays itself on your TRMNL.' } as Record<GameSlug, string>,
+    games: { 'wardenwatch': 'An office RPG that plays itself on your TRMNL.' } as Record<GameSlug, string>,
     heroStatus: { paused: 'Paused', dead: 'Knocked out', sleeping: 'Bag full', resuming: 'Resuming' } as Record<string, string>,
     adventuring: 'Adventuring',
     waitingForSave: 'Waiting for TRMNL Save',
@@ -61,7 +61,7 @@ export const shellMessages = defineMessages({
   },
   fr: {
     guideFor: (name: string) => `Guide de ${name}`,
-    games: { 'desk-crawler': 'Un RPG de bureau qui se joue tout seul sur votre TRMNL.' },
+    games: { 'wardenwatch': 'Un RPG de bureau qui se joue tout seul sur votre TRMNL.' },
     heroStatus: { paused: 'En pause', dead: 'K.-O.', sleeping: 'Sac plein', resuming: 'Reprise' },
     adventuring: 'En aventure',
     waitingForSave: 'En attente de l’enregistrement TRMNL',
@@ -113,7 +113,7 @@ export const shellMessages = defineMessages({
   },
   de: {
     guideFor: (name: string) => `Leitfaden zu ${name}`,
-    games: { 'desk-crawler': 'Ein Büro-RPG, das sich auf deinem TRMNL von selbst spielt.' },
+    games: { 'wardenwatch': 'Ein Büro-RPG, das sich auf deinem TRMNL von selbst spielt.' },
     heroStatus: { paused: 'Pausiert', dead: 'K. o.', sleeping: 'Tasche voll', resuming: 'Geht weiter' },
     adventuring: 'Auf Abenteuer',
     waitingForSave: 'Wartet auf Speichern in TRMNL',
@@ -165,7 +165,7 @@ export const shellMessages = defineMessages({
   },
   es: {
     guideFor: (name: string) => `Guía de ${name}`,
-    games: { 'desk-crawler': 'Un RPG de oficina que se juega solo en tu TRMNL.' },
+    games: { 'wardenwatch': 'Un RPG de oficina que se juega solo en tu TRMNL.' },
     heroStatus: { paused: 'En pausa', dead: 'K.O.', sleeping: 'Bolsa llena', resuming: 'Reanudando' },
     adventuring: 'De aventura',
     waitingForSave: 'Esperando a que guardes en TRMNL',
@@ -217,7 +217,7 @@ export const shellMessages = defineMessages({
   },
   it: {
     guideFor: (name: string) => `Guida di ${name}`,
-    games: { 'desk-crawler': 'Un GDR d’ufficio che si gioca da solo sul tuo TRMNL.' },
+    games: { 'wardenwatch': 'Un GDR d’ufficio che si gioca da solo sul tuo TRMNL.' },
     heroStatus: { paused: 'In pausa', dead: 'KO', sleeping: 'Borsa piena', resuming: 'Riparte' },
     adventuring: 'In avventura',
     waitingForSave: 'In attesa del salvataggio in TRMNL',
@@ -269,7 +269,7 @@ export const shellMessages = defineMessages({
   },
   pt: {
     guideFor: (name: string) => `Guia do ${name}`,
-    games: { 'desk-crawler': 'Um RPG de escritório que se joga sozinho no seu TRMNL.' },
+    games: { 'wardenwatch': 'Um RPG de escritório que se joga sozinho no seu TRMNL.' },
     heroStatus: { paused: 'Pausado', dead: 'Nocauteado', sleeping: 'Bolsa cheia', resuming: 'Retomando' },
     adventuring: 'Em aventura',
     waitingForSave: 'Esperando você salvar no TRMNL',
@@ -321,7 +321,7 @@ export const shellMessages = defineMessages({
   },
   pl: {
     guideFor: (name: string) => `Przewodnik po ${name}`,
-    games: { 'desk-crawler': 'Biurowe RPG, które samo gra się na twoim TRMNL.' },
+    games: { 'wardenwatch': 'Biurowe RPG, które samo gra się na twoim TRMNL.' },
     heroStatus: { paused: 'Pauza', dead: 'Nokaut', sleeping: 'Pełna torba', resuming: 'Wznawia' },
     adventuring: 'Na przygodzie',
     waitingForSave: 'Czeka na zapis w TRMNL',
@@ -373,7 +373,7 @@ export const shellMessages = defineMessages({
   },
   nl: {
     guideFor: (name: string) => `Gids voor ${name}`,
-    games: { 'desk-crawler': 'Een kantoor-RPG die zichzelf speelt op je TRMNL.' },
+    games: { 'wardenwatch': 'Een kantoor-RPG die zichzelf speelt op je TRMNL.' },
     heroStatus: { paused: 'Gepauzeerd', dead: 'Knock-out', sleeping: 'Tas vol', resuming: 'Gaat verder' },
     adventuring: 'Op avontuur',
     waitingForSave: 'Wacht op opslaan in TRMNL',

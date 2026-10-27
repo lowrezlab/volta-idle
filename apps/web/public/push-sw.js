@@ -16,14 +16,14 @@ self.addEventListener('push', (event) => {
       icon: '/icon-192.png',
       badge: '/icon-192.png',
       tag: typeof data.tag === 'string' ? data.tag : undefined,
-      data: { url: typeof data.url === 'string' ? data.url : '/app/desk-crawler' },
+      data: { url: typeof data.url === 'string' ? data.url : '/app/wardenwatch' },
     }),
   )
 })
 
 self.addEventListener('notificationclick', (event) => {
   event.notification.close()
-  const target = new URL(event.notification.data?.url ?? '/app/desk-crawler', self.location.origin)
+  const target = new URL(event.notification.data?.url ?? '/app/wardenwatch', self.location.origin)
   // Only ever open this site's own pages.
   if (target.origin !== self.location.origin) return
   event.waitUntil(

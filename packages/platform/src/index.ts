@@ -1,9 +1,9 @@
 /** Public platform configuration: no credentials or backend-only exports. */
 export const PLATFORM_NAME = 'TRMNL Games'
 export const PLATFORM_ORIGIN = 'https://trmnlgames.com'
-export const DESK_CRAWLER_GAME = 'desk-crawler' as const
-export type GameSlug = typeof DESK_CRAWLER_GAME
-export const GAME_SLUGS: readonly GameSlug[] = [DESK_CRAWLER_GAME]
+export const WARDENWATCH_GAME = 'wardenwatch' as const
+export type GameSlug = typeof WARDENWATCH_GAME
+export const GAME_SLUGS: readonly GameSlug[] = [WARDENWATCH_GAME]
 
 /**
  * Lifecycle status (idle-angler.md "Architecture"). `hidden`: nothing lists the game and its routes
@@ -33,23 +33,23 @@ export interface GameEntry {
 }
 
 export const games = {
-  [DESK_CRAWLER_GAME]: {
-    slug: DESK_CRAWLER_GAME,
+  [WARDENWATCH_GAME]: {
+    slug: WARDENWATCH_GAME,
     name: 'Desk Crawler',
     description: 'An office RPG that plays itself on your TRMNL.',
     defaultStatus: 'live',
-    publicPath: '/games/desk-crawler',
-    companionPath: '/app/desk-crawler',
-    helpPath: '/help/desk-crawler',
-    installPath: '/connect/trmnl/desk-crawler/install',
-    managePath: '/connect/trmnl/desk-crawler/manage',
+    publicPath: '/games/wardenwatch',
+    companionPath: '/app/wardenwatch',
+    helpPath: '/help/wardenwatch',
+    installPath: '/connect/trmnl/wardenwatch/install',
+    managePath: '/connect/trmnl/wardenwatch/manage',
     clientIdEnv: 'TRMNL_CLIENT_ID',
-    marketplaceUrl: 'https://trmnl.com/integrations/desk-crawler',
+    marketplaceUrl: 'https://trmnl.com/integrations/wardenwatch',
   },
 } as const satisfies Record<GameSlug, GameEntry>
 
 export function isGameSlug(value: unknown): value is GameSlug {
-  return value === DESK_CRAWLER_GAME
+  return value === WARDENWATCH_GAME
 }
 
 export function isGameStatus(value: unknown): value is GameStatus {

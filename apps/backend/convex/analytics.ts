@@ -14,7 +14,7 @@ export const activationSubject = internalQuery({
   handler: async (ctx, { userId, event, game }) => {
     const user = await ctx.db.get(userId)
     if (!user || user.state !== 'active' || user.analyticsConsent !== true) return null
-    const hero = await currentCharacterOf(ctx, game ?? 'desk-crawler', user)
+    const hero = await currentCharacterOf(ctx, game ?? 'wardenwatch', user)
     const distinctId = user.tokenIdentifier.split('|').at(-1)
     return (event === 'installation connected' || hero?.activationState === 'active') && distinctId ? { distinctId } : null
   },
@@ -24,7 +24,7 @@ export const captureActivation = internalAction({
   // Properties are bands and catalog ids only, never names or story text.
   args: { userId: v.id('users'), event: v.optional(serverEvent), game: v.optional(gameSlug), properties: v.optional(v.record(v.string(), v.string())) },
   returns: v.null(),
-  handler: async (ctx, { userId, event = 'hero activated', game = 'desk-crawler', properties = {} }) => {
+  handler: async (ctx, { userId, event = 'hero activated', game = 'wardenwatch', properties = {} }) => {
     const token = process.env.POSTHOG_PROJECT_TOKEN
     if (!token) return null
     const subject = await ctx.runQuery(internal.analytics.activationSubject, { userId, event, game })

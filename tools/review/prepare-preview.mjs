@@ -1,7 +1,7 @@
 import { cpSync, mkdirSync, readFileSync, symlinkSync, writeFileSync } from 'node:fs'
 import { resolve } from 'node:path'
 
-const destination = '/private/tmp/desk-crawler-review-validation'
+const destination = '/private/tmp/wardenwatch-review-validation'
 mkdirSync(destination, { recursive: true })
 cpSync('apps/backend/convex', `${destination}/convex`, { recursive: true })
 cpSync('package.json', `${destination}/package.json`)

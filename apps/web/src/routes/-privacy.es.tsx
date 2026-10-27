@@ -111,7 +111,7 @@ export const privacyEs: LegalPage = {
       <p>La eliminación de los perfiles, eventos y grabaciones de PostHog vinculados se solicita como parte del borrado de la cuenta y PostHog la procesa de forma asíncrona. Las solicitudes fallidas se reintentan y quedan visibles para el operador hasta que se resuelven.</p>
 
       <h2>Borrar solo un juego</h2>
-      <p>En los <Link to="/app/desk-crawler/settings">ajustes de Desk Crawler</Link>, elige Borrar el progreso de Desk Crawler para eliminar ese héroe, el historial, las conexiones y los ajustes y dispositivos de alertas. Tu cuenta compartida y tu inicio de sesión siguen disponibles. Puedes volver a empezar instalando el plugin cuando termine el borrado. Los demás juegos no se ven afectados.</p>
+      <p>En los <Link to="/app/wardenwatch/settings">ajustes de Desk Crawler</Link>, elige Borrar el progreso de Desk Crawler para eliminar ese héroe, el historial, las conexiones y los ajustes y dispositivos de alertas. Tu cuenta compartida y tu inicio de sesión siguen disponibles. Puedes volver a empezar instalando el plugin cuando termine el borrado. Los demás juegos no se ven afectados.</p>
 
       <h2>Tus opciones</h2>
       <p>

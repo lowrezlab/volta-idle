@@ -1,6 +1,6 @@
 /**
  * Pull a real hero's device payload from a deployment (production by default) into
- * .previews/live-payload.json, where the dev gallery (/dev/desk-crawler, scenario
+ * .previews/live-payload.json, where the dev gallery (/dev/wardenwatch, scenario
  * "live") renders it through the local templates. Read-only: it runs the owner
  * preview query `trmnlPayload:mine` as that user with the Convex CLI's admin
  * `--identity`, so it shows what the companion preview shows (no keepsake code).

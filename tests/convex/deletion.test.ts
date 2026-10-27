@@ -99,7 +99,7 @@ describe('account deletion (D22)', () => {
 
   it('reconciles a verified Clerk user.deleted once, and refuses unsigned or stale deliveries (V09)', async () => {
     vi.stubEnv('CLERK_JWT_ISSUER_DOMAIN', 'issuer')
-    const secret = 'whsec_' + btoa('desk-crawler-test-signing-key-32b')
+    const secret = 'whsec_' + btoa('wardenwatch-test-signing-key-32b')
     vi.stubEnv('CLERK_WEBHOOK_SECRET', secret)
     await seedHero(t, {}, 'user_Dana12345')
     // Clerk already deleted the user, so the provider step sees 404 and completes.

@@ -56,7 +56,7 @@ export const view = query({
     return {
       alias: user.publicAlias,
       games: [
-        ...(showDesk ? [{ slug: 'desk-crawler' as const, name: hero.name, level: hero.level, since: hero.activatedAt ?? hero.createdAt, rank: await overallRank(ctx, DESK_CRAWLER_RUNTIME, hero._id), achievements: dcUnlocks, page: `/desk-crawler/heroes/${encodeURIComponent(user.publicAlias)}` }] : []),
+        ...(showDesk ? [{ slug: 'wardenwatch' as const, name: hero.name, level: hero.level, since: hero.activatedAt ?? hero.createdAt, rank: await overallRank(ctx, DESK_CRAWLER_RUNTIME, hero._id), achievements: dcUnlocks, page: `/wardenwatch/heroes/${encodeURIComponent(user.publicAlias)}` }] : []),
       ],
       platform: platformAchievements({ games, collected }).map((a) => ({ id: a.id, name: a.name, blurb: a.blurb, family: a.family, tier: a.tier, share: current && current.totalPlayers > 0 ? Math.max(1, Math.round(((current.counts[a.id] ?? 0) * 100) / current.totalPlayers)) : null })),
     }

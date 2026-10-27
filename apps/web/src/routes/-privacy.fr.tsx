@@ -103,7 +103,7 @@ export const privacyFr: LegalPage = {
       <p>La suppression des profils, événements et enregistrements PostHog liés est demandée dans le cadre de la suppression du compte et traitée de façon asynchrone par PostHog. Les demandes en échec sont relancées et restent visibles par l’exploitant jusqu’à leur résolution.</p>
 
       <h2>Supprimer seulement un jeu</h2>
-      <p>Dans les <Link to="/app/desk-crawler/settings">réglages de Desk Crawler</Link>, choisissez Supprimer la progression Desk Crawler pour effacer ce héros, son historique, ses connexions et les réglages et appareils d’alerte. Votre compte commun et votre identifiant restent disponibles. Vous pouvez recommencer en réinstallant le plugin une fois la suppression terminée. Les autres jeux ne sont pas touchés.</p>
+      <p>Dans les <Link to="/app/wardenwatch/settings">réglages de Desk Crawler</Link>, choisissez Supprimer la progression Desk Crawler pour effacer ce héros, son historique, ses connexions et les réglages et appareils d’alerte. Votre compte commun et votre identifiant restent disponibles. Vous pouvez recommencer en réinstallant le plugin une fois la suppression terminée. Les autres jeux ne sont pas touchés.</p>
 
       <h2>Vos choix</h2>
       <p>

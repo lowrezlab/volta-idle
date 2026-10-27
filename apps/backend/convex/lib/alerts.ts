@@ -132,8 +132,8 @@ export async function ensureSender(ctx: MutationCtx, at: number): Promise<void> 
 
 /** One sentence in the game's voice, with nothing private on a lock screen, and the page it opens. */
 export function alertMessage(row: Pick<Doc<'alertOutbox'>, 'kind' | 'offerName'>, heroName: string, locale: Locale = 'en'): { title: string; body: string; url: string } {
-  if (row.kind === 'asleep') return { ...DESK_ALERTS[locale].asleep(heroName), url: '/app/desk-crawler/inventory?alert=asleep' }
-  return { ...DESK_ALERTS[locale].merchant(heroName, row.offerName ?? null), url: '/app/desk-crawler/inventory?alert=merchant' }
+  if (row.kind === 'asleep') return { ...DESK_ALERTS[locale].asleep(heroName), url: '/app/wardenwatch/inventory?alert=asleep' }
+  return { ...DESK_ALERTS[locale].merchant(heroName, row.offerName ?? null), url: '/app/wardenwatch/inventory?alert=merchant' }
 }
 
 const fr = contentTranslator('fr')

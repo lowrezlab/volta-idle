@@ -25,7 +25,7 @@ function Support() {
           {t.supportIdeas}<a href="/feedback">{t.sendFeedbackLink}</a>.
         </li>
         <li>
-          {t.supportSetup}<a href="/help/desk-crawler">{t.trmnlHelp}</a>.
+          {t.supportSetup}<a href="/help/wardenwatch">{t.trmnlHelp}</a>.
         </li>
       </ul>
       <h2>{t.supportingTitle}</h2>

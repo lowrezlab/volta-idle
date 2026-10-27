@@ -15,7 +15,7 @@ export function AuthShell({ children }: { children: ReactNode }) {
   const { isLoaded } = useAuth()
   const t = useT(shellMessages)
   // The screen's QR codes open these routes, often on a stranger's phone: explain the game before asking for a sign-in (D102).
-  const deskCrawler = useLocation({ select: (location) => location.pathname.startsWith('/app/desk-crawler') })
+  const deskCrawler = useLocation({ select: (location) => location.pathname.startsWith('/app/wardenwatch') })
   return (
     <div className="flex min-h-screen flex-col">
       <PlatformHeader />
@@ -32,7 +32,7 @@ export function AuthShell({ children }: { children: ReactNode }) {
             <h2 id="new-here" className="font-display text-xl font-semibold">{t.newHere}</h2>
             <p className="text-muted">{t.newHereBody}</p>
             <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
-              <Link to="/games/desk-crawler" className="inline-flex min-h-11 items-center underline underline-offset-4">{t.aboutDeskCrawler}</Link>
+              <Link to="/games/wardenwatch" className="inline-flex min-h-11 items-center underline underline-offset-4">{t.aboutDeskCrawler}</Link>
               <a href={DESK_CRAWLER_INSTALL_URL} onClick={() => captureAnalytics('install link opened', { place: 'sign-in page' })} className="inline-flex min-h-11 items-center underline underline-offset-4">{t.installOnTrmnl}</a>
             </div>
           </section>

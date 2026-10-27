@@ -26,7 +26,7 @@ export function DeviceSample({ caption, priority = false }: { caption: string; p
   const t = useT(pitchMessages)
   return (
     <figure className="flex flex-col gap-3">
-      <ScreenBezel slug="desk-crawler" alt={t.sampleAlt} priority={priority} />
+      <ScreenBezel slug="wardenwatch" alt={t.sampleAlt} priority={priority} />
       <figcaption className="text-sm text-muted">{caption}</figcaption>
     </figure>
   )
@@ -37,7 +37,7 @@ export function DeviceSample({ caption, priority = false }: { caption: string; p
  * (Desk Crawler: tools/trmnl/preview.ts --marketing --recap; Idle Angler: its `listing` state, D210). 16-colour PNGs, the
  * X's own 4-bit greys, beat WebP at both sizes: 800px for phones at 2x, 1200px for 3x phones and desktop.
  */
-export function ScreenBezel({ slug, alt, priority = false, sizes = '(min-width: 1024px) 600px, 100vw' }: { slug: 'desk-crawler'; alt: string; priority?: boolean; sizes?: string }) {
+export function ScreenBezel({ slug, alt, priority = false, sizes = '(min-width: 1024px) 600px, 100vw' }: { slug: 'wardenwatch'; alt: string; priority?: boolean; sizes?: string }) {
   return (
     <div className="rounded-[1.4rem] bg-[#3a3566] p-[clamp(0.5rem,2.5vw,1rem)] shadow-[0_0_0_3px_var(--color-night),0_24px_48px_-24px_rgb(0_0_0/0.8)]">
       <img
@@ -63,7 +63,7 @@ function FloorScene({ id, alt }: { id: string; alt: string }) {
       <div aria-hidden="true" className="absolute inset-0 grid grid-rows-[18%_14%_40%_28%]">
         {bands.map((colour, i) => <div key={i} style={{ background: colour }} />)}
       </div>
-      <img src={`/games/desk-crawler/floors/${id}.png`} alt={alt} width={152} height={40} loading="lazy" className="relative block h-auto w-full pt-6 [image-rendering:pixelated]" />
+      <img src={`/games/wardenwatch/floors/${id}.png`} alt={alt} width={152} height={40} loading="lazy" className="relative block h-auto w-full pt-6 [image-rendering:pixelated]" />
     </div>
   )
 }
@@ -252,7 +252,7 @@ export function InstallCta({ place, compact = false }: { place: string; compact?
         <p className="text-sm text-muted">{t.thenSignIn}</p>
       </Show>
       <Show when="signed-in">
-        <Link to="/app/desk-crawler" className={`self-start ${LINK_BUTTON} ${BUTTON_PRIMARY}`}>{t.openDeskCrawler}</Link>
+        <Link to="/app/wardenwatch" className={`self-start ${LINK_BUTTON} ${BUTTON_PRIMARY}`}>{t.openDeskCrawler}</Link>
         <NoHeroYet place={place} />
       </Show>
       {compact ? null : <p className="text-sm text-muted">{t.needsBefore}<a href="https://trmnl.com" className="underline underline-offset-4 hover:text-ink">{t.needsLink}</a>{t.needsAfter}</p>}
@@ -279,7 +279,7 @@ export function DeskCrawlerSignedOut() {
   return (
     <main id="main" className="mx-auto flex w-full max-w-2xl flex-col gap-8 px-4 py-10">
       <header className="flex flex-col gap-3">
-        <h1 className="flex items-center gap-4 font-display text-3xl font-bold leading-tight sm:text-4xl"><img src="/games/desk-crawler/icon-192.png" alt="" width={64} height={64} className="size-12 [image-rendering:pixelated] sm:size-14" />Desk Crawler</h1>
+        <h1 className="flex items-center gap-4 font-display text-3xl font-bold leading-tight sm:text-4xl"><img src="/games/wardenwatch/icon-192.png" alt="" width={64} height={64} className="size-12 [image-rendering:pixelated] sm:size-14" />Desk Crawler</h1>
         <p className="text-lg">{t.tagline}</p>
         <p className="text-muted">{t.signedOutIntro}</p>
       </header>
@@ -289,8 +289,8 @@ export function DeskCrawlerSignedOut() {
         <p>{t.wantBefore}<a href="https://trmnl.com" className="underline underline-offset-4">TRMNL</a>{t.wantAfter}</p>
         <InstallLink place="qr pitch" />
         <div className="flex flex-wrap items-center gap-4">
-          <Link to="/games/desk-crawler" className="inline-flex min-h-11 items-center underline underline-offset-4">{t.aboutDeskCrawler}</Link>
-          <Link to="/help/desk-crawler" className="inline-flex min-h-11 items-center underline underline-offset-4">{t.setupHelp}</Link>
+          <Link to="/games/wardenwatch" className="inline-flex min-h-11 items-center underline underline-offset-4">{t.aboutDeskCrawler}</Link>
+          <Link to="/help/wardenwatch" className="inline-flex min-h-11 items-center underline underline-offset-4">{t.setupHelp}</Link>
         </div>
       </section>
       <section className="flex flex-col gap-3 border-t border-rule pt-6" aria-labelledby="signin-heading">

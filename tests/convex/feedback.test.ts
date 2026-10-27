@@ -43,13 +43,13 @@ describe('player feedback (D107)', () => {
   it('stores the message and emails it to the owner with the verified address as Reply-To', async () => {
     await seedHero(t, {}, 'Ana')
     const ana = t.withIdentity({ issuer: 'issuer', subject: 'Ana' })
-    await ana.mutation(api.feedback.send, { message: '  More biomes please!  ', page: '/app/desk-crawler/settings' })
+    await ana.mutation(api.feedback.send, { message: '  More biomes please!  ', page: '/app/wardenwatch/settings' })
     await t.finishAllScheduledFunctions(vi.runAllTimers)
-    expect(await rows()).toMatchObject([{ message: 'More biomes please!', page: '/app/desk-crawler/settings', publicAlias: 'Ana', state: 'sent', attempts: 1 }])
+    expect(await rows()).toMatchObject([{ message: 'More biomes please!', page: '/app/wardenwatch/settings', publicAlias: 'Ana', state: 'sent', attempts: 1 }])
     const [email] = emails()
     expect(email).toMatchObject({ to: ['owner@example.com'], reply_to: 'ana@example.com', subject: 'TRMNL Games feedback from Ana' })
     expect(email.text).toContain('More biomes please!')
-    expect(email.text).toContain('Page: /app/desk-crawler/settings')
+    expect(email.text).toContain('Page: /app/wardenwatch/settings')
   })
 
   it('accepts accounts without a game and drops unsafe page values', async () => {

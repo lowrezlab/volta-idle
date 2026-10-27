@@ -32,7 +32,7 @@ const layoutsOf = (markup: Markup) => ({
 
 function lintGame(markup: Markup, label: string): number {
   if (!args.includes('--json')) console.log(`${label}:`)
-  const dir = mkdtempSync(join(tmpdir(), 'desk-crawler-trmnl-lint-'))
+  const dir = mkdtempSync(join(tmpdir(), 'wardenwatch-trmnl-lint-'))
   try {
     mkdirSync(join(dir, 'src'))
     writeFileSync(join(dir, 'src/settings.yml'), `${readFileSync(join(config, 'settings.yml'), 'utf8')}\nframework_version: ${FRAMEWORK_VERSION}\n`)

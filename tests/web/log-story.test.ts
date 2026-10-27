@@ -1,7 +1,7 @@
 import { renderToStaticMarkup } from 'react-dom/server'
 import { createElement } from 'react'
 import { expect, it } from 'vitest'
-import { LogStory } from '../../apps/web/src/routes/app/desk-crawler/-logStory'
+import { LogStory } from '../../apps/web/src/routes/app/wardenwatch/-logStory'
 
 it('renders the expense story and reward once, in distinct elements', () => {
   const html = renderToStaticMarkup(createElement(LogStory, { entry: { at: Date.UTC(2026, 9, 5, 11, 30), kind: 'loot', summary: 'An old expense claim finally paid out: 2 gold.', deltas: { xpEarned: 0, gold: 2, hp: 0 } } }))

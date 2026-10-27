@@ -21,30 +21,30 @@ import { Route as TermsRouteImport } from './routes/terms'
 import { Route as WhatsNewRouteImport } from './routes/whats-new'
 import { Route as AccountDeleteRouteImport } from './routes/account_.delete'
 import { Route as AppIndexRouteImport } from './routes/app/index'
-import { Route as AppDeskCrawlerRouteImport } from './routes/app/desk-crawler'
-import { Route as DeskCrawlerUnsubscribeRouteImport } from './routes/desk-crawler/unsubscribe'
-import { Route as DeskCrawlerWaitingListRouteImport } from './routes/desk-crawler/waiting-list'
-import { Route as DevDeskCrawlerRouteImport } from './routes/dev/desk-crawler'
+import { Route as AppWardenwatchRouteImport } from './routes/app/wardenwatch'
 import { Route as DevOgRouteImport } from './routes/dev/og'
-import { Route as GamesDeskCrawlerRouteImport } from './routes/games/desk-crawler'
-import { Route as HelpDeskCrawlerRouteImport } from './routes/help/desk-crawler'
+import { Route as DevWardenwatchRouteImport } from './routes/dev/wardenwatch'
+import { Route as GamesWardenwatchRouteImport } from './routes/games/wardenwatch'
+import { Route as HelpWardenwatchRouteImport } from './routes/help/wardenwatch'
 import { Route as KCodeRouteImport } from './routes/k.$code'
 import { Route as LaunchListUnsubscribeRouteImport } from './routes/launch-list/unsubscribe'
 import { Route as ProfileAliasRouteImport } from './routes/profile/$alias'
-import { Route as AppDeskCrawlerIndexRouteImport } from './routes/app/desk-crawler/index'
-import { Route as AppDeskCrawlerAchievementsRouteImport } from './routes/app/desk-crawler/achievements'
-import { Route as AppDeskCrawlerCareerRouteImport } from './routes/app/desk-crawler/career'
-import { Route as AppDeskCrawlerFieldNotesRouteImport } from './routes/app/desk-crawler/field-notes'
-import { Route as AppDeskCrawlerInventoryRouteImport } from './routes/app/desk-crawler/inventory'
-import { Route as AppDeskCrawlerKeepsakesRouteImport } from './routes/app/desk-crawler/keepsakes'
-import { Route as AppDeskCrawlerLeaderboardRouteImport } from './routes/app/desk-crawler/leaderboard'
-import { Route as AppDeskCrawlerLogRouteImport } from './routes/app/desk-crawler/log'
-import { Route as AppDeskCrawlerRosterRouteImport } from './routes/app/desk-crawler/roster'
-import { Route as AppDeskCrawlerSettingsRouteImport } from './routes/app/desk-crawler/settings'
-import { Route as AppDeskCrawlerTrmnlRouteImport } from './routes/app/desk-crawler/trmnl'
-import { Route as DeskCrawlerHeroesAliasRouteImport } from './routes/desk-crawler/heroes.$alias'
-import { Route as ConnectTrmnlDeskCrawlerInstallRouteImport } from './routes/connect/trmnl/desk-crawler/install'
-import { Route as ConnectTrmnlDeskCrawlerManageRouteImport } from './routes/connect/trmnl/desk-crawler/manage'
+import { Route as WardenwatchUnsubscribeRouteImport } from './routes/wardenwatch/unsubscribe'
+import { Route as WardenwatchWaitingListRouteImport } from './routes/wardenwatch/waiting-list'
+import { Route as AppWardenwatchIndexRouteImport } from './routes/app/wardenwatch/index'
+import { Route as AppWardenwatchAchievementsRouteImport } from './routes/app/wardenwatch/achievements'
+import { Route as AppWardenwatchCareerRouteImport } from './routes/app/wardenwatch/career'
+import { Route as AppWardenwatchFieldNotesRouteImport } from './routes/app/wardenwatch/field-notes'
+import { Route as AppWardenwatchInventoryRouteImport } from './routes/app/wardenwatch/inventory'
+import { Route as AppWardenwatchKeepsakesRouteImport } from './routes/app/wardenwatch/keepsakes'
+import { Route as AppWardenwatchLeaderboardRouteImport } from './routes/app/wardenwatch/leaderboard'
+import { Route as AppWardenwatchLogRouteImport } from './routes/app/wardenwatch/log'
+import { Route as AppWardenwatchRosterRouteImport } from './routes/app/wardenwatch/roster'
+import { Route as AppWardenwatchSettingsRouteImport } from './routes/app/wardenwatch/settings'
+import { Route as AppWardenwatchTrmnlRouteImport } from './routes/app/wardenwatch/trmnl'
+import { Route as WardenwatchHeroesAliasRouteImport } from './routes/wardenwatch/heroes.$alias'
+import { Route as ConnectTrmnlWardenwatchInstallRouteImport } from './routes/connect/trmnl/wardenwatch/install'
+import { Route as ConnectTrmnlWardenwatchManageRouteImport } from './routes/connect/trmnl/wardenwatch/manage'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -106,39 +106,29 @@ const AppIndexRoute = AppIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AppRoute,
 } as any)
-const AppDeskCrawlerRoute = AppDeskCrawlerRouteImport.update({
-  id: '/desk-crawler',
-  path: '/desk-crawler',
+const AppWardenwatchRoute = AppWardenwatchRouteImport.update({
+  id: '/wardenwatch',
+  path: '/wardenwatch',
   getParentRoute: () => AppRoute,
-} as any)
-const DeskCrawlerUnsubscribeRoute = DeskCrawlerUnsubscribeRouteImport.update({
-  id: '/desk-crawler/unsubscribe',
-  path: '/desk-crawler/unsubscribe',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DeskCrawlerWaitingListRoute = DeskCrawlerWaitingListRouteImport.update({
-  id: '/desk-crawler/waiting-list',
-  path: '/desk-crawler/waiting-list',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DevDeskCrawlerRoute = DevDeskCrawlerRouteImport.update({
-  id: '/dev/desk-crawler',
-  path: '/dev/desk-crawler',
-  getParentRoute: () => rootRouteImport,
 } as any)
 const DevOgRoute = DevOgRouteImport.update({
   id: '/dev/og',
   path: '/dev/og',
   getParentRoute: () => rootRouteImport,
 } as any)
-const GamesDeskCrawlerRoute = GamesDeskCrawlerRouteImport.update({
-  id: '/games/desk-crawler',
-  path: '/games/desk-crawler',
+const DevWardenwatchRoute = DevWardenwatchRouteImport.update({
+  id: '/dev/wardenwatch',
+  path: '/dev/wardenwatch',
   getParentRoute: () => rootRouteImport,
 } as any)
-const HelpDeskCrawlerRoute = HelpDeskCrawlerRouteImport.update({
-  id: '/help/desk-crawler',
-  path: '/help/desk-crawler',
+const GamesWardenwatchRoute = GamesWardenwatchRouteImport.update({
+  id: '/games/wardenwatch',
+  path: '/games/wardenwatch',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HelpWardenwatchRoute = HelpWardenwatchRouteImport.update({
+  id: '/help/wardenwatch',
+  path: '/help/wardenwatch',
   getParentRoute: () => rootRouteImport,
 } as any)
 const KCodeRoute = KCodeRouteImport.update({
@@ -156,79 +146,89 @@ const ProfileAliasRoute = ProfileAliasRouteImport.update({
   path: '/profile/$alias',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AppDeskCrawlerIndexRoute = AppDeskCrawlerIndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => AppDeskCrawlerRoute,
-} as any)
-const AppDeskCrawlerAchievementsRoute =
-  AppDeskCrawlerAchievementsRouteImport.update({
-    id: '/achievements',
-    path: '/achievements',
-    getParentRoute: () => AppDeskCrawlerRoute,
-  } as any)
-const AppDeskCrawlerCareerRoute = AppDeskCrawlerCareerRouteImport.update({
-  id: '/career',
-  path: '/career',
-  getParentRoute: () => AppDeskCrawlerRoute,
-} as any)
-const AppDeskCrawlerFieldNotesRoute =
-  AppDeskCrawlerFieldNotesRouteImport.update({
-    id: '/field-notes',
-    path: '/field-notes',
-    getParentRoute: () => AppDeskCrawlerRoute,
-  } as any)
-const AppDeskCrawlerInventoryRoute = AppDeskCrawlerInventoryRouteImport.update({
-  id: '/inventory',
-  path: '/inventory',
-  getParentRoute: () => AppDeskCrawlerRoute,
-} as any)
-const AppDeskCrawlerKeepsakesRoute = AppDeskCrawlerKeepsakesRouteImport.update({
-  id: '/keepsakes',
-  path: '/keepsakes',
-  getParentRoute: () => AppDeskCrawlerRoute,
-} as any)
-const AppDeskCrawlerLeaderboardRoute =
-  AppDeskCrawlerLeaderboardRouteImport.update({
-    id: '/leaderboard',
-    path: '/leaderboard',
-    getParentRoute: () => AppDeskCrawlerRoute,
-  } as any)
-const AppDeskCrawlerLogRoute = AppDeskCrawlerLogRouteImport.update({
-  id: '/log',
-  path: '/log',
-  getParentRoute: () => AppDeskCrawlerRoute,
-} as any)
-const AppDeskCrawlerRosterRoute = AppDeskCrawlerRosterRouteImport.update({
-  id: '/roster',
-  path: '/roster',
-  getParentRoute: () => AppDeskCrawlerRoute,
-} as any)
-const AppDeskCrawlerSettingsRoute = AppDeskCrawlerSettingsRouteImport.update({
-  id: '/settings',
-  path: '/settings',
-  getParentRoute: () => AppDeskCrawlerRoute,
-} as any)
-const AppDeskCrawlerTrmnlRoute = AppDeskCrawlerTrmnlRouteImport.update({
-  id: '/trmnl',
-  path: '/trmnl',
-  getParentRoute: () => AppDeskCrawlerRoute,
-} as any)
-const DeskCrawlerHeroesAliasRoute = DeskCrawlerHeroesAliasRouteImport.update({
-  id: '/desk-crawler/heroes/$alias',
-  path: '/desk-crawler/heroes/$alias',
+const WardenwatchUnsubscribeRoute = WardenwatchUnsubscribeRouteImport.update({
+  id: '/wardenwatch/unsubscribe',
+  path: '/wardenwatch/unsubscribe',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ConnectTrmnlDeskCrawlerInstallRoute =
-  ConnectTrmnlDeskCrawlerInstallRouteImport.update({
-    id: '/connect/trmnl/desk-crawler/install',
-    path: '/connect/trmnl/desk-crawler/install',
+const WardenwatchWaitingListRoute = WardenwatchWaitingListRouteImport.update({
+  id: '/wardenwatch/waiting-list',
+  path: '/wardenwatch/waiting-list',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AppWardenwatchIndexRoute = AppWardenwatchIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AppWardenwatchRoute,
+} as any)
+const AppWardenwatchAchievementsRoute =
+  AppWardenwatchAchievementsRouteImport.update({
+    id: '/achievements',
+    path: '/achievements',
+    getParentRoute: () => AppWardenwatchRoute,
+  } as any)
+const AppWardenwatchCareerRoute = AppWardenwatchCareerRouteImport.update({
+  id: '/career',
+  path: '/career',
+  getParentRoute: () => AppWardenwatchRoute,
+} as any)
+const AppWardenwatchFieldNotesRoute =
+  AppWardenwatchFieldNotesRouteImport.update({
+    id: '/field-notes',
+    path: '/field-notes',
+    getParentRoute: () => AppWardenwatchRoute,
+  } as any)
+const AppWardenwatchInventoryRoute = AppWardenwatchInventoryRouteImport.update({
+  id: '/inventory',
+  path: '/inventory',
+  getParentRoute: () => AppWardenwatchRoute,
+} as any)
+const AppWardenwatchKeepsakesRoute = AppWardenwatchKeepsakesRouteImport.update({
+  id: '/keepsakes',
+  path: '/keepsakes',
+  getParentRoute: () => AppWardenwatchRoute,
+} as any)
+const AppWardenwatchLeaderboardRoute =
+  AppWardenwatchLeaderboardRouteImport.update({
+    id: '/leaderboard',
+    path: '/leaderboard',
+    getParentRoute: () => AppWardenwatchRoute,
+  } as any)
+const AppWardenwatchLogRoute = AppWardenwatchLogRouteImport.update({
+  id: '/log',
+  path: '/log',
+  getParentRoute: () => AppWardenwatchRoute,
+} as any)
+const AppWardenwatchRosterRoute = AppWardenwatchRosterRouteImport.update({
+  id: '/roster',
+  path: '/roster',
+  getParentRoute: () => AppWardenwatchRoute,
+} as any)
+const AppWardenwatchSettingsRoute = AppWardenwatchSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AppWardenwatchRoute,
+} as any)
+const AppWardenwatchTrmnlRoute = AppWardenwatchTrmnlRouteImport.update({
+  id: '/trmnl',
+  path: '/trmnl',
+  getParentRoute: () => AppWardenwatchRoute,
+} as any)
+const WardenwatchHeroesAliasRoute = WardenwatchHeroesAliasRouteImport.update({
+  id: '/wardenwatch/heroes/$alias',
+  path: '/wardenwatch/heroes/$alias',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConnectTrmnlWardenwatchInstallRoute =
+  ConnectTrmnlWardenwatchInstallRouteImport.update({
+    id: '/connect/trmnl/wardenwatch/install',
+    path: '/connect/trmnl/wardenwatch/install',
     getParentRoute: () => rootRouteImport,
   } as any)
-const ConnectTrmnlDeskCrawlerManageRoute =
-  ConnectTrmnlDeskCrawlerManageRouteImport.update({
-    id: '/connect/trmnl/desk-crawler/manage',
-    path: '/connect/trmnl/desk-crawler/manage',
+const ConnectTrmnlWardenwatchManageRoute =
+  ConnectTrmnlWardenwatchManageRouteImport.update({
+    id: '/connect/trmnl/wardenwatch/manage',
+    path: '/connect/trmnl/wardenwatch/manage',
     getParentRoute: () => rootRouteImport,
   } as any)
 
@@ -244,31 +244,31 @@ export interface FileRoutesByFullPath {
   '/terms': typeof TermsRoute
   '/whats-new': typeof WhatsNewRoute
   '/account/delete': typeof AccountDeleteRoute
-  '/app/desk-crawler': typeof AppDeskCrawlerRouteWithChildren
-  '/desk-crawler/unsubscribe': typeof DeskCrawlerUnsubscribeRoute
-  '/desk-crawler/waiting-list': typeof DeskCrawlerWaitingListRoute
-  '/dev/desk-crawler': typeof DevDeskCrawlerRoute
+  '/app/wardenwatch': typeof AppWardenwatchRouteWithChildren
   '/dev/og': typeof DevOgRoute
-  '/games/desk-crawler': typeof GamesDeskCrawlerRoute
-  '/help/desk-crawler': typeof HelpDeskCrawlerRoute
+  '/dev/wardenwatch': typeof DevWardenwatchRoute
+  '/games/wardenwatch': typeof GamesWardenwatchRoute
+  '/help/wardenwatch': typeof HelpWardenwatchRoute
   '/k/$code': typeof KCodeRoute
   '/launch-list/unsubscribe': typeof LaunchListUnsubscribeRoute
   '/profile/$alias': typeof ProfileAliasRoute
+  '/wardenwatch/unsubscribe': typeof WardenwatchUnsubscribeRoute
+  '/wardenwatch/waiting-list': typeof WardenwatchWaitingListRoute
   '/app/': typeof AppIndexRoute
-  '/app/desk-crawler/achievements': typeof AppDeskCrawlerAchievementsRoute
-  '/app/desk-crawler/career': typeof AppDeskCrawlerCareerRoute
-  '/app/desk-crawler/field-notes': typeof AppDeskCrawlerFieldNotesRoute
-  '/app/desk-crawler/inventory': typeof AppDeskCrawlerInventoryRoute
-  '/app/desk-crawler/keepsakes': typeof AppDeskCrawlerKeepsakesRoute
-  '/app/desk-crawler/leaderboard': typeof AppDeskCrawlerLeaderboardRoute
-  '/app/desk-crawler/log': typeof AppDeskCrawlerLogRoute
-  '/app/desk-crawler/roster': typeof AppDeskCrawlerRosterRoute
-  '/app/desk-crawler/settings': typeof AppDeskCrawlerSettingsRoute
-  '/app/desk-crawler/trmnl': typeof AppDeskCrawlerTrmnlRoute
-  '/desk-crawler/heroes/$alias': typeof DeskCrawlerHeroesAliasRoute
-  '/app/desk-crawler/': typeof AppDeskCrawlerIndexRoute
-  '/connect/trmnl/desk-crawler/install': typeof ConnectTrmnlDeskCrawlerInstallRoute
-  '/connect/trmnl/desk-crawler/manage': typeof ConnectTrmnlDeskCrawlerManageRoute
+  '/app/wardenwatch/achievements': typeof AppWardenwatchAchievementsRoute
+  '/app/wardenwatch/career': typeof AppWardenwatchCareerRoute
+  '/app/wardenwatch/field-notes': typeof AppWardenwatchFieldNotesRoute
+  '/app/wardenwatch/inventory': typeof AppWardenwatchInventoryRoute
+  '/app/wardenwatch/keepsakes': typeof AppWardenwatchKeepsakesRoute
+  '/app/wardenwatch/leaderboard': typeof AppWardenwatchLeaderboardRoute
+  '/app/wardenwatch/log': typeof AppWardenwatchLogRoute
+  '/app/wardenwatch/roster': typeof AppWardenwatchRosterRoute
+  '/app/wardenwatch/settings': typeof AppWardenwatchSettingsRoute
+  '/app/wardenwatch/trmnl': typeof AppWardenwatchTrmnlRoute
+  '/wardenwatch/heroes/$alias': typeof WardenwatchHeroesAliasRoute
+  '/app/wardenwatch/': typeof AppWardenwatchIndexRoute
+  '/connect/trmnl/wardenwatch/install': typeof ConnectTrmnlWardenwatchInstallRoute
+  '/connect/trmnl/wardenwatch/manage': typeof ConnectTrmnlWardenwatchManageRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -281,30 +281,30 @@ export interface FileRoutesByTo {
   '/terms': typeof TermsRoute
   '/whats-new': typeof WhatsNewRoute
   '/account/delete': typeof AccountDeleteRoute
-  '/desk-crawler/unsubscribe': typeof DeskCrawlerUnsubscribeRoute
-  '/desk-crawler/waiting-list': typeof DeskCrawlerWaitingListRoute
-  '/dev/desk-crawler': typeof DevDeskCrawlerRoute
   '/dev/og': typeof DevOgRoute
-  '/games/desk-crawler': typeof GamesDeskCrawlerRoute
-  '/help/desk-crawler': typeof HelpDeskCrawlerRoute
+  '/dev/wardenwatch': typeof DevWardenwatchRoute
+  '/games/wardenwatch': typeof GamesWardenwatchRoute
+  '/help/wardenwatch': typeof HelpWardenwatchRoute
   '/k/$code': typeof KCodeRoute
   '/launch-list/unsubscribe': typeof LaunchListUnsubscribeRoute
   '/profile/$alias': typeof ProfileAliasRoute
+  '/wardenwatch/unsubscribe': typeof WardenwatchUnsubscribeRoute
+  '/wardenwatch/waiting-list': typeof WardenwatchWaitingListRoute
   '/app': typeof AppIndexRoute
-  '/app/desk-crawler/achievements': typeof AppDeskCrawlerAchievementsRoute
-  '/app/desk-crawler/career': typeof AppDeskCrawlerCareerRoute
-  '/app/desk-crawler/field-notes': typeof AppDeskCrawlerFieldNotesRoute
-  '/app/desk-crawler/inventory': typeof AppDeskCrawlerInventoryRoute
-  '/app/desk-crawler/keepsakes': typeof AppDeskCrawlerKeepsakesRoute
-  '/app/desk-crawler/leaderboard': typeof AppDeskCrawlerLeaderboardRoute
-  '/app/desk-crawler/log': typeof AppDeskCrawlerLogRoute
-  '/app/desk-crawler/roster': typeof AppDeskCrawlerRosterRoute
-  '/app/desk-crawler/settings': typeof AppDeskCrawlerSettingsRoute
-  '/app/desk-crawler/trmnl': typeof AppDeskCrawlerTrmnlRoute
-  '/desk-crawler/heroes/$alias': typeof DeskCrawlerHeroesAliasRoute
-  '/app/desk-crawler': typeof AppDeskCrawlerIndexRoute
-  '/connect/trmnl/desk-crawler/install': typeof ConnectTrmnlDeskCrawlerInstallRoute
-  '/connect/trmnl/desk-crawler/manage': typeof ConnectTrmnlDeskCrawlerManageRoute
+  '/app/wardenwatch/achievements': typeof AppWardenwatchAchievementsRoute
+  '/app/wardenwatch/career': typeof AppWardenwatchCareerRoute
+  '/app/wardenwatch/field-notes': typeof AppWardenwatchFieldNotesRoute
+  '/app/wardenwatch/inventory': typeof AppWardenwatchInventoryRoute
+  '/app/wardenwatch/keepsakes': typeof AppWardenwatchKeepsakesRoute
+  '/app/wardenwatch/leaderboard': typeof AppWardenwatchLeaderboardRoute
+  '/app/wardenwatch/log': typeof AppWardenwatchLogRoute
+  '/app/wardenwatch/roster': typeof AppWardenwatchRosterRoute
+  '/app/wardenwatch/settings': typeof AppWardenwatchSettingsRoute
+  '/app/wardenwatch/trmnl': typeof AppWardenwatchTrmnlRoute
+  '/wardenwatch/heroes/$alias': typeof WardenwatchHeroesAliasRoute
+  '/app/wardenwatch': typeof AppWardenwatchIndexRoute
+  '/connect/trmnl/wardenwatch/install': typeof ConnectTrmnlWardenwatchInstallRoute
+  '/connect/trmnl/wardenwatch/manage': typeof ConnectTrmnlWardenwatchManageRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -319,31 +319,31 @@ export interface FileRoutesById {
   '/terms': typeof TermsRoute
   '/whats-new': typeof WhatsNewRoute
   '/account_/delete': typeof AccountDeleteRoute
-  '/app/desk-crawler': typeof AppDeskCrawlerRouteWithChildren
-  '/desk-crawler/unsubscribe': typeof DeskCrawlerUnsubscribeRoute
-  '/desk-crawler/waiting-list': typeof DeskCrawlerWaitingListRoute
-  '/dev/desk-crawler': typeof DevDeskCrawlerRoute
+  '/app/wardenwatch': typeof AppWardenwatchRouteWithChildren
   '/dev/og': typeof DevOgRoute
-  '/games/desk-crawler': typeof GamesDeskCrawlerRoute
-  '/help/desk-crawler': typeof HelpDeskCrawlerRoute
+  '/dev/wardenwatch': typeof DevWardenwatchRoute
+  '/games/wardenwatch': typeof GamesWardenwatchRoute
+  '/help/wardenwatch': typeof HelpWardenwatchRoute
   '/k/$code': typeof KCodeRoute
   '/launch-list/unsubscribe': typeof LaunchListUnsubscribeRoute
   '/profile/$alias': typeof ProfileAliasRoute
+  '/wardenwatch/unsubscribe': typeof WardenwatchUnsubscribeRoute
+  '/wardenwatch/waiting-list': typeof WardenwatchWaitingListRoute
   '/app/': typeof AppIndexRoute
-  '/app/desk-crawler/achievements': typeof AppDeskCrawlerAchievementsRoute
-  '/app/desk-crawler/career': typeof AppDeskCrawlerCareerRoute
-  '/app/desk-crawler/field-notes': typeof AppDeskCrawlerFieldNotesRoute
-  '/app/desk-crawler/inventory': typeof AppDeskCrawlerInventoryRoute
-  '/app/desk-crawler/keepsakes': typeof AppDeskCrawlerKeepsakesRoute
-  '/app/desk-crawler/leaderboard': typeof AppDeskCrawlerLeaderboardRoute
-  '/app/desk-crawler/log': typeof AppDeskCrawlerLogRoute
-  '/app/desk-crawler/roster': typeof AppDeskCrawlerRosterRoute
-  '/app/desk-crawler/settings': typeof AppDeskCrawlerSettingsRoute
-  '/app/desk-crawler/trmnl': typeof AppDeskCrawlerTrmnlRoute
-  '/desk-crawler/heroes/$alias': typeof DeskCrawlerHeroesAliasRoute
-  '/app/desk-crawler/': typeof AppDeskCrawlerIndexRoute
-  '/connect/trmnl/desk-crawler/install': typeof ConnectTrmnlDeskCrawlerInstallRoute
-  '/connect/trmnl/desk-crawler/manage': typeof ConnectTrmnlDeskCrawlerManageRoute
+  '/app/wardenwatch/achievements': typeof AppWardenwatchAchievementsRoute
+  '/app/wardenwatch/career': typeof AppWardenwatchCareerRoute
+  '/app/wardenwatch/field-notes': typeof AppWardenwatchFieldNotesRoute
+  '/app/wardenwatch/inventory': typeof AppWardenwatchInventoryRoute
+  '/app/wardenwatch/keepsakes': typeof AppWardenwatchKeepsakesRoute
+  '/app/wardenwatch/leaderboard': typeof AppWardenwatchLeaderboardRoute
+  '/app/wardenwatch/log': typeof AppWardenwatchLogRoute
+  '/app/wardenwatch/roster': typeof AppWardenwatchRosterRoute
+  '/app/wardenwatch/settings': typeof AppWardenwatchSettingsRoute
+  '/app/wardenwatch/trmnl': typeof AppWardenwatchTrmnlRoute
+  '/wardenwatch/heroes/$alias': typeof WardenwatchHeroesAliasRoute
+  '/app/wardenwatch/': typeof AppWardenwatchIndexRoute
+  '/connect/trmnl/wardenwatch/install': typeof ConnectTrmnlWardenwatchInstallRoute
+  '/connect/trmnl/wardenwatch/manage': typeof ConnectTrmnlWardenwatchManageRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -359,31 +359,31 @@ export interface FileRouteTypes {
     | '/terms'
     | '/whats-new'
     | '/account/delete'
-    | '/app/desk-crawler'
-    | '/desk-crawler/unsubscribe'
-    | '/desk-crawler/waiting-list'
-    | '/dev/desk-crawler'
+    | '/app/wardenwatch'
     | '/dev/og'
-    | '/games/desk-crawler'
-    | '/help/desk-crawler'
+    | '/dev/wardenwatch'
+    | '/games/wardenwatch'
+    | '/help/wardenwatch'
     | '/k/$code'
     | '/launch-list/unsubscribe'
     | '/profile/$alias'
+    | '/wardenwatch/unsubscribe'
+    | '/wardenwatch/waiting-list'
     | '/app/'
-    | '/app/desk-crawler/achievements'
-    | '/app/desk-crawler/career'
-    | '/app/desk-crawler/field-notes'
-    | '/app/desk-crawler/inventory'
-    | '/app/desk-crawler/keepsakes'
-    | '/app/desk-crawler/leaderboard'
-    | '/app/desk-crawler/log'
-    | '/app/desk-crawler/roster'
-    | '/app/desk-crawler/settings'
-    | '/app/desk-crawler/trmnl'
-    | '/desk-crawler/heroes/$alias'
-    | '/app/desk-crawler/'
-    | '/connect/trmnl/desk-crawler/install'
-    | '/connect/trmnl/desk-crawler/manage'
+    | '/app/wardenwatch/achievements'
+    | '/app/wardenwatch/career'
+    | '/app/wardenwatch/field-notes'
+    | '/app/wardenwatch/inventory'
+    | '/app/wardenwatch/keepsakes'
+    | '/app/wardenwatch/leaderboard'
+    | '/app/wardenwatch/log'
+    | '/app/wardenwatch/roster'
+    | '/app/wardenwatch/settings'
+    | '/app/wardenwatch/trmnl'
+    | '/wardenwatch/heroes/$alias'
+    | '/app/wardenwatch/'
+    | '/connect/trmnl/wardenwatch/install'
+    | '/connect/trmnl/wardenwatch/manage'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -396,30 +396,30 @@ export interface FileRouteTypes {
     | '/terms'
     | '/whats-new'
     | '/account/delete'
-    | '/desk-crawler/unsubscribe'
-    | '/desk-crawler/waiting-list'
-    | '/dev/desk-crawler'
     | '/dev/og'
-    | '/games/desk-crawler'
-    | '/help/desk-crawler'
+    | '/dev/wardenwatch'
+    | '/games/wardenwatch'
+    | '/help/wardenwatch'
     | '/k/$code'
     | '/launch-list/unsubscribe'
     | '/profile/$alias'
+    | '/wardenwatch/unsubscribe'
+    | '/wardenwatch/waiting-list'
     | '/app'
-    | '/app/desk-crawler/achievements'
-    | '/app/desk-crawler/career'
-    | '/app/desk-crawler/field-notes'
-    | '/app/desk-crawler/inventory'
-    | '/app/desk-crawler/keepsakes'
-    | '/app/desk-crawler/leaderboard'
-    | '/app/desk-crawler/log'
-    | '/app/desk-crawler/roster'
-    | '/app/desk-crawler/settings'
-    | '/app/desk-crawler/trmnl'
-    | '/desk-crawler/heroes/$alias'
-    | '/app/desk-crawler'
-    | '/connect/trmnl/desk-crawler/install'
-    | '/connect/trmnl/desk-crawler/manage'
+    | '/app/wardenwatch/achievements'
+    | '/app/wardenwatch/career'
+    | '/app/wardenwatch/field-notes'
+    | '/app/wardenwatch/inventory'
+    | '/app/wardenwatch/keepsakes'
+    | '/app/wardenwatch/leaderboard'
+    | '/app/wardenwatch/log'
+    | '/app/wardenwatch/roster'
+    | '/app/wardenwatch/settings'
+    | '/app/wardenwatch/trmnl'
+    | '/wardenwatch/heroes/$alias'
+    | '/app/wardenwatch'
+    | '/connect/trmnl/wardenwatch/install'
+    | '/connect/trmnl/wardenwatch/manage'
   id:
     | '__root__'
     | '/'
@@ -433,31 +433,31 @@ export interface FileRouteTypes {
     | '/terms'
     | '/whats-new'
     | '/account_/delete'
-    | '/app/desk-crawler'
-    | '/desk-crawler/unsubscribe'
-    | '/desk-crawler/waiting-list'
-    | '/dev/desk-crawler'
+    | '/app/wardenwatch'
     | '/dev/og'
-    | '/games/desk-crawler'
-    | '/help/desk-crawler'
+    | '/dev/wardenwatch'
+    | '/games/wardenwatch'
+    | '/help/wardenwatch'
     | '/k/$code'
     | '/launch-list/unsubscribe'
     | '/profile/$alias'
+    | '/wardenwatch/unsubscribe'
+    | '/wardenwatch/waiting-list'
     | '/app/'
-    | '/app/desk-crawler/achievements'
-    | '/app/desk-crawler/career'
-    | '/app/desk-crawler/field-notes'
-    | '/app/desk-crawler/inventory'
-    | '/app/desk-crawler/keepsakes'
-    | '/app/desk-crawler/leaderboard'
-    | '/app/desk-crawler/log'
-    | '/app/desk-crawler/roster'
-    | '/app/desk-crawler/settings'
-    | '/app/desk-crawler/trmnl'
-    | '/desk-crawler/heroes/$alias'
-    | '/app/desk-crawler/'
-    | '/connect/trmnl/desk-crawler/install'
-    | '/connect/trmnl/desk-crawler/manage'
+    | '/app/wardenwatch/achievements'
+    | '/app/wardenwatch/career'
+    | '/app/wardenwatch/field-notes'
+    | '/app/wardenwatch/inventory'
+    | '/app/wardenwatch/keepsakes'
+    | '/app/wardenwatch/leaderboard'
+    | '/app/wardenwatch/log'
+    | '/app/wardenwatch/roster'
+    | '/app/wardenwatch/settings'
+    | '/app/wardenwatch/trmnl'
+    | '/wardenwatch/heroes/$alias'
+    | '/app/wardenwatch/'
+    | '/connect/trmnl/wardenwatch/install'
+    | '/connect/trmnl/wardenwatch/manage'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -472,18 +472,18 @@ export interface RootRouteChildren {
   TermsRoute: typeof TermsRoute
   WhatsNewRoute: typeof WhatsNewRoute
   AccountDeleteRoute: typeof AccountDeleteRoute
-  DeskCrawlerUnsubscribeRoute: typeof DeskCrawlerUnsubscribeRoute
-  DeskCrawlerWaitingListRoute: typeof DeskCrawlerWaitingListRoute
-  DevDeskCrawlerRoute: typeof DevDeskCrawlerRoute
   DevOgRoute: typeof DevOgRoute
-  GamesDeskCrawlerRoute: typeof GamesDeskCrawlerRoute
-  HelpDeskCrawlerRoute: typeof HelpDeskCrawlerRoute
+  DevWardenwatchRoute: typeof DevWardenwatchRoute
+  GamesWardenwatchRoute: typeof GamesWardenwatchRoute
+  HelpWardenwatchRoute: typeof HelpWardenwatchRoute
   KCodeRoute: typeof KCodeRoute
   LaunchListUnsubscribeRoute: typeof LaunchListUnsubscribeRoute
   ProfileAliasRoute: typeof ProfileAliasRoute
-  DeskCrawlerHeroesAliasRoute: typeof DeskCrawlerHeroesAliasRoute
-  ConnectTrmnlDeskCrawlerInstallRoute: typeof ConnectTrmnlDeskCrawlerInstallRoute
-  ConnectTrmnlDeskCrawlerManageRoute: typeof ConnectTrmnlDeskCrawlerManageRoute
+  WardenwatchUnsubscribeRoute: typeof WardenwatchUnsubscribeRoute
+  WardenwatchWaitingListRoute: typeof WardenwatchWaitingListRoute
+  WardenwatchHeroesAliasRoute: typeof WardenwatchHeroesAliasRoute
+  ConnectTrmnlWardenwatchInstallRoute: typeof ConnectTrmnlWardenwatchInstallRoute
+  ConnectTrmnlWardenwatchManageRoute: typeof ConnectTrmnlWardenwatchManageRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -572,33 +572,12 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppIndexRouteImport
       parentRoute: typeof AppRoute
     }
-    '/app/desk-crawler': {
-      id: '/app/desk-crawler'
-      path: '/desk-crawler'
-      fullPath: '/app/desk-crawler'
-      preLoaderRoute: typeof AppDeskCrawlerRouteImport
+    '/app/wardenwatch': {
+      id: '/app/wardenwatch'
+      path: '/wardenwatch'
+      fullPath: '/app/wardenwatch'
+      preLoaderRoute: typeof AppWardenwatchRouteImport
       parentRoute: typeof AppRoute
-    }
-    '/desk-crawler/unsubscribe': {
-      id: '/desk-crawler/unsubscribe'
-      path: '/desk-crawler/unsubscribe'
-      fullPath: '/desk-crawler/unsubscribe'
-      preLoaderRoute: typeof DeskCrawlerUnsubscribeRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/desk-crawler/waiting-list': {
-      id: '/desk-crawler/waiting-list'
-      path: '/desk-crawler/waiting-list'
-      fullPath: '/desk-crawler/waiting-list'
-      preLoaderRoute: typeof DeskCrawlerWaitingListRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/dev/desk-crawler': {
-      id: '/dev/desk-crawler'
-      path: '/dev/desk-crawler'
-      fullPath: '/dev/desk-crawler'
-      preLoaderRoute: typeof DevDeskCrawlerRouteImport
-      parentRoute: typeof rootRouteImport
     }
     '/dev/og': {
       id: '/dev/og'
@@ -607,18 +586,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DevOgRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/games/desk-crawler': {
-      id: '/games/desk-crawler'
-      path: '/games/desk-crawler'
-      fullPath: '/games/desk-crawler'
-      preLoaderRoute: typeof GamesDeskCrawlerRouteImport
+    '/dev/wardenwatch': {
+      id: '/dev/wardenwatch'
+      path: '/dev/wardenwatch'
+      fullPath: '/dev/wardenwatch'
+      preLoaderRoute: typeof DevWardenwatchRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/help/desk-crawler': {
-      id: '/help/desk-crawler'
-      path: '/help/desk-crawler'
-      fullPath: '/help/desk-crawler'
-      preLoaderRoute: typeof HelpDeskCrawlerRouteImport
+    '/games/wardenwatch': {
+      id: '/games/wardenwatch'
+      path: '/games/wardenwatch'
+      fullPath: '/games/wardenwatch'
+      preLoaderRoute: typeof GamesWardenwatchRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/help/wardenwatch': {
+      id: '/help/wardenwatch'
+      path: '/help/wardenwatch'
+      fullPath: '/help/wardenwatch'
+      preLoaderRoute: typeof HelpWardenwatchRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/k/$code': {
@@ -642,146 +628,160 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProfileAliasRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/app/desk-crawler/': {
-      id: '/app/desk-crawler/'
+    '/wardenwatch/unsubscribe': {
+      id: '/wardenwatch/unsubscribe'
+      path: '/wardenwatch/unsubscribe'
+      fullPath: '/wardenwatch/unsubscribe'
+      preLoaderRoute: typeof WardenwatchUnsubscribeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/wardenwatch/waiting-list': {
+      id: '/wardenwatch/waiting-list'
+      path: '/wardenwatch/waiting-list'
+      fullPath: '/wardenwatch/waiting-list'
+      preLoaderRoute: typeof WardenwatchWaitingListRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/app/wardenwatch/': {
+      id: '/app/wardenwatch/'
       path: '/'
-      fullPath: '/app/desk-crawler/'
-      preLoaderRoute: typeof AppDeskCrawlerIndexRouteImport
-      parentRoute: typeof AppDeskCrawlerRoute
+      fullPath: '/app/wardenwatch/'
+      preLoaderRoute: typeof AppWardenwatchIndexRouteImport
+      parentRoute: typeof AppWardenwatchRoute
     }
-    '/app/desk-crawler/achievements': {
-      id: '/app/desk-crawler/achievements'
+    '/app/wardenwatch/achievements': {
+      id: '/app/wardenwatch/achievements'
       path: '/achievements'
-      fullPath: '/app/desk-crawler/achievements'
-      preLoaderRoute: typeof AppDeskCrawlerAchievementsRouteImport
-      parentRoute: typeof AppDeskCrawlerRoute
+      fullPath: '/app/wardenwatch/achievements'
+      preLoaderRoute: typeof AppWardenwatchAchievementsRouteImport
+      parentRoute: typeof AppWardenwatchRoute
     }
-    '/app/desk-crawler/career': {
-      id: '/app/desk-crawler/career'
+    '/app/wardenwatch/career': {
+      id: '/app/wardenwatch/career'
       path: '/career'
-      fullPath: '/app/desk-crawler/career'
-      preLoaderRoute: typeof AppDeskCrawlerCareerRouteImport
-      parentRoute: typeof AppDeskCrawlerRoute
+      fullPath: '/app/wardenwatch/career'
+      preLoaderRoute: typeof AppWardenwatchCareerRouteImport
+      parentRoute: typeof AppWardenwatchRoute
     }
-    '/app/desk-crawler/field-notes': {
-      id: '/app/desk-crawler/field-notes'
+    '/app/wardenwatch/field-notes': {
+      id: '/app/wardenwatch/field-notes'
       path: '/field-notes'
-      fullPath: '/app/desk-crawler/field-notes'
-      preLoaderRoute: typeof AppDeskCrawlerFieldNotesRouteImport
-      parentRoute: typeof AppDeskCrawlerRoute
+      fullPath: '/app/wardenwatch/field-notes'
+      preLoaderRoute: typeof AppWardenwatchFieldNotesRouteImport
+      parentRoute: typeof AppWardenwatchRoute
     }
-    '/app/desk-crawler/inventory': {
-      id: '/app/desk-crawler/inventory'
+    '/app/wardenwatch/inventory': {
+      id: '/app/wardenwatch/inventory'
       path: '/inventory'
-      fullPath: '/app/desk-crawler/inventory'
-      preLoaderRoute: typeof AppDeskCrawlerInventoryRouteImport
-      parentRoute: typeof AppDeskCrawlerRoute
+      fullPath: '/app/wardenwatch/inventory'
+      preLoaderRoute: typeof AppWardenwatchInventoryRouteImport
+      parentRoute: typeof AppWardenwatchRoute
     }
-    '/app/desk-crawler/keepsakes': {
-      id: '/app/desk-crawler/keepsakes'
+    '/app/wardenwatch/keepsakes': {
+      id: '/app/wardenwatch/keepsakes'
       path: '/keepsakes'
-      fullPath: '/app/desk-crawler/keepsakes'
-      preLoaderRoute: typeof AppDeskCrawlerKeepsakesRouteImport
-      parentRoute: typeof AppDeskCrawlerRoute
+      fullPath: '/app/wardenwatch/keepsakes'
+      preLoaderRoute: typeof AppWardenwatchKeepsakesRouteImport
+      parentRoute: typeof AppWardenwatchRoute
     }
-    '/app/desk-crawler/leaderboard': {
-      id: '/app/desk-crawler/leaderboard'
+    '/app/wardenwatch/leaderboard': {
+      id: '/app/wardenwatch/leaderboard'
       path: '/leaderboard'
-      fullPath: '/app/desk-crawler/leaderboard'
-      preLoaderRoute: typeof AppDeskCrawlerLeaderboardRouteImport
-      parentRoute: typeof AppDeskCrawlerRoute
+      fullPath: '/app/wardenwatch/leaderboard'
+      preLoaderRoute: typeof AppWardenwatchLeaderboardRouteImport
+      parentRoute: typeof AppWardenwatchRoute
     }
-    '/app/desk-crawler/log': {
-      id: '/app/desk-crawler/log'
+    '/app/wardenwatch/log': {
+      id: '/app/wardenwatch/log'
       path: '/log'
-      fullPath: '/app/desk-crawler/log'
-      preLoaderRoute: typeof AppDeskCrawlerLogRouteImport
-      parentRoute: typeof AppDeskCrawlerRoute
+      fullPath: '/app/wardenwatch/log'
+      preLoaderRoute: typeof AppWardenwatchLogRouteImport
+      parentRoute: typeof AppWardenwatchRoute
     }
-    '/app/desk-crawler/roster': {
-      id: '/app/desk-crawler/roster'
+    '/app/wardenwatch/roster': {
+      id: '/app/wardenwatch/roster'
       path: '/roster'
-      fullPath: '/app/desk-crawler/roster'
-      preLoaderRoute: typeof AppDeskCrawlerRosterRouteImport
-      parentRoute: typeof AppDeskCrawlerRoute
+      fullPath: '/app/wardenwatch/roster'
+      preLoaderRoute: typeof AppWardenwatchRosterRouteImport
+      parentRoute: typeof AppWardenwatchRoute
     }
-    '/app/desk-crawler/settings': {
-      id: '/app/desk-crawler/settings'
+    '/app/wardenwatch/settings': {
+      id: '/app/wardenwatch/settings'
       path: '/settings'
-      fullPath: '/app/desk-crawler/settings'
-      preLoaderRoute: typeof AppDeskCrawlerSettingsRouteImport
-      parentRoute: typeof AppDeskCrawlerRoute
+      fullPath: '/app/wardenwatch/settings'
+      preLoaderRoute: typeof AppWardenwatchSettingsRouteImport
+      parentRoute: typeof AppWardenwatchRoute
     }
-    '/app/desk-crawler/trmnl': {
-      id: '/app/desk-crawler/trmnl'
+    '/app/wardenwatch/trmnl': {
+      id: '/app/wardenwatch/trmnl'
       path: '/trmnl'
-      fullPath: '/app/desk-crawler/trmnl'
-      preLoaderRoute: typeof AppDeskCrawlerTrmnlRouteImport
-      parentRoute: typeof AppDeskCrawlerRoute
+      fullPath: '/app/wardenwatch/trmnl'
+      preLoaderRoute: typeof AppWardenwatchTrmnlRouteImport
+      parentRoute: typeof AppWardenwatchRoute
     }
-    '/desk-crawler/heroes/$alias': {
-      id: '/desk-crawler/heroes/$alias'
-      path: '/desk-crawler/heroes/$alias'
-      fullPath: '/desk-crawler/heroes/$alias'
-      preLoaderRoute: typeof DeskCrawlerHeroesAliasRouteImport
+    '/wardenwatch/heroes/$alias': {
+      id: '/wardenwatch/heroes/$alias'
+      path: '/wardenwatch/heroes/$alias'
+      fullPath: '/wardenwatch/heroes/$alias'
+      preLoaderRoute: typeof WardenwatchHeroesAliasRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/connect/trmnl/desk-crawler/install': {
-      id: '/connect/trmnl/desk-crawler/install'
-      path: '/connect/trmnl/desk-crawler/install'
-      fullPath: '/connect/trmnl/desk-crawler/install'
-      preLoaderRoute: typeof ConnectTrmnlDeskCrawlerInstallRouteImport
+    '/connect/trmnl/wardenwatch/install': {
+      id: '/connect/trmnl/wardenwatch/install'
+      path: '/connect/trmnl/wardenwatch/install'
+      fullPath: '/connect/trmnl/wardenwatch/install'
+      preLoaderRoute: typeof ConnectTrmnlWardenwatchInstallRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/connect/trmnl/desk-crawler/manage': {
-      id: '/connect/trmnl/desk-crawler/manage'
-      path: '/connect/trmnl/desk-crawler/manage'
-      fullPath: '/connect/trmnl/desk-crawler/manage'
-      preLoaderRoute: typeof ConnectTrmnlDeskCrawlerManageRouteImport
+    '/connect/trmnl/wardenwatch/manage': {
+      id: '/connect/trmnl/wardenwatch/manage'
+      path: '/connect/trmnl/wardenwatch/manage'
+      fullPath: '/connect/trmnl/wardenwatch/manage'
+      preLoaderRoute: typeof ConnectTrmnlWardenwatchManageRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
 }
 
-interface AppDeskCrawlerRouteChildren {
-  AppDeskCrawlerAchievementsRoute: typeof AppDeskCrawlerAchievementsRoute
-  AppDeskCrawlerCareerRoute: typeof AppDeskCrawlerCareerRoute
-  AppDeskCrawlerFieldNotesRoute: typeof AppDeskCrawlerFieldNotesRoute
-  AppDeskCrawlerInventoryRoute: typeof AppDeskCrawlerInventoryRoute
-  AppDeskCrawlerKeepsakesRoute: typeof AppDeskCrawlerKeepsakesRoute
-  AppDeskCrawlerLeaderboardRoute: typeof AppDeskCrawlerLeaderboardRoute
-  AppDeskCrawlerLogRoute: typeof AppDeskCrawlerLogRoute
-  AppDeskCrawlerRosterRoute: typeof AppDeskCrawlerRosterRoute
-  AppDeskCrawlerSettingsRoute: typeof AppDeskCrawlerSettingsRoute
-  AppDeskCrawlerTrmnlRoute: typeof AppDeskCrawlerTrmnlRoute
-  AppDeskCrawlerIndexRoute: typeof AppDeskCrawlerIndexRoute
+interface AppWardenwatchRouteChildren {
+  AppWardenwatchAchievementsRoute: typeof AppWardenwatchAchievementsRoute
+  AppWardenwatchCareerRoute: typeof AppWardenwatchCareerRoute
+  AppWardenwatchFieldNotesRoute: typeof AppWardenwatchFieldNotesRoute
+  AppWardenwatchInventoryRoute: typeof AppWardenwatchInventoryRoute
+  AppWardenwatchKeepsakesRoute: typeof AppWardenwatchKeepsakesRoute
+  AppWardenwatchLeaderboardRoute: typeof AppWardenwatchLeaderboardRoute
+  AppWardenwatchLogRoute: typeof AppWardenwatchLogRoute
+  AppWardenwatchRosterRoute: typeof AppWardenwatchRosterRoute
+  AppWardenwatchSettingsRoute: typeof AppWardenwatchSettingsRoute
+  AppWardenwatchTrmnlRoute: typeof AppWardenwatchTrmnlRoute
+  AppWardenwatchIndexRoute: typeof AppWardenwatchIndexRoute
 }
 
-const AppDeskCrawlerRouteChildren: AppDeskCrawlerRouteChildren = {
-  AppDeskCrawlerAchievementsRoute: AppDeskCrawlerAchievementsRoute,
-  AppDeskCrawlerCareerRoute: AppDeskCrawlerCareerRoute,
-  AppDeskCrawlerFieldNotesRoute: AppDeskCrawlerFieldNotesRoute,
-  AppDeskCrawlerInventoryRoute: AppDeskCrawlerInventoryRoute,
-  AppDeskCrawlerKeepsakesRoute: AppDeskCrawlerKeepsakesRoute,
-  AppDeskCrawlerLeaderboardRoute: AppDeskCrawlerLeaderboardRoute,
-  AppDeskCrawlerLogRoute: AppDeskCrawlerLogRoute,
-  AppDeskCrawlerRosterRoute: AppDeskCrawlerRosterRoute,
-  AppDeskCrawlerSettingsRoute: AppDeskCrawlerSettingsRoute,
-  AppDeskCrawlerTrmnlRoute: AppDeskCrawlerTrmnlRoute,
-  AppDeskCrawlerIndexRoute: AppDeskCrawlerIndexRoute,
+const AppWardenwatchRouteChildren: AppWardenwatchRouteChildren = {
+  AppWardenwatchAchievementsRoute: AppWardenwatchAchievementsRoute,
+  AppWardenwatchCareerRoute: AppWardenwatchCareerRoute,
+  AppWardenwatchFieldNotesRoute: AppWardenwatchFieldNotesRoute,
+  AppWardenwatchInventoryRoute: AppWardenwatchInventoryRoute,
+  AppWardenwatchKeepsakesRoute: AppWardenwatchKeepsakesRoute,
+  AppWardenwatchLeaderboardRoute: AppWardenwatchLeaderboardRoute,
+  AppWardenwatchLogRoute: AppWardenwatchLogRoute,
+  AppWardenwatchRosterRoute: AppWardenwatchRosterRoute,
+  AppWardenwatchSettingsRoute: AppWardenwatchSettingsRoute,
+  AppWardenwatchTrmnlRoute: AppWardenwatchTrmnlRoute,
+  AppWardenwatchIndexRoute: AppWardenwatchIndexRoute,
 }
 
-const AppDeskCrawlerRouteWithChildren = AppDeskCrawlerRoute._addFileChildren(
-  AppDeskCrawlerRouteChildren,
+const AppWardenwatchRouteWithChildren = AppWardenwatchRoute._addFileChildren(
+  AppWardenwatchRouteChildren,
 )
 
 interface AppRouteChildren {
-  AppDeskCrawlerRoute: typeof AppDeskCrawlerRouteWithChildren
+  AppWardenwatchRoute: typeof AppWardenwatchRouteWithChildren
   AppIndexRoute: typeof AppIndexRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
-  AppDeskCrawlerRoute: AppDeskCrawlerRouteWithChildren,
+  AppWardenwatchRoute: AppWardenwatchRouteWithChildren,
   AppIndexRoute: AppIndexRoute,
 }
 
@@ -799,19 +799,29 @@ const rootRouteChildren: RootRouteChildren = {
   TermsRoute: TermsRoute,
   WhatsNewRoute: WhatsNewRoute,
   AccountDeleteRoute: AccountDeleteRoute,
-  DeskCrawlerUnsubscribeRoute: DeskCrawlerUnsubscribeRoute,
-  DeskCrawlerWaitingListRoute: DeskCrawlerWaitingListRoute,
-  DevDeskCrawlerRoute: DevDeskCrawlerRoute,
   DevOgRoute: DevOgRoute,
-  GamesDeskCrawlerRoute: GamesDeskCrawlerRoute,
-  HelpDeskCrawlerRoute: HelpDeskCrawlerRoute,
+  DevWardenwatchRoute: DevWardenwatchRoute,
+  GamesWardenwatchRoute: GamesWardenwatchRoute,
+  HelpWardenwatchRoute: HelpWardenwatchRoute,
   KCodeRoute: KCodeRoute,
   LaunchListUnsubscribeRoute: LaunchListUnsubscribeRoute,
   ProfileAliasRoute: ProfileAliasRoute,
-  DeskCrawlerHeroesAliasRoute: DeskCrawlerHeroesAliasRoute,
-  ConnectTrmnlDeskCrawlerInstallRoute: ConnectTrmnlDeskCrawlerInstallRoute,
-  ConnectTrmnlDeskCrawlerManageRoute: ConnectTrmnlDeskCrawlerManageRoute,
+  WardenwatchUnsubscribeRoute: WardenwatchUnsubscribeRoute,
+  WardenwatchWaitingListRoute: WardenwatchWaitingListRoute,
+  WardenwatchHeroesAliasRoute: WardenwatchHeroesAliasRoute,
+  ConnectTrmnlWardenwatchInstallRoute: ConnectTrmnlWardenwatchInstallRoute,
+  ConnectTrmnlWardenwatchManageRoute: ConnectTrmnlWardenwatchManageRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}

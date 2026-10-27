@@ -23,7 +23,7 @@ export const QR_SCALES = new Set([2, 3, 4, 5, 7])
  * the OG full layout's top-right code, drawn with its quiet zone on the left and bottom only, since the screen's white
  * margin already surrounds its top and right.
  */
-export const QR_TARGETS = { app: '/app/desk-crawler', bag: '/app/desk-crawler/inventory', home: '/dc', corner: '/dc' } as const
+export const QR_TARGETS = { app: '/app/wardenwatch', bag: '/app/wardenwatch/inventory', home: '/dc', corner: '/dc' } as const
 export type QrTarget = keyof typeof QR_TARGETS
 const CORNER_TARGETS: ReadonlySet<QrTarget> = new Set(['corner'])
 

@@ -58,12 +58,12 @@ function Account() {
           {me?.user && LANGUAGES_LIVE ? <LanguageSetting saved={me.user.language} /> : null}
           <nav aria-label={t.nav} className="flex flex-wrap gap-x-5 gap-y-1 text-sm">
             <Link to="/privacy" className="inline-flex min-h-11 items-center underline underline-offset-4">{t.privacyPolicy}</Link>
-            <Link to="/app/desk-crawler/settings" className="inline-flex min-h-11 items-center underline underline-offset-4">{t.deskCrawlerSettings}</Link>
+            <Link to="/app/wardenwatch/settings" className="inline-flex min-h-11 items-center underline underline-offset-4">{t.deskCrawlerSettings}</Link>
           </nav>
           {me ? (
             <details data-analytics-private className="border-t-2 border-hp pt-4">
               <summary className="min-h-11 cursor-pointer font-semibold text-hp-ink">{t.deleteSummary}</summary>
-              <p>{t.deleteBodyBefore}<Link to="/app/desk-crawler/settings" className="underline underline-offset-4">{t.deskCrawlerSettings}</Link>{t.deleteBodyAfter}</p>
+              <p>{t.deleteBodyBefore}<Link to="/app/wardenwatch/settings" className="underline underline-offset-4">{t.deskCrawlerSettings}</Link>{t.deleteBodyAfter}</p>
               <p className="mt-3 text-sm">{t.staysActive}</p>
               {activeRequest ? <p role="status" className="mt-3">{emailStatus.state === 'pending' ? t.sendingTo(emailStatus.email) : emailStatus.state === 'sent' ? t.checkEmail(emailStatus.email) : emailStatus.state === 'failed' ? t.deliveryFailed : t.deletionUnderway}</p> : emailStatus ? <p className="mt-3">{t.previousExpired}</p> : null}
               <Button className="mt-4" variant="danger" pending={pending} busyLabel={t.requestingEmail} disabled={Boolean(activeRequest) || emailStatus === undefined} onClick={sendLink}>{t.emailDeletionLink}</Button>

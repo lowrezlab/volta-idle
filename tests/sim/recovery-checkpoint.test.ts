@@ -19,7 +19,7 @@ const source: RecoveryTables = {
   trmnlInstances: [{ ...restored.trmnlInstances![1]!, state: 'disconnected' }, restored.trmnlInstances![2]!],
   revokedAuthIdentities: [{ identityHash: authHash(account) }],
   revokedTrmnlCredentials: [{ tokenHash: token }, { tokenHash: gameToken }],
-  gameDeletionJobs: [{ userId: 'u3', gameSlug: 'desk-crawler', createdAt: 50, state: 'completed' }],
+  gameDeletionJobs: [{ userId: 'u3', gameSlug: 'wardenwatch', createdAt: 50, state: 'completed' }],
 }
 
 describe('independent recovery checkpoint', () => {

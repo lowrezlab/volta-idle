@@ -110,7 +110,7 @@ export const privacyEn: LegalPage = {
       <p>Removal of linked PostHog profiles, events and recordings is requested as part of account deletion and processed asynchronously by PostHog. Failed requests are retried and remain visible to the operator until resolved.</p>
 
       <h2>Deleting only a game</h2>
-      <p>In <Link to="/app/desk-crawler/settings">Desk Crawler settings</Link>, choose Delete Desk Crawler progress to remove that hero, history, connections and alert settings and devices. Your shared account and sign-in stay available. You can start again by installing the plugin after removal finishes. Other games are unaffected.</p>
+      <p>In <Link to="/app/wardenwatch/settings">Desk Crawler settings</Link>, choose Delete Desk Crawler progress to remove that hero, history, connections and alert settings and devices. Your shared account and sign-in stay available. You can start again by installing the plugin after removal finishes. Other games are unaffected.</p>
 
       <h2>Your choices</h2>
       <p>

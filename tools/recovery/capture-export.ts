@@ -28,7 +28,7 @@ const deployKey = process.env.CONVEX_DEPLOY_KEY
 if (deployKey && deployKey.split('|')[0]?.split(':').at(-1) !== source) throw new Error('Deployment key does not match --source')
 const require = createRequire(import.meta.url)
 const cli = join(dirname(require.resolve('convex/package.json')), 'bin/main.js')
-const scratch = mkdtempSync(join(tmpdir(), 'desk-crawler-checkpoint-'))
+const scratch = mkdtempSync(join(tmpdir(), 'wardenwatch-checkpoint-'))
 chmodSync(scratch, 0o700)
 try {
   const archive = join(scratch, 'snapshot.zip')

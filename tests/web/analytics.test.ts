@@ -6,7 +6,7 @@ describe('support analytics privacy boundary', () => {
   beforeEach(() => {
     storage.clear()
     setAnalyticsIdentity(null)
-    vi.stubGlobal('window', { localStorage: { getItem: (key: string) => storage.get(key) ?? null, setItem: (key: string, value: string) => storage.set(key, value) }, dispatchEvent: vi.fn(), location: { href: 'https://trmnlgames.com/app/desk-crawler' } })
+    vi.stubGlobal('window', { localStorage: { getItem: (key: string) => storage.get(key) ?? null, setItem: (key: string, value: string) => storage.set(key, value) }, dispatchEvent: vi.fn(), location: { href: 'https://trmnlgames.com/app/wardenwatch' } })
   })
   afterEach(() => { vi.stubGlobal('window', { localStorage: { setItem: vi.fn() }, dispatchEvent: vi.fn() }); setAnalyticsConsent('declined'); vi.unstubAllGlobals() })
   const event = (properties: object) => ({ event: '$exception', properties } as NonNullable<Parameters<typeof beforeAnalyticsSend>[0]>)
@@ -27,7 +27,7 @@ describe('support analytics privacy boundary', () => {
   it('drops every capture while a raw TRMNL install or management credential is in the URL', () => {
     storage.set('tg_analytics_consent_v1', 'allowed')
     for (const query of ['code=secret-code', 'jwt=secret-jwt', 'token=deletion-proof', 'installation_callback_url=https%3A%2F%2Ftrmnl.com', 'keepsake=482917', 'fly=482917']) {
-      window.location.href = `https://trmnlgames.com/connect/trmnl/desk-crawler/install?${query}`
+      window.location.href = `https://trmnlgames.com/connect/trmnl/wardenwatch/install?${query}`
       expect(beforeAnalyticsSend(event({}))).toBeNull()
     }
   })
@@ -40,7 +40,7 @@ describe('support analytics privacy boundary', () => {
   })
   it('honors withdrawal even when browser storage refuses the update', () => {
     storage.set('tg_analytics_consent_v1', 'allowed')
-    vi.stubGlobal('window', { localStorage: { getItem: () => 'allowed', setItem: () => { throw new Error('Storage blocked') } }, dispatchEvent: vi.fn(), location: { href: 'https://trmnlgames.com/app/desk-crawler' } })
+    vi.stubGlobal('window', { localStorage: { getItem: () => 'allowed', setItem: () => { throw new Error('Storage blocked') } }, dispatchEvent: vi.fn(), location: { href: 'https://trmnlgames.com/app/wardenwatch' } })
     setAnalyticsConsent('declined')
     expect(readAnalyticsConsent()).toBe('declined')
     expect(beforeAnalyticsSend(event({}))).toBeNull()

@@ -182,7 +182,7 @@ describe('alerts backend (P33)', () => {
     expect(rows).toHaveLength(1)
     expect(rows[0]).toMatchObject({ kind: 'asleep', eventTick: hero.lastTick, state: 'sent', attempts: 1 })
     expect(sent).toHaveLength(1)
-    expect(JSON.parse(sent[0]!.payload)).toMatchObject({ body: 'Baz is holding a new find for you. Make room in the bag so the next ones are not left behind.', url: '/app/desk-crawler/inventory?alert=asleep' })
+    expect(JSON.parse(sent[0]!.payload)).toMatchObject({ body: 'Baz is holding a new find for you. Make room in the bag so the next ones are not left behind.', url: '/app/wardenwatch/inventory?alert=asleep' })
   })
 
   /** Insert an outbox row due now for the hero. */

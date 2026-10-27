@@ -41,11 +41,11 @@ function YourGames() {
   const { isAuthenticated } = useConvexAuth()
   const { data: me } = useQuery({ ...convexQuery(api.users.me, {}), enabled: isAuthenticated })
   if (!me) return null
-  const rows: Array<{ slug: 'desk-crawler'; line: string; action: ReactNode }> = [
+  const rows: Array<{ slug: 'wardenwatch'; line: string; action: ReactNode }> = [
     {
-      slug: 'desk-crawler',
+      slug: 'wardenwatch',
       line: me.hero ? shell.heroLine(me.hero) : t.notStarted,
-      action: me.hero ? <Link to="/app/desk-crawler" className={`${LINK_BUTTON} ${BUTTON_PRIMARY}`}>{t.open}</Link> : <Link to="/games/desk-crawler" className="inline-flex min-h-11 items-center underline underline-offset-4">{t.seeGame('Desk Crawler')}</Link>,
+      action: me.hero ? <Link to="/app/wardenwatch" className={`${LINK_BUTTON} ${BUTTON_PRIMARY}`}>{t.open}</Link> : <Link to="/games/wardenwatch" className="inline-flex min-h-11 items-center underline underline-offset-4">{t.seeGame('Desk Crawler')}</Link>,
     },
   ]
   return (
@@ -74,7 +74,7 @@ function YourGames() {
  * lands on whichever game the visitor points at, a figure from its catalog, its pitch and its one call to action. From
  * 1024px the two cards share rows (subgrid), so their screens, pitches and calls to action line up side by side.
  */
-function GameCard({ slug, alt, caption, facts, factGlyph, pitch, priority = false, children }: { slug: 'desk-crawler'; alt: string; caption: string; facts: string; factGlyph: GlyphName; pitch: string; priority?: boolean; children: ReactNode }) {
+function GameCard({ slug, alt, caption, facts, factGlyph, pitch, priority = false, children }: { slug: 'wardenwatch'; alt: string; caption: string; facts: string; factGlyph: GlyphName; pitch: string; priority?: boolean; children: ReactNode }) {
   const t = useT(homeMessages)
   const name = games[slug].name
   return (
@@ -145,7 +145,7 @@ function Home() {
           <section aria-labelledby="pick-heading" className="flex flex-col gap-4">
             <h2 id="pick-heading" className="sr-only">{t.pickHeading}</h2>
             <ul className="grid gap-6 lg:grid-cols-2 lg:gap-x-8">
-              <GameCard slug="desk-crawler" alt={pitch.sampleAlt} caption={pitch.homeCaption} facts={t.deskCrawlerFacts(FLOORS.length, monsters)} factGlyph="sword" pitch={t.deskCrawlerPitch} priority>
+              <GameCard slug="wardenwatch" alt={pitch.sampleAlt} caption={pitch.homeCaption} facts={t.deskCrawlerFacts(FLOORS.length, monsters)} factGlyph="sword" pitch={t.deskCrawlerPitch} priority>
                 <InstallCta place="home card" compact />
               </GameCard>
             </ul>

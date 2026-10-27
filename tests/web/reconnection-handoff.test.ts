@@ -42,49 +42,49 @@ describe('returning-player browser handoff', () => {
   afterEach(() => { vi.unstubAllGlobals(); vi.unstubAllEnvs() })
 
   it('preserves the encrypted install flow and exact callback for retry/reload until Configure', async () => {
-    expect(await captureInstall({ data: { gameSlug: 'desk-crawler', code: 'provider-code', callback: CALLBACK } })).toEqual({ ok: true })
+    expect(await captureInstall({ data: { gameSlug: 'wardenwatch', code: 'provider-code', callback: CALLBACK } })).toEqual({ ok: true })
     for (let i = 0; i < 2; i++) {
-      expect(await finishInstall({ data: { gameSlug: 'desk-crawler', publicAlias: 'Player', heroName: 'Hero' } })).toEqual({ ok: true, callbackUrl: CALLBACK, reconnectionRequired: true })
-      expect((await getPendingInstall({ data: { gameSlug: 'desk-crawler' } })).pending).toBe(true)
+      expect(await finishInstall({ data: { gameSlug: 'wardenwatch', publicAlias: 'Player', heroName: 'Hero' } })).toEqual({ ok: true, callbackUrl: CALLBACK, reconnectionRequired: true })
+      expect((await getPendingInstall({ data: { gameSlug: 'wardenwatch' } })).pending).toBe(true)
     }
     expect(mocks.deleteCookie).not.toHaveBeenCalled()
     expect(mocks.setAuth).toHaveBeenCalledWith('signed-convex-token')
     mocks.query.mockResolvedValue({ id: 'owned-draft', expiresAt: Date.now() + 60_000 })
     const jwt = await proof()
-    expect(await captureManagement({ data: { gameSlug: 'desk-crawler', uuid: UUID, jwt } })).toEqual({ ok: true })
+    expect(await captureManagement({ data: { gameSlug: 'wardenwatch', uuid: UUID, jwt } })).toEqual({ ok: true })
     expect(getFunctionName(mocks.action.mock.calls.at(-1)![0])).toBe('trmnl:verifyReconnection')
     expect(mocks.action.mock.calls.at(-1)![1]).toEqual({ attemptId: 'owned-draft', uuid: UUID, jwt })
-    expect((await getPendingInstall({ data: { gameSlug: 'desk-crawler' } })).pending).toBe(false)
-    expect(await getManagedInstance({ data: { gameSlug: 'desk-crawler' } })).toEqual({ uuid: UUID })
+    expect((await getPendingInstall({ data: { gameSlug: 'wardenwatch' } })).pending).toBe(false)
+    expect(await getManagedInstance({ data: { gameSlug: 'wardenwatch' } })).toEqual({ uuid: UUID })
   })
 
   it('keeps ordinary first-time install and management behavior without requiring reconnection', async () => {
-    await captureInstall({ data: { gameSlug: 'desk-crawler', code: 'provider-code', callback: CALLBACK } })
+    await captureInstall({ data: { gameSlug: 'wardenwatch', code: 'provider-code', callback: CALLBACK } })
     mocks.action.mockResolvedValue({ activationState: 'pending_trmnl', heroCreated: true })
-    expect(await finishInstall({ data: { gameSlug: 'desk-crawler', publicAlias: 'Player', heroName: 'Hero' } })).toEqual({ ok: true, callbackUrl: CALLBACK })
-    expect((await getPendingInstall({ data: { gameSlug: 'desk-crawler' } })).pending).toBe(false)
+    expect(await finishInstall({ data: { gameSlug: 'wardenwatch', publicAlias: 'Player', heroName: 'Hero' } })).toEqual({ ok: true, callbackUrl: CALLBACK })
+    expect((await getPendingInstall({ data: { gameSlug: 'wardenwatch' } })).pending).toBe(false)
     mocks.action.mockClear()
-    expect(await captureManagement({ data: { gameSlug: 'desk-crawler', uuid: UUID, jwt: await proof() } })).toEqual({ ok: true })
+    expect(await captureManagement({ data: { gameSlug: 'wardenwatch', uuid: UUID, jwt: await proof() } })).toEqual({ ok: true })
     expect(mocks.action).not.toHaveBeenCalled()
   })
 
   it('never records a reconnect proof while signed out; backend proof rejection cannot become a usable handoff', async () => {
     mocks.auth.mockResolvedValue({ userId: null, getToken: async () => null })
-    expect(await captureManagement({ data: { gameSlug: 'desk-crawler', uuid: UUID, jwt: await proof() } })).toEqual({ ok: true })
+    expect(await captureManagement({ data: { gameSlug: 'wardenwatch', uuid: UUID, jwt: await proof() } })).toEqual({ ok: true })
     expect(mocks.query).not.toHaveBeenCalled(); expect(mocks.action).not.toHaveBeenCalled()
     mocks.cookies.clear()
     mocks.auth.mockResolvedValue({ userId: 'user_returning', getToken: async () => 'signed-convex-token' })
     mocks.query.mockResolvedValue({ id: 'owned-draft', expiresAt: Date.now() + 60_000 })
     mocks.action.mockRejectedValue(new Error('expired or foreign proof'))
-    expect(await captureManagement({ data: { gameSlug: 'desk-crawler', uuid: UUID, jwt: await proof() } })).toEqual({ ok: false })
-    expect(await getManagedInstance({ data: { gameSlug: 'desk-crawler' } })).toEqual({ uuid: null })
+    expect(await captureManagement({ data: { gameSlug: 'wardenwatch', uuid: UUID, jwt: await proof() } })).toEqual({ ok: false })
+    expect(await getManagedInstance({ data: { gameSlug: 'wardenwatch' } })).toEqual({ uuid: null })
   })
 
   it('refuses forged management URLs and expired or tampered install cookies before authenticated backend calls', async () => {
-    expect(await captureManagement({ data: { gameSlug: 'desk-crawler', uuid: UUID, jwt: 'forged' } })).toEqual({ ok: false })
-    for (const cookie of ['tampered', await sealPendingInstall({ gameSlug: 'desk-crawler', code: 'provider-code', callbackUrl: CALLBACK, expiresAt: Date.now() - 1 }, KEY)]) {
-      mocks.cookies.set(installCookie('desk-crawler'), cookie)
-      expect(await finishInstall({ data: { gameSlug: 'desk-crawler' } })).toMatchObject({ ok: false, code: 'INSTALL_EXPIRED' })
+    expect(await captureManagement({ data: { gameSlug: 'wardenwatch', uuid: UUID, jwt: 'forged' } })).toEqual({ ok: false })
+    for (const cookie of ['tampered', await sealPendingInstall({ gameSlug: 'wardenwatch', code: 'provider-code', callbackUrl: CALLBACK, expiresAt: Date.now() - 1 }, KEY)]) {
+      mocks.cookies.set(installCookie('wardenwatch'), cookie)
+      expect(await finishInstall({ data: { gameSlug: 'wardenwatch' } })).toMatchObject({ ok: false, code: 'INSTALL_EXPIRED' })
     }
     expect(mocks.auth).not.toHaveBeenCalled(); expect(mocks.action).not.toHaveBeenCalled()
   })

@@ -111,7 +111,7 @@ export const privacyPt: LegalPage = {
       <p>A remoção dos perfis, eventos e gravações do PostHog ligados à conta é pedida como parte da exclusão da conta e processada pelo PostHog de forma assíncrona. Pedidos que falham são repetidos e ficam visíveis para o operador até serem resolvidos.</p>
 
       <h2>Excluir só um jogo</h2>
-      <p>Nas <Link to="/app/desk-crawler/settings">configurações do Desk Crawler</Link>, escolha Excluir o progresso do Desk Crawler para remover esse herói, o histórico, as conexões e as configurações e dispositivos de alertas. Sua conta compartilhada e seu login continuam disponíveis. Você pode começar de novo instalando o plugin quando a exclusão terminar. Os outros jogos não são afetados.</p>
+      <p>Nas <Link to="/app/wardenwatch/settings">configurações do Desk Crawler</Link>, escolha Excluir o progresso do Desk Crawler para remover esse herói, o histórico, as conexões e as configurações e dispositivos de alertas. Sua conta compartilhada e seu login continuam disponíveis. Você pode começar de novo instalando o plugin quando a exclusão terminar. Os outros jogos não são afetados.</p>
 
       <h2>Suas escolhas</h2>
       <p>

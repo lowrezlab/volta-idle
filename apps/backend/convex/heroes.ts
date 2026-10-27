@@ -85,7 +85,7 @@ export const mine = query({
       // When TRMNL confirmed the Save: the companion reminds a new player to add the plugin to a playlist for a day or two.
       activatedAt: hero.activatedAt ?? null,
       // Whether TRMNL has fetched a Desk Crawler screen for this account since the Save's own render; the reminder above stops once it has.
-      screenServed: (await ctx.db.query('trmnlInstances').withIndex('by_userId_and_state', (q) => q.eq('userId', user._id).eq('state', 'active')).take(10)).some((instance) => (instance.gameSlug ?? 'desk-crawler') === 'desk-crawler' && screenFetchedAfterInstall(instance)),
+      screenServed: (await ctx.db.query('trmnlInstances').withIndex('by_userId_and_state', (q) => q.eq('userId', user._id).eq('state', 'active')).take(10)).some((instance) => (instance.gameSlug ?? 'wardenwatch') === 'wardenwatch' && screenFetchedAfterInstall(instance)),
       simulationState: hero.simulationState,
       level: hero.level,
       xp: hero.xp,

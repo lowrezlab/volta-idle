@@ -7,6 +7,6 @@ import { createFileRoute, redirect } from '@tanstack/react-router'
 export const Route = createFileRoute('/k/$code')({
   beforeLoad: ({ params }) => {
     const digits = params.code.replace(/\D/g, '')
-    throw redirect({ to: '/app/desk-crawler', search: /^\d{6}$/.test(digits) ? { keepsake: digits } : {}, replace: true })
+    throw redirect({ to: '/app/wardenwatch', search: /^\d{6}$/.test(digits) ? { keepsake: digits } : {}, replace: true })
   },
 })

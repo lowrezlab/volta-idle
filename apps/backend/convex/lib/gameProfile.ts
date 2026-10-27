@@ -2,12 +2,12 @@ import type { Doc, Id } from '../_generated/dataModel'
 import type { MutationCtx, QueryCtx } from '../_generated/server'
 import { appError } from './errors'
 
-export { DESK_CRAWLER_GAME as DESK_CRAWLER } from '@trmnl-games/platform'
-import { DESK_CRAWLER_GAME as DESK_CRAWLER } from '@trmnl-games/platform'
+export { WARDENWATCH_GAME as WARDENWATCH } from '@trmnl-games/platform'
+import { WARDENWATCH_GAME as WARDENWATCH } from '@trmnl-games/platform'
 
 /** Only omitted pre-migration credentials inherit the original game's scope. */
 export function isDeskCrawler(row: { gameSlug?: string }): boolean {
-  return row.gameSlug === undefined || row.gameSlug === DESK_CRAWLER
+  return row.gameSlug === undefined || row.gameSlug === WARDENWATCH
 }
 
 export async function gameProfile(ctx: QueryCtx, userId: Id<'users'>) {

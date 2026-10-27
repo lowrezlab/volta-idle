@@ -40,7 +40,7 @@ export const screenFetchedAfterInstall = (instance: { createdAt: number; lastScr
   instance.lastScreenServedAt !== undefined && instance.lastScreenServedAt - instance.createdAt >= INSTALL_RENDER_MS
 
 export const forInstance = internalQuery({
-  args: { gameSlug: v.optional(v.literal('desk-crawler')), tokenHash: v.string(), uuid: v.string(), now: v.number(), instanceName: v.union(v.string(), v.null()), utcOffset: v.optional(v.union(v.number(), v.null())), locale: v.optional(v.union(v.string(), v.null())) },
+  args: { gameSlug: v.optional(v.literal('wardenwatch')), tokenHash: v.string(), uuid: v.string(), now: v.number(), instanceName: v.union(v.string(), v.null()), utcOffset: v.optional(v.union(v.number(), v.null())), locale: v.optional(v.union(v.string(), v.null())) },
   returns: v.union(
     v.null(),
     v.object({ outcome: v.literal('recoverable') }),

@@ -300,7 +300,7 @@ export async function purgeGameAlertRows(ctx: MutationCtx, userId: Id<'users'>, 
   const otherGame =
     owner === null
       ? false
-      : game !== 'desk-crawler' && (await currentHero(ctx, owner)) !== null
+      : game !== 'wardenwatch' && (await currentHero(ctx, owner)) !== null
   if (!otherGame) return await purgeAlertRows(ctx, userId, batch)
   const kinds: readonly AlertKind[] = DESK_CRAWLER_KINDS
   const rows = (await ctx.db.query('alertOutbox').withIndex('by_userId_and_localDay', (q) => q.eq('userId', userId)).take(batch * 4)).filter((row) => kinds.includes(row.kind)).slice(0, batch)

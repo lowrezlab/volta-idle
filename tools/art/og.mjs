@@ -5,7 +5,7 @@
 import { chromium } from 'playwright-core'
 
 const origin = process.argv[2] ?? 'http://localhost:3000'
-const CARDS = { platform: 'apps/web/public/og.png', 'desk-crawler': 'apps/web/public/games/desk-crawler/og.png' }
+const CARDS = { platform: 'apps/web/public/og.png', 'wardenwatch': 'apps/web/public/games/wardenwatch/og.png' }
 
 const browser = await chromium.launch({ channel: 'chrome' })
 const page = await browser.newPage({ viewport: { width: 1200, height: 630 }, deviceScaleFactor: 1 })

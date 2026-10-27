@@ -10,7 +10,7 @@ export const loadContent = (locale: Locale): Promise<void> => (locale === 'en' ?
  * needs no dictionary. Every other page translates game content only in a later message (a server error through
  * `useIntent`), which loads the dictionary in the background instead.
  */
-const CONTENT_PATHS = ['/app/desk-crawler', '/desk-crawler/heroes/', '/profile/']
+const CONTENT_PATHS = ['/app/wardenwatch', '/wardenwatch/heroes/', '/profile/']
 
 export const contentNeededAt = (pathname: string): boolean => CONTENT_PATHS.some((prefix) => pathname === prefix.replace(/\/$/, '') || pathname.startsWith(prefix))
 

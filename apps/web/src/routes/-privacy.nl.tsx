@@ -111,7 +111,7 @@ export const privacyNl: LegalPage = {
       <p>Verwijdering van gekoppelde PostHog-profielen, -gebeurtenissen en -opnames wordt bij het verwijderen van het account aangevraagd en door PostHog asynchroon verwerkt. Mislukte verzoeken worden opnieuw geprobeerd en blijven zichtbaar voor de beheerder tot ze zijn opgelost.</p>
 
       <h2>Alleen een spel verwijderen</h2>
-      <p>Kies in de <Link to="/app/desk-crawler/settings">instellingen van Desk Crawler</Link> Voortgang in Desk Crawler verwijderen om die held, de geschiedenis, de koppelingen en de meldingsinstellingen en -apparaten te verwijderen. Je gedeelde account en login blijven beschikbaar. Als het verwijderen klaar is, kun je opnieuw beginnen door de plugin te installeren. Andere spellen blijven zoals ze zijn.</p>
+      <p>Kies in de <Link to="/app/wardenwatch/settings">instellingen van Desk Crawler</Link> Voortgang in Desk Crawler verwijderen om die held, de geschiedenis, de koppelingen en de meldingsinstellingen en -apparaten te verwijderen. Je gedeelde account en login blijven beschikbaar. Als het verwijderen klaar is, kun je opnieuw beginnen door de plugin te installeren. Andere spellen blijven zoals ze zijn.</p>
 
       <h2>Je keuzes</h2>
       <p>

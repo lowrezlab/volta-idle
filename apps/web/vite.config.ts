@@ -37,7 +37,7 @@ const lazyContentDictionaries = (): Plugin => ({
   async resolveId(source, importer, options) {
     if (importer === undefined) return null
     const resolved = await this.resolve(source, importer, { ...options, skipSelf: true })
-    return resolved && /[\\/]packages[\\/]desk-crawler[\\/]src[\\/]i18n[\\/]index\.ts$/.test(resolved.id) ? resolved.id.replace(/index\.ts$/, 'lazy.ts') : null
+    return resolved && /[\\/]packages[\\/]wardenwatch[\\/]src[\\/]i18n[\\/]index\.ts$/.test(resolved.id) ? resolved.id.replace(/index\.ts$/, 'lazy.ts') : null
   },
 })
 

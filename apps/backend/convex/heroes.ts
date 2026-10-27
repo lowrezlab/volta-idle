@@ -12,7 +12,7 @@ import { commandLog, currentUser, intentReturns, requirePlayableHero, runIntent 
 import { deriveStats } from '@trmnl-games/wardenwatch/sim/core/stats'
 import { withCounterDefaults } from '@trmnl-games/wardenwatch/sim/core/starter'
 import { eventById, optionOf, resolveEffect } from '@trmnl-games/wardenwatch/sim/core/choice'
-import { effectById, effectiveStats, liveEffects, withEffect } from '@trmnl-games/wardenwatch/sim/core/modifiers'
+import { effectById, effectiveStats, liveEffects, mergeModifiers, withEffect } from '@trmnl-games/wardenwatch/sim/core/modifiers'
 import type { ContentCatalog } from '@trmnl-games/wardenwatch/sim/core/types'
 import { starterKit } from '@trmnl-games/wardenwatch/sim/core/starter'
 import { awardAfterIntent } from './lib/achievements'
@@ -23,6 +23,7 @@ import { heroLook, normalisedLook } from './lib/look'
 import { sceneOccasion } from '@trmnl-games/wardenwatch/payload'
 import { sceneEvent } from './lib/heroScene'
 import { localDay, occasionAt, occasionCalendar, occasionModifiers } from '@trmnl-games/wardenwatch/sim/core/occasions'
+import { skyForTick, skyModifiers } from '@trmnl-games/wardenwatch/sim/core/sky'
 import { displayLogDeltas } from '@trmnl-games/wardenwatch/log'
 import { raidWinChance } from '@trmnl-games/wardenwatch/sim/core/raid'
 import { maskRaidSummaries } from './lib/raids'
@@ -65,7 +66,8 @@ export const mine = query({
     // D80/D81: the stats the hero fights with, affixes and live effects included.
     // D139: the occasion on the owner's last TRMNL date counts too, as it does in the tick.
     const now = Date.now()
-    const occasionMods = occasionModifiers(occasionAt(worldContent(world), now, user.trmnlUtcOffset))
+    // 2B.2: and the sky's modifiers (the aria passive, the Gyre's favour in this zone), as the tick sums them.
+    const occasionMods = mergeModifiers(occasionModifiers(occasionAt(worldContent(world), now, user.trmnlUtcOffset)), skyModifiers(skyForTick(content, now), hero.biomeId))
     const stats = effectiveStats(content, { ...hero, ...(hero.effects === undefined ? {} : { effects: hero.effects }) }, items.map((item) => ({ ...item, id: item._id })), world?.currentTick ?? 0, occasionMods)
     // Achievement logs (D65) and to-do lines (D112) follow their gameplay event; the scene keeps showing that event.
     const newest = (await ctx.db

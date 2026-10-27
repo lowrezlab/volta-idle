@@ -16,8 +16,14 @@ import { POLICIES, simulateCohort } from '../../tools/balance/run'
 const shape = (value: unknown): unknown =>
   typeof value === 'string' ? '<text>' : Array.isArray(value) ? value.map(shape) : value && typeof value === 'object' ? Object.fromEntries(Object.entries(value).map(([key, inner]) => [key, shape(inner)])) : value
 
-/** Everything of the catalog except the keys whose record keys or values are authored text. */
-const rules = ({ contentVersion: _version, narrative: _narrative, lore: _lore, ...rest }: ContentCatalog) => rest
+/**
+ * Everything of the catalog except the keys whose record keys or values are authored text, and the sky (2B.2): the one
+ * rule v28 adds, tested on its own in sky-hooks.test.ts.
+ */
+const rules = ({ contentVersion: _version, narrative: _narrative, lore: _lore, sky: _sky, ...rest }: ContentCatalog) => rest
+
+/** v28 with its sky table taken out: what v28 is before the sky, which must be v27 with other words. */
+const { sky: _sky, ...unlitV28 } = contentV28
 
 const OLD = ['office', 'cubicle', 'printer', 'desk', 'stapler', 'roomba', 'cafeteria', 'server', 'microwave', 'coffee', 'keyboard', 'spreadsheet', 'photocopier', 'HR ', 'parking', 'garage', 'archive']
 
@@ -145,7 +151,12 @@ describe('content v28 (Wardenwatch, a volta game)', () => {
     }
   })
 
-  it('replays seeded cohorts exactly as v27: same state, same metrics, only the words differ', { timeout: 60_000 }, () => {
+  it('carries the sky table, and only v28 does', () => {
+    expect(contentV28.sky).toBeDefined()
+    expect(contentV27.sky).toBeUndefined()
+  })
+
+  it('replays seeded cohorts exactly as v27 once the sky is taken out: same state, same metrics, only the words differ', { timeout: 60_000 }, () => {
     // A merchant visit stores the offers' names on the hero, the one place authored text reaches hero state.
     const wordless = (hero: HeroState): HeroState => (hero.merchant ? { ...hero, merchant: { ...hero.merchant, offers: hero.merchant.offers.map(({ name: _name, ...offer }) => ({ ...offer, name: '<text>' })) } } : hero)
     const replay = (content: ContentCatalog) => {
@@ -156,7 +167,7 @@ describe('content v28 (Wardenwatch, a volta game)', () => {
       return trace
     }
     const before = replay(contentV27)
-    const after = replay(contentV28)
+    const after = replay(unlitV28)
     expect(after.length).toBe(before.length)
     expect(after.length).toBeGreaterThan(1000)
     expect(after).toEqual(before)

@@ -16,6 +16,7 @@ import type {
   TodoTemplate,
 } from '../sim/core/types'
 import { contentV27 } from './v27'
+import { SKY_V28 } from './sky'
 
 /*
  * Content catalog v28: Wardenwatch, a volta game.
@@ -876,6 +877,8 @@ export const contentV28: ContentCatalog = {
   career: { rungs: byId('commission', career.rungs, RUNGS, (rung, copy) => ({ ...rung, ...copy })) },
   workbench: { ...workbench, materials: byId('shard', workbench.materials, SHARD_NAMES, (material, name) => ({ ...material, name })) },
   potions: { ...potions, strengths: byId('draught', potions.strengths, DRAUGHT_NAMES, (strength, name) => ({ ...strength, name })) },
+  // 2B.2: the Volta sky's hooks, the one rule v28 adds; its table is ./sky.ts.
+  sky: SKY_V28,
   lore,
   narrative: {
     biomes: { office_cubicles: castellum, server_room: fjords, cafeteria_depths: fens, archive: skerry, parking_garage: seta },

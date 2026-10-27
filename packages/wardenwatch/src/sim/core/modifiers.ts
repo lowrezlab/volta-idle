@@ -38,7 +38,10 @@ const add = (total: Modifiers, more: Modifiers): Modifiers => ({
   goldLossPct: (total.goldLossPct ?? 0) + (more.goldLossPct ?? 0),
 })
 
-/** Every modifier in play: the hero's class (P37), the equipped items' affixes, the hero's live effects and the live occasion's (D139). */
+/** Two optional modifier sets summed: the live occasion's and the sky's (2B.2), for `activeModifiers`' one extra slot. */
+export const mergeModifiers = (a: Modifiers | undefined, b: Modifiers | undefined): Modifiers | undefined => (a === undefined ? b : b === undefined ? a : add(a, b))
+
+/** Every modifier in play: the hero's class (P37), the equipped items' affixes, the hero's live effects and the live occasion's (D139) and the sky's (2B.2). */
 export function activeModifiers(content: ContentCatalog, hero: Pick<HeroState, 'weaponId' | 'armorId' | 'effects'> & { readonly class?: HeroClass }, inventory: readonly ItemSnapshot[], tick: number, occasion?: Modifiers): Required<Modifiers> {
   let total: Modifiers = add(classRule(content, hero.class)?.modifiers ?? {}, occasion ?? {})
   for (const id of [hero.weaponId, hero.armorId]) {

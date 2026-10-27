@@ -90,13 +90,13 @@ export const de: HelpPage = {
       {F.classes !== undefined ? (
         <>
           <h2 id="heroes-and-classes">Helden und Klassen</h2>
-          <p>Alle beginnen als Krieger. Erreicht dein Krieger Stufe {F.rosterLevel}, zeigt dein TRMNL „Freigeschaltet: ein zweiter Held“, und du kannst auf der Seite Helden unter Mehr einen Schurken anwerben. Der Schurke beginnt auf Stufe 1 mit eigenem Namen, eigener Ausrüstung, eigenem Gold, eigenen Tränken und Zielen.</p>
+          <p>Alle beginnen als Ritter. Erreicht dein Ritter Stufe {F.rosterLevel}, zeigt dein TRMNL „Freigeschaltet: ein zweiter Held“, und du kannst auf der Seite Helden unter Mehr einen Assassinen anwerben. Der Assassine beginnt auf Stufe 1 mit eigenem Namen, eigener Ausrüstung, eigenem Gold, eigenen Tränken und Zielen.</p>
           <ul>
             <li>Es geht immer nur ein Held auf Abenteuer, und den zeigt dein TRMNL und die Ranglisten. Der andere bleibt, wo du ihn gelassen hast. Er geht nicht auf Abenteuer und holt nichts nach, und ein Händler, der ihn besucht, zieht weiter.</li>
             <li>Du kannst einmal am Tag wechseln. Direkt innerhalb von zehn Minuten zurückzuwechseln zählt nicht. Ein Held, der k. o. oder unterwegs ist, muss sich erst erholen oder ankommen.</li>
-            <li>Du kannst einen Helden jeder Klasse haben. Erfolge gehören dir, egal welcher Held sie holt; ein paar gehören nur dem Schurken.</li>
-            <li><strong>Krieger</strong>: {t.text(F.classes.warriorBlurb)}</li>
-            <li><strong>Schurke</strong>: {t.text(F.classes.rogueBlurb)} {F.classes.rogue.hpPct} % LP, Angriff {signed(F.classes.rogue.attackPct)} %, Verteidigung {signed(F.classes.rogue.defensePct)} %, {signed(F.classes.rogue.goldPct)} % Gold aus jedem Kampf und Fund und {F.classes.rogue.raidEdgePct} Punkte auf seiner Seite bei jedem Schreibtisch-Überfall. Er steigt im Tempo des Kriegers auf, wird aber etwas öfter k. o. geschlagen.</li>
+            <li>Du kannst einen Helden jeder Klasse haben. Erfolge gehören dir, egal welcher Held sie holt; ein paar gehören nur dem Assassinen.</li>
+            <li><strong>Ritter</strong>: {t.text(F.classes.warriorBlurb)}</li>
+            <li><strong>Assassine</strong>: {t.text(F.classes.rogueBlurb)} {F.classes.rogue.hpPct} % LP, Angriff {signed(F.classes.rogue.attackPct)} %, Verteidigung {signed(F.classes.rogue.defensePct)} %, {signed(F.classes.rogue.goldPct)} % Gold aus jedem Kampf und Fund und {F.classes.rogue.raidEdgePct} Punkte auf seiner Seite bei jedem Schreibtisch-Überfall. Er steigt im Tempo des Ritters auf, wird aber etwas öfter k. o. geschlagen.</li>
           </ul>
         </>
       ) : null}

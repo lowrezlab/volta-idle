@@ -96,13 +96,13 @@ export const pl: HelpPage = {
       {F.classes !== undefined ? (
         <>
           <h2 id="heroes-and-classes">Bohaterowie i klasy</h2>
-          <p>Każdy zaczyna jako Wojownik. Gdy Wojownik osiągnie poziom {F.rosterLevel}, TRMNL pokazuje „Odblokowano: drugi bohater” i możesz zwerbować Łotrzyka na stronie Bohaterowie w zakładce Więcej. Łotrzyk zaczyna na poziomie 1 z własnym imieniem, sprzętem, złotem, miksturami i celami.</p>
+          <p>Każdy zaczyna jako Rycerz. Gdy Rycerz osiągnie poziom {F.rosterLevel}, TRMNL pokazuje „Odblokowano: drugi bohater” i możesz zwerbować Zabójcę na stronie Bohaterowie w zakładce Więcej. Zabójca zaczyna na poziomie 1 z własnym imieniem, sprzętem, złotem, miksturami i celami.</p>
           <ul>
             <li>Na przygody wyrusza jeden bohater naraz i to jego pokazuje TRMNL i rankingi. Drugi zostaje tam, gdzie go zostawiłeś. Nie przeżywa przygód i niczego potem nie nadrabia, a kupiec, który go odwiedza, odjeżdża.</li>
             <li>Zmieniać możesz raz dziennie. Powrót w ciągu dziesięciu minut się nie liczy. Bohater po nokaucie albo w drodze musi najpierw dojść do siebie lub dotrzeć na miejsce.</li>
-            <li>Możesz mieć po jednym bohaterze z każdej klasy. Osiągnięcia należą do ciebie, niezależnie od tego, który bohater je zdobył; kilka należy tylko do Łotrzyka.</li>
-            <li><strong>Wojownik</strong>: {t.text(F.classes.warriorBlurb)}</li>
-            <li><strong>Łotrzyk</strong>: {t.text(F.classes.rogueBlurb)} Zdrowie {F.classes.rogue.hpPct}%, atak {signed(F.classes.rogue.attackPct)}%, obrona {signed(F.classes.rogue.defensePct)}%, złoto z każdej walki i znaleziska {signed(F.classes.rogue.goldPct)}%, a w każdym rajdzie na biurko {F.classes.rogue.raidEdgePct} punktów po jego stronie. Awansuje w tempie Wojownika, ale trochę częściej dostaje nokaut.</li>
+            <li>Możesz mieć po jednym bohaterze z każdej klasy. Osiągnięcia należą do ciebie, niezależnie od tego, który bohater je zdobył; kilka należy tylko do Zabójcy.</li>
+            <li><strong>Rycerz</strong>: {t.text(F.classes.warriorBlurb)}</li>
+            <li><strong>Zabójca</strong>: {t.text(F.classes.rogueBlurb)} Zdrowie {F.classes.rogue.hpPct}%, atak {signed(F.classes.rogue.attackPct)}%, obrona {signed(F.classes.rogue.defensePct)}%, złoto z każdej walki i znaleziska {signed(F.classes.rogue.goldPct)}%, a w każdym rajdzie na biurko {F.classes.rogue.raidEdgePct} punktów po jego stronie. Awansuje w tempie Rycerza, ale trochę częściej dostaje nokaut.</li>
           </ul>
         </>
       ) : null}

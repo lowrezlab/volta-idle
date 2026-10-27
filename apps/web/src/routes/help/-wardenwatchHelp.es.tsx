@@ -91,13 +91,13 @@ export const es: HelpPage = {
       {F.classes !== undefined ? (
         <>
           <h2 id="heroes-and-classes">Héroes y clases</h2>
-          <p>Todo el mundo empieza como Guerrero. Cuando tu Guerrero llega al nivel {F.rosterLevel}, tu TRMNL dice «Desbloqueado: un segundo héroe», y puedes reclutar un Pícaro desde la página Héroes, en Más. El Pícaro empieza en el nivel 1 con su propio nombre, equipo, oro, pociones y objetivos.</p>
+          <p>Todo el mundo empieza como Caballero. Cuando tu Caballero llega al nivel {F.rosterLevel}, tu TRMNL dice «Desbloqueado: un segundo héroe», y puedes reclutar un Asesino desde la página Héroes, en Más. El Asesino empieza en el nivel 1 con su propio nombre, equipo, oro, pociones y objetivos.</p>
           <ul>
             <li>Sale de aventura un héroe cada vez, y es el que muestra tu TRMNL y el que aparece en las clasificaciones. El otro se queda donde lo dejaste. No va de aventura ni recupera después, y un mercader que lo visite se marcha.</li>
             <li>Puedes cambiar una vez al día. Volver atrás en diez minutos no cuenta. Un héroe K.O. o de viaje tiene que recuperarse o llegar primero.</li>
-            <li>Puedes tener un héroe de cada clase. Los logros son tuyos, los consiga el héroe que sea; unos pocos son solo del Pícaro.</li>
-            <li><strong>Guerrero</strong>: {t.text(F.classes.warriorBlurb)}</li>
-            <li><strong>Pícaro</strong>: {t.text(F.classes.rogueBlurb)} {F.classes.rogue.hpPct} % de salud, ataque {signed(F.classes.rogue.attackPct)} %, defensa {signed(F.classes.rogue.defensePct)} %, {signed(F.classes.rogue.goldPct)} % de oro en cada combate y hallazgo, y {F.classes.rogue.raidEdgePct} puntos a su favor en cada incursión de escritorio. Sube de nivel al ritmo del Guerrero, pero cae K.O. un poco más a menudo.</li>
+            <li>Puedes tener un héroe de cada clase. Los logros son tuyos, los consiga el héroe que sea; unos pocos son solo del Asesino.</li>
+            <li><strong>Caballero</strong>: {t.text(F.classes.warriorBlurb)}</li>
+            <li><strong>Asesino</strong>: {t.text(F.classes.rogueBlurb)} {F.classes.rogue.hpPct} % de salud, ataque {signed(F.classes.rogue.attackPct)} %, defensa {signed(F.classes.rogue.defensePct)} %, {signed(F.classes.rogue.goldPct)} % de oro en cada combate y hallazgo, y {F.classes.rogue.raidEdgePct} puntos a su favor en cada incursión de escritorio. Sube de nivel al ritmo del Caballero, pero cae K.O. un poco más a menudo.</li>
           </ul>
         </>
       ) : null}

@@ -94,13 +94,13 @@ export const it: HelpPage = {
       {F.classes !== undefined ? (
         <>
           <h2 id="heroes-and-classes">Eroi e classi</h2>
-          <p>Tutti partono come Guerriero. Quando il tuo Guerriero raggiunge il livello {F.rosterLevel}, il tuo TRMNL scrive «Sbloccato: un secondo eroe», e puoi reclutare un Ladro dalla pagina Eroi sotto Altro. Il Ladro parte dal livello 1 con nome, equipaggiamento, oro, pozioni e obiettivi tutti suoi.</p>
+          <p>Tutti partono come Cavaliere. Quando il tuo Cavaliere raggiunge il livello {F.rosterLevel}, il tuo TRMNL scrive «Sbloccato: un secondo eroe», e puoi reclutare un Assassino dalla pagina Eroi sotto Altro. L’Assassino parte dal livello 1 con nome, equipaggiamento, oro, pozioni e obiettivi tutti suoi.</p>
           <ul>
             <li>Va all’avventura un eroe alla volta, ed è quello che mostra il tuo TRMNL e quello in classifica. L’altro resta dove l’hai lasciato. Non va all’avventura e non recupera dopo, e un mercante in visita da lui se ne va.</li>
             <li>Puoi cambiare una volta al giorno. Tornare indietro entro dieci minuti non conta. Un eroe KO o in viaggio deve prima riprendersi o arrivare.</li>
-            <li>Puoi avere un eroe per classe. Gli obiettivi sbloccati sono tuoi, qualunque eroe li ottenga; alcuni sono solo del Ladro.</li>
-            <li><strong>Guerriero</strong>: {t.text(F.classes.warriorBlurb)}</li>
-            <li><strong>Ladro</strong>: {t.text(F.classes.rogueBlurb)} {F.classes.rogue.hpPct}% di salute, attacco {signed(F.classes.rogue.attackPct)}%, difesa {signed(F.classes.rogue.defensePct)}%, {signed(F.classes.rogue.goldPct)}% di oro da ogni combattimento e ritrovamento, e {F.classes.rogue.raidEdgePct} punti dalla sua parte in ogni incursione. Sale di livello al ritmo del Guerriero ma va KO un po’ più spesso.</li>
+            <li>Puoi avere un eroe per classe. Gli obiettivi sbloccati sono tuoi, qualunque eroe li ottenga; alcuni sono solo dell’Assassino.</li>
+            <li><strong>Cavaliere</strong>: {t.text(F.classes.warriorBlurb)}</li>
+            <li><strong>Assassino</strong>: {t.text(F.classes.rogueBlurb)} {F.classes.rogue.hpPct}% di salute, attacco {signed(F.classes.rogue.attackPct)}%, difesa {signed(F.classes.rogue.defensePct)}%, {signed(F.classes.rogue.goldPct)}% di oro da ogni combattimento e ritrovamento, e {F.classes.rogue.raidEdgePct} punti dalla sua parte in ogni incursione. Sale di livello al ritmo del Cavaliere ma va KO un po’ più spesso.</li>
           </ul>
         </>
       ) : null}

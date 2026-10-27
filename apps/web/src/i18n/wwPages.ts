@@ -33,7 +33,7 @@ export const wwPagesMessages = defineMessages({
   en: {
     rosterTitle: headMessages.en.wwRoster,
     loadingHeroes: 'Loading your heroes…',
-    moreHeroesSoon: 'More heroes are on their way. Your Warrior keeps adventuring meanwhile.',
+    moreHeroesSoon: 'More heroes are on their way. Your Knight keeps adventuring meanwhile.',
     colon: ':',
     classNumbers: (n: Numbers) => classLine(n, { health: 'Health', attack: 'Attack', defense: 'Defense', gold: 'Gold', raids: (v) => `Raids ${v} points`, full: 'Full health, attack and defense' }, (v) => `${v}%`),
     waiting: (ticks: number, biome: string) => {
@@ -44,8 +44,8 @@ export const wwPagesMessages = defineMessages({
     inBiome: (biome: string) => `In the ${biome}`,
     rules: ['One hero adventures at a time. The others wait where you left them and don\'t catch up.', 'Each hero has its own gear, gold, potions and goals. Achievements belong to you, whichever hero earns them.', 'You can switch once a day. Switching back within ten minutes is free.'],
     howHeroesWork: 'How heroes work',
-    secondOpens: (level: number | null) => `A second hero opens at Warrior level ${level}`,
-    warriorLevel: (level: number) => `Your Warrior is level ${level}. Keep adventuring; your TRMNL says “Unlocked: a second hero” when it opens.`,
+    secondOpens: (level: number | null) => `A second hero opens at Knight level ${level}`,
+    warriorLevel: (level: number) => `Your Knight is level ${level}. Keep adventuring; your TRMNL says “Unlocked: a second hero” when it opens.`,
     yourHeroes: 'Your heroes',
     recruit: 'Recruit',
     classes: 'Classes',
@@ -113,7 +113,7 @@ export const wwPagesMessages = defineMessages({
   fr: {
     rosterTitle: headMessages.fr.wwRoster,
     loadingHeroes: 'Chargement de vos héros…',
-    moreHeroesSoon: 'D’autres héros arrivent bientôt. Votre Guerrier continue l’aventure en attendant.',
+    moreHeroesSoon: 'D’autres héros arrivent bientôt. Votre Chevalier continue l’aventure en attendant.',
     colon: ' :',
     classNumbers: (n: Numbers) => classLine(n, { health: 'Santé', attack: 'Attaque', defense: 'Défense', gold: 'Or', raids: (v) => `Raids ${v} points`, full: 'Santé, attaque et défense complètes' }, (v) => `${v} %`),
     waiting: (ticks: number, biome: string) => {
@@ -124,8 +124,8 @@ export const wwPagesMessages = defineMessages({
     inBiome: (biome: string) => `Dans ${fr.nameWith(biome, 'le')}`,
     rules: ['Un seul héros part à l’aventure à la fois. Les autres attendent là où vous les avez laissés et ne rattrapent rien.', 'Chaque héros a son équipement, son or, ses potions et ses objectifs. Les succès vous appartiennent, quel que soit le héros qui les obtient.', 'Vous pouvez changer une fois par jour. Revenir en arrière dans les dix minutes est gratuit.'],
     howHeroesWork: 'Comment marchent les héros',
-    secondOpens: (level: number | null) => `Un second héros se débloque au niveau ${level} du Guerrier`,
-    warriorLevel: (level: number) => `Votre Guerrier est au niveau ${level}. Continuez l’aventure ; votre TRMNL affiche « Débloqué : un second héros » le moment venu.`,
+    secondOpens: (level: number | null) => `Un second héros se débloque au niveau ${level} du Chevalier`,
+    warriorLevel: (level: number) => `Votre Chevalier est au niveau ${level}. Continuez l’aventure ; votre TRMNL affiche « Débloqué : un second héros » le moment venu.`,
     yourHeroes: 'Vos héros',
     recruit: 'Recruter',
     classes: 'Classes',
@@ -193,7 +193,7 @@ export const wwPagesMessages = defineMessages({
   de: {
     rosterTitle: headMessages.de.wwRoster,
     loadingHeroes: 'Deine Helden werden geladen …',
-    moreHeroesSoon: 'Weitere Helden sind unterwegs. Dein Krieger erkundet derweil weiter.',
+    moreHeroesSoon: 'Weitere Helden sind unterwegs. Dein Ritter erkundet derweil weiter.',
     colon: ':',
     classNumbers: (n: Numbers) => classLine(n, { health: 'LP', attack: 'Angriff', defense: 'Verteidigung', gold: 'Gold', raids: (v) => `Überfälle ${v} Punkte`, full: 'Volle LP, voller Angriff und volle Verteidigung' }, (v) => `${v} %`),
     waiting: (ticks: number, biome: string) => {
@@ -204,8 +204,8 @@ export const wwPagesMessages = defineMessages({
     inBiome: (biome: string) => `${de.nameWith(biome, 'im').replace(/^./, (c) => c.toUpperCase())}`,
     rules: ['Immer nur ein Held geht auf Abenteuer. Die anderen warten, wo du sie gelassen hast, und holen nichts nach.', 'Jeder Held hat eigene Ausrüstung, eigenes Gold, eigene Tränke und Ziele. Erfolge gehören dir, egal welcher Held sie verdient.', 'Du kannst einmal am Tag wechseln. Innerhalb von zehn Minuten zurückzuwechseln ist kostenlos.'],
     howHeroesWork: 'So funktionieren Helden',
-    secondOpens: (level: number | null) => `Ein zweiter Held wird mit Krieger-Stufe ${level} freigeschaltet`,
-    warriorLevel: (level: number) => `Dein Krieger ist auf Stufe ${level}. Erkunde weiter; dein TRMNL zeigt „Freigeschaltet: ein zweiter Held“, wenn es so weit ist.`,
+    secondOpens: (level: number | null) => `Ein zweiter Held wird mit Ritter-Stufe ${level} freigeschaltet`,
+    warriorLevel: (level: number) => `Dein Ritter ist auf Stufe ${level}. Erkunde weiter; dein TRMNL zeigt „Freigeschaltet: ein zweiter Held“, wenn es so weit ist.`,
     yourHeroes: 'Deine Helden',
     recruit: 'Anwerben',
     classes: 'Klassen',
@@ -273,7 +273,7 @@ export const wwPagesMessages = defineMessages({
   es: {
     rosterTitle: headMessages.es.wwRoster,
     loadingHeroes: 'Cargando tus héroes…',
-    moreHeroesSoon: 'Vienen más héroes de camino. Mientras tanto, tu Guerrero sigue de aventura.',
+    moreHeroesSoon: 'Vienen más héroes de camino. Mientras tanto, tu Caballero sigue de aventura.',
     colon: ':',
     classNumbers: (n: Numbers) => classLine(n, { health: 'Salud', attack: 'Ataque', defense: 'Defensa', gold: 'Oro', raids: (v) => `Incursiones ${v} puntos`, full: 'Salud, ataque y defensa completos' }, (v) => `${v} %`),
     waiting: (ticks: number, biome: string) => {
@@ -284,8 +284,8 @@ export const wwPagesMessages = defineMessages({
     inBiome: (biome: string) => capital(es.nameWith(biome, 'en')),
     rules: ['Sale de aventura un héroe cada vez. Los demás esperan donde los dejaste y no recuperan el tiempo.', 'Cada héroe tiene su propio equipo, oro, pociones y objetivos. Los logros son tuyos, los consiga el héroe que sea.', 'Puedes cambiar una vez al día. Volver atrás en diez minutos es gratis.'],
     howHeroesWork: 'Cómo funcionan los héroes',
-    secondOpens: (level: number | null) => `Un segundo héroe se abre con el Guerrero en el nivel ${level}`,
-    warriorLevel: (level: number) => `Tu Guerrero está en el nivel ${level}. Sigue de aventura; tu TRMNL dirá «Desbloqueado: un segundo héroe» cuando se abra.`,
+    secondOpens: (level: number | null) => `Un segundo héroe se abre con el Caballero en el nivel ${level}`,
+    warriorLevel: (level: number) => `Tu Caballero está en el nivel ${level}. Sigue de aventura; tu TRMNL dirá «Desbloqueado: un segundo héroe» cuando se abra.`,
     yourHeroes: 'Tus héroes',
     recruit: 'Reclutar',
     classes: 'Clases',
@@ -353,7 +353,7 @@ export const wwPagesMessages = defineMessages({
   it: {
     rosterTitle: headMessages.it.wwRoster,
     loadingHeroes: 'Caricamento dei tuoi eroi…',
-    moreHeroesSoon: 'Altri eroi sono in arrivo. Nel frattempo il tuo Guerriero continua l’avventura.',
+    moreHeroesSoon: 'Altri eroi sono in arrivo. Nel frattempo il tuo Cavaliere continua l’avventura.',
     colon: ':',
     classNumbers: (n: Numbers) => classLine(n, { health: 'Salute', attack: 'Attacco', defense: 'Difesa', gold: 'Oro', raids: (v) => `Incursioni ${v} punti`, full: 'Salute, attacco e difesa pieni' }, (v) => `${v}%`),
     waiting: (ticks: number, biome: string) => {
@@ -364,8 +364,8 @@ export const wwPagesMessages = defineMessages({
     inBiome: (biome: string) => capital(it.nameWith(biome, 'nel')),
     rules: ['Va all’avventura un eroe alla volta. Gli altri aspettano dove li hai lasciati e non recuperano.', 'Ogni eroe ha il suo equipaggiamento, oro, pozioni e obiettivi. Gli obiettivi sbloccati sono tuoi, qualunque eroe li ottenga.', 'Puoi cambiare una volta al giorno. Tornare indietro entro dieci minuti è gratis.'],
     howHeroesWork: 'Come funzionano gli eroi',
-    secondOpens: (level: number | null) => `Un secondo eroe si apre con il Guerriero al livello ${level}`,
-    warriorLevel: (level: number) => `Il tuo Guerriero è al livello ${level}. Continua l’avventura; il tuo TRMNL scriverà «Sbloccato: un secondo eroe» quando si apre.`,
+    secondOpens: (level: number | null) => `Un secondo eroe si apre con il Cavaliere al livello ${level}`,
+    warriorLevel: (level: number) => `Il tuo Cavaliere è al livello ${level}. Continua l’avventura; il tuo TRMNL scriverà «Sbloccato: un secondo eroe» quando si apre.`,
     yourHeroes: 'I tuoi eroi',
     recruit: 'Recluta',
     classes: 'Classi',
@@ -433,7 +433,7 @@ export const wwPagesMessages = defineMessages({
   pt: {
     rosterTitle: headMessages.pt.wwRoster,
     loadingHeroes: 'Carregando seus heróis…',
-    moreHeroesSoon: 'Mais heróis estão a caminho. Enquanto isso, seu Guerreiro continua em aventura.',
+    moreHeroesSoon: 'Mais heróis estão a caminho. Enquanto isso, seu Cavaleiro continua em aventura.',
     colon: ':',
     classNumbers: (n: Numbers) => classLine(n, { health: 'Saúde', attack: 'Ataque', defense: 'Defesa', gold: 'Ouro', raids: (v) => `Incursões ${v} pontos`, full: 'Saúde, ataque e defesa completos' }, (v) => `${v}%`),
     waiting: (ticks: number, biome: string) => {
@@ -444,8 +444,8 @@ export const wwPagesMessages = defineMessages({
     inBiome: (biome: string) => capital(pt.nameWith(biome, 'no')),
     rules: ['Um herói se aventura por vez. Os outros esperam onde você os deixou e não recuperam o tempo.', 'Cada herói tem seu próprio equipamento, ouro, poções e objetivos. As conquistas são suas, seja qual for o herói que as ganhe.', 'Você pode trocar uma vez por dia. Voltar atrás em até dez minutos é grátis.'],
     howHeroesWork: 'Como os heróis funcionam',
-    secondOpens: (level: number | null) => `Um segundo herói abre com o Guerreiro no nível ${level}`,
-    warriorLevel: (level: number) => `Seu Guerreiro está no nível ${level}. Continue em aventura; seu TRMNL mostra “Desbloqueado: um segundo herói” quando abrir.`,
+    secondOpens: (level: number | null) => `Um segundo herói abre com o Cavaleiro no nível ${level}`,
+    warriorLevel: (level: number) => `Seu Cavaleiro está no nível ${level}. Continue em aventura; seu TRMNL mostra “Desbloqueado: um segundo herói” quando abrir.`,
     yourHeroes: 'Seus heróis',
     recruit: 'Recrutar',
     classes: 'Classes',
@@ -513,7 +513,7 @@ export const wwPagesMessages = defineMessages({
   pl: {
     rosterTitle: headMessages.pl.wwRoster,
     loadingHeroes: 'Wczytywanie bohaterów…',
-    moreHeroesSoon: 'Kolejni bohaterowie są w drodze. Do tego czasu twój Wojownik dalej przeżywa przygody.',
+    moreHeroesSoon: 'Kolejni bohaterowie są w drodze. Do tego czasu twój Rycerz dalej przeżywa przygody.',
     colon: ':',
     classNumbers: (n: Numbers) => classLine(n, { health: 'Zdrowie', attack: 'Atak', defense: 'Obrona', gold: 'Złoto', raids: (v) => `Rajdy ${v} pkt`, full: 'Pełne zdrowie, atak i obrona' }, (v) => `${v}%`),
     waiting: (ticks: number, biome: string) => {
@@ -524,8 +524,8 @@ export const wwPagesMessages = defineMessages({
     inBiome: (biome: string) => pl.name(biome),
     rules: ['Na przygody wyrusza jeden bohater naraz. Pozostali czekają tam, gdzie ich zostawiono, i nie nadrabiają.', 'Każdy bohater ma własny sprzęt, złoto, mikstury i cele. Osiągnięcia należą do ciebie, niezależnie od tego, który bohater je zdobył.', 'Zmieniać możesz raz dziennie. Powrót w ciągu dziesięciu minut jest darmowy.'],
     howHeroesWork: 'Jak działają bohaterowie',
-    secondOpens: (level: number | null) => `Drugi bohater odblokowuje się na poziomie ${level} Wojownika`,
-    warriorLevel: (level: number) => `Twój Wojownik ma poziom ${level}. Graj dalej; gdy się odblokuje, TRMNL pokaże „Odblokowano: drugi bohater”.`,
+    secondOpens: (level: number | null) => `Drugi bohater odblokowuje się na poziomie ${level} Rycerza`,
+    warriorLevel: (level: number) => `Twój Rycerz ma poziom ${level}. Graj dalej; gdy się odblokuje, TRMNL pokaże „Odblokowano: drugi bohater”.`,
     yourHeroes: 'Twoi bohaterowie',
     recruit: 'Zwerbuj',
     classes: 'Klasy',
@@ -593,7 +593,7 @@ export const wwPagesMessages = defineMessages({
   nl: {
     rosterTitle: headMessages.nl.wwRoster,
     loadingHeroes: 'Je helden worden geladen…',
-    moreHeroesSoon: 'Er komen meer helden aan. Je Krijger gaat ondertussen gewoon op avontuur.',
+    moreHeroesSoon: 'Er komen meer helden aan. Je Ridder gaat ondertussen gewoon op avontuur.',
     colon: ':',
     classNumbers: (n: Numbers) => classLine(n, { health: 'Gezondheid', attack: 'Aanval', defense: 'Verdediging', gold: 'Goud', raids: (v) => `Raids ${v} punten`, full: 'Volle gezondheid, aanval en verdediging' }, (v) => `${v}%`),
     waiting: (ticks: number, biome: string) => {
@@ -604,8 +604,8 @@ export const wwPagesMessages = defineMessages({
     inBiome: (biome: string) => `In ${nl.nameWith(biome, 'de')}`,
     rules: ['Er gaat één held tegelijk op avontuur. De anderen wachten waar je ze liet en halen niets in.', 'Elke held heeft eigen uitrusting, goud, drankjes en doelen. Prestaties zijn van jou, welke held ze ook haalt.', 'Je kunt eens per dag wisselen. Binnen tien minuten terugwisselen is gratis.'],
     howHeroesWork: 'Hoe helden werken',
-    secondOpens: (level: number | null) => `Een tweede held komt vrij op Krijger-niveau ${level}`,
-    warriorLevel: (level: number) => `Je Krijger is niveau ${level}. Ga zo door; je TRMNL meldt ‘Ontgrendeld: een tweede held’ zodra het zover is.`,
+    secondOpens: (level: number | null) => `Een tweede held komt vrij op Ridder-niveau ${level}`,
+    warriorLevel: (level: number) => `Je Ridder is niveau ${level}. Ga zo door; je TRMNL meldt ‘Ontgrendeld: een tweede held’ zodra het zover is.`,
     yourHeroes: 'Je helden',
     recruit: 'Aanwerven',
     classes: 'Klassen',

@@ -91,13 +91,13 @@ export const nl: HelpPage = {
       {F.classes !== undefined ? (
         <>
           <h2 id="heroes-and-classes">Helden en klassen</h2>
-          <p>Iedereen begint als Krijger. Bereikt je Krijger niveau {F.rosterLevel}, dan zegt je TRMNL ‘Ontgrendeld: een tweede held’, en kun je een Schurk aanwerven via de pagina Helden onder Meer. De Schurk begint op niveau 1 met een eigen naam, uitrusting, goud, drankjes en doelen.</p>
+          <p>Iedereen begint als Ridder. Bereikt je Ridder niveau {F.rosterLevel}, dan zegt je TRMNL ‘Ontgrendeld: een tweede held’, en kun je een Sluipmoordenaar aanwerven via de pagina Helden onder Meer. De Sluipmoordenaar begint op niveau 1 met een eigen naam, uitrusting, goud, drankjes en doelen.</p>
           <ul>
             <li>Er gaat één held tegelijk op avontuur, en dat is de held die je TRMNL toont en die in de ranglijsten staat. De ander blijft waar je hem liet. Hij gaat niet op avontuur en haalt later niets in, en een koopman die hem bezoekt, vertrekt.</li>
             <li>Je kunt eens per dag wisselen. Binnen tien minuten terugwisselen telt niet. Een held die knock-out of onderweg is, moet eerst herstellen of aankomen.</li>
-            <li>Je kunt één held per klasse hebben. Prestaties zijn van jou, welke held ze ook haalt; een paar horen alleen bij de Schurk.</li>
-            <li><strong>Krijger</strong>: {t.text(F.classes.warriorBlurb)}</li>
-            <li><strong>Schurk</strong>: {t.text(F.classes.rogueBlurb)} {F.classes.rogue.hpPct}% gezondheid, aanval {signed(F.classes.rogue.attackPct)}%, verdediging {signed(F.classes.rogue.defensePct)}%, {signed(F.classes.rogue.goldPct)}% goud uit elk gevecht en elke vondst, en {F.classes.rogue.raidEdgePct} punten aan zijn kant bij elke bureauraid. Hij stijgt in hetzelfde tempo als de Krijger, maar gaat iets vaker knock-out.</li>
+            <li>Je kunt één held per klasse hebben. Prestaties zijn van jou, welke held ze ook haalt; een paar horen alleen bij de Sluipmoordenaar.</li>
+            <li><strong>Ridder</strong>: {t.text(F.classes.warriorBlurb)}</li>
+            <li><strong>Sluipmoordenaar</strong>: {t.text(F.classes.rogueBlurb)} {F.classes.rogue.hpPct}% gezondheid, aanval {signed(F.classes.rogue.attackPct)}%, verdediging {signed(F.classes.rogue.defensePct)}%, {signed(F.classes.rogue.goldPct)}% goud uit elk gevecht en elke vondst, en {F.classes.rogue.raidEdgePct} punten aan zijn kant bij elke bureauraid. Hij stijgt in hetzelfde tempo als de Ridder, maar gaat iets vaker knock-out.</li>
           </ul>
         </>
       ) : null}

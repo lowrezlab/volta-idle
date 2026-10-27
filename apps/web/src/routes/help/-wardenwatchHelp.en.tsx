@@ -86,13 +86,13 @@ export const en: HelpPage = {
       {F.classes !== undefined ? (
         <>
           <h2 id="heroes-and-classes">Heroes and classes</h2>
-          <p>Everyone starts as a Warrior. When your Warrior reaches level {F.rosterLevel}, your TRMNL says “Unlocked: a second hero”, and you can recruit a Rogue from the Heroes page under More. The Rogue starts at level 1 with its own name, gear, gold, potions and goals.</p>
+          <p>Everyone starts as a Knight. When your Knight reaches level {F.rosterLevel}, your TRMNL says “Unlocked: a second hero”, and you can recruit an Assassin from the Heroes page under More. The Assassin starts at level 1 with its own name, gear, gold, potions and goals.</p>
           <ul>
             <li>One hero adventures at a time, and that is the one your TRMNL shows and the one on the leaderboards. The other stays where you left it. It doesn't adventure or catch up later, and a merchant visiting it leaves.</li>
             <li>You can switch once a day. Switching straight back within ten minutes does not count. A hero that is knocked out or on the road has to recover or arrive first.</li>
-            <li>You can have one hero of each class. Achievements belong to you whichever hero earns them; a few belong to the Rogue alone.</li>
-            <li><strong>Warrior</strong>: {F.classes.warriorBlurb}</li>
-            <li><strong>Rogue</strong>: {F.classes.rogueBlurb} {F.classes.rogue.hpPct}% health, attack {signed(F.classes.rogue.attackPct)}%, defense {signed(F.classes.rogue.defensePct)}%, {signed(F.classes.rogue.goldPct)}% gold from every fight and find, and {F.classes.rogue.raidEdgePct} points on its side of every desk raid. It levels at the Warrior's pace but gets knocked out a little more often.</li>
+            <li>You can have one hero of each class. Achievements belong to you whichever hero earns them; a few belong to the Assassin alone.</li>
+            <li><strong>Knight</strong>: {F.classes.warriorBlurb}</li>
+            <li><strong>Assassin</strong>: {F.classes.rogueBlurb} {F.classes.rogue.hpPct}% health, attack {signed(F.classes.rogue.attackPct)}%, defense {signed(F.classes.rogue.defensePct)}%, {signed(F.classes.rogue.goldPct)}% gold from every fight and find, and {F.classes.rogue.raidEdgePct} points on its side of every desk raid. It levels at the Knight's pace but gets knocked out a little more often.</li>
           </ul>
         </>
       ) : null}

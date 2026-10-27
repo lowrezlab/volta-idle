@@ -96,13 +96,13 @@ export const pt: HelpPage = {
       {F.classes !== undefined ? (
         <>
           <h2 id="heroes-and-classes">Heróis e classes</h2>
-          <p>Todo mundo começa como Guerreiro. Quando seu Guerreiro chega ao nível {F.rosterLevel}, seu TRMNL diz “Desbloqueado: um segundo herói”, e você pode recrutar um Ladino na página Heróis, em Mais. O Ladino começa no nível 1 com nome, equipamento, ouro, poções e objetivos próprios.</p>
+          <p>Todo mundo começa como Cavaleiro. Quando seu Cavaleiro chega ao nível {F.rosterLevel}, seu TRMNL diz “Desbloqueado: um segundo herói”, e você pode recrutar um Assassino na página Heróis, em Mais. O Assassino começa no nível 1 com nome, equipamento, ouro, poções e objetivos próprios.</p>
           <ul>
             <li>Um herói se aventura por vez, e é ele que seu TRMNL mostra e que aparece nos rankings. O outro fica onde você o deixou. Ele não se aventura nem recupera depois, e um mercador que o visitar vai embora.</li>
             <li>Você pode trocar uma vez por dia. Voltar atrás em até dez minutos não conta. Um herói nocauteado ou na estrada precisa se recuperar ou chegar primeiro.</li>
-            <li>Você pode ter um herói de cada classe. As conquistas são suas, seja qual for o herói que as ganhe; algumas são só do Ladino.</li>
-            <li><strong>Guerreiro</strong>: {t.text(F.classes.warriorBlurb)}</li>
-            <li><strong>Ladino</strong>: {t.text(F.classes.rogueBlurb)} {F.classes.rogue.hpPct}% de saúde, ataque {signed(F.classes.rogue.attackPct)}%, defesa {signed(F.classes.rogue.defensePct)}%, {signed(F.classes.rogue.goldPct)}% de ouro em todo combate e achado, e {F.classes.rogue.raidEdgePct} pontos a seu favor em toda incursão de mesa. Ele sobe de nível no ritmo do Guerreiro, mas é nocauteado um pouco mais.</li>
+            <li>Você pode ter um herói de cada classe. As conquistas são suas, seja qual for o herói que as ganhe; algumas são só do Assassino.</li>
+            <li><strong>Cavaleiro</strong>: {t.text(F.classes.warriorBlurb)}</li>
+            <li><strong>Assassino</strong>: {t.text(F.classes.rogueBlurb)} {F.classes.rogue.hpPct}% de saúde, ataque {signed(F.classes.rogue.attackPct)}%, defesa {signed(F.classes.rogue.defensePct)}%, {signed(F.classes.rogue.goldPct)}% de ouro em todo combate e achado, e {F.classes.rogue.raidEdgePct} pontos a seu favor em toda incursão de mesa. Ele sobe de nível no ritmo do Cavaleiro, mas é nocauteado um pouco mais.</li>
           </ul>
         </>
       ) : null}

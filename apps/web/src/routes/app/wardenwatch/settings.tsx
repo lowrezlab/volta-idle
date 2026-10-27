@@ -14,7 +14,7 @@ import { Button, Card, LoadingState, NoticeBar, useFocusWithin, useNotice } from
 import { preload } from '../../../lib/preload'
 import { AlertsCard } from './-alerts'
 import { MoreLinks } from './-moreLinks'
-import { Makeover, NameTag } from './-shop'
+import { NameTag } from './-shop'
 
 /** The More tab (D124): the pages that are not play (achievements, keepsakes, the device) above the settings. */
 export const Route = createFileRoute('/app/wardenwatch/settings')({ head: ({ match: { context: { locale } } }) => seo({ title: messagesFor(headMessages, locale).wwMore, index: false, locale }), loader: ({ context }) => preload(context, convexQuery(api.users.me, {}), convexQuery(api.heroes.mine, {}), convexQuery(api.inventory.mine, {}), convexQuery(api.connections.mine, {}), convexQuery(api.alerts.mine, {})), component: Settings })
@@ -26,9 +26,8 @@ function Settings() {
   // One pinned notice for every command on the page (D98), so the cards hold their shape while an action settles.
   const { notice, notify, dismiss } = useNotice()
   const pause = useIntent(api.heroes.pause, { onFeedback: notify })
-  // The hero's name tag and makeover sit beside the names they change, rather than among the gear (D191).
+  // The hero's name tag sits beside the names it changes, rather than among the gear (D191); the look is free at the camp mirror.
   const buyNameTag = useIntent(api.inventory.buyNameTag, { onFeedback: notify })
-  const buyMakeover = useIntent(api.inventory.buyMakeover, { onFeedback: notify })
   const { data: connections } = useQuery(convexQuery(api.connections.mine, {}))
   const disconnect = useIntent(api.connections.disconnect, { onFeedback: notify })
   const deletion = useIntent(api.deletion.requestGameDeletion, { onFeedback: notify })
@@ -55,12 +54,11 @@ function Settings() {
     <>
       <h1 className="font-display text-3xl font-bold">{t.title}</h1>
       <MoreLinks />
-      {/* The two purchases under their own heading: among the settings they read as settings. */}
-      {bag?.nameTag || bag?.makeover ? <section aria-labelledby="shop-title" className="flex flex-col gap-4">
+      {/* The purchase under its own heading: among the settings it reads as a setting. */}
+      {bag?.nameTag ? <section aria-labelledby="shop-title" className="flex flex-col gap-4">
         <h2 id="shop-title" className="font-display text-2xl font-bold">{t.shop}</h2>
         <div className="grid gap-8 sm:grid-cols-2">
-          {bag.nameTag ? <NameTag tag={bag.nameTag} heroName={hero.name} gold={hero.gold} disabled={buyNameTag.pending || buyMakeover.pending} intent={buyNameTag} /> : null}
-          {bag.makeover ? <Makeover makeover={bag.makeover} heroName={hero.name} gold={hero.gold} disabled={buyNameTag.pending || buyMakeover.pending} intent={buyMakeover} /> : null}
+          <NameTag tag={bag.nameTag} heroName={hero.name} gold={hero.gold} disabled={buyNameTag.pending} intent={buyNameTag} />
         </div>
       </section> : null}
       <header>

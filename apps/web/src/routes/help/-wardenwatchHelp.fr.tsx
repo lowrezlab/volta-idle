@@ -91,13 +91,13 @@ export const fr: HelpPage = {
       {F.classes !== undefined ? (
         <>
           <h2 id="heroes-and-classes">Héros et classes</h2>
-          <p>Tout le monde commence en Guerrier. Quand votre Guerrier atteint le niveau {F.rosterLevel}, votre TRMNL indique « Débloqué : un second héros », et vous pouvez recruter un Voleur depuis la page Héros, sous Plus. Le Voleur commence au niveau 1 avec son propre nom, son équipement, son or, ses potions et ses objectifs.</p>
+          <p>Tout le monde commence en Chevalier. Quand votre Chevalier atteint le niveau {F.rosterLevel}, votre TRMNL indique « Débloqué : un second héros », et vous pouvez recruter un Assassin depuis la page Héros, sous Plus. L’Assassin commence au niveau 1 avec son propre nom, son équipement, son or, ses potions et ses objectifs.</p>
           <ul>
             <li>Un seul héros part à l’aventure à la fois : c’est lui que montre votre TRMNL et lui qui figure dans les classements. L’autre reste là où vous l’avez laissé. Il ne part pas à l’aventure et ne rattrape rien plus tard, et un marchand qui lui rend visite repart.</li>
             <li>Vous pouvez changer une fois par jour. Revenir en arrière dans les dix minutes ne compte pas. Un héros K.-O. ou en route doit d’abord récupérer ou arriver.</li>
-            <li>Vous pouvez avoir un héros de chaque classe. Les succès vous appartiennent quel que soit le héros qui les obtient ; quelques-uns sont réservés au Voleur.</li>
-            <li><strong>Guerrier</strong> : {t.text(F.classes.warriorBlurb)}</li>
-            <li><strong>Voleur</strong> : {t.text(F.classes.rogueBlurb)} {F.classes.rogue.hpPct} % de santé, attaque {signed(F.classes.rogue.attackPct)} %, défense {signed(F.classes.rogue.defensePct)} %, {signed(F.classes.rogue.goldPct)} % d’or à chaque combat et trouvaille, et {F.classes.rogue.raidEdgePct} points de son côté dans chaque raid de bureau. Il progresse au même rythme que le Guerrier mais se fait mettre K.-O. un peu plus souvent.</li>
+            <li>Vous pouvez avoir un héros de chaque classe. Les succès vous appartiennent quel que soit le héros qui les obtient ; quelques-uns sont réservés à l’Assassin.</li>
+            <li><strong>Chevalier</strong> : {t.text(F.classes.warriorBlurb)}</li>
+            <li><strong>Assassin</strong> : {t.text(F.classes.rogueBlurb)} {F.classes.rogue.hpPct} % de santé, attaque {signed(F.classes.rogue.attackPct)} %, défense {signed(F.classes.rogue.defensePct)} %, {signed(F.classes.rogue.goldPct)} % d’or à chaque combat et trouvaille, et {F.classes.rogue.raidEdgePct} points de son côté dans chaque raid de bureau. Il progresse au même rythme que le Chevalier mais se fait mettre K.-O. un peu plus souvent.</li>
           </ul>
         </>
       ) : null}

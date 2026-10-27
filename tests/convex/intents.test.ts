@@ -75,7 +75,7 @@ describe('player intents', () => {
     const stories = preview.log.filter((entry: { k: string }) => entry.k !== 'achievement')
     expect(stories[0]).toMatchObject({ n: 'Drank a potion.', d: `+${potion.hp! - 40} HP` })
     expect(stories[1].d).toBe(`+${sold.gold} gold`)
-    expect(preview.log.find((entry: { k: string }) => entry.k === 'achievement')).toMatchObject({ n: 'Achievement: [[First Aid]]', d: '' })
+    expect(preview.log.find((entry: { k: string }) => entry.k === 'achievement')).toMatchObject({ n: 'Achievement: [[First Draught]]', d: '' })
   })
 
   it("refuses another owner's items and requires a signed-in active hero", async () => {

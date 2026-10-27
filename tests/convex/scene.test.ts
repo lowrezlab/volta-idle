@@ -3,6 +3,8 @@ import { convexTest } from 'convex-test'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import schema from '../../apps/backend/convex/schema'
 import { sha256Hex } from '../../apps/backend/convex/lib/hash'
+import { skyDayToken } from '@trmnl-games/wardenwatch/art/sceneTime'
+import { voltaDay } from '@trmnl-games/wardenwatch/sim/core/calendar'
 import { seedHero, seedWorld } from './helpers'
 
 const modules = import.meta.glob('../../apps/backend/convex/**/*.ts')
@@ -32,8 +34,9 @@ describe('TRMNL local sky', () => {
       expect(response.status).toBe(200)
       const { merge_variables: vars } = await response.json() as { merge_variables: Record<string, string> }
       for (const key of ['scene_url', 'scene_url_small', 'scene_url_large', 'scene_url_medium']) {
-        // GDD §3.6: scene v6, with the hero's look (the default one for a hero made before the creator) after the occasion.
-        expect(vars[key]).toContain(`/art/scene/v6/office_cubicles/${time}/plain/v1.0000000/rest/prop-campfire/`)
+        // GDD §3.6: scene v6, with the hero's look (the default one for a hero made before the creator) after the occasion,
+        // and the shared Volta day for the sky strip after the local time of day.
+        expect(vars[key]).toContain(`/art/scene/v6/office_cubicles/${time}-${skyDayToken(voltaDay(now))}/plain/v1.0000000/rest/prop-campfire/`)
         const asset = await t.fetch(new URL(vars[key]!).pathname)
         expect(asset.status).toBe(200)
         expect(asset.headers.get('Cache-Control')).toBe('public, max-age=31536000, immutable')

@@ -1,5 +1,5 @@
 import { classPose, type BasePose, type HeroGender, type HeroPose } from './hero'
-import { LAYERED_SCENE_VERSION, SCENE_VERSION, type SceneTime } from './sceneTime'
+import { LAYERED_SCENE_VERSION, SCENE_VERSION, skyDayToken, type SceneTime } from './sceneTime'
 import { MEETING_PROPS, type PropId } from './props'
 
 /**
@@ -84,7 +84,8 @@ export const scenePath = (biomeId: string, pose: HeroPose, subject: SceneSubject
 /**
  * Scene v6 (GDD §3.6): the v5 path with the hero's look code between the occasion and the pose, so the composed image
  * stays immutable per URL. The pose keeps its class and gender names: they pick the whole-sprite fallback when the
- * registry cannot draw the look.
+ * registry cannot draw the look. P4.2: the time segment also carries the sky strip's Volta day (`day-123`,
+ * `sceneTime.ts`), which `sceneUrlsAt` sets at the render instant; a path built without one draws no strip.
  */
-export const layeredScenePath = (biomeId: string, look: string, pose: HeroPose, subject: SceneSubject, scale: number, time: SceneTime = 'day', occasion?: string) =>
-  `/art/scene/v${LAYERED_SCENE_VERSION}/${biomeId}/${time}/${occasion ?? 'plain'}/${look}/${pose}/${subjectSegment(subject)}/${scale}.png`
+export const layeredScenePath = (biomeId: string, look: string, pose: HeroPose, subject: SceneSubject, scale: number, time: SceneTime = 'day', occasion?: string, skyDay?: number) =>
+  `/art/scene/v${LAYERED_SCENE_VERSION}/${biomeId}/${time}${skyDay === undefined ? '' : `-${skyDayToken(skyDay)}`}/${occasion ?? 'plain'}/${look}/${pose}/${subjectSegment(subject)}/${scale}.png`

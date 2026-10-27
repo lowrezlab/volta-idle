@@ -114,7 +114,7 @@ describe('achievements (D65)', () => {
     const imp = view.families.find((f: { family: string }) => f.family === 'slay_paper_imp')
     expect(imp).toMatchObject({ tier: 2, tiers: 5, next: { tier: 3 }, target: 25 })
     expect(imp.value).toBeGreaterThanOrEqual(23)
-    expect(imp.earned).toMatchObject({ id: 'slay_paper_imp_2', name: 'Blue Bin Regular' })
+    expect(imp.earned).toMatchObject({ id: 'slay_paper_imp_2', name: 'Cellar Regular' })
     expect(view.rarity).toMatchObject({ totalPlayers: 1 })
     expect(view.rarity.counts.slay_paper_imp_2).toBe(1)
   })

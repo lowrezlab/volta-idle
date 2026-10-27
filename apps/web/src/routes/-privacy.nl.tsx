@@ -20,10 +20,10 @@ export const privacyNl: LegalPage = {
         graag deelt en zet er nooit contactgegevens in.
       </p>
       <p>
-        In Wardenwatch overvallen helden elkaars bureaus en ontmoeten ze elkaar bij toeval. Doet je held een raid, wordt hij overvallen of ontmoet hij een andere held, dan staat je openbare naam in het avonturenlogboek van de andere speler, in de app en op zijn TRMNL, net zoals al in de ranglijsten. Gaat je held knock-out, dan kan hij een reservevoorwerp met je openbare naam laten vallen, dat de held van een andere speler kan vinden en houden; je naam staat dan op dat voorwerp in zijn app en op zijn heldenpagina. Wijzig je je naam of verwijder je je account, dan tonen die verhalen en voorwerpen ‘Verborgen speler’ of verliezen ze de naam.
+        In Wardenwatch overvallen helden elkaars kampen en ontmoeten ze elkaar bij toeval. Doet je held een raid, wordt hij overvallen of ontmoet hij een andere held, dan staat je openbare naam in het avonturenlogboek van de andere speler, in de app en op zijn TRMNL, net zoals al in de ranglijsten. Gaat je held knock-out, dan kan hij een reservevoorwerp met je openbare naam laten vallen, dat de held van een andere speler kan vinden en houden; je naam staat dan op dat voorwerp in zijn app en op zijn heldenpagina. Wijzig je je naam of verwijder je je account, dan tonen die verhalen en voorwerpen ‘Verborgen speler’ of verliezen ze de naam.
       </p>
       <p>
-        Je Wardenwatch-held heeft een openbare pagina: iedereen met de link ziet je openbare naam, de naam van je held, zijn niveau, plek, huidige verdieping en startdatum, een paar totalen en je prestaties. Goud, het avonturenlogboek en je accountgegevens blijven privé, net als je uitrusting, behalve reserves van andere spelers die je held vasthoudt, die met hun namen worden getoond. De pagina staat standaard aan. Mijn heldenpagina verbergen in Instellingen verbergt hem meteen, en je kunt hem altijd weer tonen.
+        Je Wardenwatch-held heeft een openbare pagina: iedereen met de link ziet je openbare naam, de naam van je held, zijn niveau, plek, huidige gebied en startdatum, een paar totalen en je prestaties. Goud, het avonturenlogboek en je accountgegevens blijven privé, net als je uitrusting, behalve reserves van andere spelers die je held vasthoudt, die met hun namen worden getoond. De pagina staat standaard aan. Mijn heldenpagina verbergen in Instellingen verbergt hem meteen, en je kunt hem altijd weer tonen.
       </p>
       <p>
         Ingelogde spelers kunnen een openbare heldenpagina volgen. We bewaren wie wie volgt, zodat hun app de spelers kan tonen die ze volgen. Niemand krijgt te horen dat hij gevolgd wordt, en geen enkele pagina toont wie een speler volgt. Wijzig je je openbare naam, verberg je je pagina of verwijder je je voortgang, dan zien andere spelers je held niet meer in hun lijst, en verwijderen wist die gegevens.
@@ -38,7 +38,7 @@ export const privacyNl: LegalPage = {
           Per TRMNL-installatie: de ID van de plugininstantie, een hash van het toegangstoken en de instellingenlink die TRMNL ons geeft. We bewaren je TRMNL-naam
           of -e-mailadres niet.
         </li>
-        <li>De tijdzoneafwijking die je TRMNL met elk scherm meestuurt (bijvoorbeeld UTC+2), zodat de ochtendstand-up van Wardenwatch jouw dag volgt. We bewaren alleen de laatste.</li>
+        <li>De tijdzoneafwijking die je TRMNL met elk scherm meestuurt (bijvoorbeeld UTC+2), zodat het ochtendappel van Wardenwatch jouw dag volgt. We bewaren alleen de laatste.</li>
         <li>De taalinstelling die je TRMNL met elk scherm meestuurt (bijvoorbeeld nl-NL), zodat we zien naar welke talen het de moeite waard is de spellen te vertalen, en zodat je scherm jouw taal kan gebruiken. We bewaren alleen de laatste.</li>
         <li>Als je een taal kiest voor TRMNL Games, die keuze, zodat je TRMNL-schermen en meldingen die ook gebruiken.</li>
         <li>Kortlevende operationele gegevens, zoals tellers voor gebruikslimieten en bewijzen van dubbele verzoeken.</li>

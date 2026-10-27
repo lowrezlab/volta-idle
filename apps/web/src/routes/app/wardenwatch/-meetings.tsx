@@ -51,7 +51,7 @@ export function Meetings({ enabled }: { enabled: boolean }) {
             <li key={`${meeting.role}-${meeting.tick}-${meeting.rivalName}`} className="grid min-w-0 grid-cols-[2rem_minmax(0,1fr)] items-start gap-x-3">
               <span aria-hidden="true" className={`grid size-8 place-items-center border-2 border-night ${KIND_BADGE.meeting}`}><PixelIcon kind="meeting" plain className="text-night" /></span>
               <div className="min-w-0">
-                <p className="pt-1 break-words">{/* "Coffee run with Quill", in the log's own voice. */}<WithName text={t.meetingWith(meeting.kindName)} name={meeting.rivalName} profile={meeting.profile} /></p>
+                <p className="pt-1 break-words">{/* "Soup line with Quill", in the log's own voice. */}<WithName text={t.meetingWith(meeting.kindName)} name={meeting.rivalName} profile={meeting.profile} /></p>
                 <p className="flex flex-wrap gap-x-3 text-xs font-semibold tabular-nums">
                   {meeting.boon ? <span className="text-sky-ink">{c.name(meeting.boon)}</span> : null}
                   <span className="text-muted">{c.name(meeting.floor)}</span>

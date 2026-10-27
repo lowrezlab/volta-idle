@@ -20,10 +20,10 @@ export const privacyPt: LegalPage = {
         não se importe de compartilhar e nunca coloque dados de contato nele.
       </p>
       <p>
-        No Wardenwatch, os heróis invadem as mesas uns dos outros e se encontram por acaso. Quando seu herói invade, é invadido ou encontra outro herói, seu nome público aparece no diário de aventuras do outro jogador, no app e no TRMNL dele, como já aparece nos rankings. Quando seu herói é nocauteado, ele pode deixar cair um item reserva com seu nome público, que o herói de outro jogador pode achar e guardar; seu nome então aparece nesse item no app e na página de herói dele. Se você trocar de nome ou excluir sua conta, essas histórias e itens mostram “Jogador oculto” ou perdem o nome.
+        No Wardenwatch, os heróis invadem os acampamentos uns dos outros e se encontram por acaso. Quando seu herói invade, é invadido ou encontra outro herói, seu nome público aparece no diário de aventuras do outro jogador, no app e no TRMNL dele, como já aparece nos rankings. Quando seu herói é nocauteado, ele pode deixar cair um item reserva com seu nome público, que o herói de outro jogador pode achar e guardar; seu nome então aparece nesse item no app e na página de herói dele. Se você trocar de nome ou excluir sua conta, essas histórias e itens mostram “Jogador oculto” ou perdem o nome.
       </p>
       <p>
-        Seu herói do Wardenwatch tem uma página pública: qualquer pessoa com o link vê seu nome público, o nome do seu herói, nível, posição, andar atual e data de início, alguns totais e suas conquistas. Ouro, diário de aventuras e dados da conta continuam privados, assim como seu equipamento, exceto os reservas de outros jogadores que seu herói guarda, que aparecem com os nomes deles. A página vem ativada. Ocultar minha página de herói, nas Configurações, a oculta na hora, e você pode mostrá-la de novo quando quiser.
+        Seu herói do Wardenwatch tem uma página pública: qualquer pessoa com o link vê seu nome público, o nome do seu herói, nível, posição, zona atual e data de início, alguns totais e suas conquistas. Ouro, diário de aventuras e dados da conta continuam privados, assim como seu equipamento, exceto os reservas de outros jogadores que seu herói guarda, que aparecem com os nomes deles. A página vem ativada. Ocultar minha página de herói, nas Configurações, a oculta na hora, e você pode mostrá-la de novo quando quiser.
       </p>
       <p>
         Jogadores conectados podem seguir uma página pública de herói. Guardamos quem segue quem para o app deles poder listar os jogadores que seguem. Ninguém é avisado de que foi seguido, e nenhuma página mostra quem segue um jogador. Se você trocar seu nome público, ocultar sua página ou excluir seu progresso, outros jogadores deixam de ver seu herói na lista deles, e a exclusão remove esses registros.
@@ -38,7 +38,7 @@ export const privacyPt: LegalPage = {
           Para cada instalação do TRMNL: o ID da instância do plugin, um hash do token de acesso e o link de configurações que o TRMNL nos dá. Não guardamos seu nome
           nem seu e-mail do TRMNL.
         </li>
-        <li>A diferença de fuso horário que seu TRMNL envia com cada tela (por exemplo UTC−3), para o stand-up da manhã do Wardenwatch seguir o seu dia. Guardamos só a última.</li>
+        <li>A diferença de fuso horário que seu TRMNL envia com cada tela (por exemplo UTC−3), para a chamada da manhã do Wardenwatch seguir o seu dia. Guardamos só a última.</li>
         <li>A configuração de idioma que seu TRMNL envia com cada tela (por exemplo pt-BR), para sabermos para quais idiomas vale traduzir os jogos e para sua tela poder usar seu idioma. Guardamos só a última.</li>
         <li>Se você escolher um idioma para o TRMNL Games, essa escolha, para que suas telas TRMNL e seus alertas também o usem.</li>
         <li>Registros operacionais de curta duração, como contadores de limite de uso e recibos de pedidos duplicados.</li>

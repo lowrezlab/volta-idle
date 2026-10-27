@@ -19,10 +19,10 @@ export const privacyEn: LegalPage = {
         happy to share and never include contact details in it.
       </p>
       <p>
-        In Wardenwatch, heroes raid each other's desks and meet each other by chance. When your hero raids, is raided or meets another hero, your public name appears in the other player's adventure log, in the companion and on their TRMNL, as it already does on the leaderboards. When your hero is knocked out it can drop a spare item with your public name on it, which another player's hero may find and keep; your name then shows on that item in their companion and on their hero page. If you change your name or delete your account, those stories and items show "Hidden player" instead, or lose the name.
+        In Wardenwatch, heroes raid each other's camps and meet each other by chance. When your hero raids, is raided or meets another hero, your public name appears in the other player's adventure log, in the companion and on their TRMNL, as it already does on the leaderboards. When your hero is knocked out it can drop a spare item with your public name on it, which another player's hero may find and keep; your name then shows on that item in their companion and on their hero page. If you change your name or delete your account, those stories and items show "Hidden player" instead, or lose the name.
       </p>
       <p>
-        Your Wardenwatch hero has a public page: anyone with the link can see your public name, your hero's name, level, rank, current floor and start date, a few lifetime counts and your achievements. Gold, the adventure log and your account details stay private, and so does your gear, except other players' spares your hero holds, which show with the names on them. The page is on by default. Hide my hero page in Settings hides it straight away, and you can show it again at any time.
+        Your Wardenwatch hero has a public page: anyone with the link can see your public name, your hero's name, level, rank, current zone and start date, a few lifetime counts and your survey entries. Auro, the adventure log and your account details stay private, and so does your gear, except other players' spares your hero holds, which show with the names on them. The page is on by default. Hide my hero page in Settings hides it straight away, and you can show it again at any time.
       </p>
       <p>
         Signed-in players can follow a public hero page. We store who follows whom so their companion can list the players they follow. Nobody is told they were followed, and no page shows who follows a player. If you change your public name, hide your page or delete your progress, other players stop seeing your hero in their list, and deleting removes those records.
@@ -37,7 +37,7 @@ export const privacyEn: LegalPage = {
           For each TRMNL installation: the plugin instance ID, a hash of its access token and the settings link TRMNL gives us. We do not store your TRMNL
           name or email.
         </li>
-        <li>The time zone offset your TRMNL sends with each screen (for example UTC+2), so Wardenwatch's morning stand-up follows your day. We keep only the latest one.</li>
+        <li>The time zone offset your TRMNL sends with each screen (for example UTC+2), so Wardenwatch's morning muster follows your day. We keep only the latest one.</li>
         <li>The language setting your TRMNL sends with each screen (for example fr-FR), so we can see which languages are worth translating the games into, and so your screen can use your language. We keep only the latest one.</li>
         <li>If you choose a language for TRMNL Games, that choice, so your TRMNL screens and alerts use it too.</li>
         <li>Short-lived operational records such as rate-limit counters and duplicate-request receipts.</li>

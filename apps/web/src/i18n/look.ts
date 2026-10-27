@@ -8,7 +8,7 @@ import { headMessages } from './heads'
 export const lookMessages = defineMessages({
   en: {
     title: headMessages.en.wwCreator,
-    intro: 'How your hero looks on your TRMNL, your hero page and in other players’ meetings. Changing it is free, any time.',
+    intro: 'How your hero looks on your TRMNL, your hero page and at musters with other players’ heroes. Changing it is free, any time.',
     firstLook: 'Pick how your hero looks. You can change it later at the camp mirror, free.',
     previewAlt: 'Your hero in the chosen look',
     pose: 'Pose',
@@ -38,7 +38,7 @@ export const lookMessages = defineMessages({
   },
   fr: {
     title: headMessages.fr.wwCreator,
-    intro: 'L’apparence de votre héros sur votre TRMNL, sur sa page et dans les rencontres des autres joueurs. La changer est gratuit, à tout moment.',
+    intro: 'L’apparence de votre héros sur votre TRMNL, sur sa page et dans les rassemblements avec les autres joueurs. La changer est gratuit, à tout moment.',
     firstLook: 'Choisissez l’apparence de votre héros. Vous pourrez la changer plus tard au miroir du camp, gratuitement.',
     previewAlt: 'Votre héros dans l’apparence choisie',
     pose: 'Pose',
@@ -98,7 +98,7 @@ export const lookMessages = defineMessages({
   },
   es: {
     title: headMessages.es.wwCreator,
-    intro: 'El aspecto de tu héroe en tu TRMNL, en su página y en las reuniones de otros jugadores. Cambiarlo es gratis, cuando quieras.',
+    intro: 'El aspecto de tu héroe en tu TRMNL, en su página y en las revistas con otros jugadores. Cambiarlo es gratis, cuando quieras.',
     firstLook: 'Elige el aspecto de tu héroe. Podrás cambiarlo después en el espejo del campamento, gratis.',
     previewAlt: 'Tu héroe con el aspecto elegido',
     pose: 'Pose',
@@ -128,7 +128,7 @@ export const lookMessages = defineMessages({
   },
   it: {
     title: headMessages.it.wwCreator,
-    intro: 'L’aspetto del tuo eroe sul tuo TRMNL, sulla sua pagina e nelle riunioni degli altri giocatori. Cambiarlo è gratis, quando vuoi.',
+    intro: 'L’aspetto del tuo eroe sul tuo TRMNL, sulla sua pagina e nelle adunate con gli altri giocatori. Cambiarlo è gratis, quando vuoi.',
     firstLook: 'Scegli l’aspetto del tuo eroe. Potrai cambiarlo più tardi allo specchio del campo, gratis.',
     previewAlt: 'Il tuo eroe con l’aspetto scelto',
     pose: 'Posa',
@@ -158,7 +158,7 @@ export const lookMessages = defineMessages({
   },
   pt: {
     title: headMessages.pt.wwCreator,
-    intro: 'O visual do seu herói no seu TRMNL, na página dele e nas reuniões de outros jogadores. Mudar é grátis, a qualquer hora.',
+    intro: 'O visual do seu herói no seu TRMNL, na página dele e nas chamadas com outros jogadores. Mudar é grátis, a qualquer hora.',
     firstLook: 'Escolha o visual do seu herói. Dá para mudar depois no espelho do acampamento, de graça.',
     previewAlt: 'Seu herói com o visual escolhido',
     pose: 'Pose',
@@ -188,7 +188,7 @@ export const lookMessages = defineMessages({
   },
   pl: {
     title: headMessages.pl.wwCreator,
-    intro: 'Tak wygląda twój bohater na TRMNL, na swojej stronie i w spotkaniach innych graczy. Zmiana jest darmowa, w każdej chwili.',
+    intro: 'Tak wygląda twój bohater na TRMNL, na swojej stronie i na zbiórkach z innymi graczami. Zmiana jest darmowa, w każdej chwili.',
     firstLook: 'Wybierz wygląd bohatera. Później zmienisz go za darmo w lustrze w obozie.',
     previewAlt: 'Twój bohater w wybranym wyglądzie',
     pose: 'Poza',
@@ -218,7 +218,7 @@ export const lookMessages = defineMessages({
   },
   nl: {
     title: headMessages.nl.wwCreator,
-    intro: 'Hoe je held eruitziet op je TRMNL, op zijn pagina en in vergaderingen van andere spelers. Veranderen is gratis, wanneer je wilt.',
+    intro: 'Hoe je held eruitziet op je TRMNL, op zijn pagina en bij appels met andere spelers. Veranderen is gratis, wanneer je wilt.',
     firstLook: 'Kies hoe je held eruitziet. Later kun je het gratis veranderen bij de kampspiegel.',
     previewAlt: 'Je held in het gekozen uiterlijk',
     pose: 'Houding',

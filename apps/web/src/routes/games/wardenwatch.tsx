@@ -54,7 +54,7 @@ function GamePage() {
         </div>
 
         <div className={`flex flex-col gap-20 py-14 sm:gap-24 sm:py-20 ${SITE_FRAME}`}>
-          <FloorGrid headingId="floors-heading" />
+          <FloorGrid headingId="zones-heading" />
           <div className="flex flex-col gap-8">
             <FeatureGrid headingId="features-heading" />
             <div className="flex flex-col items-start gap-4 border-t border-rule pt-6 sm:flex-row sm:items-center sm:justify-between">

@@ -60,19 +60,19 @@ const familyGlyph = (family: Family): GlyphName => FAMILY_GLYPH[family.family] ?
 
 type EarnedFamily = Family & { earned: Earned }
 
-/** Shelves in reading order: what every hero earns first, then each floor's monsters, then the rarer set pieces. A category not listed gets its own shelf after these. */
+/** Shelves in reading order: what every hero earns first, then each zone's monsters, then the rarer set pieces. A category not listed gets its own shelf after these. */
 const SHELVES: ReadonlyArray<{ category: string; glyph: GlyphName; tone: string }> = [
   { category: 'Lifetime', glyph: 'trophy', tone: 'text-gold-ink' },
-  { category: 'Office Cubicles monster', glyph: 'combat', tone: 'text-hp-ink' },
-  { category: 'Server Room monster', glyph: 'combat', tone: 'text-hp-ink' },
-  { category: 'Cafeteria Depths monster', glyph: 'combat', tone: 'text-hp-ink' },
-  { category: 'Archive monster', glyph: 'combat', tone: 'text-hp-ink' },
-  { category: 'Parking Garage monster', glyph: 'combat', tone: 'text-hp-ink' },
+  { category: 'Castellum Frigo monster', glyph: 'combat', tone: 'text-hp-ink' },
+  { category: 'Moonbight Fjords monster', glyph: 'combat', tone: 'text-hp-ink' },
+  { category: 'Krine Snow Fens monster', glyph: 'combat', tone: 'text-hp-ink' },
+  { category: 'Aeon Skerry monster', glyph: 'combat', tone: 'text-hp-ink' },
+  { category: 'Exclave Seta Ruins monster', glyph: 'combat', tone: 'text-hp-ink' },
   { category: 'Set piece', glyph: 'star', tone: 'text-gold-ink' },
   { category: 'Decisions', glyph: 'choice', tone: 'text-gold-ink' },
   { category: 'Raids', glyph: 'raid', tone: 'text-rare-ink' },
-  { category: 'Coworkers', glyph: 'meeting', tone: 'text-sky-ink' },
-  { category: 'Office calendar', glyph: 'star', tone: 'text-gold-ink' },
+  { category: 'Comrades', glyph: 'meeting', tone: 'text-sky-ink' },
+  { category: 'Sky events', glyph: 'star', tone: 'text-gold-ink' },
 ]
 
 function shelvesOf(families: Family[]) {

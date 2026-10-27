@@ -20,10 +20,10 @@ export const privacyDe: LegalPage = {
         den du gern teilst, und schreib nie Kontaktdaten hinein.
       </p>
       <p>
-        In Wardenwatch überfallen Helden gegenseitig ihre Schreibtische und begegnen sich zufällig. Wenn dein Held überfällt, überfallen wird oder einem anderen Helden begegnet, erscheint dein öffentlicher Name im Abenteuerlog des anderen Spielers, in seiner Begleit-App und auf seinem TRMNL, so wie schon in den Ranglisten. Wird dein Held k. o. geschlagen, kann er ein Ersatzstück mit deinem öffentlichen Namen fallen lassen, das der Held eines anderen Spielers finden und behalten kann; dein Name steht dann auf diesem Gegenstand in dessen Begleit-App und auf dessen Heldenseite. Änderst du deinen Namen oder löschst dein Konto, zeigen diese Geschichten und Gegenstände stattdessen „Verborgener Spieler“ oder verlieren den Namen.
+        In Wardenwatch überfallen Helden gegenseitig ihre Lager und begegnen sich zufällig. Wenn dein Held überfällt, überfallen wird oder einem anderen Helden begegnet, erscheint dein öffentlicher Name im Abenteuerlog des anderen Spielers, in seiner Begleit-App und auf seinem TRMNL, so wie schon in den Ranglisten. Wird dein Held k. o. geschlagen, kann er ein Ersatzstück mit deinem öffentlichen Namen fallen lassen, das der Held eines anderen Spielers finden und behalten kann; dein Name steht dann auf diesem Gegenstand in dessen Begleit-App und auf dessen Heldenseite. Änderst du deinen Namen oder löschst dein Konto, zeigen diese Geschichten und Gegenstände stattdessen „Verborgener Spieler“ oder verlieren den Namen.
       </p>
       <p>
-        Dein Wardenwatch-Held hat eine öffentliche Seite: Wer den Link hat, sieht deinen öffentlichen Namen, Namen, Stufe, Rang, aktuelle Etage und Startdatum deines Helden, ein paar Gesamtzähler und deine Erfolge. Gold, das Abenteuerlog und deine Kontodaten bleiben privat, ebenso deine Ausrüstung, außer Ersatzstücken anderer Spieler, die dein Held hat; die erscheinen mit den Namen darauf. Die Seite ist standardmäßig an. Meine Heldenseite verbergen in den Einstellungen verbirgt sie sofort, und du kannst sie jederzeit wieder zeigen.
+        Dein Wardenwatch-Held hat eine öffentliche Seite: Wer den Link hat, sieht deinen öffentlichen Namen, Namen, Stufe, Rang, aktuelles Gebiet und Startdatum deines Helden, ein paar Gesamtzähler und deine Erfolge. Gold, das Abenteuerlog und deine Kontodaten bleiben privat, ebenso deine Ausrüstung, außer Ersatzstücken anderer Spieler, die dein Held hat; die erscheinen mit den Namen darauf. Die Seite ist standardmäßig an. Meine Heldenseite verbergen in den Einstellungen verbirgt sie sofort, und du kannst sie jederzeit wieder zeigen.
       </p>
       <p>
         Angemeldete Spieler können einer öffentlichen Heldenseite folgen. Wir speichern, wer wem folgt, damit ihre Begleit-App die Spieler auflisten kann, denen sie folgen. Niemand erfährt, dass ihm gefolgt wird, und keine Seite zeigt, wer einem Spieler folgt. Änderst du deinen öffentlichen Namen, verbirgst deine Seite oder löschst deinen Fortschritt, sehen andere Spieler deinen Helden nicht mehr in ihrer Liste, und beim Löschen werden diese Einträge entfernt.
@@ -38,7 +38,7 @@ export const privacyDe: LegalPage = {
           Für jede TRMNL-Installation: die Instanz-ID des Plugins, einen Hash seines Zugriffstokens und den Einstellungslink, den TRMNL uns gibt. Deinen TRMNL-Namen
           und deine TRMNL-E-Mail speichern wir nicht.
         </li>
-        <li>Die Zeitverschiebung, die dein TRMNL mit jedem Bildschirm schickt (zum Beispiel UTC+2), damit das Morgen-Stand-up von Wardenwatch deinem Tag folgt. Wir behalten nur die letzte.</li>
+        <li>Die Zeitverschiebung, die dein TRMNL mit jedem Bildschirm schickt (zum Beispiel UTC+2), damit der Morgenappell von Wardenwatch deinem Tag folgt. Wir behalten nur die letzte.</li>
         <li>Die Spracheinstellung, die dein TRMNL mit jedem Bildschirm schickt (zum Beispiel de-DE), damit wir sehen, in welche Sprachen sich eine Übersetzung lohnt, und damit dein Bildschirm deine Sprache verwenden kann. Wir behalten nur die letzte.</li>
         <li>Wenn du eine Sprache für TRMNL Games wählst, diese Wahl, damit deine TRMNL-Bildschirme und Benachrichtigungen sie auch verwenden.</li>
         <li>Kurzlebige Betriebsdaten wie Zähler zur Ratenbegrenzung und Belege für doppelte Anfragen.</li>

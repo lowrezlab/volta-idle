@@ -6,7 +6,7 @@ import { gearTierOf } from './biomes'
 import { nextEarlyPouchTier, potionCap, pouchMilestoneUpgrade } from './pouch'
 import { autoPotion, potionItem, potionRows, potionStrengths, potionWord, potionsHeld, rollPotionStrength, strengthOf } from './potions'
 import { assertHeroInvariants, SimulationInvariantError } from './invariants'
-import { codePoints, composeSummary, fill, rarityLabel, variant, withArticle, type NarrativeVars } from './narrative'
+import { codePoints, composeSummary, eldritchPool, fill, isEldritchTick, rarityLabel, TICK_MS, variant, withArticle, type NarrativeVars } from './narrative'
 import { drawRaidPlan, raidGoldLoss, raidHpLoss, raidStream, raidWinChance } from './raid'
 import { drawMeetingKind, drawMeetingPlan, meetingKind, meetingStream } from './meeting'
 import { graveyardDraws, spareItem, spareOf, spareSource } from './lostProperty'
@@ -133,6 +133,8 @@ class TickRun {
   private readonly occasion: LiveOccasion | undefined
   /** D163: a dug-in elite whose clock ran out while the hero explored; told as this tick's event. */
   private slipped: Standoff | undefined
+  /** GDD §8: whether this tick is its Volta day's eldritch slot, the one tick an eldritch line may be told on. */
+  private readonly eldritchTick: boolean
 
   constructor(private readonly input: SimulationInput) {
     this.h = { ...input.hero, counters: { ...input.hero.counters, monsterWins: { ...input.hero.counters.monsterWins }, ...(input.hero.counters.biomesVisited === undefined ? {} : { biomesVisited: { ...input.hero.counters.biomesVisited } }) } }
@@ -144,6 +146,7 @@ class TickRun {
       narrative: createRng(input.streams.narrative),
     }
     this.occasion = occasionForTick(input.content, input.tick, input.tickAt, input.utcOffsetSeconds)
+    this.eldritchTick = isEldritchTick(input.tickAt ?? input.tick * TICK_MS)
   }
 
   /** What the hero fights with now: class, affixes, effects and the live occasion's modifiers. */
@@ -166,8 +169,15 @@ class TickRun {
     return effectiveStance(this.content, this.h)
   }
 
+  /**
+   * A line from the pool, with the sky's rule applied first (GDD §8): the catalog's eldritch lines are told only on
+   * the day's eldritch slot, and there they are preferred, so a hero reads at most one a day. The slot comes from the
+   * tick's instant alone (`tickAt`, else the tick's quarter-hour from the epoch), the same way the occasions find
+   * their date.
+   */
   private narrate(templates: readonly string[], vars: NarrativeVars, callbacks?: Readonly<Record<string, string>>): string {
-    return variant(this.rng.narrative, templates, vars, this.input.recentSummaries, callbacks)
+    const pool = eldritchPool(templates, this.content.narrative.eldritch, this.eldritchTick)
+    return variant(this.rng.narrative, pool, vars, this.input.recentSummaries, callbacks)
   }
 
   run(): SimulationResult {
@@ -562,7 +572,7 @@ class TickRun {
             vars.item = pouch.name
             vars.capacity = pouch.cap
             primary = this.narrate(shared.pouchFind, vars)
-            compact = fill('Found a {item}. Holds {capacity} potions.', vars)
+            compact = fill('Found a {item}. Holds {capacity} draughts.', vars)
             outcome = { variant: 'loot', found: 'pouch', goldGranted: 0, jackpot: false, potionFullFallback: false }
             break
           }
@@ -751,7 +761,7 @@ class TickRun {
     if (pouchMilestone !== undefined) {
       pouchUpgrade = { from: pouchUpgrade?.from ?? potionCap(content, h), to: pouchMilestone.cap, tierId: pouchMilestone.id, source: 'milestone' }
       h.potionCap = pouchMilestone.cap
-      consequences.push(`Found ${withArticle(pouchMilestone.name)}! Holds ${pouchMilestone.cap} potions.`)
+      consequences.push(`Found ${withArticle(pouchMilestone.name)}! Holds ${pouchMilestone.cap} draughts.`)
     }
     if (pouchUpgrade !== undefined) this.metrics.pouchUpgrades = 1
 
@@ -1121,7 +1131,9 @@ class TickRun {
     const quantity = this.rng.reward.int(1, rule.maxPotionsOffered)
     // D139 Black Friday: every price on a visit that opens that day is scaled for the whole visit.
     const sale = (price: number) => Math.max(1, Math.floor((price * (this.occasion?.rule.effect?.merchantPricePct ?? 100)) / 100))
-    const offers: MerchantOffer[] = [{ id: 'potions', name: quantity === 1 ? 'Healing potion' : `${quantity} healing potions`, quantity, price: sale(rule.potionPrice * biomeTier * quantity) }]
+    // The bundle is named by the catalog's draught, as the companion and the alerts show it.
+    const draught = content.potion.name.charAt(0).toUpperCase() + potionWord(content.potion.name).slice(1)
+    const offers: MerchantOffer[] = [{ id: 'potions', name: quantity === 1 ? draught : `${quantity} ${potionWord(content.potion.name)}s`, quantity, price: sale(rule.potionPrice * biomeTier * quantity) }]
     // D122: the merchant undercuts the companion's ladder price, so a visit is a deal rather than a convenience.
     const discounted = (price: number) => sale(Math.max(1, Math.floor((price * (100 - (rule.ladderDiscountPct ?? 0))) / 100)))
     const pouch = nextEarlyPouchTier(content, h)

@@ -114,7 +114,8 @@ interface CompiledTemplate {
 }
 
 const ITEM_SUFFIX = /(?: (Mk [IVX]+))?(?: (\+\d+))?$/
-const RARITIES = ['Common', 'Uncommon', 'Rare', 'Epic', 'Legendary']
+/** Every rarity word a stored item name may carry: Desk Crawler's and Volta's (`RARITY_NAMES`), so old names still parse. */
+const RARITIES = ['Common', 'Uncommon', 'Fine', 'Rare', 'Starlit', 'Epic', 'Legendary']
 
 export function translatorFor(locale: GrammarLocale & Locale, dictionary: ContentDictionary<unknown>): ContentTranslator {
   const tag = INTL_TAG[locale]

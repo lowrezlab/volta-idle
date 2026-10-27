@@ -2,17 +2,21 @@ import type { Locale } from '@trmnl-games/platform'
 import { markedRuns } from '../sim/core/narrative'
 import { contentTranslator } from '../i18n'
 
-/** D169: the words a change chip uses, per language. English is the source the device template also keys its marks on. */
+/**
+ * D169: the words a change chip uses, per language. English is the source the device template also keys its marks on.
+ * The coin is Auro in every language (a Volta proper noun, GDD §5.2); the HP a draught restored keeps each language's
+ * own word for the draught, as the dictionaries do.
+ */
 const CHIP_WORDS: Readonly<Record<Locale, { gold: string; hp: string; xp: string; fromPotion: (hp: string) => string; bagSlots: (n: number) => string; pouch: (n: number) => string; offers: (n: number) => string; noEffect: string }>> = {
-  en: { gold: 'gold', hp: 'HP', xp: 'XP', fromPotion: (hp) => `${hp} from potion`, bagSlots: (n) => (n === 1 ? 'bag slot' : 'bag slots'), pouch: (n) => `Pouch holds ${n}`, offers: (n) => `${n} ${n === 1 ? 'offer' : 'offers'} open`, noEffect: 'No effect' },
-  fr: { gold: 'or', hp: 'PV', xp: 'XP', fromPotion: (hp) => `${hp} grâce à la potion`, bagSlots: (n) => (n === 1 ? 'place de sac' : 'places de sac'), pouch: (n) => `Pochette : ${n}`, offers: (n) => `${n} ${n === 1 ? 'offre ouverte' : 'offres ouvertes'}`, noEffect: 'Aucun effet' },
-  de: { gold: 'Gold', hp: 'LP', xp: 'XP', fromPotion: (hp) => `${hp} durch Trank`, bagSlots: (n) => (n === 1 ? 'Taschenplatz' : 'Taschenplätze'), pouch: (n) => `Beutel fasst ${n}`, offers: (n) => `${n} ${n === 1 ? 'Angebot' : 'Angebote'} offen`, noEffect: 'Keine Wirkung' },
-  es: { gold: 'oro', hp: 'PV', xp: 'XP', fromPotion: (hp) => `${hp} por la poción`, bagSlots: (n) => (n === 1 ? 'hueco en la bolsa' : 'huecos en la bolsa'), pouch: (n) => `Bolsita: ${n}`, offers: (n) => `${n} ${n === 1 ? 'oferta abierta' : 'ofertas abiertas'}`, noEffect: 'Sin efecto' },
-  it: { gold: 'oro', hp: 'PS', xp: 'XP', fromPotion: (hp) => `${hp} dalla pozione`, bagSlots: (n) => (n === 1 ? 'posto nella borsa' : 'posti nella borsa'), pouch: (n) => `Borsello: ${n}`, offers: (n) => `${n} ${n === 1 ? 'offerta aperta' : 'offerte aperte'}`, noEffect: 'Nessun effetto' },
-  pt: { gold: 'ouro', hp: 'PV', xp: 'XP', fromPotion: (hp) => `${hp} da poção`, bagSlots: (n) => (n === 1 ? 'espaço na bolsa' : 'espaços na bolsa'), pouch: (n) => `Bolsinha: ${n}`, offers: (n) => `${n} ${n === 1 ? 'oferta aberta' : 'ofertas abertas'}`, noEffect: 'Sem efeito' },
+  en: { gold: 'Auro', hp: 'HP', xp: 'XP', fromPotion: (hp) => `${hp} from draught`, bagSlots: (n) => (n === 1 ? 'bag slot' : 'bag slots'), pouch: (n) => `Pouch holds ${n}`, offers: (n) => `${n} ${n === 1 ? 'offer' : 'offers'} open`, noEffect: 'No effect' },
+  fr: { gold: 'Auro', hp: 'PV', xp: 'XP', fromPotion: (hp) => `${hp} grâce à la potion`, bagSlots: (n) => (n === 1 ? 'place de sac' : 'places de sac'), pouch: (n) => `Pochette : ${n}`, offers: (n) => `${n} ${n === 1 ? 'offre ouverte' : 'offres ouvertes'}`, noEffect: 'Aucun effet' },
+  de: { gold: 'Auro', hp: 'LP', xp: 'XP', fromPotion: (hp) => `${hp} durch Trank`, bagSlots: (n) => (n === 1 ? 'Taschenplatz' : 'Taschenplätze'), pouch: (n) => `Beutel fasst ${n}`, offers: (n) => `${n} ${n === 1 ? 'Angebot' : 'Angebote'} offen`, noEffect: 'Keine Wirkung' },
+  es: { gold: 'Auro', hp: 'PV', xp: 'XP', fromPotion: (hp) => `${hp} por la poción`, bagSlots: (n) => (n === 1 ? 'hueco en la bolsa' : 'huecos en la bolsa'), pouch: (n) => `Bolsita: ${n}`, offers: (n) => `${n} ${n === 1 ? 'oferta abierta' : 'ofertas abiertas'}`, noEffect: 'Sin efecto' },
+  it: { gold: 'Auro', hp: 'PS', xp: 'XP', fromPotion: (hp) => `${hp} dalla pozione`, bagSlots: (n) => (n === 1 ? 'posto nella borsa' : 'posti nella borsa'), pouch: (n) => `Borsello: ${n}`, offers: (n) => `${n} ${n === 1 ? 'offerta aperta' : 'offerte aperte'}`, noEffect: 'Nessun effetto' },
+  pt: { gold: 'Auro', hp: 'PV', xp: 'XP', fromPotion: (hp) => `${hp} da poção`, bagSlots: (n) => (n === 1 ? 'espaço na bolsa' : 'espaços na bolsa'), pouch: (n) => `Bolsinha: ${n}`, offers: (n) => `${n} ${n === 1 ? 'oferta aberta' : 'ofertas abertas'}`, noEffect: 'Sem efeito' },
   // Polish nouns take a form for 1, for 2–4 (not 12–14) and for the rest.
-  pl: { gold: 'złota', hp: 'PŻ', xp: 'XP', fromPotion: (hp) => `${hp} z mikstury`, bagSlots: (n) => `${n === 1 ? 'miejsce' : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14) ? 'miejsca' : 'miejsc'} w torbie`, pouch: (n) => `Sakiewka: ${n}`, offers: (n) => `Otwarte oferty: ${n}`, noEffect: 'Bez efektu' },
-  nl: { gold: 'goud', hp: 'HP', xp: 'XP', fromPotion: (hp) => `${hp} door drankje`, bagSlots: (n) => (n === 1 ? 'tasplek' : 'tasplekken'), pouch: (n) => `Buidel: ${n}`, offers: (n) => `${n} ${n === 1 ? 'aanbieding' : 'aanbiedingen'} open`, noEffect: 'Geen effect' },
+  pl: { gold: 'Auro', hp: 'PŻ', xp: 'XP', fromPotion: (hp) => `${hp} z mikstury`, bagSlots: (n) => `${n === 1 ? 'miejsce' : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14) ? 'miejsca' : 'miejsc'} w torbie`, pouch: (n) => `Sakiewka: ${n}`, offers: (n) => `Otwarte oferty: ${n}`, noEffect: 'Bez efektu' },
+  nl: { gold: 'Auro', hp: 'HP', xp: 'XP', fromPotion: (hp) => `${hp} door drankje`, bagSlots: (n) => (n === 1 ? 'tasplek' : 'tasplekken'), pouch: (n) => `Buidel: ${n}`, offers: (n) => `${n} ${n === 1 ? 'aanbieding' : 'aanbiedingen'} open`, noEffect: 'Geen effect' },
 }
 
 export interface LogDeltas {
@@ -52,13 +56,14 @@ export function displayLogDeltas(entry: { readonly deltas: LogDeltas; readonly d
 }
 
 /**
- * D131: the word for a found potion's template. Logs before v14 carry no template and were healing potions; the
- * template ids are catalog content, so the map stays here rather than reading a catalog on every log line.
+ * D131: the word for a found draught's template. Logs before v14 carry no template and were the plain draught; the
+ * template ids are catalog content, so the map stays here rather than reading a catalog on every log line. The words
+ * are v28's (copper draughts, GDD §2): a chip reads the same whatever catalog wrote the line.
  */
+const DRAUGHT_WORDS: Readonly<Record<string, string>> = { minor_potion: 'small draught', healing_potion: 'draught', major_potion: 'strong draught' }
 export function potionWordFor(templateId: string | undefined): string {
-  if (templateId === undefined) return 'healing potion'
-  const stem = templateId.replace(/_potion$/, '').replace(/_/g, ' ')
-  return `${stem} potion`
+  if (templateId === undefined) return 'draught'
+  return DRAUGHT_WORDS[templateId] ?? `${templateId.replace(/_potion$/, '').replace(/_/g, ' ')} draught`
 }
 
 /** The chip a change-free adventure shows ("No effect"), per language, for displays that leave it out. */
@@ -104,21 +109,22 @@ function englishPresentation(entry: { readonly summary: string; readonly kind: s
     .replace(/\bA trap hit for \d+ HP\./g, 'A trap struck.')
     .replace(/\s+(?:for \d+ gold|with \d+ HP)(?=\.)/g, '')
     .replace(/\b\d+ HP\./g, '')
-    .replace(/\b\d+ gold\b/g, 'gold')
+    // The prose calls the coin Auro (GDD §5.2); the amount it names is the chip's.
+    .replace(/\b\d+ gold\b/g, 'Auro')
   ).join('').replace(/\s+/g, ' ').trim()
-  if (!narrative) narrative = deltas.gold > 0 ? 'Found gold.' : 'Recovered.'
+  if (!narrative) narrative = deltas.gold > 0 ? 'Found Auro.' : 'Recovered.'
   // D110: a raid can swing five-figure gold; the device's gold column holds four digits, so it reads "12k" from 10,000.
   const goldChange = (value: number) => (options.compactGold && Math.abs(value) >= 10_000 ? `${value > 0 ? '+' : '−'}${Math.floor(Math.abs(value) / 1000)}k ${words.gold}` : signed(value, words.gold))
   const potionWord = (english: string, count: number) => (chipLocale === 'en' ? `${english}${count === 1 ? '' : 's'}` : t.name(count === 1 ? english : `${english}s`))
   const changes = [
     deltas.xpEarned ? signed(deltas.xpEarned, words.xp) : null,
     deltas.gold ? goldChange(deltas.gold) : null,
-    deltas.potionsFound ? signed(deltas.potionsFound, potionWord(deltas.potionFound ?? 'healing potion', deltas.potionsFound)) : null,
+    deltas.potionsFound ? signed(deltas.potionsFound, potionWord(deltas.potionFound ?? 'draught', deltas.potionsFound)) : null,
     // Net HP stays the single HP figure (D48); the potion chip names the part a potion restored.
     deltas.hp ? signed(deltas.hp, words.hp) : null,
     deltas.potionHealing && deltas.potionHealing !== deltas.hp ? words.fromPotion(signed(deltas.potionHealing, words.hp)) : null,
     deltas.bagSlots ? signed(deltas.bagSlots, words.bagSlots(deltas.bagSlots)) : null,
-    deltas.potionsBought ? signed(deltas.potionsBought, potionWord('healing potion', deltas.potionsBought)) : null,
+    deltas.potionsBought ? signed(deltas.potionsBought, potionWord('draught', deltas.potionsBought)) : null,
     deltas.pouchCap ? words.pouch(deltas.pouchCap) : null,
     deltas.offers ? words.offers(deltas.offers) : null,
     deltas.effectGained ? t.text(deltas.effectGained.replace(/_/g, ' ').replace(/^./, (c) => c.toUpperCase())) : null,

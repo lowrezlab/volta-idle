@@ -15,6 +15,7 @@ import { keepsakeCode, keepsakeGrant } from './lib/keepsakes'
 import { keepsakesOpen, keepsakeWeek } from '@trmnl-games/wardenwatch/content/keepsakes'
 import { displayLogDeltas } from '@trmnl-games/wardenwatch/log'
 import { affixById } from '@trmnl-games/wardenwatch/sim/core/modifiers'
+import { rarityLabel } from '@trmnl-games/wardenwatch/sim/core/narrative'
 import { todoCompactLine } from '@trmnl-games/wardenwatch/sim/core/todo'
 import { careerLine, currentRung, measureRung } from '@trmnl-games/wardenwatch/sim/core/career'
 import { taskLabel } from '@trmnl-games/wardenwatch/sim/core/todo'
@@ -116,7 +117,7 @@ async function payloadFor(ctx: QueryCtx, user: Doc<'users'>, now: number, instan
       .take(INVENTORY_READ)
     const named = (id: string | undefined) => items.find((item) => item._id === id)
     const label = (item: (typeof items)[number] | undefined) =>
-      item ? `${affixById(content, item.affixId)?.name ?? ''} ${item.rarity === 'common' ? '' : item.rarity.charAt(0).toUpperCase() + item.rarity.slice(1)} ${item.name}`.replace(/\s+/g, ' ').trim() : null
+      item ? `${affixById(content, item.affixId)?.name ?? ''} ${item.rarity === 'common' ? '' : rarityLabel(item.rarity)} ${item.name}`.replace(/\s+/g, ' ').trim() : null
     weaponName = label(named(hero.weaponId))
     armorName = label(named(hero.armorId))
     weaponAttack = named(hero.weaponId)?.attack ?? 0

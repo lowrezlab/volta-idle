@@ -10,6 +10,7 @@ import { bagUsed, currentTier, guaranteedTierIndex, isBagFull, nextEarlyTier, ne
 import { currentPouchTier, guaranteedPouchIndex, nextEarlyPouchTier, nextPouchTier, potionCap } from '@trmnl-games/wardenwatch/sim/core/pouch'
 import { starterKit } from '@trmnl-games/wardenwatch/sim/core/starter'
 import { affixById } from '@trmnl-games/wardenwatch/sim/core/modifiers'
+import { rarityLabel } from '@trmnl-games/wardenwatch/sim/core/narrative'
 import { ACTIVE_CONTENT, catalogs } from '@trmnl-games/wardenwatch/content'
 import type { ContentCatalog, HeroState } from '@trmnl-games/wardenwatch/sim/core/types'
 import { readWorld, worldContent } from './world'
@@ -152,7 +153,7 @@ function merchantView(hero: Doc<'heroes'>, tick: number) {
 }
 
 /** "Vampiric Rare Keyboard Mace Mk III +2": the affix adjective (looked up in the active catalog), the rarity, the name, the workbench suffix (D129). */
-const itemLabel = (item: Doc<'items'>) => `${affixById(catalogs[ACTIVE_CONTENT], item.affixId)?.name ?? ''} ${item.rarity === 'common' ? '' : item.rarity.charAt(0).toUpperCase() + item.rarity.slice(1)} ${item.name} ${workbenchSuffix(catalogs[ACTIVE_CONTENT], snapshotOf(item))}`.replace(/\s+/g, ' ').trim()
+const itemLabel = (item: Doc<'items'>) => `${affixById(catalogs[ACTIVE_CONTENT], item.affixId)?.name ?? ''} ${item.rarity === 'common' ? '' : rarityLabel(item.rarity)} ${item.name} ${workbenchSuffix(catalogs[ACTIVE_CONTENT], snapshotOf(item))}`.replace(/\s+/g, ' ').trim()
 
 /** The pure-core view of an item document. */
 const snapshotOf = (item: Doc<'items'>): ItemSnapshot => ({
@@ -341,7 +342,7 @@ export const usePotion = mutation({
         : ((row) => (row === undefined ? undefined : { row, healPct: healPctOf(content, row.templateId) }))(rows.find((row) => row.templateId === args.templateId))
       if (chosen === undefined) {
         const named = args.templateId === undefined ? undefined : strengthOf(content, args.templateId)
-        throw appError('NO_POTION', named === undefined ? 'No potions left.' : `No ${potionWord(named.name)}s left.`)
+        throw appError('NO_POTION', named === undefined ? 'No draughts left.' : `No ${potionWord(named.name)}s left.`)
       }
       const potion = chosen.row
       const hp = Math.min(max, hero.hp + pctOf(max, chosen.healPct))
@@ -619,7 +620,7 @@ export const buyBag = mutation({
       const content = await contentOf(ctx)
       const tier = nextEarlyTier(content, asBagHero(hero))
       if (tier === undefined || tier.price === undefined || tier.id !== args.tierId) throw appError('BAG_UNAVAILABLE', 'That bag is not available right now.')
-      if (hero.gold < tier.price) throw appError('NOT_ENOUGH_GOLD', `The ${tier.name} costs ${tier.price} gold.`)
+      if (hero.gold < tier.price) throw appError('NOT_ENOUGH_GOLD', `The ${tier.name} costs ${tier.price} Auro.`)
       const from = hero.bagCapacity
       await ctx.db.patch(hero._id, { gold: hero.gold - tier.price, bagCapacity: tier.capacity })
       await commandLog(ctx, (await ctx.db.get(hero._id))!, 'buy_bag', `Bought a [[${tier.name}]]. Bag holds ${tier.capacity}.`, { xpEarned: 0, gold: -tier.price, hp: 0 }, { bagSlots: tier.capacity - from })
@@ -642,12 +643,12 @@ export const buyNameTag = mutation({
       const name = validateName(args.name, HERO_NAME_RULE)
       if (!name.ok) throw appError('INVALID_INPUT', `Hero name: ${name.reason}`)
       if (name.value === hero.name) throw appError('INVALID_INPUT', `Your hero is already called ${hero.name}.`)
-      if (hero.gold < NAME_TAG_PRICE) throw appError('NOT_ENOUGH_GOLD', `A name tag costs ${NAME_TAG_PRICE} gold.`)
+      if (hero.gold < NAME_TAG_PRICE) throw appError('NOT_ENOUGH_GOLD', `A new name on the roll costs ${NAME_TAG_PRICE} Auro.`)
       // An account still on the legacy hero pointer gets its profile row first.
       if (profile === null) await setCurrentHero(ctx, user, hero._id)
       await ctx.db.patch((profile ?? (await gameProfile(ctx, user._id)))!._id, { lastNameTagAt: now })
       await ctx.db.patch(hero._id, { gold: hero.gold - NAME_TAG_PRICE, name: name.value })
-      await commandLog(ctx, (await ctx.db.get(hero._id))!, 'name_tag', `Pinned on a new name tag: "Hi, my name is [[${name.value}]]."`, { xpEarned: 0, gold: -NAME_TAG_PRICE, hp: 0 })
+      await commandLog(ctx, (await ctx.db.get(hero._id))!, 'name_tag', `Signed the roll under a new name: [[${name.value}]].`, { xpEarned: 0, gold: -NAME_TAG_PRICE, hp: 0 })
       return { changed: true, gold: -NAME_TAG_PRICE }
     }),
 })
@@ -664,9 +665,9 @@ export const buyPouch = mutation({
       const state = { level: hero.level, ...(hero.potionCap === undefined ? {} : { potionCap: hero.potionCap }) }
       const tier = nextEarlyPouchTier(content, state)
       if (tier === undefined || tier.price === undefined || tier.id !== args.tierId) throw appError('POUCH_UNAVAILABLE', 'That pouch is not available right now.')
-      if (hero.gold < tier.price) throw appError('NOT_ENOUGH_GOLD', `The ${tier.name} costs ${tier.price} gold.`)
+      if (hero.gold < tier.price) throw appError('NOT_ENOUGH_GOLD', `The ${tier.name} costs ${tier.price} Auro.`)
       await ctx.db.patch(hero._id, { gold: hero.gold - tier.price, potionCap: tier.cap })
-      await commandLog(ctx, (await ctx.db.get(hero._id))!, 'buy_pouch', `Bought a [[${tier.name}]]. Holds ${tier.cap} potions.`, { xpEarned: 0, gold: -tier.price, hp: 0 })
+      await commandLog(ctx, (await ctx.db.get(hero._id))!, 'buy_pouch', `Bought a [[${tier.name}]]. Holds ${tier.cap} draughts.`, { xpEarned: 0, gold: -tier.price, hp: 0 })
       await awardAfterIntent(ctx, hero, content, await currentTick(ctx))
       return { changed: true, gold: -tier.price, count: tier.cap }
     }),
@@ -688,7 +689,7 @@ export const buyOffer = mutation({
       if (!visit || tick >= visit.expiresAtTick) throw appError('MERCHANT_GONE', 'The merchant has moved on.')
       const offer = visit.offers.find((candidate) => candidate.id === args.offerId)
       if (!offer) throw appError('OFFER_UNAVAILABLE', 'That offer is no longer on the table.')
-      if (hero.gold < offer.price) throw appError('NOT_ENOUGH_GOLD', `That costs ${offer.price} gold.`)
+      if (hero.gold < offer.price) throw appError('NOT_ENOUGH_GOLD', `That costs ${offer.price} Auro.`)
       const content = await contentOf(ctx)
       const state = { level: hero.level, ...(hero.potionCap === undefined ? {} : { potionCap: hero.potionCap }) }
       const remaining = visit.offers.filter((candidate) => candidate.id !== offer.id)
@@ -703,22 +704,22 @@ export const buyOffer = mutation({
         const potion = rows.find((item) => item.templateId === content.potion.templateId)
         const have = potionsHeld(rows)
         const cap = potionCap(content, state)
-        if (have + offer.quantity > cap) throw appError('POUCH_FULL', `Your pouch holds ${cap} potions; ${cap - have} more would fit.`)
+        if (have + offer.quantity > cap) throw appError('POUCH_FULL', `Your case holds ${cap} draughts; ${cap - have} more would fit.`)
         if (potion) await ctx.db.patch(potion._id, { quantity: potion.quantity + offer.quantity })
         else await ctx.db.insert('items', { ...starterKit(content).potions, quantity: offer.quantity, heroId: hero._id, createdAt: Date.now() })
-        summary = `Bought ${offer.quantity === 1 ? 'a healing potion' : `${offer.quantity} healing potions`} from the merchant.`
+        summary = `Bought ${offer.quantity === 1 ? `a ${potionWord(content.potion.name)}` : `${offer.quantity} ${potionWord(content.potion.name)}s`} from the factor.`
       } else if (offer.id === 'pouch') {
         const tier = nextEarlyPouchTier(content, state)
         if (tier === undefined || tier.id !== offer.tierId) throw appError('OFFER_UNAVAILABLE', 'That pouch is no longer available.')
         patch.potionCap = tier.cap
         count = tier.cap
-        summary = `Bought a [[${tier.name}]] from the merchant. Holds ${tier.cap} potions.`
+        summary = `Bought a [[${tier.name}]] from the factor. Holds ${tier.cap} draughts.`
       } else {
         const tier = nextEarlyTier(content, asBagHero(hero))
         if (tier === undefined || tier.id !== offer.tierId) throw appError('OFFER_UNAVAILABLE', 'That bag is no longer available.')
         patch.bagCapacity = tier.capacity
         count = tier.capacity
-        summary = `Bought a [[${tier.name}]] from the merchant. Bag holds ${tier.capacity}.`
+        summary = `Bought a [[${tier.name}]] from the factor. Bag holds ${tier.capacity}.`
       }
       await ctx.db.patch(hero._id, patch)
       await commandLog(ctx, (await ctx.db.get(hero._id))!, 'buy_offer', summary, { xpEarned: 0, gold: -offer.price, hp: 0 }, offer.id === 'potions' ? { potionsBought: offer.quantity } : offer.id === 'bag' ? { bagSlots: count - hero.bagCapacity } : {})
@@ -778,7 +779,7 @@ function requireWorkbench(content: ContentCatalog, hero: Doc<'heroes'>): NonNull
 function requireAffordable(content: ContentCatalog, hero: Doc<'heroes'>, held: MaterialCount, price: { gold: number; materials: MaterialCount }): void {
   const short = materialShortfall(held, price.materials)
   if (Object.keys(short).length > 0) throw appError('NOT_ENOUGH_MATERIALS', `Needs ${materialsText(content, short)} more.`)
-  if (hero.gold < price.gold) throw appError('NOT_ENOUGH_GOLD', `That costs ${price.gold} gold.`)
+  if (hero.gold < price.gold) throw appError('NOT_ENOUGH_GOLD', `That costs ${price.gold} Auro.`)
 }
 
 /** The owned, unheld gear a workbench step may change; equipped gear is fine, since the item changes in place. */

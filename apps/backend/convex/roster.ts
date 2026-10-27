@@ -57,7 +57,7 @@ function assertParkable(hero: Doc<'heroes'>) {
 /** Park the current hero where it stands; a merchant's visit ends, since four adventures is a visit, not a reservation. */
 async function park(ctx: MutationCtx, hero: Doc<'heroes'>, tick: number, nextName: string) {
   await ctx.db.patch(hero._id, { isActive: false, parkedAtTick: tick, merchant: undefined })
-  await commandLog(ctx, hero, 'park_hero', `Clocked out. [[${nextName}]] takes the desk.`)
+  await commandLog(ctx, hero, 'park_hero', `Stood down. [[${nextName}]] takes the watch.`)
 }
 
 /** Bring a parked hero back: every tick-stamped timer moves on by the gap, so nothing ran out while it waited. */
@@ -73,7 +73,7 @@ async function unpark(ctx: MutationCtx, hero: Doc<'heroes'>, tick: number) {
     // D163: a dug-in elite waits for the hero too.
     ...(hero.standoff === undefined ? {} : { standoff: { ...hero.standoff, startedTick: hero.standoff.startedTick + gap, untilTick: hero.standoff.untilTick + gap } }),
   })
-  await commandLog(ctx, hero, 'unpark_hero', 'Back at the desk, right where you left off.')
+  await commandLog(ctx, hero, 'unpark_hero', 'Back on watch, right where you left off.')
 }
 
 function rosterScene(content: ContentCatalog, hero: Doc<'heroes'>, now: number, utcOffset: number | undefined) {

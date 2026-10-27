@@ -148,7 +148,7 @@ const nl = contentTranslator('nl')
 const DESK_ALERTS: Readonly<Record<Locale, { asleep: (hero: string) => { title: string; body: string }; merchant: (hero: string, offer: string | null) => { title: string; body: string } }>> = {
   en: {
     asleep: (hero) => ({ title: `${hero}'s bag is full`, body: `${hero} is holding a new find for you. Make room in the bag so the next ones are not left behind.` }),
-    merchant: (hero, offer) => ({ title: 'A merchant is visiting', body: `A merchant is offering ${hero} a ${offer ?? 'bigger bag'} at a discount, and they have the gold. The offer lasts about an hour.` }),
+    merchant: (hero, offer) => ({ title: 'A Serpentos factor is calling', body: `A Serpentos factor is offering ${hero} a ${offer ?? 'bigger pack'} at a discount, and they have the Auro. The offer stands about an hour.` }),
   },
   fr: {
     asleep: (hero) => ({ title: `Le sac de ${hero} est plein`, body: `${hero} vous garde une nouvelle trouvaille. Faites de la place dans le sac pour ne pas laisser les suivantes derrière.` }),

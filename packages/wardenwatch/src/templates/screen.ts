@@ -336,7 +336,7 @@ const fitClamp = (plain: string, clamp: number, fit: number) =>
 const plainOf = (expr: string) => `${expr} | replace: "[[", "" | replace: "]]", ""`
 
 /** On ink panels a lost HP reads red and found gold sits on yellow (D94); units follow a no-break space. */
-const chipInk = (text: string) => `{% if ${text} contains "\u00a0HP" and ${text} contains "−" %} ${ink('text', 'red')}{% elsif ${text} contains "\u00a0gold" and ${text} contains "+" %} ${ink('bg', 'yellow', 'white')}{% endif %}`
+const chipInk = (text: string) => `{% if ${text} contains "\u00a0HP" and ${text} contains "−" %} ${ink('text', 'red')}{% elsif ${text} contains "\u00a0Auro" and ${text} contains "+" %} ${ink('bg', 'yellow', 'white')}{% endif %}`
 /**
  * One change drawn like a recap fact: its HUD mark and the number ("+14" behind the letters XP), so a row reads at a glance
  * without "XP", "gold" and "HP" spelled out on every line. Units arrive after a no-break space; a change with no mark
@@ -344,9 +344,9 @@ const chipInk = (text: string) => `{% if ${text} contains "\u00a0HP" and ${text}
  */
 const chip = (text: string) =>
   `{% assign change_parts = ${text} | split: "\u00a0" %}{% assign change_unit = change_parts | last %}{% assign change_icon = "" %}{% assign change_size = "${COUNTER_ICON}" %}{% assign change_text = ${text} %}` +
-  `{% if change_parts.size > 1 %}{% case change_unit %}{% when "XP" %}{% assign change_icon = hud_xp %}{% assign change_size = "w--[24px] h--[16px] no-shrink ${ADAPTIVE}" %}{% when "gold" %}{% assign change_icon = hud_coin %}{% when "HP" %}{% assign change_icon = hud_heart_full %}{% assign change_size = "w--[18px] h--[16px] no-shrink ${ADAPTIVE}" %}{% when "bag slot", "bag slots" %}{% assign change_icon = hud_bag %}{% endcase %}` +
-  `{% if change_unit contains "potion" %}{% assign change_icon = hud_potion %}{% endif %}` +
-  `{% if change_icon != "" %}{% assign change_text = change_parts | first %}{% if change_unit == "HP from potion" %}{% assign change_text = change_text | append: "\u00a0HP" %}{% endif %}{% endif %}{% endif %}` +
+  `{% if change_parts.size > 1 %}{% case change_unit %}{% when "XP" %}{% assign change_icon = hud_xp %}{% assign change_size = "w--[24px] h--[16px] no-shrink ${ADAPTIVE}" %}{% when "Auro" %}{% assign change_icon = hud_coin %}{% when "HP" %}{% assign change_icon = hud_heart_full %}{% assign change_size = "w--[18px] h--[16px] no-shrink ${ADAPTIVE}" %}{% when "bag slot", "bag slots" %}{% assign change_icon = hud_bag %}{% endcase %}` +
+  `{% if change_unit contains "draught" %}{% assign change_icon = hud_potion %}{% endif %}` +
+  `{% if change_icon != "" %}{% assign change_text = change_parts | first %}{% if change_unit == "HP from draught" %}{% assign change_text = change_text | append: "\u00a0HP" %}{% endif %}{% endif %}{% endif %}` +
   `<span class="flex flex--row flex--center-y gap--[3px] no-shrink" data-change="true">{% if change_icon != "" %}<img class="{{ change_size }}" src="{{ change_icon }}" alt="">{% endif %}<span class="label lg:title--small${chipInk(text)}">{{ change_text | escape }}</span></span>`
 /**
  * A fixed-width cell, its mark at the left, so the same stat sits in the same place on every line. A device text scale
@@ -360,7 +360,7 @@ const chipCell = (field: string, kind: string, px: number) => `<span class="flex
  * false. A story without changes keeps the whole line, and one with only other changes reserves no stat columns.
  * Units arrive joined by a no-break space, so the words after it name the stat.
  */
-const chipSort = `{% assign chip_xp = "" %}{% assign chip_gold = "" %}{% assign chip_hp = "" %}{% assign chip_marked = "" %}{% assign chip_words = "" %}{% for change in line_changes %}{% assign chip_unit = change | split: "\u00a0" | last %}{% if chip_unit == "XP" %}{% assign chip_xp = change %}{% elsif chip_unit == "gold" %}{% assign chip_gold = change %}{% elsif chip_unit == "HP" %}{% assign chip_hp = change %}{% elsif change contains "\u00a0" and chip_unit contains "potion" or change contains "\u00a0" and chip_unit contains "bag slot" %}{% capture chip_marked %}{{ chip_marked }}${chip('change')}{% endcapture %}{% else %}{% capture chip_words %}{{ chip_words }}${chip('change')}{% endcapture %}{% endif %}{% endfor %}`
+const chipSort = `{% assign chip_xp = "" %}{% assign chip_gold = "" %}{% assign chip_hp = "" %}{% assign chip_marked = "" %}{% assign chip_words = "" %}{% for change in line_changes %}{% assign chip_unit = change | split: "\u00a0" | last %}{% if chip_unit == "XP" %}{% assign chip_xp = change %}{% elsif chip_unit == "Auro" %}{% assign chip_gold = change %}{% elsif chip_unit == "HP" %}{% assign chip_hp = change %}{% elsif change contains "\u00a0" and chip_unit contains "draught" or change contains "\u00a0" and chip_unit contains "bag slot" %}{% capture chip_marked %}{{ chip_marked }}${chip('change')}{% endcapture %}{% else %}{% capture chip_words %}{{ chip_words }}${chip('change')}{% endcapture %}{% endif %}{% endfor %}`
 const chipColumns = (visibility = 'hidden lg:flex', others = true) => `${chipSort}<span class="${visibility} flex--row flex--center-y flex--right gap--small no-shrink" data-story-chips-inline="true">${others ? '{{ chip_marked }}{{ chip_words }}' : '{% if chip_marked != "" %}<span class="flex flex--row flex--center-y gap--small" data-marked-inline="true">{{ chip_marked }}</span>{% endif %}'}{% if chip_xp != "" or chip_gold != "" or chip_hp != "" %}${chipCell('chip_xp', 'xp', 78)}${chipCell('chip_gold', 'gold', 74)}${chipCell('chip_hp', 'hp', 66)}{% endif %}</span>`
 
 /**

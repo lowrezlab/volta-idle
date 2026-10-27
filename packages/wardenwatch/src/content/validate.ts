@@ -351,6 +351,19 @@ export function validateCatalog(content: ContentCatalog): string[] {
   for (const [key, list] of Object.entries(content.narrative.shared)) {
     if ((list as readonly string[]).length < 1) problems.push(`shared narrative ${key} is empty`)
   }
+  // The eldritch lines (GDD §8) are drawn from the pools above, and no pool is only eldritch: an ordinary tick must
+  // still have a line to tell.
+  if (content.narrative.eldritch !== undefined) {
+    const marked = new Set(content.narrative.eldritch)
+    const pools: (readonly string[])[] = [
+      ...Object.values(content.narrative.biomes).flatMap((biome) => [biome.victory, biome.lootGold, biome.trapHit, biome.rest, biome.eliteVictory, biome.jackpot, biome.lootGear, biome.arrive]),
+      ...Object.values(content.narrative.shared),
+      ...Object.values(content.narrative.monsters).map((monster) => monster.victory),
+    ]
+    const known = new Set(pools.flat())
+    for (const line of marked) if (!known.has(line)) problems.push(`eldritch line is in no narrative pool: ${line}`)
+    for (const pool of pools) if (pool.length > 0 && pool.every((line) => marked.has(line))) problems.push(`a narrative pool is only eldritch lines: ${pool[0]}`)
+  }
   const tiers = content.bagLadder.tiers
   if (tiers.length < 2) problems.push('bag ladder needs at least two tiers')
   if (tiers[0]?.milestone !== undefined || tiers[0]?.price !== undefined) problems.push('the starting bag has no milestone or price')

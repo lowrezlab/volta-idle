@@ -47,18 +47,18 @@ interface Words {
 
 const WORDS: Readonly<Record<Locale, Words>> = {
   en: {
-    subjectGold: (n, g) => `Wardenwatch for TRMNL: ${n} has ${g} gold waiting`,
+    subjectGold: (n, g) => `Wardenwatch for TRMNL: ${n} has ${g} Auro waiting`,
     subjectFinds: (n, f) => `Wardenwatch for TRMNL: ${n} has ${f === 1 ? 'a find' : `${f} finds`} in the bag`,
     subjectLevel: (n, l) => `Wardenwatch for TRMNL: ${n} is level ${l}`,
     hi: 'Hi,',
     intro: (n, d, l) => `${n} has been adventuring on your TRMNL since you installed Wardenwatch on ${d}, and is now level ${l}.`,
     waiting: 'A few things are waiting for you in the Wardenwatch app:',
     upNext: 'Here’s what’s next in the Wardenwatch app:',
-    gold: (g, c) => `${g} gold from ${c === 1 ? 'a goal' : `${c} goals`} reached, ready to claim`,
+    gold: (g, c) => `${g} Auro from ${c === 1 ? 'a goal' : `${c} goals`} reached, ready to claim`,
     finds: (f, cap) => `${f === 1 ? '1 find' : `${f} finds`} in the bag (${f} of ${cap} slots)`,
     best: (b) => `Best find: ${b}`,
     next: (g) => `Next goal: ${g}`,
-    why: 'Your TRMNL shows the adventure as it happens. Claiming gold, equipping gear and selling finds happen in the app.',
+    why: 'Your TRMNL shows the survey as it happens. Claiming Auro, equipping gear and selling finds happen in the app.',
     open: (l) => `Open Wardenwatch: ${l}`,
     signIn: 'Sign in with the same account you used to install it.',
     sign: 'Barry, maker of Wardenwatch',

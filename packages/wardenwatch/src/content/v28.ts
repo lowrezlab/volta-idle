@@ -27,7 +27,8 @@ import { contentV27 } from './v27'
  * those zones, the gear, packs, draughts, shards, stances, commissions,
  * garrison orders, musters, strays and camp raids are renamed, and every line
  * of narrative is rewritten in the voice of Ur-Turul, the fort's cartographer,
- * keeping dry survey notes.
+ * keeping dry survey notes. The few lines with the sky's weight are marked
+ * `eldritch`, and the simulator tells at most one of them a day (GDD §8).
  *
  * Every number is v27's. Nothing here is a balance change: every stat,
  * weight, unlock level, price, capacity, drop rate, predicate and reward is
@@ -321,11 +322,21 @@ const MUSTERS: Record<string, Pick<MeetingKind, 'name' | 'starter' | 'partner' |
 
 const win = ' +{xp} XP, +{gold} gold.'
 
+/**
+ * The lines with the sky's weight (GDD §8): the simulator tells at most one of these a day, on the day's eldritch
+ * slot, so the horror under the cozy road stays rare. Everything else is a survey note.
+ */
+const ELDRITCH = new Set<string>()
+const eldritch = (line: string): string => {
+  ELDRITCH.add(line)
+  return line
+}
+
 const castellum: BiomeNarrative = {
   victory: [
     `Defeated a {monster} by the palisade.${win}`,
     `A {monster} fell behind the supply cellar.${win}`,
-    `Noted a {monster} under 'dealt with'.${win}`,
+    `Entered a {monster} in the survey as dealt with.${win}`,
     `Beat a {monster} by the well.${win}`,
     `Chased a {monster} out through the gap in the wall.${win}`,
     `Beat a {monster} in the drill yard.${win}`,
@@ -337,7 +348,7 @@ const castellum: BiomeNarrative = {
     'Loose coin under the paymaster’s bench: {gold} gold.',
     'A forgotten muster purse held {gold} gold.',
     'Found {gold} gold behind the brazier.',
-    'Found {gold} gold in the cook’s tip bowl.',
+    'Found {gold} gold in the cook’s honesty bowl.',
     'An old wager finally paid out: {gold} gold.',
   ],
   trapHit: [
@@ -360,7 +371,7 @@ const castellum: BiomeNarrative = {
     'Took a quiet turn by the brazier. +{heal} HP.',
     'Napped in the straw of the supply cellar. +{heal} HP.',
     'A decent bowl of broth, for once. +{heal} HP.',
-    'Stretched on the wall walk under the Watcher. +{heal} HP.',
+    eldritch('Lay on the wall walk under the Watcher. It did not blink once. +{heal} HP.'),
     'Hid in a tent nobody had claimed. +{heal} HP.',
     'Ate the last heel of bread in the cookhouse. +{heal} HP.',
   ],
@@ -370,9 +381,9 @@ const castellum: BiomeNarrative = {
     `An elite {monster} was sent back into the trees.${win}`,
   ],
   jackpot: [
-    'Jackpot! A lost pay chest: {gold} gold.',
-    'Jackpot! An unclaimed bounty purse: {gold} gold.',
-    'Jackpot! The garrison dice pool came in: {gold} gold.',
+    'Windfall. A lost pay chest: {gold} gold.',
+    'Windfall. An unclaimed bounty purse: {gold} gold.',
+    'Windfall. The garrison dice pool came in: {gold} gold.',
   ],
   lootGear: ['Found a {item} in the armoury tent.', 'Picked up a {item} left on a cot.', 'Unpacked a {item} from a supply crate.'],
   arrive: ['Gate opened. Back in the {destination}.', 'Returned to the {destination}. The roof is still not on.'],
@@ -395,7 +406,7 @@ const fjords: BiomeNarrative = {
     "A drowned sailor's purse: {gold} gold.",
     'Recovered {gold} gold from a tide-washed chest.',
     'Sold a pelt at the landing for {gold} gold.',
-    'Found {gold} gold in a bird’s nest, for some reason.',
+    'Found {gold} gold in a bird’s nest. No note on why.',
   ],
   trapHit: [
     'Thin ice gave way. -{damage} HP.',
@@ -415,7 +426,7 @@ const fjords: BiomeNarrative = {
     'Sat out of the wind behind a boulder. +{heal} HP.',
     'Rested on a bed of pine needles. +{heal} HP.',
     'Drank meltwater from a cupped leaf. +{heal} HP.',
-    'Listened to the fjord creak. +{heal} HP.',
+    eldritch('Listened to the fjord creak. Something under it creaked back. +{heal} HP.'),
     'Warmed up by a driftwood fire. +{heal} HP.',
     'Waited out a long snow shower. +{heal} HP.',
   ],
@@ -425,9 +436,9 @@ const fjords: BiomeNarrative = {
     `An elite {monster} will not cross the shingle again.${win}`,
   ],
   jackpot: [
-    'Jackpot! A smuggler’s cache under a cairn: {gold} gold.',
-    'Jackpot! A trade-ship’s strongbox washed ashore: {gold} gold.',
-    'Jackpot! The silver out of a wrecked hull: {gold} gold.',
+    'Windfall. A smuggler’s cache under a cairn: {gold} gold.',
+    'Windfall. A trade-ship’s strongbox washed ashore: {gold} gold.',
+    'Windfall. The silver out of a wrecked hull: {gold} gold.',
   ],
   lootGear: ['Pulled a {item} out of the driftwood.', 'Found a {item} in a cairn marked with a bad word.', 'Took a {item} from a wrecked longboat.'],
   arrive: ['Gate closed behind. Out in the cold {destination}.', 'Made it to the {destination}. The wind has opinions.'],
@@ -457,7 +468,7 @@ const fens: BiomeNarrative = {
     'Slipped on a frozen rut. -{damage} HP.',
     'Caught in a goblin snare. -{damage} HP.',
     'Scalded by a bog vent. -{damage} HP.',
-    'Something under the ice lunged. -{damage} HP.',
+    eldritch('Something under the ice lunged, and the ice did not break. -{damage} HP.'),
     'Tried the fen berries. -{damage} HP.',
     'Tripped over the road marker. -{damage} HP.',
     'A stack of cut reeds fell over. -{damage} HP.',
@@ -480,9 +491,9 @@ const fens: BiomeNarrative = {
     `Beat an elite {monster} at the ford.${win}`,
   ],
   jackpot: [
-    'Jackpot! A toll-keeper’s buried box: {gold} gold.',
-    'Jackpot! A wayshrine bowl overflowed: {gold} gold.',
-    'Jackpot! A forgotten supply-train purse: {gold} gold.',
+    'Windfall. A toll-keeper’s buried box: {gold} gold.',
+    'Windfall. A wayshrine bowl overflowed: {gold} gold.',
+    'Windfall. A forgotten supply-train purse: {gold} gold.',
   ],
   lootGear: ['Found a {item} behind the ford-keeper’s hut.', 'Fished a {item} out of the mire.', 'A {item} was in a sunken cart.'],
   arrive: ['Made it to the {destination}. Something smells of rot.', 'Arrived in the {destination}. Mind the thin ice.'],
@@ -493,11 +504,11 @@ const skerry: BiomeNarrative = {
     `Defeated a {monster} between the slave pens.${win}`,
     `A {monster} went back over the harbour chain.${win}`,
     `Beat a {monster} under the one lit lantern.${win}`,
-    `Argued a {monster} off the pier, with a maul.${win}`,
+    `Put a {monster} off the pier. The maul settled the argument.${win}`,
     `Left a {monster} flat under a sail.${win}`,
     `Sent a {monster} back to its ship.${win}`,
     `Beat a {monster} on the glacier lip.${win}`,
-    `Marked a {monster} SOLD and walked on.${win}`,
+    `Struck a {monster} off the slaver’s ledger.${win}`,
   ],
   lootGold: [
     'Found {gold} gold in a cask marked 1180.',
@@ -519,7 +530,7 @@ const skerry: BiomeNarrative = {
     'A stack of crates fell like dominoes. -{damage} HP.',
     'Caught a sleeve on a rusted hook. -{damage} HP.',
     'Walked into a bollard in the dark. -{damage} HP.',
-    'The one lit lantern went out mid-step. -{damage} HP.',
+    eldritch('The one lit lantern went out mid-step, and something took the step with it. -{damage} HP.'),
   ],
   trapHitCallbacks: { 'The harbour chain swung. -{damage} HP.': 'The same harbour chain swung back. -{damage} HP.' },
   rest: [
@@ -536,11 +547,11 @@ const skerry: BiomeNarrative = {
     `An elite {monster} will not raise a flag again.${win}`,
   ],
   jackpot: [
-    'Jackpot! A forgotten ransom chest: {gold} gold.',
-    'Jackpot! The pirates’ prize pool, never split: {gold} gold.',
-    'Jackpot! A cask of mint Supremacy coin: {gold} gold.',
+    'Windfall. A forgotten ransom chest: {gold} gold.',
+    'Windfall. The pirates’ prize pool, never split: {gold} gold.',
+    'Windfall. A cask of mint Supremacy coin: {gold} gold.',
   ],
-  lootGear: ['Found a {item} in a crate marked SUNDRY.', 'Pulled a {item} from a chest of taken goods.', 'A {item} was racked under W for weapons.'],
+  lootGear: ['Found a {item} in a crate marked SUNDRY.', 'Pulled a {item} from a chest of taken goods.', 'A {item} was racked with the taken goods, unlabelled.'],
   arrive: ['Took the ferry across to the {destination}. It smells of tar.', 'Made it to the {destination}. The lantern flickers twice and holds.'],
 }
 
@@ -553,7 +564,7 @@ const seta: BiomeNarrative = {
     `Left a {monster} in a dead Knot’s shadow.${win}`,
     `Beat a {monster} by the dry cistern.${win}`,
     `Walked a {monster} off its dream road.${win}`,
-    `Carried a {monster} out of the story.${win}`,
+    eldritch(`Carried a {monster} out of the story it was dreaming.${win}`),
   ],
   lootGold: [
     'Found {gold} gold in a Vorrak offering bowl.',
@@ -566,16 +577,16 @@ const seta: BiomeNarrative = {
   trapHit: [
     'The lintel came down. -{damage} HP.',
     'Slipped on a slick of dead vine. -{damage} HP.',
-    'A chorus with no mouths started up right behind. -{damage} HP.',
+    eldritch('A chorus with no mouths started up right behind. -{damage} HP.'),
     'Walked into a pillar in the dark. -{damage} HP.',
     'A step out of nowhere. -{damage} HP.',
     'Bad air in the lower terrace. -{damage} HP.',
-    'A door closed on an arm with nobody near it. -{damage} HP.',
+    eldritch('A door closed on an arm with nobody near it. -{damage} HP.'),
     'A loose vine hung from the arch. -{damage} HP.',
     'A stone rolled down the ramp. -{damage} HP.',
     'Stepped in a pool deeper than it looked. -{damage} HP.',
-    'A tile dropped from a ceiling that was not there. -{damage} HP.',
-    'Tripped over a kerb on a road that was not there either. -{damage} HP.',
+    eldritch('A tile dropped from a ceiling that was not there. -{damage} HP.'),
+    eldritch('Tripped over a kerb on a road that was not there either. -{damage} HP.'),
   ],
   rest: [
     'Sat on a kerb and waited for the echo to fade. +{heal} HP.',
@@ -583,7 +594,7 @@ const seta: BiomeNarrative = {
     'A nap in the lee of a dead Knot. +{heal} HP.',
     'Drank from a cistern that still runs. +{heal} HP.',
     'Found a dry corner on the second terrace. +{heal} HP.',
-    'Sat on a stone seat and listened to nothing. +{heal} HP.',
+    eldritch('Sat on a stone seat and listened to nothing. The nothing listened back. +{heal} HP.'),
   ],
   eliteVictory: [
     `An elite {monster} was put under the vines for good.${win}`,
@@ -591,12 +602,12 @@ const seta: BiomeNarrative = {
     `An elite {monster} stalled for the last time.${win}`,
   ],
   jackpot: [
-    'Jackpot! A year of tithes in a sealed jar: {gold} gold.',
-    "Jackpot! The gatehouse's whole strongbox: {gold} gold.",
-    'Jackpot! A coffer of unmarked coin under a tarp of vines: {gold} gold.',
+    'Windfall. A year of tithes in a sealed jar: {gold} gold.',
+    "Windfall. The gatehouse's whole strongbox: {gold} gold.",
+    'Windfall. A coffer of unmarked coin under a tarp of vines: {gold} gold.',
   ],
   lootGear: ['Found a {item} in a collapsed barrack.', 'A {item} was wedged behind the gate stone.', 'Pulled a {item} from a spoil heap by the ramp.'],
-  arrive: ['Took the dream road down to the {destination}. Every sound comes back twice.', 'Made it to the {destination}. Mind the vines.'],
+  arrive: [eldritch('Took the dream road down to the {destination}. Every sound came back twice.'), 'Made it to the {destination}. Mind the vines.'],
 }
 
 const signature = (...lines: string[]): MonsterNarrative => ({ victory: lines.map((line) => `${line}${win}`) })
@@ -620,7 +631,7 @@ const monsters: Record<string, MonsterNarrative> = {
   auditor: signature('Counted every scale on a {monster} and it left.', 'Outlasted a {monster}’s one breath of frost.'),
   trolley_swarm: signature('Walked a {monster} out of its own thought.', 'Pushed a {monster} back up the ramp.'),
   oil_slick: signature('Cut through a {monster}.', 'Pulled a {monster} down the dry cistern.'),
-  barrier_golem: signature('Stood very still until a {monster} forgot.', 'Fed a {monster} a wrong password.'),
+  barrier_golem: signature('Stood very still until a {monster} forgot.', 'Gave a {monster} the wrong watchword and it let go.'),
   ghost_car: signature('Woke up and a {monster} was gone.', 'Stepped off the road and a {monster} kept going.'),
 }
 
@@ -630,7 +641,7 @@ const shared: SharedNarrative = {
     'Backed away from a {monster} to fight another day.',
     'Called it quits against a {monster}.',
     'Left a {monster} for the night watch.',
-    'Took a rain check on a {monster}.',
+    'Left a {monster} for another day.',
   ],
   // The status line shows when the hero is back, in the owner's time.
   death: ['Knocked out by a {monster}.', 'Knocked out cold by a {monster}.', 'Flattened by a {monster}.'],
@@ -788,13 +799,13 @@ const lore: LoreRule = {
     legacy_mainframe:
       'A crab older than the fort by some accounts, with a shell like a longboat hull. It holds the tide line and will not be moved. Four squires have announced its removal, and it has outlasted all of them.',
     coffee_slime:
-      'A goblin out of Grokdeep, raiding the supply road for anything in a sack. It moves in a hurry and smells of burnt Tuesday. A maul deals with it, though the raiding party is never the same afterwards, and neither is the maul.',
+      'A goblin out of Grokdeep, raiding the supply road for anything in a sack. It moves in a hurry and smells of burnt porridge. A maul deals with it, though the raiding party is never the same afterwards, and neither is the maul.',
     crumb_golem:
       'The feral fiend of the fens: fog, teeth and a bad temper, grown out of everything the swamp did not finish. It is bigger every winter and the marsh birds fear it. Breaking it up takes patience; it is only ever fog, but a great deal of it.',
     microwave_wraith:
       'A sahuagin up the river from Mrl Mnø, scaled, webbed and furious about the cold. It haunts the ford with the smell of fish and a hiss that never quite finishes. Beached on the far bank it sulks for a week.',
     leftovers_hydra:
-      'An eel the length of a cart, lit along its back with lanterns that are not lanterns. Follow one light and two more come up by Friday. It is beaten by snuffing every lamp at once, which is also the only way the ford has ever gone dark.',
+      'An eel the length of a cart, lit along its back with lanterns that are not lanterns. Follow one light and two more come up by the next dusk. It is beaten by snuffing every lamp at once, which is also the only way the ford has ever gone dark.',
     box_file_beetle:
       'A slaver of the Rhithian line, with a ledger, a chain and the law on its side. It carries the bill of sale for a meeting nobody attended and defends it to the last link. Produce papers of your own and it lets go, for now.',
     shelf_lurker:
@@ -808,7 +819,7 @@ const lore: LoreRule = {
     oil_slick:
       'A vine off a dead Knot, grown like a brain and spread for a century until it started to move. It waits for someone to step on it. A blade takes the shine off it, and the dry cistern takes the rest, slowly.',
     barrier_golem:
-      'A sentinel of the Nullborn kind, left at the broken gate by whoever broke it. It wants a password and does not take coin. Standing very still confuses it long enough to walk under.',
+      'A sentinel of the Nullborn kind, left at the broken gate by whoever broke it. It wants a watchword and does not take coin. Standing very still confuses it long enough to walk under.',
     ghost_car:
       'A wraith of the dream roads, which are roads only while someone is dreaming them. It has no face and no dust on it. It has been walked off the road more than once, and it is always back on the same stretch by morning.',
   },
@@ -881,5 +892,6 @@ export const contentV28: ContentCatalog = {
     biomes: { office_cubicles: castellum, server_room: fjords, cafeteria_depths: fens, archive: skerry, parking_garage: seta },
     shared,
     monsters,
+    eldritch: [...ELDRITCH],
   },
 }

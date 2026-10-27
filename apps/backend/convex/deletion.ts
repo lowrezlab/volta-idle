@@ -380,7 +380,7 @@ export const requestDeletionEmail = action({
     } catch { /* Fail closed: no guessed or unverified recipient. */ }
     if (!email) throw appError('EMAIL_UNAVAILABLE', 'Add a verified primary email to your account before requesting deletion.')
     const origin = new URL(process.env.COMPANION_ORIGIN ?? 'https://trmnlgames.com').origin
-    return await ctx.runMutation(internal.deletion.reserveDeletionEmail, { tokenIdentifier: identity.tokenIdentifier, email: email.address, emailId: email.id, origin, from: process.env.DELETION_EMAIL_FROM ?? 'TRMNL Games <alerts@trmnlgames.com>', ...(locale === undefined ? {} : { locale }) })
+    return await ctx.runMutation(internal.deletion.reserveDeletionEmail, { tokenIdentifier: identity.tokenIdentifier, email: email.address, emailId: email.id, origin, from: process.env.DELETION_EMAIL_FROM ?? 'Wardenwatch <alerts@wardenwatch.example>', ...(locale === undefined ? {} : { locale }) })
   },
 })
 

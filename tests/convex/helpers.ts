@@ -92,7 +92,7 @@ export async function seedDeletionConfirmation(t: T, subject: string): Promise<s
     await ctx.db.insert('accountDeletionConfirmations', {
       tokenIdentifier: `issuer|${subject}`, tokenHash: sha256Hex(token),
       email: 'owner@example.com', emailId: 'email_fixture',
-      from: 'TRMNL Games <alerts@trmnlgames.com>', origin: 'https://trmnlgames.com',
+      from: 'Wardenwatch <alerts@wardenwatch.example>', origin: 'https://trmnlgames.com',
       state: 'sent', attempts: 1, createdAt: Date.now(), expiresAt: Date.now() + 30 * 60_000,
     })
   })

@@ -148,7 +148,7 @@ export const send = internalAction({
             method: 'POST',
             signal: AbortSignal.timeout(10_000),
             headers: { Authorization: `Bearer ${key}`, 'Content-Type': 'application/json', 'Idempotency-Key': `hero-reminder/${userId}${test ? `/test/${Date.now()}` : ''}` },
-            body: JSON.stringify({ from: process.env.REMINDER_FROM ?? 'Barry at TRMNL Games <alerts@trmnlgames.com>', to: [email.address], ...message, headers: { 'List-Unsubscribe': `<${stopLink.toString()}>` } }),
+            body: JSON.stringify({ from: process.env.REMINDER_FROM ?? 'Wardenwatch <alerts@wardenwatch.example>', to: [email.address], ...message, headers: { 'List-Unsubscribe': `<${stopLink.toString()}>` } }),
           })
           outcome = sent.ok ? 'sent' : 'failed'
         }

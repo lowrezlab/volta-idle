@@ -154,7 +154,7 @@ export const finish = internalMutation({
 })
 
 const REPLY_TO = 'barry@barrymichaeldoyle.com'
-const sender = () => ({ origin: new URL(process.env.COMPANION_ORIGIN ?? 'https://trmnlgames.com').origin, from: process.env.WAITLIST_FROM ?? 'TRMNL Games <hello@trmnlgames.com>' })
+const sender = () => ({ origin: new URL(process.env.COMPANION_ORIGIN ?? 'https://trmnlgames.com').origin, from: process.env.WAITLIST_FROM ?? 'Wardenwatch <hello@wardenwatch.example>' })
 
 /** The address for a row: the visitor's own, or the account's verified primary email from Clerk, fetched now. */
 async function addressFor(row: { email: string | null; tokenIdentifier: string | null }): Promise<string | null> {

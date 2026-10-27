@@ -60,7 +60,7 @@ export const getIncident = internalQuery({
   },
 })
 
-const alertFrom = () => process.env.ALERT_FROM ?? 'TRMNL Games <alerts@trmnlgames.com>'
+const alertFrom = () => process.env.ALERT_FROM ?? 'Wardenwatch <alerts@wardenwatch.example>'
 /** Fork: no default recipient; notices stay disabled until ALERT_TO is set. */
 const alertTo = () => process.env.ALERT_TO ?? ''
 

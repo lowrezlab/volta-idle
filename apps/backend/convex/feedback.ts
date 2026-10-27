@@ -81,7 +81,7 @@ export const deliver = internalAction({
         if (response.ok) replyTo = verifiedPrimaryEmail(await response.json())?.address ?? null
       } catch { /* Still deliver; Barry just can't reply directly. */ }
     }
-    const from = process.env.FEEDBACK_FROM ?? 'TRMNL Games <alerts@trmnlgames.com>'
+    const from = process.env.FEEDBACK_FROM ?? 'Wardenwatch <alerts@wardenwatch.example>'
     const who = row.publicAlias ?? 'a player without a game yet'
     const text = [
       row.message,

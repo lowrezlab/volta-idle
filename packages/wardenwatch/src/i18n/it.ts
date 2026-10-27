@@ -1,6 +1,6 @@
 import type { ItDictionary } from './core'
 
-/** D193: Desk Crawler's content in Italian, keyed by the English text (see ./index). */
+/** D193: Wardenwatch's content in Italian, keyed by the English text (see ./index). */
 export const it: ItDictionary = {
   nouns: {
     "Paper Imp": ["Diavoletto di carta", "m"],

@@ -3,7 +3,7 @@ import type { Locale } from '@trmnl-games/platform'
 import { HELP_FACTS as F } from './-deskCrawlerFacts'
 import { preloadContent } from '../../lib/content'
 
-/** D169: one language's Desk Crawler help page: its head, title, section names and body. */
+/** D169: one language's Wardenwatch help page: its head, title, section names and body. */
 export interface HelpPage {
   readonly seoTitle: string
   readonly description: string

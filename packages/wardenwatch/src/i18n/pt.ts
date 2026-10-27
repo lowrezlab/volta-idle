@@ -1,6 +1,6 @@
 import type { PtDictionary } from './core'
 
-/** D193: Desk Crawler's content in Brazilian Portuguese, keyed by the English text (see ./index). */
+/** D193: Wardenwatch's content in Brazilian Portuguese, keyed by the English text (see ./index). */
 export const pt: PtDictionary = {
   nouns: {
     "Paper Imp": ["Diabrete de papel", "m"],

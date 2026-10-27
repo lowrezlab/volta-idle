@@ -45,7 +45,7 @@ function occasionDate(rule: Occasion): string {
 export const es: HelpPage = {
   seoTitle: DESK_CRAWLER_HELP_HEAD.es.seoTitle,
   description: DESK_CRAWLER_HELP_HEAD.es.description,
-  title: 'Desk Crawler en TRMNL',
+  title: 'Wardenwatch en TRMNL',
   contents: {
     'getting-started': 'Primeros pasos', 'if-the-qr-sends-you-back-to-setup': 'Si el QR te devuelve a la instalación', 'how-time-works': 'Cómo pasa el tiempo', floors: 'Plantas', 'desk-keepsakes': 'Recuerdos de oficina', career: 'Carrera', 'heroes-and-classes': 'Héroes y clases', stances: 'Posturas', 'desk-raids': 'Incursiones de escritorio', meetings: 'Reuniones', 'lost-property': 'Objetos perdidos', 'to-do-list': 'Lista de tareas', potions: 'Pociones', 'the-wandering-merchant': 'El mercader ambulante', decisions: 'Decisiones', effects: 'Efectos', 'office-calendar': 'Calendario de la oficina', 'rare-and-epic-gear': 'Equipo raro y épico', 'when-your-bag-fills-up': 'Cuando la bolsa se llena', 'bigger-bags': 'Bolsas más grandes', 'salvage-and-the-workbench': 'Desmontar y el banco de trabajo', 'getting-knocked-out': 'Caer K.O.', recaps: 'Resúmenes', 'understanding-rankings': 'Cómo funcionan las clasificaciones', 'sharing-your-hero': 'Compartir tu héroe', 'following': 'Seguir', names: 'Nombres', gender: 'Género', alerts: 'Alertas', troubleshooting: 'Solución de problemas', 'disconnecting-and-removing': 'Desconectar y quitar', help: 'Ayuda',
   },
@@ -53,14 +53,14 @@ export const es: HelpPage = {
     <>
       <h2 id="getting-started">Primeros pasos</h2>
       <ul>
-        <li>Abre <a href={DESK_CRAWLER_INSTALL_URL}>Desk Crawler en la tienda de TRMNL</a> y elige Instalar.</li>
-        <li>Inicia sesión en Desk Crawler, elige un nombre público y un nombre de héroe, y conecta la instalación.</li>
+        <li>Abre <a href={DESK_CRAWLER_INSTALL_URL}>Wardenwatch en la tienda de TRMNL</a> y elige Instalar.</li>
+        <li>Inicia sesión en Wardenwatch, elige un nombre público y un nombre de héroe, y conecta la instalación.</li>
         <li>De vuelta en TRMNL, pulsa Guardar. La primera aventura de tu héroe empieza en menos de 15 minutos.</li>
         <li>Añade el plugin a una lista de reproducción, o a un mashup si quieres a tu héroe junto a otros plugins. Se admiten los cuatro tamaños de diseño.</li>
       </ul>
       <h2 id="if-the-qr-sends-you-back-to-setup">Si el QR te devuelve a la instalación</h2>
       <p>El QR abre la app de la cuenta con la que has iniciado sesión. No empieza una instalación nueva. Comprueba el correo de la sesión que aparece en la página de instalación y usa Cambiar de cuenta si conectaste en su día con otra cuenta.</p>
-      <p>Si la instalación dice «Reconectar Desk Crawler», tu conexión con TRMNL existe pero falta el héroe. Puede pasar tras el reinicio del juego previo al lanzamiento. Instala una copia nueva de <a href={DESK_CRAWLER_INSTALL_URL}>Desk Crawler desde TRMNL</a>, inicia sesión con la misma cuenta, elige un nombre de héroe nuevo, conecta y pulsa Guardar en TRMNL. Cuando la copia nueva funcione, quita la antigua de tu lista de reproducción.</p>
+      <p>Si la instalación dice «Reconectar Wardenwatch», tu conexión con TRMNL existe pero falta el héroe. Puede pasar tras el reinicio del juego previo al lanzamiento. Instala una copia nueva de <a href={DESK_CRAWLER_INSTALL_URL}>Wardenwatch desde TRMNL</a>, inicia sesión con la misma cuenta, elige un nombre de héroe nuevo, conecta y pulsa Guardar en TRMNL. Cuando la copia nueva funcione, quita la antigua de tu lista de reproducción.</p>
       <p>Si la instalación dice «Guarda en TRMNL para empezar», tu héroe ya está preparado. Vuelve a esa instalación en TRMNL y pulsa Guardar.</p>
       <h2 id="how-time-works">Cómo pasa el tiempo</h2>
       <p>
@@ -74,7 +74,7 @@ export const es: HelpPage = {
       </ul>
       {F.lore ? <p>La página Notas de campo, en Más, guarda lo que tu héroe ha apuntado sobre cada planta y cada monstruo. La nota de una planta se abre la primera vez que tu héroe la pisa, la de un monstruo con la primera victoria contra él. Las notas no afectan al juego.</p> : null}
       <h2 id="desk-keepsakes">Recuerdos de oficina</h2>
-      <p>Mantén Desk Crawler en tu lista de reproducción y busca «Recuerdo» seguido de un código de seis cifras, como 482 917, en la barra de título de la pantalla. Introduce ese código en los Ajustes de la app para conseguir un recuerdo de oficina permanente. Lo muestran tanto la pantalla completa como los mashups; la vista previa de la app lo oculta. Mientras espera un recuerdo, el QR de la pantalla también lo consigue: escanéalo con el móvil y la app lo añade a tu estante, incluso con la barra de título desactivada. Donde hay sitio, el código aparece al lado.</p>
+      <p>Mantén Wardenwatch en tu lista de reproducción y busca «Recuerdo» seguido de un código de seis cifras, como 482 917, en la barra de título de la pantalla. Introduce ese código en los Ajustes de la app para conseguir un recuerdo de oficina permanente. Lo muestran tanto la pantalla completa como los mashups; la vista previa de la app lo oculta. Mientras espera un recuerdo, el QR de la pantalla también lo consigue: escanéalo con el móvil y la app lo añade a tu estante, incluso con la barra de título desactivada. Donde hay sitio, el código aparece al lado.</p>
       <p>Puedes conseguir un recuerdo por semana, con un código nuevo cada lunes a las 00:00 UTC. El código de la semana anterior también vale si tu pantalla se actualiza despacio. Si te saltas una semana, recibes el mismo diseño la siguiente. Con la colección completa, puedes conseguir más de cada uno. Los recuerdos no cambian la XP, el equipo ni las clasificaciones, y más dispositivos o una actualización más rápida no dan extras.</p>
       {F.career !== undefined ? (
         <>
@@ -241,8 +241,8 @@ export const es: HelpPage = {
       <h2 id="troubleshooting">Solución de problemas</h2>
       <h3 id="not-on-your-screen">Tu héroe no aparece en la pantalla</h3>
       <ul>
-        <li>Pulsar Guardar añade Desk Crawler a tu lista de reproducción de TRMNL. Tu dispositivo muestra la lista plugin a plugin, a su frecuencia de actualización, así que Desk Crawler aparece cuando le toca. Con varios plugins y una actualización lenta puede tardar un rato.</li>
-        <li>Abre la lista de reproducción en TRMNL y comprueba que Desk Crawler está ahí, en el dispositivo que miras si tienes más de uno, y que ningún horario lo oculta a esta hora del día.</li>
+        <li>Pulsar Guardar añade Wardenwatch a tu lista de reproducción de TRMNL. Tu dispositivo muestra la lista plugin a plugin, a su frecuencia de actualización, así que Wardenwatch aparece cuando le toca. Con varios plugins y una actualización lenta puede tardar un rato.</li>
+        <li>Abre la lista de reproducción en TRMNL y comprueba que Wardenwatch está ahí, en el dispositivo que miras si tienes más de uno, y que ningún horario lo oculta a esta hora del día.</li>
         <li>El modo reposo detiene la actualización de la pantalla por la noche. Tu héroe sigue de aventura, y la pantalla se pone al día cuando el dispositivo despierta.</li>
         <li>Una pantalla que dice «La primera aventura empieza en menos de 15 minutos» funciona. La primera historia llega en el siguiente cuarto de hora.</li>
         <li>La página Héroe de la app siempre muestra lo que hace tu héroe, muestre lo que muestre la pantalla.</li>

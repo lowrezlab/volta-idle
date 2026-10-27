@@ -9,7 +9,7 @@ export const rootMessages = defineMessages({
     skipToContent: 'Skip to content',
     ogImageAlt: 'TRMNL Games: Pip the office warrior squares up to a Cable Serpent in the Server Room',
     siteTitle: 'TRMNL Games: games for your e-ink display',
-    siteDescription: 'Games that play themselves on your TRMNL e-ink display: Desk Crawler, an office RPG, and Idle Angler, a fishing game.',
+    siteDescription: 'Games that play themselves on your TRMNL e-ink display: Wardenwatch, an office RPG, and Idle Angler, a fishing game.',
   },
   fr: {
     notFoundTitle: 'Page introuvable',
@@ -18,7 +18,7 @@ export const rootMessages = defineMessages({
     skipToContent: 'Aller au contenu',
     ogImageAlt: 'TRMNL Games : Pip, guerrier de bureau, affronte un Serpent de câbles dans la salle des serveurs',
     siteTitle: 'TRMNL Games : des jeux pour votre écran e-ink',
-    siteDescription: 'Des jeux qui se jouent tout seuls sur votre écran e-ink TRMNL : Desk Crawler, un RPG de bureau, et Idle Angler, un jeu de pêche.',
+    siteDescription: 'Des jeux qui se jouent tout seuls sur votre écran e-ink TRMNL : Wardenwatch, un RPG de bureau, et Idle Angler, un jeu de pêche.',
   },
   de: {
     notFoundTitle: 'Seite nicht gefunden',
@@ -27,7 +27,7 @@ export const rootMessages = defineMessages({
     skipToContent: 'Zum Inhalt springen',
     ogImageAlt: 'TRMNL Games: Pip, der Büro-Krieger, stellt sich im Serverraum einer Kabelschlange',
     siteTitle: 'TRMNL Games: Spiele für dein E-Ink-Display',
-    siteDescription: 'Spiele, die sich auf deinem TRMNL-E-Ink-Display von selbst spielen: Desk Crawler, ein Büro-RPG, und Idle Angler, ein Angelspiel.',
+    siteDescription: 'Spiele, die sich auf deinem TRMNL-E-Ink-Display von selbst spielen: Wardenwatch, ein Büro-RPG, und Idle Angler, ein Angelspiel.',
   },
   es: {
     notFoundTitle: 'Página no encontrada',
@@ -36,7 +36,7 @@ export const rootMessages = defineMessages({
     skipToContent: 'Saltar al contenido',
     ogImageAlt: 'TRMNL Games: Pip, guerrero de oficina, planta cara a una Serpiente de cables en la Sala de servidores',
     siteTitle: 'TRMNL Games: juegos para tu pantalla de tinta electrónica',
-    siteDescription: 'Juegos que se juegan solos en tu pantalla de tinta electrónica TRMNL: Desk Crawler, un RPG de oficina, e Idle Angler, un juego de pesca.',
+    siteDescription: 'Juegos que se juegan solos en tu pantalla de tinta electrónica TRMNL: Wardenwatch, un RPG de oficina, e Idle Angler, un juego de pesca.',
   },
   it: {
     notFoundTitle: 'Pagina non trovata',
@@ -45,7 +45,7 @@ export const rootMessages = defineMessages({
     skipToContent: 'Vai al contenuto',
     ogImageAlt: 'TRMNL Games: Pip, guerriero d’ufficio, affronta un Serpente di cavi nella Sala server',
     siteTitle: 'TRMNL Games: giochi per il tuo display e-ink',
-    siteDescription: 'Giochi che si giocano da soli sul tuo display e-ink TRMNL: Desk Crawler, un GDR d’ufficio, e Idle Angler, un gioco di pesca.',
+    siteDescription: 'Giochi che si giocano da soli sul tuo display e-ink TRMNL: Wardenwatch, un GDR d’ufficio, e Idle Angler, un gioco di pesca.',
   },
   pt: {
     notFoundTitle: 'Página não encontrada',
@@ -54,7 +54,7 @@ export const rootMessages = defineMessages({
     skipToContent: 'Pular para o conteúdo',
     ogImageAlt: 'TRMNL Games: Pip, guerreiro de escritório, encara uma Serpente de cabos na Sala dos servidores',
     siteTitle: 'TRMNL Games: jogos para sua tela e-ink',
-    siteDescription: 'Jogos que se jogam sozinhos na sua tela e-ink TRMNL: Desk Crawler, um RPG de escritório, e Idle Angler, um jogo de pesca.',
+    siteDescription: 'Jogos que se jogam sozinhos na sua tela e-ink TRMNL: Wardenwatch, um RPG de escritório, e Idle Angler, um jogo de pesca.',
   },
   pl: {
     notFoundTitle: 'Nie znaleziono strony',
@@ -63,7 +63,7 @@ export const rootMessages = defineMessages({
     skipToContent: 'Przejdź do treści',
     ogImageAlt: 'TRMNL Games: Pip, biurowy wojownik, staje do walki z Kablowym wężem w serwerowni',
     siteTitle: 'TRMNL Games: gry na twój ekran e-ink',
-    siteDescription: 'Gry, które same grają się na twoim ekranie e-ink TRMNL: Desk Crawler, biurowe RPG, i Idle Angler, gra wędkarska.',
+    siteDescription: 'Gry, które same grają się na twoim ekranie e-ink TRMNL: Wardenwatch, biurowe RPG, i Idle Angler, gra wędkarska.',
   },
   nl: {
     notFoundTitle: 'Pagina niet gevonden',
@@ -72,6 +72,6 @@ export const rootMessages = defineMessages({
     skipToContent: 'Naar de inhoud',
     ogImageAlt: 'TRMNL Games: Pip, de kantoorkrijger, neemt het in de Serverruimte op tegen een Kabelslang',
     siteTitle: 'TRMNL Games: spellen voor je e-ink-scherm',
-    siteDescription: 'Spellen die zichzelf spelen op je TRMNL-e-ink-scherm: Desk Crawler, een kantoor-RPG, en Idle Angler, een visspel.',
+    siteDescription: 'Spellen die zichzelf spelen op je TRMNL-e-ink-scherm: Wardenwatch, een kantoor-RPG, en Idle Angler, een visspel.',
   },
 })

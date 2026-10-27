@@ -1,6 +1,6 @@
 import { makeSchedule } from '@trmnl-games/engine/schedule'
 
-/** Desk Crawler ticks on the quarter-hour exactly (D42): offset 0 within the shared engine schedule. */
+/** Wardenwatch ticks on the quarter-hour exactly (D42): offset 0 within the shared engine schedule. */
 const schedule = makeSchedule(0)
 export const SLOT_MS = schedule.SLOT_MS
 export const SLOT_OFFSET_MS = schedule.SLOT_OFFSET_MS

@@ -33,7 +33,7 @@ export const Route = createFileRoute('/')({
 
 /**
  * The signed-in player's games above the pitch (D210): each game's character and status with the way in, or, for a game
- * they have not started, its page (Desk Crawler) or the in-review state with Notify me (Idle Angler before its listing).
+ * they have not started, its page (Wardenwatch) or the in-review state with Notify me (Idle Angler before its listing).
  */
 function YourGames() {
   const t = useT(homeMessages)
@@ -45,7 +45,7 @@ function YourGames() {
     {
       slug: 'wardenwatch',
       line: me.hero ? shell.heroLine(me.hero) : t.notStarted,
-      action: me.hero ? <Link to="/app/wardenwatch" className={`${LINK_BUTTON} ${BUTTON_PRIMARY}`}>{t.open}</Link> : <Link to="/games/wardenwatch" className="inline-flex min-h-11 items-center underline underline-offset-4">{t.seeGame('Desk Crawler')}</Link>,
+      action: me.hero ? <Link to="/app/wardenwatch" className={`${LINK_BUTTON} ${BUTTON_PRIMARY}`}>{t.open}</Link> : <Link to="/games/wardenwatch" className="inline-flex min-h-11 items-center underline underline-offset-4">{t.seeGame('Wardenwatch')}</Link>,
     },
   ]
   return (

@@ -6,14 +6,14 @@ import { currentHero, gameProfile } from './gameProfile'
 /**
  * Per-game hooks for the shared TRMNL lifecycle (trmnl.ts): which profile can be deleting, the player
  * character an installation activates, and how one is prepared and activated. D115 generalized the
- * lifecycle from Desk Crawler's.
+ * lifecycle from Wardenwatch's.
  */
 export interface GameHooks {
   readonly slug: GameSlug
   readonly label: string
   deleting(ctx: QueryCtx, userId: Id<'users'>): Promise<boolean>
   current(ctx: QueryCtx, user: Doc<'users'> | null): Promise<{ _id: string; activationState: 'pending_trmnl' | 'active' } | null>
-  /** Whether preparing needs a character name (Desk Crawler's hero name). */
+  /** Whether preparing needs a character name (Wardenwatch's hero name). */
   readonly needsName: boolean
   activate(ctx: MutationCtx, userId: Id<'users'>, now: number): Promise<void>
 }
@@ -25,7 +25,7 @@ export function isGame(row: { gameSlug?: string }, slug: GameSlug): boolean {
 
 type OtherGameHooks = GameHooks & { prepare: (ctx: MutationCtx, user: Doc<'users'>, now: number) => Promise<unknown> }
 
-/** The hooks of a game other than Desk Crawler. This fork registers only Desk Crawler, so no other game reaches here. */
+/** The hooks of a game other than Wardenwatch. This fork registers only Wardenwatch, so no other game reaches here. */
 export function otherGameHooks(slug: never): OtherGameHooks {
   throw new Error(`No hooks for game ${String(slug)}`)
 }

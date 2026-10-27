@@ -291,7 +291,7 @@ export const devicesForTest = internalQuery({
 
 /**
  * Deleting one game's progress (D115): that game's outbox rows and switches go. Devices and quiet hours stay while the
- * other game still has a character to alert about; otherwise everything goes, as D114 removed it with Desk Crawler.
+ * other game still has a character to alert about; otherwise everything goes, as D114 removed it with Wardenwatch.
  * Returns how many rows went.
  */
 export async function purgeGameAlertRows(ctx: MutationCtx, userId: Id<'users'>, game: GameSlug, batch: number): Promise<number> {

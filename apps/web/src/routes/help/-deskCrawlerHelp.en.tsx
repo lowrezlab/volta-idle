@@ -40,7 +40,7 @@ function occasionDate(rule: Occasion): string {
 export const en: HelpPage = {
   seoTitle: DESK_CRAWLER_HELP_HEAD.en.seoTitle,
   description: DESK_CRAWLER_HELP_HEAD.en.description,
-  title: 'Desk Crawler on TRMNL',
+  title: 'Wardenwatch on TRMNL',
   contents: {
     'getting-started': 'Getting started', 'if-the-qr-sends-you-back-to-setup': 'If the QR sends you back to setup', 'how-time-works': 'How time works', floors: 'Floors', 'desk-keepsakes': 'Desk keepsakes', career: 'Career', 'heroes-and-classes': 'Heroes and classes', stances: 'Stances', 'desk-raids': 'Desk raids', meetings: 'Meetings', 'lost-property': 'Lost property', 'to-do-list': 'To-do list', potions: 'Potions', 'the-wandering-merchant': 'The wandering merchant', decisions: 'Decisions', effects: 'Effects', 'office-calendar': 'Office calendar', 'rare-and-epic-gear': 'Rare and epic gear', 'when-your-bag-fills-up': 'When your bag fills up', 'bigger-bags': 'Bigger bags', 'salvage-and-the-workbench': 'Salvage and the workbench', 'getting-knocked-out': 'Getting knocked out', recaps: 'Recaps', 'understanding-rankings': 'Understanding rankings', 'sharing-your-hero': 'Sharing your hero', 'following': 'Following', names: 'Names', gender: 'Gender', alerts: 'Alerts', troubleshooting: 'Troubleshooting', 'disconnecting-and-removing': 'Disconnecting and removing', help: 'Help',
   },
@@ -48,14 +48,14 @@ export const en: HelpPage = {
     <>
       <h2 id="getting-started">Getting started</h2>
       <ul>
-        <li>Open <a href={DESK_CRAWLER_INSTALL_URL}>Desk Crawler in the TRMNL marketplace</a> and choose Install.</li>
-        <li>Sign in to Desk Crawler, pick a public name and a hero name, and connect the installation.</li>
+        <li>Open <a href={DESK_CRAWLER_INSTALL_URL}>Wardenwatch in the TRMNL marketplace</a> and choose Install.</li>
+        <li>Sign in to Wardenwatch, pick a public name and a hero name, and connect the installation.</li>
         <li>Back in TRMNL, click Save. Your hero's first adventure starts within 15 minutes.</li>
         <li>Add the plugin to a playlist, or to a mashup if you want your hero beside other plugins. All four layout sizes are supported.</li>
       </ul>
       <h2 id="if-the-qr-sends-you-back-to-setup">If the QR sends you back to setup</h2>
       <p>The QR opens the companion for the account you are signed in with. It does not start a new installation. Check the signed-in email shown on the setup page and use Switch account if you originally connected with a different account.</p>
-      <p>If setup says “Reconnect Desk Crawler”, your TRMNL connection exists but the hero is missing. This can happen after the pre-launch game reset. Install a fresh copy of <a href={DESK_CRAWLER_INSTALL_URL}>Desk Crawler from TRMNL</a>, sign in with the same account, choose a new hero name, connect, then click Save back in TRMNL. Once the new copy works, remove the old copy from your playlist.</p>
+      <p>If setup says “Reconnect Wardenwatch”, your TRMNL connection exists but the hero is missing. This can happen after the pre-launch game reset. Install a fresh copy of <a href={DESK_CRAWLER_INSTALL_URL}>Wardenwatch from TRMNL</a>, sign in with the same account, choose a new hero name, connect, then click Save back in TRMNL. Once the new copy works, remove the old copy from your playlist.</p>
       <p>If setup says “Save in TRMNL to start”, your hero is already prepared. Return to that installation in TRMNL and click Save.</p>
       <h2 id="how-time-works">How time works</h2>
       <p>
@@ -69,7 +69,7 @@ export const en: HelpPage = {
       </ul>
       {F.lore ? <p>The Field notes page under More keeps what your hero has written down about each floor and monster. A floor's note opens the first time your hero stands on it, a monster's note with the first win over it. Notes don't affect play.</p> : null}
       <h2 id="desk-keepsakes">Desk keepsakes</h2>
-      <p>Keep Desk Crawler in your playlist and look for “Keepsake code” and a six-digit code, like 482 917, in the screen’s title bar (narrow portrait mashups shorten it to “Keepsake”). Enter that code in the companion’s Settings to collect a permanent office souvenir. Full-screen and mashup layouts both show it; the companion preview hides it. While a keepsake waits, the screen’s QR code collects it too: scan it with your phone and the companion adds it to your shelf, even with the title bar turned off. Where there is room, the code is printed beside it.</p>
+      <p>Keep Wardenwatch in your playlist and look for “Keepsake code” and a six-digit code, like 482 917, in the screen’s title bar (narrow portrait mashups shorten it to “Keepsake”). Enter that code in the companion’s Settings to collect a permanent office souvenir. Full-screen and mashup layouts both show it; the companion preview hides it. While a keepsake waits, the screen’s QR code collects it too: scan it with your phone and the companion adds it to your shelf, even with the title bar turned off. Where there is room, the code is printed beside it.</p>
       <p>You can collect one keepsake each week, with a new code from Monday at 00:00 UTC. Last week’s code works too if your screen refreshes slowly. If you miss a week, you get the same design the week after. After collecting the full set, you can collect more of each. Keepsakes do not change XP, gear or rankings, and extra devices or faster refresh earn no extras.</p>
       {F.career !== undefined ? (
         <>
@@ -236,8 +236,8 @@ export const en: HelpPage = {
       <h2 id="troubleshooting">Troubleshooting</h2>
       <h3 id="not-on-your-screen">Your hero isn't on your screen</h3>
       <ul>
-        <li>Clicking Save adds Desk Crawler to your TRMNL playlist. Your device shows the playlist one plugin at a time, at its refresh rate, so Desk Crawler appears when its turn comes round. With several plugins and a slow refresh rate that can take a while.</li>
-        <li>Open Playlists in TRMNL and check that Desk Crawler is there, on the device you're looking at if you have more than one, and that no schedule hides it at this time of day.</li>
+        <li>Clicking Save adds Wardenwatch to your TRMNL playlist. Your device shows the playlist one plugin at a time, at its refresh rate, so Wardenwatch appears when its turn comes round. With several plugins and a slow refresh rate that can take a while.</li>
+        <li>Open Playlists in TRMNL and check that Wardenwatch is there, on the device you're looking at if you have more than one, and that no schedule hides it at this time of day.</li>
         <li>Sleep Mode stops the screen refreshing overnight. Your hero keeps adventuring, and the screen catches up when the device wakes.</li>
         <li>A screen that says "The first adventure starts within 15 minutes" is working. The first story arrives on the next quarter hour.</li>
         <li>The companion's Hero page always shows what your hero is doing, whatever the screen shows.</li>

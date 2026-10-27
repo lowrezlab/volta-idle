@@ -44,7 +44,7 @@ function occasionDate(rule: Occasion): string {
 export const de: HelpPage = {
   seoTitle: DESK_CRAWLER_HELP_HEAD.de.seoTitle,
   description: DESK_CRAWLER_HELP_HEAD.de.description,
-  title: 'Desk Crawler auf TRMNL',
+  title: 'Wardenwatch auf TRMNL',
   contents: {
     'getting-started': 'Erste Schritte', 'if-the-qr-sends-you-back-to-setup': 'Wenn der QR-Code zur Einrichtung führt', 'how-time-works': 'Wie die Zeit vergeht', floors: 'Etagen', 'desk-keepsakes': 'Schreibtisch-Andenken', career: 'Karriere', 'heroes-and-classes': 'Helden und Klassen', stances: 'Haltungen', 'desk-raids': 'Schreibtisch-Überfälle', meetings: 'Begegnungen', 'lost-property': 'Fundsachen', 'to-do-list': 'To-do-Liste', potions: 'Tränke', 'the-wandering-merchant': 'Der fahrende Händler', decisions: 'Entscheidungen', effects: 'Effekte', 'office-calendar': 'Bürokalender', 'rare-and-epic-gear': 'Seltene und epische Ausrüstung', 'when-your-bag-fills-up': 'Wenn die Tasche voll ist', 'bigger-bags': 'Größere Taschen', 'salvage-and-the-workbench': 'Zerlegen und Werkbank', 'getting-knocked-out': 'K. o. gehen', recaps: 'Rückblicke', 'understanding-rankings': 'Ranglisten verstehen', 'sharing-your-hero': 'Deinen Helden teilen', 'following': 'Folgen', names: 'Namen', gender: 'Geschlecht', alerts: 'Benachrichtigungen', troubleshooting: 'Fehlerbehebung', 'disconnecting-and-removing': 'Trennen und entfernen', help: 'Hilfe',
   },
@@ -52,14 +52,14 @@ export const de: HelpPage = {
     <>
       <h2 id="getting-started">Erste Schritte</h2>
       <ul>
-        <li>Öffne <a href={DESK_CRAWLER_INSTALL_URL}>Desk Crawler im TRMNL-Marktplatz</a> und wähle Installieren.</li>
-        <li>Melde dich bei Desk Crawler an, wähle einen öffentlichen Namen und einen Heldennamen und verbinde die Installation.</li>
+        <li>Öffne <a href={DESK_CRAWLER_INSTALL_URL}>Wardenwatch im TRMNL-Marktplatz</a> und wähle Installieren.</li>
+        <li>Melde dich bei Wardenwatch an, wähle einen öffentlichen Namen und einen Heldennamen und verbinde die Installation.</li>
         <li>Klicke zurück in TRMNL auf Speichern. Das erste Abenteuer deines Helden beginnt innerhalb von 15 Minuten.</li>
         <li>Füge das Plugin einer Playlist hinzu, oder einem Mashup, wenn dein Held neben anderen Plugins stehen soll. Alle vier Layoutgrößen werden unterstützt.</li>
       </ul>
       <h2 id="if-the-qr-sends-you-back-to-setup">Wenn der QR-Code zur Einrichtung führt</h2>
       <p>Der QR-Code öffnet die Begleit-App für das Konto, mit dem du angemeldet bist. Er startet keine neue Installation. Prüfe die angemeldete E-Mail-Adresse auf der Einrichtungsseite und nutze Konto wechseln, wenn du ursprünglich mit einem anderen Konto verbunden hast.</p>
-      <p>Steht bei der Einrichtung „Desk Crawler neu verbinden“, gibt es deine TRMNL-Verbindung, aber der Held fehlt. Das kann nach dem Spiel-Reset vor dem Start passieren. Installiere eine frische Kopie von <a href={DESK_CRAWLER_INSTALL_URL}>Desk Crawler aus TRMNL</a>, melde dich mit demselben Konto an, wähle einen neuen Heldennamen, verbinde und klicke dann in TRMNL auf Speichern. Sobald die neue Kopie läuft, entferne die alte aus deiner Playlist.</p>
+      <p>Steht bei der Einrichtung „Wardenwatch neu verbinden“, gibt es deine TRMNL-Verbindung, aber der Held fehlt. Das kann nach dem Spiel-Reset vor dem Start passieren. Installiere eine frische Kopie von <a href={DESK_CRAWLER_INSTALL_URL}>Wardenwatch aus TRMNL</a>, melde dich mit demselben Konto an, wähle einen neuen Heldennamen, verbinde und klicke dann in TRMNL auf Speichern. Sobald die neue Kopie läuft, entferne die alte aus deiner Playlist.</p>
       <p>Steht bei der Einrichtung „In TRMNL speichern, um zu starten“, ist dein Held schon bereit. Geh in TRMNL zu dieser Installation zurück und klicke auf Speichern.</p>
       <h2 id="how-time-works">Wie die Zeit vergeht</h2>
       <p>
@@ -73,7 +73,7 @@ export const de: HelpPage = {
       </ul>
       {F.lore ? <p>Die Seite Feldnotizen unter Mehr bewahrt auf, was dein Held über jede Etage und jedes Monster aufgeschrieben hat. Die Notiz zu einer Etage öffnet sich, wenn dein Held sie zum ersten Mal betritt, die zu einem Monster mit dem ersten Sieg darüber. Notizen haben keinen Einfluss aufs Spiel.</p> : null}
       <h2 id="desk-keepsakes">Schreibtisch-Andenken</h2>
-      <p>Lass Desk Crawler in deiner Playlist und achte in der Titelleiste des Bildschirms auf „Andenken-Code“ und einen sechsstelligen Code wie 482 917 (schmale Hochformat-Mashups kürzen ihn zu „Andenken“). Gib den Code in den Einstellungen der Begleit-App ein, um ein dauerhaftes Büro-Andenken zu sammeln. Vollbild und Mashups zeigen ihn beide; die Vorschau in der Begleit-App blendet ihn aus. Solange ein Andenken wartet, holt es auch der QR-Code auf dem Bildschirm ab: Scanne ihn mit dem Handy, und die Begleit-App stellt es in dein Regal, auch bei ausgeblendeter Titelleiste. Wo Platz ist, steht der Code daneben.</p>
+      <p>Lass Wardenwatch in deiner Playlist und achte in der Titelleiste des Bildschirms auf „Andenken-Code“ und einen sechsstelligen Code wie 482 917 (schmale Hochformat-Mashups kürzen ihn zu „Andenken“). Gib den Code in den Einstellungen der Begleit-App ein, um ein dauerhaftes Büro-Andenken zu sammeln. Vollbild und Mashups zeigen ihn beide; die Vorschau in der Begleit-App blendet ihn aus. Solange ein Andenken wartet, holt es auch der QR-Code auf dem Bildschirm ab: Scanne ihn mit dem Handy, und die Begleit-App stellt es in dein Regal, auch bei ausgeblendeter Titelleiste. Wo Platz ist, steht der Code daneben.</p>
       <p>Du kannst jede Woche ein Andenken sammeln, mit einem neuen Code ab Montag 00:00 UTC. Der Code der Vorwoche funktioniert auch, wenn dein Bildschirm sich langsam aktualisiert. Verpasst du eine Woche, bekommst du dasselbe Motiv in der Woche danach. Nach dem kompletten Set kannst du weitere Exemplare jedes Motivs sammeln. Andenken ändern weder XP noch Ausrüstung noch Ranglisten, und mehrere Geräte oder schnellere Aktualisierung bringen nichts extra.</p>
       {F.career !== undefined ? (
         <>
@@ -240,8 +240,8 @@ export const de: HelpPage = {
       <h2 id="troubleshooting">Fehlerbehebung</h2>
       <h3 id="not-on-your-screen">Dein Held ist nicht auf dem Bildschirm</h3>
       <ul>
-        <li>Mit Speichern kommt Desk Crawler in deine TRMNL-Playlist. Dein Gerät zeigt die Playlist ein Plugin nach dem anderen, in seinem Aktualisierungstakt, also erscheint Desk Crawler, wenn es an der Reihe ist. Bei mehreren Plugins und langsamer Aktualisierung kann das dauern.</li>
-        <li>Öffne in TRMNL die Playlists und prüfe, ob Desk Crawler dort ist, auf dem Gerät, das du ansiehst, falls du mehrere hast, und dass kein Zeitplan es zu dieser Tageszeit ausblendet.</li>
+        <li>Mit Speichern kommt Wardenwatch in deine TRMNL-Playlist. Dein Gerät zeigt die Playlist ein Plugin nach dem anderen, in seinem Aktualisierungstakt, also erscheint Wardenwatch, wenn es an der Reihe ist. Bei mehreren Plugins und langsamer Aktualisierung kann das dauern.</li>
+        <li>Öffne in TRMNL die Playlists und prüfe, ob Wardenwatch dort ist, auf dem Gerät, das du ansiehst, falls du mehrere hast, und dass kein Zeitplan es zu dieser Tageszeit ausblendet.</li>
         <li>Der Schlafmodus stoppt die Aktualisierung über Nacht. Dein Held macht weiter, und der Bildschirm holt auf, wenn das Gerät aufwacht.</li>
         <li>Ein Bildschirm mit „Das erste Abenteuer beginnt innerhalb von 15 Minuten“ funktioniert. Die erste Geschichte kommt zur nächsten Viertelstunde.</li>
         <li>Die Helden-Seite der Begleit-App zeigt immer, was dein Held gerade tut, egal was der Bildschirm zeigt.</li>

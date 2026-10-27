@@ -1,6 +1,6 @@
 import type { FrDictionary } from './core'
 
-/** D169: Desk Crawler's content in French, keyed by the English text (see ./index). */
+/** D169: Wardenwatch's content in French, keyed by the English text (see ./index). */
 export const fr: FrDictionary = {
   nouns: {
     "Paper Imp": ["Diablotin de papier", "m"],

@@ -2,7 +2,7 @@ import { INTL_TAG, type Locale } from '@trmnl-games/platform'
 import { ADJECTIVES_FIRST, agreement, AGREEMENT_FORMS, DEFAULT_GENDER, renderPhrase, type DeAdjective, type FrAdjective, type Gender, type GrammarLocale, type NlAdjective, type NounPhrase, type PlAdjective, type RomanceAdjective } from './grammar'
 
 /**
- * D169: Desk Crawler's content in other languages. Catalogs, stored logs and item rows hold English, and they stay
+ * D169: Wardenwatch's content in other languages. Catalogs, stored logs and item rows hold English, and they stay
  * English: the simulator and every stored summary are unchanged. Translation happens when something is shown, keyed by
  * the English text itself, so one dictionary covers every catalog version and every log already written.
  *

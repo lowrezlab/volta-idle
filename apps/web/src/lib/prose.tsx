@@ -145,11 +145,11 @@ export function SiteFooter() {
           </div>
           <nav aria-label={t.siteNav} className="col-span-2 grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-4 md:col-span-4">
             <FooterGroup title={t.footerGames}>
-              <li><Link to="/games/wardenwatch" className={FOOTER_LINK}>Desk Crawler</Link></li>
+              <li><Link to="/games/wardenwatch" className={FOOTER_LINK}>Wardenwatch</Link></li>
               <Show when="signed-in"><li><Link to="/app" className={FOOTER_LINK}>{t.myGames}</Link></li></Show>
             </FooterGroup>
             <FooterGroup title={t.footerHelp}>
-              <li><Link to="/help/wardenwatch" className={FOOTER_LINK}>{t.guideFor('Desk Crawler')}</Link></li>
+              <li><Link to="/help/wardenwatch" className={FOOTER_LINK}>{t.guideFor('Wardenwatch')}</Link></li>
               <li><Link to="/whats-new" className={FOOTER_LINK}>{t.whatsNew}</Link></li>
               <li><Link to="/support" className={FOOTER_LINK}>{t.support}</Link></li>
               <li><Link to="/feedback" className={FOOTER_LINK}>{t.feedback}</Link></li>
@@ -214,7 +214,7 @@ function AnalyticsLink({ className = FOOTER_LINK }: { className?: string }) {
 export { SUPPORT_EMAIL } from './support'
 /** Optional support for the games (D134): a plain link out, with nothing in play attached to it. */
 export const SPONSOR_URL = 'https://github.com/sponsors/barrymichaeldoyle'
-/** Desk Crawler's public marketplace listing (plugin 564): its Install button starts the TRMNL connect flow. */
+/** Wardenwatch's public marketplace listing (plugin 564): its Install button starts the TRMNL connect flow. */
 export const DESK_CRAWLER_INSTALL_URL = games['wardenwatch'].marketplaceUrl
 /** Shown on the privacy and terms pages; bump whenever either changes. */
 export const POLICY_UPDATED = '2026-10-08'

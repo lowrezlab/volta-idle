@@ -19,10 +19,10 @@ export const privacyEn: LegalPage = {
         happy to share and never include contact details in it.
       </p>
       <p>
-        In Desk Crawler, heroes raid each other's desks and meet each other by chance. When your hero raids, is raided or meets another hero, your public name appears in the other player's adventure log, in the companion and on their TRMNL, as it already does on the leaderboards. When your hero is knocked out it can drop a spare item with your public name on it, which another player's hero may find and keep; your name then shows on that item in their companion and on their hero page. If you change your name or delete your account, those stories and items show "Hidden player" instead, or lose the name.
+        In Wardenwatch, heroes raid each other's desks and meet each other by chance. When your hero raids, is raided or meets another hero, your public name appears in the other player's adventure log, in the companion and on their TRMNL, as it already does on the leaderboards. When your hero is knocked out it can drop a spare item with your public name on it, which another player's hero may find and keep; your name then shows on that item in their companion and on their hero page. If you change your name or delete your account, those stories and items show "Hidden player" instead, or lose the name.
       </p>
       <p>
-        Your Desk Crawler hero has a public page: anyone with the link can see your public name, your hero's name, level, rank, current floor and start date, a few lifetime counts and your achievements. Gold, the adventure log and your account details stay private, and so does your gear, except other players' spares your hero holds, which show with the names on them. The page is on by default. Hide my hero page in Settings hides it straight away, and you can show it again at any time.
+        Your Wardenwatch hero has a public page: anyone with the link can see your public name, your hero's name, level, rank, current floor and start date, a few lifetime counts and your achievements. Gold, the adventure log and your account details stay private, and so does your gear, except other players' spares your hero holds, which show with the names on them. The page is on by default. Hide my hero page in Settings hides it straight away, and you can show it again at any time.
       </p>
       <p>
         Signed-in players can follow a public hero page. We store who follows whom so their companion can list the players they follow. Nobody is told they were followed, and no page shows who follows a player. If you change your public name, hide your page or delete your progress, other players stop seeing your hero in their list, and deleting removes those records.
@@ -32,19 +32,19 @@ export const privacyEn: LegalPage = {
       <ul>
         <li>Your sign-in identity from Clerk, our sign-in provider. Your email is copied into short-lived deletion confirmation requests only; we do not copy your real name or profile picture into the game database.</li>
         <li>Your public name, hero, items, adventure log and the recent XP used for rankings. Older accounts may also have a saved time zone from previous versions.</li>
-        <li>If you turn on Desk Crawler alerts: which alerts you want, your quiet hours and your browser's time zone (for example Europe/Dublin), and for each device you allow, the push address your browser gives us, its encryption keys and a label such as "Chrome on Android". We also keep a short record of each alert: which kind, when, and whether it was sent.</li>
+        <li>If you turn on Wardenwatch alerts: which alerts you want, your quiet hours and your browser's time zone (for example Europe/Dublin), and for each device you allow, the push address your browser gives us, its encryption keys and a label such as "Chrome on Android". We also keep a short record of each alert: which kind, when, and whether it was sent.</li>
         <li>
           For each TRMNL installation: the plugin instance ID, a hash of its access token and the settings link TRMNL gives us. We do not store your TRMNL
           name or email.
         </li>
-        <li>The time zone offset your TRMNL sends with each screen (for example UTC+2), so Desk Crawler's morning stand-up follows your day. We keep only the latest one.</li>
+        <li>The time zone offset your TRMNL sends with each screen (for example UTC+2), so Wardenwatch's morning stand-up follows your day. We keep only the latest one.</li>
         <li>The language setting your TRMNL sends with each screen (for example fr-FR), so we can see which languages are worth translating the games into, and so your screen can use your language. We keep only the latest one.</li>
         <li>If you choose a language for TRMNL Games, that choice, so your TRMNL screens and alerts use it too.</li>
         <li>Short-lived operational records such as rate-limit counters and duplicate-request receipts.</li>
         <li>When you request account deletion: your verified primary email, a hash of the confirmation link, and delivery status. The link expires after 30 minutes; expired requests are removed by daily cleanup.</li>
-        <li>The Desk Crawler launch list held email addresses for one email when Desk Crawler reached the TRMNL marketplace. That email went out on 13 October 2026, every address was deleted, and the list is closed.</li>
+        <li>The Wardenwatch launch list held email addresses for one email when Wardenwatch reached the TRMNL marketplace. That email went out on 13 October 2026, every address was deleted, and the list is closed.</li>
         <li>The Idle Angler launch list keeps, for one email when Idle Angler reaches the TRMNL marketplace: for a signed-in player who taps Notify me, a link to their account and their language (the address is read from the account when the email is sent); for anyone else, the email address they type and their language. Each entry is deleted once its email is sent, and you can leave the list at any time from the home page or the email.</li>
-        <li>The hero reminder: if your Desk Crawler hero has been running for two days and you have never opened the Desk Crawler app, we send one email to your verified primary address saying what is waiting for you there, with a link to stop it. The address is read from Clerk when the email goes out and is not stored. We keep only when it was sent, or that you asked us not to send it.</li>
+        <li>The hero reminder: if your Wardenwatch hero has been running for two days and you have never opened the Wardenwatch app, we send one email to your verified primary address saying what is waiting for you there, with a link to stop it. The address is read from Clerk when the email goes out and is not stored. We keep only when it was sent, or that you asked us not to send it.</li>
         <li>If you send feedback: your message, the page you sent it from, your public name and a link to your account. It is emailed to the developer with your verified primary email as the reply address.</li>
       </ul>
 
@@ -78,7 +78,7 @@ export const privacyEn: LegalPage = {
         </li>
         <li><strong>PostHog EU</strong> handles optional usage analytics, error reports and masked session recordings for support and product improvements.</li>
         <li><strong>Sentry</strong> (United States) receives error reports from our website's server and the game backend, and from your browser if you allow analytics, so we can find and fix bugs. A report holds the page path or the name of the game function that failed, and the technical details of the error. It never includes your account, email address, IP address, cookies, form contents, URL query strings or installation codes and tokens.</li>
-        <li><strong>Your browser's push service</strong> (Google for Chrome and Android, Apple for Safari, Mozilla for Firefox) delivers Desk Crawler alerts if you turn them on. It receives the alert encrypted, so it can't read it, along with the push address your browser created.</li>
+        <li><strong>Your browser's push service</strong> (Google for Chrome and Android, Apple for Safari, Mozilla for Firefox) delivers Wardenwatch alerts if you turn them on. It receives the alert encrypted, so it can't read it, along with the push address your browser created.</li>
         <li><strong>Resend</strong> delivers the account deletion confirmation email to your verified primary address, the launch email (sent once, on 13 October 2026), and feedback you send to the developer. It receives those addresses and the email contents. It also delivers the one hero reminder.</li>
       </ul>
 
@@ -91,7 +91,7 @@ export const privacyEn: LegalPage = {
         <li>Idle Angler launch list: each entry is deleted when its launch email is sent, when you leave the list, or with your account.</li>
         <li>Hero reminder: when it was sent, or that you asked for none, until you delete your account.</li>
         <li>Feedback: until you delete your account, or earlier on request. Copies already emailed to the developer are deleted on request.</li>
-        <li>Alert settings and devices: until you turn alerts off, remove the device, or delete Desk Crawler or your account. A device whose push address stops working is removed automatically. Records of individual alerts: seven days.</li>
+        <li>Alert settings and devices: until you turn alerts off, remove the device, or delete Wardenwatch or your account. A device whose push address stops working is removed automatically. Records of individual alerts: seven days.</li>
         <li>Backups: about a week, after which deleted data is gone from them too.</li>
         <li>Masked recordings: 30 days. Analytics events and support profiles: until account deletion or an earlier removal request.</li>
         <li>Error reports in Sentry: up to 90 days. They aren't linked to your account, so account deletion has nothing there to remove.</li>
@@ -110,7 +110,7 @@ export const privacyEn: LegalPage = {
       <p>Removal of linked PostHog profiles, events and recordings is requested as part of account deletion and processed asynchronously by PostHog. Failed requests are retried and remain visible to the operator until resolved.</p>
 
       <h2>Deleting only a game</h2>
-      <p>In <Link to="/app/wardenwatch/settings">Desk Crawler settings</Link>, choose Delete Desk Crawler progress to remove that hero, history, connections and alert settings and devices. Your shared account and sign-in stay available. You can start again by installing the plugin after removal finishes. Other games are unaffected.</p>
+      <p>In <Link to="/app/wardenwatch/settings">Wardenwatch settings</Link>, choose Delete Wardenwatch progress to remove that hero, history, connections and alert settings and devices. Your shared account and sign-in stay available. You can start again by installing the plugin after removal finishes. Other games are unaffected.</p>
 
       <h2>Your choices</h2>
       <p>

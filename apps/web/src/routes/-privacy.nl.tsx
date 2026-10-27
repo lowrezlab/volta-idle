@@ -20,10 +20,10 @@ export const privacyNl: LegalPage = {
         graag deelt en zet er nooit contactgegevens in.
       </p>
       <p>
-        In Desk Crawler overvallen helden elkaars bureaus en ontmoeten ze elkaar bij toeval. Doet je held een raid, wordt hij overvallen of ontmoet hij een andere held, dan staat je openbare naam in het avonturenlogboek van de andere speler, in de app en op zijn TRMNL, net zoals al in de ranglijsten. Gaat je held knock-out, dan kan hij een reservevoorwerp met je openbare naam laten vallen, dat de held van een andere speler kan vinden en houden; je naam staat dan op dat voorwerp in zijn app en op zijn heldenpagina. Wijzig je je naam of verwijder je je account, dan tonen die verhalen en voorwerpen ‘Verborgen speler’ of verliezen ze de naam.
+        In Wardenwatch overvallen helden elkaars bureaus en ontmoeten ze elkaar bij toeval. Doet je held een raid, wordt hij overvallen of ontmoet hij een andere held, dan staat je openbare naam in het avonturenlogboek van de andere speler, in de app en op zijn TRMNL, net zoals al in de ranglijsten. Gaat je held knock-out, dan kan hij een reservevoorwerp met je openbare naam laten vallen, dat de held van een andere speler kan vinden en houden; je naam staat dan op dat voorwerp in zijn app en op zijn heldenpagina. Wijzig je je naam of verwijder je je account, dan tonen die verhalen en voorwerpen ‘Verborgen speler’ of verliezen ze de naam.
       </p>
       <p>
-        Je Desk Crawler-held heeft een openbare pagina: iedereen met de link ziet je openbare naam, de naam van je held, zijn niveau, plek, huidige verdieping en startdatum, een paar totalen en je prestaties. Goud, het avonturenlogboek en je accountgegevens blijven privé, net als je uitrusting, behalve reserves van andere spelers die je held vasthoudt, die met hun namen worden getoond. De pagina staat standaard aan. Mijn heldenpagina verbergen in Instellingen verbergt hem meteen, en je kunt hem altijd weer tonen.
+        Je Wardenwatch-held heeft een openbare pagina: iedereen met de link ziet je openbare naam, de naam van je held, zijn niveau, plek, huidige verdieping en startdatum, een paar totalen en je prestaties. Goud, het avonturenlogboek en je accountgegevens blijven privé, net als je uitrusting, behalve reserves van andere spelers die je held vasthoudt, die met hun namen worden getoond. De pagina staat standaard aan. Mijn heldenpagina verbergen in Instellingen verbergt hem meteen, en je kunt hem altijd weer tonen.
       </p>
       <p>
         Ingelogde spelers kunnen een openbare heldenpagina volgen. We bewaren wie wie volgt, zodat hun app de spelers kan tonen die ze volgen. Niemand krijgt te horen dat hij gevolgd wordt, en geen enkele pagina toont wie een speler volgt. Wijzig je je openbare naam, verberg je je pagina of verwijder je je voortgang, dan zien andere spelers je held niet meer in hun lijst, en verwijderen wist die gegevens.
@@ -33,19 +33,19 @@ export const privacyNl: LegalPage = {
       <ul>
         <li>Je inlogidentiteit van Clerk, onze inlogdienst. Je e-mailadres wordt alleen gekopieerd naar kortlevende verzoeken om verwijdering te bevestigen; we kopiëren je echte naam of profielfoto niet naar de spel-database.</li>
         <li>Je openbare naam, held, voorwerpen, avonturenlogboek en de recente XP voor de ranglijsten. Oudere accounts kunnen ook nog een opgeslagen tijdzone uit eerdere versies hebben.</li>
-        <li>Als je meldingen van Desk Crawler aanzet: welke meldingen je wilt, je stille uren en de tijdzone van je browser (bijvoorbeeld Europe/Amsterdam), en per apparaat dat je toestaat het pushadres dat je browser ons geeft, de bijbehorende versleutelingssleutels en een label zoals ‘Chrome on Android’. We houden ook een kort overzicht bij van elke melding: welke soort, wanneer en of hij is verstuurd.</li>
+        <li>Als je meldingen van Wardenwatch aanzet: welke meldingen je wilt, je stille uren en de tijdzone van je browser (bijvoorbeeld Europe/Amsterdam), en per apparaat dat je toestaat het pushadres dat je browser ons geeft, de bijbehorende versleutelingssleutels en een label zoals ‘Chrome on Android’. We houden ook een kort overzicht bij van elke melding: welke soort, wanneer en of hij is verstuurd.</li>
         <li>
           Per TRMNL-installatie: de ID van de plugininstantie, een hash van het toegangstoken en de instellingenlink die TRMNL ons geeft. We bewaren je TRMNL-naam
           of -e-mailadres niet.
         </li>
-        <li>De tijdzoneafwijking die je TRMNL met elk scherm meestuurt (bijvoorbeeld UTC+2), zodat de ochtendstand-up van Desk Crawler jouw dag volgt. We bewaren alleen de laatste.</li>
+        <li>De tijdzoneafwijking die je TRMNL met elk scherm meestuurt (bijvoorbeeld UTC+2), zodat de ochtendstand-up van Wardenwatch jouw dag volgt. We bewaren alleen de laatste.</li>
         <li>De taalinstelling die je TRMNL met elk scherm meestuurt (bijvoorbeeld nl-NL), zodat we zien naar welke talen het de moeite waard is de spellen te vertalen, en zodat je scherm jouw taal kan gebruiken. We bewaren alleen de laatste.</li>
         <li>Als je een taal kiest voor TRMNL Games, die keuze, zodat je TRMNL-schermen en meldingen die ook gebruiken.</li>
         <li>Kortlevende operationele gegevens, zoals tellers voor gebruikslimieten en bewijzen van dubbele verzoeken.</li>
         <li>Als je om verwijdering van je account vraagt: je geverifieerde primaire e-mailadres, een hash van de bevestigingslink en de afleverstatus. De link verloopt na 30 minuten; verlopen verzoeken worden bij de dagelijkse opschoning verwijderd.</li>
-        <li>De lanceringslijst van Desk Crawler bevatte e-mailadressen voor één e-mail toen Desk Crawler in de TRMNL-marketplace kwam. Die e-mail is op 13 oktober 2026 verstuurd, elk adres is verwijderd en de lijst is gesloten.</li>
+        <li>De lanceringslijst van Wardenwatch bevatte e-mailadressen voor één e-mail toen Wardenwatch in de TRMNL-marketplace kwam. Die e-mail is op 13 oktober 2026 verstuurd, elk adres is verwijderd en de lijst is gesloten.</li>
         <li>De lanceringslijst van Idle Angler bewaart, voor één e-mail zodra Idle Angler in de TRMNL-marketplace staat: van een ingelogde speler die op Laat het me weten tikt, een koppeling met diens account en taal (het adres wordt bij het versturen uit het account gelezen); van ieder ander het ingevulde e-mailadres en de taal. Elke vermelding wordt verwijderd zodra de e-mail verstuurd is, en je kunt de lijst altijd verlaten via de startpagina of de e-mail.</li>
-        <li>De heldherinnering: als je Desk Crawler-held al twee dagen bezig is en je de Desk Crawler-app nooit hebt geopend, sturen we één e-mail naar je geverifieerde primaire adres met wat daar op je wacht, en een link om het te stoppen. Het adres wordt bij het versturen bij Clerk opgehaald en niet bewaard. We bewaren alleen wanneer hij is verstuurd, of dat je hem niet wilt.</li>
+        <li>De heldherinnering: als je Wardenwatch-held al twee dagen bezig is en je de Wardenwatch-app nooit hebt geopend, sturen we één e-mail naar je geverifieerde primaire adres met wat daar op je wacht, en een link om het te stoppen. Het adres wordt bij het versturen bij Clerk opgehaald en niet bewaard. We bewaren alleen wanneer hij is verstuurd, of dat je hem niet wilt.</li>
         <li>Als je feedback stuurt: je bericht, de pagina waarvandaan je het stuurde, je openbare naam en een link naar je account. Het gaat per e-mail naar de ontwikkelaar, met je geverifieerde primaire e-mailadres als antwoordadres.</li>
       </ul>
 
@@ -79,7 +79,7 @@ export const privacyNl: LegalPage = {
         </li>
         <li><strong>PostHog EU</strong> verzorgt optionele gebruiksanalytics, foutrapporten en gemaskeerde sessieopnames voor support en productverbeteringen.</li>
         <li><strong>Sentry</strong> (Verenigde Staten) ontvangt foutrapporten van de server van onze website en de backend van het spel, en van je browser als je analytics toestaat, zodat we bugs kunnen vinden en oplossen. Een rapport bevat het paginapad of de naam van de spelfunctie die misging, en de technische details van de fout. Het bevat nooit je account, e-mailadres, IP-adres, cookies, formulierinhoud, querystrings van URL’s of installatiecodes en -tokens.</li>
-        <li><strong>De pushdienst van je browser</strong> (Google voor Chrome en Android, Apple voor Safari, Mozilla voor Firefox) bezorgt Desk Crawler-meldingen als je die aanzet. Hij ontvangt de melding versleuteld, dus hij kan hem niet lezen, samen met het pushadres dat je browser maakte.</li>
+        <li><strong>De pushdienst van je browser</strong> (Google voor Chrome en Android, Apple voor Safari, Mozilla voor Firefox) bezorgt Wardenwatch-meldingen als je die aanzet. Hij ontvangt de melding versleuteld, dus hij kan hem niet lezen, samen met het pushadres dat je browser maakte.</li>
         <li><strong>Resend</strong> bezorgt de e-mail om verwijdering van je account te bevestigen op je geverifieerde primaire adres, de lanceringsmail (één keer verstuurd, op 13 oktober 2026) en feedback die je naar de ontwikkelaar stuurt. Resend ontvangt die adressen en de inhoud van de e-mails. Het bezorgt ook de ene heldherinnering.</li>
       </ul>
 
@@ -92,7 +92,7 @@ export const privacyNl: LegalPage = {
         <li>Lanceringslijst van Idle Angler: elke vermelding wordt verwijderd als de lanceringsmail is verstuurd, als je de lijst verlaat, of samen met je account.</li>
         <li>Heldherinnering: wanneer hij is verstuurd, of dat je hem niet wilt, tot je je account verwijdert.</li>
         <li>Feedback: tot je je account verwijdert, of eerder op verzoek. Kopieën die al naar de ontwikkelaar zijn gemaild, worden op verzoek verwijderd.</li>
-        <li>Meldingsinstellingen en apparaten: tot je meldingen uitzet, het apparaat verwijdert, of Desk Crawler of je account verwijdert. Een apparaat waarvan het pushadres niet meer werkt, wordt automatisch verwijderd. Gegevens van afzonderlijke meldingen: zeven dagen.</li>
+        <li>Meldingsinstellingen en apparaten: tot je meldingen uitzet, het apparaat verwijdert, of Wardenwatch of je account verwijdert. Een apparaat waarvan het pushadres niet meer werkt, wordt automatisch verwijderd. Gegevens van afzonderlijke meldingen: zeven dagen.</li>
         <li>Back-ups: ongeveer een week, daarna zijn verwijderde gegevens er ook uit.</li>
         <li>Gemaskeerde opnames: 30 dagen. Analytics-gebeurtenissen en supportprofielen: tot verwijdering van je account of een eerder verzoek om verwijdering.</li>
         <li>Foutrapporten in Sentry: tot 90 dagen. Ze zijn niet aan je account gekoppeld, dus bij het verwijderen van je account valt daar niets te wissen.</li>
@@ -111,7 +111,7 @@ export const privacyNl: LegalPage = {
       <p>Verwijdering van gekoppelde PostHog-profielen, -gebeurtenissen en -opnames wordt bij het verwijderen van het account aangevraagd en door PostHog asynchroon verwerkt. Mislukte verzoeken worden opnieuw geprobeerd en blijven zichtbaar voor de beheerder tot ze zijn opgelost.</p>
 
       <h2>Alleen een spel verwijderen</h2>
-      <p>Kies in de <Link to="/app/wardenwatch/settings">instellingen van Desk Crawler</Link> Voortgang in Desk Crawler verwijderen om die held, de geschiedenis, de koppelingen en de meldingsinstellingen en -apparaten te verwijderen. Je gedeelde account en login blijven beschikbaar. Als het verwijderen klaar is, kun je opnieuw beginnen door de plugin te installeren. Andere spellen blijven zoals ze zijn.</p>
+      <p>Kies in de <Link to="/app/wardenwatch/settings">instellingen van Wardenwatch</Link> Voortgang in Wardenwatch verwijderen om die held, de geschiedenis, de koppelingen en de meldingsinstellingen en -apparaten te verwijderen. Je gedeelde account en login blijven beschikbaar. Als het verwijderen klaar is, kun je opnieuw beginnen door de plugin te installeren. Andere spellen blijven zoals ze zijn.</p>
 
       <h2>Je keuzes</h2>
       <p>

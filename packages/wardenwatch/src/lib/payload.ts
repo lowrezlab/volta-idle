@@ -280,7 +280,7 @@ export function buildPayload(input: PayloadInput) {
     last_completed_tick: world?.lastCompletedTick ?? null,
     last_completed_at: lastCompletedAt === undefined ? null : iso(lastCompletedAt),
     stale,
-    plugin_instance_name: sanitizeLabel(input.instanceName, 40, 'Desk Crawler'),
+    plugin_instance_name: sanitizeLabel(input.instanceName, 40, 'Wardenwatch'),
     game_as_of_label: gameAsOf ? `${gameAsOf.label} ${gameAsOf.offset}` : words.waitingFirst,
     recap: hero !== null && input.activity ? activityRecap(input.activity.entries, recapPeriod(now, input.utcOffset ?? null), content, input.activity.truncated, locale) : null,
     ...rankingFields(input.ranking, hero === null, input.timezone, locale, words),

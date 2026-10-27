@@ -266,7 +266,7 @@ describe('alerts backend (P33)', () => {
     expect(await row(nap)).toMatchObject({ state: 'failed', attempts: 3, reason: 'push_failed' })
   })
 
-  it('Desk Crawler removal deletes preferences, devices and outbox rows', async () => {
+  it('Wardenwatch removal deletes preferences, devices and outbox rows', async () => {
     const heroId = await seedHero(t, { status: 'sleeping' }, 'Kit')
     await subscribe(t, 'Kit', 1)
     await enable(t, 'Kit')
@@ -292,7 +292,7 @@ describe('alerts backend (P33)', () => {
 })
 
 describe('alert copy (D169)', () => {
-  it('sends Desk Crawler alerts in the owner’s language', () => {
+  it('sends Wardenwatch alerts in the owner’s language', () => {
     expect(alertMessage({ kind: 'asleep', offerName: undefined }, 'Baz', 'fr').title).toBe('Le sac de Baz est plein')
     expect(alertMessage({ kind: 'merchant', offerName: 'Messenger Bag' }, 'Baz', 'de').body).toContain('eine Kuriertasche')
     expect(alertMessage({ kind: 'asleep', offerName: undefined }, 'Baz').title).toBe("Baz's bag is full")

@@ -1,6 +1,6 @@
 import type { DeDictionary } from './core'
 
-/** D169: Desk Crawler's content in German, keyed by the English text (see ./index). */
+/** D169: Wardenwatch's content in German, keyed by the English text (see ./index). */
 export const de: DeDictionary = {
   nouns: {
     "Paper Imp": ["Papierkobold", "m"],

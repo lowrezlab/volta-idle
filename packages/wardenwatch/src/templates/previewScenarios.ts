@@ -100,7 +100,7 @@ export function previewScenarios(artBaseUrl: string | null): PreviewScenarios {
       { label: 'Explore the [[Server Room]] 12 times', progress: 5, target: 12, done: false },
     ],
     goal: { title: 'Reach level 7', value: 5, target: 7, gold: 40 },
-    instanceName: 'Desk Crawler',
+    instanceName: 'Wardenwatch',
     // The live catalog, so the screens show what devices show (its stances name the status line, D103).
     content: catalogs[ACTIVE_CONTENT],
     spriteBaseUrl: null,

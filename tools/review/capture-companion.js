@@ -12,7 +12,7 @@
  */
 ;(async () => {
   const client = window.__TSR_ROUTER__?.options?.context?.convexClient
-  if (!client) throw new Error('Open the Desk Crawler companion signed in, then run this again.')
+  if (!client) throw new Error('Open the Wardenwatch companion signed in, then run this again.')
   const q = (name, args = {}) => client.query(name, args)
   const [me, hero, inventory, recap, achievements, keepsakes, connections, log, recent24h, recent7d, overall] = await Promise.all([
     q('users:me'), q('heroes:mine'), q('inventory:mine'), q('heroes:returnSummary'), q('achievements:mine'), q('keepsakes:mine'), q('connections:mine'),

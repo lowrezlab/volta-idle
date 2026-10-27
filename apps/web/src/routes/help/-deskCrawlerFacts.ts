@@ -1,7 +1,7 @@
 import { ACTIVE_CONTENT, catalogs } from '@trmnl-games/wardenwatch/content'
 
 /**
- * D169: everything the Desk Crawler help page reads from the active catalog, in no language. Each language's page body
+ * D169: everything the Wardenwatch help page reads from the active catalog, in no language. Each language's page body
  * (-deskCrawlerHelp.<locale>.tsx) words these facts itself; names stay English here and are translated where shown.
  */
 const catalog = catalogs[ACTIVE_CONTENT]

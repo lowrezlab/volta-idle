@@ -350,7 +350,7 @@ export const catchUpHero = internalMutation({
 })
 
 /**
- * Stop or restart new Desk Crawler tick starts (operations.md "Content releases").
+ * Stop or restart new Wardenwatch tick starts (operations.md "Content releases").
  * `npx convex run --prod admin:setTicksPaused '{"paused":true}'`.
  */
 export const setTicksPaused = internalMutation({

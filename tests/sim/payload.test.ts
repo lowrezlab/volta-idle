@@ -19,7 +19,7 @@ const input: PayloadInput = {
   bagCapacity: 30,
   heldItemName: null,
   logs: [],
-  instanceName: 'Desk Crawler',
+  instanceName: 'Wardenwatch',
   content: contentV1,
   spriteBaseUrl: null,
   artBaseUrl: 'https://art.test',

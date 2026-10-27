@@ -1,6 +1,6 @@
 import type { NlDictionary } from './core'
 
-/** D193: Desk Crawler's content in Dutch, keyed by the English text (see ./index). */
+/** D193: Wardenwatch's content in Dutch, keyed by the English text (see ./index). */
 export const nl: NlDictionary = {
   nouns: {
     "Paper Imp": ["Papierduiveltje", "n"],

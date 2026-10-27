@@ -6,7 +6,7 @@ type Faq = ReadonlyArray<{ q: string; a: string }>
 
 /**
  * D210: the two-game front page, the signed-in player's games, each game's in-review state while TRMNL has not listed
- * it yet, the note on Desk Crawler's hero page and the footer's guides. Game names stay in English.
+ * it yet, the note on Wardenwatch's hero page and the footer's guides. Game names stay in English.
  */
 export const homeMessages = defineMessages({
   en: {

@@ -45,11 +45,11 @@ function ManagePage() {
   useAnalyticsView('management opened', { valid_handoff: uuid !== null, invalid_link: invalid ?? false })
   return (
     <main id="main" className="mx-auto flex max-w-lg flex-col gap-4 px-4 py-12">
-      <h1 className="font-display text-3xl font-bold">{t.heading('Desk Crawler')}</h1>
+      <h1 className="font-display text-3xl font-bold">{t.heading('Wardenwatch')}</h1>
       {uuid === null ? (
         <Card>
           {invalid ? <p role="alert">{t.expired}</p> : null}
-          <p>{t.openFromSettings('Desk Crawler')}</p>
+          <p>{t.openFromSettings('Wardenwatch')}</p>
         </Card>
       ) : (
         <>
@@ -83,7 +83,7 @@ function Connection({ uuid }: { uuid: string }) {
   useAnalyticsView('management account mismatch', {}, reconnect === null && data !== undefined && (data === null || !data.owned))
   if (data === undefined || reconnect === undefined) return <LoadingState label={t.checking} />
   if (reconnect) {
-    if (reconnect.expiresAt <= now) return <Card title={t.reconnectExpired}><p>{t.startInstallAgain('Desk Crawler')}</p></Card>
+    if (reconnect.expiresAt <= now) return <Card title={t.reconnectExpired}><p>{t.startInstallAgain('Wardenwatch')}</p></Card>
     if (!reconnect.verified || reconnect.verifiedUuid !== uuid || !reconnect.proofExpiresAt || reconnect.proofExpiresAt <= now) return <Card title={t.verifyTitle}><p>{t.verifyBody}</p></Card>
     return <Reconnect attemptId={reconnect.id} publicAlias={reconnect.publicAlias} heroName={reconnect.heroName} />
   }
@@ -106,7 +106,7 @@ function Connection({ uuid }: { uuid: string }) {
           {t.showingBefore}<strong>{heroName ?? t.yourHero}</strong>{t.showingAfter}
         </p>
       ) : (
-        <p>{t.disconnected('Desk Crawler')}</p>
+        <p>{t.disconnected('Wardenwatch')}</p>
       )}
       <div className="mt-4 flex flex-wrap gap-2">
         <Link to="/app/wardenwatch" className={`${LINK_BUTTON} ${BUTTON_PRIMARY}`}>

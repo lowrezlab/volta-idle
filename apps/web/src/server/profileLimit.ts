@@ -1,7 +1,7 @@
 /** Cloudflare Workers rate-limiting binding (wrangler.jsonc `ratelimits`). */
 export type RateLimiter = { limit(options: { key: string }): Promise<{ success: boolean }> }
 
-/** Desk Crawler hero pages (D109) and the shared profile (D115). */
+/** Wardenwatch hero pages (D109) and the shared profile (D115). */
 const PROFILE_PATH = /^\/(wardenwatch\/heroes|profile)\/[^/]+\/?$/
 
 /**

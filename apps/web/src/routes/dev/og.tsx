@@ -1,8 +1,8 @@
 import { createFileRoute, notFound } from '@tanstack/react-router'
 
 const CARDS = {
-  platform: { mark: '/favicon.svg', title: 'TRMNL Games', tagline: 'Games for your TRMNL e-ink display.', note: 'Desk Crawler is free on the TRMNL marketplace' },
-  'wardenwatch': { mark: '/games/wardenwatch/icon-192.png', title: 'Desk Crawler', tagline: 'An office RPG that plays itself on your desk.', note: 'Free on the TRMNL marketplace' },
+  platform: { mark: '/favicon.svg', title: 'TRMNL Games', tagline: 'Games for your TRMNL e-ink display.', note: 'Wardenwatch is free on the TRMNL marketplace' },
+  'wardenwatch': { mark: '/games/wardenwatch/icon-192.png', title: 'Wardenwatch', tagline: 'An office RPG that plays itself on your desk.', note: 'Free on the TRMNL marketplace' },
 } as const
 type Card = keyof typeof CARDS
 

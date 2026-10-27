@@ -10,15 +10,16 @@ import { SiteShell } from '../../lib/prose'
 import { DESK_CRAWLER_JSON_LD, DESK_CRAWLER_OG, seo } from '../../lib/seo'
 import { BUTTON_SECONDARY, LINK_BUTTON } from '../../lib/ui'
 import { pitchMessages } from '../../i18n/pitch'
+import { commonMessages } from '../../i18n/common'
 
 /**
- * Desk Crawler's own page (D210). Until Idle Angler arrived the home page was this page and this route redirected there
- * (D137); now home is the two-game front page and Desk Crawler's pitch lives here, in every language (D169).
+ * Wardenwatch's own page (D210). Until Idle Angler arrived the home page was this page and this route redirected there
+ * (D137); now home is the two-game front page and Wardenwatch's pitch lives here, in every language (D169).
  */
 export const Route = createFileRoute('/games/wardenwatch')({
   head: ({ match: { context: { locale } } }) =>
     seo({
-      title: 'Desk Crawler',
+      title: 'Wardenwatch',
       path: '/games/wardenwatch',
       locale,
       description: messagesFor(headMessages, locale).dcGame,
@@ -30,13 +31,15 @@ export const Route = createFileRoute('/games/wardenwatch')({
 
 function GamePage() {
   const t = useT(pitchMessages)
+  const common = useT(commonMessages)
   return (
     <SiteShell>
       <main id="main" className="flex flex-col">
         <section aria-labelledby="dc-title" className={`grid items-center gap-10 py-10 sm:py-16 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] lg:gap-14 ${SITE_FRAME}`}>
           <div className="flex flex-col gap-6">
             <header className="flex flex-col gap-4">
-              <h1 id="dc-title" className="flex items-center gap-4 font-display text-4xl font-bold leading-tight sm:text-5xl"><img src="/games/wardenwatch/icon-192.png" alt="" width={64} height={64} className="size-14 [image-rendering:pixelated] sm:size-16" />Desk Crawler</h1>
+              <h1 id="dc-title" className="flex items-center gap-4 font-display text-4xl font-bold leading-tight sm:text-5xl"><img src="/games/wardenwatch/icon-192.png" alt="" width={64} height={64} className="size-14 [image-rendering:pixelated] sm:size-16" />Wardenwatch</h1>
+              <p className="label-px text-muted">{common.voltaGame}</p>
               <p className="font-display text-2xl font-bold leading-snug text-gold-ink">{t.homeTitle}</p>
               <p className="max-w-prose text-lg leading-relaxed text-muted">{t.homeLead}</p>
             </header>

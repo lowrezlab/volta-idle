@@ -8,7 +8,7 @@ import { publishOfficeCensus } from '../../census'
 import type { EngineRuntime } from './runtime'
 import { DESK_CRAWLER_TABLES } from './tables'
 
-/** Desk Crawler's binding to the shared engine: its tables, quarter-hour schedule (D42), versions and catalogs. */
+/** Wardenwatch's binding to the shared engine: its tables, quarter-hour schedule (D42), versions and catalogs. */
 export const DESK_CRAWLER_RUNTIME: EngineRuntime<ContentCatalog> = {
   slug: 'wardenwatch',
   tables: DESK_CRAWLER_TABLES,

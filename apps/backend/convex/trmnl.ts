@@ -23,7 +23,7 @@ import { parseTrmnlLocale } from './lib/trmnlUser'
 
 /** D115: which game's profile is being deleted, its player character, and its name in messages. */
 const gameDeleting = (slug: GameSlug) => (ctx: Parameters<typeof gameDeletingFor>[0], userId: Id<'users'>) => gameDeletingFor(ctx, slug, userId)
-const gameLabel = (slug: GameSlug) => (slug === WARDENWATCH ? 'Desk Crawler' : otherGameHooks(slug).label)
+const gameLabel = (slug: GameSlug) => (slug === WARDENWATCH ? 'Wardenwatch' : otherGameHooks(slug).label)
 const currentCharacter = (slug: GameSlug) => (ctx: Parameters<typeof currentCharacterOf>[0], user: Doc<'users'> | null) => currentCharacterOf(ctx, slug, user)
 const deletingError = (slug: GameSlug) => appError('GAME_UNAVAILABLE', `${gameLabel(slug)} progress is being deleted. Try again shortly.`)
 
@@ -113,7 +113,7 @@ export const linkInstall = internalMutation({
     // Deleted accounts: replayed Clerk tokens and old TRMNL codes/tokens never regain authority (D22/V09).
     assertNotRevoked(await ctx.db.query('revokedAuthIdentities').withIndex('by_identityHash', (q) => q.eq('identityHash', identityHash(args.tokenIdentifier))).first())
     if (await ctx.db.query('revokedTrmnlCredentials').withIndex('by_tokenHash', (q) => q.eq('tokenHash', args.tokenHash)).first()) {
-      // The verified reconnection flow (D69) is Desk Crawler's; a revoked Idle Angler token needs a fresh install.
+      // The verified reconnection flow (D69) is Wardenwatch's; a revoked Idle Angler token needs a fresh install.
       if (!args.allowReconnection || slug !== WARDENWATCH) throw appError('CONNECTION_UNAVAILABLE', 'This connection needs fresh verification from TRMNL. Start from Install, then Save and open Configure.')
       await reserveReconnection(ctx, args, now)
       return { activationState: 'pending_trmnl' as const, heroCreated: false, reconnectionRequired: true as const }
@@ -324,7 +324,7 @@ export const uninstallInstance = internalMutation({
 async function reserveReconnection(ctx: MutationCtx, args: { tokenIdentifier: string; tokenHash: string; publicAlias?: string; heroName?: string; timezone: string; analyticsConsent?: boolean }, now: number) {
   const user = await ctx.db.query('users').withIndex('by_tokenIdentifier', q => q.eq('tokenIdentifier', args.tokenIdentifier)).unique()
   if (user && user.state !== 'active') throw appError('ACCOUNT_UNAVAILABLE', 'This account is not available.')
-  if (user && (await gameProfile(ctx, user._id))?.state === 'deleting') throw appError('GAME_UNAVAILABLE', 'Desk Crawler progress is being deleted. Try again shortly.')
+  if (user && (await gameProfile(ctx, user._id))?.state === 'deleting') throw appError('GAME_UNAVAILABLE', 'Wardenwatch progress is being deleted. Try again shortly.')
   const hero = user ? await currentHero(ctx, user) : null
   const alias = validateName(user?.publicAlias ?? args.publicAlias ?? '', ALIAS_RULE)
   const heroName = validateName(hero?.name ?? args.heroName ?? '', HERO_NAME_RULE)
@@ -415,7 +415,7 @@ export const completeReconnection = mutation({
       user = (await ctx.db.get(id))!
     }
     const result = await runIntent(ctx, args.operationId, 'trmnl.completeReconnection', { attemptId: args.attemptId, confirm: args.confirm }, async owner => {
-      if ((await gameProfile(ctx, owner._id))?.state === 'deleting') throw appError('GAME_UNAVAILABLE', 'Desk Crawler progress is being deleted. Try again shortly.')
+      if ((await gameProfile(ctx, owner._id))?.state === 'deleting') throw appError('GAME_UNAVAILABLE', 'Wardenwatch progress is being deleted. Try again shortly.')
       const attempt = await ctx.db.get(args.attemptId)
       if (!attempt || attempt.tokenIdentifier !== identity.tokenIdentifier || !attempt.verifiedUuid || attempt.expiresAt <= now || !attempt.proofExpiresAt || attempt.proofExpiresAt <= now) throw appError('INSTALL_INVALID', 'This verification expired. Open Configure again from TRMNL.')
       const instance = await ctx.db.query('trmnlInstances').withIndex('by_uuid', q => q.eq('uuid', attempt.verifiedUuid!)).unique()

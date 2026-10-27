@@ -44,8 +44,8 @@ describe('the hero reminder email (D198)', () => {
     expect(messages()).toHaveLength(1)
     const [mail] = messages()
     expect(mail.to).toEqual(['owner@example.com'])
-    expect(mail.subject).toBe('Desk Crawler for TRMNL: Tobias has 10 gold waiting')
-    expect(mail.text).toContain('Tobias has been adventuring on your TRMNL since you installed Desk Crawler on 13 October, and is now level 3.')
+    expect(mail.subject).toBe('Wardenwatch for TRMNL: Tobias has 10 gold waiting')
+    expect(mail.text).toContain('Tobias has been adventuring on your TRMNL since you installed Wardenwatch on 13 October, and is now level 3.')
     expect(mail.text).toContain('- 10 gold from a goal reached, ready to claim')
     expect(mail.text).toMatch(/https:\/\/trmnlgames\.com\/wardenwatch\/unsubscribe\?u=[^&]+&t=[a-f0-9]{64}/)
     expect(mail.headers['List-Unsubscribe']).toMatch(/^<https:\/\/trmnlgames\.com\/wardenwatch\/unsubscribe/)
@@ -113,12 +113,12 @@ describe('the hero reminder text', () => {
 
   it('lists only what is there, in every language, with the stop link last', () => {
     const en = heroReminderEmail('en', facts, links)
-    expect(en.subject).toBe('Desk Crawler for TRMNL: Tobias has 25 gold waiting')
+    expect(en.subject).toBe('Wardenwatch for TRMNL: Tobias has 25 gold waiting')
     expect(en.text).toContain('- 25 gold from 2 goals reached, ready to claim\n- 7 finds in the bag (7 of 10 slots). Best find: Rare Keyboard Mace\n- Next goal: Equip a piece of gear you found')
     const quiet = heroReminderEmail('en', { ...facts, gold: 0, goals: 0, finds: 0, best: null }, links)
-    expect(quiet.subject).toBe('Desk Crawler for TRMNL: Tobias is level 3')
+    expect(quiet.subject).toBe('Wardenwatch for TRMNL: Tobias is level 3')
     expect(quiet.text).not.toContain('gold from')
-    expect(quiet.text).toContain('Here’s what’s next in the Desk Crawler app:')
+    expect(quiet.text).toContain('Here’s what’s next in the Wardenwatch app:')
     for (const locale of ['en', 'fr', 'de', 'es', 'it', 'pt', 'pl', 'nl'] as const) {
       const mail = heroReminderEmail(locale, facts, links)
       expect(mail.subject, locale).toContain('Tobias')

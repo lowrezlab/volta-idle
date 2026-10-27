@@ -122,8 +122,8 @@ export const purgeGameStep = internalMutation({
     if (user?.activeHeroId) await ctx.db.patch(user._id, { activeHeroId: undefined })
     const keepsakes = await ctx.db.query('deskKeepsakes').withIndex('by_userId', (q) => q.eq('userId', job.userId)).take(BATCH)
     const unlocks = await ctx.db.query('heroAchievements').withIndex('by_userId_and_achievementId', (q) => q.eq('userId', job.userId)).take(BATCH)
-    // P33: Desk Crawler's alert switches and outbox rows; devices and quiet hours are shared with Idle Angler (D115).
-    // D143: follows both ways go with Desk Crawler progress.
+    // P33: Wardenwatch's alert switches and outbox rows; devices and quiet hours are shared with Idle Angler (D115).
+    // D143: follows both ways go with Wardenwatch progress.
     if (await deleteBatch(ctx, keepsakes) + await deleteBatch(ctx, unlocks) + await purgeGameAlertRows(ctx, job.userId, 'wardenwatch', BATCH) + await purgeFollowRows(ctx, job.userId, BATCH) > 0) return await again()
     const receipts = await ctx.db.query('operationReceipts').withIndex('by_userId_and_scope', (q) => q.eq('userId', job.userId).eq('scope', WARDENWATCH)).take(BATCH)
     const legacy = await ctx.db.query('operationReceipts').withIndex('by_userId_and_scope', (q) => q.eq('userId', job.userId).eq('scope', undefined)).take(BATCH)

@@ -70,7 +70,7 @@ export async function requireActiveUser(ctx: QueryCtx): Promise<Doc<'users'>> {
 export async function requirePlayableHero(ctx: QueryCtx, user: Doc<'users'>): Promise<Doc<'heroes'>> {
   const hero = await currentHero(ctx, user)
   if (hero === null) throw appError('HERO_NOT_FOUND', 'No hero yet.')
-  if (hero.activationState !== 'active') throw appError('TRMNL_REQUIRED', 'Save Desk Crawler in TRMNL to start adventures.')
+  if (hero.activationState !== 'active') throw appError('TRMNL_REQUIRED', 'Save Wardenwatch in TRMNL to start adventures.')
   if (hero.simulationState === 'quarantined') throw appError('SERVICE_PAUSED', 'This hero is paused for a service check.')
   return hero
 }

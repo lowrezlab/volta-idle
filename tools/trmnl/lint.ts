@@ -1,5 +1,5 @@
 /**
- * Run the pinned official TRMNL linter against the authoritative TS templates: Desk Crawler's, Idle Angler's, then Paper Lives'.
+ * Run the pinned official TRMNL linter against the authoritative TS templates: Wardenwatch's, Idle Angler's, then Paper Lives'.
  * Then check that every static class in the templates exists in the pinned framework's CSS (or is one its JS
  * reads), since the official rules accept made-up classes like `mt--[1px]` or `-mt--2` that silently do nothing.
  */
@@ -87,7 +87,7 @@ function unknownClasses(markup: Markup, known: Set<string>): Array<{ layout: str
 }
 
 const games: Array<[Markup, string]> = [
-  [screenMarkup, 'Desk Crawler'],
+  [screenMarkup, 'Wardenwatch'],
 ]
 let failed = games.map(([markup, label]) => lintGame(markup, label)).some((status) => status !== 0)
 

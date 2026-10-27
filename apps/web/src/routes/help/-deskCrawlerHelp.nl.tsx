@@ -45,7 +45,7 @@ function occasionDate(rule: Occasion): string {
 export const nl: HelpPage = {
   seoTitle: DESK_CRAWLER_HELP_HEAD.nl.seoTitle,
   description: DESK_CRAWLER_HELP_HEAD.nl.description,
-  title: 'Desk Crawler op TRMNL',
+  title: 'Wardenwatch op TRMNL',
   contents: {
     'getting-started': 'Aan de slag', 'if-the-qr-sends-you-back-to-setup': 'Als de QR je terugstuurt naar de installatie', 'how-time-works': 'Hoe de tijd verloopt', floors: 'Verdiepingen', 'desk-keepsakes': 'Bureau-aandenkens', career: 'Carrière', 'heroes-and-classes': 'Helden en klassen', stances: 'Houdingen', 'desk-raids': 'Bureauraids', meetings: 'Vergaderingen', 'lost-property': 'Gevonden voorwerpen', 'to-do-list': 'Takenlijst', potions: 'Drankjes', 'the-wandering-merchant': 'De rondtrekkende koopman', decisions: 'Beslissingen', effects: 'Effecten', 'office-calendar': 'Kantoorkalender', 'rare-and-epic-gear': 'Zeldzame en epische uitrusting', 'when-your-bag-fills-up': 'Als je tas vol raakt', 'bigger-bags': 'Grotere tassen', 'salvage-and-the-workbench': 'Demonteren en de werkbank', 'getting-knocked-out': 'Knock-out gaan', recaps: 'Samenvattingen', 'understanding-rankings': 'Hoe de ranglijsten werken', 'sharing-your-hero': 'Je held delen', 'following': 'Volgen', names: 'Namen', gender: 'Geslacht', alerts: 'Meldingen', troubleshooting: 'Problemen oplossen', 'disconnecting-and-removing': 'Ontkoppelen en verwijderen', help: 'Hulp',
   },
@@ -53,14 +53,14 @@ export const nl: HelpPage = {
     <>
       <h2 id="getting-started">Aan de slag</h2>
       <ul>
-        <li>Open <a href={DESK_CRAWLER_INSTALL_URL}>Desk Crawler in de TRMNL-marketplace</a> en kies Installeren.</li>
-        <li>Log in bij Desk Crawler, kies een openbare naam en een heldennaam, en koppel de installatie.</li>
+        <li>Open <a href={DESK_CRAWLER_INSTALL_URL}>Wardenwatch in de TRMNL-marketplace</a> en kies Installeren.</li>
+        <li>Log in bij Wardenwatch, kies een openbare naam en een heldennaam, en koppel de installatie.</li>
         <li>Klik terug in TRMNL op Opslaan. Het eerste avontuur van je held begint binnen 15 minuten.</li>
         <li>Zet de plugin in een afspeellijst, of in een mashup als je je held naast andere plugins wilt. Alle vier de indelingsformaten worden ondersteund.</li>
       </ul>
       <h2 id="if-the-qr-sends-you-back-to-setup">Als de QR je terugstuurt naar de installatie</h2>
       <p>De QR opent de app van het account waarmee je bent ingelogd. Hij start geen nieuwe installatie. Controleer het e-mailadres van de login op de installatiepagina en gebruik Ander account als je oorspronkelijk met een ander account hebt gekoppeld.</p>
-      <p>Staat er bij de installatie ‘Desk Crawler opnieuw koppelen’, dan bestaat je TRMNL-koppeling wel, maar ontbreekt de held. Dat kan gebeuren na de reset van het spel vóór de lancering. Installeer een nieuwe kopie van <a href={DESK_CRAWLER_INSTALL_URL}>Desk Crawler vanuit TRMNL</a>, log in met hetzelfde account, kies een nieuwe heldennaam, koppel en klik dan in TRMNL op Opslaan. Werkt de nieuwe kopie, haal dan de oude uit je afspeellijst.</p>
+      <p>Staat er bij de installatie ‘Wardenwatch opnieuw koppelen’, dan bestaat je TRMNL-koppeling wel, maar ontbreekt de held. Dat kan gebeuren na de reset van het spel vóór de lancering. Installeer een nieuwe kopie van <a href={DESK_CRAWLER_INSTALL_URL}>Wardenwatch vanuit TRMNL</a>, log in met hetzelfde account, kies een nieuwe heldennaam, koppel en klik dan in TRMNL op Opslaan. Werkt de nieuwe kopie, haal dan de oude uit je afspeellijst.</p>
       <p>Staat er ‘Sla op in TRMNL om te beginnen’, dan staat je held al klaar. Ga terug naar die installatie in TRMNL en klik op Opslaan.</p>
       <h2 id="how-time-works">Hoe de tijd verloopt</h2>
       <p>
@@ -74,7 +74,7 @@ export const nl: HelpPage = {
       </ul>
       {F.lore ? <p>De pagina Veldnotities onder Meer bewaart wat je held over elke verdieping en elk monster heeft opgeschreven. De notitie van een verdieping gaat open zodra je held er voor het eerst staat, die van een monster bij de eerste overwinning erop. Notities hebben geen invloed op het spel.</p> : null}
       <h2 id="desk-keepsakes">Bureau-aandenkens</h2>
-      <p>Houd Desk Crawler in je afspeellijst en zoek in de titelbalk van het scherm naar ‘Aandenken-code’ met een zescijferige code, zoals 482 917 (smalle staande mashups korten dat in tot ‘Aandenken’). Vul die code in bij Instellingen in de app om een blijvend kantoorsouvenir te verzamelen. Zowel volledig scherm als mashups tonen hem; het voorbeeld in de app verbergt hem. Terwijl er een aandenken wacht, verzamelt de QR-code op het scherm het ook: scan hem met je telefoon en de app zet het op je plank, ook met de titelbalk uit. Waar ruimte is, staat de code ernaast.</p>
+      <p>Houd Wardenwatch in je afspeellijst en zoek in de titelbalk van het scherm naar ‘Aandenken-code’ met een zescijferige code, zoals 482 917 (smalle staande mashups korten dat in tot ‘Aandenken’). Vul die code in bij Instellingen in de app om een blijvend kantoorsouvenir te verzamelen. Zowel volledig scherm als mashups tonen hem; het voorbeeld in de app verbergt hem. Terwijl er een aandenken wacht, verzamelt de QR-code op het scherm het ook: scan hem met je telefoon en de app zet het op je plank, ook met de titelbalk uit. Waar ruimte is, staat de code ernaast.</p>
       <p>Je kunt één aandenken per week verzamelen, met elke maandag om 00:00 UTC een nieuwe code. De code van vorige week werkt ook als je scherm traag ververst. Mis je een week, dan krijg je de week erna hetzelfde ontwerp. Heb je de hele set, dan kun je van elk meer verzamelen. Aandenkens veranderen niets aan XP, uitrusting of ranglijsten, en extra apparaten of sneller verversen leveren niets extra’s op.</p>
       {F.career !== undefined ? (
         <>
@@ -241,8 +241,8 @@ export const nl: HelpPage = {
       <h2 id="troubleshooting">Problemen oplossen</h2>
       <h3 id="not-on-your-screen">Je held staat niet op je scherm</h3>
       <ul>
-        <li>Op Opslaan klikken zet Desk Crawler in je TRMNL-afspeellijst. Je apparaat toont de afspeellijst één plugin tegelijk, in zijn verversingstempo, dus Desk Crawler verschijnt als hij aan de beurt is. Met meerdere plugins en traag verversen kan dat even duren.</li>
-        <li>Open de afspeellijst in TRMNL en controleer of Desk Crawler erin staat, op het apparaat waar je naar kijkt als je er meer hebt, en of geen planning hem op dit tijdstip verbergt.</li>
+        <li>Op Opslaan klikken zet Wardenwatch in je TRMNL-afspeellijst. Je apparaat toont de afspeellijst één plugin tegelijk, in zijn verversingstempo, dus Wardenwatch verschijnt als hij aan de beurt is. Met meerdere plugins en traag verversen kan dat even duren.</li>
+        <li>Open de afspeellijst in TRMNL en controleer of Wardenwatch erin staat, op het apparaat waar je naar kijkt als je er meer hebt, en of geen planning hem op dit tijdstip verbergt.</li>
         <li>Slaapstand stopt het verversen van het scherm ’s nachts. Je held gaat door met avonturen, en het scherm haalt bij als het apparaat wakker wordt.</li>
         <li>Een scherm met ‘Het eerste avontuur begint binnen 15 minuten’ werkt. Het eerste verhaal komt bij het volgende kwartier.</li>
         <li>De pagina Held in de app toont altijd wat je held doet, wat het scherm ook laat zien.</li>

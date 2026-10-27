@@ -11,9 +11,9 @@ import { beginEngineBuild, buildStep, cleanupStep, TOP_ENTRIES } from './lib/eng
 import { writeEngineRankInput } from './lib/engine/scores'
 
 /**
- * Desk Crawler's leaderboards (leaderboards.md, ranking.md, D31/D32). Building and
+ * Wardenwatch's leaderboards (leaderboards.md, ranking.md, D31/D32). Building and
  * publishing the immutable hourly sets is shared engine code (lib/engine/publication.ts);
- * this module registers Desk Crawler's builder functions and its companion read.
+ * this module registers Wardenwatch's builder functions and its companion read.
  */
 
 export { TOP_ENTRIES, type Board } from './lib/engine/publication'

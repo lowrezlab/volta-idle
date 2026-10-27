@@ -3,7 +3,7 @@ import { v } from 'convex/values'
 import { logDetail, todoKind } from './lib/logDetail'
 import { DESK_CRAWLER_TABLES, engineTables, rankingTables } from './lib/engine/tables'
 
-/** Desk Crawler's engine tables (world, runs, score windows, leaderboard sets), from the shared factory (S0). */
+/** Wardenwatch's engine tables (world, runs, score windows, leaderboard sets), from the shared factory (S0). */
 const deskCrawlerEngine = { ...engineTables(DESK_CRAWLER_TABLES, ['deaths', 'levelUps', 'heldFinds']), ...rankingTables(DESK_CRAWLER_TABLES) }
 
 
@@ -187,7 +187,7 @@ export default defineSchema({
   }).index('by_key', ['key']),
 
   /**
-   * Desk Crawler's public office tally (D174): one row, replaced at the end of each tick's hero walk.
+   * Wardenwatch's public office tally (D174): one row, replaced at the end of each tick's hero walk.
    * Heroes who have started, the monsters they have defeated and the gear they have found.
    */
   officeCensus: defineTable({

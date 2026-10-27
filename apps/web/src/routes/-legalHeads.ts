@@ -24,12 +24,12 @@ export const PRIVACY_HEAD: Readonly<Record<Locale, LegalHead>> = {
 
 /** The terms page, by language. */
 export const TERMS_HEAD: Readonly<Record<Locale, LegalHead>> = {
-  en: { title: 'Terms of use', seoTitle: 'Terms', description: 'The rules for playing Desk Crawler: a free game, provided as-is, with fair-play and public-name rules.' },
-  fr: { title: 'Conditions d’utilisation', seoTitle: 'Conditions', description: 'Les règles pour jouer à Desk Crawler : un jeu gratuit, fourni en l’état, avec des règles de fair-play et de noms publics.' },
-  de: { title: 'Nutzungsbedingungen', description: 'Die Regeln für Desk Crawler: ein kostenloses Spiel, bereitgestellt wie es ist, mit Regeln für Fairplay und öffentliche Namen.' },
-  es: { title: 'Condiciones de uso', seoTitle: 'Condiciones', description: 'Las reglas para jugar a Desk Crawler: un juego gratuito, ofrecido tal cual, con normas de juego limpio y de nombres públicos.' },
-  it: { title: 'Termini d’uso', seoTitle: 'Termini', description: 'Le regole per giocare a Desk Crawler: un gioco gratuito, fornito così com’è, con regole sul fair play e sui nomi pubblici.' },
-  pt: { title: 'Termos de uso', seoTitle: 'Termos', description: 'As regras para jogar Desk Crawler: um jogo gratuito, oferecido como está, com regras de jogo limpo e de nomes públicos.' },
-  pl: { title: 'Warunki korzystania', seoTitle: 'Warunki', description: 'Zasady gry w Desk Crawler: darmowa gra udostępniana w obecnej postaci, z zasadami uczciwej gry i nazw publicznych.' },
-  nl: { title: 'Gebruiksvoorwaarden', seoTitle: 'Voorwaarden', description: 'De regels voor het spelen van Desk Crawler: een gratis spel, geleverd zoals het is, met regels voor eerlijk spel en openbare namen.' },
+  en: { title: 'Terms of use', seoTitle: 'Terms', description: 'The rules for playing Wardenwatch: a free game, provided as-is, with fair-play and public-name rules.' },
+  fr: { title: 'Conditions d’utilisation', seoTitle: 'Conditions', description: 'Les règles pour jouer à Wardenwatch : un jeu gratuit, fourni en l’état, avec des règles de fair-play et de noms publics.' },
+  de: { title: 'Nutzungsbedingungen', description: 'Die Regeln für Wardenwatch: ein kostenloses Spiel, bereitgestellt wie es ist, mit Regeln für Fairplay und öffentliche Namen.' },
+  es: { title: 'Condiciones de uso', seoTitle: 'Condiciones', description: 'Las reglas para jugar a Wardenwatch: un juego gratuito, ofrecido tal cual, con normas de juego limpio y de nombres públicos.' },
+  it: { title: 'Termini d’uso', seoTitle: 'Termini', description: 'Le regole per giocare a Wardenwatch: un gioco gratuito, fornito così com’è, con regole sul fair play e sui nomi pubblici.' },
+  pt: { title: 'Termos de uso', seoTitle: 'Termos', description: 'As regras para jogar Wardenwatch: um jogo gratuito, oferecido como está, com regras de jogo limpo e de nomes públicos.' },
+  pl: { title: 'Warunki korzystania', seoTitle: 'Warunki', description: 'Zasady gry w Wardenwatch: darmowa gra udostępniana w obecnej postaci, z zasadami uczciwej gry i nazw publicznych.' },
+  nl: { title: 'Gebruiksvoorwaarden', seoTitle: 'Voorwaarden', description: 'De regels voor het spelen van Wardenwatch: een gratis spel, geleverd zoals het is, met regels voor eerlijk spel en openbare namen.' },
 }

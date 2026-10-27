@@ -92,7 +92,7 @@ describe('following (D143, rivals removed in D205)', () => {
     expect(await follow('Wren', 'Moss')).toMatchObject({ changed: true })
   })
 
-  it('removes follows both ways when either player deletes Desk Crawler progress', async () => {
+  it('removes follows both ways when either player deletes Wardenwatch progress', async () => {
     await seedHero(t, {}, 'Wren')
     await seedHero(t, {}, 'Moss')
     await seedHero(t, {}, 'Fern')

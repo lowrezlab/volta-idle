@@ -115,7 +115,7 @@ const keepsakeFooter = `{% if desk_keepsake_code %}<span class="instance">${L('k
 const titleBar = `
 <div class="title_bar">
   <img class="image image-stroke ${ADAPTIVE}" src="${TITLE_ICON}" alt="">
-  <span class="title">Desk Crawler</span>
+  <span class="title">Wardenwatch</span>
   ${keepsakeFooter}
 </div>`
 
@@ -427,7 +427,7 @@ const storyList = (clamp: number, classes: string, size = 16, fit = 60, timeBelo
  * line, and trim boards marked `data-fit-rows` to their slot. First, widen any stat column a device text scale has
  * outgrown, by swapping its framework width class; last, if even the newest story has no room, let the board, scene and
  * parts of the header give way. Only classes change; there are no styles, network calls or writes.
- * Scope to this view so another Desk Crawler slot has its own height budget, and
+ * Scope to this view so another Wardenwatch slot has its own height budget, and
  * to the orientation layout the framework is showing (the other is display: none).
  */
 const fitStories = `<script>

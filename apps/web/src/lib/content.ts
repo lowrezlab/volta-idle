@@ -5,7 +5,7 @@ export const loadContent = (locale: Locale): Promise<void> => (locale === 'en' ?
 
 /**
  * D169: the pages whose first render shows game content (names, catalog lines, stored stories) in the reader's
- * language: the Desk Crawler companion and the public hero pages. Their route loaders await the locale's dictionary,
+ * language: the Wardenwatch companion and the public hero pages. Their route loaders await the locale's dictionary,
  * and the client entry awaits it before hydration, so the server render and the first client render agree. English
  * needs no dictionary. Every other page translates game content only in a later message (a server error through
  * `useIntent`), which loads the dictionary in the background instead.

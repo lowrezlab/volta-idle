@@ -35,7 +35,7 @@ export interface GameEntry {
 export const games = {
   [WARDENWATCH_GAME]: {
     slug: WARDENWATCH_GAME,
-    name: 'Desk Crawler',
+    name: 'Wardenwatch',
     description: 'An office RPG that plays itself on your TRMNL.',
     defaultStatus: 'live',
     publicPath: '/games/wardenwatch',

@@ -19,7 +19,7 @@ async function linkGrant(t: T, alias: string, tokenHash: string) {
 
 const screen = (t: T, tokenHash: string) => t.query(internal.trmnlPayload.forInstance, { tokenHash, uuid: UUID, now: Date.now(), instanceName: null })
 
-describe('Desk Crawler progress deletion', () => {
+describe('Wardenwatch progress deletion', () => {
   let t: T
   let fetchMock: ReturnType<typeof vi.fn>
   beforeEach(async () => {

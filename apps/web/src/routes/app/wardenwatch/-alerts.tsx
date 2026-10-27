@@ -23,7 +23,7 @@ const clock = (hour: number) => `${String(hour).padStart(2, '0')}:00`
 
 /**
  * Settings → Alerts (P33): off by default, the browser prompt only after a tap, a device list and two switches with
- * quiet hours. The device remains the surface that always works, and the card says so. Desk Crawler's two kinds
+ * quiet hours. The device remains the surface that always works, and the card says so. Wardenwatch's two kinds
  * (alerts.md) are the default, each saying what it is and how often it can arrive.
  */
 export function AlertsCard({ notify, kinds: given, intro: givenIntro, quietNote: givenNote }: { notify: Notify; kinds?: readonly AlertKindCopy[]; intro?: string; quietNote?: string }) {

@@ -100,7 +100,7 @@ function SignedInApp() {
         <ul className="mx-auto flex min-h-13 max-w-3xl items-stretch">
           <li className="hidden items-center pr-4 pl-2 sm:flex">
             <img src="/games/wardenwatch/favicon.svg" alt="" width={24} height={24} className="[image-rendering:pixelated]" />
-            <span className="ml-3 text-xs text-gold-ink">Desk Crawler</span>
+            <span className="ml-3 text-xs text-gold-ink">Wardenwatch</span>
           </li>
           {NAV.map((item) => {
             const mark = item.to === '/app/wardenwatch/inventory' ? bagMark : null

@@ -50,7 +50,7 @@ function occasionDate(rule: Occasion): string {
 export const pl: HelpPage = {
   seoTitle: DESK_CRAWLER_HELP_HEAD.pl.seoTitle,
   description: DESK_CRAWLER_HELP_HEAD.pl.description,
-  title: 'Desk Crawler na TRMNL',
+  title: 'Wardenwatch na TRMNL',
   contents: {
     'getting-started': 'Pierwsze kroki', 'if-the-qr-sends-you-back-to-setup': 'Gdy kod QR odsyła do instalacji', 'how-time-works': 'Jak płynie czas', floors: 'Piętra', 'desk-keepsakes': 'Pamiątki z biurka', career: 'Kariera', 'heroes-and-classes': 'Bohaterowie i klasy', stances: 'Postawy', 'desk-raids': 'Rajdy na biurka', meetings: 'Spotkania', 'lost-property': 'Rzeczy znalezione', 'to-do-list': 'Lista zadań', potions: 'Mikstury', 'the-wandering-merchant': 'Wędrowny kupiec', decisions: 'Decyzje', effects: 'Efekty', 'office-calendar': 'Kalendarz biura', 'rare-and-epic-gear': 'Rzadki i epicki sprzęt', 'when-your-bag-fills-up': 'Gdy torba się zapełni', 'bigger-bags': 'Większe torby', 'salvage-and-the-workbench': 'Rozbiórka i warsztat', 'getting-knocked-out': 'Nokaut', recaps: 'Podsumowania', 'understanding-rankings': 'Jak działają rankingi', 'sharing-your-hero': 'Udostępnianie bohatera', 'following': 'Obserwowani', names: 'Nazwy', gender: 'Płeć', alerts: 'Alerty', troubleshooting: 'Rozwiązywanie problemów', 'disconnecting-and-removing': 'Odłączanie i usuwanie', help: 'Pomoc',
   },
@@ -58,14 +58,14 @@ export const pl: HelpPage = {
     <>
       <h2 id="getting-started">Pierwsze kroki</h2>
       <ul>
-        <li>Otwórz <a href={DESK_CRAWLER_INSTALL_URL}>Desk Crawler w sklepie TRMNL</a> i wybierz „Instaluj”.</li>
-        <li>Zaloguj się do Desk Crawler, wybierz nazwę publiczną i imię bohatera, a potem połącz instalację.</li>
+        <li>Otwórz <a href={DESK_CRAWLER_INSTALL_URL}>Wardenwatch w sklepie TRMNL</a> i wybierz „Instaluj”.</li>
+        <li>Zaloguj się do Wardenwatch, wybierz nazwę publiczną i imię bohatera, a potem połącz instalację.</li>
         <li>Wróć do TRMNL i kliknij „Zapisz”. Pierwsza przygoda bohatera zacznie się w ciągu 15 minut.</li>
         <li>Dodaj plugin do playlisty albo do mashupu, jeśli chcesz mieć bohatera obok innych pluginów. Obsługiwane są wszystkie cztery rozmiary układu.</li>
       </ul>
       <h2 id="if-the-qr-sends-you-back-to-setup">Gdy kod QR odsyła do instalacji</h2>
       <p>Kod QR otwiera aplikację dla konta, na które jesteś zalogowany. Nie zaczyna nowej instalacji. Sprawdź adres e-mail zalogowanego konta na stronie instalacji i użyj opcji „Przełącz konto”, jeśli pierwotnie łączyłeś się z innego konta.</p>
-      <p>Jeśli instalacja mówi „Połącz ponownie Desk Crawler”, połączenie z TRMNL istnieje, ale brakuje bohatera. Może się tak zdarzyć po resecie gry przed premierą. Zainstaluj nową kopię <a href={DESK_CRAWLER_INSTALL_URL}>Desk Crawler z TRMNL</a>, zaloguj się na to samo konto, wybierz nowe imię bohatera, połącz i kliknij „Zapisz” w TRMNL. Gdy nowa kopia zadziała, usuń starą z playlisty.</p>
+      <p>Jeśli instalacja mówi „Połącz ponownie Wardenwatch”, połączenie z TRMNL istnieje, ale brakuje bohatera. Może się tak zdarzyć po resecie gry przed premierą. Zainstaluj nową kopię <a href={DESK_CRAWLER_INSTALL_URL}>Wardenwatch z TRMNL</a>, zaloguj się na to samo konto, wybierz nowe imię bohatera, połącz i kliknij „Zapisz” w TRMNL. Gdy nowa kopia zadziała, usuń starą z playlisty.</p>
       <p>Jeśli instalacja mówi „Zapisz w TRMNL, aby zacząć”, bohater jest już gotowy. Wróć do tej instalacji w TRMNL i kliknij „Zapisz”.</p>
       <h2 id="how-time-works">Jak płynie czas</h2>
       <p>
@@ -79,7 +79,7 @@ export const pl: HelpPage = {
       </ul>
       {F.lore ? <p>Strona Notatki terenowe w zakładce Więcej przechowuje to, co bohater zapisał o każdym piętrze i potworze. Notatka piętra otwiera się, gdy bohater pierwszy raz na nie wejdzie, notatka potwora przy pierwszej wygranej z nim. Notatki nie wpływają na grę.</p> : null}
       <h2 id="desk-keepsakes">Pamiątki z biurka</h2>
-      <p>Zostaw Desk Crawler na playliście i szukaj na pasku tytułu ekranu napisu „Kod pamiątki” z sześciocyfrowym kodem, na przykład 482 917 (wąskie pionowe mashupy skracają go do „Kod”). Wpisz ten kod w Ustawieniach aplikacji, aby zebrać stałą biurową pamiątkę. Pokazuje go zarówno pełny ekran, jak i mashupy; podgląd w aplikacji go ukrywa. Gdy pamiątka czeka, kod QR na ekranie też ją zbiera: zeskanuj go telefonem, a aplikacja doda ją na półkę, nawet z wyłączonym paskiem tytułu. Gdzie jest miejsce, kod jest wydrukowany obok.</p>
+      <p>Zostaw Wardenwatch na playliście i szukaj na pasku tytułu ekranu napisu „Kod pamiątki” z sześciocyfrowym kodem, na przykład 482 917 (wąskie pionowe mashupy skracają go do „Kod”). Wpisz ten kod w Ustawieniach aplikacji, aby zebrać stałą biurową pamiątkę. Pokazuje go zarówno pełny ekran, jak i mashupy; podgląd w aplikacji go ukrywa. Gdy pamiątka czeka, kod QR na ekranie też ją zbiera: zeskanuj go telefonem, a aplikacja doda ją na półkę, nawet z wyłączonym paskiem tytułu. Gdzie jest miejsce, kod jest wydrukowany obok.</p>
       <p>Możesz zebrać jedną pamiątkę na tydzień, z nowym kodem w każdy poniedziałek o 00:00 UTC. Kod z poprzedniego tygodnia też działa, jeśli ekran odświeża się powoli. Jeśli przegapisz tydzień, w następnym dostaniesz ten sam wzór. Po zebraniu całego kompletu możesz zbierać kolejne egzemplarze. Pamiątki nie zmieniają XP, sprzętu ani rankingów, a dodatkowe urządzenia czy szybsze odświeżanie nie dają nic ekstra.</p>
       {F.career !== undefined ? (
         <>
@@ -246,8 +246,8 @@ export const pl: HelpPage = {
       <h2 id="troubleshooting">Rozwiązywanie problemów</h2>
       <h3 id="not-on-your-screen">Bohatera nie ma na ekranie</h3>
       <ul>
-        <li>Kliknięcie „Zapisz” dodaje Desk Crawler do playlisty TRMNL. Urządzenie pokazuje playlistę po jednym pluginie, w swoim rytmie odświeżania, więc Desk Crawler pojawia się, gdy przyjdzie jego kolej. Przy kilku pluginach i wolnym odświeżaniu może to trochę potrwać.</li>
-        <li>Otwórz w TRMNL playlistę i sprawdź, czy Desk Crawler na niej jest, na urządzeniu, na które patrzysz, jeśli masz kilka, i czy żaden harmonogram nie ukrywa go o tej porze dnia.</li>
+        <li>Kliknięcie „Zapisz” dodaje Wardenwatch do playlisty TRMNL. Urządzenie pokazuje playlistę po jednym pluginie, w swoim rytmie odświeżania, więc Wardenwatch pojawia się, gdy przyjdzie jego kolej. Przy kilku pluginach i wolnym odświeżaniu może to trochę potrwać.</li>
+        <li>Otwórz w TRMNL playlistę i sprawdź, czy Wardenwatch na niej jest, na urządzeniu, na które patrzysz, jeśli masz kilka, i czy żaden harmonogram nie ukrywa go o tej porze dnia.</li>
         <li>Tryb uśpienia zatrzymuje odświeżanie ekranu w nocy. Bohater dalej przeżywa przygody, a ekran nadrabia, gdy urządzenie się obudzi.</li>
         <li>Ekran z napisem „Pierwsza przygoda zacznie się w ciągu 15 minut” działa. Pierwsza historia pojawi się z najbliższym kwadransem.</li>
         <li>Strona Bohater w aplikacji zawsze pokazuje, co robi bohater, cokolwiek pokazuje ekran.</li>

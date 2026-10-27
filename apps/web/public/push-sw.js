@@ -9,7 +9,7 @@ self.addEventListener('push', (event) => {
   } catch {
     data = {}
   }
-  const title = typeof data.title === 'string' ? data.title : 'Desk Crawler'
+  const title = typeof data.title === 'string' ? data.title : 'Wardenwatch'
   event.waitUntil(
     self.registration.showNotification(title, {
       body: typeof data.body === 'string' ? data.body : '',

@@ -45,7 +45,7 @@ export const claim = mutation({
     const code = normalizedKeepsakeCode(args.code.slice(0, 64))
     const result = await runIntent(ctx, args.operationId, 'keepsakes.claim', { code }, async (user) => {
       const hero = await currentHero(ctx, user)
-      if (!hero || hero.activationState !== 'active') throw appError('TRMNL_REQUIRED', 'Save Desk Crawler in TRMNL to collect keepsakes.')
+      if (!hero || hero.activationState !== 'active') throw appError('TRMNL_REQUIRED', 'Save Wardenwatch in TRMNL to collect keepsakes.')
       const now = Date.now()
       const week = keepsakeWeek(now)
       const collection = await ctx.db.query('deskKeepsakes').withIndex('by_userId', (q) => q.eq('userId', user._id)).unique()

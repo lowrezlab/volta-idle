@@ -82,7 +82,7 @@ export const Route = createFileRoute('/dev/wardenwatch')({
   beforeLoad: () => {
     if (!import.meta.env.DEV) throw notFound()
   },
-  head: () => seo({ title: 'Desk Crawler previews', index: false }),
+  head: () => seo({ title: 'Wardenwatch previews', index: false }),
   validateSearch: (search: Record<string, unknown>): PreviewSearch => ({
     view: pick(search.view, Object.keys(VIEWS) as View[], 'layouts'),
     // Any string here, resolved against the scenario list in the gallery: naming the list in the route options would put

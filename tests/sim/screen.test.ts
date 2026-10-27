@@ -31,7 +31,7 @@ const payload = (logs: Parameters<typeof buildPayload>[0]['logs'] = [{ at: NOW -
     bagCapacity: 30,
     heldItemName: null,
     logs,
-    instanceName: 'Desk Crawler',
+    instanceName: 'Wardenwatch',
     content: contentV1,
     spriteBaseUrl: null,
     artBaseUrl: null,
@@ -190,9 +190,9 @@ describe('companion QR in every view', () => {
       const live = await liquid.parseAndRender(markup, { ...payload(), status: 'unlinked', data_state: 'unlinked', attention: 'Sign in to the companion, then save this plugin in TRMNL.', qr_base: `${base}/app` })
       expect(live).toContain('Finish setting up')
       expect(live).toContain('Scan with your phone')
-      const paused = await liquid.parseAndRender(markup, { ...payload(), status: 'unlinked', data_state: 'service_paused', attention: 'Desk Crawler is down for maintenance.', qr_base: '' })
+      const paused = await liquid.parseAndRender(markup, { ...payload(), status: 'unlinked', data_state: 'service_paused', attention: 'Wardenwatch is down for maintenance.', qr_base: '' })
       expect(paused).toContain('Back soon')
-      expect(paused).toContain('Desk Crawler is down for maintenance.')
+      expect(paused).toContain('Wardenwatch is down for maintenance.')
       expect(paused).not.toContain('Scan')
     }
   })
@@ -742,7 +742,7 @@ describe('to-do tasks and the goal on the X full landscape (D138)', () => {
       hero: { name: 'Baz', level: 5, xp: 210, hp: 118, gold: 640, status: 'exploring', biomeId: 'server_room', lastTick: 120, lastAdvancedAt: NOW - 60_000, quarantined: false },
       weaponName: null, armorName: null, weaponAttack: 0, armorDefense: 0, potions: 1, bagUsed: 3, bagCapacity: 30, heldItemName: null,
       logs: [{ at: NOW - 60_000, kind: 'combat', summary: 'Unplugged a Cable Serpent.' }],
-      instanceName: 'Desk Crawler', content: contentV1, spriteBaseUrl: null, artBaseUrl: null, latestEvent: null, ranking: null,
+      instanceName: 'Wardenwatch', content: contentV1, spriteBaseUrl: null, artBaseUrl: null, latestEvent: null, ranking: null,
       todoTasks: [{ label: 'Defeat 4 [[Cable Serpents]]', progress: 6, target: 4, done: true }, { label: 'Find a piece of gear', progress: 0, target: 1, done: false }],
       goal: { title: 'Reach level 7', value: 5, target: 7, gold: 40 },
       ...extra,

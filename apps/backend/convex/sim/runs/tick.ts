@@ -32,9 +32,9 @@ export { SLOT_MS, SLOT_OFFSET_MS, wallSlotFor }
 export { PAGE_SIZE, STALL_MS, MAX_RECOVERY_ATTEMPTS } from '../../lib/engine/runner'
 
 /**
- * Desk Crawler's tick (simulation.md). The run frame (guards, pages, progress,
+ * Wardenwatch's tick (simulation.md). The run frame (guards, pages, progress,
  * publication, watchdog) is shared engine code in lib/engine/runner.ts; this
- * module registers Desk Crawler's functions and its per-hero step.
+ * module registers Wardenwatch's functions and its per-hero step.
  */
 
 /** D31: publish on the last slot of each UTC hour, or once after >60 minutes without a publication. */

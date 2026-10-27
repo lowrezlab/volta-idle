@@ -84,7 +84,7 @@ export const mine = query({
       activationState: hero.activationState,
       // When TRMNL confirmed the Save: the companion reminds a new player to add the plugin to a playlist for a day or two.
       activatedAt: hero.activatedAt ?? null,
-      // Whether TRMNL has fetched a Desk Crawler screen for this account since the Save's own render; the reminder above stops once it has.
+      // Whether TRMNL has fetched a Wardenwatch screen for this account since the Save's own render; the reminder above stops once it has.
       screenServed: (await ctx.db.query('trmnlInstances').withIndex('by_userId_and_state', (q) => q.eq('userId', user._id).eq('state', 'active')).take(10)).some((instance) => (instance.gameSlug ?? 'wardenwatch') === 'wardenwatch' && screenFetchedAfterInstall(instance)),
       simulationState: hero.simulationState,
       level: hero.level,
@@ -491,7 +491,7 @@ export const setPublicProfile = mutation({
     await runIntent(ctx, args.operationId, 'heroes.setPublicProfile', { visible: args.visible }, async (user) => {
       const hero = await currentHero(ctx, user)
       if (hero === null) throw appError('HERO_NOT_FOUND', 'No hero yet.')
-      if (hero.activationState !== 'active') throw appError('TRMNL_REQUIRED', 'Save Desk Crawler in TRMNL to start adventures.')
+      if (hero.activationState !== 'active') throw appError('TRMNL_REQUIRED', 'Save Wardenwatch in TRMNL to start adventures.')
       if (pagePublic(hero) === args.visible) return { changed: false }
       await ctx.db.patch(hero._id, { publicProfile: args.visible })
       return { changed: true }

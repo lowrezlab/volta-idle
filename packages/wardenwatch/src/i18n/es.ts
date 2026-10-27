@@ -1,6 +1,6 @@
 import type { EsDictionary } from './core'
 
-/** D193: Desk Crawler's content in Spanish, keyed by the English text (see ./index). */
+/** D193: Wardenwatch's content in Spanish, keyed by the English text (see ./index). */
 export const es: EsDictionary = {
   nouns: {
     "Paper Imp": ["Diablillo de papel", "m"],

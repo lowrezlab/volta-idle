@@ -53,14 +53,14 @@ function InstallPage() {
       <Page>
         <h1 className="font-display text-3xl font-bold">{t.title}</h1>
         {invalid ? <p role="alert">{t.invalidLink}</p> : null}
-        <p>{t.startFromPlugin('Desk Crawler')}</p>
+        <p>{t.startFromPlugin('Wardenwatch')}</p>
         <Link to="/help/wardenwatch" className="inline-flex min-h-11 items-center underline underline-offset-4">{t.helpWithSetup}</Link>
       </Page>
     )
   }
   return (
     <Page>
-      <h1 className="font-display text-3xl font-bold">{t.connectTo('Desk Crawler')}</h1>
+      <h1 className="font-display text-3xl font-bold">{t.connectTo('Wardenwatch')}</h1>
       <Show when="signed-out">
         <p>{t.signInFirst}</p>
         <SignIn routing="hash" forceRedirectUrl="/connect/trmnl/wardenwatch/install" signUpForceRedirectUrl="/connect/trmnl/wardenwatch/install" />

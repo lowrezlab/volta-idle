@@ -78,7 +78,7 @@ const GOLD = '#ffd166'
 const GOLD_HI = '#ffe08f'
 const GOLD_LO = '#b07a00'
 
-/* --------------------------------------------------------------- Desk Crawler */
+/* --------------------------------------------------------------- Wardenwatch */
 
 /**
  * The Warrior from the companion's painted scenes, brought close: brown hair, red cardigan with lanyard badge, and the

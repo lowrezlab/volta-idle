@@ -86,7 +86,7 @@ describe('occasion dressing (D139)', () => {
       bagCapacity: 10,
       heldItemName: null,
       logs: [],
-      instanceName: 'Desk Crawler',
+      instanceName: 'Wardenwatch',
       content: contentV19,
       spriteBaseUrl: null,
       artBaseUrl: 'https://art.test',

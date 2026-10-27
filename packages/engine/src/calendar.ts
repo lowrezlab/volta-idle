@@ -1,6 +1,6 @@
 /**
  * The shared week (D46, D162, D202): Monday 00:00 UTC, the calendar the keepsake codes, Idle Angler's seasons and
- * Opens, Paper Lives' weekly boards and Desk Crawler's This week board all turn on. One clock for every game.
+ * Opens, Paper Lives' weekly boards and Wardenwatch's This week board all turn on. One clock for every game.
  */
 const MONDAY_EPOCH = Date.UTC(1970, 0, 5)
 export const DAY_MS = 86_400_000

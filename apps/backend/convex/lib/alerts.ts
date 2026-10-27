@@ -37,7 +37,7 @@ export const PREF_FOR: Readonly<Record<AlertKind, AlertSwitch>> = {
   merchant: 'merchant',
 }
 export const kindOn = (prefs: AlertPreferences | undefined, kind: AlertKind) => prefs?.[PREF_FOR[kind]] === true
-/** Desk Crawler's kinds. */
+/** Wardenwatch's kinds. */
 export const DESK_CRAWLER_KINDS: readonly AlertKind[] = ['asleep', 'merchant']
 
 const STEP_MS = 15 * 60_000
@@ -144,7 +144,7 @@ const pt = contentTranslator('pt')
 const pl = contentTranslator('pl')
 const nl = contentTranslator('nl')
 
-/** D169, D193: Desk Crawler's two alerts in the owner's language (lib/trmnlUser.ts `deviceLocale`). */
+/** D169, D193: Wardenwatch's two alerts in the owner's language (lib/trmnlUser.ts `deviceLocale`). */
 const DESK_ALERTS: Readonly<Record<Locale, { asleep: (hero: string) => { title: string; body: string }; merchant: (hero: string, offer: string | null) => { title: string; body: string } }>> = {
   en: {
     asleep: (hero) => ({ title: `${hero}'s bag is full`, body: `${hero} is holding a new find for you. Make room in the bag so the next ones are not left behind.` }),

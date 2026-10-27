@@ -5,7 +5,7 @@ import { deriveStreamSeed as deskCrawlerSeed } from '@trmnl-games/wardenwatch/si
 import * as deskCrawler from '@trmnl-games/wardenwatch/sim/schedule'
 
 describe('engine schedule', () => {
-  it('keeps Desk Crawler on the quarter-hour', () => {
+  it('keeps Wardenwatch on the quarter-hour', () => {
     const at = Date.UTC(2026, 9, 9, 10, 15, 4)
     expect(deskCrawler.wallSlotFor(at)).toBe(Date.UTC(2026, 9, 9, 10, 15))
     expect(deskCrawler.CRON_MINUTES).toBe('0,15,30,45')
@@ -27,7 +27,7 @@ describe('engine schedule', () => {
 })
 
 describe('engine seeds', () => {
-  it('derive the same per-stream seed Desk Crawler has always used', () => {
+  it('derive the same per-stream seed Wardenwatch has always used', () => {
     expect(deskCrawlerSeed('seed', 'hero', 7, 1, 'encounter')).toBe(deriveStreamSeed('seed', 'hero', 7, 1, 'encounter'))
     // Fixed vector: changing the hash input would change every replay.
     expect(deriveStreamSeed('seed', 'hero', 7, 1, 'encounter')).toMatchInlineSnapshot(`3137966346`)

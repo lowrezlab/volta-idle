@@ -1,6 +1,6 @@
 import type { PlDictionary } from './core'
 
-/** D193: Desk Crawler's content in Polish, keyed by the English text (see ./index). Names stay in the nominative; templates are written around them. */
+/** D193: Wardenwatch's content in Polish, keyed by the English text (see ./index). Names stay in the nominative; templates are written around them. */
 export const pl: PlDictionary = {
   nouns: {
     "Paper Imp": ["Papierowy chochlik", "m"],

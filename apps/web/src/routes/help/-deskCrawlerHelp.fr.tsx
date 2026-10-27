@@ -45,7 +45,7 @@ function occasionDate(rule: Occasion): string {
 export const fr: HelpPage = {
   seoTitle: DESK_CRAWLER_HELP_HEAD.fr.seoTitle,
   description: DESK_CRAWLER_HELP_HEAD.fr.description,
-  title: 'Desk Crawler sur TRMNL',
+  title: 'Wardenwatch sur TRMNL',
   contents: {
     'getting-started': 'Premiers pas', 'if-the-qr-sends-you-back-to-setup': 'Si le QR vous renvoie à l’installation', 'how-time-works': 'Comment le temps passe', floors: 'Étages', 'desk-keepsakes': 'Souvenirs de bureau', career: 'Carrière', 'heroes-and-classes': 'Héros et classes', stances: 'Postures', 'desk-raids': 'Raids de bureau', meetings: 'Rencontres', 'lost-property': 'Objets trouvés', 'to-do-list': 'Liste de tâches', potions: 'Potions', 'the-wandering-merchant': 'Le marchand ambulant', decisions: 'Décisions', effects: 'Effets', 'office-calendar': 'Calendrier du bureau', 'rare-and-epic-gear': 'Équipement rare et épique', 'when-your-bag-fills-up': 'Quand le sac est plein', 'bigger-bags': 'Sacs plus grands', 'salvage-and-the-workbench': 'Démontage et établi', 'getting-knocked-out': 'Être mis K.-O.', recaps: 'Récaps', 'understanding-rankings': 'Comprendre les classements', 'sharing-your-hero': 'Partager votre héros', 'following': 'Suivis', names: 'Noms', gender: 'Genre', alerts: 'Alertes', troubleshooting: 'Dépannage', 'disconnecting-and-removing': 'Déconnecter et retirer', help: 'Aide',
   },
@@ -53,14 +53,14 @@ export const fr: HelpPage = {
     <>
       <h2 id="getting-started">Premiers pas</h2>
       <ul>
-        <li>Ouvrez <a href={DESK_CRAWLER_INSTALL_URL}>Desk Crawler dans la boutique TRMNL</a> et choisissez Installer.</li>
-        <li>Connectez-vous à Desk Crawler, choisissez un nom public et un nom de héros, puis reliez l’installation.</li>
+        <li>Ouvrez <a href={DESK_CRAWLER_INSTALL_URL}>Wardenwatch dans la boutique TRMNL</a> et choisissez Installer.</li>
+        <li>Connectez-vous à Wardenwatch, choisissez un nom public et un nom de héros, puis reliez l’installation.</li>
         <li>De retour dans TRMNL, cliquez sur Enregistrer. La première aventure de votre héros commence en moins de 15 minutes.</li>
         <li>Ajoutez le plugin à une playlist, ou à un mashup si vous voulez votre héros à côté d’autres plugins. Les quatre tailles de mise en page sont prises en charge.</li>
       </ul>
       <h2 id="if-the-qr-sends-you-back-to-setup">Si le QR vous renvoie à l’installation</h2>
       <p>Le QR ouvre le compagnon du compte avec lequel vous êtes connecté. Il ne lance pas de nouvelle installation. Vérifiez l’adresse e-mail affichée sur la page d’installation et utilisez Changer de compte si vous aviez relié l’installation avec un autre compte.</p>
-      <p>Si l’installation indique « Reconnecter Desk Crawler », votre connexion TRMNL existe mais le héros manque. Cela peut arriver après la réinitialisation d’avant lancement. Installez une nouvelle copie de <a href={DESK_CRAWLER_INSTALL_URL}>Desk Crawler depuis TRMNL</a>, connectez-vous avec le même compte, choisissez un nouveau nom de héros, reliez, puis cliquez sur Enregistrer dans TRMNL. Une fois la nouvelle copie en marche, retirez l’ancienne de votre playlist.</p>
+      <p>Si l’installation indique « Reconnecter Wardenwatch », votre connexion TRMNL existe mais le héros manque. Cela peut arriver après la réinitialisation d’avant lancement. Installez une nouvelle copie de <a href={DESK_CRAWLER_INSTALL_URL}>Wardenwatch depuis TRMNL</a>, connectez-vous avec le même compte, choisissez un nouveau nom de héros, reliez, puis cliquez sur Enregistrer dans TRMNL. Une fois la nouvelle copie en marche, retirez l’ancienne de votre playlist.</p>
       <p>Si l’installation indique « Enregistrez dans TRMNL pour commencer », votre héros est déjà prêt. Retournez à cette installation dans TRMNL et cliquez sur Enregistrer.</p>
       <h2 id="how-time-works">Comment le temps passe</h2>
       <p>
@@ -74,7 +74,7 @@ export const fr: HelpPage = {
       </ul>
       {F.lore ? <p>La page Notes de terrain, sous Plus, garde ce que votre héros a noté sur chaque étage et chaque monstre. La note d’un étage s’ouvre la première fois que votre héros y met les pieds, celle d’un monstre à la première victoire contre lui. Les notes n’influent pas sur le jeu.</p> : null}
       <h2 id="desk-keepsakes">Souvenirs de bureau</h2>
-      <p>Gardez Desk Crawler dans votre playlist et cherchez « Code souvenir » suivi d’un code à six chiffres, comme 482 917, dans la barre de titre de l’écran (les mashups étroits en portrait l’abrègent en « Souvenir »). Saisissez ce code dans les Réglages du compagnon pour récupérer un souvenir de bureau permanent. Le plein écran et les mashups l’affichent tous les deux ; l’aperçu du compagnon le masque. Tant qu’un souvenir attend, le QR code de l’écran le récupère aussi : scannez-le avec votre téléphone et le compagnon l’ajoute à votre étagère, même si la barre de titre est masquée. Quand il y a la place, le code est imprimé à côté.</p>
+      <p>Gardez Wardenwatch dans votre playlist et cherchez « Code souvenir » suivi d’un code à six chiffres, comme 482 917, dans la barre de titre de l’écran (les mashups étroits en portrait l’abrègent en « Souvenir »). Saisissez ce code dans les Réglages du compagnon pour récupérer un souvenir de bureau permanent. Le plein écran et les mashups l’affichent tous les deux ; l’aperçu du compagnon le masque. Tant qu’un souvenir attend, le QR code de l’écran le récupère aussi : scannez-le avec votre téléphone et le compagnon l’ajoute à votre étagère, même si la barre de titre est masquée. Quand il y a la place, le code est imprimé à côté.</p>
       <p>Vous pouvez récupérer un souvenir par semaine, avec un nouveau code chaque lundi à 00:00 UTC. Le code de la semaine précédente marche aussi si votre écran s’actualise lentement. Si vous manquez une semaine, vous obtenez le même modèle la semaine suivante. Une fois la collection complète, vous pouvez récupérer d’autres exemplaires de chaque modèle. Les souvenirs ne changent ni l’XP, ni l’équipement, ni les classements, et plusieurs appareils ou une actualisation plus rapide ne rapportent rien de plus.</p>
       {F.career !== undefined ? (
         <>
@@ -241,8 +241,8 @@ export const fr: HelpPage = {
       <h2 id="troubleshooting">Dépannage</h2>
       <h3 id="not-on-your-screen">Votre héros n’apparaît pas à l’écran</h3>
       <ul>
-        <li>Cliquer sur Enregistrer ajoute Desk Crawler à votre playlist TRMNL. Votre appareil affiche la playlist un plugin à la fois, à sa fréquence d’actualisation : Desk Crawler apparaît quand vient son tour. Avec plusieurs plugins et une actualisation lente, cela peut prendre un moment.</li>
-        <li>Ouvrez Playlists dans TRMNL et vérifiez que Desk Crawler y figure, sur l’appareil que vous regardez si vous en avez plusieurs, et qu’aucun planning ne le masque à cette heure-ci.</li>
+        <li>Cliquer sur Enregistrer ajoute Wardenwatch à votre playlist TRMNL. Votre appareil affiche la playlist un plugin à la fois, à sa fréquence d’actualisation : Wardenwatch apparaît quand vient son tour. Avec plusieurs plugins et une actualisation lente, cela peut prendre un moment.</li>
+        <li>Ouvrez Playlists dans TRMNL et vérifiez que Wardenwatch y figure, sur l’appareil que vous regardez si vous en avez plusieurs, et qu’aucun planning ne le masque à cette heure-ci.</li>
         <li>Le mode veille arrête l’actualisation de l’écran la nuit. Votre héros continue l’aventure, et l’écran rattrape son retard au réveil de l’appareil.</li>
         <li>Un écran qui indique « La première aventure commence d’ici 15 minutes » fonctionne. La première histoire arrive au quart d’heure suivant.</li>
         <li>La page Héros du compagnon montre toujours ce que fait votre héros, quoi que l’écran affiche.</li>

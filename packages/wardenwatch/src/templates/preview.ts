@@ -57,7 +57,7 @@ export const previewSize = (device: PreviewDevice, portrait = false) => {
   return portrait ? { width: height, height: width } : { width, height }
 }
 
-export function previewDocument(renderedMarkup: string, device: PreviewDevice, layout: PreviewLayout, title = 'Desk Crawler', options: { shadeOtherSlots?: boolean; portrait?: boolean; theme?: PreviewTheme | undefined } = {}): string {
+export function previewDocument(renderedMarkup: string, device: PreviewDevice, layout: PreviewLayout, title = 'Wardenwatch', options: { shadeOtherSlots?: boolean; portrait?: boolean; theme?: PreviewTheme | undefined } = {}): string {
   const oriented = options.portrait ? PREVIEW_DEVICES[device].classes.replace('screen--landscape', 'screen--portrait') : PREVIEW_DEVICES[device].classes
   const classes = options.theme ? `${oriented} screen--theme-${options.theme}` : oriented
   const themeSheet = options.theme ? `<link rel="stylesheet" href="https://trmnl.com/css/${FRAMEWORK_VERSION}/themes/${options.theme}-theme.css">` : ''

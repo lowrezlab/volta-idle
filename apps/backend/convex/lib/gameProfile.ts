@@ -26,7 +26,7 @@ export async function currentHero(ctx: QueryCtx, user: Doc<'users'> | null): Pro
 
 export async function setCurrentHero(ctx: MutationCtx, user: Doc<'users'>, heroId: Id<'heroes'>) {
   const profile = await gameProfile(ctx, user._id)
-  if (profile?.state === 'deleting') throw appError('GAME_UNAVAILABLE', 'Desk Crawler progress is being deleted. Try again shortly.')
+  if (profile?.state === 'deleting') throw appError('GAME_UNAVAILABLE', 'Wardenwatch progress is being deleted. Try again shortly.')
   if (profile) await ctx.db.patch(profile._id, { activeHeroId: heroId })
   else await ctx.db.insert('deskCrawlerProfiles', { userId: user._id, state: 'active', activeHeroId: heroId, createdAt: Date.now() })
   if (user.activeHeroId) await ctx.db.patch(user._id, { activeHeroId: undefined })

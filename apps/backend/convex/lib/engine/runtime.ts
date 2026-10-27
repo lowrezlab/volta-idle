@@ -6,7 +6,7 @@ import type { DESK_CRAWLER_TABLES, EngineTableNames } from './tables'
 
 /**
  * One game's binding to the engine (idle-angler.md "Architecture", S0). The engine
- * code is typed against Desk Crawler's instantiation of the engine tables; the
+ * code is typed against Wardenwatch's instantiation of the engine tables; the
  * table factory guarantees every game's tables have the same fields and
  * indexes, so `typedTables` only renames, it never changes a shape.
  */
@@ -32,7 +32,7 @@ export interface EngineRuntime<Content> {
 
 export type TypedTables = typeof DESK_CRAWLER_TABLES
 
-/** The runtime's table names, typed as Desk Crawler's (see the interface comment). */
+/** The runtime's table names, typed as Wardenwatch's (see the interface comment). */
 export function typedTables(runtime: EngineRuntime<unknown>): TypedTables {
   return runtime.tables as unknown as TypedTables
 }

@@ -93,7 +93,7 @@ export const dcPagesMessages = defineMessages({
     beatOne: 'Beat one and the note opens.',
 
     trmnlTitle: headMessages.en.dcTrmnl,
-    trmnlIntro: 'The Desk Crawler plugin draws a new screen after every adventure. This is the same picture, in each layout and on each device.',
+    trmnlIntro: 'The Wardenwatch plugin draws a new screen after every adventure. This is the same picture, in each layout and on each device.',
     enterCode: 'Enter a keepsake code',
     installations: 'TRMNL installations',
     displayHelp: 'Display help',
@@ -173,7 +173,7 @@ export const dcPagesMessages = defineMessages({
     beatOne: 'Battez-en un et la note s’ouvre.',
 
     trmnlTitle: headMessages.fr.dcTrmnl,
-    trmnlIntro: 'Le plugin Desk Crawler dessine un nouvel écran après chaque aventure. Voici la même image, dans chaque mise en page et sur chaque appareil.',
+    trmnlIntro: 'Le plugin Wardenwatch dessine un nouvel écran après chaque aventure. Voici la même image, dans chaque mise en page et sur chaque appareil.',
     enterCode: 'Saisir un code souvenir',
     installations: 'Installations TRMNL',
     displayHelp: 'Aide à l’affichage',
@@ -253,7 +253,7 @@ export const dcPagesMessages = defineMessages({
     beatOne: 'Besiege eins, und die Notiz öffnet sich.',
 
     trmnlTitle: headMessages.de.dcTrmnl,
-    trmnlIntro: 'Das Desk-Crawler-Plugin zeichnet nach jedem Abenteuer einen neuen Bildschirm. Das ist dasselbe Bild, in jedem Layout und auf jedem Gerät.',
+    trmnlIntro: 'Das Wardenwatch-Plugin zeichnet nach jedem Abenteuer einen neuen Bildschirm. Das ist dasselbe Bild, in jedem Layout und auf jedem Gerät.',
     enterCode: 'Andenken-Code eingeben',
     installations: 'TRMNL-Installationen',
     displayHelp: 'Hilfe zur Anzeige',
@@ -333,7 +333,7 @@ export const dcPagesMessages = defineMessages({
     beatOne: 'Vence a uno y se abre la nota.',
 
     trmnlTitle: headMessages.es.dcTrmnl,
-    trmnlIntro: 'El plugin Desk Crawler dibuja una pantalla nueva después de cada aventura. Esta es la misma imagen, en cada diseño y en cada dispositivo.',
+    trmnlIntro: 'El plugin Wardenwatch dibuja una pantalla nueva después de cada aventura. Esta es la misma imagen, en cada diseño y en cada dispositivo.',
     enterCode: 'Introducir un código de recuerdo',
     installations: 'Instalaciones de TRMNL',
     displayHelp: 'Ayuda con la pantalla',
@@ -413,7 +413,7 @@ export const dcPagesMessages = defineMessages({
     beatOne: 'Battine uno e l’appunto si apre.',
 
     trmnlTitle: headMessages.it.dcTrmnl,
-    trmnlIntro: 'Il plugin Desk Crawler disegna una nuova schermata dopo ogni avventura. Questa è la stessa immagine, in ogni layout e su ogni dispositivo.',
+    trmnlIntro: 'Il plugin Wardenwatch disegna una nuova schermata dopo ogni avventura. Questa è la stessa immagine, in ogni layout e su ogni dispositivo.',
     enterCode: 'Inserisci un codice ricordino',
     installations: 'Installazioni TRMNL',
     displayHelp: 'Aiuto con lo schermo',
@@ -493,7 +493,7 @@ export const dcPagesMessages = defineMessages({
     beatOne: 'Vença um e a nota abre.',
 
     trmnlTitle: headMessages.pt.dcTrmnl,
-    trmnlIntro: 'O plugin Desk Crawler desenha uma tela nova depois de cada aventura. Esta é a mesma imagem, em cada layout e em cada dispositivo.',
+    trmnlIntro: 'O plugin Wardenwatch desenha uma tela nova depois de cada aventura. Esta é a mesma imagem, em cada layout e em cada dispositivo.',
     enterCode: 'Digitar um código de lembrancinha',
     installations: 'Instalações do TRMNL',
     displayHelp: 'Ajuda com a tela',
@@ -573,7 +573,7 @@ export const dcPagesMessages = defineMessages({
     beatOne: 'Pokonaj jednego, a notatka się otworzy.',
 
     trmnlTitle: headMessages.pl.dcTrmnl,
-    trmnlIntro: 'Plugin Desk Crawler rysuje nowy ekran po każdej przygodzie. To ten sam obraz w każdym układzie i na każdym urządzeniu.',
+    trmnlIntro: 'Plugin Wardenwatch rysuje nowy ekran po każdej przygodzie. To ten sam obraz w każdym układzie i na każdym urządzeniu.',
     enterCode: 'Wpisz kod pamiątki',
     installations: 'Instalacje TRMNL',
     displayHelp: 'Pomoc z ekranem',
@@ -653,7 +653,7 @@ export const dcPagesMessages = defineMessages({
     beatOne: 'Versla er één en de notitie gaat open.',
 
     trmnlTitle: headMessages.nl.dcTrmnl,
-    trmnlIntro: 'De plugin Desk Crawler tekent na elk avontuur een nieuw scherm. Dit is hetzelfde beeld, in elke indeling en op elk apparaat.',
+    trmnlIntro: 'De plugin Wardenwatch tekent na elk avontuur een nieuw scherm. Dit is hetzelfde beeld, in elke indeling en op elk apparaat.',
     enterCode: 'Een aandenken-code invullen',
     installations: 'TRMNL-installaties',
     displayHelp: 'Hulp bij het scherm',

@@ -34,7 +34,7 @@ export function DeviceSample({ caption, priority = false }: { caption: string; p
 
 /**
  * A game's sample screen on a TRMNL X in the plum bezel. Rendered from the marketing preview on the X full layout
- * (Desk Crawler: tools/trmnl/preview.ts --marketing --recap; Idle Angler: its `listing` state, D210). 16-colour PNGs, the
+ * (Wardenwatch: tools/trmnl/preview.ts --marketing --recap; Idle Angler: its `listing` state, D210). 16-colour PNGs, the
  * X's own 4-bit greys, beat WebP at both sizes: 800px for phones at 2x, 1200px for 3x phones and desktop.
  */
 export function ScreenBezel({ slug, alt, priority = false, sizes = '(min-width: 1024px) 600px, 100vw' }: { slug: 'wardenwatch'; alt: string; priority?: boolean; sizes?: string }) {
@@ -271,7 +271,7 @@ function NoHeroYet({ place }: { place: string }) {
 
 /**
  * Signed-out view of the companion routes (D102). The screen's QR codes lead here, so a visitor who scanned someone
- * else's TRMNL learns what Desk Crawler is and that it needs a TRMNL before being asked to sign in.
+ * else's TRMNL learns what Wardenwatch is and that it needs a TRMNL before being asked to sign in.
  */
 export function DeskCrawlerSignedOut() {
   useAnalyticsView('setup screen shown', { setup_state: 'signed_out' })
@@ -279,7 +279,7 @@ export function DeskCrawlerSignedOut() {
   return (
     <main id="main" className="mx-auto flex w-full max-w-2xl flex-col gap-8 px-4 py-10">
       <header className="flex flex-col gap-3">
-        <h1 className="flex items-center gap-4 font-display text-3xl font-bold leading-tight sm:text-4xl"><img src="/games/wardenwatch/icon-192.png" alt="" width={64} height={64} className="size-12 [image-rendering:pixelated] sm:size-14" />Desk Crawler</h1>
+        <h1 className="flex items-center gap-4 font-display text-3xl font-bold leading-tight sm:text-4xl"><img src="/games/wardenwatch/icon-192.png" alt="" width={64} height={64} className="size-12 [image-rendering:pixelated] sm:size-14" />Wardenwatch</h1>
         <p className="text-lg">{t.tagline}</p>
         <p className="text-muted">{t.signedOutIntro}</p>
       </header>

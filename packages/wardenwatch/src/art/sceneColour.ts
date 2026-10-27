@@ -332,6 +332,15 @@ const MOTIF: Record<OccasionArt, Tones> = {
   bosses_day: tone('#f2c14e', undefined, '#8a5a00'),
   leap_day: tone('#ffffff'),
 }
+/**
+ * P4.2: the sky strip's roles. The ring, the Maiden's crack and the aria's sparkles outline in a dusk violet; a lit
+ * face glows cream, as the office window's moon does at night.
+ */
+const SKY: Record<string, Tones> = {
+  'sky:moon': { ink: '#4a3f6b' },
+  'sky:lit': { ink: '#ffe08f' },
+}
+
 const OCCASION_BACKDROP: Record<string, Tones> = {
   garland: { ink: '#6b5a48' },
   web: { ink: '#c9d3e0' },
@@ -433,9 +442,9 @@ class PaintedCanvas extends Canvas {
 }
 
 /** The stage in full colour as rows of colours (null for clear), painted from the same composition as the device image. */
-export function paintedScene(biome: BiomeArt, pose: HeroPose, subject: Subject, time: SceneTime, occasion?: OccasionArt, layered?: LayeredHero): Array<Array<string | null>> {
+export function paintedScene(biome: BiomeArt, pose: HeroPose, subject: Subject, time: SceneTime, occasion?: OccasionArt, layered?: LayeredHero, skyDay?: number): Array<Array<string | null>> {
   const c = new PaintedCanvas()
-  composeScene(biome, pose, subject, time, c, occasion, layered)
+  composeScene(biome, pose, subject, time, c, occasion, layered, skyDay)
   const placements = scenePlacements(pose, subject, occasion, layered)
   const hero = placements.find((p) => p.role === 'hero')
   const coworker = placements.find((p) => p.role === 'coworker')
@@ -449,7 +458,7 @@ export function paintedScene(biome: BiomeArt, pose: HeroPose, subject: Subject, 
       // D141: the coworker is its class's idle grid turned round, so read its part from the unmirrored column.
       if (region === 'coworker' && coworker?.role === 'coworker') return warriorTone(classPose('idle', coworker.heroClass, coworker.gender), ch, coworker.sprite.width - 1 - (x - coworker.left), y - coworker.top, coworker.sprite.height)
       const foe = FOE[region] ?? DECOR[region]
-      const tones = foe ?? backdrop[region] ?? OCCASION_BACKDROP[region] ?? {}
+      const tones = foe ?? backdrop[region] ?? OCCASION_BACKDROP[region] ?? SKY[region] ?? {}
       const fallbackInk = foe ? INK : '#5a4a3a'
       if (ch === '#') return tones.ink ?? fallbackInk
       if (ch === 'w') return tones.paper ?? null
@@ -464,7 +473,7 @@ export function paintedScene(biome: BiomeArt, pose: HeroPose, subject: Subject, 
 export function paintedSceneUri(path: string): string | null {
   const parsed = parseScenePath(path.replace(/^https?:\/\/[^/]+/, '').replace(/\?.*$/, ''))
   if (!parsed) return null
-  const grid = paintedScene(parsed.biome, parsed.pose, parsed.subject, parsed.time, parsed.occasion, sceneHero(parsed))
+  const grid = paintedScene(parsed.biome, parsed.pose, parsed.subject, parsed.time, parsed.occasion, sceneHero(parsed), parsed.skyDay)
   const colours = new Map<string, number>([['', 0]])
   const index = new Uint8Array(STAGE_WIDTH * STAGE_HEIGHT)
   grid.forEach((row, y) =>

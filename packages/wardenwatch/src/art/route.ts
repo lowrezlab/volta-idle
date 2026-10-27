@@ -6,8 +6,9 @@ import { composeScene, FULL_SCALE, LARGE_SCALE, MEDIUM_SCALE, SCENE_VERSION, sce
 import { Canvas } from './canvas'
 import { isOccasionArt, type OccasionArt } from './occasions'
 import { BWRY_PALETTE, bwryInk, BwryInk, sceneColours } from './sceneColour'
-import { LAYERED_SCENE_VERSION, type SceneTime } from './sceneTime'
+import { LAYERED_SCENE_VERSION, parseSkyDayToken, type SceneTime } from './sceneTime'
 import { layeredHeroFor, registryOf, type LayeredHero, type PartRegistry } from './layered'
+import { skyMoons } from './sky'
 import { decodeLook, isLookCode, lookParts } from './look'
 import { PARTS } from './parts/generated'
 
@@ -27,20 +28,22 @@ export interface ParsedScenePath {
   readonly occasion?: OccasionArt
   /** Scene v6: the hero's look code (look.ts). */
   readonly look?: string
+  /** Scene v6 (P4.2): the Volta day whose sky strip the stage wears; absent on paths from before the strip. */
+  readonly skyDay?: number
 }
 
 /**
- * Strict v6 paths with a look code (GDD §3.6), strict v5 paths with an occasion segment (D139), frozen v4 day/night
- * paths and frozen v3 night paths, for cached screens and rolling releases. A `-bwry` scale suffix (v4 on) asks for
- * the four-ink image (D94).
+ * Strict v6 paths with a look code (GDD §3.6) and an optional sky day on the time segment (`day-123`, `day-n5`), strict
+ * v5 paths with an occasion segment (D139), frozen v4 day/night paths and frozen v3 night paths, for cached screens
+ * and rolling releases. A `-bwry` scale suffix (v4 on) asks for the four-ink image (D94).
  */
 export function parseScenePath(path: string): ParsedScenePath | null {
-  const layered = /^\/art\/scene\/v(\d+)\/([a-z_]+)\/(day|night)\/([a-z0-9_]+)\/([a-z0-9.]+)\/([a-z_]+)\/([a-z_-]+)\/(\d)(-bwry)?\.png$/.exec(path)
+  const layered = /^\/art\/scene\/v(\d+)\/([a-z_]+)\/(day|night)(?:-(n?\d{1,7}))?\/([a-z0-9_]+)\/([a-z0-9.]+)\/([a-z_]+)\/([a-z_-]+)\/(\d)(-bwry)?\.png$/.exec(path)
   if (layered) {
-    const [, versionText, biome, timeText, occasionText, look, pose, segment, scaleText, bwrySuffix] = layered
+    const [, versionText, biome, timeText, dayToken, occasionText, look, pose, segment, scaleText, bwrySuffix] = layered
     if (Number(versionText) !== LAYERED_SCENE_VERSION || !isLookCode(look!)) return null
     const parsed = parseSceneParts(biome!, timeText, occasionText, pose!, segment!, scaleText!, bwrySuffix)
-    return parsed === null ? null : { ...parsed, look: look! }
+    return parsed === null ? null : { ...parsed, look: look!, ...(dayToken === undefined ? {} : { skyDay: parseSkyDayToken(dayToken) }) }
   }
   const match = /^\/art\/scene\/v(\d+)\/([a-z_]+)\/(?:(day|night)\/)?(?:([a-z0-9_]+)\/(?=[a-z_]+\/[a-z_-]+\/\d))?([a-z_]+)\/([a-z_-]+)\/(\d)(-bwry)?\.png$/.exec(path)
   if (!match) return null
@@ -93,7 +96,7 @@ export function renderScenePng(path: string): Uint8Array | null {
   const parsed = parseScenePath(path)
   if (!parsed) return null
   const layered = sceneHero(parsed)
-  const { width, height, ink } = composeScene(parsed.biome, parsed.pose, parsed.subject, parsed.time, new Canvas(STAGE_WIDTH, STAGE_HEIGHT), parsed.occasion, layered).scaled(parsed.scale)
+  const { width, height, ink } = composeScene(parsed.biome, parsed.pose, parsed.subject, parsed.time, new Canvas(STAGE_WIDTH, STAGE_HEIGHT), parsed.occasion, layered, parsed.skyDay).scaled(parsed.scale)
   if (!parsed.bwry) return encodePng1Bit(width, height, ink)
   // Ink stays ink; paper inside a sprite takes the companion's fill reduced to the panel's inks, and the rest is clear.
   const fills = sceneColours(parsed.pose, scenePlacements(parsed.pose, parsed.subject, parsed.occasion, layered))
@@ -103,6 +106,14 @@ export function renderScenePng(path: string): Uint8Array | null {
     for (let x = 0; x < width; x += 1) {
       const fill = row[Math.floor(x / parsed.scale)]
       index[y * width + x] = ink[y * width + x] ? BwryInk.Black : fill ? bwryInk(fill) : BwryInk.White
+    }
+  }
+  // P4.2: the moons' lit faces glow yellow on the four-ink panel, so a full moon reads against the black ceiling lines.
+  if (parsed.skyDay !== undefined) {
+    for (const moon of skyMoons(parsed.skyDay)) {
+      for (const [cx, cy] of moon.lit) {
+        for (let y = cy * parsed.scale; y < (cy + 1) * parsed.scale; y += 1) for (let x = cx * parsed.scale; x < (cx + 1) * parsed.scale; x += 1) index[y * width + x] = BwryInk.Yellow
+      }
     }
   }
   return encodePngPalette(width, height, index, BWRY_PALETTE, BwryInk.White)

@@ -5,6 +5,7 @@ import { eliteCrown, propArt, type PropId } from './props'
 import { dressingFor, heroHatAnchor, monsterHatCentre, type Dressing, type OccasionArt } from './occasions'
 import type { SceneTime } from './sceneTime'
 import type { LayeredHero } from './layered'
+import { drawSky } from './sky'
 export { SCENE_VERSION } from './sceneTime'
 
 /**
@@ -457,10 +458,15 @@ function ceilingStrip(c: Canvas, strip: NonNullable<Dressing['strip']>, occasion
 /** The region a placement draws under: its role, or the monster or prop it is. */
 export const placementRegion = (placement: Placement): string => (placement.role === 'monster' || placement.role === 'prop' || placement.role === 'decor' ? `${placement.role}:${placement.id}` : placement.role)
 
-/** The stage, drawn onto `c` (a fresh 1-bit canvas unless the companion passes its colour-tracking one). */
-export function composeScene(biome: BiomeArt, pose: HeroPose, subject: Subject, time: SceneTime = 'day', c = new Canvas(STAGE_WIDTH, STAGE_HEIGHT), occasion?: OccasionArt, layered?: LayeredHero): Canvas {
+/**
+ * The stage, drawn onto `c` (a fresh 1-bit canvas unless the companion passes its colour-tracking one). P4.2: with a
+ * Volta day (scene v6) the sky strip hangs along the top of the backdrop, under any occasion's garland or cobwebs, which
+ * decorate the room in front of it; without one (v5, and v6 paths from before the strip) the stage is as it was.
+ */
+export function composeScene(biome: BiomeArt, pose: HeroPose, subject: Subject, time: SceneTime = 'day', c = new Canvas(STAGE_WIDTH, STAGE_HEIGHT), occasion?: OccasionArt, layered?: LayeredHero, skyDay?: number): Canvas {
   const dressing = dressingFor(occasion)
   BACKDROPS[biome](c, time, dressing?.window)
+  if (skyDay !== undefined) drawSky(c, skyDay)
   if (dressing?.strip !== undefined) ceilingStrip(c, dressing.strip, occasion!)
   // Ground and a clear floor band.
   c.region = 'ground'

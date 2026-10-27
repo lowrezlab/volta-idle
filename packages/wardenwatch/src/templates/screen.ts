@@ -1,4 +1,6 @@
 /**
+ * Template v67 puts the Volta date in every title bar (P4.1): the full landscape bar reads the whole line, the others
+ * its short form, after a keepsake code when one is showing; a bar too narrow for both keeps the code.
  * Template v65 inverts the goal row and points to the companion while a reached goal's reward waits (D184).
  * Template v64 gives the full landscape ledger the portrait's adaptive rows: changes packed at their natural width and
  * the newest story on one line with its changes and time whenever they fit (D183).
@@ -52,7 +54,7 @@ import { GLYPHS, glyphRows } from '../art/glyphs'
 import { hudMarkUri } from '../art/hud'
 import { DEVICE_WORDS, type DeviceWords } from '../i18n/device'
 
-export const TEMPLATE_VERSION = 66
+export const TEMPLATE_VERSION = 67
 
 /**
  * D169: one of the template's own words, from the payload's `labels` in the owner's language. The English default keeps
@@ -110,21 +112,30 @@ const runeRuleV = `<div class="no-shrink flex flex--col flex--center-x gap--none
  * passer-by it is something to enter; the narrow portrait bars drop the word to fit.
  */
 const KEEPSAKE_WORD = `<span data-keepsake-word="true">${L('keepsake_word')}</span>`
-const keepsakeFooter = `{% if desk_keepsake_code %}<span class="instance">${L('keepsake')}${KEEPSAKE_WORD} {{ desk_keepsake_code | escape }}</span>{% endif %}`
+/**
+ * The Volta date line (P4.1): the title bar's instance text, after the keepsake code when one is showing, so a bar
+ * that truncates its instance cuts the date and never the code; the fitter drops the date whole instead. The full
+ * landscape bar reads the whole line ("Rime Ascendant 1 · Gyre of the Eldritch Beast 1203"); every other bar the
+ * short one ("Rime Asc. 1 · 1203"). An envelope from before the line (no `volta_date`) shows the code alone.
+ */
+type DateField = 'volta_date' | 'volta_date_short'
+const voltaDate = (field: DateField) => `{% if ${field} %}<span data-volta-date="true">{% if desk_keepsake_code %} · {% endif %}{{ ${field} }}</span>{% endif %}`
+const instance = (field: DateField) => `{% if desk_keepsake_code or ${field} %}<span class="instance">{% if desk_keepsake_code %}${L('keepsake')}${KEEPSAKE_WORD} {{ desk_keepsake_code | escape }}{% endif %}${voltaDate(field)}</span>{% endif %}`
 
-const titleBar = `
+const titleBar = (field: DateField = 'volta_date_short') => `
 <div class="title_bar">
   <img class="image image-stroke ${ADAPTIVE}" src="${TITLE_ICON}" alt="">
   <span class="title">Wardenwatch</span>
-  ${keepsakeFooter}
+  ${instance(field)}
 </div>`
 
 /**
- * Narrow portrait columns (side, quarter): a 480-pixel-wide panel can't fit the name beside the code, so while a code
- * is showing it takes the name's place there; the icon still marks the plugin. The X keeps both. Both use the short label.
+ * Narrow portrait columns (side, quarter): a 480-pixel-wide panel can't fit the name beside the code or the date, so
+ * while either is showing it takes the name's place there; the icon still marks the plugin. The X keeps both. Both use
+ * the short label.
  */
-const titleBarNarrow = titleBar
-  .replace('<span class="title">', '<span class="title{% if desk_keepsake_code %} hidden lg:inline-block{% endif %}">')
+const titleBarNarrow = titleBar()
+  .replace('<span class="title">', '<span class="title{% if desk_keepsake_code or volta_date_short %} hidden lg:inline-block{% endif %}">')
   .replace(KEEPSAKE_WORD, '')
 
 
@@ -514,13 +525,20 @@ const fitStories = `<script>
     if (scaled && codes.length && Array.from(view.querySelectorAll('.layout span')).some(span => crowded(span, codes))) {
       view.querySelectorAll('[data-home-qr], [data-companion-qr]:not([data-urgent])').forEach(code => { if (code.getClientRects().length) giveWay(code); });
     }
-    // The title bar: a keepsake code the bar truncates takes the title's place, then drops the word "code".
+    // The title bar: an instance the bar truncates first leaves out the Volta date, whole, at any scale (a narrow
+    // portrait bar cannot hold a code and the date); scaled, a keepsake code then takes the title's place and drops
+    // the word "code".
     const instance = footer && footer.querySelector('.instance');
-    if (scaled && instance && instance.scrollWidth > instance.clientWidth + 1) {
-      const title = footer.querySelector('.title');
-      if (title) giveWay(title);
-      const word = instance.querySelector('[data-keepsake-word]');
-      if (word && instance.scrollWidth > instance.clientWidth + 1) giveWay(word);
+    const overflowing = () => instance.scrollWidth > instance.clientWidth + 1;
+    if (instance && overflowing()) {
+      const date = instance.querySelector('[data-volta-date]');
+      if (date) giveWay(date);
+      if (scaled && overflowing()) {
+        const title = footer.querySelector('.title');
+        if (title) giveWay(title);
+        const word = instance.querySelector('[data-keepsake-word]');
+        if (word && overflowing()) giveWay(word);
+      }
     }
     // The full layouts' ledgers use natural-width changes, without empty stat placeholders; other ledgers retain their columns.
     layout.querySelectorAll('[data-adaptive-story] [data-chip-cell]').forEach(cell => {
@@ -1324,7 +1342,7 @@ export const markupFull = `${glyphAssigns([16, 24])}{% assign glyph16_todoOpen =
   {% endif %}
   {% unless attention %}${recapRibbon}{% endunless %}
   {% endif %}
-`, fullPortrait, titleBar)}${fitStories}`
+`, fullPortrait, titleBar('volta_date'), titleBar())}${fitStories}`
 
 export const markupHalfHorizontal = `${glyphAssigns([16, 24])}${HUD_ASSIGNS}${KEEPSAKE_ASSIGNS}${oriented('layout layout--col layout--top layout--stretch-x gap--small', `
   {% if status == "unlinked" or first_run %}${welcome('halfHorizontal')}
@@ -1343,9 +1361,9 @@ export const markupHalfHorizontal = `${glyphAssigns([16, 24])}${HUD_ASSIGNS}${KE
   </div>${xHalfWide}
   {% unless attention %}${recapRibbon}{% endunless %}
   {% endif %}
-`, halfHorizontalPortrait, titleBar)}${fitStories}`
+`, halfHorizontalPortrait, titleBar())}${fitStories}`
 
-export const markupHalfVertical = `${glyphAssigns([16, 24])}${HUD_ASSIGNS}${KEEPSAKE_ASSIGNS}${oriented('layout layout--col layout--top layout--stretch-x gap--small lg:gap--medium', halfVerticalLandscape, halfVerticalPortrait, titleBar, titleBarNarrow)}${fitStories}`
+export const markupHalfVertical = `${glyphAssigns([16, 24])}${HUD_ASSIGNS}${KEEPSAKE_ASSIGNS}${oriented('layout layout--col layout--top layout--stretch-x gap--small lg:gap--medium', halfVerticalLandscape, halfVerticalPortrait, titleBar(), titleBarNarrow)}${fitStories}`
 
 export const markupQuadrant = `${glyphAssigns([16])}${HUD_ASSIGNS}${KEEPSAKE_ASSIGNS}${oriented('layout layout--col layout--top layout--stretch-x gap--small', `
   {% if status == "unlinked" or first_run %}${welcome('quadrant')}
@@ -1363,7 +1381,7 @@ export const markupQuadrant = `${glyphAssigns([16])}${HUD_ASSIGNS}${KEEPSAKE_ASS
       <div class="no-shrink flex flex--col flex--center-x flex--top gap--small">${bagQr()}</div>
     </div>${xQuadrant(false)}
   {% endif %}
-`, quadrantPortrait, titleBar, titleBarNarrow)}${fitStories}`
+`, quadrantPortrait, titleBar(), titleBarNarrow)}${fitStories}`
 
 export const screenMarkup = {
   markup: markupFull,

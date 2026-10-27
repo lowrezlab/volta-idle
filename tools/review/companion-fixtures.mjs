@@ -73,9 +73,9 @@ export const Outlet = () => { const Page = useContext(OutletContext); return Pag
 // Queries from the fixture; mutations settle locally.
 write('data.js', `import fixture from './fixture.json';
 import paperLives from './paper-lives.json';
-import { ACHIEVEMENTS } from '../../packages/desk-crawler/src/content/achievements';
-import { contentV16 } from '../../packages/desk-crawler/src/content/v16';
-import { loreView } from '../../packages/desk-crawler/src/sim/core/biomes';
+import { ACHIEVEMENTS } from '../../packages/wardenwatch/src/content/achievements';
+import { contentV16 } from '../../packages/wardenwatch/src/content/v16';
+import { loreView } from '../../packages/wardenwatch/src/sim/core/biomes';
 import { useCallback, useState } from 'react';
 const params = new URLSearchParams(location.search);
 const flag = (name) => params.get(name) === '1';

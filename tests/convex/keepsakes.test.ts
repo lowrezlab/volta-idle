@@ -7,7 +7,7 @@ import schema from '../../apps/backend/convex/schema'
 import { sha256Hex } from '../../apps/backend/convex/lib/hash'
 import { keepsakeCode } from '../../apps/backend/convex/lib/keepsakes'
 import { KEEPSAKE_MISS_LIMIT } from '../../apps/backend/convex/keepsakes'
-import { DESK_KEEPSAKES, KEEPSAKE_WEEK_MS, KEEPSAKES_OPEN_AT, keepsakeShelf, keepsakeWeek, keepsakeWeekStartsAt } from '@trmnl-games/desk-crawler/content/keepsakes'
+import { DESK_KEEPSAKES, KEEPSAKE_WEEK_MS, KEEPSAKES_OPEN_AT, keepsakeShelf, keepsakeWeek, keepsakeWeekStartsAt } from '@trmnl-games/wardenwatch/content/keepsakes'
 import { seedDeletionConfirmation, seedHero, seedWorld, type T } from './helpers'
 
 const modules = import.meta.glob('../../apps/backend/convex/**/*.ts')

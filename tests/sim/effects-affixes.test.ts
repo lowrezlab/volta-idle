@@ -1,11 +1,11 @@
 import { describe, expect, it } from 'vitest'
-import { contentV5 } from '@trmnl-games/desk-crawler/content/v5'
-import { contentV6 } from '@trmnl-games/desk-crawler/content/v6'
-import { validateCatalog } from '@trmnl-games/desk-crawler/content/validate'
-import { activeModifiers, effectiveStats, withEffect } from '@trmnl-games/desk-crawler/sim/core/modifiers'
-import { simulateHero, SIMULATION_VERSION } from '@trmnl-games/desk-crawler/sim/core/simulate'
-import { deriveStats, maxHp } from '@trmnl-games/desk-crawler/sim/core/stats'
-import type { ContentCatalog, HeroState, ItemSnapshot, SimulationResult } from '@trmnl-games/desk-crawler/sim/core/types'
+import { contentV5 } from '@trmnl-games/wardenwatch/content/v5'
+import { contentV6 } from '@trmnl-games/wardenwatch/content/v6'
+import { validateCatalog } from '@trmnl-games/wardenwatch/content/validate'
+import { activeModifiers, effectiveStats, withEffect } from '@trmnl-games/wardenwatch/sim/core/modifiers'
+import { simulateHero, SIMULATION_VERSION } from '@trmnl-games/wardenwatch/sim/core/simulate'
+import { deriveStats, maxHp } from '@trmnl-games/wardenwatch/sim/core/stats'
+import type { ContentCatalog, HeroState, ItemSnapshot, SimulationResult } from '@trmnl-games/wardenwatch/sim/core/types'
 import { baseState, seeds } from './helpers'
 
 const tick = (hero: HeroState, inventory: ItemSnapshot[], content: ContentCatalog, seed = 1, at = 10) =>

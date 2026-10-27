@@ -1,8 +1,8 @@
 import { convexQuery } from '@convex-dev/react-query'
 import { useQuery } from '@tanstack/react-query'
 import { api } from '@trmnl-games/backend/api'
-import { agreesWithHero } from '@trmnl-games/desk-crawler/i18n/lazy'
-import type { PresentationOptions } from '@trmnl-games/desk-crawler/log'
+import { agreesWithHero } from '@trmnl-games/wardenwatch/i18n/lazy'
+import type { PresentationOptions } from '@trmnl-games/wardenwatch/log'
 import { useLocale } from './i18n'
 
 /** D169, D193: how the reader's stories are told: their language, and the hero its participles agree with. */

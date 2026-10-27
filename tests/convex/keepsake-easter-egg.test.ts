@@ -7,7 +7,7 @@ import schema from '../../apps/backend/convex/schema'
 import { sha256Hex } from '../../apps/backend/convex/lib/hash'
 import { keepsakeCode } from '../../apps/backend/convex/lib/keepsakes'
 import { KEEPSAKE_MISS_LIMIT } from '../../apps/backend/convex/keepsakes'
-import { EASTER_EGG_KEEPSAKE, keepsakeWeek, SAMPLE_KEEPSAKE_CODE } from '@trmnl-games/desk-crawler/content/keepsakes'
+import { EASTER_EGG_KEEPSAKE, keepsakeWeek, SAMPLE_KEEPSAKE_CODE } from '@trmnl-games/wardenwatch/content/keepsakes'
 import { seedDeletionConfirmation, seedHero, seedWorld, type T } from './helpers'
 
 /** Lets one test give the player a real weekly code equal to the sample code, a one-in-a-million chance otherwise. */

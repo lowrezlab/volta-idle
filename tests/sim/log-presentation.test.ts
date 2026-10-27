@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
-import { catalogs } from '@trmnl-games/desk-crawler/content'
-import { displayLogDeltas, logPresentation } from '@trmnl-games/desk-crawler/log'
-import { fill } from '@trmnl-games/desk-crawler/sim/core/narrative'
+import { catalogs } from '@trmnl-games/wardenwatch/content'
+import { displayLogDeltas, logPresentation } from '@trmnl-games/wardenwatch/log'
+import { fill } from '@trmnl-games/wardenwatch/sim/core/narrative'
 
 const deltas = { xpEarned: 14, gold: 5, hp: -12 }
 const present = (summary: string, changes = deltas, kind = 'combat') => logPresentation({ summary, kind, deltas: changes })

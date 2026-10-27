@@ -1,9 +1,9 @@
 import { v } from 'convex/values'
 import type { Doc, Id } from './_generated/dataModel'
 import { mutation, query, type MutationCtx, type QueryCtx } from './_generated/server'
-import { unlocked, unlockLevel } from '@trmnl-games/desk-crawler/sim/core/career'
-import { heroMaxHp } from '@trmnl-games/desk-crawler/sim/core/stats'
-import type { ContentCatalog, HeroClass } from '@trmnl-games/desk-crawler/sim/core/types'
+import { unlocked, unlockLevel } from '@trmnl-games/wardenwatch/sim/core/career'
+import { heroMaxHp } from '@trmnl-games/wardenwatch/sim/core/stats'
+import type { ContentCatalog, HeroClass } from '@trmnl-games/wardenwatch/sim/core/types'
 import { appError } from './lib/errors'
 import { createHero } from './lib/heroCreate'
 import { currentHero, gameProfile, setCurrentHero } from './lib/gameProfile'
@@ -11,9 +11,9 @@ import { commandLog, currentUser, intentReturns, requirePlayableHero, runIntent 
 import { HERO_NAME_RULE, validateName } from './lib/names'
 import { readWorld, worldContent } from './world'
 import { heroGender } from './schema'
-import { FULL_SCALE } from '@trmnl-games/desk-crawler/art/scene'
-import { sceneFor, scenePath } from '@trmnl-games/desk-crawler/art/sceneKey'
-import { sceneOccasion } from '@trmnl-games/desk-crawler/payload'
+import { FULL_SCALE } from '@trmnl-games/wardenwatch/art/scene'
+import { sceneFor, scenePath } from '@trmnl-games/wardenwatch/art/sceneKey'
+import { sceneOccasion } from '@trmnl-games/wardenwatch/payload'
 
 /**
  * The hero roster (P37, D136): one hero per class per account, one current hero at a time. The others are parked:

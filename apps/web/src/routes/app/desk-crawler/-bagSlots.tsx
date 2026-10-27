@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useId, useRef, type ReactNode } from 'react'
-import { inked, type Sprite } from '@trmnl-games/desk-crawler/art/canvas'
-import { itemArt } from '@trmnl-games/desk-crawler/art/items'
-import { potion as potionArt } from '@trmnl-games/desk-crawler/art/props'
+import { inked, type Sprite } from '@trmnl-games/wardenwatch/art/canvas'
+import { itemArt } from '@trmnl-games/wardenwatch/art/items'
+import { potion as potionArt } from '@trmnl-games/wardenwatch/art/props'
 import { RARITY_TONE } from '../../../lib/palette'
 
 /** A 1-bit sprite as a crisp SVG: ink cells in the current colour, white cells in the raised plum, so a piece reads as a solid object on a night slot. */

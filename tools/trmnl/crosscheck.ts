@@ -12,8 +12,8 @@ import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { spawnSync } from 'node:child_process'
 import { Liquid } from 'liquidjs'
-import { screenMarkup } from '@trmnl-games/desk-crawler/templates/screen'
-import type { PreviewLayout } from '@trmnl-games/desk-crawler/templates/preview'
+import { screenMarkup } from '@trmnl-games/wardenwatch/templates/screen'
+import type { PreviewLayout } from '@trmnl-games/wardenwatch/templates/preview'
 import { bundle, requireBundle, root } from './bundle'
 
 /** Preview flag sets that together cover every fixture state, with and without a keepsake code, and in every other language (D169, D193). */

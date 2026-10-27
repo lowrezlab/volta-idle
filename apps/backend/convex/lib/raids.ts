@@ -1,11 +1,11 @@
 import type { Doc, Id } from '../_generated/dataModel'
 import type { MutationCtx, QueryCtx } from '../_generated/server'
 import { currentHero } from './gameProfile'
-import { effectiveStats } from '@trmnl-games/desk-crawler/sim/core/modifiers'
-import { classRule } from '@trmnl-games/desk-crawler/sim/core/stats'
-import type { RaidPlan } from '@trmnl-games/desk-crawler/sim/core/raid'
-import type { ContentCatalog, IncomingRaid, RaidTarget, SimulationResult } from '@trmnl-games/desk-crawler/sim/core/types'
-import { effectiveStance, unlocked } from '@trmnl-games/desk-crawler/sim/core/career'
+import { effectiveStats } from '@trmnl-games/wardenwatch/sim/core/modifiers'
+import { classRule } from '@trmnl-games/wardenwatch/sim/core/stats'
+import type { RaidPlan } from '@trmnl-games/wardenwatch/sim/core/raid'
+import type { ContentCatalog, IncomingRaid, RaidTarget, SimulationResult } from '@trmnl-games/wardenwatch/sim/core/types'
+import { effectiveStance, unlocked } from '@trmnl-games/wardenwatch/sim/core/career'
 import { pagePublic } from './publicPage'
 
 /**

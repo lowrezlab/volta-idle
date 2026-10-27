@@ -1,7 +1,7 @@
 import { convexQuery } from '@convex-dev/react-query'
 import { useQuery } from '@tanstack/react-query'
 import { api } from '@trmnl-games/backend/api'
-import { ACHIEVEMENTS, ACHIEVEMENT_BY_ID, ACHIEVEMENT_FAMILIES, RARITY_PERCENT_MIN_POPULATION, rarityBand, tierLabel, type RarityBand } from '@trmnl-games/desk-crawler/content/achievements'
+import { ACHIEVEMENTS, ACHIEVEMENT_BY_ID, ACHIEVEMENT_FAMILIES, RARITY_PERCENT_MIN_POPULATION, rarityBand, tierLabel, type RarityBand } from '@trmnl-games/wardenwatch/content/achievements'
 import { useState, type ReactNode } from 'react'
 import { Glyph, SectionTitle, type GlyphName } from '../../../lib/glyphs'
 import { Button, Meter } from '../../../lib/ui'

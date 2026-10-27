@@ -54,7 +54,7 @@
   },
   "dependencies": {
     "@trmnl-games/backend": "workspace:*",
-    "@trmnl-games/desk-crawler": "workspace:*",
+    "@trmnl-games/wardenwatch": "workspace:*",
     "@trmnl-games/engine": "workspace:*",
     "@trmnl-games/platform": "workspace:*",
     "convex": "^1.46.0",

@@ -1,6 +1,6 @@
 import { existsSync } from 'node:fs'
 import { expect, it } from 'vitest'
-import { ACTIVE_CONTENT, catalogs } from '../../packages/desk-crawler/src/content'
+import { ACTIVE_CONTENT, catalogs } from '../../packages/wardenwatch/src/content'
 import { FLOORS, UNLOCKS } from '../../apps/web/src/lib/facts.gen'
 
 it('keeps the public pages\' floor facts, quoted levels and pictures in step with the active catalog (rerun tools/landing/floors.ts)', () => {

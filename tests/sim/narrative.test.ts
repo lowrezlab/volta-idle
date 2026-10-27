@@ -1,11 +1,11 @@
 import { describe, expect, it } from 'vitest'
-import { contentV1 } from '@trmnl-games/desk-crawler/content/v1'
-import { applyItemChanges } from '@trmnl-games/desk-crawler/sim/core/apply'
-import { codePoints, markedRuns, stripMarks, variant } from '@trmnl-games/desk-crawler/sim/core/narrative'
-import { createRng } from '@trmnl-games/desk-crawler/sim/core/rng'
-import { simulateHero, SIMULATION_VERSION } from '@trmnl-games/desk-crawler/sim/core/simulate'
-import { starterHero, starterKit } from '@trmnl-games/desk-crawler/sim/core/starter'
-import type { HeroState, ItemSnapshot } from '@trmnl-games/desk-crawler/sim/core/types'
+import { contentV1 } from '@trmnl-games/wardenwatch/content/v1'
+import { applyItemChanges } from '@trmnl-games/wardenwatch/sim/core/apply'
+import { codePoints, markedRuns, stripMarks, variant } from '@trmnl-games/wardenwatch/sim/core/narrative'
+import { createRng } from '@trmnl-games/wardenwatch/sim/core/rng'
+import { simulateHero, SIMULATION_VERSION } from '@trmnl-games/wardenwatch/sim/core/simulate'
+import { starterHero, starterKit } from '@trmnl-games/wardenwatch/sim/core/starter'
+import type { HeroState, ItemSnapshot } from '@trmnl-games/wardenwatch/sim/core/types'
 import { baseState, seeds, withId } from './helpers'
 
 const content = contentV1

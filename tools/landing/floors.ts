@@ -9,14 +9,14 @@
 import { mkdirSync, writeFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { paintedSceneUri } from '../../packages/desk-crawler/src/art/sceneColour'
-import { scenePath } from '../../packages/desk-crawler/src/art/sceneKey'
-import { ACTIVE_CONTENT, catalogs } from '../../packages/desk-crawler/src/content/index'
+import { paintedSceneUri } from '../../packages/wardenwatch/src/art/sceneColour'
+import { scenePath } from '../../packages/wardenwatch/src/art/sceneKey'
+import { ACTIVE_CONTENT, catalogs } from '../../packages/wardenwatch/src/content/index'
 import { LOCALES, type Locale } from '../../packages/platform/src/locale'
-import { contentTranslator, type ContentTranslator } from '../../packages/desk-crawler/src/i18n/index'
-import { renderPhrase } from '../../packages/desk-crawler/src/i18n/grammar'
-import { fr } from '../../packages/desk-crawler/src/i18n/fr'
-import { de } from '../../packages/desk-crawler/src/i18n/de'
+import { contentTranslator, type ContentTranslator } from '../../packages/wardenwatch/src/i18n/index'
+import { renderPhrase } from '../../packages/wardenwatch/src/i18n/grammar'
+import { fr } from '../../packages/wardenwatch/src/i18n/fr'
+import { de } from '../../packages/wardenwatch/src/i18n/de'
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '../..')
 const catalog = catalogs[ACTIVE_CONTENT]

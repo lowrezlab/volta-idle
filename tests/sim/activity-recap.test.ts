@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
-import { contentV1 } from '@trmnl-games/desk-crawler/content/v1'
-import { activityRecap, MAX_RECAP_EVENTS, RECAP_WINDOW_MS, recapPeriod, type ActivityEntry } from '@trmnl-games/desk-crawler/payload'
-import type { OutcomeDetail } from '@trmnl-games/desk-crawler/sim/core/types'
+import { contentV1 } from '@trmnl-games/wardenwatch/content/v1'
+import { activityRecap, MAX_RECAP_EVENTS, RECAP_WINDOW_MS, recapPeriod, type ActivityEntry } from '@trmnl-games/wardenwatch/payload'
+import type { OutcomeDetail } from '@trmnl-games/wardenwatch/sim/core/types'
 
 /** 08:00 UTC: with no offset, the completed period is the 07:00 stand-up covering 19:00 to 07:00. */
 const NOW = Date.UTC(2026, 9, 6, 8)

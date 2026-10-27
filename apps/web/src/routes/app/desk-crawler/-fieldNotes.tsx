@@ -1,6 +1,6 @@
 import { inked } from '@trmnl-games/engine/art/canvas'
-import { monsterArt } from '@trmnl-games/desk-crawler/art/monsters'
-import { FOE } from '@trmnl-games/desk-crawler/art/sceneColour'
+import { monsterArt } from '@trmnl-games/wardenwatch/art/monsters'
+import { FOE } from '@trmnl-games/wardenwatch/art/sceneColour'
 import { useMemo } from 'react'
 import { Glyph, SectionTitle } from '../../../lib/glyphs'
 import { BIOME_SWATCH } from '../../../lib/palette'

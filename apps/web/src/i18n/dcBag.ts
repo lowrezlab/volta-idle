@@ -1,4 +1,4 @@
-import { contentTranslator, type ContentTranslator } from '@trmnl-games/desk-crawler/i18n/lazy'
+import { contentTranslator, type ContentTranslator } from '@trmnl-games/wardenwatch/i18n/lazy'
 import { defineMessages, plForm } from '../lib/i18n'
 import { headMessages } from './heads'
 

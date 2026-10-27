@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { paintedSceneUri } from '@trmnl-games/desk-crawler/art/sceneColour'
+import { paintedSceneUri } from '@trmnl-games/wardenwatch/art/sceneColour'
 import { api } from '@trmnl-games/backend/api'
 import { HERO_NAME_RULE } from '@trmnl-games/platform'
 import { useIntent } from '../../../lib/intent'

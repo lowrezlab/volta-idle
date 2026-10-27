@@ -1,6 +1,6 @@
 /** Render the platform's and each game's favicons and app icons into public/, and the games' TRMNL plugin icons into docs/assets/. pnpm tsx tools/art/web.ts (social cards: tools/art/og.mjs) */
 import { mkdirSync, writeFileSync } from 'node:fs'
-import type { Canvas } from '@trmnl-games/desk-crawler/art/canvas'
+import type { Canvas } from '@trmnl-games/wardenwatch/art/canvas'
 import { BRAND, Image, colourMark, markSvg } from './colour'
 import { deskCrawlerFavicon, deskCrawlerIcon } from './gameIcons'
 import { platformFaviconCanvas, platformIconCanvas } from './platformArt'

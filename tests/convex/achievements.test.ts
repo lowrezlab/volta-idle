@@ -4,9 +4,9 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { api, internal } from '@trmnl-games/backend/api'
 import schema from '../../apps/backend/convex/schema'
 import { achievementState, awardAchievements } from '../../apps/backend/convex/lib/achievements'
-import { ACHIEVEMENTS_VERSION } from '@trmnl-games/desk-crawler/content/achievements'
-import { contentV1 } from '@trmnl-games/desk-crawler/content/v1'
-import { zeroCounters } from '@trmnl-games/desk-crawler/sim/core/starter'
+import { ACHIEVEMENTS_VERSION } from '@trmnl-games/wardenwatch/content/achievements'
+import { contentV1 } from '@trmnl-games/wardenwatch/content/v1'
+import { zeroCounters } from '@trmnl-games/wardenwatch/sim/core/starter'
 import { runTick, seedHero, seedWorld, world, type T } from './helpers'
 
 const modules = import.meta.glob('../../apps/backend/convex/**/*.ts')

@@ -1,8 +1,8 @@
 import type { Doc, Id } from '../_generated/dataModel'
 import type { MutationCtx } from '../_generated/server'
-import { starterHero, starterKit } from '@trmnl-games/desk-crawler/sim/core/starter'
-import type { HeroClass } from '@trmnl-games/desk-crawler/sim/core/types'
-import type { HeroGender } from '@trmnl-games/desk-crawler/art/hero'
+import { starterHero, starterKit } from '@trmnl-games/wardenwatch/sim/core/starter'
+import type { HeroClass } from '@trmnl-games/wardenwatch/sim/core/types'
+import type { HeroGender } from '@trmnl-games/wardenwatch/art/hero'
 import { setCurrentHero } from './gameProfile'
 import { getOrCreateWorld, worldContent } from '../world'
 

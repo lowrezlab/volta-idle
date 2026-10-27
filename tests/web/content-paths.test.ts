@@ -10,7 +10,7 @@ import { contentNeededAt } from '../../apps/web/src/lib/content'
  * use that waits for a later message, so they do not count.
  */
 const SRC = resolve(__dirname, '../../apps/web/src')
-const LAZY = '@trmnl-games/desk-crawler/i18n/lazy'
+const LAZY = '@trmnl-games/wardenwatch/i18n/lazy'
 const BOUNDARIES = new Set([join(SRC, 'lib/content.ts'), join(SRC, 'i18n/serverMessages.ts')])
 
 function walk(dir: string): string[] {

@@ -6,8 +6,8 @@
 import { copyFileSync, existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
-import { screenMarkup } from '@trmnl-games/desk-crawler/templates/screen'
-import { FRAMEWORK_VERSION } from '@trmnl-games/desk-crawler/templates/preview'
+import { screenMarkup } from '@trmnl-games/wardenwatch/templates/screen'
+import { FRAMEWORK_VERSION } from '@trmnl-games/wardenwatch/templates/preview'
 import { bundle, bundleConfig as config, requireBundle, root } from './bundle'
 
 const args = process.argv.slice(2)

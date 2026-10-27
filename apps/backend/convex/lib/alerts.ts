@@ -1,9 +1,9 @@
 import { internal } from '../_generated/api'
 import type { Doc, Id } from '../_generated/dataModel'
 import type { MutationCtx } from '../_generated/server'
-import type { SimulationResult } from '@trmnl-games/desk-crawler/sim/core/types'
+import type { SimulationResult } from '@trmnl-games/wardenwatch/sim/core/types'
 import type { Locale } from '@trmnl-games/platform'
-import { contentTranslator } from '@trmnl-games/desk-crawler/i18n'
+import { contentTranslator } from '@trmnl-games/wardenwatch/i18n'
 
 /**
  * P33 hero alerts (alerts.md): an alert goes out only when the hero has stopped or is about to lose something the

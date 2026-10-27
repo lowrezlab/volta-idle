@@ -1,11 +1,11 @@
 import { Link, createFileRoute, notFound, useNavigate } from '@tanstack/react-router'
 import { useEffect, useRef, useState } from 'react'
-import { buildPayload, type PayloadInput } from '@trmnl-games/desk-crawler/payload'
-import { sceneUrlsAt } from '@trmnl-games/desk-crawler/art/sceneTime'
-import { renderScenePng } from '@trmnl-games/desk-crawler/art/route'
-import { DEFAULT_COMPANION_ORIGIN, renderQrPng } from '@trmnl-games/desk-crawler/art/qr'
-import { screenMarkup } from '@trmnl-games/desk-crawler/templates/screen'
-import { PREVIEW_DEVICES, PREVIEW_LAYOUTS, previewDocument, previewSize, type PreviewDevice, type PreviewLayout } from '@trmnl-games/desk-crawler/templates/preview'
+import { buildPayload, type PayloadInput } from '@trmnl-games/wardenwatch/payload'
+import { sceneUrlsAt } from '@trmnl-games/wardenwatch/art/sceneTime'
+import { renderScenePng } from '@trmnl-games/wardenwatch/art/route'
+import { DEFAULT_COMPANION_ORIGIN, renderQrPng } from '@trmnl-games/wardenwatch/art/qr'
+import { screenMarkup } from '@trmnl-games/wardenwatch/templates/screen'
+import { PREVIEW_DEVICES, PREVIEW_LAYOUTS, previewDocument, previewSize, type PreviewDevice, type PreviewLayout } from '@trmnl-games/wardenwatch/templates/preview'
 import {
   KEEPSAKE_FREE_SCENARIOS,
   NO_OFFSET_SCENARIOS,
@@ -15,7 +15,7 @@ import {
   previewScenarios,
   withOvernightRecap,
   type PreviewScenarioGroup,
-} from '@trmnl-games/desk-crawler/templates/previewScenarios'
+} from '@trmnl-games/wardenwatch/templates/previewScenarios'
 import { seo } from '../../lib/seo'
 
 /**

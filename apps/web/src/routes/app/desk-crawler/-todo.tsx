@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { api } from '@trmnl-games/backend/api'
-import { markedRuns } from '@trmnl-games/desk-crawler/sim/core/narrative'
+import { markedRuns } from '@trmnl-games/wardenwatch/sim/core/narrative'
 import { useIntent } from '../../../lib/intent'
 import { ConfirmSheet, Consequences } from './-confirm'
 import { captureAnalytics } from '../../../lib/analytics'

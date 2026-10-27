@@ -1,14 +1,14 @@
 import { describe, expect, it } from 'vitest'
-import { contentV19 } from '@trmnl-games/desk-crawler/content/v19'
-import { contentV20 } from '@trmnl-games/desk-crawler/content/v20'
-import { validateCatalog } from '@trmnl-games/desk-crawler/content/validate'
-import { codePoints, fill } from '@trmnl-games/desk-crawler/sim/core/narrative'
-import { planMeeting } from '@trmnl-games/desk-crawler/sim/core/meeting'
-import { planRaid } from '@trmnl-games/desk-crawler/sim/core/raid'
-import { simulateHero, SIMULATION_VERSION } from '@trmnl-games/desk-crawler/sim/core/simulate'
-import { heroMaxHp, xpToLeave } from '@trmnl-games/desk-crawler/sim/core/stats'
-import { starterHero, starterKit } from '@trmnl-games/desk-crawler/sim/core/starter'
-import type { ContentCatalog, HeroState, IncomingMeeting, IncomingRaid, ItemSnapshot, MeetingPartner, SimulationInput, SimulationResult, StreamSeeds } from '@trmnl-games/desk-crawler/sim/core/types'
+import { contentV19 } from '@trmnl-games/wardenwatch/content/v19'
+import { contentV20 } from '@trmnl-games/wardenwatch/content/v20'
+import { validateCatalog } from '@trmnl-games/wardenwatch/content/validate'
+import { codePoints, fill } from '@trmnl-games/wardenwatch/sim/core/narrative'
+import { planMeeting } from '@trmnl-games/wardenwatch/sim/core/meeting'
+import { planRaid } from '@trmnl-games/wardenwatch/sim/core/raid'
+import { simulateHero, SIMULATION_VERSION } from '@trmnl-games/wardenwatch/sim/core/simulate'
+import { heroMaxHp, xpToLeave } from '@trmnl-games/wardenwatch/sim/core/stats'
+import { starterHero, starterKit } from '@trmnl-games/wardenwatch/sim/core/starter'
+import type { ContentCatalog, HeroState, IncomingMeeting, IncomingRaid, ItemSnapshot, MeetingPartner, SimulationInput, SimulationResult, StreamSeeds } from '@trmnl-games/wardenwatch/sim/core/types'
 import { seeds, withId } from './helpers'
 
 const streams = (n: number): StreamSeeds => ({ ...seeds(n), raid: (n * 2891336453 + 7) >>> 0, quest: (n * 1597334677 + 11) >>> 0, meeting: (n * 3812015801 + 13) >>> 0 })
@@ -157,9 +157,9 @@ describe('meetings (D141)', () => {
 
 describe('meeting scenes (D141)', () => {
   it('draws the other hero with the meeting prop, and every v20 kind has a prop', async () => {
-    const { sceneFor, scenePath } = await import('@trmnl-games/desk-crawler/art/sceneKey')
-    const { parseScenePath, renderScenePng } = await import('@trmnl-games/desk-crawler/art/route')
-    const { MEETING_PROPS } = await import('@trmnl-games/desk-crawler/art/props')
+    const { sceneFor, scenePath } = await import('@trmnl-games/wardenwatch/art/sceneKey')
+    const { parseScenePath, renderScenePng } = await import('@trmnl-games/wardenwatch/art/route')
+    const { MEETING_PROPS } = await import('@trmnl-games/wardenwatch/art/props')
     for (const kind of contentV20.meetings!.kinds) expect(MEETING_PROPS[kind.id]).toBeDefined()
     const scene = sceneFor('exploring', false, { kind: 'meeting', outcome: { variant: 'meeting', rivalClass: 'rogue', kindId: 'pep_talk' } }, 'warrior')
     expect(scene).toEqual({ pose: 'idle', subject: { kind: 'coworker', heroClass: 'rogue', prop: 'whiteboard' } })

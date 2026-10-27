@@ -3,8 +3,8 @@ import type { MutationCtx, QueryCtx } from '../_generated/server'
 import { currentHero } from './gameProfile'
 import { pagePublic } from './publicPage'
 import { HIDDEN_RIVAL } from './raids'
-import type { FindPlan } from '@trmnl-games/desk-crawler/sim/core/lostProperty'
-import type { IncomingFound, LostSpare, SimulationResult } from '@trmnl-games/desk-crawler/sim/core/types'
+import type { FindPlan } from '@trmnl-games/wardenwatch/sim/core/lostProperty'
+import type { IncomingFound, LostSpare, SimulationResult } from '@trmnl-games/wardenwatch/sim/core/types'
 
 /**
  * Lost-property adapter (D145). Every read is bounded: every hero under a catalog with lost property reads its own

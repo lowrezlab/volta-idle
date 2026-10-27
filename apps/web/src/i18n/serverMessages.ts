@@ -1,4 +1,4 @@
-import { contentTranslator } from '@trmnl-games/desk-crawler/i18n/lazy'
+import { contentTranslator } from '@trmnl-games/wardenwatch/i18n/lazy'
 import type { Locale } from '@trmnl-games/platform'
 
 /**

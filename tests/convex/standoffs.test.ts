@@ -4,8 +4,8 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { api, internal } from '@trmnl-games/backend/api'
 import type { Id } from '@trmnl-games/backend/data-model'
 import schema from '../../apps/backend/convex/schema'
-import { contentV24 } from '@trmnl-games/desk-crawler/content/v24'
-import { heroMaxHp } from '@trmnl-games/desk-crawler/sim/core/stats'
+import { contentV24 } from '@trmnl-games/wardenwatch/content/v24'
+import { heroMaxHp } from '@trmnl-games/wardenwatch/sim/core/stats'
 import { runTick, seedHero, seedWorld, type T } from './helpers'
 
 const modules = import.meta.glob('../../apps/backend/convex/**/*.ts')

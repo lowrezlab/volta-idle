@@ -1,4 +1,4 @@
-import { glyphRows } from '@trmnl-games/desk-crawler/art/glyphs'
+import { glyphRows } from '@trmnl-games/wardenwatch/art/glyphs'
 import { KIND_TONE } from '../../../lib/palette'
 
 /** A log-kind glyph (shared with the device screen) as an inline 16px icon, in its game colour unless `plain`. */

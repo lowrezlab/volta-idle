@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest'
 import { Liquid } from 'liquidjs'
-import { contentV1 } from '@trmnl-games/desk-crawler/content/v1'
-import { buildPayload } from '@trmnl-games/desk-crawler/payload'
-import { parseUtcOffset, screenMarkup, glyphUri } from '@trmnl-games/desk-crawler/templates/screen'
-import { hudMarkUri } from '@trmnl-games/desk-crawler/art/hud'
+import { contentV1 } from '@trmnl-games/wardenwatch/content/v1'
+import { buildPayload } from '@trmnl-games/wardenwatch/payload'
+import { parseUtcOffset, screenMarkup, glyphUri } from '@trmnl-games/wardenwatch/templates/screen'
+import { hudMarkUri } from '@trmnl-games/wardenwatch/art/hud'
 
 /** The ledger's changes as drawn: each mark (named by the HUD mark it uses), its ink classes and its text. */
 const MARK_NAMES: Record<string, string> = { [hudMarkUri('xp', 48, 32)]: 'xp', [hudMarkUri('coin', 24, 24)]: 'gold', [hudMarkUri('heartFull', 36, 32)]: 'hp', [hudMarkUri('potion', 24, 24)]: 'potion', [hudMarkUri('bag', 24, 24)]: 'bag' }

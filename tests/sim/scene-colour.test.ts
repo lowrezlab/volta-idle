@@ -1,10 +1,10 @@
 import { describe, expect, it } from 'vitest'
-import { heroPoses } from '@trmnl-games/desk-crawler/art/hero'
-import { monsterArt } from '@trmnl-games/desk-crawler/art/monsters'
-import { propArt } from '@trmnl-games/desk-crawler/art/props'
-import { scenePlacements, type Subject } from '@trmnl-games/desk-crawler/art/scene'
-import { paintedScene, paintedSceneUri, sceneColours } from '@trmnl-games/desk-crawler/art/sceneColour'
-import { scenePath } from '@trmnl-games/desk-crawler/art/sceneKey'
+import { heroPoses } from '@trmnl-games/wardenwatch/art/hero'
+import { monsterArt } from '@trmnl-games/wardenwatch/art/monsters'
+import { propArt } from '@trmnl-games/wardenwatch/art/props'
+import { scenePlacements, type Subject } from '@trmnl-games/wardenwatch/art/scene'
+import { paintedScene, paintedSceneUri, sceneColours } from '@trmnl-games/wardenwatch/art/sceneColour'
+import { scenePath } from '@trmnl-games/wardenwatch/art/sceneKey'
 
 describe('companion scene colours (D87)', () => {
   it('fills what an outline encloses and leaves the outside and the gaps between legs clear', () => {

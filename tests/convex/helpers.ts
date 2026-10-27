@@ -3,8 +3,8 @@ import type { convexTest } from 'convex-test'
 import { vi } from 'vitest'
 import { internal } from '@trmnl-games/backend/api'
 import type { Id } from '@trmnl-games/backend/data-model'
-import { contentV1 } from '@trmnl-games/desk-crawler/content/v1'
-import { starterHero, starterKit } from '@trmnl-games/desk-crawler/sim/core/starter'
+import { contentV1 } from '@trmnl-games/wardenwatch/content/v1'
+import { starterHero, starterKit } from '@trmnl-games/wardenwatch/sim/core/starter'
 
 export type T = ReturnType<typeof convexTest>
 

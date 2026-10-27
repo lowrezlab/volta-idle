@@ -1,7 +1,7 @@
 import type { Locale } from '@trmnl-games/platform'
 
 /** The dictionary loader, itself loaded on demand: route loaders and the client entry stay out of the game's code (D212). */
-export const loadContent = (locale: Locale): Promise<void> => (locale === 'en' ? Promise.resolve() : import('@trmnl-games/desk-crawler/i18n/lazy').then((m) => m.loadContent(locale)))
+export const loadContent = (locale: Locale): Promise<void> => (locale === 'en' ? Promise.resolve() : import('@trmnl-games/wardenwatch/i18n/lazy').then((m) => m.loadContent(locale)))
 
 /**
  * D169: the pages whose first render shows game content (names, catalog lines, stored stories) in the reader's

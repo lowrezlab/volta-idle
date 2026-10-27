@@ -3,9 +3,9 @@ import type { MutationCtx, QueryCtx } from '../_generated/server'
 import { currentHero } from './gameProfile'
 import { pagePublic } from './publicPage'
 import { HIDDEN_RIVAL } from './raids'
-import { canMeet } from '@trmnl-games/desk-crawler/sim/core/career'
-import type { MeetingPlan } from '@trmnl-games/desk-crawler/sim/core/meeting'
-import type { ContentCatalog, IncomingMeeting, MeetingPartner, SimulationResult } from '@trmnl-games/desk-crawler/sim/core/types'
+import { canMeet } from '@trmnl-games/wardenwatch/sim/core/career'
+import type { MeetingPlan } from '@trmnl-games/wardenwatch/sim/core/meeting'
+import type { ContentCatalog, IncomingMeeting, MeetingPartner, SimulationResult } from '@trmnl-games/wardenwatch/sim/core/types'
 
 /**
  * Meetings adapter (D141). Every read is bounded: a starter whose launch draw hit takes at most two pool rows on its

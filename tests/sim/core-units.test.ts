@@ -1,12 +1,12 @@
 import { readFileSync } from 'node:fs'
 import { describe, expect, it } from 'vitest'
-import { catalogs } from '@trmnl-games/desk-crawler/content'
-import { validateCatalog } from '@trmnl-games/desk-crawler/content/validate'
-import { composeSummary } from '@trmnl-games/desk-crawler/sim/core/narrative'
-import { createRng, pickWeighted } from '@trmnl-games/desk-crawler/sim/core/rng'
-import { applyXp, levelGroup, maxHp, xpToLeave } from '@trmnl-games/desk-crawler/sim/core/stats'
-import { creditTick, projectAtPublication } from '@trmnl-games/desk-crawler/sim/score'
-import { deriveStreamSeed, deriveStreamSeeds } from '@trmnl-games/desk-crawler/sim/seed'
+import { catalogs } from '@trmnl-games/wardenwatch/content'
+import { validateCatalog } from '@trmnl-games/wardenwatch/content/validate'
+import { composeSummary } from '@trmnl-games/wardenwatch/sim/core/narrative'
+import { createRng, pickWeighted } from '@trmnl-games/wardenwatch/sim/core/rng'
+import { applyXp, levelGroup, maxHp, xpToLeave } from '@trmnl-games/wardenwatch/sim/core/stats'
+import { creditTick, projectAtPublication } from '@trmnl-games/wardenwatch/sim/score'
+import { deriveStreamSeed, deriveStreamSeeds } from '@trmnl-games/wardenwatch/sim/seed'
 
 describe('rng', () => {
   it('is deterministic and stays inside its bounds', () => {
@@ -122,7 +122,7 @@ describe('hourly score projection (D31)', () => {
 
 describe('narrative articles', () => {
   it('uses "an" before vowel-initial names and marks names bold', async () => {
-    const { fill } = await import('@trmnl-games/desk-crawler/sim/core/narrative')
+    const { fill } = await import('@trmnl-games/wardenwatch/sim/core/narrative')
     expect(fill('Rebooted a {monster}. +{xp} XP.', { monster: 'Overheated Rack', xp: 3 })).toBe('Rebooted an [[Overheated Rack]]. +3 XP.')
     expect(fill('A {monster} crashed.', { monster: 'Overheated Rack' })).toBe('An [[Overheated Rack]] crashed.')
     expect(fill('Beat a {monster}.', { monster: 'Paper Imp' })).toBe('Beat a [[Paper Imp]].')
@@ -132,7 +132,7 @@ describe('narrative articles', () => {
 
 describe('screen log wrapping', () => {
   it('keeps values with their units', async () => {
-    const { keepUnitsTogether } = await import('@trmnl-games/desk-crawler/payload')
+    const { keepUnitsTogether } = await import('@trmnl-games/wardenwatch/payload')
     expect(keepUnitsTogether('Beat a Paper Imp. +14 XP, +2 gold. Reached level 12! Revives in 8 ticks. -5 HP.')).toBe(
       'Beat a Paper Imp. +14 XP, +2 gold. Reached level 12! Revives in 8 ticks. -5 HP.',
     )

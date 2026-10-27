@@ -9,12 +9,12 @@ import { sha256Hex } from './lib/hash'
 import { normalizeAlias } from './lib/names'
 import { openedCompanion } from './heroReminder'
 import { getOrCreateWorld, readWorld, worldContent } from './world'
-import { heroMaxHp } from '@trmnl-games/desk-crawler/sim/core/stats'
-import { withCounterDefaults } from '@trmnl-games/desk-crawler/sim/core/starter'
+import { heroMaxHp } from '@trmnl-games/wardenwatch/sim/core/stats'
+import { withCounterDefaults } from '@trmnl-games/wardenwatch/sim/core/starter'
 import { commandLog } from './lib/intent'
 import { simulateHeroStep } from './sim/runs/tick'
 import type { PageTally } from './lib/engine/runner'
-import { catalogs, type CatalogId } from '@trmnl-games/desk-crawler/content'
+import { catalogs, type CatalogId } from '@trmnl-games/wardenwatch/content'
 
 /**
  * Owner-run support and moderation (D23). Admin authority comes only from the

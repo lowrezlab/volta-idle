@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { nextSlotAfter, slotEta, wallSlotFor, SLOT_MS } from '@trmnl-games/desk-crawler/sim/schedule'
+import { nextSlotAfter, slotEta, wallSlotFor, SLOT_MS } from '@trmnl-games/wardenwatch/sim/schedule'
 import { formatTime, useLocale, useT } from '../../../lib/i18n'
 import { dcScreenMessages } from '../../../i18n/dcScreen'
 

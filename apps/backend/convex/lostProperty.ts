@@ -5,8 +5,8 @@ import { currentUser } from './lib/intent'
 import { heldSpares, ownSpare } from './lib/lostProperty'
 import { pagePublic } from './lib/publicPage'
 import { HIDDEN_RIVAL } from './lib/raids'
-import { ACTIVE_CONTENT, catalogs } from '@trmnl-games/desk-crawler/content'
-import { INVENTORY_READ } from '@trmnl-games/desk-crawler/sim/core/limits'
+import { ACTIVE_CONTENT, catalogs } from '@trmnl-games/wardenwatch/content'
+import { INVENTORY_READ } from '@trmnl-games/wardenwatch/sim/core/limits'
 
 const spareView = v.object({
   name: v.string(),

@@ -1,4 +1,4 @@
-import { ACTIVE_CONTENT, catalogs } from '@trmnl-games/desk-crawler/content'
+import { ACTIVE_CONTENT, catalogs } from '@trmnl-games/wardenwatch/content'
 
 /**
  * D169: everything the Desk Crawler help page reads from the active catalog, in no language. Each language's page body

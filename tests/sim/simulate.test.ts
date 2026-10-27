@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest'
-import { applyItemChanges } from '@trmnl-games/desk-crawler/sim/core/apply'
-import { SimulationInvariantError } from '@trmnl-games/desk-crawler/sim/core/invariants'
-import { codePoints } from '@trmnl-games/desk-crawler/sim/core/narrative'
-import { maxHp, xpToLeave } from '@trmnl-games/desk-crawler/sim/core/stats'
-import type { HeroState, ItemSnapshot } from '@trmnl-games/desk-crawler/sim/core/types'
+import { applyItemChanges } from '@trmnl-games/wardenwatch/sim/core/apply'
+import { SimulationInvariantError } from '@trmnl-games/wardenwatch/sim/core/invariants'
+import { codePoints } from '@trmnl-games/wardenwatch/sim/core/narrative'
+import { maxHp, xpToLeave } from '@trmnl-games/wardenwatch/sim/core/stats'
+import type { HeroState, ItemSnapshot } from '@trmnl-games/wardenwatch/sim/core/types'
 import { baseState, content, fillBag, findSeed, run } from './helpers'
 
 const c = content.constants
@@ -249,7 +249,7 @@ describe('fuzzed long runs', () => {
 
 // --------------------------------------------------------------- local helpers
 
-import { simulateHero as simulate } from '@trmnl-games/desk-crawler/sim/core/simulate'
+import { simulateHero as simulate } from '@trmnl-games/wardenwatch/sim/core/simulate'
 import { seeds as baseSeeds } from './helpers'
 
 /** Crude occasional management so long runs exercise sleep, wake and travel. */

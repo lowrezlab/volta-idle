@@ -1,7 +1,7 @@
 import { currentHero, gameProfile, setCurrentHero, DESK_CRAWLER } from './lib/gameProfile'
 import { currentCharacterOf, gameDeletingFor, isGame, otherGameHooks } from './lib/gameHooks'
 import { gameSlug as gameSlugValidator, heroGender } from './schema'
-import type { HeroGender } from '@trmnl-games/desk-crawler/art/hero'
+import type { HeroGender } from '@trmnl-games/wardenwatch/art/hero'
 import type { GameSlug } from '@trmnl-games/platform'
 import { isAdminIdentity } from './lib/adminAccess'
 import { gameStatusOf } from './platform'

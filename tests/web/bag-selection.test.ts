@@ -1,6 +1,6 @@
 import { expect, it } from 'vitest'
 import { retainSellableSelection, saleIsCurrent } from '../../apps/web/src/lib/bagSelection'
-import { BATCH_ITEMS } from '@trmnl-games/desk-crawler/sim/core/limits'
+import { BATCH_ITEMS } from '@trmnl-games/wardenwatch/sim/core/limits'
 
 const item = (id: string, overrides = {}) => ({ id, equipped: false, held: false, saleValue: 10, ...overrides })
 

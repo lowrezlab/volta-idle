@@ -2,9 +2,9 @@ import { currentHero } from './gameProfile'
 import { pagePublic } from './publicPage'
 import type { Doc } from '../_generated/dataModel'
 import type { QueryCtx } from '../_generated/server'
-import { weekStart } from '@trmnl-games/desk-crawler/sim/score'
-import { levelGroup } from '@trmnl-games/desk-crawler/sim/core/stats'
-import { TOP_ROWS, type PayloadRanking } from '@trmnl-games/desk-crawler/payload'
+import { weekStart } from '@trmnl-games/wardenwatch/sim/score'
+import { levelGroup } from '@trmnl-games/wardenwatch/sim/core/stats'
+import { TOP_ROWS, type PayloadRanking } from '@trmnl-games/wardenwatch/payload'
 
 export type Board = 'overall' | 'recent_24h' | 'recent_7d'
 

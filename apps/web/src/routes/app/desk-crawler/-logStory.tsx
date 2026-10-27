@@ -1,11 +1,11 @@
-import { keepUnitsTogether } from '@trmnl-games/desk-crawler/payload'
-import { markedRuns } from '@trmnl-games/desk-crawler/sim/core/narrative'
-import { logPresentation, type LogDeltas } from '@trmnl-games/desk-crawler/log'
+import { keepUnitsTogether } from '@trmnl-games/wardenwatch/payload'
+import { markedRuns } from '@trmnl-games/wardenwatch/sim/core/narrative'
+import { logPresentation, type LogDeltas } from '@trmnl-games/wardenwatch/log'
 import { PixelIcon } from './-pixelIcon'
 import { KIND_BADGE } from '../../../lib/palette'
 import { Glyph, type GlyphName } from '../../../lib/glyphs'
 import { formatTime, useLocale } from '../../../lib/i18n'
-import type { PresentationOptions } from '@trmnl-games/desk-crawler/log'
+import type { PresentationOptions } from '@trmnl-games/wardenwatch/log'
 
 /**
  * Companion commands all log as `system`; their own glyph says which command it was, read from the summary the backend

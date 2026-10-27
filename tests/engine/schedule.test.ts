@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest'
 import { makeSchedule, SLOT_MS } from '@trmnl-games/engine/schedule'
 import { deriveSharedSeed, deriveStreamSeed } from '@trmnl-games/engine/seed'
-import { deriveStreamSeed as deskCrawlerSeed } from '@trmnl-games/desk-crawler/sim/seed'
-import * as deskCrawler from '@trmnl-games/desk-crawler/sim/schedule'
+import { deriveStreamSeed as deskCrawlerSeed } from '@trmnl-games/wardenwatch/sim/seed'
+import * as deskCrawler from '@trmnl-games/wardenwatch/sim/schedule'
 
 describe('engine schedule', () => {
   it('keeps Desk Crawler on the quarter-hour', () => {

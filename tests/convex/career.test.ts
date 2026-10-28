@@ -244,7 +244,7 @@ describe('career ladder backend (P35)', () => {
     expect(chosen.career?.unclaimed).toEqual([expect.objectContaining({ id: 'choose_stance', gold: 20 })])
     expect(await as(t, 'Mia').query(api.heroes.mine, {})).toMatchObject({ stanceChosen: true })
     const lines = await t.run(async (ctx) => await ctx.db.query('tickLogs').withIndex('by_heroId_and_at_and_sequence', (q) => q.eq('heroId', heroId)).collect())
-    expect(lines.map((line) => line.summary)).toContain('Stance set to [[Balanced]].')
+    expect(lines.map((line) => line.summary)).toContain('Stance set to [[Steady]].')
     // Choosing it again changes nothing.
     expect(await as(t, 'Mia').mutation(api.heroes.setStance, { operationId: opId(), stance: 'balanced' })).toMatchObject({ changed: false })
 

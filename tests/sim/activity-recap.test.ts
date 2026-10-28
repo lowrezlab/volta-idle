@@ -35,8 +35,8 @@ describe('12-hour device recap', () => {
       entry({ variant: 'rest', healing: 0, automatic: false, resultingStatus: 'exploring' }),
     ], PERIOD, contentV1)
     expect(recap.totals).toMatchObject({ xp: 9, gold: 8, wins: 1, gear: 2, potions: 1, breaks: 1, rareFinds: 1, elites: 1 })
-    expect(recap.activity).toBe('1 fight won · 2 gear finds · 1 potion found · 1 break')
-    expect(recap.gains).toBe('+9 XP · 8 gold earned')
+    expect(recap.activity).toBe('1 fight won · 2 gear finds · 1 draught found · 1 rest')
+    expect(recap.gains).toBe('+9 XP · 8 Auro earned')
     expect(recap.highlights).toContain('1 rare find')
     expect(recap.span).toBe('19:00-07:00')
     // Icon-led items, most notable first, so a short line keeps the rare find and drops the break.
@@ -44,11 +44,11 @@ describe('12-hour device recap', () => {
       { k: 'achievement', t: '1 rare find' },
       { k: 'combat', t: '1 elite' },
       { k: 'xp', t: '+9 XP' },
-      { k: 'coin', t: '8 gold' },
+      { k: 'coin', t: '8 Auro' },
       { k: 'sword', t: '1 win' },
       { k: 'loot', t: '2 gear finds' },
-      { k: 'potion', t: '1 potion' },
-      { k: 'rest', t: '1 break' },
+      { k: 'potion', t: '1 draught' },
+      { k: 'rest', t: '1 rest' },
     ])
     expect(activityRecap([], PERIOD, contentV1, true)).toMatchObject({ label: 'Night recap · partial', span: '19:00-07:00', items: [{ k: 'none', t: 'No adventures in sample' }] })
   })
@@ -120,8 +120,8 @@ describe('to-do recap fact (D112)', () => {
     const recap = activityRecap([entry(done(2), { deltas: { xpEarned: 0, gold: 10, hp: 0 } }), entry(done(1)), entry(standup), entry(fight)], PERIOD, contentV1)
     expect(recap.totals.tasks).toBe(3)
     expect(recap.events).toBe(1)
-    expect(recap.items).toContainEqual({ k: 'todo', t: '3 tasks' })
-    expect(recap.activity).toContain('3 tasks')
+    expect(recap.items).toContainEqual({ k: 'todo', t: '3 orders' })
+    expect(recap.activity).toContain('3 orders')
     // A morning with only the stand-up is still a quiet one.
     expect(activityRecap([entry(standup)], PERIOD, contentV1).activity).toBe('No new adventures')
   })

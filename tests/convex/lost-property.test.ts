@@ -183,7 +183,7 @@ describe('lost property backend (D145 L2)', () => {
     const labelled = (bag.gear as Array<{ spareOf: { ownerName: string; profile: boolean } | null }>).filter((item) => item.spareOf !== null)
     expect(labelled.map((item) => item.spareOf)).toEqual([{ ownerName: 'Bo', profile: true }])
     expect(await asAna.query(api.lostProperty.mine, {})).toMatchObject({ enabled: true, mySpare: null, held: [{ name: 'Spork Halberd', rarity: 'rare', ownerName: 'Bo' }], total: 1 })
-    expect(await asBo.query(api.lostProperty.mine, {})).toMatchObject({ mySpare: { name: 'Spork Halberd', floor: 'Office Cubicles', found: true, finderName: 'Ana' }, held: [] })
+    expect(await asBo.query(api.lostProperty.mine, {})).toMatchObject({ mySpare: { name: 'Spork Halberd', floor: 'Castellum Frigo', found: true, finderName: 'Ana' }, held: [] })
     const page = await t.query(api.profiles.view, { alias: 'Ana' })
     expect(page.lostProperty).toEqual([{ name: 'Spork Halberd', rarity: 'rare', kind: 'weapon', ownerName: 'Bo', profile: true }])
     await t.run(async (ctx) => {

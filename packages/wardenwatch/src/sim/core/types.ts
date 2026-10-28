@@ -870,7 +870,16 @@ export interface ContentCatalog {
   readonly occasions?: readonly OccasionRule[]
   /** Absent before v28 (2B.2): the Volta sky changes nothing in play. */
   readonly sky?: SkyRule
-  readonly narrative: Readonly<{ biomes: Readonly<Record<string, BiomeNarrative>>; shared: SharedNarrative; monsters: Readonly<Record<string, MonsterNarrative>> }>
+  readonly narrative: Readonly<{
+    biomes: Readonly<Record<string, BiomeNarrative>>
+    shared: SharedNarrative
+    monsters: Readonly<Record<string, MonsterNarrative>>
+    /**
+     * The lines with the sky's weight (GDD §8): templates from the pools above that the simulator tells on at most
+     * one tick a day, the day's eldritch slot (`narrative.ts`). Absent before v28: every line is told as drawn.
+     */
+    eldritch?: readonly string[]
+  }>
 }
 
 // ---------------------------------------------------------------- hero and items

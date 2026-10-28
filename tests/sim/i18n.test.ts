@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { catalogs, type CatalogId } from '@trmnl-games/wardenwatch/content'
-import { ACHIEVEMENTS } from '@trmnl-games/wardenwatch/content/achievements'
+import { ACHIEVEMENT_FAMILIES, ACHIEVEMENTS } from '@trmnl-games/wardenwatch/content/achievements'
 import { contentTranslator, type ContentDictionary } from '@trmnl-games/wardenwatch/i18n'
 import { AGREEMENT_FORMS, ARTICLE_FORMS, type GrammarLocale } from '@trmnl-games/wardenwatch/i18n/grammar'
 import { fr } from '@trmnl-games/wardenwatch/i18n/fr'
@@ -34,17 +34,9 @@ describe('content dictionaries (D169)', () => {
     }
   })
 
-  /**
-   * Catalogs whose names and lines have not had their translation pass yet: v28 is the Volta re-theme (Wardenwatch),
-   * authored in English first. Its dictionaries land with the Volta translation pass; until then it is live nowhere
-   * (ACTIVE_CONTENT stays on v27) and the French-and-German floor tool is not run against it.
-   */
-  const AWAITING_TRANSLATION: ReadonlySet<CatalogId> = new Set(['v28'])
-
-  it.each(DICTIONARIES)('%s covers every name, line and achievement in every translated catalog', (_locale, dictionary) => {
+  it.each(DICTIONARIES)('%s covers every name, line and achievement in every catalog', (_locale, dictionary) => {
     const missing = new Set<string>()
-    for (const [id, catalog] of Object.entries(catalogs)) {
-      if (AWAITING_TRANSLATION.has(id as CatalogId)) continue
+    for (const catalog of Object.values(catalogs)) {
       for (const monster of catalog.monsters) if (!(monster.name in dictionary.nouns)) missing.add(monster.name)
       for (const biome of catalog.biomes) if (!(biome.name in dictionary.nouns)) missing.add(biome.name)
       for (const gear of catalog.gearTemplates) if (!(gear.name in dictionary.nouns)) missing.add(gear.name)
@@ -54,12 +46,11 @@ describe('content dictionaries (D169)', () => {
     expect([...missing]).toEqual([])
   })
 
-  /** The survey entries (achievements) are global, so their Volta names wait for the same pass; flip this when it lands. */
-  const SURVEY_TRANSLATED = false
-
-  it.skipIf(!SURVEY_TRANSLATED).each(DICTIONARIES)('%s covers every survey entry', (_locale, dictionary) => {
-    const missing = ACHIEVEMENTS.filter((achievement) => !(achievement.name in dictionary.text)).map((achievement) => achievement.name)
-    expect(missing).toEqual([])
+  it.each(DICTIONARIES)('%s covers every survey entry, its family and its note', (_locale, dictionary) => {
+    const missing = new Set<string>()
+    for (const family of ACHIEVEMENT_FAMILIES) if (!(family.name in dictionary.text)) missing.add(family.name)
+    for (const achievement of ACHIEVEMENTS) for (const line of [achievement.name, achievement.blurb]) if (!(line in dictionary.text)) missing.add(line)
+    expect([...missing]).toEqual([])
   })
 })
 
@@ -96,7 +87,7 @@ describe('story translation (D169)', () => {
     expect(contentTranslator('en').story('Arrived in the [[Archive]].')).toBeNull()
   })
 
-  it.each(['v1', 'v9', 'v14', 'v19', 'v24'] as CatalogId[])('translates every story the %s simulator writes', (version) => {
+  it.each(['v1', 'v9', 'v14', 'v19', 'v24', 'v28'] as CatalogId[])('translates every story the %s simulator writes', (version) => {
     const summaries = new Set<string>()
     simulateCohort(POLICIES[0]!, 6, 25, catalogs[version], undefined, undefined, 'warrior', (_hero, _tick, _before, result) => {
       if (result.event) summaries.add(result.event.summary)

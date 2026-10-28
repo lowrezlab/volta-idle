@@ -152,7 +152,7 @@ monster('microwave_wraith', 'Mrl Mnø Sahuagin', 'Krine Snow Fens', [
 ])
 monster('leftovers_hydra', 'Fen Lantern-Eel', 'Krine Snow Fens', [
   ['Lamps Out', 'Every lantern snuffed.'],
-  ['Ford Darkened', 'Put the ford dark on a Friday.'],
+  ['Ford Darkened', 'Put the ford dark for a whole night.'],
   ['Eel Wrangler', 'Returned to the deep water.'],
   ['Lantern Purge', 'A stern note was not needed.'],
   ['Dark Water Legend', 'The ford has been dark for a week.'],
@@ -174,7 +174,7 @@ counter('elites', 'Elites', 'Lifetime', 'eliteWins', [1, 5, 25, 100], [
   ['Senior Hunter', 'Title confirmed by the commander.'],
   ['Master of the Hunt', 'Elites are your department.'],
 ])
-counter('jackpots', 'Jackpots', 'Lifetime', 'jackpots', [1, 5, 25], [
+counter('jackpots', 'Windfalls', 'Lifetime', 'jackpots', [1, 5, 25], [
   ['Lucky Find', 'Ten times the Auro from one find.'],
   ['Bounty Approved', 'No tally required.'],
   ['Pay Chest', 'You know where it is kept.'],

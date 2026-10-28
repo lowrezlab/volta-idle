@@ -32,7 +32,7 @@ describe('merchant notice (D78)', () => {
   const notice = (p: unknown) => (p as { notice: string | null; attention: string | null }).notice
   it('announces an open visit, and stays quiet once it expired or when an attention line is showing', () => {
     expect(notice(buildPayload(input))).toBeNull()
-    expect(notice(buildPayload({ ...input, hero: { ...input.hero!, merchantExpiresAtTick: 5 } }))).toBe('Merchant visiting. Shop in the companion soon.')
+    expect(notice(buildPayload({ ...input, hero: { ...input.hero!, merchantExpiresAtTick: 5 } }))).toBe('A Serpentos factor is calling. Trade in the companion soon.')
     expect(notice(buildPayload({ ...input, world: { ...input.world!, currentTick: 5 }, hero: { ...input.hero!, merchantExpiresAtTick: 5 } }))).toBeNull()
     expect(notice(buildPayload({ ...input, hero: { ...input.hero!, status: 'dead', hp: 0, reviveAtTick: 9, merchantExpiresAtTick: 5 } }))).toBeNull()
     // D79: a waiting decision outranks the merchant.
@@ -129,15 +129,15 @@ describe('log lines and celebrations (D44)', () => {
   it('adds separate story and stat fields while preserving the legacy summary', () => {
     const summary = 'Unplugged a [[Cable Serpent]]. +14 XP, +5 gold.'
     const p = buildPayload({ ...input, logs: [{ at: NOW, kind: 'combat', summary, deltas: { xpEarned: 14, gold: 5, hp: -12 } }] })
-    expect(p.log[0]).toMatchObject({ s: 'Unplugged a [[Cable Serpent]]. +14 XP, +5 gold.', n: 'Unplugged a [[Cable Serpent]].', d: '+14 XP · +5 gold · −12 HP' })
+    expect(p.log[0]).toMatchObject({ s: 'Unplugged a [[Cable Serpent]]. +14 XP, +5 gold.', n: 'Unplugged a [[Cable Serpent]].', d: '+14 XP · +5 Auro · −12 HP' })
   })
 
   it('cheers the big moments only', () => {
     expect(celebrationFor({ kind: 'levelup' }, 6)).toBe('Level up! Now level 6')
     expect(celebrationFor({ kind: 'combat', outcome: { variant: 'combat', elite: true, outcome: 'victory' } }, 6)).toBe('Elite defeated!')
     expect(celebrationFor({ kind: 'combat', outcome: { variant: 'combat', elite: true, outcome: 'retreat' } }, 6)).toBeNull()
-    expect(celebrationFor({ kind: 'loot', outcome: { variant: 'loot', found: 'gold', jackpot: true } }, 6)).toBe('Jackpot!')
-    expect(celebrationFor({ kind: 'loot', outcome: { variant: 'loot', found: 'gear', rarity: 'rare', jackpot: false } }, 6)).toBe('Rare find!')
+    expect(celebrationFor({ kind: 'loot', outcome: { variant: 'loot', found: 'gold', jackpot: true } }, 6)).toBe('Windfall!')
+    expect(celebrationFor({ kind: 'loot', outcome: { variant: 'loot', found: 'gear', rarity: 'rare', jackpot: false } }, 6)).toBe('Starlit find!')
     expect(celebrationFor({ kind: 'loot', outcome: { variant: 'loot', found: 'gear', rarity: 'uncommon', jackpot: false } }, 6)).toBeNull()
     expect(celebrationFor(null, 6)).toBeNull()
   })
@@ -228,7 +228,7 @@ describe('to-do lines (D112)', () => {
       { at: NOW - 60_000, kind: 'todo', summary: 'Ticked off: Earn 50 gold adventuring.', deltas: { xpEarned: 0, gold: 16, hp: 0 } },
     ] }) as unknown as { log: Array<{ k: string; n: string; d: string; c?: string }> }
     expect(payload.log[0]).toMatchObject({ k: 'todo', c: 'Stand-up: 3 new tasks.', d: '' })
-    expect(payload.log[1]).toMatchObject({ k: 'todo', n: 'Ticked off: Earn 50 gold adventuring.', d: '+16 gold' })
+    expect(payload.log[1]).toMatchObject({ k: 'todo', n: 'Ticked off: Earn 50 gold adventuring.', d: '+16 Auro' })
     expect(payload.log[1]).not.toHaveProperty('c')
   })
 })

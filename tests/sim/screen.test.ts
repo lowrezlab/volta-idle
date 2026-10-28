@@ -454,7 +454,7 @@ describe('log lines (D44)', () => {
   it('shows potion acquisition beside the other changes in all four layouts', async () => {
     const vars = payload()
     for (const markup of Object.values(screenMarkup)) {
-      const html = await new Liquid({ timezoneOffset: 0 }).parseAndRender(markup, { ...vars, log: [{ n: 'Found a healing potion. Drank a potion.', s: 'Found a healing potion. Drank a potion.', k: 'loot', u: NOW / 1000, d: '+1\u00a0healing potion · +20\u00a0HP from potion · +3\u00a0bag slots · Pouch holds 6' }] })
+      const html = await new Liquid({ timezoneOffset: 0 }).parseAndRender(markup, { ...vars, log: [{ n: 'Found a healing potion. Drank a potion.', s: 'Found a healing potion. Drank a potion.', k: 'loot', u: NOW / 1000, d: '+1\u00a0draught · +20\u00a0HP from draught · +3\u00a0bag slots · Pouch holds 6' }] })
       expect(changeText(html)).toEqual(expect.arrayContaining(['potion:+1', 'potion:+20\u00a0HP', 'bag:+3', ':Pouch holds 6']))
     }
   })
@@ -488,7 +488,7 @@ describe('log lines (D44)', () => {
 
   it('puts the changes on the story line on the X in the full layout, in fixed XP, gold and HP columns', async () => {
     const vars = payload() as { log: Array<Record<string, unknown>> } & Record<string, unknown>
-    const html = await render({ ...vars, utc_offset: 7200, log: [{ ...vars.log[0], d: '+1\u00a0healing potion · +14\u00a0XP · −12\u00a0HP' }, { ...vars.log[0], d: '' }] })
+    const html = await render({ ...vars, utc_offset: 7200, log: [{ ...vars.log[0], d: '+1\u00a0draught · +14\u00a0XP · −12\u00a0HP' }, { ...vars.log[0], d: '' }] })
     const cells = (kind: string) => html.split(new RegExp(`data-chip-cell="${kind}"[^>]*>`)).slice(1).map((cell: string) => changeText(cell.split(/data-chip-cell|data-story-time/)[0]!).join(' '))
     // The first entry: XP and HP marks in their columns, gold empty, the potion just before them; landscape and portrait each draw it once.
     expect(cells('xp')).toEqual(['xp:+14', 'xp:+14'])
@@ -505,7 +505,7 @@ describe('log lines (D44)', () => {
 
   it('keeps marked changes on an older row\'s line in the X portrait ledger and puts changes in words under its story', async () => {
     const vars = payload() as { log: Array<Record<string, unknown>> } & Record<string, unknown>
-    const bought = { ...vars.log[0], n: 'Bought a [[Laptop Backpack]]. Bag holds 13.', d: '−100\u00a0gold · +3\u00a0bag slots · Pouch holds 6' }
+    const bought = { ...vars.log[0], n: 'Bought a [[Laptop Backpack]]. Bag holds 13.', d: '−100\u00a0Auro · +3\u00a0bag slots · Pouch holds 6' }
     const html = await render({ ...vars, utc_offset: 7200, log: [vars.log[0], bought] })
     const [landscape, portrait] = html.split('landscape:hidden')
     const row = portrait!.split('Bag holds 13.')[1]!.split('border--h-30')[0]!
@@ -530,7 +530,7 @@ describe('log lines (D44)', () => {
     expect(vars.log[0]!.d).toBe('')
     // Every signed change is tied to its unit, which names its mark, compact gold included.
     const raid = payload([{ at: NOW, kind: 'raid', summary: 'Raided a desk.', deltas: { xpEarned: 0, gold: 12_400, hp: 0, bagSlots: 3 } }]) as { log: Array<{ d: string }> }
-    expect(raid.log[0]!.d).toBe('+12k\u00a0gold · +3\u00a0bag slots')
+    expect(raid.log[0]!.d).toBe('+12k\u00a0Auro · +3\u00a0bag slots')
   })
 
   it('leaves the time out without an offset', async () => {
@@ -704,7 +704,7 @@ describe('HUD hearts and counters (D72)', () => {
     }
     // Both arrangements: the named counts under the hero on every device; the XP row ends at its count.
     for (const view of [landscape, portrait]) {
-      expect(view).toMatch(/<div class="flex[^"]*" data-counters="words">(?:<div[^>]*><img[^>]*><span class="label lg:title--small">(?:640 gold|1 potion|3\/30)<\/span><\/div>){3}<\/div>/)
+      expect(view).toMatch(/<div class="flex[^"]*" data-counters="words">(?:<div[^>]*><img[^>]*><span class="label lg:title--small">(?:640 Auro|1 draught|3\/30)<\/span><\/div>){3}<\/div>/)
       expect(view).toMatch(/data-xp-count="true">210\/656 XP<\/span><\/div>/)
       // The OG names the gear by the attack and defense marks.
       expect(view).toMatch(/data-gear-line="og">.*>Uncommon Cable Cutter<\/span><\/div>.*>No armor<\/span><\/div><\/div>/)
@@ -717,7 +717,7 @@ describe('HUD hearts and counters (D72)', () => {
       const stanced = await new Liquid({ timezoneOffset: 0 }).parseAndRender(markup, { ...vars, stance: 'bold', stance_name: 'Bold' })
       expect(stanced).toMatch(new RegExp(`data-stance="bold"[^>]*><img[^>]*src="${escape(hudMarkUri('stanceBold', 24, 24))}" alt=""><span class="label lg:title--small">Bold</span>`))
     }
-    expect(await render({ ...vars, potions: 2 })).toContain('>2 potions<')
+    expect(await render({ ...vars, potions: 2 })).toContain('>2 draughts<')
     expect(fullView).toMatch(/data-gear-line="true"><span class="title--small text--regular" data-clamp="0" data-clamp-lg="0">Weapon <span class="text--bold inline-block">Uncommon Cable Cutter<\/span> · Armor <span class="text--bold inline-block">None<\/span><\/span>/)
     // Narrow columns: the HP count leads the combat row, and coins and potions take their own row.
     const side = await new Liquid({ timezoneOffset: 0 }).parseAndRender(screenMarkup.markup_half_vertical, vars)
@@ -783,21 +783,21 @@ describe('to-do tasks and the goal on the X full landscape (D138)', () => {
     expect(html).toContain('<span class="text--bold inline-block">Cable Serpents</span>')
     expect(html).toMatch(/Done<\/span>/)
     expect(html).toMatch(/0\/1<\/span>/)
-    expect(html).toContain("Today's to-do")
+    expect(html).toContain("Today's orders")
     expect(html).toContain('data-fit-rows="true"')
-    expect(html).toMatch(/data-goal-line="x"[\s\S]*Reach level 7[\s\S]*5\/7 · 40 gold/)
+    expect(html).toMatch(/data-goal-line="x"[\s\S]*Reach level 7[\s\S]*5\/7 · 40 Auro/)
     expect(html).toMatch(/class="hidden lg:flex no-shrink flex--col flex--stretch-x gap--xsmall stretch-x" data-goal-line="x"/)
     const plain = await render(payload())
     expect(plain).not.toContain('data-todo-column')
     expect(plain).not.toContain('data-goal-line')
     // A one-step goal shows its gold without a count.
-    expect(await render(withTasks({ goal: { title: 'Beat an elite', value: 0, target: 1, gold: 40 } }))).toMatch(/Beat an elite<\/span>\s*<span class="title--small no-shrink">40 gold/)
+    expect(await render(withTasks({ goal: { title: 'Beat an elite', value: 0, target: 1, gold: 40 } }))).toMatch(/Beat an elite<\/span>\s*<span class="title--small no-shrink">40 Auro/)
   })
 
   it('inverts the goal row and points to the companion while a reward waits (D184)', async () => {
     const html = await render(withTasks({ goal: { title: 'Equip a find', value: 1, target: 1, gold: 90, claimable: true } }))
-    expect(html).toMatch(/data-goal-claim="x"[\s\S]*Goal reached! Claim your reward in the companion\.[\s\S]*\+90 gold/)
-    expect(html).toMatch(/data-goal-claim="portrait"[\s\S]*Goal reached! Claim your reward in the companion\.[\s\S]*\+90 gold/)
+    expect(html).toMatch(/data-goal-claim="x"[\s\S]*Goal reached! Claim your reward in the companion\.[\s\S]*\+90 Auro/)
+    expect(html).toMatch(/data-goal-claim="portrait"[\s\S]*Goal reached! Claim your reward in the companion\.[\s\S]*\+90 Auro/)
     expect(html).toMatch(/class="title label--inverted [^"]*" data-goal-claim="x"/)
     expect(html).not.toContain('Equip a find')
     expect(await render(withTasks())).not.toContain('data-goal-claim')

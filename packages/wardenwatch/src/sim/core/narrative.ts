@@ -1,3 +1,4 @@
+import { DAY_MS, VOLTA_EPOCH_MS } from './calendar'
 import { pickOne, type Rng } from './rng'
 
 export type NarrativeVars = Readonly<Record<string, string | number>>
@@ -81,7 +82,51 @@ export function composeSummary(primary: string, compact: string, consequences: r
   return [...stripMarks(compact)].slice(0, max - 1).join('') + '…'
 }
 
-export const rarityLabel = (rarity: string): string => rarity.charAt(0).toUpperCase() + rarity.slice(1)
+/**
+ * The word an item name carries for its rarity (GDD §2: Common, Fine, Starlit). Rarity ids stay as stored; only the
+ * label moved to Volta, so a name written before the move ("Rare Keyboard Mace") still parses by its old word.
+ */
+export const RARITY_NAMES: Readonly<Record<string, string>> = { common: 'Common', uncommon: 'Fine', rare: 'Starlit', epic: 'Epic', legendary: 'Legendary' }
+export const rarityLabel = (rarity: string): string => RARITY_NAMES[rarity] ?? rarity.charAt(0).toUpperCase() + rarity.slice(1)
+
+// ---------------------------------------------------------------- the eldritch line (GDD §8)
+
+export const TICK_MS = 15 * 60 * 1000
+export const TICKS_PER_DAY = DAY_MS / TICK_MS
+
+/**
+ * The one slot of a Volta day (0..95, a quarter hour each) on which an eldritch line may be told. Drawn from the day
+ * alone, with no state and no wall-clock read, so every hero's sky agrees and the same instant always answers the
+ * same; the day's slot wanders so the line never settles on one hour.
+ */
+export function eldritchSlot(day: number): number {
+  let x = Math.imul(day ^ 0x9e3779b9, 0x85ebca6b)
+  x ^= x >>> 13
+  x = Math.imul(x, 0xc2b2ae35)
+  x ^= x >>> 16
+  return (x >>> 0) % TICKS_PER_DAY
+}
+
+/** Whether the tick at this UTC instant is its Volta day's eldritch slot. */
+export function isEldritchTick(tickAt: number): boolean {
+  const since = tickAt - VOLTA_EPOCH_MS
+  const day = Math.floor(since / DAY_MS)
+  const slot = Math.floor((since - day * DAY_MS) / TICK_MS)
+  return slot === eldritchSlot(day)
+}
+
+/**
+ * The templates a tick may tell: on the day's eldritch slot the pool's eldritch lines, if it has any, so the line
+ * lands; on every other tick the pool without them, so the sky keeps its weight ("no more than one eldritch line a
+ * day", GDD §8). A pool with nothing else left keeps its lines rather than falling silent. The narrative stream draws
+ * from the result, so rewards and state never move with the words.
+ */
+export function eldritchPool(templates: readonly string[], eldritch: readonly string[] | undefined, allowed: boolean): readonly string[] {
+  if (eldritch === undefined || eldritch.length === 0) return templates
+  const marked = new Set(eldritch)
+  const kept = templates.filter((template) => marked.has(template) === allowed)
+  return kept.length > 0 ? kept : templates
+}
 
 /** "a [[Rare Mace]]", "an [[Uncommon Cable Cutter]]": the name in bold marks. */
 export const withArticle = (name: string) => `${/^[AEIOU]/i.test(name) ? 'an' : 'a'} ${bold(name)}`

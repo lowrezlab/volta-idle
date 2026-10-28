@@ -16,7 +16,7 @@ const SYSTEM_GLYPHS: ReadonlyArray<[RegExp, GlyphName]> = [
   [/^(?:Equipped|Unequipped)\b/, 'sword'],
   [/^(?:Resumed|Adventures resume)\b/, 'play'],
   [/^Paused\b/, 'pause'],
-  [/^Your shift begins\b/, 'door'],
+  [/^(Your shift begins|Sworn in)\b/, 'door'],
   [/^Set off\b/, 'travel'],
   [/^Drank\b/, 'potion'],
   // "Moved" and "Put" are legacy desk drawer lines (D111, removed in D123); they keep the bag glyph with claims.
@@ -30,7 +30,7 @@ const glyphFor = (entry: { kind: string; summary: string }): GlyphName =>
   entry.kind === 'system' ? (SYSTEM_GLYPHS.find(([pattern]) => pattern.test(entry.summary))?.[1] ?? 'system') : (entry.kind as GlyphName)
 
 /** Change chips take their stat's colour; losses keep the stat colour too, the sign carries direction. */
-export const changeTone = (part: string) => (/\bXP\b/.test(part) ? 'text-xp-ink' : /\b(?:HP|PV|LP)\b/.test(part) ? 'text-hp-ink' : /\b(?:gold|or|Gold)\b/.test(part) ? 'text-gold-ink' : /potion|trank|tränke/i.test(part) ? 'text-rare-ink' : 'text-muted')
+export const changeTone = (part: string) => (/\bXP\b/.test(part) ? 'text-xp-ink' : /\b(?:HP|PV|LP)\b/.test(part) ? 'text-hp-ink' : /\b(?:Auro|gold|or|Gold)\b/.test(part) ? 'text-gold-ink' : /draught|potion|poción|pócima|pozione|poção|breuvage|mikstur|drankje|trank|tränke/i.test(part) ? 'text-rare-ink' : 'text-muted')
 
 /** `story` tells it in the reader's language (D169); the page passes the hero's gender with it for French. */
 export function LogStory({ entry, story: given }: { entry: { at: number; summary: string; kind: string; deltas: LogDeltas }; story?: PresentationOptions }) {

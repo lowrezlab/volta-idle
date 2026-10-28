@@ -157,8 +157,9 @@ describe('potions in the simulator (D131)', () => {
         found.add(outcome.templateId!)
         const word = outcome.templateId!.replace('_potion', ' potion')
         expect(result.event!.summary).toContain(word)
+        const chip = { minor_potion: 'small draught', healing_potion: 'draught', major_potion: 'strong draught' }[outcome.templateId!]
         const deltas = displayLogDeltas({ deltas: result.event!.deltas, detail: result.event!.detail })
-        expect(logPresentation({ summary: result.event!.summary, kind: result.event!.kind, deltas }).changes).toContain(`+1 ${word}`)
+        expect(logPresentation({ summary: result.event!.summary, kind: result.event!.kind, deltas }).changes).toContain(`+1 ${chip}`)
       }
       if (result.metrics.potionsUsed) {
         // The row the drink took from names the strength; a long story may drop the "Drank a …" suffix.

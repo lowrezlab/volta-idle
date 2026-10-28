@@ -66,7 +66,7 @@ export const catalogs = {
 export type CatalogId = keyof typeof catalogs
 
 /**
- * New worlds start here; a live world switches with `world.setActiveContentVersion` between runs. v28 (Wardenwatch, the
- * Volta re-theme) waits here until its names have art, dictionaries and public floor facts; switching is this one line.
+ * New worlds start here; a live world switches with `world.setActiveContentVersion` between runs. v28 is Wardenwatch,
+ * the Volta re-theme: v27's numbers under Volta's names, with the dictionaries and public floor facts to match.
  */
-export const ACTIVE_CONTENT: CatalogId = 'v27'
+export const ACTIVE_CONTENT: CatalogId = 'v28'

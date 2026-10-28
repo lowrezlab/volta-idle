@@ -10,17 +10,17 @@ describe('the TRMNL screen in the owner’s language (D169)', () => {
   it('stays word for word in English without a locale', () => {
     const plain = buildPayload(states.normal!)
     expect(buildPayload({ ...states.normal!, locale: 'en' })).toEqual(plain)
-    expect(plain.status_label).toBe('Exploring the [[Server Room]]')
+    expect(plain.status_label).toBe('Exploring the [[Moonbight Fjords]]')
     expect(plain.labels).toEqual(DEVICE_WORDS.en.labels)
   })
 
   it('tells the status, the stories and the labels in French and German', () => {
     const french = buildPayload({ ...states.normal!, locale: 'fr' })
-    expect(french.status_label).toBe('Explore la [[Salle des serveurs]]')
+    expect(french.status_label).toBe('Explore les [[Fjords de Moonbight]]')
     expect(french.labels.bag_full).toBe('Sac plein')
     expect(french.log[0]!.n).not.toBe(buildPayload(states.normal!).log[0]!.n)
     const german = buildPayload({ ...states.travelling!, locale: 'de' })
-    expect(german.status_label).toBe('Unterwegs in die [[Kantinentiefen]]')
+    expect(german.status_label).toBe('Unterwegs in die [[Schneemoore von Krine]]')
     expect(buildPayload({ ...states.dead!, locale: 'de' }).status_label).toMatch(/^K\. o\. Zurück in etwa/)
   })
 

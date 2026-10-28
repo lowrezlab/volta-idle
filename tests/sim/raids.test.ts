@@ -204,8 +204,8 @@ describe('desk raids on the device (D110 R4)', () => {
 
   it('shortens five-figure gold on the device only, so the ledger column holds it', () => {
     const entry = { summary: '[[Quill]] made off with the petty cash.', kind: 'raid', deltas: { xpEarned: 0, gold: -12_480, hp: -30 } }
-    expect(logPresentation(entry, { compactGold: true }).changes).toEqual(['−12k gold', '−30 HP'])
-    expect(logPresentation(entry).changes).toEqual(['−12480 gold', '−30 HP'])
-    expect(logPresentation({ ...entry, deltas: { ...entry.deltas, gold: -1240 } }, { compactGold: true }).changes[0]).toBe('−1240 gold')
+    expect(logPresentation(entry, { compactGold: true }).changes).toEqual(['−12k Auro', '−30 HP'])
+    expect(logPresentation(entry).changes).toEqual(['−12480 Auro', '−30 HP'])
+    expect(logPresentation({ ...entry, deltas: { ...entry.deltas, gold: -1240 } }, { compactGold: true }).changes[0]).toBe('−1240 Auro')
   })
 })

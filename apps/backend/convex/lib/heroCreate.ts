@@ -55,7 +55,7 @@ export async function createHero(ctx: MutationCtx, user: Doc<'users'>, args: { n
     sequence: 1,
     at: args.now,
     kind: 'system',
-    summary: 'Your shift begins in the [[Office Cubicles]].',
+    summary: 'Sworn in at [[Castellum Frigo]]. The survey begins.',
     detail: { v: 1, operation: 'hero_created' },
     deltas: { xpEarned: 0, gold: 0, hp: 0 },
   })

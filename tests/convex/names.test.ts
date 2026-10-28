@@ -44,7 +44,7 @@ describe('name tags and public names (D142)', () => {
     expect(await ana.mutation(api.inventory.buyNameTag, { operationId: opId(), name: '  Grimble  ' })).toMatchObject({ changed: true, gold: -200 })
     expect(await heroDoc(t, heroId)).toMatchObject({ name: 'Grimble', gold: 250 })
     const log = await t.run(async (ctx) => await ctx.db.query('tickLogs').withIndex('by_heroId_and_at_and_sequence', (q) => q.eq('heroId', heroId)).order('desc').first())
-    expect(log).toMatchObject({ summary: 'Pinned on a new name tag: "Hi, my name is [[Grimble]]."', deltas: { gold: -200 }, detail: { operation: 'name_tag' } })
+    expect(log).toMatchObject({ summary: 'Signed the roll under a new name: [[Grimble]].', deltas: { gold: -200 }, detail: { operation: 'name_tag' } })
     // The public name is a different name and stays as it was.
     expect(await userOf(t, heroId)).toMatchObject({ publicAlias: 'Ana', publicNameVersion: 1 })
     expect((await ana.query(api.inventory.mine, {})).nameTag).toEqual({ price: 200, inStockAt: SLOT + DAY })

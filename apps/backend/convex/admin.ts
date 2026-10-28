@@ -274,7 +274,7 @@ export const compensateHero = internalMutation({
     if (hero === null) throw appError('INVALID_STATE', 'Hero not found.')
     const counters = withCounterDefaults(hero.counters)
     await ctx.db.patch(heroId, { gold: hero.gold + gold, counters: { ...counters, goldEarned: counters.goldEarned + gold } })
-    await commandLog(ctx, (await ctx.db.get(heroId))!, 'compensate', `Thanks for the heads-up about the pause. The office chipped in [[${gold} gold]].`, { xpEarned: 0, gold, hp: 0 })
+    await commandLog(ctx, (await ctx.db.get(heroId))!, 'compensate', `Thanks for the heads-up about the pause. The garrison chipped in [[${gold} Auro]].`, { xpEarned: 0, gold, hp: 0 })
     await audit(ctx, 'cli', 'compensate_hero', heroId, reasonCode, `gold +${gold}`)
     return { gold: hero.gold + gold }
   },

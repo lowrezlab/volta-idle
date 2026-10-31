@@ -12,14 +12,14 @@ export interface LegalHead {
 
 /** The privacy page, by language. */
 export const PRIVACY_HEAD: Readonly<Record<Locale, LegalHead>> = {
-  en: { title: 'Privacy', description: 'What TRMNL Games stores, what is public on leaderboards and TRMNL screens, and how to delete your account.' },
-  fr: { title: 'Confidentialité', description: 'Ce que TRMNL Games conserve, ce qui est public dans les classements et sur les écrans TRMNL, et comment supprimer votre compte.' },
-  de: { title: 'Datenschutz', description: 'Was TRMNL Games speichert, was in Ranglisten und auf TRMNL-Bildschirmen öffentlich ist und wie du dein Konto löschst.' },
-  es: { title: 'Privacidad', description: 'Qué guarda TRMNL Games, qué es público en las clasificaciones y en las pantallas TRMNL, y cómo borrar tu cuenta.' },
-  it: { title: 'Privacy', description: 'Cosa conserva TRMNL Games, cosa è pubblico nelle classifiche e sugli schermi TRMNL, e come eliminare il tuo account.' },
-  pt: { title: 'Privacidade', description: 'O que o TRMNL Games guarda, o que é público nos rankings e nas telas TRMNL, e como excluir sua conta.' },
-  pl: { title: 'Prywatność', description: 'Co przechowuje TRMNL Games, co jest publiczne w rankingach i na ekranach TRMNL i jak usunąć konto.' },
-  nl: { title: 'Privacy', description: 'Wat TRMNL Games bewaart, wat openbaar is in ranglijsten en op TRMNL-schermen, en hoe je je account verwijdert.' },
+  en: { title: 'Privacy', description: 'What Wardenwatch stores, what is public on leaderboards and TRMNL screens, and how to delete your account.' },
+  fr: { title: 'Confidentialité', description: 'Ce que Wardenwatch conserve, ce qui est public dans les classements et sur les écrans TRMNL, et comment supprimer votre compte.' },
+  de: { title: 'Datenschutz', description: 'Was Wardenwatch speichert, was in Ranglisten und auf TRMNL-Bildschirmen öffentlich ist und wie du dein Konto löschst.' },
+  es: { title: 'Privacidad', description: 'Qué guarda Wardenwatch, qué es público en las clasificaciones y en las pantallas TRMNL, y cómo borrar tu cuenta.' },
+  it: { title: 'Privacy', description: 'Cosa conserva Wardenwatch, cosa è pubblico nelle classifiche e sugli schermi TRMNL, e come eliminare il tuo account.' },
+  pt: { title: 'Privacidade', description: 'O que o Wardenwatch guarda, o que é público nos rankings e nas telas TRMNL, e como excluir sua conta.' },
+  pl: { title: 'Prywatność', description: 'Co przechowuje Wardenwatch, co jest publiczne w rankingach i na ekranach TRMNL i jak usunąć konto.' },
+  nl: { title: 'Privacy', description: 'Wat Wardenwatch bewaart, wat openbaar is in ranglijsten en op TRMNL-schermen, en hoe je je account verwijdert.' },
 }
 
 /** The terms page, by language. */

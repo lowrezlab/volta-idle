@@ -10,7 +10,7 @@ export const termsDe: LegalPage = {
   Body: () => (
     <>
       <p>
-        Diese Bedingungen gelten für deine Nutzung von TRMNL Games und seinen Spielen, betrieben von Barry Michael Doyle. Mit dem Anlegen eines Kontos oder dem Verbinden einer TRMNL-Installation
+        Diese Bedingungen gelten für deine Nutzung von Wardenwatch, betrieben von der Person, die Wardenwatch betreut. Mit dem Anlegen eines Kontos oder dem Verbinden einer TRMNL-Installation
         stimmst du ihnen zu. Sie gelten neben der <Link to="/privacy">Datenschutzerklärung</Link>.
       </p>
 
@@ -39,7 +39,7 @@ export const termsDe: LegalPage = {
       <p>Gold, Ausrüstung und Tränke gibt es nur im Spiel. Sie haben keinen Geldwert und können außerhalb des Spiels nicht verkauft, getauscht oder übertragen werden.</p>
 
       <h2>TRMNL</h2>
-      <p>TRMNL Games und Wardenwatch sind unabhängige Projekte. Sie werden nicht von TRMNL erstellt, unterstützt oder befürwortet. Für dein TRMNL-Konto und dein Gerät gelten die Bedingungen von TRMNL.</p>
+      <p>Wardenwatch ist ein unabhängiges Projekt. Es wird nicht von TRMNL erstellt, unterstützt oder befürwortet. Für dein TRMNL-Konto und dein Gerät gelten die Bedingungen von TRMNL.</p>
 
       <h2>Eigentum</h2>
       <p>
@@ -49,7 +49,7 @@ export const termsDe: LegalPage = {
 
       <h2>Keine Gewährleistung</h2>
       <p>
-        TRMNL Games wird ohne jegliche Gewährleistung bereitgestellt, so wie es ist. Soweit gesetzlich zulässig, haften wir nicht für verlorenen Fortschritt, Dienstunterbrechungen,
+        Wardenwatch wird ohne jegliche Gewährleistung bereitgestellt, so wie es ist. Soweit gesetzlich zulässig, haften wir nicht für verlorenen Fortschritt, Dienstunterbrechungen,
         das, was auf deinem Gerät erscheint, oder mittelbare Schäden. Nichts in diesen Bedingungen schränkt Rechte ein, die dir nach Verbraucherrecht zwingend zustehen.
       </p>
 

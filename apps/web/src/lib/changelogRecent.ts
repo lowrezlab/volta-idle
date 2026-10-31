@@ -32,6 +32,22 @@ export interface ChangelogEntry {
 export const changeIn = (change: Change, locale: Locale): { title: string; body: string } => (locale === 'en' ? change : change[locale])
 export const RECENT_CHANGES: ReadonlyArray<ChangelogEntry> = [
   {
+    date: '2026-10-31',
+    changes: [
+      {
+        title: 'Wardenwatch has its own home at wardens.watch',
+        body: 'The companion, your hero page, the install and manage links and the address on your TRMNL screen now all live at wardens.watch. Your account, hero and connections are unchanged, and emails from the game now come from wardens.watch too.',
+        fr: { title: 'Wardenwatch a sa propre adresse : wardens.watch', body: 'Le compagnon, votre page de héros, les liens d’installation et de gestion et l’adresse affichée sur votre écran TRMNL sont désormais tous sur wardens.watch. Votre compte, votre héros et vos connexions ne changent pas, et les e-mails du jeu viennent eux aussi de wardens.watch.' },
+        de: { title: 'Wardenwatch hat ein eigenes Zuhause: wardens.watch', body: 'Die Begleit-App, deine Heldenseite, die Installations- und Verwaltungslinks und die Adresse auf deinem TRMNL-Bildschirm liegen jetzt alle auf wardens.watch. Dein Konto, dein Held und deine Verbindungen bleiben unverändert, und E-Mails aus dem Spiel kommen jetzt ebenfalls von wardens.watch.' },
+        es: { title: 'Wardenwatch tiene casa propia: wardens.watch', body: 'La app complementaria, tu página de héroe, los enlaces de instalación y gestión y la dirección de tu pantalla TRMNL ahora están todos en wardens.watch. Tu cuenta, tu héroe y tus conexiones no cambian, y los correos del juego también llegan ahora desde wardens.watch.' },
+        it: { title: 'Wardenwatch ha una casa tutta sua: wardens.watch', body: 'L’app di supporto, la tua pagina dell’eroe, i link di installazione e gestione e l’indirizzo sullo schermo del tuo TRMNL ora stanno tutti su wardens.watch. Il tuo account, il tuo eroe e i tuoi collegamenti non cambiano, e anche le e-mail del gioco ora arrivano da wardens.watch.' },
+        pt: { title: 'Wardenwatch tem casa própria: wardens.watch', body: 'O app complementar, sua página de herói, os links de instalação e gerenciamento e o endereço na sua tela TRMNL agora ficam todos em wardens.watch. Sua conta, seu herói e suas conexões não mudam, e os e-mails do jogo agora também vêm de wardens.watch.' },
+        pl: { title: 'Wardenwatch ma własny dom: wardens.watch', body: 'Aplikacja towarzysząca, twoja strona bohatera, linki instalacji i zarządzania oraz adres na ekranie twojego TRMNL są teraz wszystkie na wardens.watch. Twoje konto, bohater i połączenia pozostają bez zmian, a maile z gry też przychodzą teraz z wardens.watch.' },
+        nl: { title: 'Wardenwatch heeft een eigen thuis: wardens.watch', body: 'De begeleidende app, je heldenpagina, de installatie- en beheerlinks en het adres op je TRMNL-scherm staan nu allemaal op wardens.watch. Je account, held en koppelingen veranderen niet, en e-mails van het spel komen nu ook van wardens.watch.' },
+      },
+    ],
+  },
+  {
     date: '2026-10-27',
     changes: [
       {

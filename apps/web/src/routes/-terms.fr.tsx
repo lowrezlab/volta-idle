@@ -11,7 +11,7 @@ export const termsFr: LegalPage = {
   Body: () => (
     <>
       <p>
-        Ces conditions couvrent votre utilisation de TRMNL Games et de ses jeux, gérés par Barry Michael Doyle. En créant un compte ou en reliant une installation TRMNL, vous les
+        Ces conditions couvrent votre utilisation de Wardenwatch, géré par la personne qui maintient Wardenwatch. En créant un compte ou en reliant une installation TRMNL, vous les
         acceptez. Elles complètent la <Link to="/privacy">politique de confidentialité</Link>.
       </p>
 
@@ -40,7 +40,7 @@ export const termsFr: LegalPage = {
       <p>L’or, l’équipement et les potions n’existent que dans le jeu. Ils n’ont aucune valeur monétaire et ne peuvent être ni vendus, ni échangés, ni transférés hors du jeu.</p>
 
       <h2>TRMNL</h2>
-      <p>TRMNL Games et Wardenwatch sont des projets indépendants. Ils ne sont ni créés, ni approuvés, ni soutenus par TRMNL. Votre compte et votre appareil TRMNL relèvent des conditions de TRMNL.</p>
+      <p>Wardenwatch est un projet indépendant. Il n’est ni créé, ni approuvé, ni soutenu par TRMNL. Votre compte et votre appareil TRMNL relèvent des conditions de TRMNL.</p>
 
       <h2>Propriété</h2>
       <p>
@@ -50,7 +50,7 @@ export const termsFr: LegalPage = {
 
       <h2>Absence de garantie</h2>
       <p>
-        TRMNL Games est fourni en l’état, sans garantie d’aucune sorte. Dans la mesure permise par la loi, nous ne sommes pas responsables de la perte de progression, des interruptions de service,
+        Wardenwatch est fourni en l’état, sans garantie d’aucune sorte. Dans la mesure permise par la loi, nous ne sommes pas responsables de la perte de progression, des interruptions de service,
         de ce qui s’affiche sur votre appareil ni d’aucune perte indirecte. Rien dans ces conditions ne supprime les droits que vous accorde le droit de la consommation et qui ne peuvent pas être exclus.
       </p>
 

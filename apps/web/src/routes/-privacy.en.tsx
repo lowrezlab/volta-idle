@@ -9,7 +9,7 @@ export const privacyEn: LegalPage = {
   Body: () => (
     <>
       <p>
-        TRMNL Games is a collection of games run by Barry Michael Doyle, an individual developer. This page describes what the service stores, who handles it and
+        Wardenwatch is run by the Wardenwatch maintainer, an individual developer. This page describes what the service stores, who handles it and
         how to remove it, in plain terms. Questions go to <a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a>.
       </p>
 
@@ -39,7 +39,7 @@ export const privacyEn: LegalPage = {
         </li>
         <li>The time zone offset your TRMNL sends with each screen (for example UTC+2), so Wardenwatch's morning muster follows your day. We keep only the latest one.</li>
         <li>The language setting your TRMNL sends with each screen (for example fr-FR), so we can see which languages are worth translating the games into, and so your screen can use your language. We keep only the latest one.</li>
-        <li>If you choose a language for TRMNL Games, that choice, so your TRMNL screens and alerts use it too.</li>
+        <li>If you choose a language for Wardenwatch, that choice, so your TRMNL screens and alerts use it too.</li>
         <li>Short-lived operational records such as rate-limit counters and duplicate-request receipts.</li>
         <li>When you request account deletion: your verified primary email, a hash of the confirmation link, and delivery status. The link expires after 30 minutes; expired requests are removed by daily cleanup.</li>
         <li>The Wardenwatch launch list held email addresses for one email when Wardenwatch reached the TRMNL marketplace. That email went out on 13 October 2026, every address was deleted, and the list is closed.</li>
@@ -54,7 +54,7 @@ export const privacyEn: LegalPage = {
       <h2>Optional analytics and support</h2>
       <p>If you allow analytics, PostHog records the pages you visit, setup steps, game-action failures and browser errors. When you sign in, these records link to your Clerk account ID, email address, public name and hero name so we can investigate support requests and fix problems. Browser errors also go to Sentry, without your account, email or IP address.</p>
       <p>PostHog also records masked sessions so we can see where a flow gets stuck. Text and form inputs are masked, sign-in and account details are blocked, and we do not record network bodies, headers or console output. Installation codes, access tokens, management JWTs and URL query strings are excluded.</p>
-      <p>You can decline and keep playing. Use Analytics preferences in the site footer to change your choice. Turning analytics off stops new collection in that browser; it does not erase earlier records. Contact us to remove those records, or delete your TRMNL Games account to request removal of its linked PostHog profile, events and recordings.</p>
+      <p>You can decline and keep playing. Use Analytics preferences in the site footer to change your choice. Turning analytics off stops new collection in that browser; it does not erase earlier records. Contact us to remove those records, or delete your Wardenwatch account to request removal of its linked PostHog profile, events and recordings.</p>
 
       <h2>Cookies</h2>
       <p>
@@ -100,7 +100,7 @@ export const privacyEn: LegalPage = {
       <h2>Deleting your account</h2>
       <p>
         Go to <Link to="/account">Account</Link> and request a deletion link. We email your verified primary address; the link expires after 30 minutes. Sign in with the same account and type DELETE on the confirmation page. Until you confirm, your account stays active. After confirmation, your account stops working straight away, your public name is hidden from
-        leaderboards, and your hero, items, history, TRMNL connections and TRMNL Games sign-in are then removed. Leaderboard snapshots that copied your name
+        leaderboards, and your hero, items, history, TRMNL connections and Wardenwatch sign-in are then removed. Leaderboard snapshots that copied your name
         are replaced within about two hours. If you can't sign in, email us and we'll do it for you.
       </p>
       <p>
@@ -119,7 +119,7 @@ export const privacyEn: LegalPage = {
       </p>
 
       <h2>Children</h2>
-      <p>TRMNL Games is not intended for children under 13, and we don't knowingly hold their data. If you believe a child has an account, email us and we'll delete it.</p>
+      <p>Wardenwatch is not intended for children under 13, and we don't knowingly hold their data. If you believe a child has an account, email us and we'll delete it.</p>
 
       <h2>Changes</h2>
       <p>When this policy changes we update this page and the date at the top.</p>

@@ -23,7 +23,7 @@ export function PlatformHeader() {
       {/* One row at every width: phones get a slimmer bar, and below 360px the wordmark is read but not shown. */}
       {/* Positioned so the game switcher's menu hangs from this row's right edge, under the bar, whatever the button's width. */}
       <div className={`relative flex items-center justify-between gap-3 py-2 sm:gap-4 sm:py-4 ${SITE_FRAME}`}>
-        <Link to="/" className="flex min-h-11 min-w-0 items-center gap-2 font-display text-lg font-semibold"><img src="/favicon.svg" alt="" width={24} height={24} className="shrink-0 [image-rendering:pixelated]" /><span className={`truncate ${inGame ? 'max-sm:sr-only' : 'max-[359px]:sr-only'}`}>TRMNL Games</span></Link>
+        <Link to="/" className="flex min-h-11 min-w-0 items-center gap-2 font-display text-lg font-semibold"><img src="/favicon.svg" alt="" width={24} height={24} className="shrink-0 [image-rendering:pixelated]" /><span className={`truncate ${inGame ? 'max-sm:sr-only' : 'max-[359px]:sr-only'}`}>Wardenwatch</span></Link>
         <nav aria-label={t.platformNav} className="flex shrink-0 items-center gap-4 text-sm">
           <Show when="signed-out">
             <Link to="/help/wardenwatch" className={NAV_LINK} activeProps={{ 'aria-current': 'page', className: 'underline' }}>{t.help}</Link>

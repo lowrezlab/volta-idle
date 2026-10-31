@@ -10,7 +10,7 @@ export const privacyEs: LegalPage = {
   Body: () => (
     <>
       <p>
-        TRMNL Games es una colección de juegos gestionada por Barry Michael Doyle, un desarrollador independiente. Esta página explica con claridad qué guarda el servicio, quién lo trata y
+        Wardenwatch está gestionado por quien mantiene Wardenwatch, un desarrollador independiente. Esta página explica con claridad qué guarda el servicio, quién lo trata y
         cómo eliminarlo. Las preguntas, a <a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a>.
       </p>
 
@@ -40,7 +40,7 @@ export const privacyEs: LegalPage = {
         </li>
         <li>El desfase horario que tu TRMNL envía con cada pantalla (por ejemplo UTC+2), para que la revista de la mañana de Wardenwatch siga tu día. Solo guardamos el último.</li>
         <li>El ajuste de idioma que tu TRMNL envía con cada pantalla (por ejemplo es-ES), para ver a qué idiomas merece la pena traducir los juegos y para que tu pantalla pueda usar tu idioma. Solo guardamos el último.</li>
-        <li>Si eliges un idioma para TRMNL Games, esa elección, para que tus pantallas TRMNL y tus alertas también lo usen.</li>
+        <li>Si eliges un idioma para Wardenwatch, esa elección, para que tus pantallas TRMNL y tus alertas también lo usen.</li>
         <li>Registros operativos de corta duración, como contadores de límite de uso y recibos de solicitudes duplicadas.</li>
         <li>Cuando pides borrar tu cuenta: tu correo principal verificado, un hash del enlace de confirmación y el estado de entrega. El enlace caduca a los 30 minutos; las solicitudes caducadas se eliminan en la limpieza diaria.</li>
         <li>La lista de lanzamiento de Wardenwatch guardaba direcciones de correo para un único correo cuando Wardenwatch llegara a la tienda de TRMNL. Ese correo se envió el 13 de octubre de 2026, todas las direcciones se borraron y la lista está cerrada.</li>
@@ -55,7 +55,7 @@ export const privacyEs: LegalPage = {
       <h2>Analítica y soporte opcionales</h2>
       <p>Si permites la analítica, PostHog registra las páginas que visitas, los pasos de instalación, los fallos de acciones del juego y los errores del navegador. Cuando inicias sesión, esos registros se vinculan con tu ID de cuenta de Clerk, tu correo, tu nombre público y el nombre de tu héroe, para poder investigar solicitudes de soporte y arreglar problemas. Los errores del navegador también van a Sentry, sin tu cuenta, tu correo ni tu dirección IP.</p>
       <p>PostHog también graba sesiones enmascaradas para que veamos dónde se atasca un proceso. Los textos y los campos de formulario se enmascaran, los datos de inicio de sesión y de cuenta se bloquean, y no grabamos cuerpos ni cabeceras de red ni la salida de la consola. Se excluyen los códigos de instalación, los tokens de acceso, los JWT de gestión y las cadenas de consulta de las URL.</p>
-      <p>Puedes rechazarla y seguir jugando. Usa Preferencias de analítica en el pie del sitio para cambiar tu elección. Desactivar la analítica detiene la recogida nueva en ese navegador; no borra los registros anteriores. Contáctanos para eliminarlos, o borra tu cuenta de TRMNL Games para pedir que se elimine su perfil de PostHog vinculado, sus eventos y sus grabaciones.</p>
+      <p>Puedes rechazarla y seguir jugando. Usa Preferencias de analítica en el pie del sitio para cambiar tu elección. Desactivar la analítica detiene la recogida nueva en ese navegador; no borra los registros anteriores. Contáctanos para eliminarlos, o borra tu cuenta de Wardenwatch para pedir que se elimine su perfil de PostHog vinculado, sus eventos y sus grabaciones.</p>
 
       <h2>Cookies</h2>
       <p>
@@ -101,7 +101,7 @@ export const privacyEs: LegalPage = {
       <h2>Borrar tu cuenta</h2>
       <p>
         Ve a <Link to="/account">Cuenta</Link> y pide un enlace de borrado. Lo enviamos a tu dirección principal verificada; el enlace caduca a los 30 minutos. Inicia sesión con la misma cuenta y escribe DELETE en la página de confirmación. Hasta que confirmes, tu cuenta sigue activa. Tras confirmar, tu cuenta deja de funcionar al momento, tu nombre público se oculta de
-        las clasificaciones, y después se eliminan tu héroe, tus objetos, tu historial, tus conexiones con TRMNL y tu inicio de sesión de TRMNL Games. Las instantáneas de las clasificaciones que copiaron tu nombre
+        las clasificaciones, y después se eliminan tu héroe, tus objetos, tu historial, tus conexiones con TRMNL y tu inicio de sesión de Wardenwatch. Las instantáneas de las clasificaciones que copiaron tu nombre
         se sustituyen en unas dos horas. Si no puedes iniciar sesión, escríbenos y lo hacemos por ti.
       </p>
       <p>
@@ -120,7 +120,7 @@ export const privacyEs: LegalPage = {
       </p>
 
       <h2>Menores</h2>
-      <p>TRMNL Games no está pensado para menores de 13 años, y no guardamos sus datos a sabiendas. Si crees que un menor tiene una cuenta, escríbenos y la borraremos.</p>
+      <p>Wardenwatch no está pensado para menores de 13 años, y no guardamos sus datos a sabiendas. Si crees que un menor tiene una cuenta, escríbenos y la borraremos.</p>
 
       <h2>Cambios</h2>
       <p>Cuando esta política cambia, actualizamos esta página y la fecha de arriba.</p>

@@ -11,7 +11,7 @@ export const termsNl: LegalPage = {
   Body: () => (
     <>
       <p>
-        Deze voorwaarden gelden voor je gebruik van TRMNL Games en de spellen ervan, beheerd door Barry Michael Doyle. Door een account aan te maken of een TRMNL-installatie te koppelen ga je
+        Deze voorwaarden gelden voor je gebruik van Wardenwatch, beheerd door wie Wardenwatch onderhoudt. Door een account aan te maken of een TRMNL-installatie te koppelen ga je
         ermee akkoord. Ze gelden naast het <Link to="/privacy">privacybeleid</Link>.
       </p>
 
@@ -52,7 +52,7 @@ export const termsNl: LegalPage = {
 
       <h2>TRMNL</h2>
       <p>
-        TRMNL Games en Wardenwatch zijn onafhankelijke projecten. Ze worden niet gemaakt, onderschreven of ondersteund door TRMNL. Voor je TRMNL-account en -apparaat gelden de eigen voorwaarden van TRMNL.
+        Wardenwatch is een onafhankelijk project. Het wordt niet gemaakt, onderschreven of ondersteund door TRMNL. Voor je TRMNL-account en -apparaat gelden de eigen voorwaarden van TRMNL.
       </p>
 
       <h2>Eigendom</h2>
@@ -64,7 +64,7 @@ export const termsNl: LegalPage = {
 
       <h2>Geen garantie</h2>
       <p>
-        TRMNL Games wordt geleverd zoals het is, zonder enige garantie. Voor zover de wet het toestaat, zijn we niet aansprakelijk voor verloren voortgang, onderbrekingen van de dienst,
+        Wardenwatch wordt geleverd zoals het is, zonder enige garantie. Voor zover de wet het toestaat, zijn we niet aansprakelijk voor verloren voortgang, onderbrekingen van de dienst,
         wat er op je apparaat verschijnt of indirecte schade. Niets in deze voorwaarden neemt rechten weg die je als consument hebt en die niet kunnen worden uitgesloten.
       </p>
 

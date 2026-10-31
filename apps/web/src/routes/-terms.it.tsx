@@ -11,7 +11,7 @@ export const termsIt: LegalPage = {
   Body: () => (
     <>
       <p>
-        Questi termini riguardano il tuo uso di TRMNL Games e dei suoi giochi, gestiti da Barry Michael Doyle. Creando un account o collegando un’installazione TRMNL li accetti.
+        Questi termini riguardano il tuo uso di Wardenwatch, gestito da chi mantiene Wardenwatch. Creando un account o collegando un’installazione TRMNL li accetti.
         Valgono insieme all’<Link to="/privacy">informativa sulla privacy</Link>.
       </p>
 
@@ -52,7 +52,7 @@ export const termsIt: LegalPage = {
 
       <h2>TRMNL</h2>
       <p>
-        TRMNL Games e Wardenwatch sono progetti indipendenti. Non sono realizzati, approvati né supportati da TRMNL. Il tuo account e il tuo dispositivo TRMNL sono regolati dai termini di TRMNL.
+        Wardenwatch è un progetto indipendente. Non è realizzato, approvato né supportato da TRMNL. Il tuo account e il tuo dispositivo TRMNL sono regolati dai termini di TRMNL.
       </p>
 
       <h2>Proprietà</h2>
@@ -64,7 +64,7 @@ export const termsIt: LegalPage = {
 
       <h2>Nessuna garanzia</h2>
       <p>
-        TRMNL Games è fornito così com’è, senza garanzie di alcun tipo. Nei limiti consentiti dalla legge, non rispondiamo di progressi persi, interruzioni del servizio,
+        Wardenwatch è fornito così com’è, senza garanzie di alcun tipo. Nei limiti consentiti dalla legge, non rispondiamo di progressi persi, interruzioni del servizio,
         di ciò che compare sul tuo dispositivo o di qualsiasi danno indiretto. Nulla in questi termini toglie i diritti che hai come consumatore e che non possono essere esclusi.
       </p>
 

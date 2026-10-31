@@ -139,7 +139,7 @@ export const send = internalAction({
         const response = await fetch(`https://api.clerk.com/v1/users/${encodeURIComponent(subject)}`, { headers: { Authorization: `Bearer ${clerk}` }, signal: AbortSignal.timeout(10_000) })
         const email = response.ok ? verifiedPrimaryEmail(await response.json()) : null
         if (email) {
-          const origin = new URL(process.env.COMPANION_ORIGIN ?? 'https://trmnlgames.com').origin
+          const origin = new URL(process.env.COMPANION_ORIGIN ?? 'https://wardens.watch').origin
           const stopLink = new URL('/wardenwatch/unsubscribe', origin)
           stopLink.searchParams.set('u', userId)
           stopLink.searchParams.set('t', stopToken(stop, userId))
@@ -148,7 +148,7 @@ export const send = internalAction({
             method: 'POST',
             signal: AbortSignal.timeout(10_000),
             headers: { Authorization: `Bearer ${key}`, 'Content-Type': 'application/json', 'Idempotency-Key': `hero-reminder/${userId}${test ? `/test/${Date.now()}` : ''}` },
-            body: JSON.stringify({ from: process.env.REMINDER_FROM ?? 'Wardenwatch <alerts@wardenwatch.example>', to: [email.address], ...message, headers: { 'List-Unsubscribe': `<${stopLink.toString()}>` } }),
+            body: JSON.stringify({ from: process.env.REMINDER_FROM ?? 'Wardenwatch <alerts@wardens.watch>', to: [email.address], ...message, headers: { 'List-Unsubscribe': `<${stopLink.toString()}>` } }),
           })
           outcome = sent.ok ? 'sent' : 'failed'
         }

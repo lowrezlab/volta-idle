@@ -47,7 +47,7 @@ describe('player feedback (D107)', () => {
     await t.finishAllScheduledFunctions(vi.runAllTimers)
     expect(await rows()).toMatchObject([{ message: 'More biomes please!', page: '/app/wardenwatch/settings', publicAlias: 'Ana', state: 'sent', attempts: 1 }])
     const [email] = emails()
-    expect(email).toMatchObject({ to: ['owner@example.com'], reply_to: 'ana@example.com', subject: 'TRMNL Games feedback from Ana' })
+    expect(email).toMatchObject({ to: ['owner@example.com'], reply_to: 'ana@example.com', subject: 'Wardenwatch feedback from Ana' })
     expect(email.text).toContain('More biomes please!')
     expect(email.text).toContain('Page: /app/wardenwatch/settings')
   })
@@ -60,7 +60,7 @@ describe('player feedback (D107)', () => {
     expect(row).toMatchObject({ message: 'Looks fun', state: 'sent' })
     expect(row!.page).toBeUndefined()
     expect(row!.publicAlias).toBeUndefined()
-    expect(emails()[0].subject).toBe('TRMNL Games feedback from a player without a game yet')
+    expect(emails()[0].subject).toBe('Wardenwatch feedback from a player without a game yet')
   })
 
   it('retries a failed email, then keeps the row for the operator view', async () => {

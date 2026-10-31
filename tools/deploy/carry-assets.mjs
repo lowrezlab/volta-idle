@@ -9,7 +9,7 @@ import { existsSync, readdirSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 
 // CARRY_ASSETS_FROM points the script at another copy of the site, for testing.
-const SITE = process.env.CARRY_ASSETS_FROM ?? 'https://trmnlgames.com'
+const SITE = process.env.CARRY_ASSETS_FROM ?? 'https://wardens.watch'
 const RETAIN_DAYS = 7
 const CLIENT = new URL('../../apps/web/dist/client/', import.meta.url).pathname
 const ASSETS = join(CLIENT, 'assets')

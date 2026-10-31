@@ -1,6 +1,6 @@
 /** Public platform configuration: no credentials or backend-only exports. */
-export const PLATFORM_NAME = 'TRMNL Games'
-export const PLATFORM_ORIGIN = 'https://trmnlgames.com'
+export const PLATFORM_NAME = 'Wardenwatch'
+export const PLATFORM_ORIGIN = 'https://wardens.watch'
 export const WARDENWATCH_GAME = 'wardenwatch' as const
 export type GameSlug = typeof WARDENWATCH_GAME
 export const GAME_SLUGS: readonly GameSlug[] = [WARDENWATCH_GAME]
@@ -71,7 +71,7 @@ export interface PlatformAchievement {
 }
 
 export const PLATFORM_ACHIEVEMENTS: readonly PlatformAchievement[] = [
-  { id: 'regular_1', family: 'regular', tier: 1, name: 'Regular', blurb: 'Plays two TRMNL Games.', kind: 'games', atLeast: 2 },
+  { id: 'regular_1', family: 'regular', tier: 1, name: 'Regular', blurb: 'Plays two games.', kind: 'games', atLeast: 2 },
   { id: 'collector_1', family: 'collector', tier: 1, name: 'Collector', blurb: '25 achievements across games.', kind: 'collected', atLeast: 25 },
   { id: 'collector_2', family: 'collector', tier: 2, name: 'Curator', blurb: '100 achievements across games.', kind: 'collected', atLeast: 100 },
   { id: 'collector_3', family: 'collector', tier: 3, name: 'Archivist', blurb: '250 achievements across games.', kind: 'collected', atLeast: 250 },

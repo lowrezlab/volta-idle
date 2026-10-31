@@ -101,7 +101,7 @@ function Settings() {
         ) : hero.publicProfile ? (
           <>
             <p>{t.pagePublic}</p>
-            <p className="mt-2 break-all"><Link to="/wardenwatch/heroes/$alias" params={{ alias: me.user.publicAlias }} className="underline underline-offset-4">trmnlgames.com/wardenwatch/heroes/{encodeURIComponent(me.user.publicAlias)}</Link></p>
+            <p className="mt-2 break-all"><Link to="/wardenwatch/heroes/$alias" params={{ alias: me.user.publicAlias }} className="underline underline-offset-4">wardens.watch/wardenwatch/heroes/{encodeURIComponent(me.user.publicAlias)}</Link></p>
             <div className="mt-3 flex flex-wrap gap-2">
               <ShareHeroLink alias={me.user.publicAlias} heroName={hero.name} notify={notify} />
             </div>

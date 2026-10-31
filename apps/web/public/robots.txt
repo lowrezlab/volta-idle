@@ -3,4 +3,4 @@ Disallow: /app
 Disallow: /admin
 Disallow: /connect/
 
-Sitemap: https://trmnlgames.com/sitemap.xml
+Sitemap: https://wardens.watch/sitemap.xml

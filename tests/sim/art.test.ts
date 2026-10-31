@@ -191,10 +191,10 @@ describe('companion QR codes', () => {
       expect(renderQrPng(bad, 'https://example.test')).toBeNull()
     }
     for (const scale of QR_SCALES) {
-      const { size, ink } = qrInk('https://trmnlgames.com/app/wardenwatch/inventory', scale)
+      const { size, ink } = qrInk('https://wardens.watch/app/wardenwatch/inventory', scale)
       const rgba = new Uint8ClampedArray(size * size * 4)
       for (let i = 0; i < ink.length; i += 1) rgba.fill(ink[i] ? 0 : 255, i * 4, i * 4 + 3), (rgba[i * 4 + 3] = 255)
-      expect(jsQR(rgba, size, size)?.data).toBe('https://trmnlgames.com/app/wardenwatch/inventory')
+      expect(jsQR(rgba, size, size)?.data).toBe('https://wardens.watch/app/wardenwatch/inventory')
     }
   })
 
@@ -206,25 +206,25 @@ describe('companion QR codes', () => {
     expect(keepsakeQrBasePath('48291')).toBeNull()
     expect(parseKeepsakeQrPath('/art/qr/v3/keepsake/482917/3.png')).toEqual({ digits: '482917', corner: false, scale: 3 })
     for (const bad of ['/art/qr/v3/keepsake/48291/3.png', '/art/qr/v3/keepsake/4829170/3.png', '/art/qr/v3/keepsake/abcdef/3.png', '/art/qr/v3/keepsake/482917/9.png', '/art/qr/v2/keepsake/482917/3.png']) {
-      expect(renderQrPng(bad, 'https://trmnlgames.com')).toBeNull()
+      expect(renderQrPng(bad, 'https://wardens.watch')).toBeNull()
     }
-    expect(renderQrPng('/art/qr/v3/keepsake-corner/482917/2.png', 'https://trmnlgames.com')).not.toBeNull()
+    expect(renderQrPng('/art/qr/v3/keepsake-corner/482917/2.png', 'https://wardens.watch')).not.toBeNull()
     expect(keepsakeQrFields('482 917', 'https://site.test')).toEqual({ keepsake_qr_base: 'https://site.test/art/qr/v3/keepsake/482917', keepsake_corner_qr_base: 'https://site.test/art/qr/v3/keepsake-corner/482917' })
     expect(keepsakeQrFields(null, 'https://site.test')).toEqual({ keepsake_qr_base: '', keepsake_corner_qr_base: '' })
     // No larger than the `/dc` home code, so it takes any standing code's place, and it scans to the short link.
-    const { size, ink } = qrInk('https://trmnlgames.com/k/482917', 2)
-    expect(size).toBe(qrInk('https://trmnlgames.com/dc', 2).size)
+    const { size, ink } = qrInk('https://wardens.watch/k/482917', 2)
+    expect(size).toBe(qrInk('https://wardens.watch/dc', 2).size)
     const rgba = new Uint8ClampedArray(size * size * 4)
     for (let i = 0; i < ink.length; i += 1) rgba.fill(ink[i] ? 0 : 255, i * 4, i * 4 + 3), (rgba[i * 4 + 3] = 255)
-    expect(jsQR(rgba, size, size)?.data).toBe('https://trmnlgames.com/k/482917')
+    expect(jsQR(rgba, size, size)?.data).toBe('https://wardens.watch/k/482917')
   })
 
   it('draws the home and corner codes from the short link, the corner one smaller and quiet only left and below (D108)', async () => {
     const { default: jsQR } = await import('jsqr')
     const { qrInk, renderQrPng } = await import('@trmnl-games/wardenwatch/art/qr')
-    const { size: full } = qrInk('https://trmnlgames.com/app/wardenwatch', 2)
-    const { size: home } = qrInk('https://trmnlgames.com/dc', 2)
-    const { size, ink } = qrInk('https://trmnlgames.com/dc', 2, true)
+    const { size: full } = qrInk('https://wardens.watch/app/wardenwatch', 2)
+    const { size: home } = qrInk('https://wardens.watch/dc', 2)
+    const { size, ink } = qrInk('https://wardens.watch/dc', 2, true)
     expect([full, home, size]).toEqual([66, 58, 54])
     // Dark modules touch the top and right edges; the left and bottom keep two modules (4 px) of quiet zone.
     const dark = (x: number, y: number) => ink[y * size + x] === 1
@@ -236,9 +236,9 @@ describe('companion QR codes', () => {
     const w = size + pad
     const rgba = new Uint8ClampedArray(w * w * 4).fill(255)
     for (let y = 0; y < size; y += 1) for (let x = 0; x < size; x += 1) if (dark(x, y)) rgba.fill(0, ((y + pad) * w + x) * 4, ((y + pad) * w + x) * 4 + 3)
-    expect(jsQR(rgba, w, w)?.data).toBe('https://trmnlgames.com/dc')
-    expect(renderQrPng('/art/qr/v3/corner/2.png', 'https://trmnlgames.com')).not.toBeNull()
-    expect(renderQrPng('/art/qr/v3/home/3.png', 'https://trmnlgames.com')).not.toBeNull()
+    expect(jsQR(rgba, w, w)?.data).toBe('https://wardens.watch/dc')
+    expect(renderQrPng('/art/qr/v3/corner/2.png', 'https://wardens.watch')).not.toBeNull()
+    expect(renderQrPng('/art/qr/v3/home/3.png', 'https://wardens.watch')).not.toBeNull()
   })
 })
 

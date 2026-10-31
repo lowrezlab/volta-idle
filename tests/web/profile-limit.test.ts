@@ -4,7 +4,7 @@ import { profileRateLimit, type RateLimiter } from '../../apps/web/src/server/pr
 const request = (path: string, init: RequestInit & { ip?: string | null } = {}) => {
   const headers = new Headers(init.headers)
   if (init.ip !== null) headers.set('CF-Connecting-IP', init.ip ?? '203.0.113.7')
-  return new Request(`https://trmnlgames.com${path}`, { ...init, headers })
+  return new Request(`https://wardens.watch${path}`, { ...init, headers })
 }
 const limiter = (success: boolean) => ({ limit: vi.fn<RateLimiter['limit']>(async () => ({ success })) })
 

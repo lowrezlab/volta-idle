@@ -60,7 +60,7 @@ export const getIncident = internalQuery({
   },
 })
 
-const alertFrom = () => process.env.ALERT_FROM ?? 'Wardenwatch <alerts@wardenwatch.example>'
+const alertFrom = () => process.env.ALERT_FROM ?? 'Wardenwatch <alerts@wardens.watch>'
 /** Fork: no default recipient; notices stay disabled until ALERT_TO is set. */
 const alertTo = () => process.env.ALERT_TO ?? ''
 
@@ -131,7 +131,7 @@ export const sendTestNotice = internalAction({
         body: JSON.stringify({
           from,
           to: [to],
-          subject: '[TEST] TRMNL Games alert email check',
+          subject: '[TEST] Wardenwatch alert email check',
           text: 'This is a test of the operational alert email. No incident is open and nothing needs doing.',
         }),
       })

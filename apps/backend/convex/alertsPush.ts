@@ -13,7 +13,7 @@ import { internalAction } from './_generated/server'
 function vapid() {
   const publicKey = process.env.VAPID_PUBLIC_KEY
   const privateKey = process.env.VAPID_PRIVATE_KEY
-  return publicKey && privateKey ? { subject: process.env.VAPID_SUBJECT ?? 'https://trmnlgames.com/support', publicKey, privateKey } : null
+  return publicKey && privateKey ? { subject: process.env.VAPID_SUBJECT ?? 'https://wardens.watch/support', publicKey, privateKey } : null
 }
 
 /** Push one payload to one device: 'sent', 'gone' for 404/410 (permission revoked or subscription expired), else 'failed'. */

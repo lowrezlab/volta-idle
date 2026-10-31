@@ -6,7 +6,7 @@ describe('support analytics privacy boundary', () => {
   beforeEach(() => {
     storage.clear()
     setAnalyticsIdentity(null)
-    vi.stubGlobal('window', { localStorage: { getItem: (key: string) => storage.get(key) ?? null, setItem: (key: string, value: string) => storage.set(key, value) }, dispatchEvent: vi.fn(), location: { href: 'https://trmnlgames.com/app/wardenwatch' } })
+    vi.stubGlobal('window', { localStorage: { getItem: (key: string) => storage.get(key) ?? null, setItem: (key: string, value: string) => storage.set(key, value) }, dispatchEvent: vi.fn(), location: { href: 'https://wardens.watch/app/wardenwatch' } })
   })
   afterEach(() => { vi.stubGlobal('window', { localStorage: { setItem: vi.fn() }, dispatchEvent: vi.fn() }); setAnalyticsConsent('declined'); vi.unstubAllGlobals() })
   const event = (properties: object) => ({ event: '$exception', properties } as NonNullable<Parameters<typeof beforeAnalyticsSend>[0]>)
@@ -27,7 +27,7 @@ describe('support analytics privacy boundary', () => {
   it('drops every capture while a raw TRMNL install or management credential is in the URL', () => {
     storage.set('tg_analytics_consent_v1', 'allowed')
     for (const query of ['code=secret-code', 'jwt=secret-jwt', 'token=deletion-proof', 'installation_callback_url=https%3A%2F%2Ftrmnl.com', 'keepsake=482917', 'fly=482917']) {
-      window.location.href = `https://trmnlgames.com/connect/trmnl/wardenwatch/install?${query}`
+      window.location.href = `https://wardens.watch/connect/trmnl/wardenwatch/install?${query}`
       expect(beforeAnalyticsSend(event({}))).toBeNull()
     }
   })
@@ -40,13 +40,13 @@ describe('support analytics privacy boundary', () => {
   })
   it('honors withdrawal even when browser storage refuses the update', () => {
     storage.set('tg_analytics_consent_v1', 'allowed')
-    vi.stubGlobal('window', { localStorage: { getItem: () => 'allowed', setItem: () => { throw new Error('Storage blocked') } }, dispatchEvent: vi.fn(), location: { href: 'https://trmnlgames.com/app/wardenwatch' } })
+    vi.stubGlobal('window', { localStorage: { getItem: () => 'allowed', setItem: () => { throw new Error('Storage blocked') } }, dispatchEvent: vi.fn(), location: { href: 'https://wardens.watch/app/wardenwatch' } })
     setAnalyticsConsent('declined')
     expect(readAnalyticsConsent()).toBe('declined')
     expect(beforeAnalyticsSend(event({}))).toBeNull()
   })
   it('scrubs nested replay URLs, exception frames, callbacks and credentials without removing support identity', () => {
-    const cleaned = scrubAnalyticsValue({ email: 'player@example.test', distinct_id: 'user_123', error_code: 'INSTALL_EXPIRED', jwt: 'secret-jwt', tokenHash: 'secret-hash', $set: { public_alias: 'Player', callbackUrl: 'secret-callback' }, $exception_list: [{ value: 'Failed at https://trmnlgames.com/install?code=secret-code#secret-hash', frames: [{ filename: 'https://trmnlgames.com/assets/app.js?jwt=secret-jwt' }] }], snapshot: { attributes: { href: 'https://trmnl.com/plugin_settings/new?code=secret-code', src: 'https://trmnlgames.com/image.png?token=secret-token' } } })
+    const cleaned = scrubAnalyticsValue({ email: 'player@example.test', distinct_id: 'user_123', error_code: 'INSTALL_EXPIRED', jwt: 'secret-jwt', tokenHash: 'secret-hash', $set: { public_alias: 'Player', callbackUrl: 'secret-callback' }, $exception_list: [{ value: 'Failed at https://wardens.watch/install?code=secret-code#secret-hash', frames: [{ filename: 'https://wardens.watch/assets/app.js?jwt=secret-jwt' }] }], snapshot: { attributes: { href: 'https://trmnl.com/plugin_settings/new?code=secret-code', src: 'https://wardens.watch/image.png?token=secret-token' } } })
     expect(JSON.stringify(cleaned)).not.toContain('secret-')
     expect(cleaned).toMatchObject({ distinct_id: 'user_123', email: 'player@example.test', error_code: 'INSTALL_EXPIRED', $set: { public_alias: 'Player' } })
   })

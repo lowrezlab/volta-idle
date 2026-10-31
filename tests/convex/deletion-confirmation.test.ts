@@ -25,7 +25,7 @@ describe('account deletion email confirmation', () => {
     vi.stubEnv('ACCOUNT_DELETION_LINK_KEY', KEY)
     vi.stubEnv('CLERK_SECRET_KEY', 'sk_test_fake')
     vi.stubEnv('RESEND_API_KEY', 're_test_fake')
-    vi.stubEnv('COMPANION_ORIGIN', 'https://trmnlgames.com')
+    vi.stubEnv('COMPANION_ORIGIN', 'https://wardens.watch')
     fetchMock = vi.fn(async (url: string, init?: RequestInit) => new Response(url.startsWith('https://api.clerk.com') && init?.method !== 'DELETE' ? JSON.stringify(clerkUser) : null, { status: 200 }))
     vi.stubGlobal('fetch', fetchMock)
     t = convexTest(schema, modules)

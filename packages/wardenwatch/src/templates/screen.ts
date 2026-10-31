@@ -948,7 +948,7 @@ const welcome = (layout: WelcomeLayout) => {
   const detail = (visibility = '') => `{% if status == "unlinked" %}{% if qr_base != "" %}<span class="${line(visibility)}" data-clamp="2">${L('scan_phone')}</span>{% endif %}
       <span class="${line(visibility)}" data-clamp="3">{{ attention | escape }}</span>{% else %}<span class="${line(visibility)}" data-clamp="2">${L('first_15')}</span>
       <span class="${line(visibility)}" data-clamp="3">${L('scan_manage')}</span>{% endif %}
-      <span class="${line(visibility)}">trmnlgames.com</span>`
+      <span class="${line(visibility)}">wardens.watch</span>`
   const lines = compact
     ? `<span class="${line('lg:hidden')}" data-clamp="2">{% if status != "unlinked" %}${L('first_15_short')}{% elsif qr_base != "" %}${L('scan_phone_short')}{% else %}{{ attention | escape }}{% endif %}</span>
       ${detail('hidden lg:block')}`

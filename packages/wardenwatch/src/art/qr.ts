@@ -27,7 +27,7 @@ export const QR_TARGETS = { app: '/app/wardenwatch', bag: '/app/wardenwatch/inve
 export type QrTarget = keyof typeof QR_TARGETS
 const CORNER_TARGETS: ReadonlySet<QrTarget> = new Set(['corner'])
 
-export const DEFAULT_COMPANION_ORIGIN = 'https://trmnlgames.com'
+export const DEFAULT_COMPANION_ORIGIN = 'https://wardens.watch'
 
 export const qrBasePath = (target: QrTarget) => `/art/qr/v${QR_VERSION}/${target}`
 export const qrPath = (target: QrTarget, scale: number) => `${qrBasePath(target)}/${scale}.png`

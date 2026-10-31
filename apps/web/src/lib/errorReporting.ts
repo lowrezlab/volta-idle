@@ -6,7 +6,7 @@ type SentryBrowser = typeof import('./sentryBrowser')
 let loading: Promise<SentryBrowser | null> | null = null
 
 /** Browser error reports go to Sentry (D113) under the same Allow analytics choice as PostHog, on the production site only. */
-const reportingConfigured = () => import.meta.env.PROD && typeof window !== 'undefined' && window.location.origin === 'https://trmnlgames.com'
+const reportingConfigured = () => import.meta.env.PROD && typeof window !== 'undefined' && window.location.origin === 'https://wardens.watch'
 
 /** Loads and starts the browser SDK once, after consent. Withdrawal is honoured per event in beforeSend. */
 export function startErrorReporting(): Promise<SentryBrowser | null> {

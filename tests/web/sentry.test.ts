@@ -14,11 +14,11 @@ describe('Sentry error report privacy boundary (D113)', () => {
 
   it('keeps only the method and path of the request: no query, headers, cookies, body or identity', () => {
     const scrubbed = scrubSentryEvent(event({
-      request: { method: 'POST', url: 'https://trmnlgames.com/connect/trmnl/wardenwatch/install?code=secret-code&installation_callback_url=https%3A%2F%2Ftrmnl.com', query_string: 'code=secret-code', headers: { cookie: 'session=secret', authorization: 'Bearer secret' }, cookies: { session: 'secret' }, data: { code: 'secret-code' } },
+      request: { method: 'POST', url: 'https://wardens.watch/connect/trmnl/wardenwatch/install?code=secret-code&installation_callback_url=https%3A%2F%2Ftrmnl.com', query_string: 'code=secret-code', headers: { cookie: 'session=secret', authorization: 'Bearer secret' }, cookies: { session: 'secret' }, data: { code: 'secret-code' } },
       user: { id: 'user_test', email: 'player@example.test', ip_address: '203.0.113.1' },
       server_name: 'worker',
     }))
-    expect(scrubbed?.request).toEqual({ method: 'POST', url: 'https://trmnlgames.com/connect/trmnl/wardenwatch/install' })
+    expect(scrubbed?.request).toEqual({ method: 'POST', url: 'https://wardens.watch/connect/trmnl/wardenwatch/install' })
     expect(scrubbed?.user).toBeUndefined()
     expect(scrubbed?.server_name).toBeUndefined()
   })
@@ -26,8 +26,8 @@ describe('Sentry error report privacy boundary (D113)', () => {
   it('scrubs credentials from messages, exceptions, breadcrumbs, extra data and tags', () => {
     const jwt = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0In0.c2lnbmF0dXJl'
     const scrubbed = scrubSentryEvent(event({
-      request: { url: 'https://trmnlgames.com/app' },
-      message: `Failed https://trmnlgames.com/manage?jwt=${jwt}`,
+      request: { url: 'https://wardens.watch/app' },
+      message: `Failed https://wardens.watch/manage?jwt=${jwt}`,
       exception: { values: [{ type: 'Error', value: `bad token=secret-token and ${jwt}` }] },
       breadcrumbs: [{ category: 'navigation', data: { from: '/connect/trmnl/wardenwatch/install?code=secret-code', to: '/app' } }],
       extra: { callbackUrl: 'https://trmnl.com/callback', note: 'access_token: secret' },
@@ -35,13 +35,13 @@ describe('Sentry error report privacy boundary (D113)', () => {
     }))
     const serialized = JSON.stringify(scrubbed)
     for (const secret of ['secret-code', 'secret-token', jwt, 'secret', 'trmnl.com/callback']) expect(serialized).not.toContain(secret)
-    expect(scrubbed?.message).toBe('Failed https://trmnlgames.com/manage')
+    expect(scrubbed?.message).toBe('Failed https://wardens.watch/manage')
     expect(scrubbed?.tags).toEqual({ source: 'route' })
   })
 
   it('scrubs breadcrumbs as they are recorded', () => {
-    const crumb = scrubSentryBreadcrumb({ category: 'fetch', message: 'GET https://trmnlgames.com/_serverFn/x?code=abc', data: { url: 'https://trmnlgames.com/x?jwt=abc', status_code: 500 } })
-    expect(crumb).toEqual({ category: 'fetch', message: 'GET https://trmnlgames.com/_serverFn/x', data: { url: 'https://trmnlgames.com/x', status_code: 500 } })
+    const crumb = scrubSentryBreadcrumb({ category: 'fetch', message: 'GET https://wardens.watch/_serverFn/x?code=abc', data: { url: 'https://wardens.watch/x?jwt=abc', status_code: 500 } })
+    expect(crumb).toEqual({ category: 'fetch', message: 'GET https://wardens.watch/_serverFn/x', data: { url: 'https://wardens.watch/x', status_code: 500 } })
   })
 
   it('collects no identity, cookies, headers, bodies, query strings or local variables, and leaves tracing off', () => {

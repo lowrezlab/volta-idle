@@ -69,7 +69,7 @@ export const publicPagesMessages = defineMessages({
     acrossGames: 'Across games',
     ofPlayers: (share: number) => ` · ${share}% of players`,
     platform: {
-      regular_1: { name: 'Regular', blurb: 'Plays two TRMNL Games.' },
+      regular_1: { name: 'Regular', blurb: 'Plays two games.' },
       collector_1: { name: 'Collector', blurb: '25 achievements across games.' },
       collector_2: { name: 'Curator', blurb: '100 achievements across games.' },
       collector_3: { name: 'Archivist', blurb: '250 achievements across games.' },
@@ -125,7 +125,7 @@ export const publicPagesMessages = defineMessages({
     acrossGames: 'Tous jeux confondus',
     ofPlayers: (share: number) => ` · ${share} % des joueurs`,
     platform: {
-      regular_1: { name: 'Habitué', blurb: 'Joue à deux TRMNL Games.' },
+      regular_1: { name: 'Habitué', blurb: 'Joue à deux jeux.' },
       collector_1: { name: 'Collectionneur', blurb: '25 succès tous jeux confondus.' },
       collector_2: { name: 'Conservateur', blurb: '100 succès tous jeux confondus.' },
       collector_3: { name: 'Archiviste', blurb: '250 succès tous jeux confondus.' },
@@ -181,7 +181,7 @@ export const publicPagesMessages = defineMessages({
     acrossGames: 'Über alle Spiele',
     ofPlayers: (share: number) => ` · ${share} % der Spieler`,
     platform: {
-      regular_1: { name: 'Stammgast', blurb: 'Spielt zwei TRMNL Games.' },
+      regular_1: { name: 'Stammgast', blurb: 'Spielt zwei Spiele.' },
       collector_1: { name: 'Sammler', blurb: '25 Erfolge über alle Spiele.' },
       collector_2: { name: 'Kurator', blurb: '100 Erfolge über alle Spiele.' },
       collector_3: { name: 'Archivar', blurb: '250 Erfolge über alle Spiele.' },
@@ -237,7 +237,7 @@ export const publicPagesMessages = defineMessages({
     acrossGames: 'Entre juegos',
     ofPlayers: (share: number) => ` · ${share} % de los jugadores`,
     platform: {
-      regular_1: { name: 'Habitual', blurb: 'Juega a dos juegos de TRMNL Games.' },
+      regular_1: { name: 'Habitual', blurb: 'Juega a dos juegos.' },
       collector_1: { name: 'Coleccionista', blurb: '25 logros entre juegos.' },
       collector_2: { name: 'Conservador', blurb: '100 logros entre juegos.' },
       collector_3: { name: 'Archivero', blurb: '250 logros entre juegos.' },
@@ -293,7 +293,7 @@ export const publicPagesMessages = defineMessages({
     acrossGames: 'Tra i giochi',
     ofPlayers: (share: number) => ` · ${share}% dei giocatori`,
     platform: {
-      regular_1: { name: 'Habitué', blurb: 'Gioca a due giochi TRMNL Games.' },
+      regular_1: { name: 'Habitué', blurb: 'Gioca a due giochi.' },
       collector_1: { name: 'Collezionista', blurb: '25 obiettivi tra i giochi.' },
       collector_2: { name: 'Curatore', blurb: '100 obiettivi tra i giochi.' },
       collector_3: { name: 'Archivista', blurb: '250 obiettivi tra i giochi.' },
@@ -349,7 +349,7 @@ export const publicPagesMessages = defineMessages({
     acrossGames: 'Entre jogos',
     ofPlayers: (share: number) => ` · ${share}% dos jogadores`,
     platform: {
-      regular_1: { name: 'Frequentador', blurb: 'Joga dois jogos do TRMNL Games.' },
+      regular_1: { name: 'Frequentador', blurb: 'Joga dois jogos.' },
       collector_1: { name: 'Colecionador', blurb: '25 conquistas entre jogos.' },
       collector_2: { name: 'Curador', blurb: '100 conquistas entre jogos.' },
       collector_3: { name: 'Arquivista', blurb: '250 conquistas entre jogos.' },
@@ -405,7 +405,7 @@ export const publicPagesMessages = defineMessages({
     acrossGames: 'We wszystkich grach',
     ofPlayers: (share: number) => ` · ${share}% graczy`,
     platform: {
-      regular_1: { name: 'Bywalec', blurb: 'Gra w dwie gry TRMNL Games.' },
+      regular_1: { name: 'Bywalec', blurb: 'Gra w dwie gry.' },
       collector_1: { name: 'Kolekcjoner', blurb: '25 osiągnięć we wszystkich grach.' },
       collector_2: { name: 'Kurator', blurb: '100 osiągnięć we wszystkich grach.' },
       collector_3: { name: 'Archiwista', blurb: '250 osiągnięć we wszystkich grach.' },
@@ -461,7 +461,7 @@ export const publicPagesMessages = defineMessages({
     acrossGames: 'Over spellen heen',
     ofPlayers: (share: number) => ` · ${share}% van de spelers`,
     platform: {
-      regular_1: { name: 'Vaste gast', blurb: 'Speelt twee TRMNL Games.' },
+      regular_1: { name: 'Vaste gast', blurb: 'Speelt twee spellen.' },
       collector_1: { name: 'Verzamelaar', blurb: '25 prestaties over spellen heen.' },
       collector_2: { name: 'Conservator', blurb: '100 prestaties over spellen heen.' },
       collector_3: { name: 'Archivaris', blurb: '250 prestaties over spellen heen.' },

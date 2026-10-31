@@ -21,7 +21,7 @@ describe('the hero reminder email (D198)', () => {
     vi.stubEnv('ACCOUNT_DELETION_LINK_KEY', 'test-deletion-link-signing-secret-32-characters')
     vi.stubEnv('CLERK_SECRET_KEY', 'sk_test_fake')
     vi.stubEnv('RESEND_API_KEY', 're_test_fake')
-    vi.stubEnv('COMPANION_ORIGIN', 'https://trmnlgames.com')
+    vi.stubEnv('COMPANION_ORIGIN', 'https://wardens.watch')
     fetchMock = vi.fn(async (url: string) => new Response(url.startsWith('https://api.clerk.com') ? JSON.stringify(clerkUser) : '{}', { status: 200 }))
     vi.stubGlobal('fetch', fetchMock)
     t = convexTest(schema, modules)
@@ -47,8 +47,8 @@ describe('the hero reminder email (D198)', () => {
     expect(mail.subject).toBe('Wardenwatch for TRMNL: Tobias has 10 Auro waiting')
     expect(mail.text).toContain('Tobias has been adventuring on your TRMNL since you installed Wardenwatch on 13 October, and is now level 3.')
     expect(mail.text).toContain('- 10 Auro from a goal reached, ready to claim')
-    expect(mail.text).toMatch(/https:\/\/trmnlgames\.com\/wardenwatch\/unsubscribe\?u=[^&]+&t=[a-f0-9]{64}/)
-    expect(mail.headers['List-Unsubscribe']).toMatch(/^<https:\/\/trmnlgames\.com\/wardenwatch\/unsubscribe/)
+    expect(mail.text).toMatch(/https:\/\/wardens\.watch\/wardenwatch\/unsubscribe\?u=[^&]+&t=[a-f0-9]{64}/)
+    expect(mail.headers['List-Unsubscribe']).toMatch(/^<https:\/\/wardens\.watch\/wardenwatch\/unsubscribe/)
     expect((await user('Ana'))!.heroReminderSentAt).toBeDefined()
     // Once is all: the next day's run finds nobody.
     vi.advanceTimersByTime(DAY)
@@ -97,7 +97,7 @@ describe('the hero reminder email (D198)', () => {
     const ana = (await user('Ana'))!
     const sent = await t.action(internal.heroReminder.sendTest, { alias: 'Ana' })
     expect(sent).toBe('sent')
-    const link = new URL(messages()[0].text.match(/https:\/\/trmnlgames\.com\/wardenwatch\/unsubscribe\S+/)![0])
+    const link = new URL(messages()[0].text.match(/https:\/\/wardens\.watch\/wardenwatch\/unsubscribe\S+/)![0])
     // A test send marks nothing, so the owner is still due.
     expect((await user('Ana'))!.heroReminderSentAt).toBeUndefined()
     expect(await t.mutation(api.heroReminder.stop, { userId: ana._id, token: 'f'.repeat(64) })).toBe(false)
@@ -109,7 +109,7 @@ describe('the hero reminder email (D198)', () => {
 
 describe('the hero reminder text', () => {
   const facts = { name: 'Tobias', level: 3, since: Date.UTC(2026, 9, 13, 9), timezone: 'Europe/Paris', gold: 25, goals: 2, finds: 7, capacity: 10, best: 'Rare Keyboard Mace', nextGoal: 'Equip a piece of gear you found' }
-  const links = { app: 'https://trmnlgames.com/app/wardenwatch', stop: 'https://trmnlgames.com/stop' }
+  const links = { app: 'https://wardens.watch/app/wardenwatch', stop: 'https://wardens.watch/stop' }
 
   it('lists only what is there, in every language, with the stop link last', () => {
     const en = heroReminderEmail('en', facts, links)

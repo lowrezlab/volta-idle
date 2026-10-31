@@ -6,10 +6,10 @@ const redirect = (location: string, status = 307) => new Response(null, { status
 describe('trailing-slash redirects', () => {
   it.each([
     ['/help/wardenwatch/', '/help/wardenwatch'],
-    ['/games/wardenwatch/', 'https://trmnlgames.com/games/wardenwatch'],
+    ['/games/wardenwatch/', 'https://wardens.watch/games/wardenwatch'],
     ['/privacy/?ref=x', '/privacy?ref=x'],
   ])('makes the slash-stripping redirect from %s permanent', (path, location) => {
-    const response = permanentSlashRedirect(new Request('https://trmnlgames.com' + path), redirect(location))
+    const response = permanentSlashRedirect(new Request('https://wardens.watch' + path), redirect(location))
     expect(response.status).toBe(308)
     expect(response.headers.get('Location')).toBe(location)
   })
@@ -23,6 +23,6 @@ describe('trailing-slash redirects', () => {
       ['/help/wardenwatch/', redirect('https://evil.example/help/wardenwatch')],
       ['/help/wardenwatch/', new Response('page')],
     ]
-    for (const [path, original] of cases) expect(permanentSlashRedirect(new Request('https://trmnlgames.com' + path), original)).toBe(original)
+    for (const [path, original] of cases) expect(permanentSlashRedirect(new Request('https://wardens.watch' + path), original)).toBe(original)
   })
 })

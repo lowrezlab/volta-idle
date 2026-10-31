@@ -139,7 +139,7 @@ export function SiteFooter() {
       <div className={`flex flex-col gap-8 py-10 ${SITE_FRAME}`}>
         <div className="grid grid-cols-2 gap-x-6 gap-y-8 md:grid-cols-[1.4fr_repeat(4,1fr)]">
           <div className="col-span-2 flex flex-col gap-3 md:col-span-1">
-            <Link to="/" className="flex min-h-11 items-center gap-2 self-start font-display text-lg font-semibold"><img src="/favicon.svg" alt="" width={24} height={24} className="[image-rendering:pixelated]" />TRMNL Games</Link>
+            <Link to="/" className="flex min-h-11 items-center gap-2 self-start font-display text-lg font-semibold"><img src="/favicon.svg" alt="" width={24} height={24} className="[image-rendering:pixelated]" />Wardenwatch</Link>
             <p className="max-w-xs text-muted">{t.tagline}</p>
             <LanguagePicker className="text-sm" />
           </div>

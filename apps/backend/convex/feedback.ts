@@ -81,7 +81,7 @@ export const deliver = internalAction({
         if (response.ok) replyTo = verifiedPrimaryEmail(await response.json())?.address ?? null
       } catch { /* Still deliver; Barry just can't reply directly. */ }
     }
-    const from = process.env.FEEDBACK_FROM ?? 'Wardenwatch <alerts@wardenwatch.example>'
+    const from = process.env.FEEDBACK_FROM ?? 'Wardenwatch <alerts@wardens.watch>'
     const who = row.publicAlias ?? 'a player without a game yet'
     const text = [
       row.message,
@@ -98,7 +98,7 @@ export const deliver = internalAction({
         method: 'POST',
         signal: AbortSignal.timeout(10_000),
         headers: { Authorization: `Bearer ${resendKey}`, 'Content-Type': 'application/json', 'Idempotency-Key': `feedback/${id}` },
-        body: JSON.stringify({ from, to: [feedbackTo()], subject: `TRMNL Games feedback from ${who}`, text, ...(replyTo ? { reply_to: replyTo } : {}) }),
+        body: JSON.stringify({ from, to: [feedbackTo()], subject: `Wardenwatch feedback from ${who}`, text, ...(replyTo ? { reply_to: replyTo } : {}) }),
       })
       ok = response.ok
     } catch { ok = false }

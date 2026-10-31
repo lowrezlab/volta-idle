@@ -14,7 +14,7 @@ import { headMessages } from '../i18n/heads'
 import { pagesMessages } from '../i18n/pages'
 
 const MAX = 2000
-const MAILTO = `mailto:${SUPPORT_EMAIL}?subject=${encodeURIComponent('TRMNL Games feedback')}`
+const MAILTO = `mailto:${SUPPORT_EMAIL}?subject=${encodeURIComponent('Wardenwatch feedback')}`
 
 /** Player feedback (D107): one text box for signed-in players, email for everyone else. */
 export const Route = createFileRoute('/feedback')({

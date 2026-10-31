@@ -10,7 +10,7 @@ export const privacyNl: LegalPage = {
   Body: () => (
     <>
       <p>
-        TRMNL Games is een verzameling spellen van Barry Michael Doyle, een zelfstandige ontwikkelaar. Deze pagina beschrijft in gewone taal wat de dienst bewaart, wie ermee werkt en
+        Wardenwatch wordt beheerd door wie Wardenwatch onderhoudt, een zelfstandige ontwikkelaar. Deze pagina beschrijft in gewone taal wat de dienst bewaart, wie ermee werkt en
         hoe je het laat verwijderen. Vragen kun je sturen naar <a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a>.
       </p>
 
@@ -40,7 +40,7 @@ export const privacyNl: LegalPage = {
         </li>
         <li>De tijdzoneafwijking die je TRMNL met elk scherm meestuurt (bijvoorbeeld UTC+2), zodat het ochtendappel van Wardenwatch jouw dag volgt. We bewaren alleen de laatste.</li>
         <li>De taalinstelling die je TRMNL met elk scherm meestuurt (bijvoorbeeld nl-NL), zodat we zien naar welke talen het de moeite waard is de spellen te vertalen, en zodat je scherm jouw taal kan gebruiken. We bewaren alleen de laatste.</li>
-        <li>Als je een taal kiest voor TRMNL Games, die keuze, zodat je TRMNL-schermen en meldingen die ook gebruiken.</li>
+        <li>Als je een taal kiest voor Wardenwatch, die keuze, zodat je TRMNL-schermen en meldingen die ook gebruiken.</li>
         <li>Kortlevende operationele gegevens, zoals tellers voor gebruikslimieten en bewijzen van dubbele verzoeken.</li>
         <li>Als je om verwijdering van je account vraagt: je geverifieerde primaire e-mailadres, een hash van de bevestigingslink en de afleverstatus. De link verloopt na 30 minuten; verlopen verzoeken worden bij de dagelijkse opschoning verwijderd.</li>
         <li>De lanceringslijst van Wardenwatch bevatte e-mailadressen voor één e-mail toen Wardenwatch in de TRMNL-marketplace kwam. Die e-mail is op 13 oktober 2026 verstuurd, elk adres is verwijderd en de lijst is gesloten.</li>
@@ -55,7 +55,7 @@ export const privacyNl: LegalPage = {
       <h2>Optionele analytics en support</h2>
       <p>Sta je analytics toe, dan legt PostHog vast welke pagina’s je bezoekt, de installatiestappen, mislukte spelacties en browserfouten. Als je inlogt, worden die gegevens gekoppeld aan je Clerk-account-ID, e-mailadres, openbare naam en heldennaam, zodat we supportvragen kunnen uitzoeken en problemen kunnen oplossen. Browserfouten gaan ook naar Sentry, zonder je account, e-mailadres of IP-adres.</p>
       <p>PostHog neemt ook gemaskeerde sessies op, zodat we zien waar een stap vastloopt. Tekst en formuliervelden worden gemaskeerd, inlog- en accountgegevens worden geblokkeerd, en we nemen geen netwerkinhoud, headers of console-uitvoer op. Installatiecodes, toegangstokens, beheer-JWT’s en querystrings van URL’s worden uitgesloten.</p>
-      <p>Je kunt weigeren en gewoon doorspelen. Gebruik Analytics-voorkeuren onderaan de site om je keuze te wijzigen. Analytics uitzetten stopt het nieuwe verzamelen in die browser; eerdere gegevens worden niet gewist. Neem contact op om die te laten verwijderen, of verwijder je TRMNL Games-account om verwijdering van het gekoppelde PostHog-profiel, de gebeurtenissen en opnames aan te vragen.</p>
+      <p>Je kunt weigeren en gewoon doorspelen. Gebruik Analytics-voorkeuren onderaan de site om je keuze te wijzigen. Analytics uitzetten stopt het nieuwe verzamelen in die browser; eerdere gegevens worden niet gewist. Neem contact op om die te laten verwijderen, of verwijder je Wardenwatch-account om verwijdering van het gekoppelde PostHog-profiel, de gebeurtenissen en opnames aan te vragen.</p>
 
       <h2>Cookies</h2>
       <p>
@@ -101,7 +101,7 @@ export const privacyNl: LegalPage = {
       <h2>Je account verwijderen</h2>
       <p>
         Ga naar <Link to="/account">Account</Link> en vraag een verwijderlink aan. We mailen je geverifieerde primaire adres; de link verloopt na 30 minuten. Log in met hetzelfde account en typ DELETE op de bevestigingspagina. Tot je bevestigt, blijft je account actief. Na de bevestiging werkt je account meteen niet meer, verdwijnt je openbare naam uit de
-        ranglijsten, en worden daarna je held, voorwerpen, geschiedenis, TRMNL-koppelingen en je TRMNL Games-login verwijderd. Momentopnamen van ranglijsten waarin je naam stond,
+        ranglijsten, en worden daarna je held, voorwerpen, geschiedenis, TRMNL-koppelingen en je Wardenwatch-login verwijderd. Momentopnamen van ranglijsten waarin je naam stond,
         worden binnen ongeveer twee uur vervangen. Kun je niet inloggen, mail ons dan en we doen het voor je.
       </p>
       <p>
@@ -120,7 +120,7 @@ export const privacyNl: LegalPage = {
       </p>
 
       <h2>Kinderen</h2>
-      <p>TRMNL Games is niet bedoeld voor kinderen onder de 13, en we bewaren niet bewust hun gegevens. Denk je dat een kind een account heeft, mail ons dan en we verwijderen het.</p>
+      <p>Wardenwatch is niet bedoeld voor kinderen onder de 13, en we bewaren niet bewust hun gegevens. Denk je dat een kind een account heeft, mail ons dan en we verwijderen het.</p>
 
       <h2>Wijzigingen</h2>
       <p>Als dit beleid verandert, werken we deze pagina en de datum bovenaan bij.</p>

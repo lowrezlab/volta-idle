@@ -11,7 +11,7 @@ async function clerksOwnLoader(): Promise<{ clerkUIScriptUrl: (opts: { publishab
   return import(pathToFileURL(loader.replace(/\.js$/, '.mjs')).href)
 }
 
-const KEYS = [`pk_live_${btoa('clerk.trmnlgames.com$')}`, `pk_test_${btoa('optimum-stork-2236.clerk.accounts.dev$')}`]
+const KEYS = [`pk_live_${btoa('clerk.wardens.watch$')}`, `pk_test_${btoa('optimum-stork-2236.clerk.accounts.dev$')}`]
 
 it('loads Clerk UI from the same URL Clerk itself would, so the on-demand UI matches the SDK (D137)', async () => {
   const { clerkUIScriptUrl } = await clerksOwnLoader()
@@ -19,7 +19,7 @@ it('loads Clerk UI from the same URL Clerk itself would, so the on-demand UI mat
 })
 
 it('reads the frontend host from a publishable key and refuses anything that is not one', () => {
-  expect(clerkFrontendHost(KEYS[0])).toBe('clerk.trmnlgames.com')
+  expect(clerkFrontendHost(KEYS[0])).toBe('clerk.wardens.watch')
   expect(clerkFrontendHost(undefined)).toBeNull()
   expect(clerkFrontendHost('pk_live_%%%')).toBeNull()
   expect(clerkFrontendHost(`pk_live_${btoa('evil.com/x"$')}`)).toBeNull()

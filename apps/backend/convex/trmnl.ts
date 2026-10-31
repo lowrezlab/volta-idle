@@ -386,7 +386,7 @@ export const recordReconnectionProof = internalMutation({
     const user = await ctx.db.query('users').withIndex('by_tokenIdentifier', q => q.eq('tokenIdentifier', args.tokenIdentifier)).unique()
     if (user && (user.state !== 'active' || (await gameProfile(ctx, user._id))?.state === 'deleting')) throw appError('ACCOUNT_UNAVAILABLE', 'This account is not available.')
     const existing = await ctx.db.query('trmnlInstances').withIndex('by_uuid', q => q.eq('uuid', args.uuid)).unique()
-    if (existing && existing.userId !== user?._id) throw appError('CONNECTION_CONFLICT', 'This installation is connected to another TRMNL Games account.')
+    if (existing && existing.userId !== user?._id) throw appError('CONNECTION_CONFLICT', 'This installation is connected to another Wardenwatch account.')
     await ctx.db.patch(attempt._id, { verifiedUuid: args.uuid, verifiedAt: now, proofExpiresAt: Math.min(attempt.expiresAt, now + MANAGEMENT_PROOF_MS) })
     return null
   },
@@ -406,7 +406,7 @@ export const completeReconnection = mutation({
     // A taken installation is refused before a new profile is written. A throw inside runIntent would commit that profile.
     const verifiedUuid = pending?.verifiedUuid
     const taken = verifiedUuid === undefined ? null : await ctx.db.query('trmnlInstances').withIndex('by_uuid', (q) => q.eq('uuid', verifiedUuid)).unique()
-    if (taken && taken.userId !== user?._id) return { operationId: args.operationId, ok: false as const, changed: false as const, code: 'CONNECTION_CONFLICT', message: 'This installation is connected to another TRMNL Games account.' }
+    if (taken && taken.userId !== user?._id) return { operationId: args.operationId, ok: false as const, changed: false as const, code: 'CONNECTION_CONFLICT', message: 'This installation is connected to another Wardenwatch account.' }
     if (!user) {
       if (!pending || pending.tokenIdentifier !== identity.tokenIdentifier || !pending.verifiedUuid || pending.expiresAt <= now || !pending.proofExpiresAt || pending.proofExpiresAt <= now) throw appError('INSTALL_INVALID', 'Verify this installation through Configure in TRMNL before connecting.')
       const alias = validateName(pending.publicAlias, ALIAS_RULE)
@@ -420,7 +420,7 @@ export const completeReconnection = mutation({
       const attempt = await ctx.db.get(args.attemptId)
       if (!attempt || attempt.tokenIdentifier !== identity.tokenIdentifier || !attempt.verifiedUuid || attempt.expiresAt <= now || !attempt.proofExpiresAt || attempt.proofExpiresAt <= now) throw appError('INSTALL_INVALID', 'This verification expired. Open Configure again from TRMNL.')
       const instance = await ctx.db.query('trmnlInstances').withIndex('by_uuid', q => q.eq('uuid', attempt.verifiedUuid!)).unique()
-      if (instance && instance.userId !== owner._id) throw appError('CONNECTION_CONFLICT', 'This installation is connected to another TRMNL Games account.')
+      if (instance && instance.userId !== owner._id) throw appError('CONNECTION_CONFLICT', 'This installation is connected to another Wardenwatch account.')
       const grantId = await ctx.db.insert('trmnlGrants', { gameSlug: WARDENWATCH, userId: owner._id, tokenHash: attempt.tokenHash, authorizedUuid: attempt.verifiedUuid, state: 'active', createdAt: now, lastVerifiedAt: now })
       if (instance) {
         // Only an explicit signed confirmation can reconnect a selected own tombstone.

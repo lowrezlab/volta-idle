@@ -121,7 +121,7 @@ function synchronizeIdentity(sdk: PostHog) {
   } else identifiedProperties = ''
 }
 
-export const analyticsConfigured = () => Boolean(import.meta.env.VITE_POSTHOG_PROJECT_TOKEN && import.meta.env.PROD && typeof window !== 'undefined' && window.location.origin === 'https://trmnlgames.com')
+export const analyticsConfigured = () => Boolean(import.meta.env.VITE_POSTHOG_PROJECT_TOKEN && import.meta.env.PROD && typeof window !== 'undefined' && window.location.origin === 'https://wardens.watch')
 
 export async function analyticsClient(): Promise<PostHog | null> {
   if (!analyticsConfigured() || identity === undefined || readAnalyticsConsent() !== 'allowed' || hasSensitiveLocation()) return null

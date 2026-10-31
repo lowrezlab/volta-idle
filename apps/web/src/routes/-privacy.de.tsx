@@ -10,7 +10,7 @@ export const privacyDe: LegalPage = {
   Body: () => (
     <>
       <p>
-        TRMNL Games ist eine Sammlung von Spielen, betrieben von Barry Michael Doyle, einem unabhängigen Entwickler. Diese Seite erklärt in einfachen Worten, was der Dienst speichert,
+        Wardenwatch wird von der Person betrieben, die Wardenwatch betreut, einem unabhängigen Entwickler. Diese Seite erklärt in einfachen Worten, was der Dienst speichert,
         wer es verarbeitet und wie du es entfernen lässt. Fragen an <a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a>.
       </p>
 
@@ -40,7 +40,7 @@ export const privacyDe: LegalPage = {
         </li>
         <li>Die Zeitverschiebung, die dein TRMNL mit jedem Bildschirm schickt (zum Beispiel UTC+2), damit der Morgenappell von Wardenwatch deinem Tag folgt. Wir behalten nur die letzte.</li>
         <li>Die Spracheinstellung, die dein TRMNL mit jedem Bildschirm schickt (zum Beispiel de-DE), damit wir sehen, in welche Sprachen sich eine Übersetzung lohnt, und damit dein Bildschirm deine Sprache verwenden kann. Wir behalten nur die letzte.</li>
-        <li>Wenn du eine Sprache für TRMNL Games wählst, diese Wahl, damit deine TRMNL-Bildschirme und Benachrichtigungen sie auch verwenden.</li>
+        <li>Wenn du eine Sprache für Wardenwatch wählst, diese Wahl, damit deine TRMNL-Bildschirme und Benachrichtigungen sie auch verwenden.</li>
         <li>Kurzlebige Betriebsdaten wie Zähler zur Ratenbegrenzung und Belege für doppelte Anfragen.</li>
         <li>Wenn du die Kontolöschung anforderst: deine bestätigte Haupt-E-Mail-Adresse, einen Hash des Bestätigungslinks und den Zustellstatus. Der Link läuft nach 30 Minuten ab; abgelaufene Anfragen entfernt eine tägliche Bereinigung.</li>
         <li>Die Wardenwatch-Startliste enthielt E-Mail-Adressen für eine einzige E-Mail, als Wardenwatch in den TRMNL-Marktplatz kam. Diese E-Mail ging am 13. Oktober 2026 raus, jede Adresse wurde gelöscht, und die Liste ist geschlossen.</li>
@@ -55,7 +55,7 @@ export const privacyDe: LegalPage = {
       <h2>Optionale Analyse und Support</h2>
       <p>Wenn du Analyse erlaubst, zeichnet PostHog die besuchten Seiten, Einrichtungsschritte, fehlgeschlagene Spielaktionen und Browserfehler auf. Wenn du angemeldet bist, werden diese Daten mit deiner Clerk-Konto-ID, deiner E-Mail-Adresse, deinem öffentlichen Namen und dem Namen deines Helden verknüpft, damit wir Supportanfragen nachgehen und Probleme beheben können. Browserfehler gehen auch an Sentry, ohne dein Konto, deine E-Mail oder deine IP-Adresse.</p>
       <p>PostHog zeichnet außerdem maskierte Sitzungen auf, damit wir sehen, wo ein Ablauf hängt. Text und Formulareingaben sind maskiert, Anmelde- und Kontodaten blockiert, und wir zeichnen weder Netzwerkinhalte noch Header noch Konsolenausgaben auf. Installationscodes, Zugriffstokens, Verwaltungs-JWTs und URL-Parameter sind ausgeschlossen.</p>
-      <p>Du kannst ablehnen und weiterspielen. Über Analyse-Einstellungen im Fußbereich der Website änderst du deine Wahl. Das Ausschalten stoppt neue Erfassung in diesem Browser; frühere Daten werden dadurch nicht gelöscht. Schreib uns, um sie entfernen zu lassen, oder lösche dein TRMNL-Games-Konto, um die Entfernung des verknüpften PostHog-Profils samt Ereignissen und Aufzeichnungen zu beantragen.</p>
+      <p>Du kannst ablehnen und weiterspielen. Über Analyse-Einstellungen im Fußbereich der Website änderst du deine Wahl. Das Ausschalten stoppt neue Erfassung in diesem Browser; frühere Daten werden dadurch nicht gelöscht. Schreib uns, um sie entfernen zu lassen, oder lösche dein Wardenwatch-Konto, um die Entfernung des verknüpften PostHog-Profils samt Ereignissen und Aufzeichnungen zu beantragen.</p>
 
       <h2>Cookies</h2>
       <p>
@@ -93,7 +93,7 @@ export const privacyDe: LegalPage = {
       <h2>Dein Konto löschen</h2>
       <p>
         Geh zu <Link to="/account">Konto</Link> und fordere einen Löschlink an. Wir schreiben an deine bestätigte Hauptadresse; der Link läuft nach 30 Minuten ab. Melde dich mit demselben Konto an und gib auf der Bestätigungsseite DELETE ein. Bis du bestätigst, bleibt dein Konto aktiv. Nach der Bestätigung funktioniert dein Konto sofort nicht mehr, dein öffentlicher Name wird in den
-        Ranglisten verborgen, und danach werden dein Held, deine Gegenstände, dein Verlauf, deine TRMNL-Verbindungen und deine TRMNL-Games-Anmeldung entfernt. Ranglisten-Momentaufnahmen, die deinen Namen kopiert haben,
+        Ranglisten verborgen, und danach werden dein Held, deine Gegenstände, dein Verlauf, deine TRMNL-Verbindungen und deine Wardenwatch-Anmeldung entfernt. Ranglisten-Momentaufnahmen, die deinen Namen kopiert haben,
         werden innerhalb von etwa zwei Stunden ersetzt. Wenn du dich nicht anmelden kannst, schreib uns, und wir erledigen es für dich.
       </p>
       <p>
@@ -112,7 +112,7 @@ export const privacyDe: LegalPage = {
       </p>
 
       <h2>Kinder</h2>
-      <p>TRMNL Games richtet sich nicht an Kinder unter 13 Jahren, und wir halten wissentlich keine Daten von ihnen. Wenn du glaubst, dass ein Kind ein Konto hat, schreib uns, und wir löschen es.</p>
+      <p>Wardenwatch richtet sich nicht an Kinder unter 13 Jahren, und wir halten wissentlich keine Daten von ihnen. Wenn du glaubst, dass ein Kind ein Konto hat, schreib uns, und wir löschen es.</p>
 
       <h2>Änderungen</h2>
       <p>Wenn sich diese Erklärung ändert, aktualisieren wir diese Seite und das Datum oben.</p>

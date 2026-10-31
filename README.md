@@ -28,12 +28,12 @@ Confirmed on 2026-10-03:
 - Rolling 24-hour/seven-day XP ranking within level bands, published hourly; dormant heroes drop off recent boards. Seven-day view on TRMNL, both plus lifetime in the companion.
 - Manage gear every three to seven days; retain the first overflow and sleep until deliberate resume (Resume can name the next biome; chosen gear sells in bulk). Start tuning at 30 slots/~five gear per day; slow the late-game gear curve and trim gold income.
 - Bounded reward rolls plus rare elite foes and gold jackpots for a little luck.
-- Gold reserved for later merchants; Barry initially handles private support and audited name repair. Following D40, game-progress deletion preserves the shared account; account deletion removes all game progress and the TRMNL Games Clerk account.
+- Gold reserved for later merchants; Barry initially handles private support and audited name repair. Following D40, game-progress deletion preserves the shared account; account deletion removes all game progress and the Wardenwatch Clerk account.
 - Approved pacing/content targets, bounded return recap, owner incident alerts, daily backups and an early install-to-display milestone; [build refinements](docs/build-readiness.md).
 
 Start with the [documentation index](docs/README.md), [MVP definition](docs/product.md), [decisions and open questions](docs/decisions.md), and [agent work packages](docs/work-packages.md).
 
-Desk Crawler now runs on the shared TRMNL Games platform at `trmnlgames.com`. The monorepo/domain migration is complete; the [migration plan](docs/trmnl-games-migration.md) records the rollout and remaining review preparation.
+Wardenwatch will run at `wardens.watch` (not yet deployed). The upstream [migration plan](docs/trmnl-games-migration.md) is kept for history.
 
 The first release includes all four TRMNL layouts because Third Party marketplace publication requires them. The canonical flat player JSON remains a separate API contract; the marketplace endpoint returns markup plus merge variables.
 

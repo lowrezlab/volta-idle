@@ -114,7 +114,7 @@ export const accountMessages = defineMessages({
     loading: 'Dein Konto wird geladen …',
     offline: 'Du bist offline. Verbinde dich neu, um die E-Mail anzufordern.',
     playingAsBefore: 'Du spielst als ',
-    playingAsAfter: ' in allen TRMNL-Games-Spielen.',
+    playingAsAfter: ' in Wardenwatch.',
     pickName: 'Einen öffentlichen Namen wählst du, wenn du dein erstes Spiel über TRMNL verbindest.',
     signInMethods: 'Deine Anmeldemethoden verwaltest du über den Profilknopf oben.',
     nav: 'Konto',

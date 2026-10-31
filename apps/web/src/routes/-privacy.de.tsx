@@ -93,7 +93,7 @@ export const privacyDe: LegalPage = {
       <h2>Dein Konto löschen</h2>
       <p>
         Geh zu <Link to="/account">Konto</Link> und fordere einen Löschlink an. Wir schreiben an deine bestätigte Hauptadresse; der Link läuft nach 30 Minuten ab. Melde dich mit demselben Konto an und gib auf der Bestätigungsseite DELETE ein. Bis du bestätigst, bleibt dein Konto aktiv. Nach der Bestätigung funktioniert dein Konto sofort nicht mehr, dein öffentlicher Name wird in den
-        Ranglisten verborgen, und danach werden dein Held, deine Gegenstände, dein Verlauf, deine TRMNL-Verbindungen und deine TRMNL-Games-Anmeldung entfernt. Ranglisten-Momentaufnahmen, die deinen Namen kopiert haben,
+        Ranglisten verborgen, und danach werden dein Held, deine Gegenstände, dein Verlauf, deine TRMNL-Verbindungen und deine Wardenwatch-Anmeldung entfernt. Ranglisten-Momentaufnahmen, die deinen Namen kopiert haben,
         werden innerhalb von etwa zwei Stunden ersetzt. Wenn du dich nicht anmelden kannst, schreib uns, und wir erledigen es für dich.
       </p>
       <p>

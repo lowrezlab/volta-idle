@@ -35,3 +35,4 @@ skills-lock.json
 # Impeccable review captures and decision pages (local evidence, regenerated per run).
 .impeccable/review/
 .impeccable/mocks/
+!.env.development

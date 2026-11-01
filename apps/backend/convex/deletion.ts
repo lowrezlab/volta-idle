@@ -12,6 +12,7 @@ import { internal } from './_generated/api'
 import type { Doc, Id, TableNames } from './_generated/dataModel'
 import { action, internalAction, internalMutation, internalQuery, mutation, query, type MutationCtx } from './_generated/server'
 import { appError } from './lib/errors'
+import { clerkIssuer } from './lib/clerkIssuer'
 import { sha256Hex } from './lib/hash'
 import { intentReturns, narrowChanged, runIntent } from './lib/intent'
 import { eraseAnalyticsPerson } from './analytics'
@@ -178,8 +179,8 @@ export const providerDeleted = internalMutation({
   args: { clerkUserId: v.string() },
   returns: v.object({ started: v.boolean() }),
   handler: async (ctx, { clerkUserId }) => {
-    const issuer = process.env.CLERK_JWT_ISSUER_DOMAIN
-    if (!issuer) throw new Error('CLERK_JWT_ISSUER_DOMAIN is not set')
+    const issuer = clerkIssuer()
+    if (!issuer) throw new Error('CLERK_FRONTEND_API_URL is not set')
     const tokenIdentifier = `${issuer}|${clerkUserId}`
     const now = Date.now()
     const user = await ctx.db.query('users').withIndex('by_tokenIdentifier', (q) => q.eq('tokenIdentifier', tokenIdentifier)).unique()
